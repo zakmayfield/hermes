@@ -44,3 +44,7 @@ h5,
 h6 {
   @apply text-xl;
 }
+
+input {
+  @apply text-black px-2 py-1 rounded;
+}

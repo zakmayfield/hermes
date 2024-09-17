@@ -25,3 +25,22 @@ body {
     text-wrap: balance;
   }
 }
+
+h1 {
+  @apply text-4xl;
+  @apply font-normal;
+}
+
+h2 {
+  @apply text-3xl;
+}
+
+h3,
+h4 {
+  @apply text-2xl;
+}
+
+h5,
+h6 {
+  @apply text-xl;
+}

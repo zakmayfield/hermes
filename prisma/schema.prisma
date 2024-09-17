@@ -1,0 +1,67 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["omitApi"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ----- NEXTAUTH
+model Account {
+  id      String @id @default(cuid())
+  user_id String
+
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  user_id      String
+  sessionToken String   @unique
+  expires      DateTime
+  user         User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  verification_token_id String @id @default(cuid())
+  user_id               String @unique
+
+  identifier String   @unique
+  token      String   @unique
+  expires    DateTime
+  is_valid   Boolean  @default(true)
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+// ----- END NEXTAUTH
+
+// ----- USER
+model User {
+  id                 String              @id @default(cuid())
+  email              String              @unique
+  password           String
+  // authorization
+  verification_token VerificationToken[]
+  // NextAuth
+  image              String?
+  accounts           Account[]
+  sessions           Session[]
+}
+
+// ----- END USER

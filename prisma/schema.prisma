@@ -60,6 +60,8 @@ model User {
 
   verification_token VerificationToken[]
   onboarding         Onboarding?
+  permissions        UserPermissions[]
+  roles              UserRoles[]
 
   image    String?
   accounts Account[]
@@ -81,6 +83,61 @@ model Onboarding {
 enum OnboardingStatus {
   COMPLETE
   PENDING
+}
+
+model Role {
+  role_id String @id @default(cuid())
+  name    Roles  @unique
+
+  role_permissions RolePermissions[]
+  user_roles       UserRoles[]
+}
+
+enum Roles {
+  SUPER
+  ADMIN
+  USER
+}
+
+model UserRoles {
+  user_id String
+  role_id String
+
+  role Role @relation(fields: [role_id], references: [role_id])
+  user User @relation(fields: [user_id], references: [id])
+
+  @@unique([user_id, role_id])
+}
+
+model Permission {
+  permission_id String @id @default(cuid())
+  name          String
+
+  role_permissions RolePermissions[]
+  user_permissions UserPermissions[]
+}
+
+model RolePermissions {
+  role_id          String
+  permission_id    String
+  permission_level Int    @default(1)
+
+  role       Role       @relation(fields: [role_id], references: [role_id])
+  permission Permission @relation(fields: [permission_id], references: [permission_id])
+
+  @@unique([role_id, permission_id])
+}
+
+model UserPermissions {
+  user_id       String
+  permission_id String
+  granted_at    DateTime  @default(now())
+  revoked_at    DateTime?
+
+  user       User       @relation(fields: [user_id], references: [id])
+  permission Permission @relation(fields: [permission_id], references: [permission_id])
+
+  @@unique([user_id, permission_id])
 }
 
 // ----- END USER

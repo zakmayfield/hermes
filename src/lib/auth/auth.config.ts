@@ -148,6 +148,15 @@ const providers: NextAuthProviders = [
                 identifier: `email-verification-${email}`,
                 expires: expires_date
               }
+            },
+            roles: {
+              create: {
+                role: {
+                  connect: {
+                    name: "USER"
+                  }
+                }
+              }
             }
           }
         });

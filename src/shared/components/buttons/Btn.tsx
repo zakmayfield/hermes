@@ -127,19 +127,20 @@ export const useButtonClasses = ({
 
     // Button
     const baseClasses = "rounded-md flex items-center justify-center";
-    const widthClasses = (width && widthMap[width]) || widthMap.full;
+    const widthClasses = (width && widthMap[width]) || widthMap.auto;
     const heightClasses = (height && heightMap[height]) || heightMap.default;
     const paddingClasses = (padding && paddingMap[padding]) || paddingMap.default;
     const borderClasses = border && "border";
     const bgColorClasses = (bgColor && bgColorMap[bgColor]) || bgColorMap.default;
     const hoverClasses =
-      (!isDisabled && !bgColor && "hover:bg-slate-100") || (!isDisabled && "hover:bg-opacity-90");
+      (!isDisabled && !bgColor && "hover:bg-slate-900") || (!isDisabled && "hover:bg-opacity-90");
     const disabledClasses =
       (isDisabled && bgColor && "bg-opacity-70") || (isDisabled && !bgColor && "bg-slate-50");
 
     // Content
     const textDisabled = isDisabled && "text-opacity-60";
-    const color = !textColor && bgColor ? "text-white" : textColor ? textColor : "text-black";
+    // const color = !textColor && bgColor ? "text-white" : textColor ? textColor : "text-black";
+    const color = "text-white";
     const textWeight = (fontWeight && fontWeightMap[fontWeight]) || fontWeightMap.default;
     const textSize = (fontSize && fontSizeMap[fontSize]) || fontSizeMap.default;
 

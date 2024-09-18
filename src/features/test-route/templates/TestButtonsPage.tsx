@@ -15,7 +15,6 @@ export const TestButtonsPage = () => {
         heading="h2"
         title="Buttons"
         contentFlex="row"
-        contentClassname="border rounded"
         contentPadding="lg"
       >
         <Btn text="Button" />

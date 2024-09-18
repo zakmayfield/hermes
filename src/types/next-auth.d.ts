@@ -1,9 +1,11 @@
+import { OnboardingStatus } from "@prisma/client";
 import { User } from "next-auth";
 
 declare module "next-auth" {
   interface User {
-    // is_approved: boolean;
-    // email_verified_on: Date | null;
+    onboarding: {
+      status: OnboardingStatus;
+    } | null;
   }
 }
 
@@ -11,9 +13,8 @@ declare module "next-auth" {
   interface Session {
     user: User & {
       email: string;
+      onboarding_status?: OnboardingStatus;
       // cart_id: string;
-      // is_approved: boolean;
-      // email_verified_on: Date | null;
     };
   }
 }
@@ -22,8 +23,7 @@ declare module "next-auth/jwt" {
   interface JWT {
     id: string;
     email: string;
+    onboarding_status?: OnboardingStatus;
     // cart_id: string;
-    // is_approved: boolean;
-    // email_verified_on: Date | null;
   }
 }

@@ -56,6 +56,13 @@ const providers: NextAuthProviders = [
           where: { email },
           omit: {
             password: false
+          },
+          include: {
+            onboarding: {
+              select: {
+                status: true
+              }
+            }
           }
         });
 
@@ -158,6 +165,13 @@ const providers: NextAuthProviders = [
                 }
               }
             }
+          },
+          include: {
+            onboarding: {
+              select: {
+                status: true
+              }
+            }
           }
         });
 
@@ -182,7 +196,15 @@ type NextAuthCallbacks = NextAuthOptions["callbacks"];
 const callbacks: NextAuthCallbacks = {
   async jwt({ token, user }) {
     const db_user = await db.user.findUnique({
-      where: { id: user.id }
+      where: { id: user.id },
+      include: {
+        onboarding: {
+          select: {
+            status: true
+          }
+        },
+        roles: true
+      }
     });
 
     if (!db_user) {
@@ -192,7 +214,8 @@ const callbacks: NextAuthCallbacks = {
 
     return {
       id: db_user.id,
-      email: db_user.email
+      email: db_user.email,
+      onboarding_status: db_user.onboarding?.status
     };
   },
 
@@ -200,6 +223,7 @@ const callbacks: NextAuthCallbacks = {
     if (token) {
       session.user.id = token.id;
       session.user.email = token.email;
+      session.user.onboarding_status = token.onboarding_status;
     }
 
     return session;

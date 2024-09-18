@@ -1,4 +1,4 @@
-import { merge } from '@/shared/utils/ui';
+import { merge } from "@/utils/ui";
 
 type Children = React.ReactNode;
 type Props = {
@@ -26,24 +26,24 @@ const H6 = ({ children, className }: Props) => {
 };
 
 type HeadingProps = {
-  as: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   content: string;
   className?: string;
 };
 
-export const Heading = ({ as = 'h1', content, className }: HeadingProps) => {
+export const Heading = ({ as = "h1", content, className }: HeadingProps) => {
   switch (as) {
-    case 'h1':
+    case "h1":
       return <H1 className={className}>{content}</H1>;
-    case 'h2':
+    case "h2":
       return <H2 className={className}>{content}</H2>;
-    case 'h3':
+    case "h3":
       return <H3 className={className}>{content}</H3>;
-    case 'h4':
+    case "h4":
       return <H4 className={className}>{content}</H4>;
-    case 'h5':
+    case "h5":
       return <H5 className={className}>{content}</H5>;
-    case 'h6':
+    case "h6":
       return <H6 className={className}>{content}</H6>;
   }
 };

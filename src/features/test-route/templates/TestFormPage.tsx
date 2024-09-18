@@ -1,7 +1,7 @@
 "use client";
 
 import { ContentWrapper, Layout } from "@/shared/components/containers";
-import { Form } from "@/shared/components/form";
+import { Form, Input } from "@/shared/components/form";
 
 export const TestFormPage = () => {
   return (
@@ -12,7 +12,20 @@ export const TestFormPage = () => {
       contentPadding="lg"
     >
       <ContentWrapper>
-        <Form submit={() => console.log("submit")}>form content</Form>
+        <Form
+          submit={() => console.log("submit")}
+          className="border"
+          title="Test Form"
+        >
+          <Input
+            name="test-1"
+            label="Test 1"
+          />
+          <Input
+            label="Test 2"
+            name="test-2"
+          />
+        </Form>
       </ContentWrapper>
     </Layout>
   );

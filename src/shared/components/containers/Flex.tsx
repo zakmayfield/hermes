@@ -41,18 +41,25 @@ export const Flex = (props: TFlexProps) => {
     };
 
     const positionMap = {
-      left: "items-start justify-start",
-      center: "items-center justify-center",
-      right: "items-end justify-end"
+      col: {
+        left: "items-start justify-start",
+        center: "items-center justify-center",
+        right: "items-end justify-end"
+      },
+      row: {
+        left: "items-center justify-start",
+        center: "items-center justify-center",
+        right: "items-center justify-end"
+      }
     };
 
     return merge(`
-        ${dirMap[dir]}
-        ${gapMap[gap]}
-        ${paddingMap[padding]}
-        ${positionMap[position]}
-        ${className}
-      `);
+      ${dirMap[dir]}
+      ${gapMap[gap]}
+      ${paddingMap[padding]}
+      ${positionMap[dir][position]}
+      ${className}
+    `);
   }, [dir, className]);
 
   return <div className={classList}>{children}</div>;

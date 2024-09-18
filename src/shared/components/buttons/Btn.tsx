@@ -6,16 +6,17 @@ import { ContentWrapper, Text } from "../containers";
 import { SpinLoader } from "../loaders";
 
 export type BtnStyleProps = {
+  buttonClassName?: string;
+  containerClassName?: string;
+  contentClassName?: string;
   isDisabled?: boolean;
-  border?: boolean;
-  width?: "sm" | "md" | "lg" | "auto";
+  width?: "sm" | "md" | "lg" | "full";
   height?: "sm" | "md" | "lg";
   padding?: "sm" | "md" | "lg";
   bgColor?: "green" | "red";
-  textColor?: string;
   fontWeight?: "normal" | "bold";
   fontSize?: "sm" | "md" | "lg";
-  className?: string;
+  theme?: "light" | "dark";
 };
 
 type BtnProps = BtnStyleProps & {
@@ -32,10 +33,10 @@ type BtnProps = BtnStyleProps & {
 
 export const Btn = (props: BtnProps) => {
   const { text, isDisabled, isLoading, width, Icon, handleClick, mouseActions } = props;
-  const { buttonClasses, contentClasses } = useButtonClasses({ ...props });
+  const { containerClasses, buttonClasses, contentClasses } = useButtonClasses({ ...props });
 
   return (
-    <ContentWrapper width={width || "auto"}>
+    <ContentWrapper className={merge(containerClasses)}>
       <button
         onClick={handleClick}
         disabled={isDisabled}
@@ -45,22 +46,16 @@ export const Btn = (props: BtnProps) => {
       >
         {isLoading && width ? (
           <SpinLoader
-            spinnerClassName={merge(
-              `${contentClasses} ${
-                props.bgColor ? "text-white" : "text-black"
-              } text-opacity-100 text-xl`
-            )}
+            position="center"
+            width="full"
+            spinnerClassName={merge(`${contentClasses}`)}
           />
         ) : (
-          <ContentWrapper flex="row">
-            {Icon && (
-              <Text
-                as="span"
-                className={contentClasses}
-              >
-                <Icon />
-              </Text>
-            )}
+          <ContentWrapper
+            flex="row"
+            flexCenter={true}
+          >
+            {Icon && <Icon className={contentClasses} />}
             {text && (
               <Text
                 as="span"
@@ -76,91 +71,101 @@ export const Btn = (props: BtnProps) => {
   );
 };
 
-export const useButtonClasses = ({
-  width,
-  height,
-  padding,
-  border,
-  bgColor,
-  textColor,
-  isDisabled,
-  fontWeight,
-  fontSize,
-  className
-}: BtnStyleProps) =>
-  useMemo(() => {
+export const useButtonClasses = (props: BtnStyleProps) => {
+  const {
+    buttonClassName,
+    containerClassName,
+    contentClassName,
+    width = "auto",
+    height = "sm",
+    padding = "sm",
+    fontWeight = "normal",
+    fontSize = "md",
+    theme = "dark",
+    bgColor = "none",
+    isDisabled
+  } = props;
+
+  return useMemo(() => {
     const widthMap = {
       sm: "w-44",
-      md: "w-52",
-      lg: "w-64",
-      auto: "w-auto",
-      full: "w-full"
+      md: "w-56",
+      lg: "w-72",
+      full: "w-full",
+      auto: "w-auto"
     };
     const heightMap = {
-      sm: "h-8",
-      md: "h-10",
-      lg: "h-12",
-      default: "h-10"
+      sm: "h-10",
+      md: "h-12",
+      lg: "h-14"
     };
     const paddingMap = {
       sm: "p-2",
       md: "p-4",
-      lg: "p-6",
-      default: "px-4"
+      lg: "p-6"
     };
-    const bgColorMap = {
+    const bgMap = {
       green: "bg-green-500",
       red: "bg-red-400",
-      default: "bg-none"
+      none: "bg-none"
     };
     const fontWeightMap = {
       normal: "font-normal",
-      bold: "font-semibold",
-      default: "font-light"
+      bold: "font-semibold"
     };
     const fontSizeMap = {
       sm: "text-sm",
       md: "text-base",
-      lg: "text-xl",
-      default: "text-base"
+      lg: "text-xl"
     };
-
-    // Button
-    const baseClasses = "rounded-md flex items-center justify-center";
-    const widthClasses = (width && widthMap[width]) || widthMap.auto;
-    const heightClasses = (height && heightMap[height]) || heightMap.default;
-    const paddingClasses = (padding && paddingMap[padding]) || paddingMap.default;
-    const borderClasses = border && "border";
-    const bgColorClasses = (bgColor && bgColorMap[bgColor]) || bgColorMap.default;
-    const hoverClasses =
-      (!isDisabled && !bgColor && "hover:bg-slate-900") || (!isDisabled && "hover:bg-opacity-90");
-    const disabledClasses =
-      (isDisabled && bgColor && "bg-opacity-70") || (isDisabled && !bgColor && "bg-slate-50");
-
-    // Content
-    const textDisabled = isDisabled && "text-opacity-60";
-    // const color = !textColor && bgColor ? "text-white" : textColor ? textColor : "text-black";
-    const color = "text-white";
-    const textWeight = (fontWeight && fontWeightMap[fontWeight]) || fontWeightMap.default;
-    const textSize = (fontSize && fontSizeMap[fontSize]) || fontSizeMap.default;
+    const themeMap = {
+      light: "text-black",
+      dark: "text-white"
+    };
+    const borderMap = (bgColor === "none" && "border") || "border-none";
+    const hoverMap =
+      (!isDisabled && bgColor === "none" && "hover:bg-slate-900") ||
+      (!isDisabled && "hover:bg-opacity-90");
+    const disabledMap =
+      (isDisabled && bgColor !== "none" && "bg-opacity-70") ||
+      (isDisabled && bgColor === "none" && "bg-slate-500");
+    const containerWidthMap = (width === "full" && "w-full") || "";
 
     return {
+      containerClasses: `
+        ${containerWidthMap}
+        ${containerClassName}
+      `,
       contentClasses: `
-        ${textDisabled}
-        ${color}
-        ${textWeight}
-        ${textSize}
+        mx-auto
+        ${fontWeightMap[fontWeight]}
+        ${fontSizeMap[fontSize]}
+        ${themeMap[theme]}
+        ${disabledMap}
+        ${contentClassName}
       `,
       buttonClasses: `
-        ${baseClasses}
-        ${widthClasses}
-        ${heightClasses}
-        ${paddingClasses}
-        ${borderClasses}
-        ${bgColorClasses}
-        ${hoverClasses}
-        ${disabledClasses}
-        ${className}
+        rounded-md
+        ${borderMap}
+        ${paddingMap[padding]}
+        ${heightMap[height]}
+        ${widthMap[width]}
+        ${bgMap[bgColor]}
+        ${hoverMap}
+        ${disabledMap}
+        ${buttonClassName}
       `
     };
-  }, [width, height, padding, border, bgColor, isDisabled, fontWeight, fontSize, className]);
+  }, [
+    buttonClassName,
+    containerClassName,
+    contentClassName,
+    width,
+    height,
+    padding,
+    fontWeight,
+    fontSize,
+    bgColor,
+    isDisabled
+  ]);
+};

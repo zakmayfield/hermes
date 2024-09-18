@@ -1,7 +1,7 @@
 "use client";
 
 import { Btn } from "@/shared/components/buttons";
-import { ContentWrapper, Layout } from "@/shared/components/containers";
+import { Layout } from "@/shared/components/containers";
 
 export const TestButtonsPage = () => {
   return (
@@ -14,10 +14,30 @@ export const TestButtonsPage = () => {
       <Layout
         heading="h2"
         title="Buttons"
+        contentFlex="row"
+        contentClassname="border rounded"
+        contentPadding="lg"
       >
-        <ContentWrapper>
-          <Btn text="Button" />
-        </ContentWrapper>
+        <Btn text="Button" />
+        <Btn
+          text="Button"
+          width="full"
+        />
+        <Btn
+          text="Button"
+          width="sm"
+          bgColor="green"
+          theme="light"
+        />
+        <Btn
+          text="Button"
+          width="md"
+          bgColor="red"
+        />
+        <Btn
+          text="Button"
+          width="lg"
+        />
       </Layout>
     </Layout>
   );

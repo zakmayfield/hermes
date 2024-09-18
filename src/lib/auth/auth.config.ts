@@ -152,6 +152,12 @@ const providers: NextAuthProviders = [
           }
         });
 
+        await db.onboarding.create({
+          data: {
+            user_id: new_user.id
+          }
+        });
+
         return { new_user };
       }
 

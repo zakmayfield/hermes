@@ -1,6 +1,6 @@
 "use client";
 import { signIn } from "next-auth/react";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 type TSignInPageProps = {};
 

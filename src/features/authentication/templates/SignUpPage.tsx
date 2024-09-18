@@ -2,9 +2,7 @@
 import { signIn } from "next-auth/react";
 import { ChangeEvent, FormEvent, useState } from "react";
 
-type TSignUpPageProps = {};
-
-export const SignUpPage = (props: TSignUpPageProps) => {
+export const SignUpPage = () => {
   type TFormValues = {
     email: string;
     password: string;

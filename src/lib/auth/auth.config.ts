@@ -8,7 +8,7 @@ import { SECRET } from "@/utils/constants";
 
 //^ adapter
 type NextAuthAdapter = NextAuthOptions["adapter"];
-// TODO: Type error from omitting password globally
+// @ts-expect-error NextAuth has not configured support for Prisma Omit API
 const adapter: NextAuthAdapter = PrismaAdapter(db);
 
 //^ strategy

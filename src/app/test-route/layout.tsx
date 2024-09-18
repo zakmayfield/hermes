@@ -6,6 +6,8 @@ export default function TestLayout({ children }: { children: React.ReactNode }) 
       <nav>
         <Link href="/test-route">Test Home</Link>
         <Link href="/test-route/containers">Containers</Link>
+        <Link href="/test-route/buttons">Buttons</Link>
+        <Link href="/test-route/loading">Loading</Link>
       </nav>
 
       <div>{children}</div>

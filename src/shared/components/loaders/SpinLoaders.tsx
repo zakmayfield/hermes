@@ -27,7 +27,7 @@ export const SpinLoader = (props: SpinLoaderProps) => {
 function useSpinLoaderClasses(props: SpinLoaderProps) {
   const {
     size = "md",
-    width = "none",
+    width = "content",
     position = "center",
     padding = "none",
     theme = "light"
@@ -40,7 +40,6 @@ function useSpinLoaderClasses(props: SpinLoaderProps) {
   };
 
   const widthMap = {
-    none: "",
     content: "max-w-min",
     full: "w-full"
   };

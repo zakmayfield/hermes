@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import { merge } from "@/utils/ui";
 import { Flex, Heading } from "../containers";
+import { Btn } from "../buttons";
 
 type TFormProps = {
   children?: React.ReactNode;
@@ -10,12 +11,21 @@ type TFormProps = {
   title?: string;
   submit(): void;
 
+  buttonText?: string;
   padding?: "sm" | "md" | "lg";
   width?: "sm" | "md" | "lg";
 };
 
 export const Form = (props: TFormProps) => {
-  const { children, className, title, submit, padding = "lg", width = "full" } = props;
+  const {
+    children,
+    className,
+    title,
+    submit,
+    buttonText = "Submit",
+    padding = "lg",
+    width = "full"
+  } = props;
 
   const classList = useMemo(() => {
     const paddingMap = {
@@ -35,9 +45,10 @@ export const Form = (props: TFormProps) => {
     return merge(`
       ${paddingMap[padding]}
       ${widthMap[width]}
+      py-12
       ${className}
     `);
-  }, [padding]);
+  }, [className, padding, width]);
 
   return (
     <form
@@ -58,6 +69,11 @@ export const Form = (props: TFormProps) => {
         gap="lg"
       >
         {children}
+
+        <Btn
+          text={buttonText}
+          width="full"
+        />
       </Flex>
     </form>
   );

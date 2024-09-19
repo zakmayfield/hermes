@@ -60,7 +60,7 @@ export const Flex = (props: TFlexProps) => {
       ${positionMap[dir][position]}
       ${className}
     `);
-  }, [dir, className]);
+  }, [dir, className, gap, padding, position]);
 
   return <div className={classList}>{children}</div>;
 };

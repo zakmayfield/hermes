@@ -38,7 +38,7 @@ export const Input = (props: TInputProps) => {
       ${width_map[width]}
       ${containerClassName}
     `);
-  }, [containerClassName]);
+  }, [containerClassName, width]);
 
   return (
     <Flex

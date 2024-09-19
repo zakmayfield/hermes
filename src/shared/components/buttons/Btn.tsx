@@ -166,6 +166,7 @@ export const useButtonClasses = (props: BtnStyleProps) => {
     fontWeight,
     fontSize,
     bgColor,
-    isDisabled
+    isDisabled,
+    theme
   ]);
 };

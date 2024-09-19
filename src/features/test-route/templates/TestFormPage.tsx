@@ -14,8 +14,9 @@ export const TestFormPage = () => {
       <ContentWrapper>
         <Form
           submit={() => console.log("submit")}
-          className="border"
+          className="rounded-md bg-slate-900"
           title="Test Form"
+          width="sm"
         >
           <Input
             name="test-1"

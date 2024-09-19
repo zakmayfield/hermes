@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { FormEvent, useMemo } from "react";
 import { merge } from "@/utils/ui";
 import { Flex, Heading } from "../containers";
 import { Btn } from "../buttons";
@@ -9,7 +9,7 @@ type TFormProps = {
   children?: React.ReactNode;
   className?: string;
   title?: string;
-  submit(): void;
+  submit(e: FormEvent<HTMLFormElement>): void;
 
   buttonText?: string;
   padding?: "sm" | "md" | "lg";
@@ -52,7 +52,7 @@ export const Form = (props: TFormProps) => {
 
   return (
     <form
-      onSubmit={submit}
+      onSubmit={(e) => submit(e)}
       className={classList}
     >
       {title && (
@@ -73,6 +73,7 @@ export const Form = (props: TFormProps) => {
         <Btn
           text={buttonText}
           width="full"
+          type="submit"
         />
       </Flex>
     </form>

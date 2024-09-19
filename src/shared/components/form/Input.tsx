@@ -1,21 +1,37 @@
-import { useMemo } from "react";
+import { FC, useMemo } from "react";
 import { Flex } from "../containers";
 import { merge } from "@/utils/ui";
+import { FieldValues, UseFormRegister } from "react-hook-form";
 
-type TInputProps = {
-  containerClassName?: string;
+// type TInputProps = {
+//   containerClassName?: string;
+//   label?: string;
+//   htmlFor?: string;
+//   hiddenLabel?: boolean;
+//   name?: string;
+
+//   flex?: "row" | "col";
+//   position?: "left" | "center" | "right";
+//   width?: "full";
+// };
+
+interface Props<T extends FieldValues> {
+  name: keyof T;
+  register?: UseFormRegister<T>;
   label?: string;
-  htmlFor?: string;
+
+  containerClassName?: string;
   hiddenLabel?: boolean;
-  name?: string;
+
   flex?: "row" | "col";
   position?: "left" | "center" | "right";
   width?: "full";
-};
+}
 
-export const Input = (props: TInputProps) => {
+export const Input: FC<Props<any>> = (props) => {
   const {
     containerClassName,
+    register,
     name,
     label,
     hiddenLabel,
@@ -47,7 +63,7 @@ export const Input = (props: TInputProps) => {
       className={containerClassList}
     >
       <label
-        htmlFor={name}
+        htmlFor={name as string}
         className={`
           ${label_hidden_class}
         `}
@@ -60,6 +76,7 @@ export const Input = (props: TInputProps) => {
         type="text"
         placeholder={label}
         className="w-full"
+        {...register?.(name as string)}
       />
     </Flex>
   );

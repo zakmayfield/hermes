@@ -1,27 +1,28 @@
 "use client";
 
-import { FormEvent, useMemo } from "react";
+import { FC, FormEvent, useMemo } from "react";
 import { merge } from "@/utils/ui";
 import { Flex, Heading } from "../containers";
 import { Btn } from "../buttons";
+import { FieldValues, SubmitHandler } from "react-hook-form";
 
-type TFormProps = {
+interface FormProps<T extends FieldValues> {
   children?: React.ReactNode;
   className?: string;
   title?: string;
-  submit(e: FormEvent<HTMLFormElement>): void;
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
 
   buttonText?: string;
   padding?: "sm" | "md" | "lg";
   width?: "sm" | "md" | "lg";
-};
+}
 
-export const Form = (props: TFormProps) => {
+export const Form: FC<FormProps<any>> = (props) => {
   const {
     children,
     className,
     title,
-    submit,
+    onSubmit,
     buttonText = "Submit",
     padding = "lg",
     width = "full"
@@ -52,7 +53,7 @@ export const Form = (props: TFormProps) => {
 
   return (
     <form
-      onSubmit={(e) => submit(e)}
+      onSubmit={onSubmit}
       className={classList}
     >
       {title && (

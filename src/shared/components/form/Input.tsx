@@ -3,19 +3,7 @@ import { Flex } from "../containers";
 import { merge } from "@/utils/ui";
 import { FieldValues, UseFormRegister } from "react-hook-form";
 
-// type TInputProps = {
-//   containerClassName?: string;
-//   label?: string;
-//   htmlFor?: string;
-//   hiddenLabel?: boolean;
-//   name?: string;
-
-//   flex?: "row" | "col";
-//   position?: "left" | "center" | "right";
-//   width?: "full";
-// };
-
-interface Props<T extends FieldValues> {
+interface InputProps<T extends FieldValues> {
   name: keyof T;
   register?: UseFormRegister<T>;
   label?: string;
@@ -28,7 +16,7 @@ interface Props<T extends FieldValues> {
   width?: "full";
 }
 
-export const Input: FC<Props<any>> = (props) => {
+export const Input: FC<InputProps<any>> = (props) => {
   const {
     containerClassName,
     register,

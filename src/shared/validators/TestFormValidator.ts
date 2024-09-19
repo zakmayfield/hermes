@@ -9,6 +9,7 @@ export const TestFormValidator = z.object({
 export const TestFormResolver = zodResolver(TestFormValidator);
 
 export type TestFormData = z.infer<typeof TestFormValidator>;
+export type TestFormResponse = { status: "success" };
 
 export const defaultTestFormValues: TestFormData = {
   test_1: "",

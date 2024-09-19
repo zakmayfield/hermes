@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+import { ToastContainer } from "react-toastify";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { quicksand } from "@/utils/ui";
+import { CoreProvider } from "@/lib/providers";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -14,7 +17,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${quicksand.className} antialiased`}>{children}</body>
+      <CoreProvider>
+        <body className={`${quicksand.className} antialiased`}>
+          {children}
+
+          {/* <ToastContainer
+            limit={4}
+            autoClose={3000}
+            position="bottom-right"
+          /> */}
+
+          <ReactQueryDevtools initialIsOpen={false} />
+        </body>
+      </CoreProvider>
     </html>
   );
 }

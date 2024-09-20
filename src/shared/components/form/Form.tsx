@@ -79,10 +79,14 @@ export const Form: FC<FormProps> = (props) => {
         {children}
 
         <Btn
-          buttonClassName={classes.button}
-          text={buttonText}
-          width="full"
           type="submit"
+          text={buttonText}
+          classList={{
+            buttonClassName: classes.button
+          }}
+          style={{
+            width: "full"
+          }}
         />
       </Flex>
     </form>

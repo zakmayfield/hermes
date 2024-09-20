@@ -6,24 +6,28 @@ import { ContentWrapper, Text } from "../containers";
 import { SpinLoader } from "../loaders";
 
 export type BtnStyleProps = {
-  buttonClassName?: string;
-  containerClassName?: string;
-  contentClassName?: string;
-  isDisabled?: boolean;
-  width?: "sm" | "md" | "lg" | "full";
-  height?: "sm" | "md" | "lg";
-  padding?: "sm" | "md" | "lg";
-  bgColor?: "green" | "red";
-  fontWeight?: "normal" | "bold";
-  fontSize?: "sm" | "md" | "lg";
-  theme?: "light" | "dark";
+  classList?: {
+    containerClassName?: string;
+    buttonClassName?: string;
+    contentClassName?: string;
+  };
+  style?: {
+    Icon?: IconType;
+    isLoading?: boolean;
+    isDisabled?: boolean;
+    width?: "sm" | "md" | "lg" | "full";
+    height?: "sm" | "md" | "lg";
+    padding?: "sm" | "md" | "lg";
+    bgColor?: "green" | "red";
+    fontWeight?: "normal" | "bold";
+    fontSize?: "sm" | "md" | "lg";
+    theme?: "light" | "dark";
+  };
 };
 
 type BtnProps = BtnStyleProps & {
   type?: "button" | "reset" | "submit";
   text?: string;
-  isLoading?: boolean;
-  Icon?: IconType;
   handleClick?(): void;
   mouseActions?: {
     onMouseEnter?(): void;
@@ -32,34 +36,36 @@ type BtnProps = BtnStyleProps & {
 };
 
 export const Btn = (props: BtnProps) => {
-  const { text, isDisabled, isLoading, width, Icon, handleClick, mouseActions } = props;
-  const { containerClasses, buttonClasses, contentClasses } = useButtonClasses({ ...props });
+  const { type, text, handleClick, mouseActions } = props;
+  const { Icon, isLoading, isDisabled, width } = props.style || {};
+  const classes = useButtonClasses({ ...props });
 
   return (
-    <ContentWrapper className={merge(containerClasses)}>
+    <ContentWrapper className={merge(classes.container)}>
       <button
-        onClick={handleClick}
+        type={type}
         disabled={isDisabled}
         aria-disabled={isDisabled}
-        className={merge(buttonClasses)}
+        className={merge(classes.button)}
+        onClick={handleClick}
         {...mouseActions}
       >
         {isLoading && width ? (
           <SpinLoader
             position="center"
             width="full"
-            spinnerClassName={merge(`${contentClasses}`)}
+            spinnerClassName={merge(`${classes.content}`)}
           />
         ) : (
           <ContentWrapper
             flex="row"
             flexCenter={true}
           >
-            {Icon && <Icon className={contentClasses} />}
+            {Icon && <Icon className={classes.content} />}
             {text && (
               <Text
                 as="span"
-                className={contentClasses}
+                className={classes.content}
               >
                 {text}
               </Text>
@@ -72,21 +78,21 @@ export const Btn = (props: BtnProps) => {
 };
 
 export const useButtonClasses = (props: BtnStyleProps) => {
-  const {
-    buttonClassName,
-    containerClassName,
-    contentClassName,
-    width = "auto",
-    height = "sm",
-    padding = "sm",
-    fontWeight = "normal",
-    fontSize = "md",
-    theme = "dark",
-    bgColor = "none",
-    isDisabled
-  } = props;
+  const { classList, style } = props;
 
   return useMemo(() => {
+    const { containerClassName, buttonClassName, contentClassName } = classList || {};
+    const {
+      width = "auto",
+      height = "sm",
+      padding = "sm",
+      fontWeight = "normal",
+      fontSize = "md",
+      theme = "dark",
+      bgColor = "none",
+      isDisabled
+    } = style || {};
+
     const widthMap = {
       sm: "w-44",
       md: "w-56",
@@ -132,11 +138,11 @@ export const useButtonClasses = (props: BtnStyleProps) => {
     const containerWidthMap = (width === "full" && "w-full") || "";
 
     return {
-      containerClasses: `
+      container: `
         ${containerWidthMap}
         ${containerClassName}
       `,
-      contentClasses: `
+      content: `
         mx-auto
         ${fontWeightMap[fontWeight]}
         ${fontSizeMap[fontSize]}
@@ -144,7 +150,7 @@ export const useButtonClasses = (props: BtnStyleProps) => {
         ${disabledMap}
         ${contentClassName}
       `,
-      buttonClasses: `
+      button: `
         rounded-md
         ${borderMap}
         ${paddingMap[padding]}
@@ -156,17 +162,5 @@ export const useButtonClasses = (props: BtnStyleProps) => {
         ${buttonClassName}
       `
     };
-  }, [
-    buttonClassName,
-    containerClassName,
-    contentClassName,
-    width,
-    height,
-    padding,
-    fontWeight,
-    fontSize,
-    bgColor,
-    isDisabled,
-    theme
-  ]);
+  }, [classList, style]);
 };

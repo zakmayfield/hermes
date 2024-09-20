@@ -8,6 +8,7 @@ import {
 } from "../components/containers";
 import { TBtnStyleProps } from "../components/buttons";
 import { TFormStyleProps } from "../components/form";
+import { SpinLoaderProps } from "../components/loaders";
 
 export const classHooks = {
   useButtonClasses: (props: TBtnStyleProps) => {
@@ -408,6 +409,65 @@ export const classHooks = {
         button: merge(`
         ${buttonClassName}
         `)
+      };
+    }, [style, classList]);
+  },
+
+  useSpinLoaderClasses: (props: SpinLoaderProps) => {
+    const { style, classList } = props;
+
+    return useMemo(() => {
+      const { containerClassName, spinnerClassName } = classList || {};
+      const {
+        size = "md",
+        width = "content",
+        position = "center",
+        padding = "none",
+        theme = "light"
+      } = style || {};
+
+      const sizeMap = {
+        sm: "text-base",
+        md: "text-lg",
+        lg: "text-2xl"
+      };
+
+      const widthMap = {
+        content: "max-w-min",
+        full: "w-full"
+      };
+
+      const positionMap = {
+        left: "mr-auto",
+        center: "m-auto",
+        right: "ml-auto"
+      };
+
+      const paddingMap = {
+        none: "p-0",
+        sm: "p-3",
+        md: "p-6",
+        lg: "p-9"
+      };
+
+      const themeMap = {
+        light: "text-gray-800",
+        dark: "text-white"
+      };
+
+      return {
+        wrapper: merge(`
+          ${widthMap[width]}
+          ${paddingMap[padding]}
+          ${containerClassName}
+          `),
+        icon: merge(`
+          animate-spin
+          ${sizeMap[size]}
+          ${positionMap[position]}
+          ${themeMap[theme]}
+          ${spinnerClassName}
+          `)
       };
     }, [style, classList]);
   }

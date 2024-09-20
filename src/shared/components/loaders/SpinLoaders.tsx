@@ -1,77 +1,28 @@
-import { merge } from "@/utils/ui";
+import { classHooks } from "@/shared/hooks";
 import { PiSpinnerGap } from "react-icons/pi";
 
-type SpinLoaderProps = {
-  size?: "sm" | "md" | "lg";
-  width?: "full";
-  position?: "left" | "center" | "right";
-  padding?: "sm" | "md" | "lg";
-  theme?: "light" | "dark";
-  containerClassName?: string;
-  spinnerClassName?: string;
+export type SpinLoaderProps = {
+  classList?: {
+    containerClassName?: string;
+    spinnerClassName?: string;
+  };
+  style?: {
+    size?: "sm" | "md" | "lg";
+    width?: "full";
+    position?: "left" | "center" | "right";
+    padding?: "sm" | "md" | "lg";
+    theme?: "light" | "dark";
+  };
 };
 export const SpinLoader = (props: SpinLoaderProps) => {
-  const { containerClassName, spinnerClassName, ...rest } = props;
-
-  const { width, padding, size, position, theme } = useSpinLoaderClasses({
-    ...rest
-  });
+  const classes = classHooks.useSpinLoaderClasses({ ...props });
 
   return (
-    <div className={merge(`${width} ${padding} ${containerClassName}`)}>
-      <PiSpinnerGap className={`animate-spin ${size} ${position} ${theme} ${spinnerClassName}`} />
+    <div className={classes.wrapper}>
+      <PiSpinnerGap className={classes.icon} />
     </div>
   );
 };
-
-function useSpinLoaderClasses(props: SpinLoaderProps) {
-  const {
-    size = "md",
-    width = "content",
-    position = "center",
-    padding = "none",
-    theme = "light"
-  } = props;
-
-  const sizeMap = {
-    sm: "text-base",
-    md: "text-lg",
-    lg: "text-2xl"
-  };
-
-  const widthMap = {
-    content: "max-w-min",
-    full: "w-full"
-  };
-
-  const positionMap = {
-    left: "mr-auto",
-    center: "m-auto",
-    right: "ml-auto"
-  };
-
-  const paddingMap = {
-    none: "p-0",
-    sm: "p-3",
-    md: "p-6",
-    lg: "p-9"
-  };
-
-  const themeMap = {
-    light: "text-gray-800",
-    dark: "text-white"
-  };
-
-  const classMap = {
-    size: sizeMap[size],
-    width: widthMap[width],
-    padding: paddingMap[padding],
-    position: positionMap[position],
-    theme: themeMap[theme]
-  };
-
-  return classMap;
-}
 
 export const useSpinLoader = (props: SpinLoaderProps) => {
   const Loader = () => <SpinLoader {...props} />;

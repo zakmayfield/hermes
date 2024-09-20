@@ -1,19 +1,22 @@
 import { FC, useMemo } from "react";
-import { Flex } from "../containers";
+import { Flex, Text } from "../containers";
 import { merge } from "@/utils/ui";
-import { FieldValues, UseFormRegister } from "react-hook-form";
+import { FieldError, FieldValues, UseFormRegister } from "react-hook-form";
+import { FormFieldError } from "./FieldError";
 
 interface InputProps<T extends FieldValues> {
   name: keyof T;
   label?: string;
   register?: UseFormRegister<T>;
+  error?: FieldError;
   classList?: {
     containerClassName?: string;
     labelClassName?: string;
     inputClassName?: string;
   };
   style?: {
-    is_hidden_label?: boolean;
+    is_label_hidden?: boolean;
+    is_error_hidden?: boolean;
     flex?: "row" | "col";
     position?: "left" | "center" | "right";
     width?: "full";
@@ -21,12 +24,21 @@ interface InputProps<T extends FieldValues> {
 }
 
 export const Input: FC<InputProps<any>> = (props) => {
-  const { label, register, style, classList } = props;
-  const { is_hidden_label = false, flex = "col", position = "left" } = style || {};
+  const { label, register, error, style, classList } = props;
+  const {
+    is_label_hidden = false,
+    is_error_hidden = false,
+    flex = "col",
+    position = "left"
+  } = style || {};
   const name = props.name as string;
 
   const classes = useMemo(() => {
-    const { containerClassName, labelClassName, inputClassName } = classList || {};
+    const {
+      containerClassName = "",
+      labelClassName = "",
+      inputClassName = ""
+    } = classList || {};
     const { width = "full" } = style || {};
 
     const width_map = {
@@ -58,7 +70,7 @@ export const Input: FC<InputProps<any>> = (props) => {
       <label
         className={classes.label}
         htmlFor={name}
-        hidden={is_hidden_label}
+        hidden={is_label_hidden}
       >
         {label}
       </label>
@@ -68,8 +80,19 @@ export const Input: FC<InputProps<any>> = (props) => {
         type="text"
         placeholder={label}
         aria-label={name}
+        aria-invalid={!!error}
         {...register?.(name)}
       />
+
+      {error && (
+        <FormFieldError
+          message={error.message}
+          described_by={name}
+          is_error_hidden={is_error_hidden}
+        >
+          {error.message}
+        </FormFieldError>
+      )}
     </Flex>
   );
 };

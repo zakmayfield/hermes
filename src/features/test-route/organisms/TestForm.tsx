@@ -2,7 +2,7 @@ import { Form, Input } from "@/shared/components/form";
 import { formHooks } from "@/shared/hooks";
 
 export const TestForm = () => {
-  const { register, onSubmit } = formHooks.useTestForm();
+  const { register, onSubmit, formErrors } = formHooks.useTestForm();
 
   return (
     <Form
@@ -17,11 +17,13 @@ export const TestForm = () => {
         name="test_1"
         label="Test 1"
         register={register}
+        error={formErrors.test_1}
       />
       <Input
         name="test_2"
         label="Test 2"
         register={register}
+        error={formErrors.test_2}
       />
     </Form>
   );

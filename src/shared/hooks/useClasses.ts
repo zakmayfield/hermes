@@ -106,7 +106,7 @@ export const classHooks = {
   },
 
   useContentWrapperClasses: (props: TContentWrapperStyleProps) => {
-    const { style, className } = props || {};
+    const { style, className = "" } = props || {};
 
     return useMemo(() => {
       const {
@@ -197,7 +197,7 @@ export const classHooks = {
   },
 
   useFlexClasses: (props: TFlexStyleProps) => {
-    const { style, className } = props || {};
+    const { style, className = "" } = props || {};
 
     return useMemo(() => {
       const {
@@ -254,7 +254,11 @@ export const classHooks = {
     const { classList, style } = props;
 
     return useMemo(() => {
-      const { wrapperClassName, headingClassName, childrenClassName } = classList || {};
+      const {
+        wrapperClassName = "",
+        headingClassName = "",
+        childrenClassName = ""
+      } = classList || {};
       const {
         width = "full",
         padding = "none",
@@ -326,7 +330,7 @@ export const classHooks = {
   },
 
   useTextClasses: (props: TTextStyleProps) => {
-    const { style, className } = props;
+    const { style, className = "" } = props;
 
     return useMemo(() => {
       const {
@@ -382,7 +386,11 @@ export const classHooks = {
     const { style, classList } = props;
 
     return useMemo(() => {
-      const { formClassName, headingClassName, buttonClassName } = classList || {};
+      const {
+        formClassName = "",
+        headingClassName = "",
+        buttonClassName = ""
+      } = classList || {};
       const { padding = "lg", width = "full" } = style || {};
       const paddingMap = {
         sm: "p-2",
@@ -419,7 +427,7 @@ export const classHooks = {
     const { style, classList } = props;
 
     return useMemo(() => {
-      const { containerClassName, spinnerClassName } = classList || {};
+      const { containerClassName = "", spinnerClassName = "" } = classList || {};
       const {
         size = "md",
         width = "content",

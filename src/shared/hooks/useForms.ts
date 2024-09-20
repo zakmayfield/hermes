@@ -27,16 +27,18 @@ export const formHooks = {
       }
     });
 
-    const { register, onSubmit, handleReset } = customHooks.useCustomForm<
-      TestFormResponse,
-      TestFormData
-    >({
+    const {
+      register,
+      onSubmit,
+      handleReset,
+      formState: { errors }
+    } = customHooks.useCustomForm<TestFormResponse, TestFormData>({
       defaultValues,
       resolver,
       mutate
     });
 
-    return { register, onSubmit };
+    return { register, onSubmit, formErrors: errors };
   },
 
   useChangePasswordForm: () => {

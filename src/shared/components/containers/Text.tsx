@@ -1,4 +1,5 @@
 import { classHooks } from "@/shared/hooks";
+import { HTMLAttributes } from "react";
 
 export type TTextStyleProps = {
   className?: string;
@@ -10,19 +11,38 @@ export type TTextStyleProps = {
   };
 };
 
-type TTextProps = TTextStyleProps & {
-  children: React.ReactNode;
-  as?: "p" | "span";
-};
+type TTextProps = TTextStyleProps &
+  HTMLAttributes<HTMLParagraphElement> & {
+    children: React.ReactNode;
+    as?: "p" | "span";
+    described_by?: string;
+    is_hidden?: boolean;
+  };
 
 export const Text = (props: TTextProps) => {
-  const { children, as = "p" } = props;
+  const { children, as = "p", described_by, is_hidden } = props;
   const classes = classHooks.useTextClasses({ ...props });
 
   switch (as) {
     case "p":
-      return <p className={classes.wrapper}>{children}</p>;
+      return (
+        <p
+          aria-describedby={described_by}
+          className={classes.wrapper}
+          hidden={is_hidden}
+        >
+          {children}
+        </p>
+      );
     case "span":
-      return <span className={classes.wrapper}>{children}</span>;
+      return (
+        <span
+          aria-describedby={described_by}
+          hidden={is_hidden}
+          className={classes.wrapper}
+        >
+          {children}
+        </span>
+      );
   }
 };

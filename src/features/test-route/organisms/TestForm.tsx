@@ -1,34 +1,8 @@
 import { Form, Input } from "@/shared/components/form";
-import { customHooks } from "@/shared/hooks";
-import { validators } from "@/shared/validators";
+import { formHooks } from "@/shared/hooks";
 
 export const TestForm = () => {
-  const { resolver, defaultValues } = validators.getTestFormValidator();
-  type TestFormData = typeof defaultValues;
-  type TestFormResponse = { status: "success" | "error" };
-
-  const { mutate: TestMutation } = customHooks.useCustomMutation<
-    TestFormResponse,
-    TestFormData
-  >({
-    mutationFn: async () => {
-      return {
-        status: "success"
-      };
-    },
-    handleError(error, variables) {
-      console.log({ error, variables });
-    },
-    handleSuccess(data, variables) {
-      console.log({ data, variables });
-    }
-  });
-
-  const { register, onSubmit } = customHooks.useCustomForm<TestFormData>({
-    resolver,
-    defaultValues,
-    mutation: TestMutation
-  });
+  const { register, onSubmit } = formHooks.useTestForm();
 
   return (
     <Form

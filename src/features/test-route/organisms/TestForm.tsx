@@ -1,13 +1,12 @@
 import { Form, Input } from "@/shared/components/form";
 import { customHooks } from "@/shared/hooks";
-import {
-  TestFormData,
-  TestFormResponse,
-  TestFormResolver as resolver,
-  defaultTestFormValues as defaultValues
-} from "@/shared/validators/TestFormValidator";
+import { validators } from "@/shared/validators";
 
 export const TestForm = () => {
+  const { resolver, defaultValues } = validators.getTestFormValidator();
+  type TestFormData = typeof defaultValues;
+  type TestFormResponse = { status: "success" | "error" };
+
   const { mutate: TestMutation } = customHooks.useCustomMutation<
     TestFormResponse,
     TestFormData
@@ -17,15 +16,17 @@ export const TestForm = () => {
         status: "success"
       };
     },
-    handleError(error, variables) {},
+    handleError(error, variables) {
+      console.log({ error, variables });
+    },
     handleSuccess(data, variables) {
       console.log({ data, variables });
     }
   });
 
   const { register, onSubmit } = customHooks.useCustomForm<TestFormData>({
-    defaultValues,
     resolver,
+    defaultValues,
     mutation: TestMutation
   });
 

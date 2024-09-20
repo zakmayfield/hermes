@@ -1,15 +1,11 @@
 "use client";
 
-import { FC, FormEvent, useMemo } from "react";
-import { merge } from "@/utils/ui";
+import { FC, FormEvent } from "react";
 import { Flex, Heading } from "../containers";
 import { Btn } from "../buttons";
+import { classHooks } from "@/shared/hooks";
 
-interface FormProps {
-  children?: React.ReactNode;
-  title?: string;
-  buttonText?: string;
-  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+export type TFormStyleProps = {
   classList?: {
     formClassName?: string;
     headingClassName?: string;
@@ -19,44 +15,18 @@ interface FormProps {
     padding?: "sm" | "md" | "lg";
     width?: "sm" | "md" | "lg";
   };
-}
+};
+
+type FormProps = TFormStyleProps & {
+  children?: React.ReactNode;
+  title?: string;
+  buttonText?: string;
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+};
 
 export const Form: FC<FormProps> = (props) => {
   const { children, title, onSubmit, buttonText = "Submit", style, classList } = props;
-
-  const classes = useMemo(() => {
-    const { formClassName, headingClassName, buttonClassName } = classList || {};
-    const { padding = "lg", width = "full" } = style || {};
-
-    const paddingMap = {
-      sm: "p-2",
-      md: "p-4",
-      lg: "p-6",
-      none: "p-0"
-    };
-
-    const widthMap = {
-      sm: "max-w-sm w-full",
-      md: "max-w-lg w-full",
-      lg: "max-w-2xl w-full",
-      full: "w-full"
-    };
-
-    return {
-      form: merge(`
-        ${paddingMap[padding]}
-        ${widthMap[width]}
-        ${formClassName}
-        `),
-      heading: merge(`
-        mb-6
-        ${headingClassName}
-        `),
-      button: merge(`
-        ${buttonClassName}
-        `)
-    };
-  }, [classList]);
+  const classes = classHooks.useFormClasses({ ...props });
 
   return (
     <form

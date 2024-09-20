@@ -1,12 +1,13 @@
 import { useMemo } from "react";
 import { merge } from "@/utils/ui";
-import { TBtnStyleProps } from "../components/buttons";
 import {
   TContentWrapperStyleProps,
   TFlexStyleProps,
   TLayoutStyleProps,
   TTextStyleProps
 } from "../components/containers";
+import { TBtnStyleProps } from "../components/buttons";
+import { TFormStyleProps } from "../components/form";
 
 export const classHooks = {
   useButtonClasses: (props: TBtnStyleProps) => {
@@ -372,5 +373,42 @@ export const classHooks = {
         `)
       };
     }, [style, className]);
+  },
+
+  useFormClasses: (props: TFormStyleProps) => {
+    const { style, classList } = props;
+
+    return useMemo(() => {
+      const { formClassName, headingClassName, buttonClassName } = classList || {};
+      const { padding = "lg", width = "full" } = style || {};
+      const paddingMap = {
+        sm: "p-2",
+        md: "p-4",
+        lg: "p-6",
+        none: "p-0"
+      };
+
+      const widthMap = {
+        sm: "max-w-sm w-full",
+        md: "max-w-lg w-full",
+        lg: "max-w-2xl w-full",
+        full: "w-full"
+      };
+
+      return {
+        form: merge(`
+        ${paddingMap[padding]}
+        ${widthMap[width]}
+        ${formClassName}
+        `),
+        heading: merge(`
+        mb-6
+        ${headingClassName}
+        `),
+        button: merge(`
+        ${buttonClassName}
+        `)
+      };
+    }, [style, classList]);
   }
 };

@@ -3,12 +3,9 @@ import { Flex, Text } from "../containers";
 import { merge } from "@/utils/ui";
 import { FieldError, FieldValues, UseFormRegister } from "react-hook-form";
 import { FormFieldError } from "./FieldError";
+import { classHooks } from "@/shared/hooks";
 
-interface InputProps<T extends FieldValues> {
-  name: keyof T;
-  label?: string;
-  register?: UseFormRegister<T>;
-  error?: FieldError;
+export type InputStyleProps = {
   classList?: {
     containerClassName?: string;
     labelClassName?: string;
@@ -21,43 +18,28 @@ interface InputProps<T extends FieldValues> {
     position?: "left" | "center" | "right";
     width?: "full";
   };
-}
+};
+
+type InputProps<T extends FieldValues> = InputStyleProps & {
+  name: keyof T;
+  label?: string;
+  register?: UseFormRegister<T>;
+  error?: FieldError;
+};
 
 export const Input: FC<InputProps<any>> = (props) => {
-  const { label, register, error, style, classList } = props;
+  const { label, register, error, style } = props;
+
   const {
     is_label_hidden = false,
     is_error_hidden = false,
     flex = "col",
     position = "left"
   } = style || {};
+
+  const classes = classHooks.useInputClasses({ ...props });
+
   const name = props.name as string;
-
-  const classes = useMemo(() => {
-    const {
-      containerClassName = "",
-      labelClassName = "",
-      inputClassName = ""
-    } = classList || {};
-    const { width = "full" } = style || {};
-
-    const width_map = {
-      content: "",
-      full: "w-full"
-    };
-
-    return {
-      container: merge(`
-        ${width_map[width]}
-        ${containerClassName}
-      `),
-      label: merge(`${labelClassName}`),
-      input: merge(`
-        w-full 
-        ${inputClassName}
-      `)
-    };
-  }, [classList, style]);
 
   return (
     <Flex

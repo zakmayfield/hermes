@@ -8,7 +8,7 @@ import {
   TTextStyleProps
 } from "../components/containers";
 import { TBtnStyleProps } from "../components/buttons";
-import { TFormStyleProps } from "../components/form";
+import { InputStyleProps, TFormStyleProps } from "../components/form";
 import { SpinLoaderProps } from "../components/loaders";
 
 export const classHooks = {
@@ -382,47 +382,6 @@ export const classHooks = {
     }, [style, className]);
   },
 
-  useFormClasses: (props: TFormStyleProps) => {
-    const { style, classList } = props;
-
-    return useMemo(() => {
-      const {
-        formClassName = "",
-        headingClassName = "",
-        buttonClassName = ""
-      } = classList || {};
-      const { padding = "lg", width = "full" } = style || {};
-      const paddingMap = {
-        sm: "p-2",
-        md: "p-4",
-        lg: "p-6",
-        none: "p-0"
-      };
-
-      const widthMap = {
-        sm: "max-w-sm w-full",
-        md: "max-w-lg w-full",
-        lg: "max-w-2xl w-full",
-        full: "w-full"
-      };
-
-      return {
-        form: merge(`
-        ${paddingMap[padding]}
-        ${widthMap[width]}
-        ${formClassName}
-        `),
-        heading: merge(`
-        mb-6
-        ${headingClassName}
-        `),
-        button: merge(`
-        ${buttonClassName}
-        `)
-      };
-    }, [style, classList]);
-  },
-
   useSpinLoaderClasses: (props: SpinLoaderProps) => {
     const { style, classList } = props;
 
@@ -480,5 +439,76 @@ export const classHooks = {
           `)
       };
     }, [style, classList]);
+  },
+
+  useFormClasses: (props: TFormStyleProps) => {
+    const { style, classList } = props;
+
+    return useMemo(() => {
+      const {
+        formClassName = "",
+        headingClassName = "",
+        buttonClassName = ""
+      } = classList || {};
+      const { padding = "lg", width = "full" } = style || {};
+      const paddingMap = {
+        sm: "p-2",
+        md: "p-4",
+        lg: "p-6",
+        none: "p-0"
+      };
+
+      const widthMap = {
+        sm: "max-w-sm w-full",
+        md: "max-w-lg w-full",
+        lg: "max-w-2xl w-full",
+        full: "w-full"
+      };
+
+      return {
+        form: merge(`
+        ${paddingMap[padding]}
+        ${widthMap[width]}
+        ${formClassName}
+        `),
+        heading: merge(`
+        mb-6
+        ${headingClassName}
+        `),
+        button: merge(`
+        ${buttonClassName}
+        `)
+      };
+    }, [style, classList]);
+  },
+
+  useInputClasses: (props: InputStyleProps) => {
+    const { style, classList } = props;
+
+    return useMemo(() => {
+      const {
+        containerClassName = "",
+        labelClassName = "",
+        inputClassName = ""
+      } = classList || {};
+      const { width = "full" } = style || {};
+
+      const width_map = {
+        content: "",
+        full: "w-full"
+      };
+
+      return {
+        container: merge(`
+        ${width_map[width]}
+        ${containerClassName}
+      `),
+        label: merge(`${labelClassName}`),
+        input: merge(`
+        w-full 
+        ${inputClassName}
+      `)
+      };
+    }, [classList, style]);
   }
 };

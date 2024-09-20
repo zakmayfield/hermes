@@ -38,8 +38,8 @@ export const Text = (props: TTextProps) => {
       return (
         <span
           aria-describedby={described_by}
-          hidden={is_hidden}
           className={classes.wrapper}
+          hidden={is_hidden}
         >
           {children}
         </span>

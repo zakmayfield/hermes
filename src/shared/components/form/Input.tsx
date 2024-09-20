@@ -5,66 +5,68 @@ import { FieldValues, UseFormRegister } from "react-hook-form";
 
 interface InputProps<T extends FieldValues> {
   name: keyof T;
-  register?: UseFormRegister<T>;
   label?: string;
-
-  containerClassName?: string;
-  hiddenLabel?: boolean;
-
-  flex?: "row" | "col";
-  position?: "left" | "center" | "right";
-  width?: "full";
+  register?: UseFormRegister<T>;
+  classList?: {
+    containerClassName?: string;
+    labelClassName?: string;
+    inputClassName?: string;
+  };
+  style?: {
+    is_hidden_label?: boolean;
+    flex?: "row" | "col";
+    position?: "left" | "center" | "right";
+    width?: "full";
+  };
 }
 
 export const Input: FC<InputProps<any>> = (props) => {
-  const {
-    containerClassName,
-    register,
-    name,
-    label,
-    hiddenLabel,
-    flex = "col",
-    position = "left",
-    width = "full"
-  } = props;
+  const { label, register, style, classList } = props;
+  const { is_hidden_label = false, flex = "col", position = "left" } = style || {};
+  const name = props.name as string;
 
-  const is_hidden = !!hiddenLabel;
+  const classes = useMemo(() => {
+    const { containerClassName, labelClassName, inputClassName } = classList || {};
+    const { width = "full" } = style || {};
 
-  const label_hidden_class = (hiddenLabel && "hidden") || "";
-
-  const containerClassList = useMemo(() => {
     const width_map = {
       content: "",
       full: "w-full"
     };
 
-    return merge(`
-      ${width_map[width]}
-      ${containerClassName}
-    `);
-  }, [containerClassName, width]);
+    return {
+      container: merge(`
+        ${width_map[width]}
+        ${containerClassName}
+      `),
+      label: merge(`${labelClassName}`),
+      input: merge(`
+        w-full 
+        ${inputClassName}
+      `)
+    };
+  }, [classList, style]);
 
   return (
     <Flex
+      className={classes.container}
       dir={flex}
       position={position}
-      className={containerClassList}
     >
       <label
-        htmlFor={name as string}
-        className={`
-          ${label_hidden_class}
-        `}
-        aria-hidden={is_hidden}
+        className={classes.label}
+        htmlFor={name}
+        hidden={is_hidden_label}
       >
         {label}
       </label>
 
       <input
+        className={classes.input}
         type="text"
         placeholder={label}
-        className="w-full"
-        {...register?.(name as string)}
+        aria-label={name}
+        {...register?.(name)}
       />
     </Flex>
   );

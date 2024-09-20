@@ -4,31 +4,30 @@ import { FC, FormEvent, useMemo } from "react";
 import { merge } from "@/utils/ui";
 import { Flex, Heading } from "../containers";
 import { Btn } from "../buttons";
-import { FieldValues, SubmitHandler } from "react-hook-form";
 
-interface FormProps<T extends FieldValues> {
+interface FormProps {
   children?: React.ReactNode;
-  className?: string;
   title?: string;
-  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
-
   buttonText?: string;
-  padding?: "sm" | "md" | "lg";
-  width?: "sm" | "md" | "lg";
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  classList?: {
+    formClassName?: string;
+    headingClassName?: string;
+    buttonClassName?: string;
+  };
+  style?: {
+    padding?: "sm" | "md" | "lg";
+    width?: "sm" | "md" | "lg";
+  };
 }
 
-export const Form: FC<FormProps<any>> = (props) => {
-  const {
-    children,
-    className,
-    title,
-    onSubmit,
-    buttonText = "Submit",
-    padding = "lg",
-    width = "full"
-  } = props;
+export const Form: FC<FormProps> = (props) => {
+  const { children, title, onSubmit, buttonText = "Submit", style, classList } = props;
 
-  const classList = useMemo(() => {
+  const classes = useMemo(() => {
+    const { formClassName, headingClassName, buttonClassName } = classList || {};
+    const { padding = "lg", width = "full" } = style || {};
+
     const paddingMap = {
       sm: "p-2",
       md: "p-4",
@@ -43,24 +42,32 @@ export const Form: FC<FormProps<any>> = (props) => {
       full: "w-full"
     };
 
-    return merge(`
-      ${paddingMap[padding]}
-      ${widthMap[width]}
-      py-12
-      ${className}
-    `);
-  }, [className, padding, width]);
+    return {
+      form: merge(`
+        ${paddingMap[padding]}
+        ${widthMap[width]}
+        ${formClassName}
+        `),
+      heading: merge(`
+        mb-6
+        ${headingClassName}
+        `),
+      button: merge(`
+        ${buttonClassName}
+        `)
+    };
+  }, [classList]);
 
   return (
     <form
+      className={classes.form}
       onSubmit={onSubmit}
-      className={classList}
     >
       {title && (
         <Heading
+          className={classes.heading}
           as="h3"
           content={title}
-          className="mb-6"
         />
       )}
 
@@ -72,6 +79,7 @@ export const Form: FC<FormProps<any>> = (props) => {
         {children}
 
         <Btn
+          buttonClassName={classes.button}
           text={buttonText}
           width="full"
           type="submit"

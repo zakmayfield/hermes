@@ -1,4 +1,3 @@
-import { FormEvent, useEffect } from "react";
 import { Form, Input } from "@/shared/components/form";
 import { useCustomForm, useCustomMutation } from "@/shared/hooks";
 import {
@@ -17,7 +16,7 @@ export const TestForm = () => {
     },
     handleError(error, variables) {},
     handleSuccess(data, variables) {
-      console.log({ data });
+      console.log({ data, variables });
     }
   });
 
@@ -30,9 +29,11 @@ export const TestForm = () => {
   return (
     <Form
       onSubmit={onSubmit}
-      className="rounded-md bg-slate-900"
       title="Test Form"
-      width="sm"
+      classList={{
+        formClassName: "rounded-md bg-slate-900 py-12"
+      }}
+      style={{ width: "sm" }}
     >
       <Input
         name="test_1"

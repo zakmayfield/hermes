@@ -14,6 +14,7 @@ export type SpinLoaderProps = {
     theme?: "light" | "dark";
   };
 };
+
 export const SpinLoader = (props: SpinLoaderProps) => {
   const classes = classHooks.useSpinLoaderClasses({ ...props });
 

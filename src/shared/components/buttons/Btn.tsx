@@ -51,9 +51,13 @@ export const Btn = (props: TBtnProps) => {
       >
         {isLoading && width ? (
           <SpinLoader
-            position="center"
-            width="full"
-            spinnerClassName={classes.content}
+            style={{
+              position: "center",
+              width: "full"
+            }}
+            classList={{
+              spinnerClassName: classes.content
+            }}
           />
         ) : (
           <ContentWrapper

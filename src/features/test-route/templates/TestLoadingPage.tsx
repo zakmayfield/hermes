@@ -30,7 +30,7 @@ export const TestLoadingPage = () => {
         heading="h2"
         title="Spin"
       >
-        <SpinLoader spinnerClassName="text-white" />
+        <SpinLoader classList={{ spinnerClassName: "text-white" }} />
       </Layout>
     </Layout>
   );

@@ -1,7 +1,8 @@
+"use client";
 import { FormEvent } from "react";
+import { useForm, DefaultValues, FieldValues, Resolver } from "react-hook-form";
 import { MutationFunction, useMutation } from "@tanstack/react-query";
 import { UseMutateFunction } from "@tanstack/react-query";
-import { DefaultValues, FieldValues, Resolver, useForm } from "react-hook-form";
 
 export type UseCustomMutationParams<T, V> = {
   mutationFn: MutationFunction<T, V>;

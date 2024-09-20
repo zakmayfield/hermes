@@ -1,3 +1,4 @@
+"use client";
 import { useMemo } from "react";
 import { merge } from "@/utils/ui";
 import {
@@ -197,14 +198,15 @@ export const classHooks = {
 
   useFlexClasses: (props: TFlexStyleProps) => {
     const { style, className } = props || {};
-    const {
-      dir = "row",
-      gap = "sm",
-      padding = "none",
-      position = "center"
-    } = style || {};
 
     return useMemo(() => {
+      const {
+        dir = "row",
+        gap = "sm",
+        padding = "none",
+        position = "center"
+      } = style || {};
+
       const dirMap = {
         row: "flex",
         col: "flex flex-col"

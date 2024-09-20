@@ -1,4 +1,3 @@
-import { merge } from "@/utils/ui";
 import { Heading } from "./Heading";
 import { classHooks } from "@/shared/hooks";
 

@@ -25,7 +25,7 @@ type FormProps = TFormStyleProps & {
 };
 
 export const Form: FC<FormProps> = (props) => {
-  const { children, title, onSubmit, buttonText = "Submit", style, classList } = props;
+  const { children, title, onSubmit, buttonText = "Submit" } = props;
   const classes = classHooks.useFormClasses({ ...props });
 
   return (

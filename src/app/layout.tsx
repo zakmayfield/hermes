@@ -21,11 +21,11 @@ export default function RootLayout({
         <body className={`${quicksand.className} antialiased`}>
           {children}
 
-          {/* <ToastContainer
+          <ToastContainer
             limit={4}
             autoClose={3000}
             position="bottom-right"
-          /> */}
+          />
 
           <ReactQueryDevtools initialIsOpen={false} />
         </body>

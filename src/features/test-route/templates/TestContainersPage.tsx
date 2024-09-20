@@ -23,17 +23,21 @@ export const TestContainersPage = () => {
           contentFlex="col"
         >
           <ContentWrapper
-            rounded="lg"
             className="border"
-            padding="lg"
+            style={{
+              rounded: "lg",
+              padding: "lg"
+            }}
           >
             Content Wrapper 1
           </ContentWrapper>
 
           <ContentWrapper
-            rounded="lg"
-            padding="lg"
             className="border"
+            style={{
+              rounded: "lg",
+              padding: "lg"
+            }}
           >
             Content Wrapper 2
           </ContentWrapper>
@@ -45,15 +49,19 @@ export const TestContainersPage = () => {
           contentFlex="row"
         >
           <ContentWrapper
-            rounded="lg"
-            padding="lg"
+            style={{
+              rounded: "lg",
+              padding: "lg"
+            }}
             className="border"
           >
             Content Wrapper 3
           </ContentWrapper>
           <ContentWrapper
-            rounded="lg"
-            padding="lg"
+            style={{
+              rounded: "lg",
+              padding: "lg"
+            }}
             className="border"
           >
             Content Wrapper 4
@@ -73,23 +81,29 @@ export const TestContainersPage = () => {
         >
           <ContentWrapper
             className="border"
-            rounded="lg"
-            padding="sm"
-            width="auto"
+            style={{
+              rounded: "lg",
+              padding: "sm",
+              width: "auto"
+            }}
           >
             A
           </ContentWrapper>
           <ContentWrapper
             className="border"
-            rounded="lg"
-            padding="md"
+            style={{
+              rounded: "lg",
+              padding: "md"
+            }}
           >
             B
           </ContentWrapper>
           <ContentWrapper
             className="border"
-            rounded="lg"
-            padding="lg"
+            style={{
+              rounded: "lg",
+              padding: "lg"
+            }}
           >
             C
           </ContentWrapper>
@@ -101,12 +115,14 @@ export const TestContainersPage = () => {
         >
           <ContentWrapper
             className="border"
-            rounded="lg"
-            flex="col"
+            style={{
+              rounded: "lg",
+              flex: "col"
+            }}
           >
-            <ContentWrapper margin="sm">X</ContentWrapper>
-            <ContentWrapper margin="md">Y</ContentWrapper>
-            <ContentWrapper margin="lg">Z</ContentWrapper>
+            <ContentWrapper style={{ margin: "sm" }}>X</ContentWrapper>
+            <ContentWrapper style={{ margin: "md" }}>Y</ContentWrapper>
+            <ContentWrapper style={{ margin: "lg" }}>Z</ContentWrapper>
           </ContentWrapper>
         </Layout>
       </Layout>
@@ -118,32 +134,40 @@ export const TestContainersPage = () => {
       >
         <ContentWrapper
           className="border"
-          rounded="lg"
-          padding="lg"
-          width="sm"
+          style={{
+            rounded: "lg",
+            padding: "lg",
+            width: "sm"
+          }}
         >
           A
         </ContentWrapper>
         <ContentWrapper
           className="border"
-          rounded="lg"
-          padding="lg"
-          width="md"
+          style={{
+            rounded: "lg",
+            padding: "lg",
+            width: "md"
+          }}
         >
           B
         </ContentWrapper>
         <ContentWrapper
           className="border"
-          rounded="lg"
-          padding="lg"
-          width="lg"
+          style={{
+            rounded: "lg",
+            padding: "lg",
+            width: "lg"
+          }}
         >
           C
         </ContentWrapper>
         <ContentWrapper
           className="border"
-          rounded="lg"
-          padding="lg"
+          style={{
+            rounded: "lg",
+            padding: "lg"
+          }}
         >
           D
         </ContentWrapper>

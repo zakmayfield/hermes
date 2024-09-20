@@ -1,7 +1,7 @@
 "use client";
 
 import { Btn } from "@/shared/components/buttons";
-import { Layout } from "@/shared/components/containers";
+import { ContentWrapper, Layout } from "@/shared/components/containers";
 
 export const TestButtonsPage = () => {
   return (

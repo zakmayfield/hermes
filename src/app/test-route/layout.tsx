@@ -5,7 +5,7 @@ export default function TestLayout({ children }: { children: React.ReactNode }) 
   return (
     <div>
       <nav className="bg-slate-900">
-        <Flex padding="lg">
+        <Flex style={{ padding: "lg" }}>
           <Link href="/test-route">Test Home</Link>
           <Link href="/test-route/containers">Containers</Link>
           <Link href="/test-route/buttons">Buttons</Link>

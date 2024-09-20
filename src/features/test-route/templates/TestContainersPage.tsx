@@ -7,20 +7,26 @@ export const TestContainersPage = () => {
     <Layout
       heading="h1"
       title="Test Containers Page"
-      contentFlex="col"
-      padding="lg"
-      contentPadding="lg"
-      contentClassname="gap-6"
+      style={{
+        childrenFlex: "col",
+        padding: "lg",
+        childrenPadding: "lg",
+        childrenClassname: "gap-6"
+      }}
     >
       <Layout
         heading="h2"
         title="Flex"
-        contentFlex="row"
+        style={{
+          childrenFlex: "row"
+        }}
       >
         <Layout
           heading="h3"
           title="Col"
-          contentFlex="col"
+          style={{
+            childrenFlex: "col"
+          }}
         >
           <ContentWrapper
             className="border"
@@ -46,7 +52,9 @@ export const TestContainersPage = () => {
         <Layout
           heading="h3"
           title="Row"
-          contentFlex="row"
+          style={{
+            childrenFlex: "row"
+          }}
         >
           <ContentWrapper
             style={{
@@ -72,12 +80,16 @@ export const TestContainersPage = () => {
       <Layout
         heading="h2"
         title="Spacing"
-        contentFlex="row"
+        style={{
+          childrenFlex: "row"
+        }}
       >
         <Layout
           heading="h3"
           title="Padding"
-          contentFlex="col"
+          style={{
+            childrenFlex: "col"
+          }}
         >
           <ContentWrapper
             className="border"
@@ -130,7 +142,9 @@ export const TestContainersPage = () => {
       <Layout
         heading="h2"
         title="Width"
-        contentFlex="col"
+        style={{
+          childrenFlex: "col"
+        }}
       >
         <ContentWrapper
           className="border"

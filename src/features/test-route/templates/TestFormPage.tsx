@@ -7,8 +7,10 @@ export const TestFormPage = () => {
     <Layout
       heading="h1"
       title="Test Form Page"
-      padding="lg"
-      contentPadding="lg"
+      style={{
+        padding: "lg",
+        childrenPadding: "lg"
+      }}
     >
       <TestForm />
     </Layout>

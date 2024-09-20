@@ -8,14 +8,19 @@ export const TestButtonsPage = () => {
     <Layout
       heading="h1"
       title="Test Buttons Page"
-      padding="lg"
-      contentPadding="lg"
+      style={{
+        childrenFlex: "row",
+        padding: "lg",
+        childrenPadding: "lg"
+      }}
     >
       <Layout
         heading="h2"
         title="Buttons"
-        contentFlex="row"
-        contentPadding="lg"
+        style={{
+          childrenFlex: "row",
+          childrenPadding: "lg"
+        }}
       >
         <Btn text="Button" />
         <Btn

@@ -1,7 +1,12 @@
 import { useMemo } from "react";
 import { TBtnStyleProps } from "../components/buttons";
 import { merge } from "@/utils/ui";
-import { TContentWrapperStyleProps, TFlexStyleProps } from "../components/containers";
+import {
+  TContentWrapperStyleProps,
+  TFlexStyleProps,
+  TLayoutStyleProps,
+  TTextStyleProps
+} from "../components/containers";
 
 export const classHooks = {
   useButtonClasses: (props: TBtnStyleProps) => {
@@ -237,6 +242,134 @@ export const classHooks = {
           ${positionMap[dir][position]}
           ${className}
           `)
+      };
+    }, [style, className]);
+  },
+
+  useLayoutClasses: (props: TLayoutStyleProps) => {
+    const { classList, style } = props;
+
+    return useMemo(() => {
+      const { wrapperClassName, headingClassName, childrenClassName } = classList || {};
+      const {
+        width = "full",
+        padding = "none",
+        position = "center",
+        childrenPadding = "none",
+        childrenFlex = "none",
+        childrenRounded = "none"
+      } = style || {};
+
+      const widthMap = {
+        sm: "max-w-sm w-full",
+        md: "max-w-lg w-full",
+        lg: "max-w-2xl w-full",
+        full: "w-full"
+      };
+
+      const paddingMap = {
+        none: "",
+        sm: "p-2",
+        md: "p-4",
+        lg: "p-6"
+      };
+
+      const positionMap = {
+        left: "mr-auto",
+        center: "mx-auto",
+        right: "ml-auto"
+      };
+
+      const childrenPaddingMap = {
+        none: "",
+        sm: "p-2",
+        md: "p-4",
+        lg: "p-6"
+      };
+
+      const childrenFlexMap = {
+        none: "",
+        row: "flex gap-3",
+        col: "flex flex-col gap-3"
+      };
+
+      const childrenRoundedMap = {
+        none: "rounded-none",
+        sm: "rounded",
+        md: "rounded-md",
+        lg: "rounded-lg"
+      };
+
+      return {
+        wrapper: merge(`
+          flex flex-col gap-3 
+          ${widthMap[width]}
+          ${paddingMap[padding]}
+          ${positionMap[position]}
+          ${wrapperClassName}
+          `),
+        heading: merge(`
+          ${headingClassName}
+          `),
+        children: merge(`
+          ${childrenPaddingMap[childrenPadding]}
+          ${childrenFlexMap[childrenFlex]}
+          ${childrenRoundedMap[childrenRounded]}
+          ${childrenClassName}
+          `)
+      };
+    }, [style, classList]);
+  },
+
+  useTextClasses: (props: TTextStyleProps) => {
+    const { style, className } = props;
+
+    return useMemo(() => {
+      const {
+        width = "none",
+        padding = "none",
+        margin = "none",
+        position = "none"
+      } = style || {};
+
+      const widthMap = {
+        none: "",
+        auto: "w-auto",
+        sm: "max-w-sm w-full",
+        md: "max-w-lg w-full",
+        lg: "max-w-2xl w-full",
+        full: "w-full"
+      };
+
+      const paddingMap = {
+        none: "",
+        sm: "p-2",
+        md: "p-4",
+        lg: "p-6"
+      };
+
+      const marginMap = {
+        none: "",
+        sm: "m-2",
+        md: "m-4",
+        lg: "m-6"
+      };
+
+      const positionMap = {
+        none: "",
+        left: "mr-auto",
+        center: "mx-auto",
+        right: "ml-auto"
+      };
+
+      return {
+        wrapper: merge(`
+        ${widthMap[width]}
+        ${paddingMap[padding]}
+        ${marginMap[margin]}
+        ${positionMap[position]}
+        ${className}
+        `)
       };
     }, [style, className]);
   }

@@ -50,8 +50,10 @@ export const Input: FC<InputProps<any>> = (props) => {
   return (
     <Flex
       className={classes.container}
-      dir={flex}
-      position={position}
+      style={{
+        dir: flex,
+        position: position
+      }}
     >
       <label
         className={classes.label}

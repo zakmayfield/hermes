@@ -72,9 +72,11 @@ export const Form: FC<FormProps> = (props) => {
       )}
 
       <Flex
-        dir="col"
-        position="left"
-        gap="lg"
+        style={{
+          dir: "col",
+          position: "left",
+          gap: "lg"
+        }}
       >
         {children}
 

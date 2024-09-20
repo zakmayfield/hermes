@@ -8,15 +8,19 @@ export const TestLoadingPage = () => {
     <Layout
       heading="h1"
       title="Test Loaders Page"
-      padding="lg"
-      contentPadding="lg"
-      contentFlex="row"
-      contentClassname="gap-6"
+      style={{
+        padding: "lg",
+        childrenFlex: "row",
+        childrenPadding: "lg",
+        childrenClassname: "gap-6"
+      }}
     >
       <Layout
         heading="h2"
         title="Pulse"
-        contentFlex="col"
+        style={{
+          childrenFlex: "col"
+        }}
       >
         <PulseLoader />
         <PulseLoader size="md" />

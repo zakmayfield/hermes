@@ -240,6 +240,7 @@ export const classHooks = {
 
       return {
         wrapper: merge(`
+          w-full
           ${dirMap[dir]}
           ${gapMap[gap]}
           ${paddingMap[padding]}

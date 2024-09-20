@@ -1,9 +1,9 @@
-import { FC, useMemo } from "react";
-import { Flex, Text } from "../containers";
-import { merge } from "@/utils/ui";
+import { FC } from "react";
+import { Flex } from "../containers";
 import { FieldError, FieldValues, UseFormRegister } from "react-hook-form";
 import { FormFieldError } from "./FieldError";
 import { classHooks } from "@/shared/hooks";
+import { PiWarningCircleDuotone } from "react-icons/pi";
 
 export type InputStyleProps = {
   classList?: {
@@ -14,6 +14,7 @@ export type InputStyleProps = {
   style?: {
     is_label_hidden?: boolean;
     is_error_hidden?: boolean;
+    is_error_icon_hidden?: boolean;
     flex?: "row" | "col";
     position?: "left" | "center" | "right";
     width?: "full";
@@ -33,6 +34,7 @@ export const Input: FC<InputProps<any>> = (props) => {
   const {
     is_label_hidden = false,
     is_error_hidden = false,
+    is_error_icon_hidden = false,
     flex = "col",
     position = "left"
   } = style || {};
@@ -57,14 +59,20 @@ export const Input: FC<InputProps<any>> = (props) => {
         {label}
       </label>
 
-      <input
-        className={classes.input}
-        type="text"
-        placeholder={label}
-        aria-label={name}
-        aria-invalid={!!error}
-        {...register?.(name)}
-      />
+      <Flex className="relative">
+        <input
+          className={`${classes.input} ${(error && "ring-4 ring-red-400") || ""}`}
+          type="text"
+          placeholder={label}
+          aria-label={name}
+          aria-invalid={!!error}
+          {...register?.(name)}
+        />
+
+        {error && !is_error_icon_hidden && (
+          <PiWarningCircleDuotone className="absolute right-3 text-red-500 text-xl" />
+        )}
+      </Flex>
 
       {error && (
         <FormFieldError

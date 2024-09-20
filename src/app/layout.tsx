@@ -4,6 +4,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { quicksand } from "@/utils/ui";
 import { CoreProvider } from "@/lib/providers";
 import "./globals.css";
+import "react-toastify/dist/ReactToastify.css";
 
 export const metadata: Metadata = {
   title: "Hermes",

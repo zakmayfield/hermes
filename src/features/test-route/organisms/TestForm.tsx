@@ -1,5 +1,5 @@
 import { Form, Input } from "@/shared/components/form";
-import { useCustomForm, useCustomMutation } from "@/shared/hooks";
+import { customHooks } from "@/shared/hooks";
 import {
   TestFormData,
   TestFormResponse,
@@ -8,7 +8,10 @@ import {
 } from "@/shared/validators/TestFormValidator";
 
 export const TestForm = () => {
-  const { mutate: TestMutation } = useCustomMutation<TestFormResponse, TestFormData>({
+  const { mutate: TestMutation } = customHooks.useCustomMutation<
+    TestFormResponse,
+    TestFormData
+  >({
     mutationFn: async () => {
       return {
         status: "success"
@@ -20,7 +23,7 @@ export const TestForm = () => {
     }
   });
 
-  const { register, onSubmit } = useCustomForm<TestFormData>({
+  const { register, onSubmit } = customHooks.useCustomForm<TestFormData>({
     defaultValues,
     resolver,
     mutation: TestMutation

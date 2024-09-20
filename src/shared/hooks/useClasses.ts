@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import { TBtnStyleProps } from "../components/buttons";
 import { merge } from "@/utils/ui";
+import { TBtnStyleProps } from "../components/buttons";
 import {
   TContentWrapperStyleProps,
   TFlexStyleProps,

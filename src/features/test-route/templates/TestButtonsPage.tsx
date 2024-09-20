@@ -20,22 +20,30 @@ export const TestButtonsPage = () => {
         <Btn text="Button" />
         <Btn
           text="Button"
-          width="full"
+          style={{
+            width: "full"
+          }}
         />
         <Btn
           text="Button"
-          width="sm"
-          bgColor="green"
-          theme="light"
+          style={{
+            width: "sm",
+            bgColor: "green",
+            theme: "light"
+          }}
         />
         <Btn
           text="Button"
-          width="md"
-          bgColor="red"
+          style={{
+            width: "md",
+            bgColor: "red"
+          }}
         />
         <Btn
           text="Button"
-          width="lg"
+          style={{
+            width: "lg"
+          }}
         />
       </Layout>
     </Layout>

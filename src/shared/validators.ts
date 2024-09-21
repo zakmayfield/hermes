@@ -40,5 +40,25 @@ export const validators = {
       resolver: SignUpFormResolver,
       defaultValues: defaultSignUpFormValues
     };
+  },
+
+  getSignInFormValidator: () => {
+    const SignInFormValidator = z.object({
+      email: z.string().email(),
+      password: z.string().min(1, { message: "Password is required" })
+    });
+
+    const SignInFormResolver = zodResolver(SignInFormValidator);
+
+    const defaultSignInFormValues: z.infer<typeof SignInFormValidator> = {
+      email: "",
+      password: ""
+    };
+
+    return {
+      validator: SignInFormValidator,
+      resolver: SignInFormResolver,
+      defaultValues: defaultSignInFormValues
+    };
   }
 };

@@ -70,6 +70,31 @@ export const formHooks = {
     return { register, onSubmit, formErrors: errors, isPending };
   },
 
+  useSignInForm: () => {
+    const { defaultValues, resolver } = validators.getSignInFormValidator();
+    type SignInFormData = typeof defaultValues;
+    type SignInFormResponse = SignInResponse | undefined;
+
+    const { mutate, isPending } = customHooks.useCustomMutation<
+      SignInFormResponse,
+      SignInFormData
+    >({
+      mutationFn: async (data) => await signIn("sign-in", data)
+    });
+
+    const {
+      register,
+      onSubmit,
+      formState: { errors }
+    } = customHooks.useCustomForm<SignInFormResponse, SignInFormData>({
+      defaultValues,
+      resolver,
+      mutate
+    });
+
+    return { register, onSubmit, errors, isPending };
+  },
+
   useChangePasswordForm: () => {
     const { notify } = utilityHooks.useToast();
 

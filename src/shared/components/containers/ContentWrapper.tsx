@@ -3,7 +3,7 @@ import { classHooks } from "@/shared/hooks";
 export type TContentWrapperStyleProps = {
   className?: string;
   style?: {
-    width?: "auto" | "sm" | "md" | "lg";
+    width?: "auto" | "sm" | "md" | "lg" | "full";
     padding?: "sm" | "md" | "lg";
     paddingX?: "sm" | "md" | "lg";
     margin?: "sm" | "md" | "lg";

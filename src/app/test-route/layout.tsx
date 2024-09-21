@@ -11,6 +11,7 @@ export default function TestLayout({ children }: { children: React.ReactNode }) 
           <Link href="/test-route/buttons">Buttons</Link>
           <Link href="/test-route/loading">Loading</Link>
           <Link href="/test-route/form">Form</Link>
+          <Link href="/test-route/accordion">Accordion</Link>
         </Flex>
       </nav>
 

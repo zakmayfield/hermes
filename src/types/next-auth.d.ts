@@ -1,4 +1,4 @@
-import { OnboardingStatus } from "@prisma/client";
+import { OnboardingStatus, Roles } from "@prisma/client";
 import { User } from "next-auth";
 
 declare module "next-auth" {
@@ -14,7 +14,7 @@ declare module "next-auth" {
     user: User & {
       email: string;
       onboarding_status?: OnboardingStatus;
-      // cart_id: string;
+      roles: Roles[];
     };
   }
 }
@@ -24,6 +24,6 @@ declare module "next-auth/jwt" {
     id: string;
     email: string;
     onboarding_status?: OnboardingStatus;
-    // cart_id: string;
+    roles: Roles[];
   }
 }

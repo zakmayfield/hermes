@@ -4,7 +4,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { quicksand } from "@/utils/ui";
 import { CoreProvider } from "@/lib/providers";
 import "./globals.css";
-import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/ReactToastify.min.css";
 import { getAuthSession } from "@/lib/auth/auth.options";
 
 export const metadata: Metadata = {
@@ -18,9 +18,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await getAuthSession();
-
-  console.log({ session });
-
+  console.log({ session: session?.user.roles });
   return (
     <html lang="en">
       <CoreProvider>

@@ -203,14 +203,22 @@ type NextAuthCallbacks = NextAuthOptions["callbacks"];
 const callbacks: NextAuthCallbacks = {
   async jwt({ token, user }) {
     const db_user = await db.user.findUnique({
-      where: { id: user.id },
+      where: { email: token.email },
       include: {
         onboarding: {
           select: {
             status: true
           }
         },
-        roles: true
+        roles: {
+          select: {
+            role: {
+              select: {
+                name: true
+              }
+            }
+          }
+        }
       }
     });
 
@@ -219,10 +227,14 @@ const callbacks: NextAuthCallbacks = {
       return token;
     }
 
+    const user_roles = db_user.roles.map((role) => role.role.name);
+    const onboarding_status = db_user.onboarding?.status;
+
     return {
       id: db_user.id,
       email: db_user.email,
-      onboarding_status: db_user.onboarding?.status
+      onboarding_status,
+      roles: user_roles
     };
   },
 
@@ -231,6 +243,7 @@ const callbacks: NextAuthCallbacks = {
       session.user.id = token.id;
       session.user.email = token.email;
       session.user.onboarding_status = token.onboarding_status;
+      session.user.roles = token.roles;
     }
 
     return session;

@@ -7,6 +7,9 @@ import "./globals.css";
 import "react-toastify/ReactToastify.min.css";
 import "react-tooltip/dist/react-tooltip.css";
 import { getAuthSession } from "@/lib/auth/auth.options";
+import { Layout } from "@/shared/components/containers";
+import { NavigationTemplate } from "@/features/navigation/templates";
+import { FooterTemplate } from "@/features/footer/templates";
 
 export const metadata: Metadata = {
   title: "Hermes",
@@ -19,12 +22,31 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await getAuthSession();
-  console.log({ session: session?.user.roles });
+  const is_auth = !!session;
+
+  const Nav = is_auth && <NavigationTemplate />;
+  const Footer = is_auth && <FooterTemplate />;
+
   return (
     <html lang="en">
       <CoreProvider>
         <body className={`${quicksand.className} antialiased`}>
-          {children}
+          {/* NAV */}
+          {Nav}
+
+          <Layout
+            classList={{
+              childrenClassName: "min-h-screen"
+            }}
+            style={{
+              childrenPadding: "lg"
+            }}
+          >
+            {children}
+          </Layout>
+
+          {/* FOOTER */}
+          {Footer}
 
           <ToastContainer
             limit={4}

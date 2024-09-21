@@ -1,3 +1,4 @@
+"use client";
 import { Heading } from "./Heading";
 import { classHooks } from "@/shared/hooks";
 
@@ -12,7 +13,6 @@ export type TLayoutStyleProps = {
     width?: "sm" | "md" | "lg";
     padding?: "sm" | "md" | "lg";
     position?: "left" | "center" | "right";
-    childrenClassname?: string;
     childrenPadding?: "sm" | "md" | "lg";
     childrenFlex?: "row" | "col";
     childrenRounded?: "sm" | "md" | "lg";

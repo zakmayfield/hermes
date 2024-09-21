@@ -10,10 +10,11 @@ type TFieldErrorProps = HTMLAttributes<HTMLParagraphElement> & {
 
 export const FormFieldError = (props: TFieldErrorProps) => {
   const { message, is_error_hidden, described_by, className = "" } = props;
+
   return (
     <Text
       described_by={described_by}
-      hidden={is_error_hidden}
+      is_hidden={is_error_hidden}
       className={`text-red-300 italic pt-1 ${className}`}
     >
       {message}

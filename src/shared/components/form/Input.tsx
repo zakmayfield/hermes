@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Flex } from "../containers";
 import { FieldError, FieldValues, UseFormRegister } from "react-hook-form";
 import { FormFieldError } from "./FieldError";
-import { classHooks } from "@/shared/hooks";
+import { classHooks, utilityHooks } from "@/shared/hooks";
 import { PiWarningCircleDuotone } from "react-icons/pi";
 
 export type InputStyleProps = {
@@ -31,7 +31,6 @@ type InputProps<T extends FieldValues> = InputStyleProps & {
 
 export const Input: FC<InputProps<any>> = (props) => {
   const { type = "text", label, register, error, style } = props;
-
   const {
     is_label_hidden = false,
     is_error_hidden = false,
@@ -40,9 +39,16 @@ export const Input: FC<InputProps<any>> = (props) => {
     position = "left"
   } = style || {};
 
+  const name = props.name as string;
+
   const classes = classHooks.useInputClasses({ ...props });
 
-  const name = props.name as string;
+  const { Tooltip } = utilityHooks.useTooltip({
+    content: error?.message,
+    anchorSelect: `#${name}_error_icon`,
+    place: "top-end",
+    variant: "error"
+  });
 
   return (
     <Flex
@@ -71,8 +77,13 @@ export const Input: FC<InputProps<any>> = (props) => {
         />
 
         {error && !is_error_icon_hidden && (
-          <PiWarningCircleDuotone className="absolute right-3 text-red-500 text-xl" />
+          <PiWarningCircleDuotone
+            id={`${name}_error_icon`}
+            className="absolute right-3 text-red-500 text-xl"
+          />
         )}
+
+        {error && !is_error_icon_hidden && <Tooltip />}
       </Flex>
 
       {error && (

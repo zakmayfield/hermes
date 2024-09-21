@@ -14,7 +14,6 @@ export const SignInForm = () => {
         label="Email"
         register={register}
         error={errors.email}
-        // TODO: is_error_hidden is broken
       />
       <Input
         type="password"

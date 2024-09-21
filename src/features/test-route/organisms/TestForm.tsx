@@ -18,6 +18,10 @@ export const TestForm = () => {
         label="Test 1"
         register={register}
         error={formErrors.test_1}
+        style={{
+          is_error_hidden: true,
+          is_label_hidden: true
+        }}
       />
       <Input
         name="test_2"

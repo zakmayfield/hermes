@@ -1,8 +1,10 @@
 "use client";
-import { useState } from "react";
+import { RefAttributes, useState } from "react";
 import { toast } from "react-toastify";
+import { ITooltip, TooltipRefProps, Tooltip } from "react-tooltip";
 
 type ToastVariants = "success" | "error" | "warn" | "info";
+type TooltipProps = ITooltip & RefAttributes<TooltipRefProps>;
 
 export const utilityHooks = {
   useToast: () => {
@@ -13,6 +15,14 @@ export const utilityHooks = {
 
     return {
       notify
+    };
+  },
+
+  useTooltip: (props: TooltipProps) => {
+    const tt = () => <Tooltip {...props} />;
+
+    return {
+      Tooltip: tt
     };
   },
 

@@ -3,6 +3,7 @@
 import { customHooks } from "./useCustom";
 import { utilityHooks } from "./useUtilities";
 import { validators } from "../validators";
+import { signIn, SignInResponse } from "next-auth/react";
 
 export const formHooks = {
   useTestForm: () => {
@@ -39,6 +40,34 @@ export const formHooks = {
     });
 
     return { register, onSubmit, formErrors: errors };
+  },
+
+  useSignUpForm: () => {
+    const { resolver, defaultValues } = validators.getSignUpFormValidator();
+    type SignUpFormData = typeof defaultValues;
+    type SignUpFormResponse = SignInResponse | undefined;
+
+    const { mutate, isPending } = customHooks.useCustomMutation<
+      SignUpFormResponse,
+      SignUpFormData
+    >({
+      mutationFn: async (data) => await signIn("sign-up", { ...data }),
+      handleError(error) {
+        console.log(error.message);
+      }
+    });
+
+    const {
+      register,
+      onSubmit,
+      formState: { errors }
+    } = customHooks.useCustomForm<SignUpFormResponse, SignUpFormData>({
+      defaultValues,
+      resolver,
+      mutate
+    });
+
+    return { register, onSubmit, formErrors: errors, isPending };
   },
 
   useChangePasswordForm: () => {

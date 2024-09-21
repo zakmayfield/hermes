@@ -103,7 +103,7 @@ model UserRoles {
   user_id String
   role_id String
 
-  role Role @relation(fields: [role_id], references: [role_id])
+  role Role @relation(fields: [role_id], references: [role_id], onDelete: Cascade)
   user User @relation(fields: [user_id], references: [id])
 
   @@unique([user_id, role_id])
@@ -134,7 +134,7 @@ model UserPermissions {
   granted_at    DateTime  @default(now())
   revoked_at    DateTime?
 
-  user       User       @relation(fields: [user_id], references: [id])
+  user       User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
   permission Permission @relation(fields: [permission_id], references: [permission_id])
 
   @@unique([user_id, permission_id])

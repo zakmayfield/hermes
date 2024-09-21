@@ -26,10 +26,11 @@ type InputProps<T extends FieldValues> = InputStyleProps & {
   label?: string;
   register?: UseFormRegister<T>;
   error?: FieldError;
+  type?: "text" | "password";
 };
 
 export const Input: FC<InputProps<any>> = (props) => {
-  const { label, register, error, style } = props;
+  const { type = "text", label, register, error, style } = props;
 
   const {
     is_label_hidden = false,
@@ -62,7 +63,7 @@ export const Input: FC<InputProps<any>> = (props) => {
       <Flex className="relative">
         <input
           className={`${classes.input} ${(error && "ring-4 ring-red-400") || ""}`}
-          type="text"
+          type={type}
           placeholder={label}
           aria-label={name}
           aria-invalid={!!error}

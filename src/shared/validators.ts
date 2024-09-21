@@ -10,9 +10,7 @@ export const validators = {
 
     const TestFormResolver = zodResolver(TestFormValidator);
 
-    type TestFormData = z.infer<typeof TestFormValidator>;
-
-    const defaultTestFormValues: TestFormData = {
+    const defaultTestFormValues: z.infer<typeof TestFormValidator> = {
       test_1: "",
       test_2: ""
     };
@@ -21,6 +19,26 @@ export const validators = {
       validator: TestFormValidator,
       resolver: TestFormResolver,
       defaultValues: defaultTestFormValues
+    };
+  },
+
+  getSignUpFormValidator: () => {
+    const SignUpFormValidator = z.object({
+      email: z.string().email(),
+      password: z.string().min(1, { message: "Password is required" })
+    });
+
+    const SignUpFormResolver = zodResolver(SignUpFormValidator);
+
+    const defaultSignUpFormValues: z.infer<typeof SignUpFormValidator> = {
+      email: "",
+      password: ""
+    };
+
+    return {
+      validator: SignUpFormValidator,
+      resolver: SignUpFormResolver,
+      defaultValues: defaultSignUpFormValues
     };
   }
 };

@@ -21,11 +21,12 @@ type FormProps = TFormStyleProps & {
   children?: React.ReactNode;
   title?: string;
   buttonText?: string;
+  isPending?: boolean;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
 };
 
 export const Form: FC<FormProps> = (props) => {
-  const { children, title, onSubmit, buttonText = "Submit" } = props;
+  const { children, title, onSubmit, buttonText = "Submit", isPending } = props;
   const classes = classHooks.useFormClasses({ ...props });
 
   return (
@@ -57,7 +58,9 @@ export const Form: FC<FormProps> = (props) => {
             buttonClassName: classes.button
           }}
           style={{
-            width: "full"
+            width: "full",
+            isDisabled: isPending,
+            isLoading: isPending
           }}
         />
       </Flex>

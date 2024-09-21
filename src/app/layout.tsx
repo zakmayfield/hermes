@@ -5,17 +5,22 @@ import { quicksand } from "@/utils/ui";
 import { CoreProvider } from "@/lib/providers";
 import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
+import { getAuthSession } from "@/lib/auth/auth.options";
 
 export const metadata: Metadata = {
   title: "Hermes",
   description: "Chasers Juice Ordering"
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getAuthSession();
+
+  console.log({ session });
+
   return (
     <html lang="en">
       <CoreProvider>

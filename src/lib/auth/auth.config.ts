@@ -38,7 +38,9 @@ const providers: NextAuthProviders = [
     },
     async authorize(credentials) {
       // validation
-      function isValidCredentials(credentials: Record<"email" | "password", string> | undefined) {
+      function isValidCredentials(
+        credentials: Record<"email" | "password", string> | undefined
+      ) {
         const email = credentials?.email;
         const password = credentials?.password;
 
@@ -97,7 +99,9 @@ const providers: NextAuthProviders = [
     },
     async authorize(credentials) {
       // validation
-      function isValidCredentials(credentials: Record<"email" | "password", string> | undefined) {
+      function isValidCredentials(
+        credentials: Record<"email" | "password", string> | undefined
+      ) {
         const email = credentials?.email;
         const password = credentials?.password;
 
@@ -111,7 +115,10 @@ const providers: NextAuthProviders = [
       const { email, password } = isValidCredentials(credentials);
 
       async function canCreateUser() {
-        const is_user = await db.user.findUnique({ where: { email }, select: { email: true } });
+        const is_user = await db.user.findUnique({
+          where: { email },
+          select: { email: true }
+        });
 
         if (is_user) {
           throw new Error("User already exists. Please log in to continue.");
@@ -145,7 +152,7 @@ const providers: NextAuthProviders = [
 
       // create
       async function createUser() {
-        const new_user = await db.user.create({
+        const user = await db.user.create({
           data: {
             email,
             password: hashed_pw,
@@ -177,16 +184,16 @@ const providers: NextAuthProviders = [
 
         await db.onboarding.create({
           data: {
-            user_id: new_user.id
+            user_id: user.id
           }
         });
 
-        return { new_user };
+        return { user };
       }
 
-      const { new_user } = await createUser();
+      const { user } = await createUser();
 
-      return new_user;
+      return user;
     }
   })
 ];

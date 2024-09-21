@@ -32,7 +32,12 @@ export const customHooks = {
   useCustomMutation: <T, V>(props: UseCustomMutationParams<T, V>) => {
     const { mutationFn, handleSuccess, handleError } = props;
 
-    const { mutate, error, data, variables } = useMutation<T, Error, V, unknown>({
+    const { mutate, error, data, variables, isPending } = useMutation<
+      T,
+      Error,
+      V,
+      unknown
+    >({
       mutationFn,
       onSuccess(data, variables) {
         handleSuccess?.(data, variables);
@@ -42,7 +47,7 @@ export const customHooks = {
       }
     });
 
-    return { mutate, error, data, variables };
+    return { mutate, error, data, variables, isPending };
   },
 
   useCustomQuery: <T>(props: UseCustomQueryParams<T>) => {

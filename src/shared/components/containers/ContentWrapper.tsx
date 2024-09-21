@@ -1,3 +1,4 @@
+"use client";
 import { classHooks } from "@/shared/hooks";
 
 export type TContentWrapperStyleProps = {

@@ -3,13 +3,14 @@ import { formHooks } from "@/shared/hooks";
 
 export const SignInForm = () => {
   const { register, onSubmit, errors, isPending } = formHooks.useSignInForm();
+
   return (
     <Form
       onSubmit={onSubmit}
       title="Sign In"
       isPending={isPending}
       classList={{
-        formClassName: "bg-slate-900 rounded-lg pb-12"
+        formClassName: "bg-slate-900 rounded-lg py-12"
       }}
     >
       <Input

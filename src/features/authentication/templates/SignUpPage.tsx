@@ -2,9 +2,5 @@
 import { SignUpForm } from "../organisms";
 
 export const SignUpPage = () => {
-  return (
-    <div>
-      <SignUpForm />
-    </div>
-  );
+  return <SignUpForm />;
 };

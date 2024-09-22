@@ -50,8 +50,8 @@ export const classHooks = {
         lg: "p-6"
       };
       const bgMap = {
-        green: "bg-green-500",
-        red: "bg-red-400",
+        green: "bg-green-700",
+        red: "bg-red-500",
         none: "bg-none"
       };
       const fontWeightMap = {

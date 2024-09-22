@@ -11,7 +11,11 @@ export const SignUpForm = () => {
       buttonText="Sign Up"
       isPending={isPending}
       classList={{
-        formClassName: "bg-slate-900 rounded-lg py-12"
+        formClassName: "bg-slate-900 rounded-lg py-12",
+        buttonClassName: "h-12 md:h-10"
+      }}
+      style={{
+        buttonBgColor: "green"
       }}
     >
       <Input
@@ -19,6 +23,9 @@ export const SignUpForm = () => {
         label="Email"
         register={register}
         error={formErrors.email}
+        classList={{
+          inputClassName: "h-12 md:h-auto"
+        }}
       />
 
       <Input
@@ -27,6 +34,9 @@ export const SignUpForm = () => {
         register={register}
         error={formErrors.password}
         type="password"
+        classList={{
+          inputClassName: "h-12 md:h-auto"
+        }}
       />
     </Form>
   );

@@ -25,7 +25,10 @@ export const Nav = () => {
     <nav className="p-6 bg-slate-900">
       <Flex>
         {nav_items.map((item) => (
-          <NavItem {...item} />
+          <NavItem
+            key={item.id}
+            {...item}
+          />
         ))}
         <SignOutButton />
       </Flex>

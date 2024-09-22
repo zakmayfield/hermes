@@ -273,6 +273,9 @@ export const classHooks = {
         sm: "max-w-sm w-full",
         md: "max-w-lg w-full",
         lg: "max-w-2xl w-full",
+        xl: "max-w-4xl w-full",
+        "2xl": "max-w-6xl w-full",
+        "3xl": "max-w-7xl w-full",
         full: "w-full"
       };
 

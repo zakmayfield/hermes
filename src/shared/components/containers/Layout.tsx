@@ -10,7 +10,7 @@ export type TLayoutStyleProps = {
   };
   style?: {
     headingClassName?: string;
-    width?: "sm" | "md" | "lg";
+    width?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl";
     padding?: "sm" | "md" | "lg";
     position?: "left" | "center" | "right";
     childrenPadding?: "sm" | "md" | "lg";

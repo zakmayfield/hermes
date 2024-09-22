@@ -36,10 +36,12 @@ export default async function RootLayout({
 
           <Layout
             classList={{
-              childrenClassName: "min-h-screen"
+              childrenClassName: "min-h-screen",
+              wrapperClassName: "border"
             }}
             style={{
-              childrenPadding: "lg"
+              childrenPadding: "lg",
+              width: "3xl"
             }}
           >
             {children}

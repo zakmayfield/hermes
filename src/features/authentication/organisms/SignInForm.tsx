@@ -26,6 +26,10 @@ export const SignInForm = () => {
         classList={{
           inputClassName: "h-12 md:h-auto"
         }}
+        style={{
+          is_error_hidden: true,
+          is_label_hidden: true
+        }}
       />
       <Input
         type="password"

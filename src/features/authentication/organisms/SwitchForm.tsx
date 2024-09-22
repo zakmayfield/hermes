@@ -1,12 +1,10 @@
 "use client";
 
-import { ContentWrapper, Text } from "@/shared/components/containers";
 import Link from "next/link";
+import { ContentWrapper, Text } from "@/shared/components/containers";
 import { usePathname } from "next/navigation";
 
-type TSwitchFormProps = {};
-
-export const SwitchForm = (props: TSwitchFormProps) => {
+export const SwitchForm = () => {
   const pathname = usePathname();
   const is_sign_in = pathname.includes("sign-in");
 

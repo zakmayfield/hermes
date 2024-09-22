@@ -8,7 +8,7 @@ export const RoleSwitch = () => {
   const queryClient = useQueryClient();
 
   const { data, isLoading } = useQuery({
-    queryKey: ["roles"],
+    queryKey: ["user_roles"],
     queryFn: async () => await fetchUserRoles()
   });
 

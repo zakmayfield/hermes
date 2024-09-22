@@ -1,7 +1,7 @@
 "use client";
 
 import { Layout } from "@/shared/components/containers";
-import { DashboardNavigation } from "../../organisms";
+import { SuperNavigation } from "../../organisms/super";
 
 type TSuperDashboardLayoutTemplateProps = {
   children: React.ReactNode;
@@ -19,7 +19,7 @@ export const SuperDashboardLayoutTemplate = (
         childrenFlex: "col"
       }}
     >
-      <DashboardNavigation />
+      <SuperNavigation />
       {children}
     </Layout>
   );

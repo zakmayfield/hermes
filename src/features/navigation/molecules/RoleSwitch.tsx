@@ -14,7 +14,7 @@ export const RoleSwitch = () => {
 
   const invalidateRolesCache = () =>
     queryClient.invalidateQueries({
-      queryKey: ["roles"]
+      queryKey: ["user_roles"]
     });
 
   const { mutate } = useMutation({

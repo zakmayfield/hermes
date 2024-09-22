@@ -19,12 +19,17 @@ export const fetchUserRoles = async () => {
   return user_roles;
 };
 
-export const fetchPermissions = async () => {
-  const permissions = await db.permission.findMany();
+export const fetchRolePermissions = async () => {
+  const permissions = await db.rolePermissions.findMany({
+    include: {
+      permission: true,
+      role: true
+    }
+  });
   return permissions;
 };
 
-export const fetchRolePermissions = async (role: Roles) => {
+export const fetchPermissionsByRole = async (role: Roles) => {
   const role_permissions = await db.permission.findMany({
     where: { role_permissions: { some: { role: { name: role } } } }
   });

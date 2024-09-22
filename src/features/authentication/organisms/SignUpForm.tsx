@@ -8,6 +8,7 @@ export const SignUpForm = () => {
     <Form
       onSubmit={onSubmit}
       title="Sign Up"
+      buttonText="Sign Up"
       isPending={isPending}
       classList={{
         formClassName: "bg-slate-900 rounded-lg py-12"

@@ -1,10 +1,10 @@
 "use client";
-import { RefAttributes, useEffect, useState } from "react";
+import { RefAttributes, useState } from "react";
 import { toast } from "react-toastify";
 import { ITooltip, TooltipRefProps, Tooltip } from "react-tooltip";
+import { FaChevronDown } from "react-icons/fa";
 import { ContentWrapper, Flex, Text } from "../components/containers";
 import { Btn } from "../components/buttons";
-import { FaChevronDown } from "react-icons/fa";
 
 type ToastVariants = "success" | "error" | "warn" | "info";
 type TooltipProps = ITooltip & RefAttributes<TooltipRefProps>;

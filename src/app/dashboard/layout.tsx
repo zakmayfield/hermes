@@ -14,8 +14,7 @@ export default async function DashboardLayout({
   const session = await getAuthSession();
   if (!session) redirect("/sign-in");
 
-  // TODO: signing in causes useContext error
-  const user_roles = ["USER", "ADMIN", "SUPER"];
+  const user_roles = session.user.roles;
 
   const dashboard =
     (user_roles.includes("SUPER") && superDashboard) ||

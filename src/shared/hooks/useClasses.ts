@@ -159,8 +159,8 @@ export const classHooks = {
 
     return useMemo(() => {
       const disabledMap =
-        (!isDisabled && !button?.bg && "bg-opacity-70") ||
-        (!isDisabled && !button?.bg && "bg-slate-500") ||
+        (isDisabled && !button?.bg && "bg-opacity-70") ||
+        (isDisabled && !button?.bg && "bg-slate-500") ||
         "";
 
       return {

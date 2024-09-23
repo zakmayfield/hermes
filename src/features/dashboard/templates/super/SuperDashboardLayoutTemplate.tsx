@@ -1,6 +1,6 @@
 "use client";
 
-import { Layout } from "@/shared/components/containers";
+import { LayoutTemplate } from "@/shared/components/containers";
 import { SuperNavigation } from "../../organisms/super";
 
 type TSuperDashboardLayoutTemplateProps = {
@@ -12,15 +12,17 @@ export const SuperDashboardLayoutTemplate = (
 ) => {
   const { children } = props;
   return (
-    <Layout
+    <LayoutTemplate
       heading="h2"
       title="Super"
       style={{
-        childrenFlex: "col"
+        children: {
+          flex: "col"
+        }
       }}
     >
       <SuperNavigation />
       {children}
-    </Layout>
+    </LayoutTemplate>
   );
 };

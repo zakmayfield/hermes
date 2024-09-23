@@ -1,6 +1,11 @@
 "use client";
 import React from "react";
-import { ContentWrapper, Flex, Layout, Text } from "@/shared/components/containers";
+import {
+  ContentWrapper,
+  Flex,
+  LayoutTemplate,
+  Text
+} from "@/shared/components/containers";
 import { fetchRolePermissions } from "@/shared/queries";
 import { Permission, Role, RolePermissions } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
@@ -21,16 +26,21 @@ export const ManagePermissionsPage = () => {
 
   const ManagePermissionsLayout = ({ children }: { children: React.ReactNode }) => {
     return (
-      <Layout
+      <LayoutTemplate
         heading="h3"
         title="Permissions"
-        style={{ childrenFlex: "col", childrenPadding: "lg" }}
+        style={{
+          children: {
+            flex: "col",
+            padding: "lg"
+          }
+        }}
         classList={{
           childrenClassName: "items-start justify-between lg:flex-row gap-6"
         }}
       >
         {children}
-      </Layout>
+      </LayoutTemplate>
     );
   };
   const PermissionList = ({
@@ -41,20 +51,23 @@ export const ManagePermissionsPage = () => {
     title: string;
   }) => {
     return (
-      <Layout
+      <LayoutTemplate
         heading="h5"
         title={title}
         style={{
-          width: "lg",
-          childrenFlex: "col",
-          childrenPadding: "md"
-        }}
-        classList={{
-          childrenClassName: "rounded-lg bg-slate-800"
+          wrapper: {
+            width: "lg"
+          },
+          children: {
+            flex: "col",
+            padding: "md",
+            rounded: "lg",
+            bg: "bg-slate-800"
+          }
         }}
       >
         {children}
-      </Layout>
+      </LayoutTemplate>
     );
   };
   const PermissionItem = (props: PermissionItemProps) => {

@@ -7,7 +7,7 @@ import "./globals.css";
 import "react-toastify/ReactToastify.min.css";
 import "react-tooltip/dist/react-tooltip.css";
 import { getAuthSession } from "@/lib/auth/auth.options";
-import { Layout } from "@/shared/components/containers";
+import { LayoutTemplate } from "@/shared/components/containers";
 import { NavigationTemplate } from "@/features/navigation/templates";
 import { FooterTemplate } from "@/features/footer/templates";
 
@@ -34,18 +34,23 @@ export default async function RootLayout({
           {/* NAV */}
           {Nav}
 
-          <Layout
+          <LayoutTemplate
             classList={{
-              childrenClassName: "min-h-screen",
-              wrapperClassName: "border"
+              childrenClassName: "min-h-screen"
             }}
             style={{
-              childrenPadding: "lg",
-              width: "3xl"
+              wrapper: {
+                width: "3xl",
+                place: "center",
+                border: "sm"
+              },
+              children: {
+                padding: "lg"
+              }
             }}
           >
             {children}
-          </Layout>
+          </LayoutTemplate>
 
           {/* FOOTER */}
           {Footer}

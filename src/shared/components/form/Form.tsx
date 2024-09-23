@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, FormEvent } from "react";
-import { Flex, Heading } from "../containers";
+import { Heading, Wrapper } from "../containers";
 import { Btn } from "../buttons";
 import { classHooks } from "@/shared/hooks";
 
@@ -44,10 +44,9 @@ export const Form: FC<FormProps> = (props) => {
         />
       )}
 
-      <Flex
+      <Wrapper
         style={{
-          dir: "col",
-          position: "left",
+          flex: "col",
           gap: "lg"
         }}
       >
@@ -67,7 +66,7 @@ export const Form: FC<FormProps> = (props) => {
             bgColor: buttonBgColor
           }}
         />
-      </Flex>
+      </Wrapper>
     </form>
   );
 };

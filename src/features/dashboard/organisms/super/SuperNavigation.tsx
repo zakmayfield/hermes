@@ -1,4 +1,4 @@
-import { Flex } from "@/shared/components/containers";
+import { Wrapper } from "@/shared/components/containers";
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
 
@@ -7,7 +7,7 @@ export const SuperNavigation = () => {
 
   return (
     <nav>
-      <Flex>
+      <Wrapper style={{ flex: "row", gap: "md", flexPosition: "center-center" }}>
         <Link
           href="/dashboard"
           className={`${(!segment && "underline") || ""}`}
@@ -26,7 +26,7 @@ export const SuperNavigation = () => {
         >
           Permissions
         </Link>
-      </Flex>
+      </Wrapper>
     </nav>
   );
 };

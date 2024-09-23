@@ -1,6 +1,6 @@
 "use client";
 
-import { ContentWrapper } from "@/shared/components/containers";
+import { Wrapper } from "@/shared/components/containers";
 import { Logo, SwitchForm } from "@/features/authentication/organisms";
 
 type TAuthenticationLayoutTemplateProps = {
@@ -12,31 +12,28 @@ export const AuthenticationLayoutTemplate = (
 ) => {
   const { children } = props;
   return (
-    <ContentWrapper
-      style={{ flex: "col" }}
-      className="min-h-screen"
-    >
-      <ContentWrapper
+    <Wrapper style={{ flex: "col", height: "screen" }}>
+      <Wrapper
         style={{
           flex: "col",
           width: "sm",
-          flexCenter: true,
-          position: "center",
+          flexPosition: "center-center",
+          place: "center",
           gap: "lg"
         }}
         className="mt-6"
       >
-        <ContentWrapper
+        <Wrapper
           style={{ flex: "row", padding: "lg" }}
           className="justify-center w-3/4"
         >
           <Logo />
-        </ContentWrapper>
+        </Wrapper>
 
         {children}
 
         <SwitchForm />
-      </ContentWrapper>
-    </ContentWrapper>
+      </Wrapper>
+    </Wrapper>
   );
 };

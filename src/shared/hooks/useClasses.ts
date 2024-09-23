@@ -1,255 +1,51 @@
 "use client";
+import { utilityHooks } from "@/shared/hooks";
 import { useMemo } from "react";
 import { merge } from "@/utils/ui";
 import {
-  TContentWrapperStyleProps,
-  TFlexStyleProps,
   TLayoutTemplateStyleProps,
-  TTextStyleProps
+  TTextStyleProps,
+  TWrapperProps
 } from "../components/containers";
 import { TBtnStyleProps } from "../components/buttons";
 import { InputStyleProps, TFormStyleProps } from "../components/form";
 import { SpinLoaderProps } from "../components/loaders";
-import { utilityHooks } from "./useUtilities";
 
 export const classHooks = {
-  useButtonClasses: (props: TBtnStyleProps) => {
-    const { classList, style } = props;
+  useWrapperClasses: (props: TWrapperProps) => {
+    const { className, style } = props;
+    const styles = utilityHooks.useStyleMap();
 
     return useMemo(() => {
-      const {
-        containerClassName = "",
-        buttonClassName = "",
-        contentClassName = ""
-      } = classList || {};
-      const {
-        width = "auto",
-        height = "sm",
-        padding = "sm",
-        fontWeight = "normal",
-        fontSize = "md",
-        theme = "dark",
-        bgColor = "none",
-        isDisabled
-      } = style || {};
-
-      const widthMap = {
-        sm: "w-44",
-        md: "w-56",
-        lg: "w-72",
-        full: "w-full",
-        auto: "w-auto"
-      };
-      const heightMap = {
-        sm: "h-10",
-        md: "h-12",
-        lg: "h-14"
-      };
-      const paddingMap = {
-        sm: "p-2",
-        md: "p-4",
-        lg: "p-6"
-      };
-      const bgMap = {
-        green: "bg-green-700",
-        red: "bg-red-500",
-        none: "bg-none"
-      };
-      const fontWeightMap = {
-        normal: "font-normal",
-        bold: "font-semibold"
-      };
-      const fontSizeMap = {
-        sm: "text-sm",
-        md: "text-base",
-        lg: "text-xl"
-      };
-      const themeMap = {
-        light: "text-black",
-        dark: "text-white"
-      };
-      const borderMap = (bgColor === "none" && "border") || "border-none";
-      const hoverMap =
-        (!isDisabled && bgColor === "none" && "hover:bg-slate-900") ||
-        (!isDisabled && "hover:bg-opacity-90");
-      const disabledMap =
-        (isDisabled && bgColor !== "none" && "bg-opacity-70") ||
-        (isDisabled && bgColor === "none" && "bg-slate-500") ||
-        "";
-      const containerWidthMap = (width === "full" && "w-full") || "";
-
-      return {
-        container: merge(`
-        ${containerWidthMap}
-        ${containerClassName}
-      `),
-        content: merge(`
-        mx-auto
-        ${fontWeightMap[fontWeight]}
-        ${fontSizeMap[fontSize]}
-        ${themeMap[theme]}
-        ${disabledMap}
-        ${contentClassName}
-      `),
-        button: merge(`
-        rounded-md
-        ${borderMap}
-        ${paddingMap[padding]}
-        ${heightMap[height]}
-        ${widthMap[width]}
-        ${bgMap[bgColor]}
-        ${hoverMap}
-        ${disabledMap}
-        ${buttonClassName}
-      `)
-      };
-    }, [classList, style]);
-  },
-
-  useContentWrapperClasses: (props: TContentWrapperStyleProps) => {
-    const { style, className = "" } = props || {};
-
-    return useMemo(() => {
-      const {
-        width = "none",
-        padding = "none",
-        paddingX = "none",
-        margin = "none",
-        flex = "none",
-        gap = "md",
-        position = "none",
-        flexCenter = false,
-        rounded = "none"
-      } = style || {};
-
-      const widthMap = {
-        none: "",
-        auto: "w-auto",
-        sm: "max-w-sm w-full",
-        md: "max-w-lg w-full",
-        lg: "max-w-2xl w-full",
-        full: "w-full"
-      };
-
-      const paddingMap = {
-        none: "",
-        sm: "p-2",
-        md: "p-4",
-        lg: "p-6"
-      };
-
-      const paddingXMap = {
-        none: "",
-        sm: "px-2",
-        md: "px-4",
-        lg: "px-6"
-      };
-
-      const marginMap = {
-        none: "",
-        sm: "m-2",
-        md: "m-4",
-        lg: "m-6"
-      };
-
-      const positionMap = {
-        none: "",
-        left: "mr-auto",
-        center: "mx-auto",
-        right: "ml-auto"
-      };
-
-      const flexMap = {
-        none: "",
-        row: "flex gap-3 items-center",
-        col: "flex flex-col gap-3"
-      };
-
-      const gapMap = {
-        sm: "gap-1",
-        md: "gap-3",
-        lg: "gap-6"
-      };
-
-      const roundedMap = {
-        none: "rounded-none",
-        sm: "rounded",
-        md: "rounded-md",
-        lg: "rounded-lg"
-      };
-
-      const flexCenterMap = flexCenter ? "items-center justify-center" : "";
-
       return {
         wrapper: merge(`
-          ${widthMap[width]}
-          ${paddingMap[padding]}
-          ${paddingXMap[paddingX]}
-          ${marginMap[margin]}
-          ${positionMap[position]}
-          ${flexMap[flex]}
-          ${gapMap[gap]}
-          ${flexCenterMap}
-          ${roundedMap[rounded]}
+          ${styles.widthMap[style?.width || "none"]}
+          ${styles.heightMap[style?.height || "none"]}
+          ${styles.maxHeightMap[style?.maxHeight || "none"]}
+          ${styles.paddingMap[style?.padding || "none"]}
+          ${styles.paddingXMap[style?.paddingX || "none"]}
+          ${styles.paddingYMap[style?.paddingY || "none"]}
+          ${styles.marginMap[style?.margin || "none"]}
+          ${styles.marginXMap[style?.marginX || "none"]}
+          ${styles.marginYMap[style?.marginY || "none"]}
+          ${styles.placeMap[style?.place || "none"]}
+          ${styles.roundedMap[style?.rounded || "none"]}
+          ${styles.flexMap[style?.flex || "none"]}
+          ${
+            style?.flex &&
+            style?.flexPosition &&
+            styles.flexPositionMap[style.flex][style.flexPosition]
+          }
+          ${styles.gapMap[style?.gap || "none"]}
+          ${styles.bgOpacityMap[style?.bgOpacity || "none"]}
+          ${style?.bg || ""}
+          ${styles.borderMap[style?.border || "none"]}
+          ${styles.fontSizeMap[style?.fontSize || "none"]}
+          ${styles.fontWeightMap[style?.fontWeight || "none"]}
           ${className}
           `)
       };
-    }, [style, className]);
-  },
-
-  useFlexClasses: (props: TFlexStyleProps) => {
-    const { style, className = "" } = props || {};
-
-    return useMemo(() => {
-      const {
-        dir = "row",
-        gap = "sm",
-        padding = "none",
-        position = "center"
-      } = style || {};
-
-      const dirMap = {
-        row: "flex",
-        col: "flex flex-col"
-      };
-
-      const gapMap = {
-        sm: "gap-2",
-        md: "gap-4",
-        lg: "gap-6"
-      };
-
-      const paddingMap = {
-        sm: "p-2",
-        md: "p-4",
-        lg: "p-6",
-        none: "p-0"
-      };
-
-      const positionMap = {
-        col: {
-          left: "items-start justify-start",
-          center: "items-center justify-center",
-          right: "items-end justify-end"
-        },
-        row: {
-          left: "items-center justify-start",
-          center: "items-center justify-center",
-          right: "items-center justify-end"
-        }
-      };
-
-      return {
-        wrapper: merge(`
-          w-full
-          ${dirMap[dir]}
-          ${gapMap[gap]}
-          ${paddingMap[padding]}
-          ${positionMap[dir][position]}
-          ${className}
-          `)
-      };
-    }, [style, className]);
+    }, [className, style]);
   },
 
   useLayoutTemplateClasses: (props: TLayoutTemplateStyleProps) => {
@@ -342,6 +138,99 @@ export const classHooks = {
       children,
       styles
     ]);
+  },
+
+  useButtonClasses: (props: TBtnStyleProps) => {
+    const { classList, style } = props;
+
+    return useMemo(() => {
+      const {
+        containerClassName = "",
+        buttonClassName = "",
+        contentClassName = ""
+      } = classList || {};
+      const {
+        width = "auto",
+        height = "sm",
+        padding = "sm",
+        fontWeight = "normal",
+        fontSize = "md",
+        theme = "dark",
+        bgColor = "none",
+        isDisabled
+      } = style || {};
+
+      const widthMap = {
+        sm: "w-44",
+        md: "w-56",
+        lg: "w-72",
+        full: "w-full",
+        auto: "w-auto"
+      };
+      const heightMap = {
+        sm: "h-10",
+        md: "h-12",
+        lg: "h-14"
+      };
+      const paddingMap = {
+        sm: "p-2",
+        md: "p-4",
+        lg: "p-6"
+      };
+      const bgMap = {
+        green: "bg-green-700",
+        red: "bg-red-500",
+        none: "bg-none"
+      };
+      const fontWeightMap = {
+        normal: "font-normal",
+        bold: "font-semibold"
+      };
+      const fontSizeMap = {
+        sm: "text-sm",
+        md: "text-base",
+        lg: "text-xl"
+      };
+      const themeMap = {
+        light: "text-black",
+        dark: "text-white"
+      };
+      const borderMap = (bgColor === "none" && "border") || "border-none";
+      const hoverMap =
+        (!isDisabled && bgColor === "none" && "hover:bg-slate-900") ||
+        (!isDisabled && "hover:bg-opacity-90");
+      const disabledMap =
+        (isDisabled && bgColor !== "none" && "bg-opacity-70") ||
+        (isDisabled && bgColor === "none" && "bg-slate-500") ||
+        "";
+      const containerWidthMap = (width === "full" && "w-full") || "";
+
+      return {
+        container: merge(`
+        ${containerWidthMap}
+        ${containerClassName}
+      `),
+        content: merge(`
+        mx-auto
+        ${fontWeightMap[fontWeight]}
+        ${fontSizeMap[fontSize]}
+        ${themeMap[theme]}
+        ${disabledMap}
+        ${contentClassName}
+      `),
+        button: merge(`
+        rounded-md
+        ${borderMap}
+        ${paddingMap[padding]}
+        ${heightMap[height]}
+        ${widthMap[width]}
+        ${bgMap[bgColor]}
+        ${hoverMap}
+        ${disabledMap}
+        ${buttonClassName}
+      `)
+      };
+    }, [classList, style]);
   },
 
   useTextClasses: (props: TTextStyleProps) => {

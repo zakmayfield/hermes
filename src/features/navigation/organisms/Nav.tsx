@@ -1,4 +1,4 @@
-import { Flex } from "@/shared/components/containers";
+import { Wrapper } from "@/shared/components/containers";
 import { NavItem, RoleSwitch, TNavItem } from "../molecules";
 import { SignOutButton } from "@/features/authentication/atoms/SignOutButton";
 
@@ -24,7 +24,13 @@ export const Nav = () => {
   return (
     <nav className="p-6 bg-slate-900 relative">
       <RoleSwitch />
-      <Flex>
+      <Wrapper
+        style={{
+          flex: "row",
+          flexPosition: "center-center",
+          gap: "md"
+        }}
+      >
         {nav_items.map((item) => (
           <NavItem
             key={item.id}
@@ -32,7 +38,7 @@ export const Nav = () => {
           />
         ))}
         <SignOutButton />
-      </Flex>
+      </Wrapper>
     </nav>
   );
 };

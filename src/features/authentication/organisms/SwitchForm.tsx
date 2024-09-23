@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ContentWrapper, Text } from "@/shared/components/containers";
+import { Text, Wrapper } from "@/shared/components/containers";
 import { usePathname } from "next/navigation";
 
 export const SwitchForm = () => {
@@ -40,9 +40,9 @@ export const SwitchForm = () => {
   );
 
   return (
-    <ContentWrapper>
+    <Wrapper>
       {sign_in_switch}
       {sign_up_switch}
-    </ContentWrapper>
+    </Wrapper>
   );
 };

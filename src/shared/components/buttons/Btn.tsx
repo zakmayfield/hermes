@@ -1,7 +1,7 @@
 "use client";
 import { IconType } from "react-icons";
 import { classHooks } from "@/shared/hooks";
-import { ContentWrapper, Text } from "../containers";
+import { Text, Wrapper } from "../containers";
 import { SpinLoader } from "../loaders";
 
 export type TBtnStyleProps = {
@@ -40,7 +40,7 @@ export const Btn = (props: TBtnProps) => {
   const classes = classHooks.useButtonClasses({ ...props });
 
   return (
-    <ContentWrapper className={classes.container}>
+    <Wrapper className={classes.container}>
       <button
         type={type}
         disabled={isDisabled}
@@ -60,10 +60,10 @@ export const Btn = (props: TBtnProps) => {
             }}
           />
         ) : (
-          <ContentWrapper
+          <Wrapper
             style={{
               flex: "row",
-              flexCenter: true
+              flexPosition: "center-center"
             }}
           >
             {Icon && <Icon className={classes.content} />}
@@ -75,9 +75,9 @@ export const Btn = (props: TBtnProps) => {
                 {text}
               </Text>
             )}
-          </ContentWrapper>
+          </Wrapper>
         )}
       </button>
-    </ContentWrapper>
+    </Wrapper>
   );
 };

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Flex } from "../containers";
+import { Wrapper } from "../containers";
 import { FieldError, FieldValues, UseFormRegister } from "react-hook-form";
 import { FormFieldError } from "./FieldError";
 import { classHooks, utilityHooks } from "@/shared/hooks";
@@ -51,11 +51,12 @@ export const Input: FC<InputProps<any>> = (props) => {
   });
 
   return (
-    <Flex
+    <Wrapper
       className={classes.container}
       style={{
-        dir: flex,
-        position: position
+        flex: flex,
+        gap: "sm",
+        place: position
       }}
     >
       <label
@@ -66,7 +67,10 @@ export const Input: FC<InputProps<any>> = (props) => {
         {label}
       </label>
 
-      <Flex className="relative">
+      <Wrapper
+        style={{ flex: "row" }}
+        className="relative"
+      >
         <input
           className={`${classes.input} ${(error && "ring-4 ring-red-400") || ""}`}
           type={type}
@@ -79,12 +83,12 @@ export const Input: FC<InputProps<any>> = (props) => {
         {error && !is_error_icon_hidden && (
           <PiWarningCircleDuotone
             id={`${name}_error_icon`}
-            className="absolute right-3 text-red-500 text-xl"
+            className="absolute right-3 top-[.375rem] text-red-500 text-xl"
           />
         )}
 
         {error && !is_error_icon_hidden && <Tooltip />}
-      </Flex>
+      </Wrapper>
 
       {error && (
         <FormFieldError
@@ -95,6 +99,6 @@ export const Input: FC<InputProps<any>> = (props) => {
           {error.message}
         </FormFieldError>
       )}
-    </Flex>
+    </Wrapper>
   );
 };

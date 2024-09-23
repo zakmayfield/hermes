@@ -1,11 +1,6 @@
 "use client";
-import React, { useEffect } from "react";
-import {
-  ContentWrapper,
-  Flex,
-  LayoutTemplate,
-  Text
-} from "@/shared/components/containers";
+import React from "react";
+import { LayoutTemplate, Text, Wrapper } from "@/shared/components/containers";
 import { fetchRolePermissions } from "@/shared/queries";
 import { Permission, Role, RolePermissions } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
@@ -91,16 +86,22 @@ export const ManagePermissionsPage = () => {
       content: "Enable to give access to permission"
     });
     return (
-      <ContentWrapper>
-        <Flex className="justify-between">
+      <Wrapper>
+        <Wrapper
+          style={{ flex: "row", gap: "sm" }}
+          className="justify-between"
+        >
           <Text>{name}</Text>
-          <Flex className="justify-end">
+          <Wrapper
+            style={{ flex: "row", flexPosition: "center-right", gap: "sm" }}
+            className="justify-end"
+          >
             <Text>{permission_level ? "✅" : "🚫"}</Text>
             <PiInfoDuotone id={`${permission_id}_info_icon`} />
             <Tooltip />
-          </Flex>
-        </Flex>
-      </ContentWrapper>
+          </Wrapper>
+        </Wrapper>
+      </Wrapper>
     );
   };
 

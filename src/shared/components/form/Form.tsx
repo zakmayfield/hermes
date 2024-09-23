@@ -4,6 +4,7 @@ import { FC, FormEvent } from "react";
 import { Heading, Wrapper } from "../containers";
 import { Btn } from "../buttons";
 import { classHooks } from "@/shared/hooks";
+import { IBaseStyles, IFlexStyles, IOtherStyles } from "@/types/Styles";
 
 export type TFormStyleProps = {
   classList?: {
@@ -12,9 +13,13 @@ export type TFormStyleProps = {
     buttonClassName?: string;
   };
   style?: {
-    padding?: "sm" | "md" | "lg";
-    width?: "sm" | "md" | "lg";
-    buttonBgColor?: "green" | "red";
+    form?: IBaseStyles & IFlexStyles & IOtherStyles;
+    heading?: IBaseStyles & IFlexStyles & IOtherStyles;
+    button?: IBaseStyles &
+      IFlexStyles &
+      IOtherStyles & {
+        buttonBgColor?: "green" | "red";
+      };
   };
 };
 
@@ -28,7 +33,6 @@ type FormProps = TFormStyleProps & {
 
 export const Form: FC<FormProps> = (props) => {
   const { children, title, onSubmit, buttonText = "Submit", isPending, style } = props;
-  const { buttonBgColor } = style || {};
   const classes = classHooks.useFormClasses({ ...props });
 
   return (
@@ -63,7 +67,7 @@ export const Form: FC<FormProps> = (props) => {
             width: "full",
             isDisabled: isPending,
             isLoading: isPending,
-            bgColor: buttonBgColor
+            bgColor: style?.button?.buttonBgColor
           }}
         />
       </Wrapper>

@@ -4,20 +4,18 @@ import { FieldError, FieldValues, UseFormRegister } from "react-hook-form";
 import { FormFieldError } from "./FieldError";
 import { classHooks, utilityHooks } from "@/shared/hooks";
 import { PiWarningCircleDuotone } from "react-icons/pi";
+import { IBaseStyles, IFlexStyles, IOtherStyles } from "@/types/Styles";
 
 export type InputStyleProps = {
   classList?: {
-    containerClassName?: string;
+    wrapperClassName?: string;
     labelClassName?: string;
     inputClassName?: string;
   };
   style?: {
-    is_label_hidden?: boolean;
-    is_error_hidden?: boolean;
-    is_error_icon_hidden?: boolean;
-    flex?: "row" | "col";
-    position?: "left" | "center" | "right";
-    width?: "full";
+    wrapper?: IBaseStyles & IFlexStyles & IOtherStyles;
+    label?: IBaseStyles & IFlexStyles & IOtherStyles;
+    input?: IBaseStyles & IFlexStyles & IOtherStyles;
   };
 };
 
@@ -27,17 +25,22 @@ type InputProps<T extends FieldValues> = InputStyleProps & {
   register?: UseFormRegister<T>;
   error?: FieldError;
   type?: "text" | "password";
+  is_label_hidden?: boolean;
+  is_error_hidden?: boolean;
+  is_error_icon_hidden?: boolean;
 };
 
 export const Input: FC<InputProps<any>> = (props) => {
-  const { type = "text", label, register, error, style } = props;
   const {
+    type = "text",
+    label,
+    register,
+    error,
+    style,
     is_label_hidden = false,
     is_error_hidden = false,
-    is_error_icon_hidden = false,
-    flex = "col",
-    position = "left"
-  } = style || {};
+    is_error_icon_hidden = false
+  } = props;
 
   const name = props.name as string;
 
@@ -51,14 +54,7 @@ export const Input: FC<InputProps<any>> = (props) => {
   });
 
   return (
-    <Wrapper
-      className={classes.container}
-      style={{
-        flex: flex,
-        gap: "sm",
-        place: position
-      }}
-    >
+    <Wrapper className={classes.wrapper}>
       <label
         className={classes.label}
         htmlFor={name}

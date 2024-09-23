@@ -10,12 +10,22 @@ export const SignInForm = () => {
       title="Sign In"
       buttonText="Sign In"
       isPending={isPending}
-      classList={{
-        formClassName: "bg-slate-900 rounded-lg py-12",
-        buttonClassName: "h-12 md:h-10"
-      }}
       style={{
-        buttonBgColor: "green"
+        form: {
+          bg: "bg-slate-900",
+          rounded: "lg",
+          width: "md",
+          padding: "lg"
+        },
+        heading: {
+          marginY: "md"
+        },
+        button: {
+          buttonBgColor: "green"
+        }
+      }}
+      classList={{
+        formClassName: "pb-12"
       }}
     >
       <Input

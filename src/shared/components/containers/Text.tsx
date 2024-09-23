@@ -1,14 +1,10 @@
 import { classHooks } from "@/shared/hooks";
+import { IBaseStyles, IFlexStyles, IOtherStyles } from "@/types/Styles";
 import { HTMLAttributes } from "react";
 
 export type TTextStyleProps = {
   className?: string;
-  style?: {
-    width?: "auto" | "sm" | "md" | "lg" | "full";
-    padding?: "sm" | "md" | "lg";
-    margin?: "sm" | "md" | "lg";
-    position?: "left" | "center" | "right";
-  };
+  style?: IBaseStyles & IFlexStyles & IOtherStyles;
 };
 
 type TTextProps = TTextStyleProps &

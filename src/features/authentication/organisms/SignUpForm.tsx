@@ -10,12 +10,22 @@ export const SignUpForm = () => {
       title="Sign Up"
       buttonText="Sign Up"
       isPending={isPending}
-      classList={{
-        formClassName: "bg-slate-900 rounded-lg py-12",
-        buttonClassName: "h-12 md:h-10"
-      }}
       style={{
-        buttonBgColor: "green"
+        form: {
+          bg: "bg-slate-900",
+          rounded: "lg",
+          width: "md",
+          padding: "lg"
+        },
+        heading: {
+          marginY: "md"
+        },
+        button: {
+          buttonBgColor: "green"
+        }
+      }}
+      classList={{
+        formClassName: "pb-12"
       }}
     >
       <Input
@@ -23,6 +33,12 @@ export const SignUpForm = () => {
         label="Email"
         register={register}
         error={formErrors.email}
+        style={{
+          wrapper: {
+            flex: "col",
+            gap: "sm"
+          }
+        }}
         classList={{
           inputClassName: "h-12 md:h-auto"
         }}

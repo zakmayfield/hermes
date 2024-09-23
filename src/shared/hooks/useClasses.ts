@@ -42,7 +42,7 @@ export const classHooks = {
           ${styles.borderMap[style?.border || "none"]}
           ${styles.fontSizeMap[style?.fontSize || "none"]}
           ${styles.fontWeightMap[style?.fontWeight || "none"]}
-          ${className}
+          ${className || ""}
           `)
       };
     }, [className, style]);
@@ -50,11 +50,7 @@ export const classHooks = {
 
   useLayoutTemplateClasses: (props: TLayoutTemplateStyleProps) => {
     const {
-      classList: {
-        wrapperClassName = "",
-        headingClassName = "",
-        childrenClassName = ""
-      } = {},
+      classList: { wrapperClassName, headingClassName, childrenClassName } = {},
       style: { wrapper = {}, heading = {}, children = {} } = {}
     } = props;
 
@@ -72,7 +68,7 @@ export const classHooks = {
           ${styles.heightMap[wrapper.height || "none"]}
           ${styles.flexMap[wrapper.flex || "none"]}
           ${styles.gapMap[wrapper.gap || "none"]}
-          ${wrapperClassName}
+          ${wrapperClassName || ""}
           `),
         heading: merge(`
           ${styles.flexMap[heading.flex || "none"]}
@@ -91,7 +87,7 @@ export const classHooks = {
           ${styles.heightMap[heading.height || "none"]}
           ${styles.placeMap[heading.place || "none"]}
           ${styles.borderMap[heading.border || "none"]}
-          ${headingClassName}
+          ${headingClassName || ""}
           `),
         children: merge(`
           ${styles.borderMap[children.border || "none"]}
@@ -110,7 +106,7 @@ export const classHooks = {
           ${styles.maxHeightMap[children.maxHeight || "none"]}
           ${styles.heightMap[children.height || "none"]}
           ${styles.widthMap[children.width || "none"]}
-          ${childrenClassName}
+          ${childrenClassName || ""}
           `)
       };
     }, [
@@ -218,54 +214,18 @@ export const classHooks = {
   },
 
   useTextClasses: (props: TTextStyleProps) => {
-    const { style, className = "" } = props;
+    const { style, className } = props;
+    const styles = utilityHooks.useStyleMap();
 
     return useMemo(() => {
-      const {
-        width = "none",
-        padding = "none",
-        margin = "none",
-        position = "none"
-      } = style || {};
-
-      const widthMap = {
-        none: "",
-        auto: "w-auto",
-        sm: "max-w-sm w-full",
-        md: "max-w-lg w-full",
-        lg: "max-w-2xl w-full",
-        full: "w-full"
-      };
-
-      const paddingMap = {
-        none: "",
-        sm: "p-2",
-        md: "p-4",
-        lg: "p-6"
-      };
-
-      const marginMap = {
-        none: "",
-        sm: "m-2",
-        md: "m-4",
-        lg: "m-6"
-      };
-
-      const positionMap = {
-        none: "",
-        left: "mr-auto",
-        center: "mx-auto",
-        right: "ml-auto"
-      };
-
       return {
         wrapper: merge(`
-        ${widthMap[width]}
-        ${paddingMap[padding]}
-        ${marginMap[margin]}
-        ${positionMap[position]}
-        ${className}
-        `)
+          ${styles.widthMap[style?.width || "none"]}
+          ${styles.paddingMap[style?.padding || "none"]}
+          ${styles.marginMap[style?.margin || "none"]}
+          ${styles.placeMap[style?.place || "none"]}
+          ${className || ""}
+          `)
       };
     }, [style, className]);
   },
@@ -331,72 +291,96 @@ export const classHooks = {
 
   useFormClasses: (props: TFormStyleProps) => {
     const { style, classList } = props;
+    const styles = utilityHooks.useStyleMap();
 
     return useMemo(() => {
-      const {
-        formClassName = "",
-        headingClassName = "",
-        buttonClassName = ""
-      } = classList || {};
-      const { padding = "lg", width = "full" } = style || {};
-      const paddingMap = {
-        sm: "p-2",
-        md: "p-4",
-        lg: "p-6",
-        none: "p-0"
-      };
-
-      const widthMap = {
-        sm: "max-w-sm w-full",
-        md: "max-w-lg w-full",
-        lg: "max-w-2xl w-full",
-        full: "w-full"
-      };
+      const { formClassName, headingClassName, buttonClassName } = classList || {};
+      const { form, heading } = style || {};
 
       return {
         form: merge(`
-        ${paddingMap[padding]}
-        ${widthMap[width]}
-        ${formClassName}
-        `),
+          ${styles.paddingMap[form?.padding || "none"]}
+          ${styles.widthMap[form?.width || "none"]}
+          ${styles.roundedMap[form?.rounded || "none"]}
+          ${form?.bg || ""}
+          ${formClassName || ""}
+          `),
         heading: merge(`
-        mb-6
-        ${headingClassName}
-        `),
+          ${styles.marginYMap[heading?.marginY || "none"]}
+          ${headingClassName || ""}
+          `),
         button: merge(`
-        ${buttonClassName}
-        `)
+          ${buttonClassName || ""}
+          `)
       };
     }, [style, classList]);
   },
 
   useInputClasses: (props: InputStyleProps) => {
     const { style, classList } = props;
+    const { wrapperClassName, labelClassName, inputClassName } = classList || {};
+    const { wrapper, label, input } = style || {};
+
+    const styles = utilityHooks.useStyleMap();
 
     return useMemo(() => {
-      const {
-        containerClassName = "",
-        labelClassName = "",
-        inputClassName = ""
-      } = classList || {};
-      const { width = "full" } = style || {};
-
-      const width_map = {
-        content: "",
-        full: "w-full"
-      };
-
       return {
-        container: merge(`
-        ${width_map[width]}
-        ${containerClassName}
-      `),
-        label: merge(`${labelClassName}`),
+        wrapper: merge(`
+          ${styles.widthMap[wrapper?.width || "none"]}
+          ${styles.heightMap[wrapper?.height || "none"]}
+          ${styles.maxHeightMap[wrapper?.maxHeight || "none"]}
+          ${styles.paddingMap[wrapper?.padding || "none"]}
+          ${styles.paddingXMap[wrapper?.paddingX || "none"]}
+          ${styles.paddingYMap[wrapper?.paddingY || "none"]}
+          ${styles.marginMap[wrapper?.margin || "none"]}
+          ${styles.marginXMap[wrapper?.marginX || "none"]}
+          ${styles.marginYMap[wrapper?.marginY || "none"]}
+          ${styles.placeMap[wrapper?.place || "none"]}
+          ${styles.roundedMap[wrapper?.rounded || "none"]}
+          ${styles.flexMap[wrapper?.flex || "none"]}
+          ${
+            wrapper?.flex &&
+            wrapper?.flexPosition &&
+            styles.flexPositionMap[wrapper.flex][wrapper.flexPosition]
+          }
+          ${styles.gapMap[wrapper?.gap || "none"]}
+          ${styles.bgOpacityMap[wrapper?.bgOpacity || "none"]}
+          ${wrapper?.bg || ""}
+          ${styles.borderMap[wrapper?.border || "none"]}
+          ${styles.fontSizeMap[wrapper?.fontSize || "none"]}
+          ${styles.fontWeightMap[wrapper?.fontWeight || "none"]}
+          ${wrapperClassName || ""}
+          `),
+        label: merge(`
+          ${labelClassName || ""}
+          `),
         input: merge(`
-        w-full 
-        ${inputClassName}
-      `)
+          ${styles.widthMap[input?.width || "none"]}
+          ${styles.heightMap[input?.height || "none"]}
+          ${styles.maxHeightMap[input?.maxHeight || "none"]}
+          ${styles.paddingMap[input?.padding || "none"]}
+          ${styles.paddingXMap[input?.paddingX || "none"]}
+          ${styles.paddingYMap[input?.paddingY || "none"]}
+          ${styles.marginMap[input?.margin || "none"]}
+          ${styles.marginXMap[input?.marginX || "none"]}
+          ${styles.marginYMap[input?.marginY || "none"]}
+          ${styles.placeMap[input?.place || "none"]}
+          ${styles.roundedMap[input?.rounded || "none"]}
+          ${styles.flexMap[input?.flex || "none"]}
+          ${
+            input?.flex &&
+            input?.flexPosition &&
+            styles.flexPositionMap[input.flex][input.flexPosition]
+          }
+          ${styles.gapMap[input?.gap || "none"]}
+          ${styles.bgOpacityMap[input?.bgOpacity || "none"]}
+          ${input?.bg || ""}
+          ${styles.borderMap[input?.border || "none"]}
+          ${styles.fontSizeMap[input?.fontSize || "none"]}
+          ${styles.fontWeightMap[input?.fontWeight || "none"]}
+          ${inputClassName || ""}
+          `)
       };
-    }, [classList, style]);
+    }, [styles, wrapper, label, input, wrapperClassName, labelClassName, inputClassName]);
   }
 };

@@ -21,6 +21,7 @@ export const SignUpForm = () => {
           marginY: "md"
         },
         button: {
+          // TODO: conditionally check if isPending and set disabled state
           bg: "bg-green-700 hover:bg-opacity-90"
         }
       }}

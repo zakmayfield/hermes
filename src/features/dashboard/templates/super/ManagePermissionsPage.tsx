@@ -20,7 +20,6 @@ export const ManagePermissionsPage = () => {
   });
 
   const ManagePermissionsLayout = ({ children }: { children: React.ReactNode }) => {
-    const { flexMap, flexPositionMap } = utilityHooks.useStyleMap();
     return (
       <LayoutTemplate
         heading="h3"
@@ -36,7 +35,7 @@ export const ManagePermissionsPage = () => {
           }
         }}
         classList={{
-          childrenClassName: `lg:${flexMap.row}-row lg:${flexPositionMap.row["center-center"]}`
+          childrenClassName: "lg:flex-row"
         }}
       >
         {children}

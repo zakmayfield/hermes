@@ -61,71 +61,55 @@ export const classHooks = {
     const styles = utilityHooks.useStyleMap();
 
     return useMemo(() => {
-      const {
-        paddingMap,
-        paddingXMap,
-        paddingYMap,
-        marginMap,
-        flexMap,
-        gapMap,
-        flexPositionMap,
-        roundedMap,
-        placeMap,
-        widthMap,
-        borderMap,
-        heightMap,
-        maxHeightMap
-      } = styles;
-
       return {
         wrapper: merge(`
-          ${paddingMap[wrapper.padding || "none"]}
-          ${marginMap[wrapper.margin || "none"]}
-          ${widthMap[wrapper.width || "none"]}
-          ${placeMap[wrapper.place || "none"]}
-          ${borderMap[wrapper.border || "none"]}
-          ${maxHeightMap[wrapper.maxHeight || "none"]}
-          ${heightMap[wrapper.height || "none"]}
-          ${flexMap[wrapper.flex || "none"]}
-          ${gapMap[wrapper.gap || "none"]}
+          ${styles.paddingMap[wrapper.padding || "none"]}
+          ${styles.marginMap[wrapper.margin || "none"]}
+          ${styles.widthMap[wrapper.width || "none"]}
+          ${styles.placeMap[wrapper.place || "none"]}
+          ${styles.borderMap[wrapper.border || "none"]}
+          ${styles.maxHeightMap[wrapper.maxHeight || "none"]}
+          ${styles.heightMap[wrapper.height || "none"]}
+          ${styles.flexMap[wrapper.flex || "none"]}
+          ${styles.gapMap[wrapper.gap || "none"]}
           ${wrapperClassName}
           `),
         heading: merge(`
-          ${flexMap[heading.flex || "none"]}
+          ${styles.flexMap[heading.flex || "none"]}
           ${
             (!!heading.flex &&
               !!heading.flexPosition &&
-              flexPositionMap[heading.flex][heading.flexPosition]) ||
+              styles.flexPositionMap[heading.flex][heading.flexPosition]) ||
             "none"
           }
-          ${paddingMap[heading.padding || "none"]}
-          ${paddingXMap[heading.paddingX || "none"]}
-          ${paddingYMap[heading.paddingY || "none"]}
-          ${marginMap[heading.margin || "none"]}
-          ${widthMap[heading.width || "none"]}
-          ${maxHeightMap[heading.maxHeight || "none"]}
-          ${heightMap[heading.height || "none"]}
-          ${placeMap[heading.place || "none"]}
-          ${borderMap[heading.border || "none"]}
+          ${styles.paddingMap[heading.padding || "none"]}
+          ${styles.paddingXMap[heading.paddingX || "none"]}
+          ${styles.paddingYMap[heading.paddingY || "none"]}
+          ${styles.marginMap[heading.margin || "none"]}
+          ${styles.widthMap[heading.width || "none"]}
+          ${styles.maxHeightMap[heading.maxHeight || "none"]}
+          ${styles.heightMap[heading.height || "none"]}
+          ${styles.placeMap[heading.place || "none"]}
+          ${styles.borderMap[heading.border || "none"]}
           ${headingClassName}
           `),
         children: merge(`
-          ${borderMap[children.border || "none"]}
-          ${paddingMap[children.padding || "none"]}
-          ${marginMap[children.margin || "none"]}
-          ${flexMap[children.flex || "none"]}
+          ${styles.borderMap[children.border || "none"]}
+          ${styles.paddingMap[children.padding || "none"]}
+          ${styles.marginMap[children.margin || "none"]}
+          ${styles.flexMap[children.flex || "none"]}
           ${
             (children.flex &&
               children.flexPosition &&
-              flexPositionMap[children.flex][children.flexPosition]) ||
+              styles.flexPositionMap[children.flex][children.flexPosition]) ||
             "none"
           }
-          ${gapMap[children.gap || "none"]}
-          ${roundedMap[children.rounded || "none"]}
+          ${styles.gapMap[children.gap || "none"]}
+          ${styles.roundedMap[children.rounded || "none"]}
           ${children.bg || ""}
-          ${maxHeightMap[children.maxHeight || "none"]}
-          ${heightMap[children.height || "none"]}
-          ${widthMap[children.width || "none"]}
+          ${styles.maxHeightMap[children.maxHeight || "none"]}
+          ${styles.heightMap[children.height || "none"]}
+          ${styles.widthMap[children.width || "none"]}
           ${childrenClassName}
           `)
       };

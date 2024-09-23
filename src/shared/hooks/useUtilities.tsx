@@ -213,6 +213,14 @@ export const utilityHooks = {
       full: "w-full"
     };
 
+    const heightMap = {
+      none: "",
+      sm: "min-h-[10rem]",
+      md: "min-h-[15rem]",
+      lg: "min-h-[20rem]",
+      screen: "min-h-screen"
+    };
+
     const fontSizeMap = {
       none: "",
       sm: "text-sm",
@@ -252,6 +260,7 @@ export const utilityHooks = {
       roundedMap,
       placeMap,
       widthMap,
+      heightMap,
       flexPositionMap,
       fontSizeMap,
       fontWeightMap,

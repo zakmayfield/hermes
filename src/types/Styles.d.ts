@@ -33,6 +33,7 @@ export type TMarginX = BaseSizesWithZero;
 export type TMarginY = BaseSizesWithZero;
 export type TPlace = Place;
 export type TWidth = ExtendedSizes | "full";
+export type THeight = BaseSizes | "screen";
 
 // flex
 export type TFlexDir = FlexDir;
@@ -47,6 +48,7 @@ export type TBgOpacity = BgOpacity;
 
 export interface IBaseStyles {
   width?: TWidth;
+  height?: THeight;
   padding?: TPadding;
   paddingX?: TPaddingX;
   paddingY?: TPaddingY;

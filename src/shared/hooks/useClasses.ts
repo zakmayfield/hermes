@@ -345,7 +345,7 @@ export const classHooks = {
       style: { wrapper = {}, heading = {}, children = {} } = {}
     } = props;
 
-    const styleMaps = utilityHooks.useStyleMap();
+    const styles = utilityHooks.useStyleMap();
 
     return useMemo(() => {
       const {
@@ -359,14 +359,18 @@ export const classHooks = {
         roundedMap,
         placeMap,
         widthMap,
-        borderMap
-      } = styleMaps;
+        borderMap,
+        heightMap
+      } = styles;
 
       return {
         wrapper: merge(`
           ${paddingMap[wrapper.padding || "none"]}
           ${marginMap[wrapper.margin || "none"]}
           ${widthMap[wrapper.width || "none"]}
+          ${placeMap[wrapper.place || "none"]}
+          ${borderMap[wrapper.border || "none"]}
+          ${heightMap[wrapper.height || "none"]}
           ${wrapperClassName}
           `),
         heading: merge(`
@@ -399,6 +403,7 @@ export const classHooks = {
           ${gapMap[children.gap || "none"]}
           ${roundedMap[children.rounded || "none"]}
           ${children.bg || ""}
+          ${heightMap[children.height || "none"]}
           w-full
           ${childrenClassName}
           `)
@@ -410,7 +415,7 @@ export const classHooks = {
       wrapper,
       heading,
       children,
-      styleMaps
+      styles
     ]);
   },
 

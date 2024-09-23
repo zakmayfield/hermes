@@ -1,9 +1,11 @@
 "use client";
 import React from "react";
-import { ContentWrapper, Layout, Text } from "@/shared/components/containers";
+import { ContentWrapper, Flex, Layout, Text } from "@/shared/components/containers";
 import { fetchRolePermissions } from "@/shared/queries";
 import { Permission, Role, RolePermissions } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
+import { utilityHooks } from "@/shared/hooks";
+import { PiInfoDuotone } from "react-icons/pi";
 
 type PermissionItemProps = RolePermissions & {
   permission: Permission;
@@ -13,7 +15,8 @@ type PermissionItemProps = RolePermissions & {
 export const ManagePermissionsPage = () => {
   const { data } = useQuery({
     queryKey: ["permissions"],
-    queryFn: async () => await fetchRolePermissions()
+    queryFn: async () => await fetchRolePermissions(),
+    staleTime: Infinity
   });
 
   const ManagePermissionsLayout = ({ children }: { children: React.ReactNode }) => {
@@ -55,10 +58,26 @@ export const ManagePermissionsPage = () => {
     );
   };
   const PermissionItem = (props: PermissionItemProps) => {
+    const {
+      permission: { name, permission_id },
+      permission_level
+    } = props;
+
+    const { Tooltip } = utilityHooks.useTooltip({
+      place: "top-end",
+      anchorSelect: `#${permission_id}_info_icon`,
+      content: "Enable to give access to permission"
+    });
     return (
       <ContentWrapper>
-        <Text>Name:</Text>
-        <Text>{props.permission.name}</Text>
+        <Flex className="justify-between">
+          <Text>{name}</Text>
+          <Flex className="justify-end">
+            <PiInfoDuotone id={`${permission_id}_info_icon`} />
+            <Tooltip />
+            <Text>{permission_level ? "✅" : "🚫"}</Text>
+          </Flex>
+        </Flex>
       </ContentWrapper>
     );
   };

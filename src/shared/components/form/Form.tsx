@@ -15,11 +15,7 @@ export type TFormStyleProps = {
   style?: {
     form?: IBaseStyles & IFlexStyles & IOtherStyles;
     heading?: IBaseStyles & IFlexStyles & IOtherStyles;
-    button?: IBaseStyles &
-      IFlexStyles &
-      IOtherStyles & {
-        buttonBgColor?: "green" | "red";
-      };
+    button?: IBaseStyles & IFlexStyles & IOtherStyles;
   };
 };
 
@@ -59,15 +55,17 @@ export const Form: FC<FormProps> = (props) => {
         <Btn
           type="submit"
           text={buttonText}
-          classList={{
-            buttonClassName: classes.button,
-            containerClassName: "mt-3"
-          }}
+          isDisabled={isPending}
+          isLoading={isPending}
           style={{
-            width: "full",
-            isDisabled: isPending,
-            isLoading: isPending,
-            bgColor: style?.button?.buttonBgColor
+            button: {
+              width: "full",
+              buttonHeight: "md",
+              rounded: "md"
+            }
+          }}
+          classList={{
+            buttonClassName: classes.button
           }}
         />
       </Wrapper>

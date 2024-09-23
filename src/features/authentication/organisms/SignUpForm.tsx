@@ -21,11 +21,12 @@ export const SignUpForm = () => {
           marginY: "md"
         },
         button: {
-          buttonBgColor: "green"
+          bg: "bg-green-700 hover:bg-opacity-90"
         }
       }}
       classList={{
-        formClassName: "pb-12"
+        formClassName: "pb-12",
+        buttonClassName: "mt-6"
       }}
     >
       <Input
@@ -33,14 +34,17 @@ export const SignUpForm = () => {
         label="Email"
         register={register}
         error={formErrors.email}
+        classList={{
+          inputClassName: "h-12 md:h-auto"
+        }}
         style={{
           wrapper: {
             flex: "col",
             gap: "sm"
+          },
+          input: {
+            width: "full"
           }
-        }}
-        classList={{
-          inputClassName: "h-12 md:h-auto"
         }}
       />
 
@@ -52,6 +56,15 @@ export const SignUpForm = () => {
         type="password"
         classList={{
           inputClassName: "h-12 md:h-auto"
+        }}
+        style={{
+          wrapper: {
+            flex: "col",
+            gap: "sm"
+          },
+          input: {
+            width: "full"
+          }
         }}
       />
     </Form>

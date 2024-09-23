@@ -16,8 +16,8 @@ export type TLayoutTemplateStyleProps = {
     childrenClassName?: string;
   };
   style?: {
-    wrapper?: IBaseStyles & IFlexStyles;
-    heading?: IBaseStyles & IFlexStyles;
+    wrapper?: IBaseStyles & IFlexStyles & IOtherStyles;
+    heading?: IBaseStyles & IFlexStyles & IOtherStyles;
     children?: IBaseStyles & IFlexStyles & IOtherStyles;
   };
 };

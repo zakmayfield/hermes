@@ -21,11 +21,13 @@ export const SignInForm = () => {
           marginY: "md"
         },
         button: {
-          buttonBgColor: "green"
+          // TODO: conditionally check if isPending and set disabled state
+          bg: "bg-green-700 hover:bg-opacity-90"
         }
       }}
       classList={{
-        formClassName: "pb-12"
+        formClassName: "pb-12",
+        buttonClassName: "mt-6"
       }}
     >
       <Input
@@ -36,6 +38,15 @@ export const SignInForm = () => {
         classList={{
           inputClassName: "h-12 md:h-auto"
         }}
+        style={{
+          wrapper: {
+            flex: "col",
+            gap: "sm"
+          },
+          input: {
+            width: "full"
+          }
+        }}
       />
       <Input
         type="password"
@@ -45,6 +56,15 @@ export const SignInForm = () => {
         error={errors.password}
         classList={{
           inputClassName: "h-12 md:h-auto"
+        }}
+        style={{
+          wrapper: {
+            flex: "col",
+            gap: "sm"
+          },
+          input: {
+            width: "full"
+          }
         }}
       />
     </Form>

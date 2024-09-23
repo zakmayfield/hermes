@@ -57,8 +57,13 @@ export const utilityHooks = {
           <Wrapper style={{ flex: "row", paddingX: "lg", paddingY: "md" }}>
             <Text>{title}</Text>
             <Btn
+              Icon={FaChevronDown}
               handleClick={() => handle_expand(id)}
-              style={{ Icon: FaChevronDown, height: "sm" }}
+              style={{
+                button: {
+                  buttonHeight: "sm"
+                }
+              }}
               classList={{
                 buttonClassName: (is_expanded(id) && "rotate-180") || ""
               }}
@@ -218,6 +223,13 @@ export const utilityHooks = {
       full: "h-full"
     };
 
+    const buttonHeightMap = {
+      none: "",
+      sm: "min-h-[2rem]",
+      md: "min-h-[2.5rem]",
+      lg: "min-h-[3rem]"
+    };
+
     const maxHeightMap = {
       none: "",
       sm: "max-h-[10rem]",
@@ -266,6 +278,7 @@ export const utilityHooks = {
       placeMap,
       widthMap,
       heightMap,
+      buttonHeightMap,
       maxHeightMap,
       flexPositionMap,
       fontSizeMap,

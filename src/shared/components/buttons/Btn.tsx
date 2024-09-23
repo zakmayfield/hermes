@@ -3,44 +3,39 @@ import { IconType } from "react-icons";
 import { classHooks } from "@/shared/hooks";
 import { Text, Wrapper } from "../containers";
 import { SpinLoader } from "../loaders";
+import { IBaseStyles, IFlexStyles, IOtherStyles } from "@/types/Styles";
 
-export type TBtnStyleProps = {
-  classList?: {
-    containerClassName?: string;
-    buttonClassName?: string;
-    contentClassName?: string;
-  };
-  style?: {
-    Icon?: IconType;
-    isLoading?: boolean;
-    isDisabled?: boolean;
-    width?: "sm" | "md" | "lg" | "full";
-    height?: "sm" | "md" | "lg";
-    padding?: "sm" | "md" | "lg";
-    bgColor?: "green" | "red";
-    fontWeight?: "normal" | "bold";
-    fontSize?: "sm" | "md" | "lg";
-    theme?: "light" | "dark";
-  };
-};
-
-type TBtnProps = TBtnStyleProps & {
+export type TBtnProps = {
+  Icon?: IconType;
   type?: "button" | "reset" | "submit";
   text?: string;
   handleClick?(): void;
+  isLoading?: boolean;
+  isDisabled?: boolean;
   mouseActions?: {
     onMouseEnter?(): void;
     onMouseLeave?(): void;
   };
+  classList?: {
+    wrapperClassName?: string;
+    buttonClassName?: string;
+    loaderClassName?: string;
+    contentClassName?: string;
+  };
+  style?: {
+    wrapper?: IBaseStyles & IFlexStyles & IOtherStyles;
+    button?: IBaseStyles & IFlexStyles & IOtherStyles;
+    loader?: IBaseStyles & IFlexStyles & IOtherStyles;
+    content?: IBaseStyles & IFlexStyles & IOtherStyles;
+  };
 };
 
 export const Btn = (props: TBtnProps) => {
-  const { type, text, handleClick, mouseActions } = props;
-  const { Icon, isLoading, isDisabled, width } = props.style || {};
+  const { type, text, Icon, handleClick, isLoading, isDisabled, mouseActions } = props;
   const classes = classHooks.useButtonClasses({ ...props });
 
   return (
-    <Wrapper className={classes.container}>
+    <Wrapper className={classes.wrapper}>
       <button
         type={type}
         disabled={isDisabled}
@@ -49,13 +44,10 @@ export const Btn = (props: TBtnProps) => {
         onClick={handleClick}
         {...mouseActions}
       >
-        {isLoading && width ? (
+        {isLoading && props.style?.button?.width ? (
           <SpinLoader
-            style={{
-              position: "center",
-              width: "full"
-            }}
             classList={{
+              containerClassName: classes.loader,
               spinnerClassName: classes.content
             }}
           />

@@ -35,6 +35,7 @@ export type TPlace = Place;
 export type TWidth = ExtendedSizes | "full";
 export type THeight = BaseSizes | "screen" | "full";
 export type TMaxHeight = BaseSizes;
+export type TButtonHeight = BaseSizes;
 
 // flex
 export type TFlexDir = FlexDir;
@@ -51,6 +52,7 @@ export interface IBaseStyles {
   width?: TWidth;
   height?: THeight;
   maxHeight?: TMaxHeight;
+  buttonHeight?: TButtonHeight;
   padding?: TPadding;
   paddingX?: TPaddingX;
   paddingY?: TPaddingY;

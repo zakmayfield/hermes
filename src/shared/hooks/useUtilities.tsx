@@ -1,10 +1,11 @@
 "use client";
-import { RefAttributes, useState } from "react";
+import { RefAttributes, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { ITooltip, TooltipRefProps, Tooltip } from "react-tooltip";
 import { FaChevronDown } from "react-icons/fa";
 import { ContentWrapper, Flex, Text } from "../components/containers";
 import { Btn } from "../components/buttons";
+import { useQuery } from "@tanstack/react-query";
 
 type ToastVariants = "success" | "error" | "warn" | "info";
 type TooltipProps = ITooltip & RefAttributes<TooltipRefProps>;
@@ -104,7 +105,8 @@ export const utilityHooks = {
 
   useStyleMap: () => {
     const paddingMap = {
-      none: "p-0",
+      none: "",
+      zero: "p-0",
       sm: "p-2",
       md: "p-4",
       lg: "p-6"
@@ -127,7 +129,8 @@ export const utilityHooks = {
     };
 
     const marginMap = {
-      none: "m-0",
+      none: "",
+      zero: "m-0",
       sm: "m-2",
       md: "m-4",
       lg: "m-6"
@@ -218,7 +221,15 @@ export const utilityHooks = {
       sm: "min-h-[10rem]",
       md: "min-h-[15rem]",
       lg: "min-h-[20rem]",
-      screen: "min-h-screen"
+      screen: "min-h-screen",
+      full: "h-full"
+    };
+
+    const maxHeightMap = {
+      none: "",
+      sm: "max-h-[10rem]",
+      md: "max-h-[15rem]",
+      lg: "max-h-[20rem]"
     };
 
     const fontSizeMap = {
@@ -261,6 +272,7 @@ export const utilityHooks = {
       placeMap,
       widthMap,
       heightMap,
+      maxHeightMap,
       flexPositionMap,
       fontSizeMap,
       fontWeightMap,

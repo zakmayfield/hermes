@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   ContentWrapper,
   Flex,
@@ -25,18 +25,23 @@ export const ManagePermissionsPage = () => {
   });
 
   const ManagePermissionsLayout = ({ children }: { children: React.ReactNode }) => {
+    const { flexMap, flexPositionMap } = utilityHooks.useStyleMap();
     return (
       <LayoutTemplate
         heading="h3"
         title="Permissions"
         style={{
+          wrapper: {
+            flex: "col",
+            gap: "lg"
+          },
           children: {
             flex: "col",
-            padding: "lg"
+            gap: "lg"
           }
         }}
         classList={{
-          childrenClassName: "items-start justify-between lg:flex-row gap-6"
+          childrenClassName: `lg:${flexMap.row}-row lg:${flexPositionMap.row["center-center"]}`
         }}
       >
         {children}
@@ -56,13 +61,17 @@ export const ManagePermissionsPage = () => {
         title={title}
         style={{
           wrapper: {
-            width: "lg"
+            flex: "col",
+            gap: "md",
+            width: "md",
+            place: "center"
           },
           children: {
-            flex: "col",
             padding: "md",
             rounded: "lg",
-            bg: "bg-slate-800"
+            bg: "bg-slate-800",
+            border: "sm",
+            height: "full"
           }
         }}
       >
@@ -86,9 +95,9 @@ export const ManagePermissionsPage = () => {
         <Flex className="justify-between">
           <Text>{name}</Text>
           <Flex className="justify-end">
+            <Text>{permission_level ? "✅" : "🚫"}</Text>
             <PiInfoDuotone id={`${permission_id}_info_icon`} />
             <Tooltip />
-            <Text>{permission_level ? "✅" : "🚫"}</Text>
           </Flex>
         </Flex>
       </ContentWrapper>

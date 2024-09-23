@@ -4,7 +4,6 @@ import { merge } from "@/utils/ui";
 import {
   TContentWrapperStyleProps,
   TFlexStyleProps,
-  TLayoutStyleProps,
   TLayoutTemplateStyleProps,
   TTextStyleProps
 } from "../components/containers";
@@ -253,88 +252,6 @@ export const classHooks = {
     }, [style, className]);
   },
 
-  useLayoutClasses: (props: TLayoutStyleProps) => {
-    const { classList, style } = props;
-
-    return useMemo(() => {
-      const {
-        wrapperClassName = "",
-        headingClassName = "",
-        childrenClassName = ""
-      } = classList || {};
-      const {
-        width = "full",
-        padding = "none",
-        position = "center",
-        childrenPadding = "none",
-        childrenFlex = "none",
-        childrenRounded = "none"
-      } = style || {};
-
-      const widthMap = {
-        sm: "max-w-sm w-full",
-        md: "max-w-lg w-full",
-        lg: "max-w-2xl w-full",
-        xl: "max-w-4xl w-full",
-        "2xl": "max-w-6xl w-full",
-        "3xl": "max-w-7xl w-full",
-        full: "w-full"
-      };
-
-      const paddingMap = {
-        none: "",
-        sm: "p-2",
-        md: "p-4",
-        lg: "p-6"
-      };
-
-      const positionMap = {
-        left: "mr-auto",
-        center: "mx-auto",
-        right: "ml-auto"
-      };
-
-      const childrenPaddingMap = {
-        none: "",
-        sm: "p-2",
-        md: "p-4",
-        lg: "p-6"
-      };
-
-      const childrenFlexMap = {
-        none: "",
-        row: "flex gap-3",
-        col: "flex flex-col gap-3"
-      };
-
-      const childrenRoundedMap = {
-        none: "rounded-none",
-        sm: "rounded",
-        md: "rounded-md",
-        lg: "rounded-lg"
-      };
-
-      return {
-        wrapper: merge(`
-          flex flex-col gap-3 
-          ${widthMap[width]}
-          ${paddingMap[padding]}
-          ${positionMap[position]}
-          ${wrapperClassName}
-          `),
-        heading: merge(`
-          ${headingClassName}
-          `),
-        children: merge(`
-          ${childrenPaddingMap[childrenPadding]}
-          ${childrenFlexMap[childrenFlex]}
-          ${childrenRoundedMap[childrenRounded]}
-          ${childrenClassName}
-          `)
-      };
-    }, [style, classList]);
-  },
-
   useLayoutTemplateClasses: (props: TLayoutTemplateStyleProps) => {
     const {
       classList: {
@@ -360,7 +277,8 @@ export const classHooks = {
         placeMap,
         widthMap,
         borderMap,
-        heightMap
+        heightMap,
+        maxHeightMap
       } = styles;
 
       return {
@@ -370,7 +288,10 @@ export const classHooks = {
           ${widthMap[wrapper.width || "none"]}
           ${placeMap[wrapper.place || "none"]}
           ${borderMap[wrapper.border || "none"]}
+          ${maxHeightMap[wrapper.maxHeight || "none"]}
           ${heightMap[wrapper.height || "none"]}
+          ${flexMap[wrapper.flex || "none"]}
+          ${gapMap[wrapper.gap || "none"]}
           ${wrapperClassName}
           `),
         heading: merge(`
@@ -386,7 +307,10 @@ export const classHooks = {
           ${paddingYMap[heading.paddingY || "none"]}
           ${marginMap[heading.margin || "none"]}
           ${widthMap[heading.width || "none"]}
+          ${maxHeightMap[heading.maxHeight || "none"]}
+          ${heightMap[heading.height || "none"]}
           ${placeMap[heading.place || "none"]}
+          ${borderMap[heading.border || "none"]}
           ${headingClassName}
           `),
         children: merge(`
@@ -403,8 +327,9 @@ export const classHooks = {
           ${gapMap[children.gap || "none"]}
           ${roundedMap[children.rounded || "none"]}
           ${children.bg || ""}
+          ${maxHeightMap[children.maxHeight || "none"]}
           ${heightMap[children.height || "none"]}
-          w-full
+          ${widthMap[children.width || "none"]}
           ${childrenClassName}
           `)
       };

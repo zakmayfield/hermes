@@ -25,15 +25,16 @@ export type Children = React.ReactNode;
 export type THeadings = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
 // base
-export type TPadding = BaseSizes;
+export type TPadding = BaseSizesWithZero;
 export type TPaddingX = BaseSizesWithZero;
 export type TPaddingY = BaseSizesWithZero;
-export type TMargin = BaseSizes;
+export type TMargin = BaseSizesWithZero;
 export type TMarginX = BaseSizesWithZero;
 export type TMarginY = BaseSizesWithZero;
 export type TPlace = Place;
 export type TWidth = ExtendedSizes | "full";
-export type THeight = BaseSizes | "screen";
+export type THeight = BaseSizes | "screen" | "full";
+export type TMaxHeight = BaseSizes;
 
 // flex
 export type TFlexDir = FlexDir;
@@ -49,6 +50,7 @@ export type TBgOpacity = BgOpacity;
 export interface IBaseStyles {
   width?: TWidth;
   height?: THeight;
+  maxHeight?: TMaxHeight;
   padding?: TPadding;
   paddingX?: TPaddingX;
   paddingY?: TPaddingY;

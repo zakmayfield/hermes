@@ -5,11 +5,13 @@ import {
   TContentWrapperStyleProps,
   TFlexStyleProps,
   TLayoutStyleProps,
+  TLayoutTemplateStyleProps,
   TTextStyleProps
 } from "../components/containers";
 import { TBtnStyleProps } from "../components/buttons";
 import { InputStyleProps, TFormStyleProps } from "../components/form";
 import { SpinLoaderProps } from "../components/loaders";
+import { utilityHooks } from "./useUtilities";
 
 export const classHooks = {
   useButtonClasses: (props: TBtnStyleProps) => {
@@ -331,6 +333,85 @@ export const classHooks = {
           `)
       };
     }, [style, classList]);
+  },
+
+  useLayoutTemplateClasses: (props: TLayoutTemplateStyleProps) => {
+    const {
+      classList: {
+        wrapperClassName = "",
+        headingClassName = "",
+        childrenClassName = ""
+      } = {},
+      style: { wrapper = {}, heading = {}, children = {} } = {}
+    } = props;
+
+    const styleMaps = utilityHooks.useStyleMap();
+
+    return useMemo(() => {
+      const {
+        paddingMap,
+        paddingXMap,
+        paddingYMap,
+        marginMap,
+        flexMap,
+        gapMap,
+        flexPositionMap,
+        roundedMap,
+        placeMap,
+        widthMap,
+        borderMap
+      } = styleMaps;
+
+      return {
+        wrapper: merge(`
+          ${paddingMap[wrapper.padding || "none"]}
+          ${marginMap[wrapper.margin || "none"]}
+          ${widthMap[wrapper.width || "none"]}
+          ${wrapperClassName}
+          `),
+        heading: merge(`
+          ${flexMap[heading.flex || "none"]}
+          ${
+            (!!heading.flex &&
+              !!heading.flexPosition &&
+              flexPositionMap[heading.flex][heading.flexPosition]) ||
+            "none"
+          }
+          ${paddingMap[heading.padding || "none"]}
+          ${paddingXMap[heading.paddingX || "none"]}
+          ${paddingYMap[heading.paddingY || "none"]}
+          ${marginMap[heading.margin || "none"]}
+          ${widthMap[heading.width || "none"]}
+          ${placeMap[heading.place || "none"]}
+          ${headingClassName}
+          `),
+        children: merge(`
+          ${borderMap[children.border || "none"]}
+          ${paddingMap[children.padding || "none"]}
+          ${marginMap[children.margin || "none"]}
+          ${flexMap[children.flex || "none"]}
+          ${
+            (children.flex &&
+              children.flexPosition &&
+              flexPositionMap[children.flex][children.flexPosition]) ||
+            "none"
+          }
+          ${gapMap[children.gap || "none"]}
+          ${roundedMap[children.rounded || "none"]}
+          ${children.bg || ""}
+          w-full
+          ${childrenClassName}
+          `)
+      };
+    }, [
+      wrapperClassName,
+      headingClassName,
+      childrenClassName,
+      wrapper,
+      heading,
+      children,
+      styleMaps
+    ]);
   },
 
   useTextClasses: (props: TTextStyleProps) => {

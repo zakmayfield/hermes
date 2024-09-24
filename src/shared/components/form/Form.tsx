@@ -3,8 +3,8 @@
 import { FC, FormEvent } from "react";
 import { Heading, Wrapper } from "../containers";
 import { Btn } from "../buttons";
-import { classHooks } from "@/shared/hooks";
-import { IBaseStyles, IFlexStyles, IOtherStyles } from "@/types/Styles";
+import { utilityHooks } from "@/shared/hooks";
+import { IStyles } from "@/types/Styles";
 
 export type TFormStyleProps = {
   classList?: {
@@ -13,9 +13,9 @@ export type TFormStyleProps = {
     buttonClassName?: string;
   };
   style?: {
-    form?: IBaseStyles & IFlexStyles & IOtherStyles;
-    heading?: IBaseStyles & IFlexStyles & IOtherStyles;
-    button?: IBaseStyles & IFlexStyles & IOtherStyles;
+    form?: IStyles;
+    heading?: IStyles;
+    button?: IStyles;
   };
 };
 
@@ -29,7 +29,7 @@ type FormProps = TFormStyleProps & {
 
 export const Form: FC<FormProps> = (props) => {
   const { children, title, onSubmit, buttonText = "Submit", isPending, style } = props;
-  const classes = classHooks.useFormClasses({ ...props });
+  const classes = utilityHooks.useClassNames({ ...props.style });
 
   return (
     <form
@@ -46,8 +46,7 @@ export const Form: FC<FormProps> = (props) => {
 
       <Wrapper
         style={{
-          flex: "col",
-          gap: "lg"
+          wrapper: { flex: "col", gap: "lg" }
         }}
       >
         {children}

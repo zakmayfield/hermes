@@ -5,8 +5,7 @@ export const Footer = () => {
     <footer className="p-12 bg-slate-900">
       <Wrapper
         style={{
-          flex: "row",
-          flexPosition: "center-center"
+          wrapper: { flex: "row", flexPosition: "center-center" }
         }}
       >
         footer

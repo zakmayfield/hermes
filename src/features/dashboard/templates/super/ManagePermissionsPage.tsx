@@ -87,12 +87,12 @@ export const ManagePermissionsPage = () => {
     return (
       <Wrapper>
         <Wrapper
-          style={{ flex: "row", gap: "sm" }}
+          style={{ wrapper: { flex: "row", gap: "sm" } }}
           className="justify-between"
         >
           <Text>{name}</Text>
           <Wrapper
-            style={{ flex: "row", flexPosition: "center-right", gap: "sm" }}
+            style={{ wrapper: { flex: "row", flexPosition: "center-right", gap: "sm" } }}
             className="justify-end"
           >
             <Text>{permission_level ? "✅" : "🚫"}</Text>

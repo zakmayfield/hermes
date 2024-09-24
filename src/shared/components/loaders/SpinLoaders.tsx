@@ -1,4 +1,5 @@
-import { classHooks } from "@/shared/hooks";
+import { utilityHooks } from "@/shared/hooks";
+import { IStyles } from "@/types/Styles";
 import { PiSpinnerGap } from "react-icons/pi";
 
 export type SpinLoaderProps = {
@@ -7,16 +8,13 @@ export type SpinLoaderProps = {
     spinnerClassName?: string;
   };
   style?: {
-    size?: "sm" | "md" | "lg";
-    width?: "full";
-    position?: "left" | "center" | "right";
-    padding?: "sm" | "md" | "lg";
-    theme?: "light" | "dark";
+    wrapper?: IStyles;
+    icon?: IStyles;
   };
 };
 
 export const SpinLoader = (props: SpinLoaderProps) => {
-  const classes = classHooks.useSpinLoaderClasses({ ...props });
+  const classes = utilityHooks.useClassNames({ ...props.style });
 
   return (
     <div className={classes.wrapper}>

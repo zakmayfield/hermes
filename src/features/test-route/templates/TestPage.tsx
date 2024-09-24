@@ -9,11 +9,20 @@ export const TestPage = () => {
         title="Layout"
         heading="h1"
         style={{
+          wrapper: {
+            width: "full",
+            border: "sm"
+          },
+          heading: {
+            paddingX: "lg",
+            width: "sm",
+            place: "right"
+          },
           children: {
-            border: "sm",
-            height: "md",
             flex: "row",
-            gap: "lg"
+            gap: "lg",
+            flexPosition: "bottom-left",
+            height: "lg"
           }
         }}
       >

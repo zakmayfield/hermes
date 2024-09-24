@@ -1,23 +1,22 @@
-import { classHooks } from "@/shared/hooks";
-import { IBaseStyles, IFlexStyles, IOtherStyles } from "@/types/Styles";
+import { utilityHooks } from "@/shared/hooks";
+import { IStyles } from "@/types/Styles";
 import { HTMLAttributes } from "react";
 
-export type TTextStyleProps = {
+type TTextProps = {
+  children: React.ReactNode;
+  as?: "p" | "span";
+  described_by?: string;
+  is_hidden?: boolean;
   className?: string;
-  style?: IBaseStyles & IFlexStyles & IOtherStyles;
-};
-
-type TTextProps = TTextStyleProps &
-  HTMLAttributes<HTMLParagraphElement> & {
-    children: React.ReactNode;
-    as?: "p" | "span";
-    described_by?: string;
-    is_hidden?: boolean;
+  style?: {
+    wrapper: IStyles;
   };
+  htmlProps?: HTMLAttributes<HTMLParagraphElement>;
+};
 
 export const Text = (props: TTextProps) => {
   const { children, as = "p", described_by, is_hidden } = props;
-  const classes = classHooks.useTextClasses({ ...props });
+  const classes = utilityHooks.useClassNames({ ...props.style });
 
   switch (as) {
     case "p":

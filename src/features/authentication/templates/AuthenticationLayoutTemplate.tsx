@@ -12,19 +12,21 @@ export const AuthenticationLayoutTemplate = (
 ) => {
   const { children } = props;
   return (
-    <Wrapper style={{ flex: "col", height: "screen" }}>
+    <Wrapper style={{ wrapper: { flex: "col", height: "screen" } }}>
       <Wrapper
         style={{
-          flex: "col",
-          width: "sm",
-          flexPosition: "center-center",
-          place: "center",
-          gap: "lg"
+          wrapper: {
+            flex: "col",
+            width: "sm",
+            flexPosition: "center-center",
+            place: "center",
+            gap: "lg"
+          }
         }}
         className="mt-6"
       >
         <Wrapper
-          style={{ flex: "row", padding: "lg" }}
+          style={{ wrapper: { flex: "row", padding: "lg" } }}
           className="justify-center w-3/4"
         >
           <Logo />

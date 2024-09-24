@@ -1,9 +1,9 @@
 "use client";
 import { IconType } from "react-icons";
-import { classHooks } from "@/shared/hooks";
+import { utilityHooks } from "@/shared/hooks";
 import { Text, Wrapper } from "../containers";
 import { SpinLoader } from "../loaders";
-import { IBaseStyles, IFlexStyles, IOtherStyles } from "@/types/Styles";
+import { IStyles } from "@/types/Styles";
 
 export type TBtnProps = {
   Icon?: IconType;
@@ -23,16 +23,16 @@ export type TBtnProps = {
     contentClassName?: string;
   };
   style?: {
-    wrapper?: IBaseStyles & IFlexStyles & IOtherStyles;
-    button?: IBaseStyles & IFlexStyles & IOtherStyles;
-    loader?: IBaseStyles & IFlexStyles & IOtherStyles;
-    content?: IBaseStyles & IFlexStyles & IOtherStyles;
+    wrapper?: IStyles;
+    button?: IStyles;
+    loader?: IStyles;
+    content?: IStyles;
   };
 };
 
 export const Btn = (props: TBtnProps) => {
   const { type, text, Icon, handleClick, isLoading, isDisabled, mouseActions } = props;
-  const classes = classHooks.useButtonClasses({ ...props });
+  const classes = utilityHooks.useClassNames({ ...props.style });
 
   return (
     <Wrapper className={classes.wrapper}>
@@ -54,8 +54,7 @@ export const Btn = (props: TBtnProps) => {
         ) : (
           <Wrapper
             style={{
-              flex: "row",
-              flexPosition: "center-center"
+              wrapper: { flex: "row", flexPosition: "center-center" }
             }}
           >
             {Icon && <Icon className={classes.content} />}

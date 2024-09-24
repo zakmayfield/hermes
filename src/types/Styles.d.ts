@@ -77,3 +77,5 @@ export interface IOtherStyles {
   fontSize?: TFontSize;
   fontWeight?: TFontWeight;
 }
+
+export type IStyles = IBaseStyles & IFlexStyles & IOtherStyles;

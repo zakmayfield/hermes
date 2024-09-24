@@ -1,13 +1,8 @@
 "use client";
-import {
-  Children,
-  IBaseStyles,
-  IFlexStyles,
-  IOtherStyles,
-  THeadings
-} from "@/types/Styles";
+import { Children, IStyles, THeadings } from "@/types/Styles";
 import { Heading } from "./Heading";
-import { classHooks } from "@/shared/hooks";
+import { utilityHooks } from "@/shared/hooks";
+import { merge } from "@/utils/ui";
 
 export type TLayoutTemplateStyleProps = {
   classList?: {
@@ -16,9 +11,9 @@ export type TLayoutTemplateStyleProps = {
     childrenClassName?: string;
   };
   style?: {
-    wrapper?: IBaseStyles & IFlexStyles & IOtherStyles;
-    heading?: IBaseStyles & IFlexStyles & IOtherStyles;
-    children?: IBaseStyles & IFlexStyles & IOtherStyles;
+    wrapper?: IStyles;
+    heading?: IStyles;
+    children?: IStyles;
   };
 };
 
@@ -29,19 +24,31 @@ type TLayoutTemplateProps = TLayoutTemplateStyleProps & {
 };
 
 export const LayoutTemplate = (props: TLayoutTemplateProps) => {
-  const { children, heading, title = "" } = props;
-  const classes = classHooks.useLayoutTemplateClasses({ ...props });
+  const {
+    children,
+    heading,
+    title = "",
+    classList: {
+      wrapperClassName = "",
+      headingClassName = "",
+      childrenClassName = ""
+    } = {}
+  } = props;
+
+  const classes = utilityHooks.useClassNames({ ...props.style });
+
+  console.log({ classes });
 
   return (
-    <div className={classes.wrapper}>
+    <div className={merge(classes.wrapper + wrapperClassName)}>
       {heading && (
         <Heading
           as={heading}
           content={title}
-          className={classes.heading}
+          className={merge(classes.heading + headingClassName)}
         />
       )}
-      <div className={classes.children}>{children}</div>
+      <div className={merge(classes.children + childrenClassName)}>{children}</div>
     </div>
   );
 };

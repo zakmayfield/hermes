@@ -2,9 +2,9 @@ import { FC } from "react";
 import { Wrapper } from "../containers";
 import { FieldError, FieldValues, UseFormRegister } from "react-hook-form";
 import { FormFieldError } from "./FieldError";
-import { classHooks, utilityHooks } from "@/shared/hooks";
+import { utilityHooks } from "@/shared/hooks";
 import { PiWarningCircleDuotone } from "react-icons/pi";
-import { IBaseStyles, IFlexStyles, IOtherStyles } from "@/types/Styles";
+import { IStyles } from "@/types/Styles";
 
 export type InputStyleProps = {
   classList?: {
@@ -13,9 +13,9 @@ export type InputStyleProps = {
     inputClassName?: string;
   };
   style?: {
-    wrapper?: IBaseStyles & IFlexStyles & IOtherStyles;
-    label?: IBaseStyles & IFlexStyles & IOtherStyles;
-    input?: IBaseStyles & IFlexStyles & IOtherStyles;
+    wrapper?: IStyles;
+    label?: IStyles;
+    input?: IStyles;
   };
 };
 
@@ -36,7 +36,6 @@ export const Input: FC<InputProps<any>> = (props) => {
     label,
     register,
     error,
-    style,
     is_label_hidden = false,
     is_error_hidden = false,
     is_error_icon_hidden = false
@@ -44,7 +43,7 @@ export const Input: FC<InputProps<any>> = (props) => {
 
   const name = props.name as string;
 
-  const classes = classHooks.useInputClasses({ ...props });
+  const classes = utilityHooks.useClassNames({ ...props.style });
 
   const { Tooltip } = utilityHooks.useTooltip({
     content: error?.message,
@@ -64,7 +63,7 @@ export const Input: FC<InputProps<any>> = (props) => {
       </label>
 
       <Wrapper
-        style={{ flex: "row" }}
+        style={{ wrapper: { flex: "row" } }}
         className="relative"
       >
         <input

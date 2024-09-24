@@ -35,9 +35,6 @@ export default async function RootLayout({
           {Nav}
 
           <LayoutTemplate
-            classList={{
-              childrenClassName: "min-h-screen"
-            }}
             style={{
               wrapper: {
                 width: "3xl",
@@ -45,7 +42,8 @@ export default async function RootLayout({
                 border: "sm"
               },
               children: {
-                padding: "lg"
+                padding: "lg",
+                height: "screen"
               }
             }}
           >

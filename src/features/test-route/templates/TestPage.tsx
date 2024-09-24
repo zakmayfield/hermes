@@ -1,8 +1,22 @@
 "use client";
 
 import { LayoutTemplate } from "@/shared/components/containers";
+import { utilityHooks } from "@/shared/hooks";
 
 export const TestPage = () => {
+  const classes = utilityHooks.useClassNames({
+    wrapper_one: {
+      height: "sm",
+      width: "sm",
+      border: "sm"
+    },
+    wrapper_two: {
+      height: "md",
+      width: "md",
+      border: "lg"
+    }
+  });
+
   return (
     <div>
       <LayoutTemplate
@@ -31,8 +45,8 @@ export const TestPage = () => {
           }
         }}
       >
-        <div>content 1</div>
-        <div>content 2</div>
+        <div className={classes.wrapper_one}>content 1</div>
+        <div className={classes.wrapper_two}>content 2</div>
       </LayoutTemplate>
     </div>
   );

@@ -306,8 +306,8 @@ export const utilityHooks = {
 
       for (const key in props) {
         if (Object.prototype.hasOwnProperty.call(props, key)) {
-          const styleObject = props[key];
           const classNames: string[] = [];
+          const styleObject = props[key];
 
           for (const key in styleObject) {
             const styleKey = key;

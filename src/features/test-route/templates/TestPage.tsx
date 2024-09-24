@@ -14,7 +14,7 @@ export const TestPage = () => {
             border: "sm"
           },
           heading: {
-            paddingX: "lg",
+            padding: "lg",
             width: "sm",
             place: "right"
           },
@@ -22,7 +22,12 @@ export const TestPage = () => {
             flex: "row",
             gap: "lg",
             flexPosition: "bottom-left",
-            height: "lg"
+            height: "lg",
+            padding: "lg",
+            rounded: "lg",
+            border: "sm",
+            margin: "lg",
+            bg: "bg-slate-900"
           }
         }}
       >

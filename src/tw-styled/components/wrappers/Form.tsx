@@ -54,15 +54,12 @@ export const Form: FC<FormProps> = (props) => {
           text={buttonText}
           isDisabled={isPending}
           isLoading={isPending}
+          variant="ghost"
           style={{
             button: {
               width: "full",
-              buttonHeight: "md",
-              rounded: "md"
+              className: classes.button
             }
-          }}
-          classList={{
-            buttonClassName: classes.button
           }}
         />
       </Wrapper>

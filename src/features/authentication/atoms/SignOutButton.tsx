@@ -9,9 +9,6 @@ export const SignOutButton = () => {
       <Btn
         handleClick={() => signOut()}
         text="Logout"
-        classList={{
-          buttonClassName: "border-none"
-        }}
       />
     </div>
   );

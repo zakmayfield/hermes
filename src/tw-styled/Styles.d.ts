@@ -2,7 +2,13 @@ export type StyleObj = Record<string, IStyles>;
 export type Children = React.ReactNode;
 export type THeadings = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 export type BtnVariants = "primary" | "warning" | "ghost";
-export type IStyles = IDimensions & ISpacing & IAlignment & ITypography & IOther;
+export type IStyles = IDimensions &
+  ISpacing &
+  IAlignment &
+  ITypography &
+  IOther & {
+    className?: string;
+  };
 
 interface IDimensions {
   width?: SizesWithFull | ExtendedSizes;
@@ -37,6 +43,7 @@ interface IOther {
   rounded?: Sizes;
   border?: Sizes;
   bgOpacity?: Opacities;
+  textOpacity?: Opacities;
 }
 
 type Sizes = "sm" | "md" | "lg";

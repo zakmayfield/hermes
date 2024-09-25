@@ -130,6 +130,12 @@ export const useClassNames = (style: StyleObj) => {
               const mapValue = styleMaps[mapKey][value || "none"];
               classNames.push(mapValue);
             }
+            if (isType<"bg">(styleKey, "bg")) {
+              const value = styleObject[styleKey];
+              if (value) {
+                classNames.push(value);
+              }
+            }
             if (
               isType<"bgOpacity">(styleKey, "bgOpacity") &&
               isType<"bgOpacityMap">(mapKey, "bgOpacityMap")
@@ -138,12 +144,15 @@ export const useClassNames = (style: StyleObj) => {
               const mapValue = styleMaps[mapKey][value || "none"];
               classNames.push(mapValue);
             }
-            if (isType<"bg">(styleKey, "bg")) {
+            if (
+              isType<"textOpacity">(styleKey, "textOpacity") &&
+              isType<"textOpacityMap">(mapKey, "textOpacityMap")
+            ) {
               const value = styleObject[styleKey];
-              if (value) {
-                classNames.push(value);
-              }
+              const mapValue = styleMaps[mapKey][value || "none"];
+              classNames.push(mapValue);
             }
+
             if (
               isType<"border">(styleKey, "border") &&
               isType<"borderMap">(mapKey, "borderMap")
@@ -178,7 +187,16 @@ export const useClassNames = (style: StyleObj) => {
             }
           }
         }
-        result[key] = merge(classNames.join(" ") || "");
+
+        result[key] = merge(classNames.join(" "));
+
+        if (result[key]) {
+          result[key].concat(styleObject.className || "");
+        } else {
+          result[key] = styleObject.className || "";
+        }
+
+        console.log({ result });
       }
     }
 

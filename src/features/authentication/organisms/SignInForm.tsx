@@ -19,15 +19,7 @@ export const SignInForm = () => {
         },
         heading: {
           marginY: "md"
-        },
-        button: {
-          // TODO: conditionally check if isPending and set disabled state
-          bg: "bg-green-700 hover:bg-opacity-90"
         }
-      }}
-      classList={{
-        formClassName: "pb-12",
-        buttonClassName: "mt-6"
       }}
     >
       <Input

@@ -4,7 +4,9 @@ import { BtnVariants, IStyles, StyleObj } from "@/tw-styled/Styles";
 import { useClassNames } from "@/tw-styled";
 import { Text, Wrapper } from "../wrappers";
 import { SpinLoader } from "../loaders";
-import { useButtonVariant } from "@/tw-styled/hooks/useButtonVariant";
+
+import { buttonHooks } from "@/tw-styled/hooks/buttonHooks";
+import { useEffect } from "react";
 
 export type BtnProps = {
   Icon?: IconType;
@@ -18,12 +20,6 @@ export type BtnProps = {
     onMouseEnter?(): void;
     onMouseLeave?(): void;
   };
-  classList?: {
-    wrapperClassName?: string;
-    buttonClassName?: string;
-    loaderClassName?: string;
-    contentClassName?: string;
-  };
   style?: {
     wrapper?: IStyles;
     button?: IStyles;
@@ -34,35 +30,41 @@ export type BtnProps = {
 
 export const Btn = (props: BtnProps) => {
   const {
-    type,
-    text,
-    Icon,
+    type = "button",
+    text = "Submit",
     variant = "ghost",
+    isLoading = false,
+    isDisabled = false,
+    Icon,
     handleClick,
-    isLoading,
-    isDisabled,
     mouseActions,
     style
   } = props;
 
-  const { variantStyles } = useButtonVariant(variant);
+  const variantStyles = buttonHooks.useVariantStyles(variant, { isLoading, isDisabled });
 
   const styles: StyleObj = {
     ...style,
     button: {
       ...variantStyles,
       ...style?.button
+    },
+    content: {
+      textOpacity: variantStyles.textOpacity,
+      ...style?.content
     }
   };
 
   const classes = useClassNames(styles);
 
+  const disabled = isDisabled || isLoading;
+
   return (
     <Wrapper className={classes.wrapper}>
       <button
         type={type}
-        disabled={isDisabled}
-        aria-disabled={isDisabled}
+        disabled={disabled}
+        aria-disabled={disabled}
         className={classes.button}
         onClick={handleClick}
         {...mouseActions}
@@ -77,14 +79,14 @@ export const Btn = (props: BtnProps) => {
         ) : (
           <Wrapper
             style={{
-              wrapper: { flex: "row", flexPosition: "center-center" }
+              wrapper: { flex: "row", flexPosition: "center-center", gap: "sm" }
             }}
           >
             {Icon && <Icon className={classes.content} />}
             {text && (
               <Text
                 as="span"
-                className={classes.content}
+                style={{ wrapper: { className: classes.content } }}
               >
                 {text}
               </Text>

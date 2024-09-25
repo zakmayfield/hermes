@@ -195,8 +195,6 @@ export const useClassNames = (style: StyleObj) => {
         } else {
           result[key] = styleObject.className || "";
         }
-
-        console.log({ result });
       }
     }
 

@@ -69,11 +69,15 @@ export const Btn = (props: BtnProps) => {
         onClick={handleClick}
         {...mouseActions}
       >
-        {isLoading && props.style?.button?.width ? (
+        {(isLoading && props.style?.button?.width) || props.style?.button?.buttonSize ? (
           <SpinLoader
-            classList={{
-              containerClassName: classes.loader,
-              spinnerClassName: classes.content
+            style={{
+              wrapper: {
+                className: classes.loader
+              },
+              icon: {
+                className: classes.content
+              }
             }}
           />
         ) : (

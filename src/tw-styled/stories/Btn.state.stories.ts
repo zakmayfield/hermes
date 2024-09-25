@@ -19,6 +19,11 @@ export const Disabled: Story = {
 export const Loading: Story = {
   args: {
     variant: "primary",
-    isLoading: true
+    isLoading: true,
+    style: {
+      button: {
+        buttonSize: "sm"
+      }
+    }
   }
 };

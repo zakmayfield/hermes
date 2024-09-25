@@ -1,5 +1,5 @@
 import { useClassNames } from "@/tw-styled";
-import { IStyles } from "@/tw-styled/Styles";
+import { IStyles, StyleObj } from "@/tw-styled/Styles";
 import { PiSpinnerGap } from "react-icons/pi";
 
 export type SpinLoaderProps = {
@@ -14,11 +14,23 @@ export type SpinLoaderProps = {
 };
 
 export const SpinLoader = (props: SpinLoaderProps) => {
-  const classes = useClassNames({ ...props.style });
+  const styles: StyleObj = {
+    ...props.style,
+
+    wrapper: {
+      ...props.style?.wrapper
+    },
+    icon: {
+      place: "center",
+      ...props.style?.icon
+    }
+  };
+
+  const classes = useClassNames(styles);
 
   return (
     <div className={classes.wrapper}>
-      <PiSpinnerGap className={classes.icon} />
+      <PiSpinnerGap className={`${classes.icon} animate-spin`} />
     </div>
   );
 };

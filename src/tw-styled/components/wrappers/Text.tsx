@@ -1,7 +1,7 @@
 "use client";
 import { useClassNames } from "@/tw-styled";
 import { IStyles } from "@/tw-styled/Styles";
-import { HTMLAttributes, useEffect } from "react";
+import { HTMLAttributes } from "react";
 
 type TextProps = {
   children: React.ReactNode;
@@ -17,10 +17,6 @@ type TextProps = {
 export const Text = (props: TextProps) => {
   const { children, as = "p", described_by, is_hidden } = props;
   const classes = useClassNames({ ...props.style });
-
-  useEffect(() => {
-    console.log("text classes", { classes });
-  }, [classes]);
 
   switch (as) {
     case "p":

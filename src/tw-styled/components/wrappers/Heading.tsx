@@ -1,5 +1,5 @@
 import { Children } from "@/tw-styled/Styles";
-import { merge } from "@/utils/ui";
+import { merge } from "@/tw-styled/utils/class-merge";
 
 type Props = {
   children: Children;

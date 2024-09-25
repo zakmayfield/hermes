@@ -1,7 +1,17 @@
-import { merge } from "@/utils/ui";
+import { merge } from "@/tw-styled/utils/class-merge";
 
-const BaseLoader = ({ children, className }: { children: React.ReactNode; className?: string }) => {
-  return <div className={merge(`p-3 px-6 bg-slate-100 rounded-md ${className}`)}>{children}</div>;
+const BaseLoader = ({
+  children,
+  className
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  return (
+    <div className={merge(`p-3 px-6 bg-slate-100 rounded-md ${className}`)}>
+      {children}
+    </div>
+  );
 };
 
 type LoaderProps = {

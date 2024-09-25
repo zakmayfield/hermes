@@ -1,6 +1,11 @@
+import { IStyles } from "@/tw-styled/Styles";
+const baseMap = {
+  none: ""
+};
+
 export const style_maps = {
   paddingMap: {
-    none: "",
+    ...baseMap,
     zero: "p-0",
     sm: "p-2",
     md: "p-4",
@@ -8,7 +13,7 @@ export const style_maps = {
   },
 
   paddingXMap: {
-    none: "",
+    ...baseMap,
     zero: "px-0",
     sm: "px-2",
     md: "px-4",
@@ -16,7 +21,7 @@ export const style_maps = {
   },
 
   paddingYMap: {
-    none: "",
+    ...baseMap,
     zero: "py-0",
     sm: "py-2",
     md: "py-4",
@@ -24,7 +29,7 @@ export const style_maps = {
   },
 
   marginMap: {
-    none: "",
+    ...baseMap,
     zero: "m-0",
     sm: "m-2",
     md: "m-4",
@@ -32,7 +37,7 @@ export const style_maps = {
   },
 
   marginXMap: {
-    none: "",
+    ...baseMap,
     zero: "mx-0",
     sm: "mx-2",
     md: "mx-4",
@@ -40,7 +45,7 @@ export const style_maps = {
   },
 
   marginYMap: {
-    none: "",
+    ...baseMap,
     zero: "my-0",
     sm: "my-2",
     md: "my-4",
@@ -48,13 +53,13 @@ export const style_maps = {
   },
 
   flexMap: {
-    none: "",
+    ...baseMap,
     row: "flex",
     col: "flex flex-col"
   },
 
   flexPositionMap: {
-    none: "",
+    ...baseMap,
     row: {
       "top-left": "items-start",
       "center-left": "items-center justify-start",
@@ -80,28 +85,28 @@ export const style_maps = {
   },
 
   gapMap: {
-    none: "",
+    ...baseMap,
     sm: "gap-2",
     md: "gap-4",
     lg: "gap-6"
   },
 
   roundedMap: {
-    none: "",
+    ...baseMap,
     sm: "rounded",
     md: "rounded-md",
     lg: "rounded-lg"
   },
 
   placeMap: {
-    none: "",
+    ...baseMap,
     left: "mr-auto",
     center: "mx-auto",
     right: "ml-auto"
   },
 
   widthMap: {
-    none: "",
+    ...baseMap,
     sm: "max-w-sm w-full",
     md: "max-w-lg w-full",
     lg: "max-w-2xl w-full",
@@ -112,7 +117,7 @@ export const style_maps = {
   },
 
   heightMap: {
-    none: "",
+    ...baseMap,
     sm: "min-h-[10rem]",
     md: "min-h-[15rem]",
     lg: "min-h-[20rem]",
@@ -120,45 +125,46 @@ export const style_maps = {
     full: "h-full"
   },
 
-  buttonHeightMap: {
-    none: "",
-    sm: "min-h-[2rem]",
-    md: "min-h-[2.5rem]",
-    lg: "min-h-[3rem]"
-  },
-
   maxHeightMap: {
-    none: "",
+    ...baseMap,
     sm: "max-h-[10rem]",
     md: "max-h-[15rem]",
     lg: "max-h-[20rem]"
   },
 
   fontSizeMap: {
-    none: "",
+    ...baseMap,
     sm: "text-sm",
     md: "text-base",
     lg: "text-xl"
   },
 
   fontWeightMap: {
-    none: "",
+    ...baseMap,
     light: "font-light",
     normal: "font-normal",
     bold: "font-semibold"
   },
 
   bgOpacityMap: {
-    none: "",
+    ...baseMap,
     light: "bg-opacity-30",
     medium: "bg-opacity-60",
     dark: "bg-opacity-90"
   },
 
   borderMap: {
-    none: "",
+    ...baseMap,
     sm: "border",
     md: "border-2",
     lg: "border-4"
+  },
+
+  buttonSizeMap: {
+    ...baseMap,
+    sm: "max-w-[10rem] w-full",
+    md: "max-w-[15rem] w-full",
+    lg: "max-w-[20rem] w-full",
+    full: "w-full"
   }
 };

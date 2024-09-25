@@ -1,17 +1,19 @@
 "use client";
 import { IconType } from "react-icons";
-import { IStyles } from "@/tw-styled/Styles";
+import { BtnVariants, IStyles, StyleObj } from "@/tw-styled/Styles";
 import { useClassNames } from "@/tw-styled";
 import { Text, Wrapper } from "../wrappers";
 import { SpinLoader } from "../loaders";
+import { useButtonVariant } from "@/tw-styled/hooks/useButtonVariant";
 
-export type TBtnProps = {
+export type BtnProps = {
   Icon?: IconType;
   type?: "button" | "reset" | "submit";
   text?: string;
   handleClick?(): void;
   isLoading?: boolean;
   isDisabled?: boolean;
+  variant?: BtnVariants;
   mouseActions?: {
     onMouseEnter?(): void;
     onMouseLeave?(): void;
@@ -30,9 +32,30 @@ export type TBtnProps = {
   };
 };
 
-export const Btn = (props: TBtnProps) => {
-  const { type, text, Icon, handleClick, isLoading, isDisabled, mouseActions } = props;
-  const classes = useClassNames({ ...props.style });
+export const Btn = (props: BtnProps) => {
+  const {
+    type,
+    text,
+    Icon,
+    variant = "ghost",
+    handleClick,
+    isLoading,
+    isDisabled,
+    mouseActions,
+    style
+  } = props;
+
+  const { variantStyles } = useButtonVariant(variant);
+
+  const styles: StyleObj = {
+    ...style,
+    button: {
+      ...variantStyles,
+      ...style?.button
+    }
+  };
+
+  const classes = useClassNames(styles);
 
   return (
     <Wrapper className={classes.wrapper}>

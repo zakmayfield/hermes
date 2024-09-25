@@ -1,8 +1,51 @@
-type BaseSizes = "sm" | "md" | "lg";
-type ExtendedSizes = BaseSizes | "xl" | "2xl" | "3xl";
-type BaseSizesWithZero = BaseSizes | "zero";
+export type StyleObj = Record<string, IStyles>;
+export type Children = React.ReactNode;
+export type THeadings = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+export type BtnVariants = "primary" | "warning" | "ghost";
+export type IStyles = IDimensions & ISpacing & IAlignment & ITypography & IOther;
 
-type FlexDir = "row" | "col";
+interface IDimensions {
+  width?: SizesWithFull | ExtendedSizes;
+  height?: SizesWithFull | "screen";
+  maxHeight?: Sizes;
+  buttonSize?: SizesWithFull;
+}
+
+interface ISpacing {
+  padding?: SizesWithZero;
+  paddingX?: SizesWithZero;
+  paddingY?: SizesWithZero;
+  margin?: SizesWithZero;
+  marginX?: SizesWithZero;
+  marginY?: SizesWithZero;
+}
+
+interface IAlignment {
+  flex?: FlexDirections;
+  flexPosition?: FlexPositions;
+  gap?: Sizes;
+  place?: Places;
+}
+
+interface ITypography {
+  fontSize?: Sizes;
+  fontWeight?: FontWeights;
+}
+
+interface IOther {
+  bg?: string;
+  rounded?: Sizes;
+  border?: Sizes;
+  bgOpacity?: Opacities;
+}
+
+type Sizes = "sm" | "md" | "lg";
+type ExtendedSizes = "xl" | "2xl" | "3xl";
+type SizesWithZero = Sizes | "zero";
+type SizesWithFull = Sizes | "full";
+type Full = "full";
+type Screen = "screen";
+type FlexDirections = "row" | "col";
 type FlexPositions =
   | "top-left"
   | "center-left"
@@ -13,69 +56,6 @@ type FlexPositions =
   | "top-right"
   | "center-right"
   | "bottom-right";
-type Borders = BaseSizes;
-
-type FontSizes = BaseSizes;
 type FontWeights = "light" | "normal" | "bold";
-type BgOpacity = "light" | "medium" | "dark";
-
-type Place = "left" | "center" | "right";
-
-export type Children = React.ReactNode;
-export type THeadings = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
-
-// base
-type TPadding = BaseSizesWithZero;
-type TPaddingX = BaseSizesWithZero;
-type TPaddingY = BaseSizesWithZero;
-type TMargin = BaseSizesWithZero;
-type TMarginX = BaseSizesWithZero;
-type TMarginY = BaseSizesWithZero;
-type TPlace = Place;
-type TWidth = ExtendedSizes | "full";
-type THeight = BaseSizes | "screen" | "full";
-type TMaxHeight = BaseSizes;
-type TButtonHeight = BaseSizes;
-
-// flex
-type TFlexDir = FlexDir;
-type TFlexPosition = FlexPositions;
-type TGap = BaseSizes;
-
-// other
-type TRounded = BaseSizes;
-type TFontSize = FontSizes;
-type TFontWeight = FontWeights;
-type TBgOpacity = BgOpacity;
-
-interface IBaseStyles {
-  width?: TWidth;
-  height?: THeight;
-  maxHeight?: TMaxHeight;
-  buttonHeight?: TButtonHeight;
-  padding?: TPadding;
-  paddingX?: TPaddingX;
-  paddingY?: TPaddingY;
-  margin?: TMargin;
-  marginX?: TMarginX;
-  marginY?: TMarginY;
-  place?: Place;
-  rounded?: TRounded;
-  border?: Borders;
-}
-
-interface IFlexStyles {
-  flex?: TFlexDir;
-  flexPosition?: TFlexPosition;
-  gap?: TGap;
-}
-
-interface IOtherStyles {
-  rounded?: TRounded;
-  bg?: string;
-  bgOpacity?: TBgOpacity;
-  fontSize?: TFontSize;
-  fontWeight?: TFontWeight;
-}
-
-export type IStyles = IBaseStyles & IFlexStyles & IOtherStyles;
+type Opacities = "light" | "medium" | "dark";
+type Places = "left" | "center" | "right";

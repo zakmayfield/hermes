@@ -1,8 +1,7 @@
 "use client";
-import { useClassNames } from "@/tw-styled";
+import { merge, useClassNames } from "@/tw-styled";
 import { Children, IStyles, THeadings } from "@/tw-styled/Styles";
 import { Heading } from "./Heading";
-import { merge } from "@/utils/ui";
 
 type TLayoutProps = {
   children: Children;

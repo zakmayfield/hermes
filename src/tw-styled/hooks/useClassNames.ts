@@ -1,12 +1,12 @@
-import { IStyles } from "../Styles";
+import { StyleObj } from "../Styles";
 import { merge } from "../utils/class-merge";
 import { style_maps } from "../utils/style-maps";
 import { isType } from "../utils/type-guards";
 
-export const useClassNames = (style: Record<string, IStyles>) => {
+export const useClassNames = (style: StyleObj) => {
   const styleMaps = style_maps;
 
-  const classNameGenerator = (props: Record<string, IStyles>) => {
+  const classNameGenerator = (props: StyleObj) => {
     const result: Record<string, string> = {};
 
     for (const key in props) {
@@ -140,7 +140,9 @@ export const useClassNames = (style: Record<string, IStyles>) => {
             }
             if (isType<"bg">(styleKey, "bg")) {
               const value = styleObject[styleKey];
-              classNames.push(value || "");
+              if (value) {
+                classNames.push(value);
+              }
             }
             if (
               isType<"border">(styleKey, "border") &&
@@ -161,6 +163,14 @@ export const useClassNames = (style: Record<string, IStyles>) => {
             if (
               isType<"fontWeight">(styleKey, "fontWeight") &&
               isType<"fontWeightMap">(mapKey, "fontWeightMap")
+            ) {
+              const value = styleObject[styleKey];
+              const mapValue = styleMaps[mapKey][value || "none"];
+              classNames.push(mapValue);
+            }
+            if (
+              isType<"buttonSize">(styleKey, "buttonSize") &&
+              isType<"buttonSizeMap">(mapKey, "buttonSizeMap")
             ) {
               const value = styleObject[styleKey];
               const mapValue = styleMaps[mapKey][value || "none"];

@@ -1,7 +1,7 @@
 "use client";
 
+import { Text, Wrapper } from "@/tw-styled/components";
 import Link from "next/link";
-import { Text, Wrapper } from "@/shared/components/containers";
 import { usePathname } from "next/navigation";
 
 export const SwitchForm = () => {

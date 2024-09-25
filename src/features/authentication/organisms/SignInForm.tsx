@@ -1,5 +1,5 @@
-import { Form, Input } from "@/shared/components/form";
 import { formHooks } from "@/shared/hooks";
+import { Form, Input } from "@/tw-styled/components";
 
 export const SignInForm = () => {
   const { register, onSubmit, errors, isPending } = formHooks.useSignInForm();

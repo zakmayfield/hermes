@@ -3,8 +3,7 @@ import { RefAttributes, useState } from "react";
 import { toast } from "react-toastify";
 import { ITooltip, TooltipRefProps, Tooltip } from "react-tooltip";
 import { FaChevronDown } from "react-icons/fa";
-import { Text, Wrapper } from "../components/containers";
-import { Btn } from "../components/buttons";
+import { Btn, Text, Wrapper } from "@/tw-styled/components";
 
 type ToastVariants = "success" | "error" | "warn" | "info";
 type TooltipProps = ITooltip & RefAttributes<TooltipRefProps>;

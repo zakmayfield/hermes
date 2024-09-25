@@ -1,9 +1,9 @@
 "use client";
 import { IconType } from "react-icons";
-import { Text, Wrapper } from "../containers";
-import { SpinLoader } from "../loaders";
-import { IStyles } from "@/types/Styles";
+import { IStyles } from "@/tw-styled/Styles";
 import { useClassNames } from "@/tw-styled";
+import { Text, Wrapper } from "../wrappers";
+import { SpinLoader } from "../loaders";
 
 export type TBtnProps = {
   Icon?: IconType;

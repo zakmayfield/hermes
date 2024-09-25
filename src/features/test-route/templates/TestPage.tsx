@@ -1,7 +1,7 @@
 "use client";
 
-import { LayoutTemplate } from "@/shared/components/containers";
 import { useClassNames } from "@/tw-styled";
+import { Layout } from "@/tw-styled/components";
 
 export const TestPage = () => {
   const classes = useClassNames({
@@ -19,7 +19,7 @@ export const TestPage = () => {
 
   return (
     <div>
-      <LayoutTemplate
+      <Layout
         title="Layout"
         heading="h1"
         style={{
@@ -47,7 +47,7 @@ export const TestPage = () => {
       >
         <div className={classes.wrapper_one}>content 1</div>
         <div className={classes.wrapper_two}>content 2</div>
-      </LayoutTemplate>
+      </Layout>
     </div>
   );
 };

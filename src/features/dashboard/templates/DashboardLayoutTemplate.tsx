@@ -1,5 +1,5 @@
 "use client";
-import { LayoutTemplate } from "@/shared/components/containers";
+import { Layout } from "@/tw-styled/components";
 
 type TDashboardLayoutTemplateProps = {
   children: React.ReactNode;
@@ -8,11 +8,11 @@ type TDashboardLayoutTemplateProps = {
 export const DashboardLayoutTemplate = (props: TDashboardLayoutTemplateProps) => {
   const { children } = props;
   return (
-    <LayoutTemplate
+    <Layout
       title="Dashboard"
       heading="h1"
     >
       {children}
-    </LayoutTemplate>
+    </Layout>
   );
 };

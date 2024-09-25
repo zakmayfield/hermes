@@ -1,10 +1,13 @@
 "use client";
-import { Children, IStyles, THeadings } from "@/types/Styles";
+import { useClassNames } from "@/tw-styled";
+import { Children, IStyles, THeadings } from "@/tw-styled/Styles";
 import { Heading } from "./Heading";
 import { merge } from "@/utils/ui";
-import { useClassNames } from "@/tw-styled";
 
-export type TLayoutTemplateStyleProps = {
+type TLayoutProps = {
+  children: Children;
+  heading?: THeadings;
+  title?: string;
   classList?: {
     wrapperClassName?: string;
     headingClassName?: string;
@@ -17,13 +20,7 @@ export type TLayoutTemplateStyleProps = {
   };
 };
 
-type TLayoutTemplateProps = TLayoutTemplateStyleProps & {
-  children: Children;
-  heading?: THeadings;
-  title?: string;
-};
-
-export const LayoutTemplate = (props: TLayoutTemplateProps) => {
+export const Layout = (props: TLayoutProps) => {
   const {
     children,
     heading,

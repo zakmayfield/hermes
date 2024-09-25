@@ -1,6 +1,6 @@
 "use client";
 
-import { Btn } from "@/shared/components/buttons";
+import { Btn } from "@/tw-styled/components";
 import { signOut } from "next-auth/react";
 
 export const SignOutButton = () => {

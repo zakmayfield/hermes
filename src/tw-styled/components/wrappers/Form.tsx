@@ -1,12 +1,18 @@
 "use client";
 
 import { FC, FormEvent } from "react";
-import { Heading, Wrapper } from "../containers";
-import { Btn } from "../buttons";
-import { IStyles } from "@/types/Styles";
+import { IStyles } from "@/tw-styled/Styles";
 import { useClassNames } from "@/tw-styled";
+import { Heading } from "./Heading";
+import { Wrapper } from "./Wrapper";
+import { Btn } from "../btns";
 
-export type TFormStyleProps = {
+type FormProps = {
+  children?: React.ReactNode;
+  title?: string;
+  buttonText?: string;
+  isPending?: boolean;
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   classList?: {
     formClassName?: string;
     headingClassName?: string;
@@ -17,14 +23,6 @@ export type TFormStyleProps = {
     heading?: IStyles;
     button?: IStyles;
   };
-};
-
-type FormProps = TFormStyleProps & {
-  children?: React.ReactNode;
-  title?: string;
-  buttonText?: string;
-  isPending?: boolean;
-  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
 };
 
 export const Form: FC<FormProps> = (props) => {

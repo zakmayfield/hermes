@@ -1,6 +1,6 @@
+import { Children } from "@/tw-styled/Styles";
 import { merge } from "@/utils/ui";
 
-type Children = React.ReactNode;
 type Props = {
   children: Children;
   className?: string;

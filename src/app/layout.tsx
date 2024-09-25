@@ -7,9 +7,9 @@ import "./globals.css";
 import "react-toastify/ReactToastify.min.css";
 import "react-tooltip/dist/react-tooltip.css";
 import { getAuthSession } from "@/lib/auth/auth.options";
-import { LayoutTemplate } from "@/shared/components/containers";
 import { NavigationTemplate } from "@/features/navigation/templates";
 import { FooterTemplate } from "@/features/footer/templates";
+import { Layout } from "@/tw-styled/components";
 
 export const metadata: Metadata = {
   title: "Hermes",
@@ -34,7 +34,7 @@ export default async function RootLayout({
           {/* NAV */}
           {Nav}
 
-          <LayoutTemplate
+          <Layout
             style={{
               wrapper: {
                 width: "3xl",
@@ -48,7 +48,7 @@ export default async function RootLayout({
             }}
           >
             {children}
-          </LayoutTemplate>
+          </Layout>
 
           {/* FOOTER */}
           {Footer}

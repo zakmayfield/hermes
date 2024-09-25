@@ -1,4 +1,4 @@
-import { Wrapper } from "@/shared/components/containers";
+import { Wrapper } from "@/tw-styled/components";
 
 export const Footer = () => {
   return (

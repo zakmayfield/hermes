@@ -1,5 +1,5 @@
 import { HTMLAttributes } from "react";
-import { Text } from "../containers";
+import { Text } from "./Text";
 
 type TFieldErrorProps = HTMLAttributes<HTMLParagraphElement> & {
   message?: string;

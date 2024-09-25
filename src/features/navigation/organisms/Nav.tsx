@@ -1,4 +1,4 @@
-import { Wrapper } from "@/shared/components/containers";
+import { Wrapper } from "@/tw-styled/components";
 import { NavItem, RoleSwitch, TNavItem } from "../molecules";
 import { SignOutButton } from "@/features/authentication/atoms/SignOutButton";
 

@@ -1,5 +1,5 @@
 import { useClassNames } from "@/tw-styled";
-import { IStyles } from "@/types/Styles";
+import { IStyles } from "@/tw-styled/Styles";
 import { PiSpinnerGap } from "react-icons/pi";
 
 export type SpinLoaderProps = {

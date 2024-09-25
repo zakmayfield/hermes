@@ -1,7 +1,7 @@
 import Link from "next/link";
 import notfound from "@/assets/notfound.png";
 import Image from "next/image";
-import { Heading } from "@/shared/components/containers";
+import { Heading } from "@/tw-styled/components";
 
 export default function NotFound() {
   return (

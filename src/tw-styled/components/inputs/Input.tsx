@@ -1,13 +1,20 @@
 import { FC } from "react";
-import { Wrapper } from "../containers";
 import { FieldError, FieldValues, UseFormRegister } from "react-hook-form";
-import { FormFieldError } from "./FieldError";
 import { utilityHooks } from "@/shared/hooks";
 import { PiWarningCircleDuotone } from "react-icons/pi";
-import { IStyles } from "@/types/Styles";
+import { IStyles } from "@/tw-styled/Styles";
 import { useClassNames } from "@/tw-styled";
+import { FormFieldError, Wrapper } from "../wrappers";
 
-export type InputStyleProps = {
+type InputProps<T extends FieldValues> = {
+  name: keyof T;
+  label?: string;
+  register?: UseFormRegister<T>;
+  error?: FieldError;
+  type?: "text" | "password";
+  is_label_hidden?: boolean;
+  is_error_hidden?: boolean;
+  is_error_icon_hidden?: boolean;
   classList?: {
     wrapperClassName?: string;
     labelClassName?: string;
@@ -18,17 +25,6 @@ export type InputStyleProps = {
     label?: IStyles;
     input?: IStyles;
   };
-};
-
-type InputProps<T extends FieldValues> = InputStyleProps & {
-  name: keyof T;
-  label?: string;
-  register?: UseFormRegister<T>;
-  error?: FieldError;
-  type?: "text" | "password";
-  is_label_hidden?: boolean;
-  is_error_hidden?: boolean;
-  is_error_icon_hidden?: boolean;
 };
 
 export const Input: FC<InputProps<any>> = (props) => {

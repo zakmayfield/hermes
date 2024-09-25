@@ -1,6 +1,6 @@
 "use client";
 import { useClassNames } from "@/tw-styled";
-import { Children, IStyles } from "@/types/Styles";
+import { Children, IStyles } from "@/tw-styled/Styles";
 
 export type TWrapperProps = {
   children: Children;

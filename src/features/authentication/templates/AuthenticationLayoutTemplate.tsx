@@ -1,7 +1,7 @@
 "use client";
 
-import { Wrapper } from "@/shared/components/containers";
 import { Logo, SwitchForm } from "@/features/authentication/organisms";
+import { Wrapper } from "@/tw-styled/components";
 
 type TAuthenticationLayoutTemplateProps = {
   children: React.ReactNode;

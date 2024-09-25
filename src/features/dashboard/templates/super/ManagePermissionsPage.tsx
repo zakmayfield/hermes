@@ -1,11 +1,11 @@
 "use client";
 import React from "react";
-import { LayoutTemplate, Text, Wrapper } from "@/shared/components/containers";
 import { fetchRolePermissions } from "@/shared/queries";
 import { Permission, Role, RolePermissions } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
 import { utilityHooks } from "@/shared/hooks";
 import { PiInfoDuotone } from "react-icons/pi";
+import { Layout, Text, Wrapper } from "@/tw-styled/components";
 
 type PermissionItemProps = RolePermissions & {
   permission: Permission;
@@ -21,7 +21,7 @@ export const ManagePermissionsPage = () => {
 
   const ManagePermissionsLayout = ({ children }: { children: React.ReactNode }) => {
     return (
-      <LayoutTemplate
+      <Layout
         heading="h3"
         title="Permissions"
         style={{
@@ -39,7 +39,7 @@ export const ManagePermissionsPage = () => {
         }}
       >
         {children}
-      </LayoutTemplate>
+      </Layout>
     );
   };
   const PermissionList = ({
@@ -50,7 +50,7 @@ export const ManagePermissionsPage = () => {
     title: string;
   }) => {
     return (
-      <LayoutTemplate
+      <Layout
         heading="h5"
         title={title}
         style={{
@@ -70,7 +70,7 @@ export const ManagePermissionsPage = () => {
         }}
       >
         {children}
-      </LayoutTemplate>
+      </Layout>
     );
   };
   const PermissionItem = (props: PermissionItemProps) => {

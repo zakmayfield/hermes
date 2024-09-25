@@ -1,4 +1,4 @@
-import { utilityHooks } from "@/shared/hooks";
+import { useClassNames } from "@/tw-styled";
 import { IStyles } from "@/types/Styles";
 import { HTMLAttributes } from "react";
 
@@ -16,7 +16,7 @@ type TTextProps = {
 
 export const Text = (props: TTextProps) => {
   const { children, as = "p", described_by, is_hidden } = props;
-  const classes = utilityHooks.useClassNames({ ...props.style });
+  const classes = useClassNames({ ...props.style });
 
   switch (as) {
     case "p":

@@ -1,8 +1,8 @@
 "use client";
 import { Children, IStyles, THeadings } from "@/types/Styles";
 import { Heading } from "./Heading";
-import { utilityHooks } from "@/shared/hooks";
 import { merge } from "@/utils/ui";
+import { useClassNames } from "@/tw-styled";
 
 export type TLayoutTemplateStyleProps = {
   classList?: {
@@ -35,9 +35,7 @@ export const LayoutTemplate = (props: TLayoutTemplateProps) => {
     } = {}
   } = props;
 
-  const classes = utilityHooks.useClassNames({ ...props.style });
-
-  console.log({ classes });
+  const classes = useClassNames({ ...props.style });
 
   return (
     <div className={merge(classes.wrapper + wrapperClassName)}>

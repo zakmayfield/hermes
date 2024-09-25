@@ -7,7 +7,9 @@ export const SuperNavigation = () => {
 
   return (
     <nav>
-      <Wrapper style={{ flex: "row", gap: "md", flexPosition: "center-center" }}>
+      <Wrapper
+        style={{ wrapper: { flex: "row", gap: "md", flexPosition: "center-center" } }}
+      >
         <Link
           href="/dashboard"
           className={`${(!segment && "underline") || ""}`}

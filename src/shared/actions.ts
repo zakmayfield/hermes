@@ -9,6 +9,8 @@ export const changeRole = async (data: FormData) => {
   const session = await getAuthSession();
   const form_value = data.get("role") as Roles;
 
+  const user_id = session?.user.id as string;
+
   const roles = await db.role.findMany();
 
   await db.userRoles.deleteMany({
@@ -18,8 +20,8 @@ export const changeRole = async (data: FormData) => {
   if (form_value === "USER") {
     await db.userRoles.create({
       data: {
-        user_id: session?.user.id!,
-        role_id: roles.find((role) => role.name === form_value)?.role_id!
+        user_id,
+        role_id: roles.find((role) => role.name === form_value)?.role_id as string
       }
     });
   }
@@ -28,12 +30,12 @@ export const changeRole = async (data: FormData) => {
     await db.userRoles.createMany({
       data: [
         {
-          user_id: session?.user.id!,
-          role_id: roles.find((role) => role.name === "USER")?.role_id!
+          user_id,
+          role_id: roles.find((role) => role.name === "USER")?.role_id as string
         },
         {
-          user_id: session?.user.id!,
-          role_id: roles.find((role) => role.name === form_value)?.role_id!
+          user_id,
+          role_id: roles.find((role) => role.name === form_value)?.role_id as string
         }
       ]
     });
@@ -43,16 +45,16 @@ export const changeRole = async (data: FormData) => {
     await db.userRoles.createMany({
       data: [
         {
-          user_id: session?.user.id!,
-          role_id: roles.find((role) => role.name === "USER")?.role_id!
+          user_id,
+          role_id: roles.find((role) => role.name === "USER")?.role_id as string
         },
         {
-          user_id: session?.user.id!,
-          role_id: roles.find((role) => role.name === "ADMIN")?.role_id!
+          user_id,
+          role_id: roles.find((role) => role.name === "ADMIN")?.role_id as string
         },
         {
-          user_id: session?.user.id!,
-          role_id: roles.find((role) => role.name === form_value)?.role_id!
+          user_id,
+          role_id: roles.find((role) => role.name === form_value)?.role_id as string
         }
       ]
     });

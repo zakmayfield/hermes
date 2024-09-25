@@ -1,10 +1,10 @@
 "use client";
 
 import { LayoutTemplate } from "@/shared/components/containers";
-import { utilityHooks } from "@/shared/hooks";
+import { useClassNames } from "@/tw-styled";
 
 export const TestPage = () => {
-  const classes = utilityHooks.useClassNames({
+  const classes = useClassNames({
     wrapper_one: {
       height: "sm",
       width: "sm",

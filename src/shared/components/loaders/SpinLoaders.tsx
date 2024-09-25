@@ -1,4 +1,4 @@
-import { utilityHooks } from "@/shared/hooks";
+import { useClassNames } from "@/tw-styled";
 import { IStyles } from "@/types/Styles";
 import { PiSpinnerGap } from "react-icons/pi";
 
@@ -14,7 +14,7 @@ export type SpinLoaderProps = {
 };
 
 export const SpinLoader = (props: SpinLoaderProps) => {
-  const classes = utilityHooks.useClassNames({ ...props.style });
+  const classes = useClassNames({ ...props.style });
 
   return (
     <div className={classes.wrapper}>

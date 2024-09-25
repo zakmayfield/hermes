@@ -3,8 +3,8 @@
 import { FC, FormEvent } from "react";
 import { Heading, Wrapper } from "../containers";
 import { Btn } from "../buttons";
-import { utilityHooks } from "@/shared/hooks";
 import { IStyles } from "@/types/Styles";
+import { useClassNames } from "@/tw-styled";
 
 export type TFormStyleProps = {
   classList?: {
@@ -28,8 +28,8 @@ type FormProps = TFormStyleProps & {
 };
 
 export const Form: FC<FormProps> = (props) => {
-  const { children, title, onSubmit, buttonText = "Submit", isPending, style } = props;
-  const classes = utilityHooks.useClassNames({ ...props.style });
+  const { children, title, onSubmit, buttonText = "Submit", isPending } = props;
+  const classes = useClassNames({ ...props.style });
 
   return (
     <form

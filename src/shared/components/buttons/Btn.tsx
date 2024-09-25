@@ -1,9 +1,9 @@
 "use client";
 import { IconType } from "react-icons";
-import { utilityHooks } from "@/shared/hooks";
 import { Text, Wrapper } from "../containers";
 import { SpinLoader } from "../loaders";
 import { IStyles } from "@/types/Styles";
+import { useClassNames } from "@/tw-styled";
 
 export type TBtnProps = {
   Icon?: IconType;
@@ -32,7 +32,7 @@ export type TBtnProps = {
 
 export const Btn = (props: TBtnProps) => {
   const { type, text, Icon, handleClick, isLoading, isDisabled, mouseActions } = props;
-  const classes = utilityHooks.useClassNames({ ...props.style });
+  const classes = useClassNames({ ...props.style });
 
   return (
     <Wrapper className={classes.wrapper}>

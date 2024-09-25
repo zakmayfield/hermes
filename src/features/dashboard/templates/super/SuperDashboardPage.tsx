@@ -1,5 +1,3 @@
-type TSuperDashboardPageProps = {};
-
-export const SuperDashboardPage = (props: TSuperDashboardPageProps) => {
+export const SuperDashboardPage = () => {
   return <div>Super Dashboard Page</div>;
 };

@@ -1,5 +1,5 @@
 "use client";
-import { utilityHooks } from "@/shared/hooks";
+import { useClassNames } from "@/tw-styled";
 import { Children, IStyles } from "@/types/Styles";
 
 export type TWrapperProps = {
@@ -12,7 +12,7 @@ export type TWrapperProps = {
 
 export const Wrapper = (props: TWrapperProps) => {
   const { children } = props;
-  const classes = utilityHooks.useClassNames({ ...props.style });
+  const classes = useClassNames({ ...props.style });
 
   return <div className={classes.wrapper}>{children}</div>;
 };

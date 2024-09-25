@@ -5,6 +5,7 @@ import { FormFieldError } from "./FieldError";
 import { utilityHooks } from "@/shared/hooks";
 import { PiWarningCircleDuotone } from "react-icons/pi";
 import { IStyles } from "@/types/Styles";
+import { useClassNames } from "@/tw-styled";
 
 export type InputStyleProps = {
   classList?: {
@@ -43,7 +44,7 @@ export const Input: FC<InputProps<any>> = (props) => {
 
   const name = props.name as string;
 
-  const classes = utilityHooks.useClassNames({ ...props.style });
+  const classes = useClassNames({ ...props.style });
 
   const { Tooltip } = utilityHooks.useTooltip({
     content: error?.message,

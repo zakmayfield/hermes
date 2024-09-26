@@ -9,11 +9,13 @@ export const useClassNames = (style: StyleObj) => {
   const classNameGenerator = (props: StyleObj) => {
     const result: Record<string, string> = {};
 
-    for (const key in props) {
-      if (Object.prototype.hasOwnProperty.call(props, key)) {
+    // get key from props: props: { wrapper: {...}, content: {...} }
+    for (const propsKey in props) {
+      if (Object.prototype.hasOwnProperty.call(props, propsKey)) {
         const classNames: string[] = [];
-        const styleObject = props[key];
+        const styleObject = props[propsKey];
 
+        // get key from style object: { flex: "", width: "" }
         for (const key in styleObject) {
           const styleKey = key;
           const mapKey = `${key}Map`;
@@ -125,6 +127,14 @@ export const useClassNames = (style: StyleObj) => {
 
               classNames.push(mapValue);
             }
+            if (
+              isType<"flexSpacing">(styleKey, "flexSpacing") &&
+              isType<"flexSpacingMap">(mapKey, "flexSpacingMap")
+            ) {
+              const value = styleObject[styleKey];
+              const mapValue = styleMaps[mapKey][value || "none"];
+              classNames.push(mapValue);
+            }
             if (isType<"gap">(styleKey, "gap") && isType<"gapMap">(mapKey, "gapMap")) {
               const value = styleObject[styleKey];
               const mapValue = styleMaps[mapKey][value || "none"];
@@ -196,12 +206,18 @@ export const useClassNames = (style: StyleObj) => {
           }
         }
 
-        result[key] = merge(classNames.join(" "));
+        // each iteration of propKeys add key to result
+        result[propsKey] = "";
 
-        if (result[key]) {
-          result[key].concat(styleObject.className || "");
-        } else {
-          result[key] = styleObject.className || "";
+        const joinedClassNames = classNames.join(" ");
+        const objectClassNames = styleObject.className || "";
+        const finalClassNames = joinedClassNames.concat(" ", objectClassNames);
+
+        result[propsKey] = merge(finalClassNames);
+
+        // remove key if no classNames were created
+        if (result[propsKey].length === 0) {
+          delete result[propsKey];
         }
       }
     }

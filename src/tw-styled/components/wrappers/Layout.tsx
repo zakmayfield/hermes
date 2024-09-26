@@ -1,17 +1,12 @@
 "use client";
-import { merge, useClassNames } from "@/tw-styled";
-import { Children, IStyles, THeadings } from "@/tw-styled/Styles";
+import { useClassNames } from "@/tw-styled";
+import { Children, IStyles, Headings } from "@/tw-styled/Styles";
 import { Heading } from "./Heading";
 
 type TLayoutProps = {
   children: Children;
-  heading?: THeadings;
+  heading?: Headings;
   title?: string;
-  classList?: {
-    wrapperClassName?: string;
-    headingClassName?: string;
-    childrenClassName?: string;
-  };
   style?: {
     wrapper?: IStyles;
     heading?: IStyles;
@@ -20,29 +15,20 @@ type TLayoutProps = {
 };
 
 export const Layout = (props: TLayoutProps) => {
-  const {
-    children,
-    heading,
-    title = "",
-    classList: {
-      wrapperClassName = "",
-      headingClassName = "",
-      childrenClassName = ""
-    } = {}
-  } = props;
+  const { children, heading, title = "" } = props;
 
   const classes = useClassNames({ ...props.style });
 
   return (
-    <div className={merge(classes.wrapper + wrapperClassName)}>
+    <div className={classes.wrapper}>
       {heading && (
         <Heading
           as={heading}
           content={title}
-          className={merge(classes.heading + headingClassName)}
+          className={classes.heading}
         />
       )}
-      <div className={merge(classes.children + childrenClassName)}>{children}</div>
+      <div className={classes.children}>{children}</div>
     </div>
   );
 };

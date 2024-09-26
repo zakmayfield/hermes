@@ -58,6 +58,13 @@ export const style_maps = {
     col: "flex flex-col"
   },
 
+  flexSpacingMap: {
+    ...baseMap,
+    "space-between": "justify-between",
+    "space-evenly": "justify-evenly",
+    "space-around": "justify-around"
+  },
+
   flexPositionMap: {
     ...baseMap,
     row: {

@@ -1,6 +1,6 @@
 export type StyleObj = Record<string, IStyles>;
 export type Children = React.ReactNode;
-export type THeadings = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+export type Headings = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 export type BtnVariants = "primary" | "warning" | "ghost";
 export type IStyles = IDimensions &
   ISpacing &
@@ -30,6 +30,7 @@ interface ISpacing {
 interface IAlignment {
   flex?: FlexDirections;
   flexPosition?: FlexPositions;
+  flexSpacing?: FlexSpacing;
   gap?: Sizes;
   place?: Places;
 }
@@ -64,6 +65,7 @@ type FlexPositions =
   | "top-right"
   | "center-right"
   | "bottom-right";
+type FlexSpacing = "space-between" | "space-evenly" | "space-around";
 type FontWeights = "light" | "normal" | "bold";
 type Opacities = "light" | "medium" | "dark";
 type Places = "left" | "center" | "right";

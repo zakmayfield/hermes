@@ -4,7 +4,7 @@ import { BtnVariants, IStyles, StyleObj } from "@/tw-styled/Styles";
 import { useClassNames } from "@/tw-styled";
 import { Text, Wrapper } from "../wrappers";
 import { SpinLoader } from "../loaders";
-import { buttonHooks } from "@/tw-styled/hooks/buttonHooks";
+import { styleHooks } from "@/tw-styled/hooks/styleHooks";
 
 export type BtnProps = {
   Icon?: IconType;
@@ -39,7 +39,7 @@ export const Btn = (props: BtnProps) => {
     style
   } = props;
 
-  const variantStyles = buttonHooks.useVariantStyles(variant, { isLoading, isDisabled });
+  const variantStyles = styleHooks.useButtonVariant(variant, { isLoading, isDisabled });
 
   const styles: StyleObj = {
     ...style,

@@ -1,7 +1,8 @@
+import { HeadingProps } from "../components";
 import { BtnVariants, IStyles } from "../Styles";
 
-export const buttonHooks = {
-  useVariantStyles: (
+export const styleHooks = {
+  useButtonVariant: (
     variant: BtnVariants,
     buttonState: { isLoading: boolean; isDisabled: boolean }
   ) => {
@@ -58,5 +59,17 @@ export const buttonHooks = {
         };
         return ghost_styles;
     }
+  },
+
+  useDefaultHeading: () => {
+    const defaultHeadingStyles: HeadingProps["style"] = {
+      wrapper: {},
+      childrenWrapper: {
+        flex: "row",
+        gap: "sm"
+      }
+    };
+
+    return defaultHeadingStyles;
   }
 };

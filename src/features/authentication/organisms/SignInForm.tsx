@@ -4,6 +4,13 @@ import { Form, Input } from "@/tw-styled/components";
 export const SignInForm = () => {
   const { register, onSubmit, errors, isPending } = formHooks.useSignInForm();
 
+  const group = (
+    <div>
+      {" "}
+      <p>one</p>
+      <p>two</p>
+    </div>
+  );
   return (
     <Form
       onSubmit={onSubmit}
@@ -22,6 +29,11 @@ export const SignInForm = () => {
         }
       }}
     >
+      <div className="h-56 border flex flex-col justify-evenly">
+        <p>content 1</p>
+        <p>content 2</p>
+      </div>
+
       <Input
         name="email"
         label="Email"

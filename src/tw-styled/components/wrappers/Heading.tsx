@@ -1,49 +1,38 @@
-import { Children } from "@/tw-styled/Styles";
-import { merge } from "@/tw-styled/utils/class-merge";
+import React from "react";
+import { styleHooks, useClassNames } from "@/tw-styled/hooks/";
+import { Children, Headings, IStyles } from "@/tw-styled/Styles";
 
-type Props = {
+export type HeadingProps = {
+  as?: Headings;
   children: Children;
-  className?: string;
+  style?: {
+    wrapper?: IStyles;
+    childrenWrapper?: IStyles;
+  };
 };
 
-const H1 = ({ children, className }: Props) => {
-  return <h1 className={merge(`${className}`)}>{children}</h1>;
-};
-const H2 = ({ children, className }: Props) => {
-  return <h2 className={merge(`${className}`)}>{children}</h2>;
-};
-const H3 = ({ children, className }: Props) => {
-  return <h3 className={merge(`${className}`)}>{children}</h3>;
-};
-const H4 = ({ children, className }: Props) => {
-  return <h4 className={merge(`${className}`)}>{children}</h4>;
-};
-const H5 = ({ children, className }: Props) => {
-  return <h5 className={merge(`${className}`)}>{children}</h5>;
-};
-const H6 = ({ children, className }: Props) => {
-  return <h6 className={merge(`${className}`)}>{children}</h6>;
-};
+export const Heading = (props: HeadingProps) => {
+  const { as = "h1", children, style } = props;
 
-type HeadingProps = {
-  as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
-  content: string;
-  className?: string;
-};
+  console.log("prop classes", { style });
 
-export const Heading = ({ as = "h1", content, className }: HeadingProps) => {
-  switch (as) {
-    case "h1":
-      return <H1 className={className}>{content}</H1>;
-    case "h2":
-      return <H2 className={className}>{content}</H2>;
-    case "h3":
-      return <H3 className={className}>{content}</H3>;
-    case "h4":
-      return <H4 className={className}>{content}</H4>;
-    case "h5":
-      return <H5 className={className}>{content}</H5>;
-    case "h6":
-      return <H6 className={className}>{content}</H6>;
-  }
+  const defaultStyles = styleHooks.useDefaultHeading();
+
+  const styles: HeadingProps["style"] = {
+    wrapper: {
+      ...defaultStyles.wrapper,
+      ...style?.wrapper
+    },
+    childrenWrapper: {
+      ...defaultStyles.childrenWrapper,
+      ...style?.childrenWrapper
+    }
+  };
+
+  const classes = useClassNames({ ...styles });
+
+  console.log("generated classes", { classes });
+
+  const ChildrenWrapper = <div className={classes.childrenWrapper}>{children}</div>;
+  return React.createElement(as, { className: classes.wrapper }, ChildrenWrapper);
 };

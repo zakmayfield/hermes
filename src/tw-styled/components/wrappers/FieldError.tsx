@@ -1,5 +1,5 @@
+import { merge } from "@/tw-styled/utils/class-merge";
 import { HTMLAttributes } from "react";
-import { Text } from "./Text";
 
 type TFieldErrorProps = HTMLAttributes<HTMLParagraphElement> & {
   message?: string;
@@ -11,19 +11,15 @@ type TFieldErrorProps = HTMLAttributes<HTMLParagraphElement> & {
 export const FormFieldError = (props: TFieldErrorProps) => {
   const { message, is_error_hidden, described_by, className = "" } = props;
 
-  const defaultClassName = `text-red-300 italic pt-1 ${className}`;
+  const classes = `text-red-300 italic pt-1 ${className}`;
 
   return (
-    <Text
-      described_by={described_by}
-      is_hidden={is_error_hidden}
-      style={{
-        wrapper: {
-          className: defaultClassName
-        }
-      }}
+    <p
+      aria-describedby={described_by}
+      hidden={is_error_hidden}
+      className={merge(classes)}
     >
       {message}
-    </Text>
+    </p>
   );
 };

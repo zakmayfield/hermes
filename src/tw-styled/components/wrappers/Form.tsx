@@ -1,13 +1,13 @@
 "use client";
 
-import { FC, FormEvent } from "react";
+import React, { FC, FormEvent } from "react";
 import { IStyles } from "@/tw-styled/Styles";
 import { useClassNames } from "@/tw-styled";
 import { Heading } from "./Heading";
-import { Wrapper } from "./Wrapper";
 import { Btn } from "../btns";
+import { styleHooks } from "@/tw-styled/hooks";
 
-type FormProps = {
+export type FormProps = {
   children?: React.ReactNode;
   title?: string;
   buttonText?: string;
@@ -16,53 +16,71 @@ type FormProps = {
   style?: {
     form?: IStyles;
     heading?: IStyles;
+    contentWrapper?: IStyles;
     button?: IStyles;
   };
 };
 
 export const Form: FC<FormProps> = (props) => {
-  const { children, title, onSubmit, buttonText = "Submit", isPending } = props;
-  const classes = useClassNames({ ...props.style });
+  const { children, title, onSubmit, buttonText = "Submit", isPending, style } = props;
+  const defaultStyles = styleHooks.useDefaultForm();
+
+  const styles: FormProps["style"] = {
+    ...style,
+    form: {
+      ...defaultStyles.form,
+      ...style?.form
+    },
+    heading: {
+      ...defaultStyles.heading,
+      ...style?.heading
+    },
+    button: {
+      ...defaultStyles.button,
+      ...style?.button
+    },
+    contentWrapper: {
+      ...defaultStyles.contentWrapper,
+      ...style?.contentWrapper
+    }
+  };
+
+  const classes = useClassNames({ ...styles });
+
+  const heading = title && (
+    <Heading
+      as="h3"
+      style={{ wrapper: { className: classes.heading } }}
+    >
+      {title}
+    </Heading>
+  );
+
+  const button = (
+    <Btn
+      type="submit"
+      text={buttonText}
+      isDisabled={isPending}
+      isLoading={isPending}
+      variant="ghost"
+      style={{
+        button: {
+          className: classes.button
+        }
+      }}
+    />
+  );
 
   return (
     <form
       className={classes.form}
       onSubmit={onSubmit}
     >
-      {title && (
-        <Heading
-          as="h3"
-          style={{
-            wrapper: {
-              className: classes.heading
-            }
-          }}
-        >
-          {title}
-        </Heading>
-      )}
-
-      <Wrapper
-        style={{
-          childrenWrapper: { flex: "col", gap: "lg", width: "full" }
-        }}
-      >
+      {heading}
+      <div className={classes.contentWrapper}>
         {children}
-
-        <Btn
-          type="submit"
-          text={buttonText}
-          isDisabled={isPending}
-          isLoading={isPending}
-          variant="ghost"
-          style={{
-            button: {
-              width: "full",
-              className: classes.button
-            }
-          }}
-        />
-      </Wrapper>
+        {button}
+      </div>
     </form>
   );
 };

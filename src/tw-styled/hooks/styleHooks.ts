@@ -1,4 +1,4 @@
-import { HeadingProps, LayoutProps, WrapperProps } from "../components";
+import { FormProps, HeadingProps, LayoutProps, WrapperProps } from "../components";
 import { BtnVariants, IStyles } from "../Styles";
 
 export const styleHooks = {
@@ -104,5 +104,29 @@ export const styleHooks = {
     };
 
     return defaultWrapperStyles;
+  },
+
+  useDefaultForm: () => {
+    const defaultFormStyles: FormProps["style"] = {
+      form: {
+        flex: "col",
+        gap: "lg",
+        width: "md",
+        rounded: "lg",
+        padding: "lg"
+      },
+      heading: {
+        width: "full"
+      },
+      button: {
+        width: "full"
+      },
+      contentWrapper: {
+        flex: "col",
+        gap: "lg"
+      }
+    };
+
+    return defaultFormStyles;
   }
 };

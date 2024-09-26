@@ -13,16 +13,7 @@ export const SignInForm = () => {
       isPending={isPending}
       style={{
         form: {
-          bg: "bg-slate-900",
-          rounded: "lg",
-          width: "md",
-          padding: "lg"
-        },
-        heading: {
-          marginY: "md"
-        },
-        button: {
-          width: "full"
+          bg: "bg-slate-900"
         }
       }}
     >

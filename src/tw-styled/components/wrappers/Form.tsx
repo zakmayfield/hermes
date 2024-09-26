@@ -13,11 +13,6 @@ type FormProps = {
   buttonText?: string;
   isPending?: boolean;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
-  classList?: {
-    formClassName?: string;
-    headingClassName?: string;
-    buttonClassName?: string;
-  };
   style?: {
     form?: IStyles;
     heading?: IStyles;
@@ -36,10 +31,15 @@ export const Form: FC<FormProps> = (props) => {
     >
       {title && (
         <Heading
-          className={classes.heading}
           as="h3"
-          content={title}
-        />
+          style={{
+            wrapper: {
+              className: classes.heading
+            }
+          }}
+        >
+          {title}
+        </Heading>
       )}
 
       <Wrapper

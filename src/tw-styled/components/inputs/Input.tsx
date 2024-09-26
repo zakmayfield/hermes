@@ -15,11 +15,6 @@ type InputProps<T extends FieldValues> = {
   is_label_hidden?: boolean;
   is_error_hidden?: boolean;
   is_error_icon_hidden?: boolean;
-  classList?: {
-    wrapperClassName?: string;
-    labelClassName?: string;
-    inputClassName?: string;
-  };
   style?: {
     wrapper?: IStyles;
     label?: IStyles;

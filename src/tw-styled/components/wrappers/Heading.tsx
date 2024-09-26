@@ -31,8 +31,6 @@ export const Heading = (props: HeadingProps) => {
 
   const classes = useClassNames({ ...styles });
 
-  console.log("generated classes", { classes });
-
   const ChildrenWrapper = <div className={classes.childrenWrapper}>{children}</div>;
   return React.createElement(as, { className: classes.wrapper }, ChildrenWrapper);
 };

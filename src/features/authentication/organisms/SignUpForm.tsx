@@ -27,16 +27,14 @@ export const SignUpForm = () => {
         label="Email"
         register={register}
         error={formErrors.email}
-        classList={{
-          inputClassName: "h-12 md:h-auto"
-        }}
         style={{
           wrapper: {
             flex: "col",
             gap: "sm"
           },
           input: {
-            width: "full"
+            width: "full",
+            className: "h-12 md:h-auto"
           }
         }}
       />
@@ -47,16 +45,14 @@ export const SignUpForm = () => {
         register={register}
         error={formErrors.password}
         type="password"
-        classList={{
-          inputClassName: "h-12 md:h-auto"
-        }}
         style={{
           wrapper: {
             flex: "col",
             gap: "sm"
           },
           input: {
-            width: "full"
+            width: "full",
+            className: "h-12 md:h-auto"
           }
         }}
       />

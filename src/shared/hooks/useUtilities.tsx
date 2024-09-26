@@ -60,11 +60,9 @@ export const utilityHooks = {
               handleClick={() => handle_expand(id)}
               style={{
                 button: {
-                  buttonHeight: "sm"
+                  buttonHeight: "sm",
+                  className: (is_expanded(id) && "rotate-180") || ""
                 }
-              }}
-              classList={{
-                buttonClassName: (is_expanded(id) && "rotate-180") || ""
               }}
             />
           </Wrapper>

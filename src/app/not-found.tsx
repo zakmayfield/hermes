@@ -32,10 +32,7 @@ function NotFoundInfo() {
   return (
     <div className="flex items-end">
       <div className="2xl:py-12">
-        <Heading
-          as="h1"
-          content="404 Not Found"
-        />
+        <Heading as="h1">404 Not Found</Heading>
         <p className="mb-6 text-lg">We couldn&apos;t find that requested resource</p>
         <Link
           href="/dashboard"

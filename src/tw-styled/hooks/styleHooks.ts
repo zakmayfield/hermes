@@ -48,7 +48,7 @@ export const styleHooks = {
 
       default:
         const ghost_hover = getHoverStyle(
-          "hover:bg-slate-900 hover:bg-opacity-20",
+          "hover:bg-slate-100 hover:bg-opacity-10",
           "bg-slate-600 bg-opacity-20 border-gray-200 border-opacity-50"
         );
 

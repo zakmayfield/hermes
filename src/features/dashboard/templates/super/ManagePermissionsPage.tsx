@@ -31,11 +31,9 @@ export const ManagePermissionsPage = () => {
           },
           children: {
             flex: "col",
-            gap: "lg"
+            gap: "lg",
+            className: "lg:flex-row"
           }
-        }}
-        classList={{
-          childrenClassName: "lg:flex-row"
         }}
       >
         {children}

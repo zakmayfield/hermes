@@ -1,4 +1,3 @@
-import { IStyles } from "@/tw-styled/Styles";
 const baseMap = {
   none: ""
 };

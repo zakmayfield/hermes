@@ -24,9 +24,14 @@ export const Layout = (props: TLayoutProps) => {
       {heading && (
         <Heading
           as={heading}
-          content={title}
-          className={classes.heading}
-        />
+          style={{
+            wrapper: {
+              className: classes.heading
+            }
+          }}
+        >
+          {title}
+        </Heading>
       )}
       <div className={classes.children}>{children}</div>
     </div>

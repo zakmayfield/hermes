@@ -1,7 +1,7 @@
 "use client";
+import React from "react";
 import { useClassNames } from "@/tw-styled";
 import { IStyles } from "@/tw-styled/Styles";
-import { HTMLAttributes } from "react";
 
 type TextProps = {
   children: React.ReactNode;
@@ -10,34 +10,23 @@ type TextProps = {
   is_hidden?: boolean;
   style?: {
     wrapper: IStyles;
+    childrenWrapper?: IStyles;
   };
-  htmlProps?: HTMLAttributes<HTMLParagraphElement>;
 };
 
 export const Text = (props: TextProps) => {
-  const { children, as = "p", described_by, is_hidden } = props;
+  const { as = "p", children, described_by, is_hidden } = props;
   const classes = useClassNames({ ...props.style });
 
-  switch (as) {
-    case "p":
-      return (
-        <p
-          aria-describedby={described_by}
-          className={classes.wrapper}
-          hidden={is_hidden}
-        >
-          {children}
-        </p>
-      );
-    case "span":
-      return (
-        <span
-          aria-describedby={described_by}
-          className={classes.wrapper}
-          hidden={is_hidden}
-        >
-          {children}
-        </span>
-      );
-  }
+  const ChildrenWrapper = <div className={classes.childrenWrapper}>{children}</div>;
+
+  return React.createElement(
+    as,
+    {
+      "aria-describedby": described_by,
+      hidden: is_hidden,
+      className: classes.wrapper
+    },
+    ChildrenWrapper
+  );
 };

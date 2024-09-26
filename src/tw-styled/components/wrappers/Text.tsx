@@ -4,8 +4,8 @@ import { useClassNames } from "@/tw-styled";
 import { IStyles } from "@/tw-styled/Styles";
 
 type TextProps = {
-  children: React.ReactNode;
   as?: "p" | "span";
+  children?: React.ReactNode;
   described_by?: string;
   is_hidden?: boolean;
   style?: {

@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { Headings } from "./Headings";
 
 const meta = {
-  title: "Headings/All",
+  title: "Heading/All",
   component: Headings
 } satisfies Meta<typeof Headings>;
 export default meta;

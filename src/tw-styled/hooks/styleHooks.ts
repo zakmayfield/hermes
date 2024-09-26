@@ -1,4 +1,4 @@
-import { HeadingProps } from "../components";
+import { HeadingProps, LayoutProps } from "../components";
 import { BtnVariants, IStyles } from "../Styles";
 
 export const styleHooks = {
@@ -71,5 +71,25 @@ export const styleHooks = {
     };
 
     return defaultHeadingStyles;
+  },
+
+  useDefaultLayout: () => {
+    const defaultLayoutStyles: LayoutProps["style"] = {
+      wrapper: {
+        padding: "lg",
+        flex: "col",
+        gap: "lg"
+      },
+      heading: {},
+      children: {
+        flex: "col",
+        gap: "md",
+        padding: "lg",
+        flexWrap: "wrap",
+        flexSize: "grow"
+      }
+    };
+
+    return defaultLayoutStyles;
   }
 };

@@ -64,6 +64,19 @@ export const style_maps = {
     "space-around": "justify-around"
   },
 
+  flexWrapMap: {
+    ...baseMap,
+    wrap: "flex-wrap",
+    nowrap: "flex-nowrap"
+  },
+  flexSizeMap: {
+    ...baseMap,
+    grow: "flex-grow",
+    shrink: "flex-shrink",
+    nogrow: "flex-grow-0",
+    noshrink: "flex-shrink-0"
+  },
+
   flexPositionMap: {
     ...baseMap,
     row: {

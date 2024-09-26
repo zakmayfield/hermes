@@ -135,6 +135,22 @@ export const useClassNames = (style: StyleObj) => {
               const mapValue = styleMaps[mapKey][value || "none"];
               classNames.push(mapValue);
             }
+            if (
+              isType<"flexWrap">(styleKey, "flexWrap") &&
+              isType<"flexWrapMap">(mapKey, "flexWrapMap")
+            ) {
+              const value = styleObject[styleKey];
+              const mapValue = styleMaps[mapKey][value || "none"];
+              classNames.push(mapValue);
+            }
+            if (
+              isType<"flexSize">(styleKey, "flexSize") &&
+              isType<"flexSizeMap">(mapKey, "flexSizeMap")
+            ) {
+              const value = styleObject[styleKey];
+              const mapValue = styleMaps[mapKey][value || "none"];
+              classNames.push(mapValue);
+            }
             if (isType<"gap">(styleKey, "gap") && isType<"gapMap">(mapKey, "gapMap")) {
               const value = styleObject[styleKey];
               const mapValue = styleMaps[mapKey][value || "none"];

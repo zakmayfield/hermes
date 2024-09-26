@@ -12,7 +12,7 @@ type FormProps = {
   title?: string;
   buttonText?: string;
   isPending?: boolean;
-  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  onSubmit?: (e: FormEvent<HTMLFormElement>) => void;
   style?: {
     form?: IStyles;
     heading?: IStyles;

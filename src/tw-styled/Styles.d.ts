@@ -31,6 +31,8 @@ interface IAlignment {
   flex?: FlexDirections;
   flexPosition?: FlexPositions;
   flexSpacing?: FlexSpacing;
+  flexWrap?: FlexWrap;
+  flexSize?: FlexSize;
   gap?: Sizes;
   place?: Places;
 }
@@ -66,6 +68,8 @@ type FlexPositions =
   | "center-right"
   | "bottom-right";
 type FlexSpacing = "space-between" | "space-evenly" | "space-around";
+type FlexSize = "grow" | "shrink" | "nogrow" | "noshrink";
+type FlexWrap = "wrap" | "nowrap";
 type FontWeights = "light" | "normal" | "bold";
 type Opacities = "light" | "medium" | "dark";
 type Places = "left" | "center" | "right";

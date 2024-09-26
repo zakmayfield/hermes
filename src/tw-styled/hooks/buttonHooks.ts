@@ -17,6 +17,7 @@ export const buttonHooks = {
       padding: "sm",
       paddingX: "md",
       rounded: "md",
+      buttonHeight: "sm",
       textOpacity: getTextOpacity()
     };
 
@@ -46,8 +47,8 @@ export const buttonHooks = {
 
       default:
         const ghost_hover = getHoverStyle(
-          "hover:bg-slate-700 hover:bg-opacity-30",
-          "bg-slate-600 bg-opacity-30"
+          "hover:bg-slate-900 hover:bg-opacity-20",
+          "bg-slate-600 bg-opacity-20 border-gray-200 border-opacity-50"
         );
 
         const ghost_styles: IStyles = {

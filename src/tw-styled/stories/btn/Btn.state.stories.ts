@@ -1,22 +1,21 @@
-import { Meta, StoryObj } from "@storybook/react";
-import { Btn } from "../components";
+import { StoryObj } from "@storybook/react";
+import btnMeta from "./meta";
 
 const meta = {
   title: "Btn/State",
-  component: Btn
-} satisfies Meta<typeof Btn>;
-
+  ...btnMeta
+};
 export default meta;
-type Story = StoryObj<typeof meta>;
+export type BtnStory = StoryObj<typeof meta>;
 
-export const Disabled: Story = {
+export const Disabled: BtnStory = {
   args: {
     variant: "primary",
     isDisabled: true
   }
 };
 
-export const Loading: Story = {
+export const Loading: BtnStory = {
   args: {
     variant: "primary",
     isLoading: true,

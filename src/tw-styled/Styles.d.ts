@@ -15,6 +15,7 @@ interface IDimensions {
   height?: SizesWithFull | "screen";
   maxHeight?: Sizes;
   buttonSize?: SizesWithFull;
+  buttonHeight?: Sizes;
 }
 
 interface ISpacing {

@@ -185,6 +185,14 @@ export const useClassNames = (style: StyleObj) => {
               const mapValue = styleMaps[mapKey][value || "none"];
               classNames.push(mapValue);
             }
+            if (
+              isType<"buttonHeight">(styleKey, "buttonHeight") &&
+              isType<"buttonHeightMap">(mapKey, "buttonHeightMap")
+            ) {
+              const value = styleObject[styleKey];
+              const mapValue = styleMaps[mapKey][value || "none"];
+              classNames.push(mapValue);
+            }
           }
         }
 

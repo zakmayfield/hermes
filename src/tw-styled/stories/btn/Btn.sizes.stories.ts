@@ -1,21 +1,20 @@
-import { Meta, StoryObj } from "@storybook/react";
-import { Btn } from "../components";
+import { StoryObj } from "@storybook/react";
+import btnMeta from "./meta";
 
 const meta = {
   title: "Btn/Sizes",
-  component: Btn
-} satisfies Meta<typeof Btn>;
-
+  ...btnMeta
+};
 export default meta;
-type Story = StoryObj<typeof meta>;
+export type BtnStory = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Default: BtnStory = {
   args: {
     text: "Submit"
   }
 };
 
-export const Sm: Story = {
+export const Sm: BtnStory = {
   args: {
     text: "Submit",
     style: {
@@ -29,7 +28,7 @@ export const Sm: Story = {
   }
 };
 
-export const Md: Story = {
+export const Md: BtnStory = {
   args: {
     text: "Submit",
     style: {
@@ -43,7 +42,7 @@ export const Md: Story = {
   }
 };
 
-export const Lg: Story = {
+export const Lg: BtnStory = {
   args: {
     text: "Submit",
     style: {
@@ -57,7 +56,7 @@ export const Lg: Story = {
   }
 };
 
-export const Full: Story = {
+export const Full: BtnStory = {
   args: {
     text: "Submit",
     style: {

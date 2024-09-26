@@ -4,9 +4,7 @@ import { BtnVariants, IStyles, StyleObj } from "@/tw-styled/Styles";
 import { useClassNames } from "@/tw-styled";
 import { Text, Wrapper } from "../wrappers";
 import { SpinLoader } from "../loaders";
-
 import { buttonHooks } from "@/tw-styled/hooks/buttonHooks";
-import { useEffect } from "react";
 
 export type BtnProps = {
   Icon?: IconType;
@@ -69,7 +67,7 @@ export const Btn = (props: BtnProps) => {
         onClick={handleClick}
         {...mouseActions}
       >
-        {(isLoading && props.style?.button?.width) || props.style?.button?.buttonSize ? (
+        {isLoading && (props.style?.button?.width || props.style?.button?.buttonSize) ? (
           <SpinLoader
             style={{
               wrapper: {

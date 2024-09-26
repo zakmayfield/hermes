@@ -173,5 +173,12 @@ export const style_maps = {
     md: "max-w-[15rem] w-full",
     lg: "max-w-[20rem] w-full",
     full: "w-full"
+  },
+
+  buttonHeightMap: {
+    ...baseMap,
+    sm: "min-h-[2.63rem]",
+    md: "max-w-[2.75rem]",
+    lg: "max-w-[2.87rem]"
   }
 };

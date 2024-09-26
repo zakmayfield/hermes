@@ -1,15 +1,14 @@
-import { Meta, StoryObj } from "@storybook/react";
-import { Btn } from "../components";
+import { StoryObj } from "@storybook/react";
+import btnMeta from "./meta";
 
 const meta = {
   title: "Btn/Variants",
-  component: Btn
-} satisfies Meta<typeof Btn>;
-
+  ...btnMeta
+};
 export default meta;
-type Story = StoryObj<typeof meta>;
+export type BtnStory = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const Primary: BtnStory = {
   args: {
     text: "Submit",
     variant: "primary",
@@ -19,7 +18,7 @@ export const Primary: Story = {
   }
 };
 
-export const Warning: Story = {
+export const Warning: BtnStory = {
   args: {
     text: "Submit",
     variant: "warning",
@@ -28,7 +27,8 @@ export const Warning: Story = {
     }
   }
 };
-export const Ghost: Story = {
+
+export const Ghost: BtnStory = {
   args: {
     text: "Submit",
     variant: "ghost",

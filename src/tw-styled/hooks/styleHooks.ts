@@ -1,4 +1,4 @@
-import { HeadingProps, LayoutProps } from "../components";
+import { HeadingProps, LayoutProps, WrapperProps } from "../components";
 import { BtnVariants, IStyles } from "../Styles";
 
 export const styleHooks = {
@@ -31,7 +31,7 @@ export const styleHooks = {
 
         const primary_styles: IStyles = {
           ...defaultStyles,
-          bg: primary_hover
+          className: primary_hover
         };
         return primary_styles;
 
@@ -42,19 +42,19 @@ export const styleHooks = {
         );
         const warning_styles: IStyles = {
           ...defaultStyles,
-          bg: warning_hover
+          className: warning_hover
         };
         return warning_styles;
 
       default:
         const ghost_hover = getHoverStyle(
-          "hover:bg-slate-100 hover:bg-opacity-10",
+          "hover:bg-white hover:bg-opacity-10",
           "bg-slate-600 bg-opacity-20 border-gray-200 border-opacity-50"
         );
 
         const ghost_styles: IStyles = {
           ...defaultStyles,
-          bg: ghost_hover,
+          className: ghost_hover,
           border: "sm"
         };
         return ghost_styles;
@@ -80,16 +80,29 @@ export const styleHooks = {
         flex: "col",
         gap: "lg"
       },
-      heading: {},
       children: {
         flex: "col",
         gap: "md",
-        padding: "lg",
         flexWrap: "wrap",
         flexSize: "grow"
       }
     };
 
     return defaultLayoutStyles;
+  },
+
+  useDefaultWrapper: () => {
+    const defaultWrapperStyles: WrapperProps["style"] = {
+      parentWrapper: {
+        flex: "row"
+      },
+      childrenWrapper: {
+        flex: "col",
+        gap: "sm",
+        width: "full"
+      }
+    };
+
+    return defaultWrapperStyles;
   }
 };

@@ -5,6 +5,7 @@ import { useClassNames } from "@/tw-styled";
 import { Text, Wrapper } from "../wrappers";
 import { SpinLoader } from "../loaders";
 import { styleHooks } from "@/tw-styled/hooks/styleHooks";
+import { PiSpinnerGap } from "react-icons/pi";
 
 export type BtnProps = {
   Icon?: IconType;
@@ -19,10 +20,11 @@ export type BtnProps = {
     onMouseLeave?(): void;
   };
   style?: {
-    wrapper?: IStyles;
+    parentWrapper?: IStyles;
     button?: IStyles;
-    loader?: IStyles;
+    contentWrapper?: IStyles;
     content?: IStyles;
+    spinner?: IStyles;
   };
 };
 
@@ -43,13 +45,21 @@ export const Btn = (props: BtnProps) => {
 
   const styles: StyleObj = {
     ...style,
+    parentWrapper: {
+      ...style?.parentWrapper
+    },
     button: {
       ...variantStyles,
       ...style?.button
     },
-    content: {
+    contentWrapper: {
+      flex: "row",
+      flexPosition: "center-center",
       textOpacity: variantStyles.textOpacity,
-      ...style?.content
+      ...style?.contentWrapper
+    },
+    spinner: {
+      className: "animate-spin"
     }
   };
 
@@ -58,7 +68,7 @@ export const Btn = (props: BtnProps) => {
   const disabled = isDisabled || isLoading;
 
   return (
-    <Wrapper className={classes.wrapper}>
+    <div className={classes.parentWrapper}>
       <button
         type={type}
         disabled={disabled}
@@ -68,34 +78,16 @@ export const Btn = (props: BtnProps) => {
         {...mouseActions}
       >
         {isLoading && (props.style?.button?.width || props.style?.button?.buttonSize) ? (
-          <SpinLoader
-            style={{
-              wrapper: {
-                className: classes.loader
-              },
-              icon: {
-                className: classes.content
-              }
-            }}
-          />
+          <div className={classes.contentWrapper}>
+            <PiSpinnerGap className={classes.spinner} />
+          </div>
         ) : (
-          <Wrapper
-            style={{
-              wrapper: { flex: "row", flexPosition: "center-center", gap: "sm" }
-            }}
-          >
+          <div className={classes.contentWrapper}>
             {Icon && <Icon className={classes.content} />}
-            {text && (
-              <Text
-                as="span"
-                style={{ wrapper: { className: classes.content } }}
-              >
-                {text}
-              </Text>
-            )}
-          </Wrapper>
+            {text && <span className={classes.content}>{text}</span>}
+          </div>
         )}
       </button>
-    </Wrapper>
+    </div>
   );
 };

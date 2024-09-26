@@ -39,11 +39,9 @@ export default async function RootLayout({
               wrapper: {
                 width: "3xl",
                 place: "center",
-                border: "sm"
-              },
-              children: {
-                padding: "lg",
-                height: "screen"
+                border: "sm",
+                height: "screen",
+                className: "border-orange-500"
               }
             }}
           >

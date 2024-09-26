@@ -52,8 +52,10 @@ export const utilityHooks = {
       const { id, title, body } = item;
 
       return (
-        <Wrapper style={{ wrapper: { rounded: "lg", bg: "bg-slate-800" } }}>
-          <Wrapper style={{ wrapper: { flex: "row", paddingX: "lg", paddingY: "md" } }}>
+        <Wrapper style={{ parentWrapper: { rounded: "lg", bg: "bg-slate-800" } }}>
+          <Wrapper
+            style={{ childrenWrapper: { flex: "row", paddingX: "lg", paddingY: "md" } }}
+          >
             <Text>{title}</Text>
             <Btn
               Icon={FaChevronDown}
@@ -68,13 +70,15 @@ export const utilityHooks = {
           </Wrapper>
 
           <Wrapper
-            style={{ wrapper: { flex: "col", padding: "lg", gap: "lg" } }}
-            className={`${(!is_expanded(id) && "hidden") || ""}`}
+            style={{
+              parentWrapper: { className: (!is_expanded(id) && "hidden") || "" },
+              childrenWrapper: { padding: "lg", gap: "lg" }
+            }}
           >
             {body.map((item) => (
               <Wrapper
                 key={`${item.id}`}
-                style={{ wrapper: { width: "full", padding: "sm" } }}
+                style={{ parentWrapper: { padding: "sm" } }}
               >
                 {item.child}
               </Wrapper>
@@ -85,7 +89,7 @@ export const utilityHooks = {
     };
 
     const Accordion = () => (
-      <Wrapper style={{ wrapper: { padding: "lg", flex: "col" } }}>
+      <Wrapper style={{ childrenWrapper: { padding: "lg", flex: "col" } }}>
         {data.map((item) => (
           <AccordionItem
             key={item.id}

@@ -1,18 +1,35 @@
 "use client";
 import { useClassNames } from "@/tw-styled";
+import { styleHooks } from "@/tw-styled/hooks";
 import { Children, IStyles } from "@/tw-styled/Styles";
 
-export type TWrapperProps = {
-  children: Children;
-  className?: string;
+export type WrapperProps = {
+  children?: Children;
   style?: {
-    wrapper: IStyles;
+    parentWrapper?: IStyles;
+    childrenWrapper?: IStyles;
   };
 };
 
-export const Wrapper = (props: TWrapperProps) => {
-  const { children } = props;
-  const classes = useClassNames({ ...props.style });
+export const Wrapper = (props: WrapperProps) => {
+  const { children, style } = props;
+  const defaultStyles = styleHooks.useDefaultWrapper();
 
-  return <div className={classes.wrapper}>{children}</div>;
+  const styles: WrapperProps["style"] = {
+    parentWrapper: {
+      ...defaultStyles.parentWrapper,
+      ...style?.parentWrapper
+    },
+    childrenWrapper: {
+      ...defaultStyles.childrenWrapper,
+      ...style?.childrenWrapper
+    }
+  };
+
+  const classes = useClassNames({ ...styles });
+  return (
+    <div className={classes.parentWrapper}>
+      <div className={classes.childrenWrapper}>{children}</div>
+    </div>
+  );
 };

@@ -18,7 +18,7 @@ export const Sm: BtnStory = {
   args: {
     text: "Submit",
     style: {
-      wrapper: {
+      parentWrapper: {
         width: "full"
       },
       button: {
@@ -32,7 +32,7 @@ export const Md: BtnStory = {
   args: {
     text: "Submit",
     style: {
-      wrapper: {
+      parentWrapper: {
         width: "full"
       },
       button: {
@@ -46,7 +46,7 @@ export const Lg: BtnStory = {
   args: {
     text: "Submit",
     style: {
-      wrapper: {
+      parentWrapper: {
         width: "full"
       },
       button: {
@@ -60,7 +60,7 @@ export const Full: BtnStory = {
   args: {
     text: "Submit",
     style: {
-      wrapper: {
+      parentWrapper: {
         width: "full"
       },
       button: {

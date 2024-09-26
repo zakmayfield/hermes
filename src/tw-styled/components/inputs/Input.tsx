@@ -45,7 +45,11 @@ export const Input: FC<InputProps<any>> = (props) => {
   });
 
   return (
-    <Wrapper className={classes.wrapper}>
+    <Wrapper
+      style={{
+        childrenWrapper: { width: "full", className: classes.wrapper }
+      }}
+    >
       <label
         className={classes.label}
         htmlFor={name}
@@ -55,8 +59,7 @@ export const Input: FC<InputProps<any>> = (props) => {
       </label>
 
       <Wrapper
-        style={{ wrapper: { flex: "row" } }}
-        className="relative"
+        style={{ childrenWrapper: { flex: "row", width: "full", className: "relative" } }}
       >
         <input
           className={`${classes.input} ${(error && "ring-4 ring-red-400") || ""}`}

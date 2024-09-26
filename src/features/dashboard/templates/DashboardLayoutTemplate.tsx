@@ -11,6 +11,13 @@ export const DashboardLayoutTemplate = (props: TDashboardLayoutTemplateProps) =>
     <Layout
       title="Dashboard"
       heading="h1"
+      style={{
+        wrapper: {
+          border: "sm",
+          paddingX: "zero",
+          className: "border-green-400"
+        }
+      }}
     >
       {children}
     </Layout>

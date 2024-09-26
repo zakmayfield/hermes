@@ -44,7 +44,7 @@ export const Form: FC<FormProps> = (props) => {
 
       <Wrapper
         style={{
-          wrapper: { flex: "col", gap: "lg" }
+          childrenWrapper: { flex: "col", gap: "lg", width: "full" }
         }}
       >
         {children}

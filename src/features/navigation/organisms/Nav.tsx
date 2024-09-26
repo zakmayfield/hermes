@@ -26,7 +26,10 @@ export const Nav = () => {
       <RoleSwitch />
       <Wrapper
         style={{
-          wrapper: { flex: "row", flexPosition: "center-center", gap: "lg" }
+          childrenWrapper: {
+            flex: "row",
+            flexPosition: "center-center"
+          }
         }}
       >
         {nav_items.map((item) => (

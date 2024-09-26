@@ -18,7 +18,7 @@ export const Text = (props: TextProps) => {
   const { as = "p", children, described_by, is_hidden } = props;
   const classes = useClassNames({ ...props.style });
 
-  const ChildrenWrapper = <div className={classes.childrenWrapper}>{children}</div>;
+  const ChildrenWrapper = <span className={classes.childrenWrapper}>{children}</span>;
 
   return React.createElement(
     as,

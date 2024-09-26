@@ -27,11 +27,16 @@ export const ManagePermissionsPage = () => {
         style={{
           wrapper: {
             flex: "col",
-            gap: "lg"
+            gap: "lg",
+            border: "sm",
+            paddingX: "zero",
+            className: "border-red-400"
           },
           children: {
             flex: "col",
             gap: "lg",
+            flexSpacing: "space-evenly",
+            flexWrap: "nowrap",
             className: "lg:flex-row"
           }
         }}
@@ -55,8 +60,10 @@ export const ManagePermissionsPage = () => {
           wrapper: {
             flex: "col",
             gap: "md",
-            width: "md",
-            place: "center"
+            width: "sm",
+            place: "center",
+            border: "sm",
+            className: "border-yellow-400"
           },
           children: {
             padding: "md",
@@ -82,21 +89,24 @@ export const ManagePermissionsPage = () => {
       anchorSelect: `#${permission_id}_info_icon`,
       content: "Enable to give access to permission"
     });
+
     return (
-      <Wrapper>
+      <Wrapper style={{ childrenWrapper: { flex: "row", flexSpacing: "space-between" } }}>
+        <Text>{name}</Text>
+
         <Wrapper
-          style={{ wrapper: { flex: "row", gap: "sm" } }}
-          className="justify-between"
+          style={{
+            childrenWrapper: {
+              flex: "row",
+              flexPosition: "center-right",
+              gap: "sm",
+              place: "right"
+            }
+          }}
         >
-          <Text>{name}</Text>
-          <Wrapper
-            style={{ wrapper: { flex: "row", flexPosition: "center-right", gap: "sm" } }}
-            className="justify-end"
-          >
-            <Text>{permission_level ? "✅" : "🚫"}</Text>
-            <PiInfoDuotone id={`${permission_id}_info_icon`} />
-            <Tooltip />
-          </Wrapper>
+          <Text>{permission_level ? "✅" : "🚫"}</Text>
+          <PiInfoDuotone id={`${permission_id}_info_icon`} />
+          <Tooltip />
         </Wrapper>
       </Wrapper>
     );

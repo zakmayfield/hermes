@@ -8,7 +8,7 @@ export const SuperNavigation = () => {
   return (
     <nav>
       <Wrapper
-        style={{ wrapper: { flex: "row", gap: "md", flexPosition: "center-center" } }}
+        style={{ childrenWrapper: { flex: "row", flexPosition: "center-center" } }}
       >
         <Link
           href="/dashboard"

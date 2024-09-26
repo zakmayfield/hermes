@@ -4,7 +4,7 @@ import { Children, Headings, IStyles } from "@/tw-styled/Styles";
 
 export type HeadingProps = {
   as?: Headings;
-  children: Children;
+  children?: Children;
   style?: {
     wrapper?: IStyles;
     childrenWrapper?: IStyles;

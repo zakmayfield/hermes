@@ -10,7 +10,7 @@ export type HeadingStory = StoryObj<typeof meta>;
 
 export const WithChildren: HeadingStory = {
   args: {
-    children: [<p key={0}>Child 1</p>, <p key={1}>Child 2</p>],
+    children: "Heading Text",
     style: {
       wrapper: {
         height: "md",

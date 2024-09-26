@@ -1,6 +1,5 @@
 import { formHooks } from "@/shared/hooks";
-import { Form, Input, Wrapper } from "@/tw-styled/components";
-import { PiAcorn } from "react-icons/pi";
+import { Form, Input } from "@/tw-styled/components";
 
 export const SignInForm = () => {
   const { register, onSubmit, errors, isPending } = formHooks.useSignInForm();

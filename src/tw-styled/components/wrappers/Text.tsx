@@ -10,15 +10,19 @@ type TextProps = {
   is_hidden?: boolean;
   style?: {
     wrapper: IStyles;
-    childrenWrapper?: IStyles;
   };
 };
 
 export const Text = (props: TextProps) => {
-  const { as = "p", children, described_by, is_hidden } = props;
-  const classes = useClassNames({ ...props.style });
+  const { as = "p", children, described_by, is_hidden, style } = props;
 
-  const ChildrenWrapper = <span className={classes.childrenWrapper}>{children}</span>;
+  const styles: TextProps["style"] = {
+    wrapper: {
+      ...style?.wrapper
+    }
+  };
+
+  const classes = useClassNames({ ...styles });
 
   return React.createElement(
     as,
@@ -27,6 +31,6 @@ export const Text = (props: TextProps) => {
       hidden: is_hidden,
       className: classes.wrapper
     },
-    ChildrenWrapper
+    children
   );
 };

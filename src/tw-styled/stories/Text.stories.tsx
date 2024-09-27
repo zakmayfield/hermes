@@ -4,16 +4,9 @@ import { Meta, StoryObj } from "@storybook/react";
 const meta = {
   title: "Text/Default",
   component: Text,
-  argTypes: {
-    children: {
-      options: ["a"],
-      mapping: {
-        a: [<div>text content 1</div>, <div>text content 2</div>]
-      }
-    }
-  },
   args: {
-    children: "Text content"
+    children:
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam laudantium recusandae, numquam ea quisquam sequi repellat consectetur omnis aut laboriosam nemo explicabo delectus, a corrupti distinctio? Totam, eos nam. Porro!"
   }
 } satisfies Meta<typeof Text>;
 

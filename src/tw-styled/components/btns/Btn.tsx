@@ -2,8 +2,6 @@
 import { IconType } from "react-icons";
 import { BtnVariants, IStyles, StyleObj } from "@/tw-styled/Styles";
 import { useClassNames } from "@/tw-styled";
-import { Text, Wrapper } from "../wrappers";
-import { SpinLoader } from "../loaders";
 import { styleHooks } from "@/tw-styled/hooks/styleHooks";
 import { PiSpinnerGap } from "react-icons/pi";
 

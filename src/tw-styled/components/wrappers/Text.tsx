@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
 import { useClassNames } from "@/tw-styled";
-import { IStyles } from "@/tw-styled/Styles";
+import { IStyles, TextElements } from "@/tw-styled/Styles";
 
 type TextProps = {
-  as?: "p" | "span";
+  as?: TextElements;
   children?: React.ReactNode;
   described_by?: string;
   is_hidden?: boolean;

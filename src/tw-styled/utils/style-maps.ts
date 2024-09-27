@@ -199,5 +199,17 @@ export const style_maps = {
     sm: "min-h-[2.63rem]",
     md: "max-w-[2.75rem]",
     lg: "max-w-[2.87rem]"
+  },
+
+  displayMap: {
+    ...baseMap,
+    relative: "relative",
+    absolute: "absolute",
+    fixed: "fixed",
+    sticky: "sticky",
+    inline: "inline",
+    "inline-block": "inline-block",
+    "inline-flex": "inline-flex",
+    hidden: "hidden"
   }
 };

@@ -1,9 +1,11 @@
 "use client";
+import React from "react";
 import { useClassNames } from "@/tw-styled";
 import { styleHooks } from "@/tw-styled/hooks";
-import { Children, IStyles } from "@/tw-styled/Styles";
+import { Children, IStyles, WrapperElements } from "@/tw-styled/Styles";
 
 export type WrapperProps = {
+  as?: WrapperElements;
   children?: Children;
   style?: {
     parentWrapper?: IStyles;
@@ -12,7 +14,7 @@ export type WrapperProps = {
 };
 
 export const Wrapper = (props: WrapperProps) => {
-  const { children, style } = props;
+  const { as = "div", children, style } = props;
   const defaultStyles = styleHooks.useDefaultWrapper();
 
   const styles: WrapperProps["style"] = {
@@ -27,9 +29,8 @@ export const Wrapper = (props: WrapperProps) => {
   };
 
   const classes = useClassNames({ ...styles });
-  return (
-    <div className={classes.parentWrapper}>
-      <div className={classes.childrenWrapper}>{children}</div>
-    </div>
-  );
+
+  const ChildrenWrapper = <div className={classes.childrenWrapper}>{children}</div>;
+
+  return React.createElement(as, { className: classes.parentWrapper }, ChildrenWrapper);
 };

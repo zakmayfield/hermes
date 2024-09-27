@@ -1,6 +1,18 @@
 export type StyleObj = Record<string, IStyles>;
 export type Children = React.ReactNode;
 export type Headings = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+export type WrapperElements =
+  | "div"
+  | "sectin"
+  | "article"
+  | "aside"
+  | "footer"
+  | "nav"
+  | "header"
+  | "main"
+  | "ol"
+  | "ul";
+export type TextElements = "p" | "span" | "li" | "figure" | "a" | "i" | "em" | "strong";
 export type BtnVariants = "primary" | "warning" | "ghost";
 export type IStyles = IDimensions &
   ISpacing &
@@ -48,6 +60,7 @@ interface IOther {
   border?: Sizes;
   bgOpacity?: Opacities;
   textOpacity?: Opacities;
+  display?: Displays;
 }
 
 type Sizes = "sm" | "md" | "lg";
@@ -73,3 +86,12 @@ type FlexWrap = "wrap" | "nowrap";
 type FontWeights = "light" | "normal" | "bold";
 type Opacities = "light" | "medium" | "dark";
 type Places = "left" | "center" | "right";
+type Displays =
+  | "relative"
+  | "absolute"
+  | "fixed"
+  | "sticky"
+  | "inline"
+  | "inline-block"
+  | "inline-flex"
+  | "hidden";

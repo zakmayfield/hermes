@@ -71,3 +71,8 @@ export const Pulse = (props: PulseProps) => {
       );
   }
 };
+
+export const usePulse = (props: PulseProps) => {
+  const Loader = () => <Pulse {...props} />;
+  return { Pulse: Loader };
+};

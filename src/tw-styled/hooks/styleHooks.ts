@@ -5,6 +5,7 @@ import {
   InputStyleProps,
   LayoutProps,
   PulseProps,
+  SpinProps,
   TextProps,
   WrapperProps
 } from "../components";
@@ -272,5 +273,23 @@ export const styleHooks = {
     };
 
     return defaultPulseLoaderStyles;
+  },
+
+  useDefaultSpinLoader: (props: SpinProps) => {
+    const { style } = props;
+
+    const styles: SpinProps["style"] = {
+      wrapper: {
+        ...style?.icon
+      },
+      icon: {
+        place: "center",
+        fontSize: "lg",
+        animate: "spin",
+        ...style?.icon
+      }
+    };
+
+    return styles;
   }
 };

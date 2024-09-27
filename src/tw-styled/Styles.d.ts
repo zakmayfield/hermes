@@ -59,7 +59,7 @@ interface IOther {
   bg?: string;
   rounded?: Sizes | "xl";
   border?: Sizes | None;
-  bgOpacity?: Opacities;
+  bgOpacity?: Opacities | None;
   textOpacity?: Opacities | None;
   display?: Displays;
   pulseLoaderWidth?: SizesWithFull;

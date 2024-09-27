@@ -45,8 +45,6 @@ export const Btn = (props: BtnProps) => {
     style
   });
 
-  console.log({ styles });
-
   const classes = useClassNames(styles);
 
   const disabled = isDisabled || isLoading;

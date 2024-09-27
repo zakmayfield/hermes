@@ -171,7 +171,8 @@ export const style_maps = {
     ...baseMap,
     light: "bg-opacity-30",
     medium: "bg-opacity-60",
-    dark: "bg-opacity-90"
+    dark: "bg-opacity-90",
+    opaque: "text-opacity-100"
   },
 
   textOpacityMap: {

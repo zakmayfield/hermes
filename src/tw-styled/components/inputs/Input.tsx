@@ -6,6 +6,7 @@ import { IStyles } from "@/tw-styled/Styles";
 import { useClassNames } from "@/tw-styled";
 import { FormFieldError } from "../wrappers";
 import { styleHooks } from "@/tw-styled/hooks";
+import { useIcons } from "@/tw-styled/hooks/useIcons";
 
 type InputProps<T extends FieldValues> = InputStyleProps & {
   name: keyof T;
@@ -41,11 +42,12 @@ export const Input: FC<InputProps<any>> = (props) => {
   } = props;
   const is_error = !!error;
 
+  const icons = useIcons(["error"]);
   const styles = styleHooks.useDefaultInput({ is_error, style });
-
   const classes = useClassNames({ ...styles });
 
   const name = props.name as string;
+
   const { Tooltip } = utilityHooks.useTooltip({
     content: error?.message,
     anchorSelect: `#${name}_error_icon`,
@@ -75,7 +77,7 @@ export const Input: FC<InputProps<any>> = (props) => {
       />
 
       {error && !is_error_icon_hidden && (
-        <PiWarningCircleDuotone
+        <icons.error
           id={`${name}_error_icon`}
           className={classes.errorIcon}
         />

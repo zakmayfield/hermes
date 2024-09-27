@@ -12,6 +12,7 @@ import {
 } from "../components";
 import { BtnVariants, IStyles } from "../Styles";
 
+// TODO: memoize parent objects
 export const styleHooks = {
   useBtnStyles: (props: {
     variant: BtnVariants;

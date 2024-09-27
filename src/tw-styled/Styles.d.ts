@@ -1,6 +1,7 @@
 export type StyleObj = Record<string, IStyles>;
 export type Children = React.ReactNode;
 export type Headings = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+export type Themes = "light" | "dark";
 export type WrapperElements =
   | "div"
   | "sectin"
@@ -56,14 +57,16 @@ interface ITypography {
 
 interface IOther {
   bg?: string;
-  rounded?: Sizes;
+  rounded?: Sizes | "xl";
   border?: Sizes;
   bgOpacity?: Opacities;
   textOpacity?: Opacities;
   display?: Displays;
+  pulseLoaderWidth?: SizesWithFull;
+  animate?: Animations;
 }
 
-type Sizes = "sm" | "md" | "lg";
+export type Sizes = "sm" | "md" | "lg";
 type ExtendedSizes = "xl" | "2xl" | "3xl";
 type SizesWithZero = Sizes | "zero";
 type SizesWithFull = Sizes | "full";
@@ -95,3 +98,4 @@ type Displays =
   | "inline-block"
   | "inline-flex"
   | "hidden";
+type Animations = "spin" | "pulse";

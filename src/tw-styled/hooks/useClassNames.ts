@@ -227,6 +227,22 @@ export const useClassNames = (style: StyleObj) => {
               const mapValue = styleMaps[mapKey][value || "none"];
               classNames.push(mapValue);
             }
+            if (
+              isType<"pulseLoaderWidth">(styleKey, "pulseLoaderWidth") &&
+              isType<"pulseLoaderWidthMap">(mapKey, "pulseLoaderWidthMap")
+            ) {
+              const value = styleObject[styleKey];
+              const mapValue = styleMaps[mapKey][value || "none"];
+              classNames.push(mapValue);
+            }
+            if (
+              isType<"animate">(styleKey, "animate") &&
+              isType<"animateMap">(mapKey, "animateMap")
+            ) {
+              const value = styleObject[styleKey];
+              const mapValue = styleMaps[mapKey][value || "none"];
+              classNames.push(mapValue);
+            }
           }
         }
 

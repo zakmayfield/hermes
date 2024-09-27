@@ -1,12 +1,13 @@
-import { FieldError } from "react-hook-form";
 import {
   FormProps,
   HeadingProps,
   InputStyleProps,
   LayoutProps,
+  PulseProps,
   WrapperProps
 } from "../components";
-import { BtnVariants, IStyles } from "../Styles";
+import { BtnVariants, IStyles, Themes } from "../Styles";
+import { style_maps } from "../utils/style-maps";
 
 export const styleHooks = {
   useButtonVariant: (
@@ -138,7 +139,6 @@ export const styleHooks = {
   },
 
   useDefaultInput: ({ is_error }: { is_error: boolean }) => {
-    console.log("is_error", is_error);
     const defaultFormStyles: InputStyleProps["style"] = {
       wrapper: {
         flex: "col",
@@ -163,5 +163,50 @@ export const styleHooks = {
     };
 
     return defaultFormStyles;
+  },
+
+  useDefaultPulseLoader: (props: PulseProps) => {
+    const { theme = "light", style } = props;
+
+    function getTheme(theme: PulseProps["theme"]) {
+      const themes = {
+        light: {
+          parentTheme: "bg-slate-100",
+          childrenTheme: "bg-slate-300"
+        },
+        dark: {
+          parentTheme: "bg-slate-600",
+          childrenTheme: "bg-slate-700"
+        }
+      };
+
+      return themes[theme!];
+    }
+
+    const defaultPulseLoaderStyles: PulseProps["style"] = {
+      wrapper: {
+        animate: "pulse",
+        rounded: "lg",
+        width: "md",
+        flex: "col",
+        gap: "sm",
+        padding: "sm",
+        className: getTheme(theme).parentTheme,
+        ...style?.wrapper
+      },
+      childrenWrapper: {
+        flex: "row",
+        gap: "sm"
+      },
+      children: {
+        animate: "pulse",
+        padding: "md",
+        rounded: "xl",
+        className: getTheme(theme).childrenTheme,
+        ...style?.children
+      }
+    };
+
+    return defaultPulseLoaderStyles;
   }
 };

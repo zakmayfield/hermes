@@ -1,3 +1,5 @@
+import { styleHooks, useClassNames } from "@/tw-styled/hooks";
+import { IStyles, Sizes, Themes } from "@/tw-styled/Styles";
 import { merge } from "@/tw-styled/utils/class-merge";
 
 const BaseLoader = ({
@@ -14,14 +16,17 @@ const BaseLoader = ({
   );
 };
 
-type LoaderProps = {
-  width?: "full";
-};
-const Sm = (props: LoaderProps) => {
-  const { width } = props;
-  const widthClass = width ? width : "max-w-sm";
+const Sm = ({ style }: PulseLoaderProps) => {
+  const styles: PulseLoaderProps["style"] = {
+    wrapper: {
+      pulseLoaderWidth: "sm",
+      ...style?.wrapper
+    }
+  };
+
+  const classes = useClassNames({ ...styles });
   return (
-    <BaseLoader className={widthClass}>
+    <BaseLoader className={classes.wrapper}>
       <div className="flex gap-3">
         <div className="p-3 bg-slate-200 rounded-[3rem] animate-pulse"></div>
         <div className="p-3 bg-slate-200 rounded-[3rem] w-full animate-pulse"></div>
@@ -29,11 +34,18 @@ const Sm = (props: LoaderProps) => {
     </BaseLoader>
   );
 };
-const Md = (props: LoaderProps) => {
-  const { width } = props;
-  const widthClass = width ? width : "max-w-lg";
+const Md = ({ style }: PulseLoaderProps) => {
+  const styles: PulseLoaderProps["style"] = {
+    wrapper: {
+      pulseLoaderWidth: "md",
+      ...style?.wrapper
+    }
+  };
+
+  const classes = useClassNames({ ...styles });
+
   return (
-    <BaseLoader className={widthClass}>
+    <BaseLoader className={classes.wrapper}>
       <div className="flex flex-col gap-3">
         <div className="flex gap-3">
           <div className="p-3 bg-slate-200 rounded-[3rem] animate-pulse w-1/3"></div>
@@ -48,11 +60,18 @@ const Md = (props: LoaderProps) => {
     </BaseLoader>
   );
 };
-const Lg = (props: LoaderProps) => {
-  const { width } = props;
-  const widthClass = width ? width : "max-w-2xl";
+const Lg = ({ style }: PulseLoaderProps) => {
+  const styles: PulseLoaderProps["style"] = {
+    wrapper: {
+      pulseLoaderWidth: "lg",
+      ...style?.wrapper
+    }
+  };
+
+  const classes = useClassNames({ ...styles });
+
   return (
-    <BaseLoader className={widthClass}>
+    <BaseLoader className={classes.wrapper}>
       <div className="flex flex-col gap-3">
         <div className="flex gap-3">
           <div className="p-6 bg-slate-200 rounded-[3rem] animate-pulse w-1/3"></div>
@@ -77,19 +96,36 @@ const Lg = (props: LoaderProps) => {
   );
 };
 
-type PulseLoaderProps = LoaderProps & {
-  size?: "sm" | "md" | "lg";
+export type PulseLoaderProps = {
+  style?: {
+    wrapper?: {
+      size?: Sizes;
+      theme?: Themes;
+    } & IStyles;
+  };
 };
-export const PulseLoader = (props: PulseLoaderProps) => {
-  const { size = "sm", ...rest } = props;
 
-  switch (size) {
-    case "sm":
-      return <Sm {...rest} />;
+export const PulseLoader = (props: PulseLoaderProps) => {
+  const { style } = props;
+
+  const defaultStyles = styleHooks.useDefaultPulseLoader({});
+
+  const styles: PulseLoaderProps["style"] = {
+    wrapper: {
+      ...defaultStyles,
+      ...style?.wrapper
+    }
+  };
+
+  const classes = useClassNames({ ...styles });
+
+  switch (style?.wrapper?.size) {
     case "md":
-      return <Md {...rest} />;
+      return <Md {...props} />;
     case "lg":
-      return <Lg {...rest} />;
+      return <Lg {...props} />;
+    default:
+      return <Sm {...props} />;
   }
 };
 

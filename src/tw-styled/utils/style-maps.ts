@@ -69,6 +69,7 @@ export const style_maps = {
     wrap: "flex-wrap",
     nowrap: "flex-nowrap"
   },
+
   flexSizeMap: {
     ...baseMap,
     grow: "flex-grow",
@@ -114,7 +115,8 @@ export const style_maps = {
     ...baseMap,
     sm: "rounded",
     md: "rounded-md",
-    lg: "rounded-lg"
+    lg: "rounded-lg",
+    xl: "rounded-3xl"
   },
 
   placeMap: {
@@ -211,5 +213,19 @@ export const style_maps = {
     "inline-block": "inline-block",
     "inline-flex": "inline-flex",
     hidden: "hidden"
+  },
+
+  pulseLoaderWidthMap: {
+    ...baseMap,
+    sm: "max-w-sm",
+    md: "max-w-lg",
+    lg: "max-w-2xl",
+    full: "w-full"
+  },
+
+  animateMap: {
+    ...baseMap,
+    spin: "animate-spin",
+    pulse: "animate-pulse"
   }
 };

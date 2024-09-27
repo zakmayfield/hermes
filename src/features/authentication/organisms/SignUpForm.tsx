@@ -12,13 +12,7 @@ export const SignUpForm = () => {
       isPending={isPending}
       style={{
         form: {
-          bg: "bg-slate-900",
-          rounded: "lg",
-          width: "md",
-          padding: "lg"
-        },
-        heading: {
-          marginY: "md"
+          bg: "bg-slate-900"
         }
       }}
     >
@@ -27,16 +21,6 @@ export const SignUpForm = () => {
         label="Email"
         register={register}
         error={formErrors.email}
-        style={{
-          wrapper: {
-            flex: "col",
-            gap: "sm"
-          },
-          input: {
-            width: "full",
-            className: "h-12 md:h-auto"
-          }
-        }}
       />
 
       <Input
@@ -45,16 +29,6 @@ export const SignUpForm = () => {
         register={register}
         error={formErrors.password}
         type="password"
-        style={{
-          wrapper: {
-            flex: "col",
-            gap: "sm"
-          },
-          input: {
-            width: "full",
-            className: "h-12 md:h-auto"
-          }
-        }}
       />
     </Form>
   );

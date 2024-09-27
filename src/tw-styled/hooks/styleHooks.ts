@@ -1,4 +1,11 @@
-import { FormProps, HeadingProps, LayoutProps, WrapperProps } from "../components";
+import { FieldError } from "react-hook-form";
+import {
+  FormProps,
+  HeadingProps,
+  InputStyleProps,
+  LayoutProps,
+  WrapperProps
+} from "../components";
 import { BtnVariants, IStyles } from "../Styles";
 
 export const styleHooks = {
@@ -124,6 +131,34 @@ export const styleHooks = {
       contentWrapper: {
         flex: "col",
         gap: "lg"
+      }
+    };
+
+    return defaultFormStyles;
+  },
+
+  useDefaultInput: ({ is_error }: { is_error: boolean }) => {
+    console.log("is_error", is_error);
+    const defaultFormStyles: InputStyleProps["style"] = {
+      wrapper: {
+        flex: "col",
+        gap: "sm",
+        width: "full"
+      },
+      label: {
+        fontSize: is_error ? "lg" : "md"
+      },
+      inputWrapper: {
+        flex: "row",
+        width: "full",
+        className: "relative"
+      },
+      input: {
+        width: "full",
+        className: is_error ? "ring-4 ring-red-400" : ""
+      },
+      errorIcon: {
+        className: "absolute right-3 top-[.375rem] text-red-500 text-xl"
       }
     };
 

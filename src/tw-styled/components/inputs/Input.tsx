@@ -4,9 +4,10 @@ import { utilityHooks } from "@/shared/hooks";
 import { PiWarningCircleDuotone } from "react-icons/pi";
 import { IStyles } from "@/tw-styled/Styles";
 import { useClassNames } from "@/tw-styled";
-import { FormFieldError, Wrapper } from "../wrappers";
+import { FormFieldError } from "../wrappers";
+import { styleHooks } from "@/tw-styled/hooks";
 
-type InputProps<T extends FieldValues> = {
+type InputProps<T extends FieldValues> = InputStyleProps & {
   name: keyof T;
   label?: string;
   register?: UseFormRegister<T>;
@@ -15,10 +16,15 @@ type InputProps<T extends FieldValues> = {
   is_label_hidden?: boolean;
   is_error_hidden?: boolean;
   is_error_icon_hidden?: boolean;
+};
+
+export type InputStyleProps = {
   style?: {
     wrapper?: IStyles;
     label?: IStyles;
+    inputWrapper?: IStyles;
     input?: IStyles;
+    errorIcon?: IStyles;
   };
 };
 
@@ -30,13 +36,35 @@ export const Input: FC<InputProps<any>> = (props) => {
     error,
     is_label_hidden = false,
     is_error_hidden = false,
-    is_error_icon_hidden = false
+    is_error_icon_hidden = false,
+    style
   } = props;
+  const is_error = !!error;
+
+  const defaultStyles = styleHooks.useDefaultInput({ is_error });
+
+  const styles: InputStyleProps["style"] = {
+    wrapper: {
+      ...defaultStyles.wrapper,
+      ...style?.wrapper
+    },
+    label: {
+      ...defaultStyles.label,
+      ...style?.label
+    },
+    input: {
+      ...defaultStyles.input,
+      ...style?.input
+    },
+    errorIcon: {
+      ...defaultStyles.errorIcon,
+      ...style?.errorIcon
+    }
+  };
+
+  const classes = useClassNames({ ...styles });
 
   const name = props.name as string;
-
-  const classes = useClassNames({ ...props.style });
-
   const { Tooltip } = utilityHooks.useTooltip({
     content: error?.message,
     anchorSelect: `#${name}_error_icon`,
@@ -44,51 +72,53 @@ export const Input: FC<InputProps<any>> = (props) => {
     variant: "error"
   });
 
-  return (
-    <Wrapper
-      style={{
-        childrenWrapper: { width: "full", className: classes.wrapper }
-      }}
+  const Label = (
+    <label
+      className={classes.label}
+      htmlFor={name}
+      hidden={is_label_hidden}
     >
-      <label
-        className={classes.label}
-        htmlFor={name}
-        hidden={is_label_hidden}
-      >
-        {label}
-      </label>
+      {label}
+    </label>
+  );
 
-      <Wrapper
-        style={{ childrenWrapper: { flex: "row", width: "full", className: "relative" } }}
-      >
-        <input
-          className={`${classes.input} ${(error && "ring-4 ring-red-400") || ""}`}
-          type={type}
-          placeholder={label}
-          aria-label={name}
-          aria-invalid={!!error}
-          {...register?.(name)}
+  const InputWrapper = (
+    <div className={classes.inputWrapper}>
+      <input
+        className={classes.input}
+        type={type}
+        placeholder={label}
+        aria-label={name}
+        aria-invalid={!!error}
+        {...register?.(name)}
+      />
+
+      {error && !is_error_icon_hidden && (
+        <PiWarningCircleDuotone
+          id={`${name}_error_icon`}
+          className={classes.errorIcon}
         />
-
-        {error && !is_error_icon_hidden && (
-          <PiWarningCircleDuotone
-            id={`${name}_error_icon`}
-            className="absolute right-3 top-[.375rem] text-red-500 text-xl"
-          />
-        )}
-
-        {error && !is_error_icon_hidden && <Tooltip />}
-      </Wrapper>
-
-      {error && (
-        <FormFieldError
-          message={error.message}
-          described_by={name}
-          is_error_hidden={is_error_hidden}
-        >
-          {error.message}
-        </FormFieldError>
       )}
-    </Wrapper>
+
+      {error && !is_error_icon_hidden && <Tooltip />}
+    </div>
+  );
+
+  const FieldError = error && (
+    <FormFieldError
+      message={error.message}
+      described_by={name}
+      is_error_hidden={is_error_hidden}
+    >
+      {error.message}
+    </FormFieldError>
+  );
+
+  return (
+    <div className={classes.wrapper}>
+      {Label}
+      {InputWrapper}
+      {FieldError}
+    </div>
   );
 };

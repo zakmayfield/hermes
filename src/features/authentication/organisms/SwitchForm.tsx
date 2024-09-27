@@ -24,7 +24,15 @@ export const SwitchForm = () => {
   );
 
   return (
-    <Wrapper style={{ childrenWrapper: { flex: "row", gap: "sm", place: "center" } }}>
+    <Wrapper
+      style={{
+        childrenWrapper: {
+          flex: "row",
+          gap: "sm",
+          flexPosition: "center-center"
+        }
+      }}
+    >
       {text}
       {switch_link}
     </Wrapper>

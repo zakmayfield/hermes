@@ -14,8 +14,6 @@ export type HeadingProps = {
 export const Heading = (props: HeadingProps) => {
   const { as = "h1", children, style } = props;
 
-  console.log("prop classes", { style });
-
   const defaultStyles = styleHooks.useDefaultHeading();
 
   const styles: HeadingProps["style"] = {

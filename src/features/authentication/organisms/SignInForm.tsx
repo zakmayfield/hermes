@@ -21,16 +21,6 @@ export const SignInForm = () => {
         label="Email"
         register={register}
         error={errors.email}
-        style={{
-          wrapper: {
-            flex: "col",
-            gap: "sm"
-          },
-          input: {
-            width: "full",
-            className: "h-12 md:h-auto"
-          }
-        }}
       />
       <Input
         type="password"
@@ -38,16 +28,6 @@ export const SignInForm = () => {
         label="Password"
         register={register}
         error={errors.password}
-        style={{
-          wrapper: {
-            flex: "col",
-            gap: "sm"
-          },
-          input: {
-            width: "full",
-            className: "h-12 md:h-auto"
-          }
-        }}
       />
     </Form>
   );

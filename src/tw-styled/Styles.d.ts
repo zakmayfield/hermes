@@ -58,14 +58,15 @@ interface ITypography {
 interface IOther {
   bg?: string;
   rounded?: Sizes | "xl";
-  border?: Sizes;
+  border?: Sizes | None;
   bgOpacity?: Opacities;
-  textOpacity?: Opacities;
+  textOpacity?: Opacities | None;
   display?: Displays;
   pulseLoaderWidth?: SizesWithFull;
   animate?: Animations;
 }
 
+type None = "none";
 export type Sizes = "sm" | "md" | "lg";
 type ExtendedSizes = "xl" | "2xl" | "3xl";
 type SizesWithZero = Sizes | "zero";
@@ -87,7 +88,7 @@ type FlexSpacing = "space-between" | "space-evenly" | "space-around";
 type FlexSize = "grow" | "shrink" | "nogrow" | "noshrink";
 type FlexWrap = "wrap" | "nowrap";
 type FontWeights = "light" | "normal" | "bold";
-type Opacities = "light" | "medium" | "dark";
+type Opacities = "light" | "medium" | "dark" | "opaque";
 type Places = "left" | "center" | "right";
 type Displays =
   | "relative"

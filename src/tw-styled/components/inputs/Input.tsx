@@ -41,26 +41,7 @@ export const Input: FC<InputProps<any>> = (props) => {
   } = props;
   const is_error = !!error;
 
-  const defaultStyles = styleHooks.useDefaultInput({ is_error });
-
-  const styles: InputStyleProps["style"] = {
-    wrapper: {
-      ...defaultStyles.wrapper,
-      ...style?.wrapper
-    },
-    label: {
-      ...defaultStyles.label,
-      ...style?.label
-    },
-    input: {
-      ...defaultStyles.input,
-      ...style?.input
-    },
-    errorIcon: {
-      ...defaultStyles.errorIcon,
-      ...style?.errorIcon
-    }
-  };
+  const styles = styleHooks.useDefaultInput({ is_error, style });
 
   const classes = useClassNames({ ...styles });
 

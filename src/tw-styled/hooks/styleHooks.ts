@@ -1,164 +1,228 @@
 import {
+  BtnProps,
   FormProps,
   HeadingProps,
   InputStyleProps,
   LayoutProps,
   PulseProps,
+  TextProps,
   WrapperProps
 } from "../components";
-import { BtnVariants, IStyles, Themes } from "../Styles";
-import { style_maps } from "../utils/style-maps";
+import { BtnVariants, IStyles } from "../Styles";
 
 export const styleHooks = {
-  useButtonVariant: (
-    variant: BtnVariants,
-    buttonState: { isLoading: boolean; isDisabled: boolean }
-  ) => {
-    const getHoverStyle = (base: string, disabled: string) => {
-      return buttonState.isDisabled || buttonState.isLoading ? disabled : base;
+  useDefaultBtn: ({
+    variant,
+    state,
+    style
+  }: {
+    variant: BtnVariants;
+    state: { isLoading: boolean; isDisabled: boolean };
+    style: BtnProps["style"];
+  }) => {
+    const is_disabled = state.isDisabled || state.isLoading;
+
+    const getBaseStyles = (): BtnProps["style"] => {
+      return {
+        parentWrapper: {},
+        button: {
+          padding: "sm",
+          paddingX: "md",
+          rounded: "md",
+          buttonHeight: "sm"
+        },
+        contentWrapper: {
+          flex: "row",
+          flexPosition: "center-center"
+        },
+        content: {},
+        spinner: {
+          className: "animate-spin"
+        }
+      };
     };
 
-    const getTextOpacity = (): IStyles["textOpacity"] => {
-      return buttonState.isDisabled || buttonState.isLoading ? "light" : undefined;
+    const getDynamicStyles = (): BtnProps["style"] => {
+      const btn_state = is_disabled ? "disabled" : "enabled";
+
+      const border: IStyles["border"] = variant === "ghost" ? "sm" : "none";
+      const textOpacity: IStyles["textOpacity"] = is_disabled ? "light" : "none";
+
+      const color_styles = {
+        ghost: {
+          enabled: "hover:bg-white hover:bg-opacity-10",
+          disabled: "bg-slate-600 bg-opacity-20 border-gray-200 border-opacity-50"
+        },
+        primary: {
+          enabled: "bg-green-700 hover:bg-opacity-80",
+          disabled: "bg-green-700 bg-opacity-50"
+        },
+        warning: {
+          enabled: "bg-red-700 hover:bg-opacity-80",
+          disabled: "bg-red-700 bg-opacity-50"
+        }
+      };
+
+      return {
+        button: {
+          border,
+          className: color_styles[variant][btn_state]
+        },
+        contentWrapper: {
+          textOpacity
+        }
+      };
     };
 
-    const defaultStyles: IStyles = {
-      padding: "sm",
-      paddingX: "md",
-      rounded: "md",
-      buttonHeight: "sm",
-      textOpacity: getTextOpacity()
+    const styles: BtnProps["style"] = {
+      parentWrapper: {
+        ...getBaseStyles()?.parentWrapper,
+        ...style?.parentWrapper
+      },
+      button: {
+        ...getBaseStyles()?.button,
+        ...getDynamicStyles()?.button,
+        ...style?.button
+      },
+      contentWrapper: {
+        ...getBaseStyles()?.contentWrapper,
+        ...getDynamicStyles()?.contentWrapper,
+        ...style?.contentWrapper
+      },
+      content: {
+        ...getBaseStyles()?.content,
+        ...style?.content
+      },
+      spinner: {
+        ...getBaseStyles()?.spinner,
+        ...style?.spinner
+      }
     };
 
-    switch (variant) {
-      case "primary":
-        const primary_hover = getHoverStyle(
-          "bg-green-700 hover:bg-opacity-80",
-          "bg-green-700 bg-opacity-50"
-        );
-
-        const primary_styles: IStyles = {
-          ...defaultStyles,
-          className: primary_hover
-        };
-        return primary_styles;
-
-      case "warning":
-        const warning_hover = getHoverStyle(
-          "bg-red-700 hover:bg-opacity-80",
-          "bg-red-700 bg-opacity-50"
-        );
-        const warning_styles: IStyles = {
-          ...defaultStyles,
-          className: warning_hover
-        };
-        return warning_styles;
-
-      default:
-        const ghost_hover = getHoverStyle(
-          "hover:bg-white hover:bg-opacity-10",
-          "bg-slate-600 bg-opacity-20 border-gray-200 border-opacity-50"
-        );
-
-        const ghost_styles: IStyles = {
-          ...defaultStyles,
-          className: ghost_hover,
-          border: "sm"
-        };
-        return ghost_styles;
-    }
+    return { ...styles };
   },
 
-  useDefaultHeading: () => {
+  useDefaultHeading: ({ style }: { style: HeadingProps["style"] }) => {
     const defaultHeadingStyles: HeadingProps["style"] = {
-      wrapper: {},
+      wrapper: {
+        ...style?.wrapper
+      },
       childrenWrapper: {
         flex: "row",
-        gap: "sm"
+        gap: "sm",
+        ...style?.childrenWrapper
       }
     };
 
     return defaultHeadingStyles;
   },
 
-  useDefaultLayout: () => {
+  useDefaultLayout: ({ style }: { style: LayoutProps["style"] }) => {
     const defaultLayoutStyles: LayoutProps["style"] = {
       wrapper: {
         padding: "lg",
         flex: "col",
-        gap: "lg"
+        gap: "lg",
+        ...style?.wrapper
       },
       children: {
         flex: "col",
         gap: "md",
         flexWrap: "wrap",
-        flexSize: "grow"
+        flexSize: "grow",
+        ...style?.wrapper
       }
     };
 
     return defaultLayoutStyles;
   },
 
-  useDefaultWrapper: () => {
+  useDefaultWrapper: ({ style }: { style: WrapperProps["style"] }) => {
     const defaultWrapperStyles: WrapperProps["style"] = {
       parentWrapper: {
-        flex: "row"
+        flex: "row",
+        ...style?.parentWrapper
       },
       childrenWrapper: {
         flex: "col",
         gap: "sm",
-        width: "full"
+        width: "full",
+        ...style?.childrenWrapper
       }
     };
 
     return defaultWrapperStyles;
   },
 
-  useDefaultForm: () => {
+  useDefaultText: ({ style }: { style: TextProps["style"] }) => {
+    const defaultTextStyles: TextProps["style"] = {
+      wrapper: {
+        ...style?.wrapper
+      }
+    };
+
+    return defaultTextStyles;
+  },
+
+  useDefaultForm: ({ style }: { style: FormProps["style"] }) => {
     const defaultFormStyles: FormProps["style"] = {
       form: {
         flex: "col",
         gap: "lg",
         width: "md",
         rounded: "lg",
-        padding: "lg"
+        padding: "lg",
+        ...style?.form
       },
       heading: {
-        width: "full"
+        width: "full",
+        ...style?.heading
       },
       button: {
-        width: "full"
+        width: "full",
+        ...style?.button
       },
       contentWrapper: {
         flex: "col",
-        gap: "lg"
+        gap: "lg",
+        ...style?.contentWrapper
       }
     };
 
     return defaultFormStyles;
   },
 
-  useDefaultInput: ({ is_error }: { is_error: boolean }) => {
+  useDefaultInput: ({
+    is_error,
+    style
+  }: {
+    is_error: boolean;
+    style: InputStyleProps["style"];
+  }) => {
     const defaultFormStyles: InputStyleProps["style"] = {
       wrapper: {
         flex: "col",
         gap: "sm",
-        width: "full"
+        width: "full",
+        ...style?.wrapper
       },
       label: {
-        fontSize: is_error ? "lg" : "md"
+        ...style?.label
       },
       inputWrapper: {
         flex: "row",
         width: "full",
-        className: "relative"
+        className: "relative",
+        ...style?.inputWrapper
       },
       input: {
         width: "full",
-        className: is_error ? "ring-4 ring-red-400" : ""
+        className: is_error ? "ring-4 ring-red-400" : "",
+        ...style?.input
       },
       errorIcon: {
-        className: "absolute right-3 top-[.375rem] text-red-500 text-xl"
+        className: "absolute right-3 top-[.375rem] text-red-500 text-xl",
+        ...style?.errorIcon
       }
     };
 

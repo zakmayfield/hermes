@@ -17,22 +17,10 @@ export type LayoutProps = {
 
 export const Layout = (props: LayoutProps) => {
   const { children, heading = "h1", title = "", style } = props;
-  const defaultStyles = styleHooks.useDefaultLayout();
 
-  const styles: LayoutProps["style"] = {
-    wrapper: {
-      ...defaultStyles.wrapper,
-      ...style?.wrapper
-    },
-    heading: {
-      ...defaultStyles.heading,
-      ...style?.heading
-    },
-    children: {
-      ...defaultStyles.children,
-      ...style?.children
-    }
-  };
+  const styles = styleHooks.useDefaultLayout({
+    style
+  });
 
   const classes = useClassNames({ ...styles });
 

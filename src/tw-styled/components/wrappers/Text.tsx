@@ -2,8 +2,9 @@
 import React from "react";
 import { useClassNames } from "@/tw-styled";
 import { IStyles, TextElements } from "@/tw-styled/Styles";
+import { styleHooks } from "@/tw-styled/hooks";
 
-type TextProps = {
+export type TextProps = {
   as?: TextElements;
   children?: React.ReactNode;
   described_by?: string;
@@ -16,11 +17,7 @@ type TextProps = {
 export const Text = (props: TextProps) => {
   const { as = "p", children, described_by, is_hidden, style } = props;
 
-  const styles: TextProps["style"] = {
-    wrapper: {
-      ...style?.wrapper
-    }
-  };
+  const styles = styleHooks.useDefaultText({ style });
 
   const classes = useClassNames({ ...styles });
 

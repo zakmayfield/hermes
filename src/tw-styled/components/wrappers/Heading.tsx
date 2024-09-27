@@ -14,21 +14,11 @@ export type HeadingProps = {
 export const Heading = (props: HeadingProps) => {
   const { as = "h1", children, style } = props;
 
-  const defaultStyles = styleHooks.useDefaultHeading();
-
-  const styles: HeadingProps["style"] = {
-    wrapper: {
-      ...defaultStyles.wrapper,
-      ...style?.wrapper
-    },
-    childrenWrapper: {
-      ...defaultStyles.childrenWrapper,
-      ...style?.childrenWrapper
-    }
-  };
+  const styles = styleHooks.useDefaultHeading({ style });
 
   const classes = useClassNames({ ...styles });
 
   const ChildrenWrapper = <div className={classes.childrenWrapper}>{children}</div>;
+
   return React.createElement(as, { className: classes.wrapper }, ChildrenWrapper);
 };

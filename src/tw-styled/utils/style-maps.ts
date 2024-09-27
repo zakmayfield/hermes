@@ -178,7 +178,8 @@ export const style_maps = {
     ...baseMap,
     light: "text-gray-200 text-opacity-40",
     medium: "text-gray-200 text-opacity-60",
-    dark: "text-gray-200 text-opacity-90"
+    dark: "text-gray-200 text-opacity-90",
+    opaque: "text-opacity-100"
   },
 
   borderMap: {

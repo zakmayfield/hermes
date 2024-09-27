@@ -23,27 +23,8 @@ export type FormProps = {
 
 export const Form: FC<FormProps> = (props) => {
   const { children, title, onSubmit, buttonText = "Submit", isPending, style } = props;
-  const defaultStyles = styleHooks.useDefaultForm();
 
-  const styles: FormProps["style"] = {
-    ...style,
-    form: {
-      ...defaultStyles.form,
-      ...style?.form
-    },
-    heading: {
-      ...defaultStyles.heading,
-      ...style?.heading
-    },
-    button: {
-      ...defaultStyles.button,
-      ...style?.button
-    },
-    contentWrapper: {
-      ...defaultStyles.contentWrapper,
-      ...style?.contentWrapper
-    }
-  };
+  const styles = styleHooks.useDefaultForm({ style });
 
   const classes = useClassNames({ ...styles });
 

@@ -39,27 +39,13 @@ export const Btn = (props: BtnProps) => {
     style
   } = props;
 
-  const variantStyles = styleHooks.useButtonVariant(variant, { isLoading, isDisabled });
+  const styles = styleHooks.useDefaultBtn({
+    variant,
+    state: { isLoading, isDisabled },
+    style
+  });
 
-  const styles: StyleObj = {
-    ...style,
-    parentWrapper: {
-      ...style?.parentWrapper
-    },
-    button: {
-      ...variantStyles,
-      ...style?.button
-    },
-    contentWrapper: {
-      flex: "row",
-      flexPosition: "center-center",
-      textOpacity: variantStyles.textOpacity,
-      ...style?.contentWrapper
-    },
-    spinner: {
-      className: "animate-spin"
-    }
-  };
+  console.log({ styles });
 
   const classes = useClassNames(styles);
 

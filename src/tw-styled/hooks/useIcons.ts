@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { IconType } from "react-icons";
 import { PiSpinnerGap, PiShoppingCart, PiWarningCircle } from "react-icons/pi";
 
@@ -10,11 +11,11 @@ export const useIcons = (names: IconName[]) => {
     error: PiWarningCircle
   };
 
-  const payload = {} as Record<IconName, IconType>;
+  const icons = useMemo(() => {
+    return names.reduce((acc, name) => {
+      return { ...acc, [name]: iconMap[name] };
+    }, {}) as Record<IconName, IconType>;
+  }, [names, iconMap]);
 
-  for (const name of names) {
-    payload[name] = iconMap[name];
-  }
-
-  return payload;
+  return icons;
 };

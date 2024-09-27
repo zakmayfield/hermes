@@ -10,15 +10,14 @@ export type TextProps = {
   described_by?: string;
   is_hidden?: boolean;
   style?: {
-    wrapper: IStyles;
+    wrapper?: IStyles;
   };
 };
 
 export const Text = (props: TextProps) => {
   const { as = "p", children, described_by, is_hidden, style } = props;
 
-  const styles = styleHooks.useDefaultText({ style });
-
+  const styles = styleHooks.useTextStyles({ ...style });
   const classes = useClassNames({ ...styles });
 
   return React.createElement(

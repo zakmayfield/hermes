@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { FieldError, FieldValues, UseFormRegister } from "react-hook-form";
 import { utilityHooks } from "@/shared/hooks";
-import { PiWarningCircleDuotone } from "react-icons/pi";
 import { IStyles } from "@/tw-styled/Styles";
 import { useClassNames } from "@/tw-styled";
 import { FormFieldError } from "../wrappers";
@@ -43,7 +42,7 @@ export const Input: FC<InputProps<any>> = (props) => {
   const is_error = !!error;
 
   const icons = useIcons(["error"]);
-  const styles = styleHooks.useDefaultInput({ is_error, style });
+  const styles = styleHooks.useInputStyles({ is_error, style });
   const classes = useClassNames({ ...styles });
 
   const name = props.name as string;

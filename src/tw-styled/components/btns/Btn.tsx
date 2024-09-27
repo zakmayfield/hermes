@@ -39,13 +39,12 @@ export const Btn = (props: BtnProps) => {
     style
   } = props;
 
-  const styles = styleHooks.useDefaultBtn({
+  const styles = styleHooks.useBtnStyles({
     variant,
     state: { isLoading, isDisabled },
     style
   });
-
-  const classes = useClassNames(styles);
+  const classes = useClassNames({ ...styles });
 
   const disabled = isDisabled || isLoading;
 

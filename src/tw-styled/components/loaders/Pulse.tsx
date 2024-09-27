@@ -15,11 +15,10 @@ export type PulseProps = {
 export const Pulse = (props: PulseProps) => {
   const { size, theme, style } = props;
 
-  const styles = styleHooks.useDefaultPulseLoader({
+  const styles = styleHooks.usePulseStyles({
     theme,
     style
   });
-
   const classes = useClassNames({ ...styles });
 
   switch (size) {

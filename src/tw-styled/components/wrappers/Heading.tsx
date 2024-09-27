@@ -14,8 +14,7 @@ export type HeadingProps = {
 export const Heading = (props: HeadingProps) => {
   const { as = "h1", children, style } = props;
 
-  const styles = styleHooks.useDefaultHeading({ style });
-
+  const styles = styleHooks.useHeadingStyles({ ...style });
   const classes = useClassNames({ ...styles });
 
   const ChildrenWrapper = <div className={classes.childrenWrapper}>{children}</div>;

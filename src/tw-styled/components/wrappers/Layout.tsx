@@ -18,9 +18,7 @@ export type LayoutProps = {
 export const Layout = (props: LayoutProps) => {
   const { children, heading = "h1", title = "", style } = props;
 
-  const styles = styleHooks.useDefaultLayout({
-    style
-  });
+  const styles = styleHooks.useLayoutStyles({ ...style });
 
   const classes = useClassNames({ ...styles });
 

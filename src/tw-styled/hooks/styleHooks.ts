@@ -1,3 +1,4 @@
+import { useCallback, useMemo } from "react";
 import {
   BtnProps,
   FormProps,
@@ -12,18 +13,23 @@ import {
 import { BtnVariants, IStyles } from "../Styles";
 
 export const styleHooks = {
-  useDefaultBtn: ({
-    variant,
-    state,
-    style
-  }: {
+  useBtnStyles: (props: {
     variant: BtnVariants;
     state: { isLoading: boolean; isDisabled: boolean };
     style: BtnProps["style"];
   }) => {
-    const is_disabled = state.isDisabled || state.isLoading;
+    const { variant, state, style } = useMemo(() => {
+      const { variant, state, style } = props;
+      return {
+        variant,
+        state,
+        style
+      };
+    }, [props]);
 
-    const getBaseStyles = (): BtnProps["style"] => {
+    const is_disabled = useMemo(() => state.isDisabled || state.isLoading, [state]);
+
+    const getBaseStyles = useCallback((): BtnProps["style"] => {
       return {
         parentWrapper: {},
         button: {
@@ -41,9 +47,9 @@ export const styleHooks = {
           className: "animate-spin"
         }
       };
-    };
+    }, []);
 
-    const getDynamicStyles = (): BtnProps["style"] => {
+    const getDynamicStyles = useCallback((): BtnProps["style"] => {
       const btn_state = is_disabled ? "disabled" : "enabled";
 
       const border: IStyles["border"] = variant === "ghost" ? "sm" : "none";
@@ -73,167 +79,211 @@ export const styleHooks = {
           textOpacity
         }
       };
-    };
+    }, []);
 
-    const styles: BtnProps["style"] = {
-      parentWrapper: {
-        ...getBaseStyles()?.parentWrapper,
-        ...style?.parentWrapper
-      },
-      button: {
-        ...getBaseStyles()?.button,
-        ...getDynamicStyles()?.button,
-        ...style?.button
-      },
-      contentWrapper: {
-        ...getBaseStyles()?.contentWrapper,
-        ...getDynamicStyles()?.contentWrapper,
-        ...style?.contentWrapper
-      },
-      content: {
-        ...getBaseStyles()?.content,
-        ...style?.content
-      },
-      spinner: {
-        ...getBaseStyles()?.spinner,
-        ...style?.spinner
-      }
-    };
-
-    return { ...styles };
+    return useMemo((): BtnProps["style"] => {
+      return {
+        parentWrapper: {
+          ...getBaseStyles()?.parentWrapper,
+          ...style?.parentWrapper
+        },
+        button: {
+          ...getBaseStyles()?.button,
+          ...getDynamicStyles()?.button,
+          ...style?.button
+        },
+        contentWrapper: {
+          ...getBaseStyles()?.contentWrapper,
+          ...getDynamicStyles()?.contentWrapper,
+          ...style?.contentWrapper
+        },
+        content: {
+          ...getBaseStyles()?.content,
+          ...style?.content
+        },
+        spinner: {
+          ...getBaseStyles()?.spinner,
+          ...style?.spinner
+        }
+      };
+    }, [style]);
   },
 
-  useDefaultHeading: ({ style }: { style: HeadingProps["style"] }) => {
-    const defaultHeadingStyles: HeadingProps["style"] = {
-      wrapper: {
-        ...style?.wrapper
-      },
-      childrenWrapper: {
-        flex: "row",
-        gap: "sm",
-        ...style?.childrenWrapper
-      }
-    };
+  useHeadingStyles: (props: HeadingProps["style"]) => {
+    const { style } = useMemo(() => {
+      const style = props;
+      return {
+        style
+      };
+    }, [props]);
 
-    return defaultHeadingStyles;
+    return useMemo(() => {
+      return {
+        wrapper: {
+          ...style?.wrapper
+        },
+        childrenWrapper: {
+          flex: "row",
+          gap: "sm",
+          ...style?.childrenWrapper
+        }
+      } satisfies HeadingProps["style"];
+    }, [style]);
   },
 
-  useDefaultLayout: ({ style }: { style: LayoutProps["style"] }) => {
-    const defaultLayoutStyles: LayoutProps["style"] = {
-      wrapper: {
-        padding: "lg",
-        flex: "col",
-        gap: "lg",
-        ...style?.wrapper
-      },
-      children: {
-        flex: "col",
-        gap: "md",
-        flexWrap: "wrap",
-        flexSize: "grow",
-        ...style?.wrapper
-      }
-    };
+  useLayoutStyles: (props: LayoutProps["style"]) => {
+    const { style } = useMemo(() => {
+      const style = props;
+      return {
+        style
+      };
+    }, [props]);
 
-    return defaultLayoutStyles;
+    return useMemo(() => {
+      return {
+        wrapper: {
+          padding: "lg",
+          flex: "col",
+          gap: "lg",
+          ...style?.wrapper
+        },
+        children: {
+          flex: "col",
+          gap: "md",
+          flexWrap: "wrap",
+          flexSize: "grow",
+          ...style?.wrapper
+        }
+      } satisfies LayoutProps["style"];
+    }, []);
   },
 
-  useDefaultWrapper: ({ style }: { style: WrapperProps["style"] }) => {
-    const defaultWrapperStyles: WrapperProps["style"] = {
-      parentWrapper: {
-        flex: "row",
-        ...style?.parentWrapper
-      },
-      childrenWrapper: {
-        flex: "col",
-        gap: "sm",
-        width: "full",
-        ...style?.childrenWrapper
-      }
-    };
+  useWrapperStyles: (props: WrapperProps["style"]) => {
+    const { style } = useMemo(() => {
+      const style = props;
+      return {
+        style
+      };
+    }, [props]);
 
-    return defaultWrapperStyles;
+    return useMemo(() => {
+      return {
+        parentWrapper: {
+          flex: "row",
+          ...style?.parentWrapper
+        },
+        childrenWrapper: {
+          flex: "col",
+          gap: "sm",
+          width: "full",
+          ...style?.childrenWrapper
+        }
+      } satisfies WrapperProps["style"];
+    }, [style]);
   },
 
-  useDefaultText: ({ style }: { style: TextProps["style"] }) => {
-    const defaultTextStyles: TextProps["style"] = {
-      wrapper: {
-        ...style?.wrapper
-      }
-    };
+  useTextStyles: (props: TextProps["style"]) => {
+    const { style } = useMemo(() => {
+      const style = props;
+      return {
+        style
+      };
+    }, [props]);
 
-    return defaultTextStyles;
+    return useMemo(() => {
+      return {
+        wrapper: {
+          ...style?.wrapper
+        }
+      } satisfies TextProps["style"];
+    }, [style]);
   },
 
-  useDefaultForm: ({ style }: { style: FormProps["style"] }) => {
-    const defaultFormStyles: FormProps["style"] = {
-      form: {
-        flex: "col",
-        gap: "lg",
-        width: "md",
-        rounded: "lg",
-        padding: "lg",
-        ...style?.form
-      },
-      heading: {
-        width: "full",
-        ...style?.heading
-      },
-      button: {
-        width: "full",
-        ...style?.button
-      },
-      contentWrapper: {
-        flex: "col",
-        gap: "lg",
-        ...style?.contentWrapper
-      }
-    };
+  useFormStyles: (props: FormProps["style"]) => {
+    const { style } = useMemo(() => {
+      const style = props;
+      return {
+        style
+      };
+    }, [props]);
 
-    return defaultFormStyles;
+    return useMemo(() => {
+      return {
+        form: {
+          flex: "col",
+          gap: "lg",
+          width: "md",
+          rounded: "lg",
+          padding: "lg",
+          ...style?.form
+        },
+        heading: {
+          width: "full",
+          ...style?.heading
+        },
+        button: {
+          width: "full",
+          ...style?.button
+        },
+        contentWrapper: {
+          flex: "col",
+          gap: "lg",
+          ...style?.contentWrapper
+        }
+      } satisfies FormProps["style"];
+    }, [style]);
   },
 
-  useDefaultInput: ({
-    is_error,
-    style
-  }: {
-    is_error: boolean;
-    style: InputStyleProps["style"];
-  }) => {
-    const defaultFormStyles: InputStyleProps["style"] = {
-      wrapper: {
-        flex: "col",
-        gap: "sm",
-        width: "full",
-        ...style?.wrapper
-      },
-      label: {
-        ...style?.label
-      },
-      inputWrapper: {
-        flex: "row",
-        width: "full",
-        className: "relative",
-        ...style?.inputWrapper
-      },
-      input: {
-        width: "full",
-        className: is_error ? "ring-4 ring-red-400" : "",
-        ...style?.input
-      },
-      errorIcon: {
-        className: "absolute right-3 top-[.375rem] text-red-500 text-xl",
-        ...style?.errorIcon
-      }
-    };
+  useInputStyles: (props: { is_error: boolean; style: InputStyleProps["style"] }) => {
+    const { is_error, style } = useMemo(() => {
+      const { is_error, style } = props;
+      return {
+        is_error,
+        style
+      };
+    }, [props]);
 
-    return defaultFormStyles;
+    return useMemo(() => {
+      return {
+        wrapper: {
+          flex: "col",
+          gap: "sm",
+          width: "full",
+          ...style?.wrapper
+        },
+        label: {
+          ...style?.label
+        },
+        inputWrapper: {
+          flex: "row",
+          width: "full",
+          className: "relative",
+          ...style?.inputWrapper
+        },
+        input: {
+          width: "full",
+          className: is_error ? "ring-4 ring-red-400" : "",
+          ...style?.input
+        },
+        errorIcon: {
+          className: "absolute right-3 top-[.375rem] text-red-500 text-xl",
+          ...style?.errorIcon
+        }
+      } satisfies InputStyleProps["style"];
+    }, [style, is_error]);
   },
 
-  useDefaultPulseLoader: (props: PulseProps) => {
-    const { theme = "light", style } = props;
+  usePulseStyles: (props: PulseProps) => {
+    const { theme, style } = useMemo(() => {
+      const { theme = "light", style } = props;
 
-    function getTheme(theme: PulseProps["theme"]) {
+      return {
+        theme,
+        style
+      };
+    }, [props]);
+
+    const getTheme = useCallback((theme: PulseProps["theme"]) => {
       const themes = {
         light: {
           parentTheme: "bg-slate-100",
@@ -246,50 +296,56 @@ export const styleHooks = {
       };
 
       return themes[theme!];
-    }
+    }, []);
 
-    const defaultPulseLoaderStyles: PulseProps["style"] = {
-      wrapper: {
-        animate: "pulse",
-        rounded: "lg",
-        width: "md",
-        flex: "col",
-        gap: "sm",
-        padding: "sm",
-        className: getTheme(theme).parentTheme,
-        ...style?.wrapper
-      },
-      childrenWrapper: {
-        flex: "row",
-        gap: "sm"
-      },
-      children: {
-        animate: "pulse",
-        padding: "md",
-        rounded: "xl",
-        className: getTheme(theme).childrenTheme,
-        ...style?.children
-      }
-    };
-
-    return defaultPulseLoaderStyles;
+    return useMemo(() => {
+      return {
+        wrapper: {
+          animate: "pulse",
+          rounded: "lg",
+          width: "md",
+          flex: "col",
+          gap: "sm",
+          padding: "sm",
+          className: getTheme(theme).parentTheme,
+          ...style?.wrapper
+        },
+        childrenWrapper: {
+          flex: "row",
+          gap: "sm",
+          ...style?.childrenWrapper
+        },
+        children: {
+          animate: "pulse",
+          padding: "md",
+          rounded: "xl",
+          className: getTheme(theme).childrenTheme,
+          ...style?.children
+        }
+      } satisfies PulseProps["style"];
+    }, [style, theme]);
   },
 
-  useDefaultSpinLoader: (props: SpinProps) => {
-    const { style } = props;
+  useSpinStyles: (props: SpinProps) => {
+    const { style } = useMemo(() => {
+      const { style } = props;
+      return {
+        style
+      };
+    }, [props]);
 
-    const styles: SpinProps["style"] = {
-      wrapper: {
-        ...style?.icon
-      },
-      icon: {
-        place: "center",
-        fontSize: "lg",
-        animate: "spin",
-        ...style?.icon
-      }
-    };
-
-    return styles;
+    return useMemo(() => {
+      return {
+        wrapper: {
+          ...style?.wrapper
+        },
+        icon: {
+          place: "center",
+          fontSize: "lg",
+          animate: "spin",
+          ...style?.icon
+        }
+      } satisfies SpinProps["style"];
+    }, [style]);
   }
 };

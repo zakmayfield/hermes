@@ -16,10 +16,7 @@ export type WrapperProps = {
 export const Wrapper = (props: WrapperProps) => {
   const { as = "div", children, style } = props;
 
-  const styles = styleHooks.useDefaultWrapper({
-    style
-  });
-
+  const styles = styleHooks.useWrapperStyles({ ...style });
   const classes = useClassNames({ ...styles });
 
   const ChildrenWrapper = <div className={classes.childrenWrapper}>{children}</div>;

@@ -47,7 +47,7 @@ export const styleHooks = {
           className: "animate-spin"
         }
       };
-    }, []);
+    }, [style]);
 
     const getDynamicStyles = useCallback((): BtnProps["style"] => {
       const btn_state = is_disabled ? "disabled" : "enabled";
@@ -79,7 +79,7 @@ export const styleHooks = {
           textOpacity
         }
       };
-    }, []);
+    }, [is_disabled]);
 
     return useMemo((): BtnProps["style"] => {
       return {
@@ -106,7 +106,7 @@ export const styleHooks = {
           ...style?.spinner
         }
       };
-    }, [style]);
+    }, [is_disabled, style]);
   },
 
   useHeadingStyles: (props: HeadingProps["style"]) => {

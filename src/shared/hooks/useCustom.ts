@@ -1,5 +1,5 @@
 "use client";
-import { FormEvent } from "react";
+import { FormEvent, useMemo } from "react";
 import { useForm, DefaultValues, FieldValues, Resolver } from "react-hook-form";
 import {
   MutationFunction,
@@ -28,56 +28,58 @@ export type UseCustomFormParams<R, T extends FieldValues> = {
   mutate?: UseMutateFunction<R, Error, T, unknown>;
 };
 
-export const customHooks = {
-  useCustomMutation: <T, V>(props: UseCustomMutationParams<T, V>) => {
-    const { mutationFn, handleSuccess, handleError } = props;
+export const customHooks = useMemo(() => {
+  return {
+    useCustomMutation: <T, V>(props: UseCustomMutationParams<T, V>) => {
+      const { mutationFn, handleSuccess, handleError } = props;
 
-    const { mutate, error, data, variables, isPending } = useMutation<
-      T,
-      Error,
-      V,
-      unknown
-    >({
-      mutationFn,
-      onSuccess(data, variables) {
-        handleSuccess?.(data, variables);
-      },
-      onError(error, variables) {
-        handleError?.(error, variables);
-      }
-    });
+      const { mutate, error, data, variables, isPending } = useMutation<
+        T,
+        Error,
+        V,
+        unknown
+      >({
+        mutationFn,
+        onSuccess(data, variables) {
+          handleSuccess?.(data, variables);
+        },
+        onError(error, variables) {
+          handleError?.(error, variables);
+        }
+      });
 
-    return { mutate, error, data, variables, isPending };
-  },
+      return { mutate, error, data, variables, isPending };
+    },
 
-  useCustomQuery: <T>(props: UseCustomQueryParams<T>) => {
-    const { queryKey, queryFn, staleTime = Infinity } = props;
+    useCustomQuery: <T>(props: UseCustomQueryParams<T>) => {
+      const { queryKey, queryFn, staleTime = Infinity } = props;
 
-    const { data, error, isLoading } = useQuery<T, Error>({
-      queryKey,
-      queryFn,
-      staleTime
-    });
+      const { data, error, isLoading } = useQuery<T, Error>({
+        queryKey,
+        queryFn,
+        staleTime
+      });
 
-    return { data, error, isLoading };
-  },
+      return { data, error, isLoading };
+    },
 
-  useCustomForm: <R, T extends FieldValues>(props: UseCustomFormParams<R, T>) => {
-    const { defaultValues, resolver, mutate } = props;
+    useCustomForm: <R, T extends FieldValues>(props: UseCustomFormParams<R, T>) => {
+      const { defaultValues, resolver, mutate } = props;
 
-    const { register, handleSubmit, reset, getValues, formState } = useForm({
-      defaultValues,
-      resolver
-    });
+      const { register, handleSubmit, reset, getValues, formState } = useForm({
+        defaultValues,
+        resolver
+      });
 
-    const handleReset = () => reset(defaultValues);
+      const handleReset = () => reset(defaultValues);
 
-    const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      const data = getValues();
-      handleSubmit(() => mutate?.(data))();
-    };
+      const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const data = getValues();
+        handleSubmit(() => mutate?.(data))();
+      };
 
-    return { register, onSubmit, handleReset, formState };
-  }
-};
+      return { register, onSubmit, handleReset, formState };
+    }
+  };
+}, []);

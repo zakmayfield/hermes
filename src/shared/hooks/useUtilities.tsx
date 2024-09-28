@@ -1,5 +1,5 @@
 "use client";
-import { RefAttributes, useState } from "react";
+import { RefAttributes, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import { ITooltip, TooltipRefProps, Tooltip } from "react-tooltip";
 import { FaChevronDown } from "react-icons/fa";
@@ -20,85 +20,87 @@ type AccordionItem = {
   }[];
 };
 
-export const utilityHooks = {
-  useToast: () => {
-    const notify = (message: string, variant?: ToastVariants) => {
-      const defaultVariant = !variant ? "success" : variant;
-      return toast[defaultVariant](message);
-    };
+export const utilityHooks = useMemo(() => {
+  return {
+    useToast: () => {
+      const notify = (message: string, variant?: ToastVariants) => {
+        const defaultVariant = !variant ? "success" : variant;
+        return toast[defaultVariant](message);
+      };
 
-    return {
-      notify
-    };
-  },
+      return {
+        notify
+      };
+    },
 
-  useTooltip: (props: TooltipProps) => {
-    const tt = () => <Tooltip {...props} />;
+    useTooltip: (props: TooltipProps) => {
+      const tt = () => <Tooltip {...props} />;
 
-    return {
-      Tooltip: tt
-    };
-  },
+      return {
+        Tooltip: tt
+      };
+    },
 
-  useAccordion: (props: AccordionProps) => {
-    const [expandedId, setExpandedId] = useState<string | null>(null);
-    const is_expanded = (id: string) => id === expandedId;
-    const handle_expand = (id: string) =>
-      is_expanded(id) ? setExpandedId(null) : setExpandedId(id);
+    useAccordion: (props: AccordionProps) => {
+      const [expandedId, setExpandedId] = useState<string | null>(null);
+      const is_expanded = (id: string) => id === expandedId;
+      const handle_expand = (id: string) =>
+        is_expanded(id) ? setExpandedId(null) : setExpandedId(id);
 
-    const { data } = props;
+      const { data } = props;
 
-    const AccordionItem = (item: AccordionItem) => {
-      const { id, title, body } = item;
+      const AccordionItem = (item: AccordionItem) => {
+        const { id, title, body } = item;
 
-      return (
-        <Wrapper style={{ parentWrapper: { rounded: "lg", bg: "bg-slate-800" } }}>
-          <Wrapper
-            style={{ childrenWrapper: { flex: "row", paddingX: "lg", paddingY: "md" } }}
-          >
-            <Text>{title}</Text>
-            <Btn
-              Icon={FaChevronDown}
-              handleClick={() => handle_expand(id)}
+        return (
+          <Wrapper style={{ parentWrapper: { rounded: "lg", bg: "bg-slate-800" } }}>
+            <Wrapper
+              style={{ childrenWrapper: { flex: "row", paddingX: "lg", paddingY: "md" } }}
+            >
+              <Text>{title}</Text>
+              <Btn
+                Icon={FaChevronDown}
+                handleClick={() => handle_expand(id)}
+                style={{
+                  button: {
+                    buttonHeight: "sm",
+                    className: (is_expanded(id) && "rotate-180") || ""
+                  }
+                }}
+              />
+            </Wrapper>
+
+            <Wrapper
               style={{
-                button: {
-                  buttonHeight: "sm",
-                  className: (is_expanded(id) && "rotate-180") || ""
-                }
+                parentWrapper: { className: (!is_expanded(id) && "hidden") || "" },
+                childrenWrapper: { padding: "lg", gap: "lg" }
               }}
-            />
+            >
+              {body.map((item) => (
+                <Wrapper
+                  key={`${item.id}`}
+                  style={{ parentWrapper: { padding: "sm" } }}
+                >
+                  {item.child}
+                </Wrapper>
+              ))}
+            </Wrapper>
           </Wrapper>
+        );
+      };
 
-          <Wrapper
-            style={{
-              parentWrapper: { className: (!is_expanded(id) && "hidden") || "" },
-              childrenWrapper: { padding: "lg", gap: "lg" }
-            }}
-          >
-            {body.map((item) => (
-              <Wrapper
-                key={`${item.id}`}
-                style={{ parentWrapper: { padding: "sm" } }}
-              >
-                {item.child}
-              </Wrapper>
-            ))}
-          </Wrapper>
+      const Accordion = () => (
+        <Wrapper style={{ childrenWrapper: { padding: "lg", flex: "col" } }}>
+          {data.map((item) => (
+            <AccordionItem
+              key={item.id}
+              {...item}
+            />
+          ))}
         </Wrapper>
       );
-    };
 
-    const Accordion = () => (
-      <Wrapper style={{ childrenWrapper: { padding: "lg", flex: "col" } }}>
-        {data.map((item) => (
-          <AccordionItem
-            key={item.id}
-            {...item}
-          />
-        ))}
-      </Wrapper>
-    );
-
-    return { Accordion, handle_expand, is_expanded };
-  }
-};
+      return { Accordion, handle_expand, is_expanded };
+    }
+  };
+}, []);

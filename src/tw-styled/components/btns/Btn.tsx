@@ -1,9 +1,10 @@
 "use client";
 import { IconType } from "react-icons";
-import { BtnVariants, IStyles, StyleObj } from "@/tw-styled/Styles";
+import { BtnVariants, IStyles } from "@/tw-styled/Styles";
 import { useClassNames } from "@/tw-styled";
 import { styleHooks } from "@/tw-styled/hooks/styleHooks";
 import { PiSpinnerGap } from "react-icons/pi";
+import { useStyles } from "@/tw-styled/hooks";
 
 export type BtnProps = {
   Icon?: IconType;
@@ -39,14 +40,23 @@ export const Btn = (props: BtnProps) => {
     style
   } = props;
 
-  const styles = styleHooks.useBtnStyles({
-    variant,
-    state: { isLoading, isDisabled },
-    style
-  });
-  const classes = useClassNames({ ...styles });
+  // const styles = useStyles({
+  //   key: "btn",
+  //   style,
+  //   options: {
+  //     state: {
+  //       isLoading,
+  //       isDisabled
+  //     },
+  //     btn: {
+  //       variant
+  //     }
+  //   }
+  // });
 
   const disabled = isDisabled || isLoading;
+  const x = styleHooks.useBtnStyles({ variant, style, disabled });
+  const classes = useClassNames({ ...x });
 
   return (
     <div className={classes.parentWrapper}>

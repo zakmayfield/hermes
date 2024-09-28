@@ -3,9 +3,8 @@
 import React, { FC, FormEvent } from "react";
 import { IStyles } from "@/tw-styled/Styles";
 import { useClassNames } from "@/tw-styled";
-import { Heading } from "./Heading";
 import { Btn } from "../btns";
-import { styleHooks } from "@/tw-styled/hooks";
+import { styleHooks, useStyles } from "@/tw-styled/hooks";
 
 export type FormProps = {
   children?: React.ReactNode;
@@ -24,17 +23,14 @@ export type FormProps = {
 export const Form: FC<FormProps> = (props) => {
   const { children, title, onSubmit, buttonText = "Submit", isPending, style } = props;
 
-  const styles = styleHooks.useFormStyles({ ...style });
-  const classes = useClassNames({ ...styles });
+  // const styles = useStyles({
+  //   key: "form",
+  //   style
+  // });
+  const x = styleHooks.useFormStyles({ ...style });
+  const classes = useClassNames({ ...x });
 
-  const heading = title && (
-    <Heading
-      as="h3"
-      style={{ wrapper: { className: classes.heading } }}
-    >
-      {title}
-    </Heading>
-  );
+  const heading = title && <h3 className={classes.heading}>{title}</h3>;
 
   const button = (
     <Btn

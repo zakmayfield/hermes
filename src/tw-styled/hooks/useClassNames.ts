@@ -1,9 +1,9 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { IStyles, StyleObj } from "../Styles";
 import { merge } from "../utils/class-merge";
 import { useClassHandlers } from "../utils/class-handlers";
 
-export const useClassNames = (style: StyleObj) => {
+export const useClassNames = (props: StyleObj) => {
   const classHandlers = useClassHandlers();
 
   return useCallback(
@@ -44,6 +44,6 @@ export const useClassNames = (style: StyleObj) => {
 
       return result;
     },
-    [style]
-  )(style);
+    [props]
+  )(props);
 };

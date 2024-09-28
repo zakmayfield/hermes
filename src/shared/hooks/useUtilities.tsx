@@ -20,87 +20,85 @@ type AccordionItem = {
   }[];
 };
 
-export const utilityHooks = useMemo(() => {
-  return {
-    useToast: () => {
-      const notify = (message: string, variant?: ToastVariants) => {
-        const defaultVariant = !variant ? "success" : variant;
-        return toast[defaultVariant](message);
-      };
+export const utilityHooks = {
+  useToast: () => {
+    const notify = (message: string, variant?: ToastVariants) => {
+      const defaultVariant = !variant ? "success" : variant;
+      return toast[defaultVariant](message);
+    };
 
-      return {
-        notify
-      };
-    },
+    return {
+      notify
+    };
+  },
 
-    useTooltip: (props: TooltipProps) => {
-      const tt = () => <Tooltip {...props} />;
+  useTooltip: (props: TooltipProps) => {
+    const tt = () => <Tooltip {...props} />;
 
-      return {
-        Tooltip: tt
-      };
-    },
+    return {
+      Tooltip: tt
+    };
+  },
 
-    useAccordion: (props: AccordionProps) => {
-      const [expandedId, setExpandedId] = useState<string | null>(null);
-      const is_expanded = (id: string) => id === expandedId;
-      const handle_expand = (id: string) =>
-        is_expanded(id) ? setExpandedId(null) : setExpandedId(id);
+  useAccordion: (props: AccordionProps) => {
+    const [expandedId, setExpandedId] = useState<string | null>(null);
+    const is_expanded = (id: string) => id === expandedId;
+    const handle_expand = (id: string) =>
+      is_expanded(id) ? setExpandedId(null) : setExpandedId(id);
 
-      const { data } = props;
+    const { data } = props;
 
-      const AccordionItem = (item: AccordionItem) => {
-        const { id, title, body } = item;
+    const AccordionItem = (item: AccordionItem) => {
+      const { id, title, body } = item;
 
-        return (
-          <Wrapper style={{ parentWrapper: { rounded: "lg", bg: "bg-slate-800" } }}>
-            <Wrapper
-              style={{ childrenWrapper: { flex: "row", paddingX: "lg", paddingY: "md" } }}
-            >
-              <Text>{title}</Text>
-              <Btn
-                Icon={FaChevronDown}
-                handleClick={() => handle_expand(id)}
-                style={{
-                  button: {
-                    buttonHeight: "sm",
-                    className: (is_expanded(id) && "rotate-180") || ""
-                  }
-                }}
-              />
-            </Wrapper>
-
-            <Wrapper
+      return (
+        <Wrapper style={{ parentWrapper: { rounded: "lg", bg: "bg-slate-800" } }}>
+          <Wrapper
+            style={{ childrenWrapper: { flex: "row", paddingX: "lg", paddingY: "md" } }}
+          >
+            <Text>{title}</Text>
+            <Btn
+              Icon={FaChevronDown}
+              handleClick={() => handle_expand(id)}
               style={{
-                parentWrapper: { className: (!is_expanded(id) && "hidden") || "" },
-                childrenWrapper: { padding: "lg", gap: "lg" }
+                button: {
+                  buttonHeight: "sm",
+                  className: (is_expanded(id) && "rotate-180") || ""
+                }
               }}
-            >
-              {body.map((item) => (
-                <Wrapper
-                  key={`${item.id}`}
-                  style={{ parentWrapper: { padding: "sm" } }}
-                >
-                  {item.child}
-                </Wrapper>
-              ))}
-            </Wrapper>
-          </Wrapper>
-        );
-      };
-
-      const Accordion = () => (
-        <Wrapper style={{ childrenWrapper: { padding: "lg", flex: "col" } }}>
-          {data.map((item) => (
-            <AccordionItem
-              key={item.id}
-              {...item}
             />
-          ))}
+          </Wrapper>
+
+          <Wrapper
+            style={{
+              parentWrapper: { className: (!is_expanded(id) && "hidden") || "" },
+              childrenWrapper: { padding: "lg", gap: "lg" }
+            }}
+          >
+            {body.map((item) => (
+              <Wrapper
+                key={`${item.id}`}
+                style={{ parentWrapper: { padding: "sm" } }}
+              >
+                {item.child}
+              </Wrapper>
+            ))}
+          </Wrapper>
         </Wrapper>
       );
+    };
 
-      return { Accordion, handle_expand, is_expanded };
-    }
-  };
-}, []);
+    const Accordion = () => (
+      <Wrapper style={{ childrenWrapper: { padding: "lg", flex: "col" } }}>
+        {data.map((item) => (
+          <AccordionItem
+            key={item.id}
+            {...item}
+          />
+        ))}
+      </Wrapper>
+    );
+
+    return { Accordion, handle_expand, is_expanded };
+  }
+};

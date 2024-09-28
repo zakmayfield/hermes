@@ -4,7 +4,7 @@ import { utilityHooks } from "@/shared/hooks";
 import { IStyles } from "@/tw-styled/Styles";
 import { useClassNames } from "@/tw-styled";
 import { FormFieldError } from "../wrappers";
-import { styleHooks } from "@/tw-styled/hooks";
+import { styleHooks, useStyles } from "@/tw-styled/hooks";
 import { useIcons } from "@/tw-styled/hooks/useIcons";
 
 type InputProps<T extends FieldValues> = InputStyleProps & {
@@ -20,7 +20,7 @@ type InputProps<T extends FieldValues> = InputStyleProps & {
 
 export type InputStyleProps = {
   style?: {
-    wrapper?: IStyles;
+    parentWrapper?: IStyles;
     label?: IStyles;
     inputWrapper?: IStyles;
     input?: IStyles;
@@ -41,9 +41,24 @@ export const Input: FC<InputProps<any>> = (props) => {
   } = props;
   const is_error = !!error;
 
-  const icons = useIcons(["error"]);
-  const styles = styleHooks.useInputStyles({ is_error, style });
-  const classes = useClassNames({ ...styles });
+  const icons = useIcons({
+    names: ["error"]
+  });
+
+  // const styles = useStyles({
+  //   key: "input",
+  //   style,
+  //   options: {
+  //     input: {
+  //       is_error
+  //     }
+  //   }
+  // });
+  const x = styleHooks.useInputStyles({
+    style,
+    is_error
+  });
+  const classes = useClassNames({ ...x });
 
   const name = props.name as string;
 
@@ -97,7 +112,7 @@ export const Input: FC<InputProps<any>> = (props) => {
   );
 
   return (
-    <div className={classes.wrapper}>
+    <div className={classes.parentWrapper}>
       {Label}
       {InputWrapper}
       {FieldError}

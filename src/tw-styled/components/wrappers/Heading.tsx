@@ -1,12 +1,12 @@
 import React from "react";
-import { styleHooks, useClassNames } from "@/tw-styled/hooks/";
+import { styleHooks, useClassNames, useStyles } from "@/tw-styled/hooks";
 import { Children, Headings, IStyles } from "@/tw-styled/Styles";
 
 export type HeadingProps = {
   as?: Headings;
   children?: Children;
   style?: {
-    wrapper?: IStyles;
+    parentWrapper?: IStyles;
     childrenWrapper?: IStyles;
   };
 };
@@ -14,10 +14,15 @@ export type HeadingProps = {
 export const Heading = (props: HeadingProps) => {
   const { as = "h1", children, style } = props;
 
-  const styles = styleHooks.useHeadingStyles({ ...style });
-  const classes = useClassNames({ ...styles });
+  // const styles = useStyles({
+  //   key: "heading",
+  //   style
+  // });
+  const x = styleHooks.useHeadingStyles({
+    ...style
+  });
+  const classes = useClassNames({ ...x });
 
   const ChildrenWrapper = <div className={classes.childrenWrapper}>{children}</div>;
-
-  return React.createElement(as, { className: classes.wrapper }, ChildrenWrapper);
+  return React.createElement(as, { className: classes.parentWrapper }, ChildrenWrapper);
 };

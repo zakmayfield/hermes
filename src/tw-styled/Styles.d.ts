@@ -15,6 +15,17 @@ export type WrapperElements =
   | "ul";
 export type TextElements = "p" | "span" | "li" | "figure" | "a" | "i" | "em" | "strong";
 export type BtnVariants = "primary" | "warning" | "ghost";
+export type StyleHookKeys =
+  | "layout"
+  | "wrapper"
+  | "heading"
+  | "text"
+  | "form"
+  | "input"
+  | "btn"
+  | "pulse"
+  | "spin";
+
 export type IStyles = IDimensions &
   ISpacing &
   IAlignment &

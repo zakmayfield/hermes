@@ -1,11 +1,26 @@
 import { useCallback, useMemo } from "react";
 import { IconType } from "react-icons";
-import { PiSpinnerGap, PiShoppingCart, PiWarningCircle } from "react-icons/pi";
+import {
+  PiSpinnerGap,
+  PiSpinnerGapDuotone,
+  PiShoppingCart,
+  PiShoppingCartDuotone,
+  PiWarningCircle,
+  PiWarningCircleDuotone
+} from "react-icons/pi";
 
-type IconName = "spin" | "cart" | "error";
+type IconNames = "spin" | "cart" | "error";
+type IconVariants = "base" | "duotone";
 
-export const useIcons = (names: IconName[]) => {
-  const iconMap = useCallback(() => {
+type UseIconsProps = {
+  names: IconNames[];
+  variant?: IconVariants;
+};
+
+export const useIcons = (props: UseIconsProps) => {
+  const { names, variant = "base" } = props;
+
+  const getBaseIcons = useCallback(() => {
     return {
       spin: PiSpinnerGap,
       cart: PiShoppingCart,
@@ -13,11 +28,29 @@ export const useIcons = (names: IconName[]) => {
     };
   }, []);
 
+  const getVariantIcons = useCallback(() => {
+    return {
+      spin: PiSpinnerGapDuotone,
+      cart: PiShoppingCartDuotone,
+      error: PiWarningCircleDuotone
+    };
+  }, []);
+
+  const iconMap = useMemo(() => {
+    return {
+      base: getBaseIcons(),
+      duotone: getVariantIcons()
+    };
+  }, [getBaseIcons, getVariantIcons]);
+
   const icons = useMemo(() => {
     return names.reduce((acc, name) => {
-      return { ...acc, [name]: iconMap()[name] };
-    }, {}) as Record<IconName, IconType>;
-  }, [names, iconMap]);
+      return {
+        ...acc,
+        [name]: iconMap[variant][name]
+      };
+    }, {}) as Record<IconNames, IconType>;
+  }, [names, variant, iconMap]);
 
   return icons;
 };

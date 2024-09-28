@@ -11,29 +11,20 @@ export type BtnStory = StoryObj<typeof meta>;
 export const Primary: BtnStory = {
   args: {
     text: "Submit",
-    variant: "primary",
-    style: {
-      button: {}
-    }
+    variant: "primary"
   }
 };
 
 export const Warning: BtnStory = {
   args: {
     text: "Submit",
-    variant: "warning",
-    style: {
-      button: {}
-    }
+    variant: "warning"
   }
 };
 
 export const Ghost: BtnStory = {
   args: {
     text: "Submit",
-    variant: "ghost",
-    style: {
-      button: {}
-    }
+    variant: "ghost"
   }
 };

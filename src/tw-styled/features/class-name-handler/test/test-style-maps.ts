@@ -1,37 +1,39 @@
 import { useMemo } from "react";
 
-export const useStyleMaps = () => {
+type Maps = Record<string, Record<string, string>>;
+
+export const useTestStyleMaps = () => {
   return useMemo(() => {
     const baseMap = {
       none: ""
     };
 
-    const styleMaps = {
-      flexPositionMap: {
-        row: {
-          "top-left": "items-start",
-          "center-left": "items-center justify-start",
-          "bottom-left": "items-end",
-          "top-center": "items-start justify-center",
-          "center-center": "items-center justify-center",
-          "bottom-center": "items-end justify-center",
-          "top-right": "items-start justify-end",
-          "center-right": "items-center justify-end",
-          "bottom-right": "items-end justify-end"
-        },
-        col: {
-          "top-left": "justify-start",
-          "center-left": "justify-center",
-          "bottom-left": "justify-end",
-          "top-center": "items-center justify-start",
-          "center-center": "items-center justify-center",
-          "bottom-center": "items-center justify-end",
-          "top-right": "items-end justify-start",
-          "center-right": "items-end justify-end",
-          "bottom-right": "items-end justify-end"
-        }
+    const flexPositionMap: Record<string, Record<string, string>> = {
+      row: {
+        "top-left": "items-start",
+        "center-left": "items-center justify-start",
+        "bottom-left": "items-end",
+        "top-center": "items-start justify-center",
+        "center-center": "items-center justify-center",
+        "bottom-center": "items-end justify-center",
+        "top-right": "items-start justify-end",
+        "center-right": "items-center justify-end",
+        "bottom-right": "items-end justify-end"
       },
+      col: {
+        "top-left": "justify-start",
+        "center-left": "justify-center",
+        "bottom-left": "justify-end",
+        "top-center": "items-center justify-start",
+        "center-center": "items-center justify-center",
+        "bottom-center": "items-center justify-end",
+        "top-right": "items-end justify-start",
+        "center-right": "items-end justify-end",
+        "bottom-right": "items-end justify-end"
+      }
+    };
 
+    const styleMaps: Maps = {
       paddingMap: {
         ...baseMap,
         zero: "p-0",
@@ -235,6 +237,6 @@ export const useStyleMaps = () => {
       }
     };
 
-    return styleMaps;
+    return { styleMaps, flexPositionMap };
   }, []);
 };

@@ -36,7 +36,7 @@ export default async function RootLayout({
 
           <Layout
             style={{
-              wrapper: {
+              parentWrapper: {
                 width: "3xl",
                 place: "center",
                 border: "sm",

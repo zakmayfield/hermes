@@ -13,7 +13,7 @@ export const Default: LayoutStory = {
     title: "Layout Title",
     children: "Layout Children",
     style: {
-      wrapper: {
+      parentWrapper: {
         border: "sm",
         rounded: "lg",
         height: "screen"
@@ -22,7 +22,7 @@ export const Default: LayoutStory = {
         border: "sm",
         rounded: "md"
       },
-      children: {
+      childrenWrapper: {
         border: "sm",
         rounded: "md"
       }

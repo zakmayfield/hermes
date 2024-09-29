@@ -14,7 +14,7 @@ export const Spin = (props: SpinProps) => {
   const { style } = props;
 
   const styles = styleHooks.useSpinStyles({ style });
-  const classes = useClassNames({ ...styles });
+  const classes = useClassNames(styles);
 
   return (
     <div className={classes.wrapper}>

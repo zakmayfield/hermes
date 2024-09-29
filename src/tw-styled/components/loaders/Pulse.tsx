@@ -1,4 +1,5 @@
-import { styleHooks, useClassNames } from "@/tw-styled/hooks";
+import { styleHooks } from "@/tw-styled/hooks";
+import { useClassNames } from "@/tw-styled/hooks/useClassNames";
 import { IStyles, Sizes, Themes } from "@/tw-styled/Styles";
 import { merge } from "@/tw-styled/utils/class-merge";
 
@@ -19,7 +20,7 @@ export const Pulse = (props: PulseProps) => {
     theme,
     style
   });
-  const classes = useClassNames({ ...styles });
+  const classes = useClassNames(styles);
 
   switch (size) {
     default:

@@ -167,6 +167,7 @@ export const styleHooks = {
           gap: "lg",
           ...style?.parentWrapper
         },
+        heading: { ...style?.heading },
         childrenWrapper: {
           flex: "col",
           gap: "md",

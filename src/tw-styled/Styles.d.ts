@@ -1,5 +1,6 @@
 export type StyleObj = Record<string, IStyles>;
 export type Children = React.ReactNode;
+
 export type Headings = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 export type Themes = "light" | "dark";
 export type WrapperElements =
@@ -33,6 +34,8 @@ export type IStyles = IDimensions &
   IOther & {
     className?: string;
   };
+
+export type StyleKeys = keyof IStyles;
 
 interface IDimensions {
   width?: SizesWithFull | ExtendedSizes;

@@ -2,9 +2,9 @@
 
 import React, { FC, FormEvent } from "react";
 import { IStyles } from "@/tw-styled/Styles";
-import { useClassNames } from "@/tw-styled";
 import { Btn } from "../btns";
-import { styleHooks, useStyles } from "@/tw-styled/hooks";
+import { styleHooks } from "@/tw-styled/hooks";
+import { useClassNames } from "@/tw-styled/hooks/useClassNames";
 
 export type FormProps = {
   children?: React.ReactNode;
@@ -23,12 +23,8 @@ export type FormProps = {
 export const Form: FC<FormProps> = (props) => {
   const { children, title, onSubmit, buttonText = "Submit", isPending, style } = props;
 
-  // const styles = useStyles({
-  //   key: "form",
-  //   style
-  // });
-  const x = styleHooks.useFormStyles({ ...style });
-  const classes = useClassNames({ ...x });
+  const styles = styleHooks.useFormStyles(style);
+  const classes = useClassNames(styles);
 
   const heading = title && <h3 className={classes.heading}>{title}</h3>;
 

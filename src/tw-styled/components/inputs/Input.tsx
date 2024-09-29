@@ -2,10 +2,11 @@ import { FC } from "react";
 import { FieldError, FieldValues, UseFormRegister } from "react-hook-form";
 import { utilityHooks } from "@/shared/hooks";
 import { IStyles } from "@/tw-styled/Styles";
-import { useClassNames } from "@/tw-styled";
 import { FormFieldError } from "../wrappers";
-import { styleHooks, useStyles } from "@/tw-styled/hooks";
+import { styleHooks, useClasses, useStyles } from "@/tw-styled/hooks";
 import { useIcons } from "@/tw-styled/hooks/useIcons";
+import { useTestClasses } from "@/tw-styled/hooks/testHook";
+import { useClassNames } from "@/tw-styled/hooks/useClassNames";
 
 type InputProps<T extends FieldValues> = InputStyleProps & {
   name: keyof T;
@@ -45,20 +46,11 @@ export const Input: FC<InputProps<any>> = (props) => {
     names: ["error"]
   });
 
-  // const styles = useStyles({
-  //   key: "input",
-  //   style,
-  //   options: {
-  //     input: {
-  //       is_error
-  //     }
-  //   }
-  // });
-  const x = styleHooks.useInputStyles({
+  const styles = styleHooks.useInputStyles({
     style,
     is_error
   });
-  const classes = useClassNames({ ...x });
+  const classes = useClassNames(styles);
 
   const name = props.name as string;
 
@@ -82,6 +74,7 @@ export const Input: FC<InputProps<any>> = (props) => {
   const InputWrapper = (
     <div className={classes.inputWrapper}>
       <input
+        // TODO: classes are not being added to input
         className={classes.input}
         type={type}
         placeholder={label}

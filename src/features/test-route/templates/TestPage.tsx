@@ -1,10 +1,9 @@
 "use client";
-
-import { useClassNames } from "@/tw-styled";
 import { Layout } from "@/tw-styled/components";
+import { useClasses } from "@/tw-styled/hooks";
 
 export const TestPage = () => {
-  const classes = useClassNames({
+  const { classes } = useClasses({
     wrapper_one: {
       height: "sm",
       width: "sm",
@@ -23,7 +22,7 @@ export const TestPage = () => {
         title="Layout"
         heading="h1"
         style={{
-          wrapper: {
+          parentWrapper: {
             width: "full",
             border: "sm"
           },
@@ -32,7 +31,7 @@ export const TestPage = () => {
             width: "sm",
             place: "right"
           },
-          children: {
+          childrenWrapper: {
             flex: "row",
             gap: "lg",
             flexPosition: "bottom-left",

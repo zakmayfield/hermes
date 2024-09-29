@@ -1,8 +1,7 @@
 "use client";
-import { useClassNames } from "@/tw-styled";
 import { Children, IStyles, Headings } from "@/tw-styled/Styles";
 import { Heading } from "./Heading";
-import { styleHooks, useStyles } from "@/tw-styled/hooks";
+import { styleHooks, useClassNames } from "@/tw-styled/hooks";
 
 export type LayoutProps = {
   heading?: Headings;
@@ -18,12 +17,8 @@ export type LayoutProps = {
 export const Layout = (props: LayoutProps) => {
   const { children, heading = "h1", title = "", style } = props;
 
-  // const styles = useStyles({
-  //   key: "layout",
-  //   style
-  // });
-  const x = styleHooks.useLayoutStyles({ ...style });
-  const classes = useClassNames({ ...x });
+  const styles = styleHooks.useLayoutStyles(style);
+  const classes = useClassNames(styles);
 
   return (
     <div className={classes.parentWrapper}>

@@ -4,7 +4,8 @@ import {
   HeadingElements,
   TextElements,
   WrapperElements,
-  Themes
+  Themes,
+  Sizes
 } from "@/tw-styled/types";
 import { FormEvent } from "react";
 import { IconType } from "react-icons";

@@ -13,7 +13,6 @@ export type StylePropKeys = keyof StyleProps;
 
 interface ILayout {
   width?: string;
-  maxWidth?: string;
   height?: string;
   maxHeight?: string;
   border?: string;
@@ -89,3 +88,38 @@ interface IOther {
   cursor: string;
   className?: string;
 }
+
+export type Sizes = "sm" | "md" | "lg";
+type ExtendedSizes = "xl" | "2xl" | "3xl";
+type SizesWithZero = Sizes | "zero";
+type SizesWithFull = Sizes | "full";
+type None = "none";
+type Full = "full";
+type Screen = "screen";
+type FlexDirections = "row" | "col";
+type FlexPositions =
+  | "top-left"
+  | "center-left"
+  | "bottom-left"
+  | "top-center"
+  | "center-center"
+  | "bottom-center"
+  | "top-right"
+  | "center-right"
+  | "bottom-right";
+type FlexSpacing = "space-between" | "space-evenly" | "space-around";
+type FlexSize = "grow" | "shrink" | "nogrow" | "noshrink";
+type FlexWrap = "wrap" | "nowrap";
+type FontWeights = "light" | "normal" | "bold";
+type Opacities = "light" | "medium" | "dark" | "opaque";
+type Places = "left" | "center" | "right";
+type Displays =
+  | "relative"
+  | "absolute"
+  | "fixed"
+  | "sticky"
+  | "inline"
+  | "inline-block"
+  | "inline-flex"
+  | "hidden";
+type Animations = "spin" | "pulse";

@@ -14,7 +14,7 @@ export const SignInForm = () => {
     console.log({ result1 });
   }, []);
   useEffect(() => {
-    const result2 = getStyleMapGroup("layout");
+    const result2 = getStyleMapGroup("typography");
     console.log({ result2 });
   }, []);
   useEffect(() => {
@@ -22,7 +22,7 @@ export const SignInForm = () => {
     console.log({ result3 });
   }, []);
   useEffect(() => {
-    const result4 = getStyleMapFromGroup("margin", "marginBottom");
+    const result4 = getStyleMapFromGroup("alignment", "flexRowPosition");
     console.log({ result4 });
   }, []);
 

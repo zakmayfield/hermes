@@ -12,90 +12,93 @@ export type StyleProps = ILayout &
 export type StylePropKeys = keyof StyleProps;
 
 interface ILayout {
-  width?: string;
-  height?: string;
-  maxHeight?: string;
-  border?: string;
-  rounded?: string;
-  display?: string;
-  position?: string;
+  width?: Sizes | ExtendedSizes | Full;
+  height?: Sizes | Screen | Full;
+  maxHeight?: Sizes;
+  border?: Sizes;
+  rounded?: Sizes | "xl";
+  display?: Displays;
+  position?: Positions;
 }
 
 interface IPadding {
-  padding?: string;
-  paddingX?: string;
-  paddingY?: string;
-  paddingTop?: string;
-  paddingBottom?: string;
-  paddingLeft?: string;
-  paddingRight?: string;
+  padding?: Sizes | Zero;
+  paddingX?: Sizes | Zero;
+  paddingY?: Sizes | Zero;
+  paddingTop?: Sizes | Zero;
+  paddingBottom?: Sizes | Zero;
+  paddingLeft?: Sizes | Zero;
+  paddingRight?: Sizes | Zero;
 }
 
 interface IMargin {
-  margin?: string;
-  marginX?: string;
-  marginY?: string;
-  marginTop?: string;
-  marginBottom?: string;
-  marginLeft?: string;
-  marginRight?: string;
+  margin?: Sizes | Zero;
+  marginX?: Sizes | Zero;
+  marginY?: Sizes | Zero;
+  marginTop?: Sizes | Zero;
+  marginBottom?: Sizes | Zero;
+  marginLeft?: Sizes | Zero;
+  marginRight?: Sizes | Zero;
 }
 
 interface IAlignment {
-  flex?: string;
-  flexPosition?: string;
-  flexSpacing?: string;
-  flexWrap?: string;
-  fleSize?: string;
-  gap?: string;
-  place?: string;
+  flex?: FlexDirections;
+  flexRowPosition?: FlexPositions;
+  flexColPosition?: FlexPositions;
+  flexSpacing?: FlexSpacing;
+  flexWrap?: FlexWrap;
+  flexSize?: FlexSize;
+  gap?: Sizes;
+  place?: Places;
 }
 
 interface ITypography {
-  fontSize?: string;
-  fontWeight?: string;
-  textOpacity?: string;
-  textColor?: string;
-  textDecoration?: string;
-  textAlign?: string;
-  lineHeight?: string;
-  letterSpacing?: string;
+  fontSize?: Sizes;
+  fontWeight?: FontWeight;
+  textOpacity?: Opacities;
+  textColor?: TextColor;
+  textDecoration?: TextDecorations;
+  textAlign?: TextAlign;
+  lineHeight?: LineHeight;
+  letterSpacing?: LetterSpacing;
 }
 
 interface IBackground {
-  bgColor?: string;
-  bgOpacity?: string;
-  bgImage?: string;
-  bgPosition?: string;
+  bgColor?: BgColor;
+  bgOpacity?: Opacities;
 }
 
 interface IAnimations {
-  animate?: string;
+  animate?: Animations;
 }
 
 interface IButton {
-  buttonSize?: string;
-  buttonWidth?: string;
-  buttonHeight?: string;
+  buttonSize?: Sizes | Full;
+  buttonWidth?: Sizes | Full;
+  buttonHeight?: Sizes;
 }
 
 interface ILoader {
-  loaderWidth?: string;
+  loaderWidth?: Sizes | Full;
 }
 
 interface IOther {
-  opacity: string;
-  cursor: string;
+  opacity: Opacities;
+  cursor: Cursors;
   className?: string;
 }
 
 export type Sizes = "sm" | "md" | "lg";
 type ExtendedSizes = "xl" | "2xl" | "3xl";
-type SizesWithZero = Sizes | "zero";
-type SizesWithFull = Sizes | "full";
 type None = "none";
 type Full = "full";
 type Screen = "screen";
+type Zero = "zero";
+
+type Displays = "block" | "inline" | "inline-block" | "inline-flex" | "hidden";
+
+type Positions = "relative" | "absolute" | "fixed" | "sticky" | "static";
+
 type FlexDirections = "row" | "col";
 type FlexPositions =
   | "top-left"
@@ -111,15 +114,19 @@ type FlexSpacing = "space-between" | "space-evenly" | "space-around";
 type FlexSize = "grow" | "shrink" | "nogrow" | "noshrink";
 type FlexWrap = "wrap" | "nowrap";
 type FontWeights = "light" | "normal" | "bold";
-type Opacities = "light" | "medium" | "dark" | "opaque";
 type Places = "left" | "center" | "right";
-type Displays =
-  | "relative"
-  | "absolute"
-  | "fixed"
-  | "sticky"
-  | "inline"
-  | "inline-block"
-  | "inline-flex"
-  | "hidden";
+
 type Animations = "spin" | "pulse";
+
+type FontWeight = "light" | "normal" | "bold";
+type TextColor = "white" | "light" | "medium" | "dark" | "black";
+type TextDecorations = "underline" | "line-through";
+type TextAlign = "left" | "center" | "right" | "justify";
+type LineHeight = "tight" | "normal" | "loose";
+type LetterSpacing = "tight" | "normal" | "wide";
+
+type Opacities = "light" | "medium" | "dark" | "opaque";
+
+type BgColor = "white" | "lighter" | "light" | "medium" | "dark" | "darker" | "black";
+
+type Cursors = "pointer" | "not-allowed";

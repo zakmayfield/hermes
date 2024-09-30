@@ -177,6 +177,199 @@ export const useStyleMaps = () => {
           md: "mr-4",
           lg: "mr-6"
         }
+      },
+
+      alignment: {
+        flex: {
+          ...baseMap,
+          row: "flex",
+          col: "flex flex-col"
+        },
+        flexSpacing: {
+          ...baseMap,
+          "space-between": "justify-between",
+          "space-evenly": "justify-evenly",
+          "space-around": "justify-around"
+        },
+        flexWrap: {
+          ...baseMap,
+          wrap: "flex-wrap",
+          nowrap: "flex-nowrap"
+        },
+        flexSize: {
+          ...baseMap,
+          grow: "flex-grow",
+          shrink: "flex-shrink",
+          nogrow: "flex-grow-0",
+          noshrink: "flex-shrink-0"
+        },
+        gapMap: {
+          ...baseMap,
+          sm: "gap-2",
+          md: "gap-4",
+          lg: "gap-6"
+        },
+        place: {
+          ...baseMap,
+          left: "mr-auto",
+          center: "mx-auto",
+          right: "ml-auto"
+        },
+        flexRowPosition: {
+          ...baseMap,
+          "top-left": "items-start",
+          "center-left": "items-center justify-start",
+          "bottom-left": "items-end",
+          "top-center": "items-start justify-center",
+          "center-center": "items-center justify-center",
+          "bottom-center": "items-end justify-center",
+          "top-right": "items-start justify-end",
+          "center-right": "items-center justify-end",
+          "bottom-right": "items-end justify-end"
+        },
+        flexColPosition: {
+          ...baseMap,
+          "top-left": "justify-start",
+          "center-left": "justify-center",
+          "bottom-left": "justify-end",
+          "top-center": "items-center justify-start",
+          "center-center": "items-center justify-center",
+          "bottom-center": "items-center justify-end",
+          "top-right": "items-end justify-start",
+          "center-right": "items-end justify-end",
+          "bottom-right": "items-end justify-end"
+        }
+      },
+
+      typography: {
+        fontSize: {
+          ...baseMap,
+          sm: "text-sm",
+          md: "text-base",
+          lg: "text-xl"
+        },
+        fontWeight: {
+          ...baseMap,
+          light: "font-light",
+          normal: "font-normal",
+          bold: "font-semibold"
+        },
+        textColor: {
+          ...baseMap,
+          white: "text-white",
+          light: "text-gray-50",
+          medium: "text-gray-500",
+          dark: "text-gray-900",
+          black: "text-black"
+        },
+        textOpacity: {
+          ...baseMap,
+          light: "text-opacity-30",
+          medium: "text-opacity-60",
+          dark: "text-opacity-90",
+          opaque: "text-opacity-100"
+        },
+        textDecoration: {
+          ...baseMap,
+          underline: "underline",
+          "line-through": "line-through"
+        },
+        textAlign: {
+          ...baseMap,
+          left: "text-left",
+          center: "text-center",
+          right: "text-right",
+          justify: "text-justify"
+        },
+        lineHeight: {
+          ...baseMap,
+          tight: "leading-tight",
+          normal: "leading-normal",
+          loose: "leading-loose"
+        },
+        letterSpacing: {
+          ...baseMap,
+          tight: "tracking-tight",
+          normal: "tracking-normal",
+          wide: "tracking-wide"
+        }
+      },
+
+      background: {
+        bgColor: {
+          ...baseMap,
+          white: "bg-white",
+          lighter: "bg-slate-200",
+          light: "bg-slate-300",
+          medium: "bg-slate-600",
+          dark: "bg-slate-800",
+          darker: "bg-slate-900",
+          black: "bg-black"
+        },
+        bgOpacity: {
+          ...baseMap,
+          light: "bg-opacity-30",
+          medium: "bg-opacity-60",
+          dark: "bg-opacity-90",
+          opaque: "bg-opacity-100"
+        }
+      },
+
+      animations: {
+        animate: {
+          ...baseMap,
+          spin: "animate-spin",
+          pulse: "animate-pulse"
+        }
+      },
+
+      button: {
+        buttonSize: {
+          ...baseMap,
+          // TODO: Set height values for "out of the box button style"
+          sm: "max-w-[10rem] w-full min-h-[2.63rem]",
+          md: "max-w-[15rem] w-full min-h-[2.75rem]",
+          lg: "max-w-[20rem] w-full min-h-[2.87rem]",
+          full: "w-full"
+        },
+        buttonWidth: {
+          ...baseMap,
+          sm: "max-w-[10rem] w-full",
+          md: "max-w-[15rem] w-full",
+          lg: "max-w-[20rem] w-full",
+          full: "w-full"
+        },
+        buttonHeight: {
+          ...baseMap,
+          sm: "min-h-[2.63rem]",
+          md: "min-h-[2.75rem]",
+          lg: "min-h-[2.87rem]"
+        }
+      },
+
+      loader: {
+        loaderWidth: {
+          ...baseMap,
+          sm: "max-w-sm",
+          md: "max-w-lg",
+          lg: "max-w-2xl",
+          full: "w-full"
+        }
+      },
+
+      other: {
+        cursor: {
+          ...baseMap,
+          pointer: "cursor-pointer",
+          "not-allowed": "cursor-not-allowed"
+        },
+        opacity: {
+          ...baseMap,
+          light: "opacity-30",
+          medium: "opacity-60",
+          dark: "opacity-90",
+          opaque: "opacity-100"
+        }
       }
     };
   }, []);

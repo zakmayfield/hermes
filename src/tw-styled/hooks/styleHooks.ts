@@ -10,7 +10,8 @@ import {
   TextProps,
   WrapperProps
 } from "../components";
-import { BtnVariants, IStyles } from "../Styles";
+import { IStyles } from "../Styles";
+import { BtnVariants } from "@/tw-styled/types";
 
 export const styleHooks = {
   useBtnStyles: (props: {

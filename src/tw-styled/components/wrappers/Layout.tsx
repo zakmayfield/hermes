@@ -1,11 +1,12 @@
 "use client";
-import { Children, IStyles, Headings } from "@/tw-styled/Styles";
+import { IStyles } from "@/tw-styled/Styles";
 import { Heading } from "./Heading";
 import { styleHooks, useClassNames } from "@/tw-styled/hooks";
+import { Children, Headings } from "@/tw-styled/types";
 
 export type LayoutProps = {
-  heading?: Headings;
   title?: string;
+  heading?: Headings;
   children?: Children;
   style?: {
     parentWrapper?: IStyles;

@@ -1,9 +1,10 @@
 "use client";
 import { IconType } from "react-icons";
-import { BtnVariants, IStyles } from "@/tw-styled/Styles";
+import { IStyles } from "@/tw-styled/Styles";
 import { styleHooks } from "@/tw-styled/hooks/styleHooks";
 import { PiSpinnerGap } from "react-icons/pi";
 import { useClassNames } from "@/tw-styled/hooks/useClassNames";
+import { BtnVariants } from "@/tw-styled/types";
 
 export type BtnProps = {
   Icon?: IconType;

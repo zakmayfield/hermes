@@ -1,7 +1,8 @@
 "use client";
 import React from "react";
 import { styleHooks, useClassNames } from "@/tw-styled/hooks";
-import { Children, IStyles, WrapperElements } from "@/tw-styled/Styles";
+import { IStyles } from "@/tw-styled/Styles";
+import { Children, WrapperElements } from "@/tw-styled/types";
 
 export type WrapperProps = {
   as?: WrapperElements;

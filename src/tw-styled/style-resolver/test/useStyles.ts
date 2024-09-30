@@ -1,3 +1,29 @@
+import { useCallback, useMemo } from "react";
+import { IStyles, StyleObj } from "../../Styles";
+import {
+  BtnProps,
+  FormProps,
+  HeadingProps,
+  InputStyleProps,
+  LayoutProps,
+  PulseProps,
+  SpinProps,
+  TextProps,
+  WrapperProps
+} from "../../components";
+import { BtnVariants, Themes } from "@/tw-styled/types";
+
+type StyleHookKeys =
+  | "layout"
+  | "wrapper"
+  | "heading"
+  | "text"
+  | "form"
+  | "input"
+  | "btn"
+  | "pulse"
+  | "spin";
+
 type UseStyles<T> = {
   key: StyleHookKeys;
   style?: T;

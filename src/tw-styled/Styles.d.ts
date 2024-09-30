@@ -1,31 +1,4 @@
 export type StyleObj = Record<string, IStyles>;
-export type Children = React.ReactNode;
-
-export type Headings = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
-export type Themes = "light" | "dark";
-export type WrapperElements =
-  | "div"
-  | "sectin"
-  | "article"
-  | "aside"
-  | "footer"
-  | "nav"
-  | "header"
-  | "main"
-  | "ol"
-  | "ul";
-export type TextElements = "p" | "span" | "li" | "figure" | "a" | "i" | "em" | "strong";
-export type BtnVariants = "primary" | "warning" | "ghost";
-export type StyleHookKeys =
-  | "layout"
-  | "wrapper"
-  | "heading"
-  | "text"
-  | "form"
-  | "input"
-  | "btn"
-  | "pulse"
-  | "spin";
 
 export type IStyles = IDimensions &
   ISpacing &

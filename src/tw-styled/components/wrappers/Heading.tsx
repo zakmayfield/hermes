@@ -1,6 +1,7 @@
 import React from "react";
 import { styleHooks, useClassNames } from "@/tw-styled/hooks";
-import { Children, Headings, IStyles } from "@/tw-styled/Styles";
+import { IStyles } from "@/tw-styled/Styles";
+import { Children, Headings } from "@/tw-styled/types";
 
 export type HeadingProps = {
   as?: Headings;

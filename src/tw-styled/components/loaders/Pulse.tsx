@@ -1,6 +1,7 @@
 import { styleHooks } from "@/tw-styled/hooks";
 import { useClassNames } from "@/tw-styled/hooks/useClassNames";
-import { IStyles, Sizes, Themes } from "@/tw-styled/Styles";
+import { IStyles, Sizes } from "@/tw-styled/Styles";
+import { Themes } from "@/tw-styled/types";
 import { merge } from "@/tw-styled/utils/class-merge";
 
 export type PulseProps = {

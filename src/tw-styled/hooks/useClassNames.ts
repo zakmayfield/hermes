@@ -1,7 +1,7 @@
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 import { IStyles, StyleObj } from "../Styles";
 import { merge } from "../utils/class-merge";
-import { useClassHandlers } from "../utils/class-handlers";
+import { useClassHandlers } from "./useClassHandlers";
 
 export const useClassNames = (props: StyleObj) => {
   const classHandlers = useClassHandlers();

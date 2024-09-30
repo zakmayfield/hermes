@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { IStyles } from "../Styles";
-import { isType } from "./type-guards";
-import { useStyleMaps } from "./style-maps";
+import { isType } from "../utils/type-guards";
+import { useStyleMaps } from "./useStyleMaps";
 
 export const useClassHandlers = () => {
   const styleMaps = useStyleMaps();

@@ -1,7 +1,8 @@
 "use client";
 import React from "react";
-import { IStyles, TextElements } from "@/tw-styled/Styles";
+import { IStyles } from "@/tw-styled/Styles";
 import { styleHooks, useClassNames } from "@/tw-styled/hooks";
+import { TextElements } from "@/tw-styled/types";
 
 export type TextProps = {
   as?: TextElements;

@@ -9,8 +9,8 @@ import { useClassNames } from "@/tw-styled/hooks/useClassNames";
 
 type InputProps<T extends FieldValues> = InputStyleProps & {
   name: keyof T;
-  label?: string;
   register?: UseFormRegister<T>;
+  label?: string;
   error?: FieldError;
   type?: "text" | "password";
   is_label_hidden?: boolean;

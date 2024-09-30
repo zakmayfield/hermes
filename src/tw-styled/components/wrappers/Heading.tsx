@@ -1,10 +1,10 @@
 import React from "react";
 import { styleHooks, useClassNames } from "@/tw-styled/hooks";
 import { IStyles } from "@/tw-styled/Styles";
-import { Children, Headings } from "@/tw-styled/types";
+import { Children, HeadingElements } from "@/tw-styled/types";
 
 export type HeadingProps = {
-  as?: Headings;
+  as?: HeadingElements;
   children?: Children;
   style?: {
     parentWrapper?: IStyles;

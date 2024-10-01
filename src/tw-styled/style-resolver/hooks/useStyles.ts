@@ -109,6 +109,9 @@ export const useStyles = <T extends ComponentStyleProp>(props: UseStyles<T>) => 
           parentWrapper: {
             ...style?.parentWrapper
           },
+          heading: {
+            ...style?.heading
+          },
           childrenWrapper: {
             flex: "row",
             gap: "sm",

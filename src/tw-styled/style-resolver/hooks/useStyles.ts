@@ -56,7 +56,7 @@ export const useStyles = <T extends ComponentStyleProp>(props: UseStyles<T>) => 
             ...style?.childrenWrapper
           }
         } satisfies WrapperProps["style"];
-      }, []);
+      }, [style]);
 
     case "layout":
       return useMemo(() => {
@@ -67,18 +67,23 @@ export const useStyles = <T extends ComponentStyleProp>(props: UseStyles<T>) => 
             gap: "lg",
             ...style?.parentWrapper
           },
-          heading: {
-            ...style?.heading
-          },
           childrenWrapper: {
             flex: "col",
             gap: "md",
             flexWrap: "wrap",
-            flexSize: "grow",
             ...style?.childrenWrapper
+          },
+          children: {
+            ...style?.children
+          },
+          headingWrapper: {
+            ...style?.headingWrapper
+          },
+          headingChildren: {
+            ...style?.headingChildren
           }
         } satisfies LayoutProps["style"];
-      }, []);
+      }, [style]);
 
     case "text":
       return useMemo(() => {
@@ -87,7 +92,7 @@ export const useStyles = <T extends ComponentStyleProp>(props: UseStyles<T>) => 
             ...style?.wrapper
           }
         } satisfies TextProps["style"];
-      }, []);
+      }, [style]);
 
     case "heading":
       return useMemo(() => {
@@ -101,7 +106,7 @@ export const useStyles = <T extends ComponentStyleProp>(props: UseStyles<T>) => 
             ...style?.childrenWrapper
           }
         } satisfies HeadingProps["style"];
-      }, []);
+      }, [style]);
 
     case "form":
       return useMemo(() => {
@@ -128,7 +133,7 @@ export const useStyles = <T extends ComponentStyleProp>(props: UseStyles<T>) => 
             ...style?.contentWrapper
           }
         } satisfies FormProps["style"];
-      }, []);
+      }, [style]);
 
     case "input":
       return useMemo(() => {
@@ -158,7 +163,7 @@ export const useStyles = <T extends ComponentStyleProp>(props: UseStyles<T>) => 
             ...style?.errorIcon
           }
         } satisfies InputStyleProps["style"];
-      }, []);
+      }, [style, input]);
 
     case "pulse":
       return useMemo(() => {
@@ -212,7 +217,7 @@ export const useStyles = <T extends ComponentStyleProp>(props: UseStyles<T>) => 
             ...style?.icon
           }
         } satisfies SpinProps["style"];
-      }, []);
+      }, [style]);
 
     case "btn":
       return useMemo(() => {

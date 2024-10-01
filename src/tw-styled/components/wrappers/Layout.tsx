@@ -9,8 +9,10 @@ export type LayoutProps = {
   heading?: HeadingElements;
   style?: {
     parentWrapper?: StyleProps;
-    heading?: StyleProps;
     childrenWrapper?: StyleProps;
+    children?: StyleProps;
+    headingWrapper?: StyleProps;
+    headingChildren?: StyleProps;
   };
 };
 
@@ -30,7 +32,10 @@ export const Layout = (props: LayoutProps) => {
           as={heading}
           style={{
             parentWrapper: {
-              className: classes.heading
+              className: classes.headingParent
+            },
+            childrenWrapper: {
+              className: classes.headingChildren
             }
           }}
         >

@@ -25,14 +25,14 @@ export const ManagePermissionsPage = () => {
         heading="h3"
         title="Permissions"
         style={{
-          wrapper: {
+          parentWrapper: {
             flex: "col",
             gap: "lg",
             border: "sm",
             paddingX: "zero",
             className: "border-red-400"
           },
-          children: {
+          childrenWrapper: {
             flex: "col",
             gap: "lg",
             flexSpacing: "space-evenly",
@@ -57,7 +57,7 @@ export const ManagePermissionsPage = () => {
         heading="h5"
         title={title}
         style={{
-          wrapper: {
+          parentWrapper: {
             flex: "col",
             gap: "md",
             width: "sm",
@@ -65,10 +65,10 @@ export const ManagePermissionsPage = () => {
             border: "sm",
             className: "border-yellow-400"
           },
-          children: {
+          childrenWrapper: {
             padding: "md",
             rounded: "lg",
-            bg: "bg-slate-800",
+            bgColor: "dark",
             border: "sm",
             height: "full"
           }
@@ -98,7 +98,7 @@ export const ManagePermissionsPage = () => {
           style={{
             childrenWrapper: {
               flex: "row",
-              flexPosition: "center-right",
+              flexRowPosition: "center-right",
               gap: "sm",
               place: "right"
             }

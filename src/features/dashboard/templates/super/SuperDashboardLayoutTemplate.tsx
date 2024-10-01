@@ -16,12 +16,12 @@ export const SuperDashboardLayoutTemplate = (
       heading="h2"
       title="Super"
       style={{
-        wrapper: {
+        parentWrapper: {
           border: "sm",
           paddingX: "zero",
           className: "border-blue-400"
         },
-        children: {
+        childrenWrapper: {
           flex: "col"
         }
       }}

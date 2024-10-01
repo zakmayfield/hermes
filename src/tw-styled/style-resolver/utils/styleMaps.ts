@@ -202,7 +202,7 @@ const alignmentMap = {
   alignment: {
     flex: {
       ...baseMap,
-      row: "flex",
+      row: "flex flex-row",
       col: "flex flex-col"
     },
     flexSpacing: {

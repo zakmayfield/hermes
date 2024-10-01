@@ -19,7 +19,7 @@ export const Md: PulseLoaderStory = {
   args: {
     size: "md",
     style: {
-      wrapper: {
+      parentWrapper: {
         padding: "lg"
       }
     }
@@ -29,7 +29,7 @@ export const Lg: PulseLoaderStory = {
   args: {
     size: "lg",
     style: {
-      wrapper: {
+      parentWrapper: {
         width: "xl",
         padding: "lg"
       }

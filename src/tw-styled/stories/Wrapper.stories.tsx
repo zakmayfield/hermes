@@ -2,7 +2,7 @@ import { Wrapper } from "@/tw-styled/components";
 import { Meta, StoryObj } from "@storybook/react";
 
 const meta = {
-  title: "Wrapper/Wrapper",
+  title: "Wrapper",
   component: Wrapper,
   argTypes: {
     children: {

@@ -12,7 +12,7 @@ export const DashboardLayoutTemplate = (props: TDashboardLayoutTemplateProps) =>
       title="Dashboard"
       heading="h1"
       style={{
-        wrapper: {
+        parentWrapper: {
           border: "sm",
           paddingX: "zero",
           className: "border-green-400"

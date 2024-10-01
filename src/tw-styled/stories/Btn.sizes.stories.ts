@@ -1,20 +1,31 @@
-import { StoryObj } from "@storybook/react";
-import btnMeta from "./meta";
+import { Meta, StoryObj } from "@storybook/react";
+import { Btn } from "@/tw-styled/components";
 
 const meta = {
-  title: "Btn/Sizes",
-  ...btnMeta
-};
-export default meta;
-export type BtnStory = StoryObj<typeof meta>;
+  title: "Btn/Size",
+  component: Btn,
+  argTypes: {
+    variant: {
+      options: ["primary", "warning", "ghost"]
+    }
+  },
+  args: {
+    isDisabled: false,
+    isLoading: false,
+    text: "Submit"
+  }
+} satisfies Meta<typeof Btn>;
 
-export const Default: BtnStory = {
+export default meta;
+export type BtnSizesStory = StoryObj<typeof meta>;
+
+export const Default: BtnSizesStory = {
   args: {
     text: "Submit"
   }
 };
 
-export const Sm: BtnStory = {
+export const Sm: BtnSizesStory = {
   args: {
     text: "Submit",
     style: {
@@ -28,7 +39,7 @@ export const Sm: BtnStory = {
   }
 };
 
-export const Md: BtnStory = {
+export const Md: BtnSizesStory = {
   args: {
     text: "Submit",
     style: {
@@ -42,7 +53,7 @@ export const Md: BtnStory = {
   }
 };
 
-export const Lg: BtnStory = {
+export const Lg: BtnSizesStory = {
   args: {
     text: "Submit",
     style: {
@@ -56,7 +67,7 @@ export const Lg: BtnStory = {
   }
 };
 
-export const Full: BtnStory = {
+export const Full: BtnSizesStory = {
   args: {
     text: "Submit",
     style: {

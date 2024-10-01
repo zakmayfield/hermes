@@ -12,79 +12,79 @@ export type StyleProps = ILayout &
 export type StylePropKeys = keyof StyleProps;
 
 interface ILayout {
-  width?: Sizes | ExtendedSizes | Full;
-  height?: Sizes | Screen | Full;
-  maxHeight?: Sizes;
-  border?: Sizes;
-  rounded?: Sizes | "xl";
-  display?: Displays;
-  position?: Positions;
+  width?: Sizes | ExtendedSizes | Full | None;
+  height?: Sizes | Screen | Full | None;
+  maxHeight?: Sizes | None;
+  border?: Sizes | None;
+  rounded?: Sizes | "xl" | None;
+  display?: Displays | None;
+  position?: Positions | None;
 }
 
 interface IPadding {
-  padding?: Sizes | Zero;
-  paddingX?: Sizes | Zero;
-  paddingY?: Sizes | Zero;
-  paddingTop?: Sizes | Zero;
-  paddingBottom?: Sizes | Zero;
-  paddingLeft?: Sizes | Zero;
-  paddingRight?: Sizes | Zero;
+  padding?: Sizes | Zero | None;
+  paddingX?: Sizes | Zero | None;
+  paddingY?: Sizes | Zero | None;
+  paddingTop?: Sizes | Zero | None;
+  paddingBottom?: Sizes | Zero | None;
+  paddingLeft?: Sizes | Zero | None;
+  paddingRight?: Sizes | Zero | None;
 }
 
 interface IMargin {
-  margin?: Sizes | Zero;
-  marginX?: Sizes | Zero;
-  marginY?: Sizes | Zero;
-  marginTop?: Sizes | Zero;
-  marginBottom?: Sizes | Zero;
-  marginLeft?: Sizes | Zero;
-  marginRight?: Sizes | Zero;
+  margin?: Sizes | Zero | None;
+  marginX?: Sizes | Zero | None;
+  marginY?: Sizes | Zero | None;
+  marginTop?: Sizes | Zero | None;
+  marginBottom?: Sizes | Zero | None;
+  marginLeft?: Sizes | Zero | None;
+  marginRight?: Sizes | Zero | None;
 }
 
 interface IAlignment {
-  flex?: FlexDirections;
-  flexRowPosition?: FlexPositions;
-  flexColPosition?: FlexPositions;
-  flexSpacing?: FlexSpacing;
-  flexWrap?: FlexWrap;
-  flexSize?: FlexSize;
-  gap?: Sizes;
-  place?: Places;
+  flex?: FlexDirections | None;
+  flexRowPosition?: FlexPositions | None;
+  flexColPosition?: FlexPositions | None;
+  flexSpacing?: FlexSpacing | None;
+  flexWrap?: FlexWrap | None;
+  flexSize?: FlexSize | None;
+  gap?: Sizes | None;
+  place?: Places | None;
 }
 
 interface ITypography {
-  fontSize?: Sizes;
-  fontWeight?: FontWeight;
-  textOpacity?: Opacities;
-  textColor?: TextColor;
-  textDecoration?: TextDecorations;
-  textAlign?: TextAlign;
-  lineHeight?: LineHeight;
-  letterSpacing?: LetterSpacing;
+  fontSize?: Sizes | None;
+  fontWeight?: FontWeight | None;
+  textOpacity?: Opacities | None;
+  textColor?: TextColor | None;
+  textDecoration?: TextDecorations | None;
+  textAlign?: TextAlign | None;
+  lineHeight?: LineHeight | None;
+  letterSpacing?: LetterSpacing | None;
 }
 
 interface IBackground {
-  bgColor?: BgColor;
-  bgOpacity?: Opacities;
+  bgColor?: BgColor | None;
+  bgOpacity?: Opacities | None;
 }
 
 interface IAnimations {
-  animate?: Animations;
+  animate?: Animations | None;
 }
 
 interface IButton {
-  buttonSize?: Sizes | Full;
-  buttonWidth?: Sizes | Full;
-  buttonHeight?: Sizes;
+  buttonSize?: Sizes | Full | None;
+  buttonWidth?: Sizes | Full | None;
+  buttonHeight?: Sizes | None;
 }
 
 interface ILoader {
-  loaderWidth?: Sizes | Full;
+  loaderWidth?: Sizes | Full | None;
 }
 
 interface IOther {
-  opacity?: Opacities;
-  cursor?: Cursors;
+  opacity?: Opacities | None;
+  cursor?: Cursors | None;
   className?: string;
 }
 

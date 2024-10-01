@@ -2,7 +2,7 @@ import { Text } from "@/tw-styled/components";
 import { Meta, StoryObj } from "@storybook/react";
 
 const meta = {
-  title: "Text/Default",
+  title: "Text",
   component: Text,
   args: {
     children:
@@ -13,4 +13,4 @@ const meta = {
 export default meta;
 export type TextStory = StoryObj<typeof meta>;
 
-export const POrSpan: TextStory = {};
+export const Demo: TextStory = {};

@@ -2,7 +2,7 @@ import { Form } from "@/tw-styled/components";
 import { Meta, StoryObj } from "@storybook/react";
 
 const meta = {
-  title: "Form/Default",
+  title: "Form",
   component: Form
 } satisfies Meta<typeof Form>;
 

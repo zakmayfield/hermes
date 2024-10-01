@@ -1,10 +1,9 @@
 "use client";
 
 import React, { FC, FormEvent } from "react";
-import { IStyles } from "@/tw-styled/Styles";
 import { Btn } from "../btns";
-import { styleHooks } from "@/tw-styled/hooks";
-import { useClassNames } from "@/tw-styled/hooks/useClassNames";
+import { StyleProps } from "@/tw-styled/types";
+import { useClassNameResolver, useStyles } from "@/tw-styled";
 
 export type FormProps = {
   children?: React.ReactNode;
@@ -13,18 +12,21 @@ export type FormProps = {
   isPending?: boolean;
   onSubmit?: (e: FormEvent<HTMLFormElement>) => void;
   style?: {
-    form?: IStyles;
-    heading?: IStyles;
-    contentWrapper?: IStyles;
-    button?: IStyles;
+    form?: StyleProps;
+    heading?: StyleProps;
+    contentWrapper?: StyleProps;
+    button?: StyleProps;
   };
 };
 
 export const Form: FC<FormProps> = (props) => {
   const { children, title, onSubmit, buttonText = "Submit", isPending, style } = props;
 
-  const styles = styleHooks.useFormStyles(style);
-  const classes = useClassNames(styles);
+  const styles = useStyles({
+    key: "form",
+    style
+  });
+  const classes = useClassNameResolver({ ...styles });
 
   const heading = title && <h3 className={classes.heading}>{title}</h3>;
 

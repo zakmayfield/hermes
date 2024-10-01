@@ -1,23 +1,25 @@
-import { merge, useClassNames } from "@/tw-styled";
-import { styleHooks } from "@/tw-styled/hooks";
-import { IStyles } from "@/tw-styled/Styles";
+import { merge, useClassNameResolver, useStyles } from "@/tw-styled";
+import { StyleProps } from "@/tw-styled/types";
 import { PiSpinnerGap } from "react-icons/pi";
 
 export type SpinProps = {
   style?: {
-    wrapper?: IStyles;
-    icon?: IStyles;
+    parentWrapper?: StyleProps;
+    icon?: StyleProps;
   };
 };
 
 export const Spin = (props: SpinProps) => {
   const { style } = props;
 
-  const styles = styleHooks.useSpinStyles({ style });
-  const classes = useClassNames(styles);
+  const styles = useStyles({
+    key: "spin",
+    style
+  });
+  const classes = useClassNameResolver({ ...styles });
 
   return (
-    <div className={classes.wrapper}>
+    <div className={classes.parentWrapper}>
       <PiSpinnerGap className={merge(classes.icon)} />
     </div>
   );

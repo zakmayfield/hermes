@@ -1,32 +1,32 @@
-import { styleHooks } from "@/tw-styled/hooks";
-import { useClassNames } from "@/tw-styled/hooks/useClassNames";
-import { IStyles, Sizes } from "@/tw-styled/Styles";
-import { Themes } from "@/tw-styled/types";
-import { merge } from "@/tw-styled/utils/class-merge";
+import { Sizes, StyleProps, Themes } from "@/tw-styled/types";
+import { merge, useClassNameResolver, useStyles } from "@/tw-styled";
 
 export type PulseProps = {
   theme?: Themes;
   size?: Sizes;
   style?: {
-    wrapper?: IStyles;
-    childrenWrapper?: IStyles;
-    children?: IStyles;
+    parentWrapper?: StyleProps;
+    childrenWrapper?: StyleProps;
+    children?: StyleProps;
   };
 };
 
 export const Pulse = (props: PulseProps) => {
   const { size, theme, style } = props;
 
-  const styles = styleHooks.usePulseStyles({
-    theme,
-    style
+  const styles = useStyles({
+    key: "pulse",
+    style,
+    options: {
+      theme
+    }
   });
-  const classes = useClassNames(styles);
+  const classes = useClassNameResolver({ ...styles });
 
   switch (size) {
     default:
       return (
-        <div className={classes.wrapper}>
+        <div className={classes.parentWrapper}>
           <div className={classes.childrenWrapper}>
             <div className={classes.children} />
             <div className={merge("w-full " + classes.children)} />
@@ -35,7 +35,7 @@ export const Pulse = (props: PulseProps) => {
       );
     case "md":
       return (
-        <div className={classes.wrapper}>
+        <div className={classes.parentWrapper}>
           <div className={classes.childrenWrapper}>
             <div className={merge("w-1/3 " + classes.children)} />
             <div className={merge("flex-grow " + classes.children)} />
@@ -49,7 +49,7 @@ export const Pulse = (props: PulseProps) => {
       );
     case "lg":
       return (
-        <div className={classes.wrapper}>
+        <div className={classes.parentWrapper}>
           <div className={classes.childrenWrapper}>
             <div className={merge("w-1/3 " + classes.children + " p-6")} />
             <div className={merge("flex-grow " + classes.children + " p-6")} />

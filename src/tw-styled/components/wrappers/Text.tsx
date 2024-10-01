@@ -1,8 +1,7 @@
 "use client";
 import React from "react";
-import { IStyles } from "@/tw-styled/Styles";
-import { styleHooks, useClassNames } from "@/tw-styled/hooks";
-import { TextElements } from "@/tw-styled/types";
+import { StyleProps, TextElements } from "@/tw-styled/types";
+import { useClassNameResolver, useStyles } from "@/tw-styled";
 
 export type TextProps = {
   as?: TextElements;
@@ -10,15 +9,18 @@ export type TextProps = {
   described_by?: string;
   is_hidden?: boolean;
   style?: {
-    parentWrapper?: IStyles;
+    parentWrapper?: StyleProps;
   };
 };
 
 export const Text = (props: TextProps) => {
   const { as = "p", children, described_by, is_hidden, style } = props;
 
-  const styles = styleHooks.useTextStyles({ ...style });
-  const classes = useClassNames(styles);
+  const styles = useStyles({
+    key: "text",
+    style
+  });
+  const classes = useClassNameResolver(styles);
 
   return React.createElement(
     as,

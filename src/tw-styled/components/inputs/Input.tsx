@@ -1,11 +1,9 @@
 import { FC } from "react";
+import { useClassNameResolver, useStyles, useIcons } from "@/tw-styled";
 import { FieldError, FieldValues, UseFormRegister } from "react-hook-form";
 import { utilityHooks } from "@/shared/hooks";
-import { IStyles } from "@/tw-styled/Styles";
 import { FormFieldError } from "../wrappers";
-import { styleHooks } from "@/tw-styled/hooks";
-import { useIcons } from "@/tw-styled/hooks/useIcons";
-import { useClassNames } from "@/tw-styled/hooks/useClassNames";
+import { StyleProps } from "@/tw-styled/types";
 
 type InputProps<T extends FieldValues> = InputStyleProps & {
   name: keyof T;
@@ -20,11 +18,11 @@ type InputProps<T extends FieldValues> = InputStyleProps & {
 
 export type InputStyleProps = {
   style?: {
-    parentWrapper?: IStyles;
-    label?: IStyles;
-    inputWrapper?: IStyles;
-    input?: IStyles;
-    errorIcon?: IStyles;
+    parentWrapper?: StyleProps;
+    label?: StyleProps;
+    inputWrapper?: StyleProps;
+    input?: StyleProps;
+    errorIcon?: StyleProps;
   };
 };
 
@@ -45,11 +43,15 @@ export const Input: FC<InputProps<any>> = (props) => {
     names: ["error"]
   });
 
-  const styles = styleHooks.useInputStyles({
-    style,
-    is_error
+  const styles = useStyles({
+    key: "input",
+    options: {
+      input: {
+        is_error
+      }
+    }
   });
-  const classes = useClassNames(styles);
+  const classes = useClassNameResolver({ ...styles });
 
   const name = props.name as string;
 

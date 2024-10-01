@@ -1,5 +1,4 @@
-import { useCallback, useMemo } from "react";
-import { IStyles, StyleObj } from "../../Styles";
+import { useMemo } from "react";
 import {
   BtnProps,
   FormProps,
@@ -11,7 +10,7 @@ import {
   TextProps,
   WrapperProps
 } from "../../components";
-import { BtnVariants, Themes } from "@/tw-styled/types";
+import { BtnVariants, ComponentStyleProp, StyleProps, Themes } from "@/tw-styled/types";
 
 type StyleHookKeys =
   | "layout"
@@ -39,33 +38,12 @@ type UseStyles<T> = {
   };
 };
 
-type HooksMap = Record<StyleHookKeys, HooksMapValue>;
-type HooksMapValue = Record<any, any>;
+export const useStyles = <T extends ComponentStyleProp>(props: UseStyles<T>) => {
+  const { key, style, options: { btn, input, state, theme = "dark" } = {} } = props;
 
-export const useStyles = <T extends StyleObj | undefined>(props: UseStyles<T>) => {
-  const { key, style, options = {} } = props;
-
-  const hooksMap = useMemo(() => {
-    return {
-      layout: useMemo(() => {
-        return {
-          parentWrapper: {
-            padding: "lg",
-            flex: "col",
-            gap: "lg",
-            ...style?.parentWrapper
-          },
-          childrenWrapper: {
-            flex: "col",
-            gap: "md",
-            flexWrap: "wrap",
-            flexSize: "grow",
-            ...style?.childrenWrapper
-          }
-        } satisfies LayoutProps["style"];
-      }, [style]),
-
-      wrapper: useMemo(() => {
+  switch (key) {
+    case "wrapper":
+      return useMemo(() => {
         return {
           parentWrapper: {
             flex: "row",
@@ -78,9 +56,41 @@ export const useStyles = <T extends StyleObj | undefined>(props: UseStyles<T>) =
             ...style?.childrenWrapper
           }
         } satisfies WrapperProps["style"];
-      }, [style]),
+      }, []);
 
-      heading: useMemo(() => {
+    case "layout":
+      return useMemo(() => {
+        return {
+          parentWrapper: {
+            padding: "lg",
+            flex: "col",
+            gap: "lg",
+            ...style?.parentWrapper
+          },
+          heading: {
+            ...style?.heading
+          },
+          childrenWrapper: {
+            flex: "col",
+            gap: "md",
+            flexWrap: "wrap",
+            flexSize: "grow",
+            ...style?.childrenWrapper
+          }
+        } satisfies LayoutProps["style"];
+      }, []);
+
+    case "text":
+      return useMemo(() => {
+        return {
+          parentWrapper: {
+            ...style?.wrapper
+          }
+        } satisfies TextProps["style"];
+      }, []);
+
+    case "heading":
+      return useMemo(() => {
         return {
           parentWrapper: {
             ...style?.parentWrapper
@@ -91,17 +101,10 @@ export const useStyles = <T extends StyleObj | undefined>(props: UseStyles<T>) =
             ...style?.childrenWrapper
           }
         } satisfies HeadingProps["style"];
-      }, [style]),
+      }, []);
 
-      text: useMemo(() => {
-        return {
-          parentWrapper: {
-            ...style?.wrapper
-          }
-        } satisfies TextProps["style"];
-      }, [style]),
-
-      form: useMemo(() => {
+    case "form":
+      return useMemo(() => {
         return {
           form: {
             flex: "col",
@@ -125,10 +128,10 @@ export const useStyles = <T extends StyleObj | undefined>(props: UseStyles<T>) =
             ...style?.contentWrapper
           }
         } satisfies FormProps["style"];
-      }, [style]),
+      }, []);
 
-      input: useMemo(() => {
-        const { input: { is_error } = {} } = options;
+    case "input":
+      return useMemo(() => {
         return {
           parentWrapper: {
             flex: "col",
@@ -147,7 +150,7 @@ export const useStyles = <T extends StyleObj | undefined>(props: UseStyles<T>) =
           },
           input: {
             width: "full",
-            className: is_error ? "ring-4 ring-red-400" : "",
+            className: input?.is_error ? "ring-4 ring-red-400" : "",
             ...style?.input
           },
           errorIcon: {
@@ -155,38 +158,69 @@ export const useStyles = <T extends StyleObj | undefined>(props: UseStyles<T>) =
             ...style?.errorIcon
           }
         } satisfies InputStyleProps["style"];
-      }, [options, style]),
+      }, []);
 
-      btn: useMemo(() => {
-        const { state, btn } = options;
+    case "pulse":
+      return useMemo(() => {
+        const themes = {
+          light: {
+            parentTheme: "bg-slate-100",
+            childrenTheme: "bg-slate-300"
+          },
+          dark: {
+            parentTheme: "bg-slate-600",
+            childrenTheme: "bg-slate-700"
+          }
+        };
+
+        return {
+          parentWrapper: {
+            animate: "pulse",
+            rounded: "lg",
+            width: "md",
+            flex: "col",
+            gap: "sm",
+            padding: "sm",
+            className: themes[theme!].parentTheme,
+            ...style?.wrapper
+          },
+          childrenWrapper: {
+            flex: "row",
+            gap: "sm",
+            ...style?.childrenWrapper
+          },
+          children: {
+            animate: "pulse",
+            padding: "md",
+            rounded: "xl",
+            className: themes[theme!].childrenTheme,
+            ...style?.children
+          }
+        } satisfies PulseProps["style"];
+      }, [style, theme]);
+
+    case "spin":
+      return useMemo(() => {
+        return {
+          parentWrapper: {
+            ...style?.wrapper
+          },
+          icon: {
+            place: "center",
+            fontSize: "lg",
+            animate: "spin",
+            ...style?.icon
+          }
+        } satisfies SpinProps["style"];
+      }, []);
+
+    case "btn":
+      return useMemo(() => {
         const is_disabled = state?.isLoading || state?.isDisabled;
         const variant = btn?.variant || "ghost";
 
-        const baseStyles = useMemo(() => {
-          return {
-            parentWrapper: {},
-            button: {
-              padding: "sm",
-              paddingX: "md",
-              rounded: "md",
-              buttonHeight: "sm"
-            },
-            contentWrapper: {
-              flex: "row",
-              flexPosition: "center-center"
-            },
-            content: {},
-            spinner: {
-              className: "animate-spin"
-            }
-          } satisfies BtnProps["style"];
-        }, []);
-
-        const getDynamicStyles = useCallback((): BtnProps["style"] => {
+        const getDynamicStyles = () => {
           const btn_state = is_disabled ? "disabled" : "enabled";
-
-          const border: IStyles["border"] = btn?.variant === "ghost" ? "sm" : "none";
-          const textOpacity: IStyles["textOpacity"] = is_disabled ? "light" : "none";
 
           const color_styles = {
             ghost: {
@@ -205,107 +239,42 @@ export const useStyles = <T extends StyleObj | undefined>(props: UseStyles<T>) =
 
           return {
             button: {
-              border,
+              border: btn?.variant === "ghost" ? "sm" : undefined,
               className: color_styles[variant][btn_state]
             },
             contentWrapper: {
-              textOpacity
+              textColor: is_disabled ? "light" : undefined,
+              textOpacity: is_disabled ? "medium" : undefined
             }
-          };
-        }, [is_disabled, variant]);
+          } satisfies BtnProps["style"];
+        };
 
-        return useMemo(() => {
-          return {
-            parentWrapper: {
-              ...baseStyles.parentWrapper,
-              ...style?.parentWrapper
-            },
-            button: {
-              ...baseStyles.button,
-              ...getDynamicStyles()?.button,
-              ...style?.button
-            },
-            contentWrapper: {
-              ...baseStyles.contentWrapper,
-              ...getDynamicStyles()?.contentWrapper,
-              ...style?.contentWrapper
-            },
-            content: {
-              ...baseStyles.content,
-              ...style?.content
-            },
-            spinner: {
-              ...baseStyles.spinner,
-              ...style?.spinner
-            }
-          };
-        }, [variant, style]) satisfies BtnProps["style"];
-      }, [options, style]),
-
-      pulse: useMemo(() => {
-        const { theme = "dark" } = options;
-
-        const getTheme = useCallback(
-          (theme: PulseProps["theme"]) => {
-            const themes = {
-              light: {
-                parentTheme: "bg-slate-100",
-                childrenTheme: "bg-slate-300"
-              },
-              dark: {
-                parentTheme: "bg-slate-600",
-                childrenTheme: "bg-slate-700"
-              }
-            };
-
-            return themes[theme!];
-          },
-          [theme]
-        );
-
-        return useMemo(() => {
-          return {
-            wrapper: {
-              animate: "pulse",
-              rounded: "lg",
-              width: "md",
-              flex: "col",
-              gap: "sm",
-              padding: "sm",
-              className: getTheme(theme).parentTheme,
-              ...style?.wrapper
-            },
-            childrenWrapper: {
-              flex: "row",
-              gap: "sm",
-              ...style?.childrenWrapper
-            },
-            children: {
-              animate: "pulse",
-              padding: "md",
-              rounded: "xl",
-              className: getTheme(theme).childrenTheme,
-              ...style?.children
-            }
-          } satisfies PulseProps["style"];
-        }, [style, theme]) satisfies PulseProps["style"];
-      }, [options, style]),
-
-      spin: useMemo(() => {
         return {
-          wrapper: {
-            ...style?.wrapper
+          parentWrapper: {
+            ...style?.parentWrapper
           },
-          icon: {
-            place: "center",
-            fontSize: "lg",
+          button: {
+            padding: "sm",
+            paddingX: "md",
+            rounded: "md",
+            buttonHeight: "sm",
+            ...getDynamicStyles()?.button,
+            ...style?.button
+          },
+          contentWrapper: {
+            flex: "row",
+            flexRowPosition: "center-center",
+            ...getDynamicStyles()?.contentWrapper,
+            ...style?.contentWrapper
+          },
+          content: {
+            ...style?.content
+          },
+          spinner: {
             animate: "spin",
-            ...style?.icon
+            ...style?.spinner
           }
-        } satisfies SpinProps["style"];
-      }, [style])
-    } satisfies HooksMap;
-  }, []);
-
-  return hooksMap[key];
+        } satisfies BtnProps["style"];
+      }, [style, state, btn]);
+  }
 };

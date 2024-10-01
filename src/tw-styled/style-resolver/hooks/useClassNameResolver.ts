@@ -1,6 +1,5 @@
-import { useStyleMaps } from "@/tw-styled/style-resolver/hooks";
 import { ComponentStyleProp, StylePropKeys } from "@/tw-styled/types";
-import { merge } from "@/tw-styled/utils/class-merge";
+import { merge, useStyleMaps } from "@/tw-styled";
 import { useMemo } from "react";
 
 const isValidObject = (obj: ComponentStyleProp, key: string) => {

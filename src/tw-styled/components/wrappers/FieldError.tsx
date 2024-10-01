@@ -1,4 +1,4 @@
-import { merge } from "@/tw-styled/utils/class-merge";
+import { merge } from "@/tw-styled";
 import { HTMLAttributes } from "react";
 
 type TFieldErrorProps = HTMLAttributes<HTMLParagraphElement> & {

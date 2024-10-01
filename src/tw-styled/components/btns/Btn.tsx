@@ -1,10 +1,8 @@
 "use client";
 import { IconType } from "react-icons";
-import { IStyles } from "@/tw-styled/Styles";
-import { styleHooks } from "@/tw-styled/hooks/styleHooks";
 import { PiSpinnerGap } from "react-icons/pi";
-import { useClassNames } from "@/tw-styled/hooks/useClassNames";
-import { BtnVariants } from "@/tw-styled/types";
+import { BtnVariants, StyleProps } from "@/tw-styled/types";
+import { useClassNameResolver, useStyles } from "@/tw-styled";
 
 export type BtnProps = {
   Icon?: IconType;
@@ -19,11 +17,11 @@ export type BtnProps = {
     onMouseLeave?(): void;
   };
   style?: {
-    parentWrapper?: IStyles;
-    button?: IStyles;
-    contentWrapper?: IStyles;
-    content?: IStyles;
-    spinner?: IStyles;
+    parentWrapper?: StyleProps;
+    button?: StyleProps;
+    contentWrapper?: StyleProps;
+    content?: StyleProps;
+    spinner?: StyleProps;
   };
 };
 
@@ -41,8 +39,21 @@ export const Btn = (props: BtnProps) => {
   } = props;
 
   const disabled = isDisabled || isLoading;
-  const styles = styleHooks.useBtnStyles({ variant, style, disabled });
-  const classes = useClassNames({ ...styles });
+
+  const styles = useStyles({
+    key: "btn",
+    style,
+    options: {
+      state: {
+        isLoading,
+        isDisabled
+      },
+      btn: {
+        variant
+      }
+    }
+  });
+  const classes = useClassNameResolver({ ...styles });
 
   return (
     <div className={classes.parentWrapper}>

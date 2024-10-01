@@ -1,15 +1,19 @@
 import { FC } from "react";
 import { useStyleResolver, useStyles, useIcons } from "@/tw-styled";
-import { FieldError, FieldValues, UseFormRegister } from "react-hook-form";
+import {
+  FieldError as FieldErrorType,
+  FieldValues,
+  UseFormRegister
+} from "react-hook-form";
 import { utilityHooks } from "@/shared/hooks";
-import { FormFieldError } from "../wrappers";
+import { FieldError } from "../wrappers";
 import { StyleProps } from "@/tw-styled/types";
 
 type InputProps<T extends FieldValues> = InputStyleProps & {
   name: keyof T;
   register?: UseFormRegister<T>;
   label?: string;
-  error?: FieldError;
+  error?: FieldErrorType;
   type?: "text" | "password";
   is_label_hidden?: boolean;
   is_error_hidden?: boolean;
@@ -95,21 +99,19 @@ export const Input: FC<InputProps<any>> = (props) => {
     </div>
   );
 
-  const FieldError = error && (
-    <FormFieldError
+  const Error = error && (
+    <FieldError
       message={error.message}
       described_by={name}
       is_error_hidden={is_error_hidden}
-    >
-      {error.message}
-    </FormFieldError>
+    />
   );
 
   return (
     <div className={classes.parentWrapper}>
       {Label}
       {InputWrapper}
-      {FieldError}
+      {Error}
     </div>
   );
 };

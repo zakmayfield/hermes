@@ -1,23 +1,29 @@
-import { merge } from "@/tw-styled";
-import { HTMLAttributes } from "react";
+import { useStyleResolver, useStyles } from "@/tw-styled";
+import { StyleProps } from "@/tw-styled/types";
 
-type TFieldErrorProps = HTMLAttributes<HTMLParagraphElement> & {
+export type FieldErrorProps = {
   message?: string;
   described_by?: string;
   is_error_hidden?: boolean;
-  className?: string;
+  style?: {
+    parentWrapper: StyleProps;
+  };
 };
 
-export const FormFieldError = (props: TFieldErrorProps) => {
-  const { message, is_error_hidden, described_by, className = "" } = props;
+export const FieldError = (props: FieldErrorProps) => {
+  const { message, is_error_hidden, described_by, style } = props;
 
-  const classes = `text-red-300 italic pt-1 ${className}`;
+  const styles = useStyles({
+    key: "fieldError",
+    style
+  });
+  const classes = useStyleResolver({ ...styles });
 
   return (
     <p
       aria-describedby={described_by}
       hidden={is_error_hidden}
-      className={merge(classes)}
+      className={classes.parentWrapper}
     >
       {message}
     </p>

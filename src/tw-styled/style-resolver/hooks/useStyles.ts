@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import {
   BtnProps,
+  FieldErrorProps,
   FormProps,
   HeadingProps,
   InputStyleProps,
@@ -19,6 +20,7 @@ type StyleHookKeys =
   | "text"
   | "form"
   | "input"
+  | "fieldError"
   | "btn"
   | "pulse"
   | "spin";
@@ -175,6 +177,17 @@ export const useStyles = <T extends ComponentStyleProp>(props: UseStyles<T>) => 
             ...style?.errorIcon
           }
         } satisfies InputStyleProps["style"];
+      }, [style, input]);
+
+    case "fieldError":
+      return useMemo(() => {
+        return {
+          parentWrapper: {
+            paddingTop: "sm",
+            className: "italic text-red-300",
+            ...style?.parentWrapper
+          }
+        } satisfies FieldErrorProps["style"];
       }, [style, input]);
 
     case "pulse":

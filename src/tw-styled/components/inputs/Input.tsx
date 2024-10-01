@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { useClassNameResolver, useStyles, useIcons } from "@/tw-styled";
+import { useStyleResolver, useStyles, useIcons } from "@/tw-styled";
 import { FieldError, FieldValues, UseFormRegister } from "react-hook-form";
 import { utilityHooks } from "@/shared/hooks";
 import { FormFieldError } from "../wrappers";
@@ -51,7 +51,7 @@ export const Input: FC<InputProps<any>> = (props) => {
       }
     }
   });
-  const classes = useClassNameResolver({ ...styles });
+  const classes = useStyleResolver({ ...styles });
 
   const name = props.name as string;
 

@@ -7,7 +7,7 @@ import {
   TextElements,
   WrapperElements
 } from "@/tw-styled/types";
-import { useClassNameResolver, useStyles } from "@/tw-styled";
+import { useStyleResolver, useStyles } from "@/tw-styled";
 
 export type WrapperProps = {
   children?: Children;
@@ -26,7 +26,7 @@ export const Wrapper = (props: WrapperProps) => {
     style
   });
 
-  const classes = useClassNameResolver({ ...styles });
+  const classes = useStyleResolver({ ...styles });
 
   const ChildrenWrapper = <div className={classes.childrenWrapper}>{children}</div>;
   return React.createElement(as, { className: classes.parentWrapper }, ChildrenWrapper);

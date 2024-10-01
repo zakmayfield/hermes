@@ -1,5 +1,5 @@
 import { Sizes, StyleProps, Themes } from "@/tw-styled/types";
-import { merge, useClassNameResolver, useStyles } from "@/tw-styled";
+import { merge, useStyleResolver, useStyles } from "@/tw-styled";
 
 export type PulseProps = {
   theme?: Themes;
@@ -21,7 +21,7 @@ export const Pulse = (props: PulseProps) => {
       theme
     }
   });
-  const classes = useClassNameResolver({ ...styles });
+  const classes = useStyleResolver({ ...styles });
 
   switch (size) {
     default:

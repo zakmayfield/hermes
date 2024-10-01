@@ -2,7 +2,7 @@
 import { IconType } from "react-icons";
 import { PiSpinnerGap } from "react-icons/pi";
 import { BtnVariants, StyleProps } from "@/tw-styled/types";
-import { useClassNameResolver, useStyles } from "@/tw-styled";
+import { useStyleResolver, useStyles } from "@/tw-styled";
 
 export type BtnProps = {
   Icon?: IconType;
@@ -53,7 +53,7 @@ export const Btn = (props: BtnProps) => {
       }
     }
   });
-  const classes = useClassNameResolver({ ...styles });
+  const classes = useStyleResolver({ ...styles });
 
   return (
     <div className={classes.parentWrapper}>

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { StyleProps, TextElements } from "@/tw-styled/types";
-import { useClassNameResolver, useStyles } from "@/tw-styled";
+import { useStyleResolver, useStyles } from "@/tw-styled";
 
 export type TextProps = {
   as?: TextElements;
@@ -20,7 +20,7 @@ export const Text = (props: TextProps) => {
     key: "text",
     style
   });
-  const classes = useClassNameResolver(styles);
+  const classes = useStyleResolver(styles);
 
   return React.createElement(
     as,

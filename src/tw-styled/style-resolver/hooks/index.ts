@@ -1,3 +1,3 @@
-export * from "./useClassNameResolver";
+export * from "./useStyleResolver";
 export * from "./useStyleMaps";
 export * from "./useStyles";

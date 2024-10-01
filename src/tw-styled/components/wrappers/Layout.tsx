@@ -1,6 +1,6 @@
 "use client";
 import { Heading } from "./Heading";
-import { useClassNameResolver, useStyles } from "@/tw-styled";
+import { useStyleResolver, useStyles } from "@/tw-styled";
 import { Children, HeadingElements, StyleProps } from "@/tw-styled/types";
 
 export type LayoutProps = {
@@ -21,7 +21,7 @@ export const Layout = (props: LayoutProps) => {
     key: "layout",
     style
   });
-  const classes = useClassNameResolver({ ...styles });
+  const classes = useStyleResolver({ ...styles });
 
   return (
     <div className={classes.parentWrapper}>

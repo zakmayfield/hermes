@@ -1,12 +1,8 @@
-import { ComponentStyleProp, StylePropKeys } from "@/tw-styled/types";
-import { merge, useStyleMaps } from "@/tw-styled";
 import { useMemo } from "react";
+import { useStyleMaps } from "@/tw-styled/style-resolver/hooks";
+import { StylePropKeys } from "@/tw-styled/types";
 
-const isValidObject = (obj: ComponentStyleProp, key: string) => {
-  return Object.keys(obj[key]).length !== 0;
-};
-
-const typeNarrowHandler = (styleKey: StylePropKeys, styleValue: string) => {
+export const typeNarrowHandler = (styleKey: StylePropKeys, styleValue: string) => {
   const { getAllStyleMaps } = useStyleMaps();
 
   const styleMaps = useMemo(() => {
@@ -178,26 +174,4 @@ const typeNarrowHandler = (styleKey: StylePropKeys, styleValue: string) => {
     case "className":
       return styleValue === "none" ? "" : styleValue;
   }
-};
-
-export const useClassNameResolver = (styleProp: ComponentStyleProp) => {
-  const result: Record<string, string> = {};
-
-  for (const stylePropKey in styleProp) {
-    if (isValidObject(styleProp, stylePropKey)) {
-      const classes = [];
-      result[stylePropKey] = "";
-
-      for (const key in styleProp[stylePropKey]) {
-        const styleKey = key as StylePropKeys;
-        const styleValue = styleProp[stylePropKey][styleKey] || "none";
-
-        classes.push(typeNarrowHandler(styleKey, styleValue));
-      }
-
-      result[stylePropKey] = merge(classes.join(" ").trim());
-    }
-  }
-
-  return result;
 };

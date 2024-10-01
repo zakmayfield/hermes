@@ -3,7 +3,7 @@
 import React, { FC, FormEvent } from "react";
 import { Btn } from "../btns";
 import { StyleProps } from "@/tw-styled/types";
-import { useClassNameResolver, useStyles } from "@/tw-styled";
+import { useStyleResolver, useStyles } from "@/tw-styled";
 
 export type FormProps = {
   children?: React.ReactNode;
@@ -26,7 +26,7 @@ export const Form: FC<FormProps> = (props) => {
     key: "form",
     style
   });
-  const classes = useClassNameResolver({ ...styles });
+  const classes = useStyleResolver({ ...styles });
 
   const heading = title && <h3 className={classes.heading}>{title}</h3>;
 

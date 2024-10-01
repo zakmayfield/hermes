@@ -1,4 +1,4 @@
-import { merge, useClassNameResolver, useStyles } from "@/tw-styled";
+import { merge, useStyleResolver, useStyles } from "@/tw-styled";
 import { StyleProps } from "@/tw-styled/types";
 import { PiSpinnerGap } from "react-icons/pi";
 
@@ -16,7 +16,7 @@ export const Spin = (props: SpinProps) => {
     key: "spin",
     style
   });
-  const classes = useClassNameResolver({ ...styles });
+  const classes = useStyleResolver({ ...styles });
 
   return (
     <div className={classes.parentWrapper}>

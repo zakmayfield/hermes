@@ -12,7 +12,7 @@ export const SignUpForm = () => {
       isPending={isPending}
       style={{
         form: {
-          bg: "bg-slate-900"
+          bgColor: "darker"
         }
       }}
     >

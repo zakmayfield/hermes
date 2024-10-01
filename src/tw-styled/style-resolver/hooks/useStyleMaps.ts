@@ -10,7 +10,7 @@ import {
   otherMap,
   paddingMap,
   typographyMap
-} from "../utils/styleMaps";
+} from "@/tw-styled/style-resolver/utils";
 
 export const useStyleMaps = () => {
   const styleMapGroups = useMemo(() => {

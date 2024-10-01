@@ -1,5 +1,5 @@
 import { formHooks } from "@/shared/hooks";
-import { Form, Input, Layout } from "@/tw-styled/components";
+import { Form, Input, Layout, Wrapper } from "@/tw-styled/components";
 
 export const SignInForm = () => {
   const { register, onSubmit, errors, isPending } = formHooks.useSignInForm();
@@ -16,6 +16,17 @@ export const SignInForm = () => {
         }
       }}
     >
+      <Wrapper
+        style={{
+          parentWrapper: { border: "sm", padding: "sm" },
+          childrenWrapper: { border: "sm", padding: "sm" },
+          children: { border: "sm", padding: "sm" }
+        }}
+      >
+        <div>test 1</div>
+        <div>test 2</div>
+      </Wrapper>
+
       <Input
         name="email"
         label="Email"

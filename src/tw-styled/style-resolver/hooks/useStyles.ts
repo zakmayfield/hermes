@@ -10,7 +10,7 @@ import {
   TextProps,
   WrapperProps
 } from "../../components";
-import { BtnVariants, ComponentStyleProp, StyleProps, Themes } from "@/tw-styled/types";
+import { BtnVariants, ComponentStyleProp, Themes } from "@/tw-styled/types";
 
 type StyleHookKeys =
   | "layout"
@@ -46,14 +46,16 @@ export const useStyles = <T extends ComponentStyleProp>(props: UseStyles<T>) => 
       return useMemo(() => {
         return {
           parentWrapper: {
-            flex: "row",
-            ...style?.prentWrapper
+            ...style?.parentWrapper
           },
           childrenWrapper: {
             flex: "col",
             gap: "sm",
             width: "full",
             ...style?.childrenWrapper
+          },
+          children: {
+            ...style?.children
           }
         } satisfies WrapperProps["style"];
       }, [style]);

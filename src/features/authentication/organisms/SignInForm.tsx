@@ -16,17 +16,6 @@ export const SignInForm = () => {
         }
       }}
     >
-      <Wrapper
-        style={{
-          parentWrapper: { border: "sm", padding: "sm" },
-          childrenWrapper: { border: "sm", padding: "sm" },
-          children: { border: "sm", padding: "sm" }
-        }}
-      >
-        <div>test 1</div>
-        <div>test 2</div>
-      </Wrapper>
-
       <Input
         name="email"
         label="Email"

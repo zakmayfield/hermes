@@ -98,7 +98,7 @@ export const useStyles = <T extends ComponentStyleProp>(props: UseStyles<T>) => 
       return useMemo(() => {
         return {
           parentWrapper: {
-            ...style?.wrapper
+            ...style?.parentWrapper
           }
         } satisfies TextProps["style"];
       }, [style]);

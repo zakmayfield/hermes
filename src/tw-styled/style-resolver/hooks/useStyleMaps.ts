@@ -30,28 +30,30 @@ export const useStyleMaps = () => {
 
   type StyleMapGroupKeys = keyof typeof styleMapGroups;
 
-  const getAllStyleMaps = useCallback(() => {
-    return {
-      ...styleMapGroups.layout,
-      ...styleMapGroups.padding,
-      ...styleMapGroups.margin,
-      ...styleMapGroups.alignment,
-      ...styleMapGroups.typography,
-      ...styleMapGroups.background,
-      ...styleMapGroups.animations,
-      ...styleMapGroups.button,
-      ...styleMapGroups.loader,
-      ...styleMapGroups.other
-    };
-  }, []);
+  const getAllStyleMaps = () =>
+    useMemo(() => {
+      return {
+        ...styleMapGroups.layout,
+        ...styleMapGroups.padding,
+        ...styleMapGroups.margin,
+        ...styleMapGroups.alignment,
+        ...styleMapGroups.typography,
+        ...styleMapGroups.background,
+        ...styleMapGroups.animations,
+        ...styleMapGroups.button,
+        ...styleMapGroups.loader,
+        ...styleMapGroups.other
+      };
+    }, []);
 
-  const getStyleMapFromGroup = useCallback(
-    <T extends StyleMapGroupKeys>(group: T, map: keyof (typeof styleMapGroups)[T]) => {
+  const getStyleMapFromGroup = <T extends StyleMapGroupKeys>(
+    group: T,
+    map: keyof (typeof styleMapGroups)[T]
+  ) =>
+    useMemo(() => {
       const groupMap = styleMapGroups[group];
       return { ...groupMap[map] };
-    },
-    []
-  );
+    }, []);
 
   return {
     getAllStyleMaps,

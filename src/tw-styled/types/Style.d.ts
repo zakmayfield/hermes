@@ -83,8 +83,8 @@ interface ILoader {
 }
 
 interface IOther {
-  opacity: Opacities;
-  cursor: Cursors;
+  opacity?: Opacities;
+  cursor?: Cursors;
   className?: string;
 }
 

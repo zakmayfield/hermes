@@ -45,19 +45,6 @@ export const useStyleMaps = () => {
     };
   }, []);
 
-  const getStyleMapGroup = useCallback((group: StyleMapGroupKeys) => {
-    return { ...styleMapGroups[group] };
-  }, []);
-
-  const getStyleMapGroups = useCallback((groups: StyleMapGroupKeys[]) => {
-    return [...new Set(groups)].reduce((acc, group) => {
-      return {
-        ...acc,
-        ...styleMapGroups[group]
-      };
-    }, {});
-  }, []);
-
   const getStyleMapFromGroup = useCallback(
     <T extends StyleMapGroupKeys>(group: T, map: keyof (typeof styleMapGroups)[T]) => {
       const groupMap = styleMapGroups[group];
@@ -68,8 +55,6 @@ export const useStyleMaps = () => {
 
   return {
     getAllStyleMaps,
-    getStyleMapGroup,
-    getStyleMapGroups,
     getStyleMapFromGroup
   };
 };

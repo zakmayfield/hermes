@@ -5,12 +5,6 @@ import { Permission, Role, RolePermissions } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
 import { utilityHooks } from "@/shared/hooks";
 import { PiInfoDuotone } from "react-icons/pi";
-import { Layout, Text, Wrapper } from "@/tw-styled/components";
-
-type PermissionItemProps = RolePermissions & {
-  permission: Permission;
-  role: Role;
-};
 
 export const ManagePermissionsPage = () => {
   const { data } = useQuery({
@@ -21,30 +15,14 @@ export const ManagePermissionsPage = () => {
 
   const ManagePermissionsLayout = ({ children }: { children: React.ReactNode }) => {
     return (
-      <Layout
-        heading="h3"
-        title="Permissions"
-        style={{
-          parentWrapper: {
-            flex: "col",
-            gap: "lg",
-            border: "sm",
-            paddingX: "zero",
-            className: "border-red-400"
-          },
-          childrenWrapper: {
-            flex: "col",
-            gap: "lg",
-            flexSpacing: "space-evenly",
-            flexWrap: "nowrap",
-            className: "lg:flex-row"
-          }
-        }}
-      >
+      <div>
+        {" "}
+        <h3>Permissions</h3>
         {children}
-      </Layout>
+      </div>
     );
   };
+
   const PermissionList = ({
     children,
     title
@@ -53,31 +31,19 @@ export const ManagePermissionsPage = () => {
     title: string;
   }) => {
     return (
-      <Layout
-        heading="h5"
-        title={title}
-        style={{
-          parentWrapper: {
-            flex: "col",
-            gap: "md",
-            width: "sm",
-            place: "center",
-            border: "sm",
-            className: "border-yellow-400"
-          },
-          childrenWrapper: {
-            padding: "md",
-            rounded: "lg",
-            bgColor: "dark",
-            border: "sm",
-            height: "full"
-          }
-        }}
-      >
+      <div>
+        {" "}
+        <h5>{title}</h5>
         {children}
-      </Layout>
+      </div>
     );
   };
+
+  type PermissionItemProps = RolePermissions & {
+    permission: Permission;
+    role: Role;
+  };
+
   const PermissionItem = (props: PermissionItemProps) => {
     const {
       permission: { name, permission_id },
@@ -91,24 +57,15 @@ export const ManagePermissionsPage = () => {
     });
 
     return (
-      <Wrapper style={{ childrenWrapper: { flex: "row", flexSpacing: "space-between" } }}>
-        <Text>{name}</Text>
+      <div>
+        <p>{name}</p>
 
-        <Wrapper
-          style={{
-            childrenWrapper: {
-              flex: "row",
-              flexRowPosition: "center-right",
-              gap: "sm",
-              place: "right"
-            }
-          }}
-        >
-          <Text>{permission_level ? "✅" : "🚫"}</Text>
+        <div>
+          <p>{permission_level ? "✅" : "🚫"}</p>
           <PiInfoDuotone id={`${permission_id}_info_icon`} />
           <Tooltip />
-        </Wrapper>
-      </Wrapper>
+        </div>
+      </div>
     );
   };
 

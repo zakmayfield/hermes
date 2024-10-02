@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Text, Wrapper } from "@/tw-styled/components";
 import { usePathname } from "next/navigation";
 
 export const SwitchForm = () => {
@@ -12,7 +11,7 @@ export const SwitchForm = () => {
     ? "Need to create an account?"
     : "Already have an account?";
 
-  const text = <Text>{switch_text}</Text>;
+  const text = <p>{switch_text}</p>;
 
   const switch_link = (
     <Link
@@ -24,9 +23,9 @@ export const SwitchForm = () => {
   );
 
   return (
-    <Wrapper>
+    <div>
       {text}
       {switch_link}
-    </Wrapper>
+    </div>
   );
 };

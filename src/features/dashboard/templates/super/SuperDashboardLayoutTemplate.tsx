@@ -1,33 +1,19 @@
 "use client";
 
 import { SuperNavigation } from "../../organisms/super";
-import { Layout } from "@/tw-styled/components";
 
-type TSuperDashboardLayoutTemplateProps = {
+type SuperDashboardLayoutTemplateProps = {
   children: React.ReactNode;
 };
 
 export const SuperDashboardLayoutTemplate = (
-  props: TSuperDashboardLayoutTemplateProps
+  props: SuperDashboardLayoutTemplateProps
 ) => {
   const { children } = props;
   return (
-    <Layout
-      heading="h2"
-      title="Super"
-      style={{
-        parentWrapper: {
-          border: "sm",
-          paddingX: "zero",
-          className: "border-blue-400"
-        },
-        childrenWrapper: {
-          flex: "col"
-        }
-      }}
-    >
+    <div>
       <SuperNavigation />
       {children}
-    </Layout>
+    </div>
   );
 };

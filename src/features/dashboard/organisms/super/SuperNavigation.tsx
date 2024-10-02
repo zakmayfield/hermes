@@ -1,4 +1,3 @@
-import { Wrapper } from "@/tw-styled/components";
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
 
@@ -7,9 +6,7 @@ export const SuperNavigation = () => {
 
   return (
     <nav>
-      <Wrapper
-        style={{ childrenWrapper: { flex: "row", flexPosition: "center-center" } }}
-      >
+      <div>
         <Link
           href="/dashboard"
           className={`${(!segment && "underline") || ""}`}
@@ -28,7 +25,7 @@ export const SuperNavigation = () => {
         >
           Permissions
         </Link>
-      </Wrapper>
+      </div>
     </nav>
   );
 };

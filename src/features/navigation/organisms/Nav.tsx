@@ -28,7 +28,7 @@ export const Nav = () => {
         style={{
           childrenWrapper: {
             flex: "row",
-            flexPosition: "center-center"
+            flexRowPosition: "center-center"
           }
         }}
       >

@@ -1,27 +1,26 @@
 "use client";
 
 import { Logo, SwitchForm } from "@/features/authentication/organisms";
-import { Wrapper } from "@/tw-styled/components";
 
-type TAuthenticationLayoutTemplateProps = {
+type AuthenticationLayoutTemplateProps = {
   children: React.ReactNode;
 };
 
 export const AuthenticationLayoutTemplate = (
-  props: TAuthenticationLayoutTemplateProps
+  props: AuthenticationLayoutTemplateProps
 ) => {
   const { children } = props;
   return (
-    <Wrapper>
-      <Wrapper>
-        <Wrapper>
+    <div>
+      <div>
+        <div>
           <Logo />
-        </Wrapper>
+        </div>
 
         {children}
 
         <SwitchForm />
-      </Wrapper>
-    </Wrapper>
+      </div>
+    </div>
   );
 };

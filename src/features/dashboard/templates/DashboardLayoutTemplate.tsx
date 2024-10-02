@@ -1,25 +1,10 @@
 "use client";
-import { Layout } from "@/tw-styled/components";
 
-type TDashboardLayoutTemplateProps = {
+type DashboardLayoutTemplateProps = {
   children: React.ReactNode;
 };
 
-export const DashboardLayoutTemplate = (props: TDashboardLayoutTemplateProps) => {
+export const DashboardLayoutTemplate = (props: DashboardLayoutTemplateProps) => {
   const { children } = props;
-  return (
-    <Layout
-      title="Dashboard"
-      heading="h1"
-      style={{
-        parentWrapper: {
-          border: "sm",
-          paddingX: "zero",
-          className: "border-green-400"
-        }
-      }}
-    >
-      {children}
-    </Layout>
-  );
+  return <div>{children}</div>;
 };

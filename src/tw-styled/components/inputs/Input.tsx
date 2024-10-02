@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useCallback, useMemo } from "react";
 import { useStyleResolver, useStyles, useIcons } from "@/tw-styled";
 import {
   FieldError as FieldErrorType,
@@ -10,9 +10,9 @@ import { FieldError } from "../wrappers";
 import { StyleProps } from "@/tw-styled/types";
 
 type InputProps<T extends FieldValues> = InputStyleProps & {
-  name: keyof T;
   register?: UseFormRegister<T>;
-  label?: string;
+  name: keyof T;
+  labelText?: string;
   error?: FieldErrorType;
   type?: "text" | "password";
   is_label_hidden?: boolean;
@@ -32,15 +32,16 @@ export type InputStyleProps = {
 
 export const Input: FC<InputProps<any>> = (props) => {
   const {
-    type = "text",
-    label,
     register,
+    type = "text",
+    labelText = "",
     error,
     is_label_hidden = false,
     is_error_hidden = false,
     is_error_icon_hidden = false,
     style
   } = props;
+
   const is_error = !!error;
 
   const icons = useIcons({
@@ -49,6 +50,7 @@ export const Input: FC<InputProps<any>> = (props) => {
 
   const styles = useStyles({
     key: "input",
+    style,
     options: {
       input: {
         is_error
@@ -66,23 +68,13 @@ export const Input: FC<InputProps<any>> = (props) => {
     variant: "error"
   });
 
-  const Label = (
-    <label
-      className={classes.label}
-      htmlFor={name}
-      hidden={is_label_hidden}
-    >
-      {label}
-    </label>
-  );
-
   const InputWrapper = (
     <div className={classes.inputWrapper}>
       <input
         // TODO: classes are not being added to input
         className={classes.input}
         type={type}
-        placeholder={label}
+        placeholder={labelText}
         aria-label={name}
         aria-invalid={!!error}
         {...register?.(name)}
@@ -99,19 +91,61 @@ export const Input: FC<InputProps<any>> = (props) => {
     </div>
   );
 
-  const Error = error && (
-    <FieldError
-      message={error.message}
-      described_by={name}
-      is_error_hidden={is_error_hidden}
-    />
-  );
+  const { FieldError, Label } = useInput({
+    name,
+    is_error_hidden,
+    errorMessage: error?.message || "",
+    labelText,
+    is_label_hidden,
+    classes
+  });
 
   return (
     <div className={classes.parentWrapper}>
       {Label}
       {InputWrapper}
-      {Error}
+      {FieldError}
     </div>
   );
 };
+
+function useInput(props: {
+  name: string;
+  is_error_hidden: boolean;
+  errorMessage: string;
+  labelText: string;
+  is_label_hidden: boolean;
+  classes: Record<string, string>;
+}) {
+  const { name, errorMessage, is_error_hidden, labelText, is_label_hidden, classes } =
+    props;
+
+  const Error = useMemo(() => {
+    return (
+      <FieldError
+        message={errorMessage}
+        described_by={name}
+        is_error_hidden={is_error_hidden}
+      />
+    );
+  }, [errorMessage, is_error_hidden, name]);
+
+  const Label = useMemo(() => {
+    return (
+      <label
+        className={classes.label}
+        htmlFor={name}
+        hidden={is_label_hidden}
+      >
+        {labelText}
+      </label>
+    );
+  }, [labelText, is_label_hidden, name, classes]);
+
+  const components = {
+    FieldError: Error,
+    Label
+  };
+
+  return components;
+}

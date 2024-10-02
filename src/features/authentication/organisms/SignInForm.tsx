@@ -18,14 +18,14 @@ export const SignInForm = () => {
     >
       <Input
         name="email"
-        label="Email"
+        labelText="Email"
         register={register}
         error={errors.email}
       />
       <Input
         type="password"
         name="password"
-        label="Password"
+        labelText="Password"
         register={register}
         error={errors.password}
       />

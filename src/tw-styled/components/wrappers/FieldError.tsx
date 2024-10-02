@@ -1,5 +1,6 @@
 import { useStyleResolver, useStyles } from "@/tw-styled";
 import { StyleProps } from "@/tw-styled/types";
+import { useMemo } from "react";
 
 export type FieldErrorProps = {
   message?: string;
@@ -19,13 +20,17 @@ export const FieldError = (props: FieldErrorProps) => {
   });
   const classes = useStyleResolver({ ...styles });
 
-  return (
-    <p
-      aria-describedby={described_by}
-      hidden={is_error_hidden}
-      className={classes.parentWrapper}
-    >
-      {message}
-    </p>
-  );
+  const FieldError = useMemo(() => {
+    return (
+      <p
+        aria-describedby={described_by}
+        hidden={is_error_hidden}
+        className={classes.parentWrapper}
+      >
+        {message}
+      </p>
+    );
+  }, [described_by, is_error_hidden, message, classes]);
+
+  return FieldError;
 };

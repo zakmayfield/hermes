@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-type TNavItemProps = TNavItem;
+type NavItemProps = TNavItem;
 
 export type TNavItem = {
   id: string;
@@ -8,7 +8,7 @@ export type TNavItem = {
   href: string;
 };
 
-export const NavItem = (props: TNavItemProps) => {
+export const NavItem = (props: NavItemProps) => {
   const { text, ...rest } = props;
   return <Link {...rest}>{text}</Link>;
 };

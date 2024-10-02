@@ -1,7 +1,6 @@
 import Link from "next/link";
 import notfound from "@/assets/notfound.png";
 import Image from "next/image";
-import { Heading } from "@/tw-styled/components";
 
 export default function NotFound() {
   return (
@@ -32,7 +31,7 @@ function NotFoundInfo() {
   return (
     <div className="flex items-end">
       <div className="2xl:py-12">
-        <Heading as="h1">404 Not Found</Heading>
+        <h1>404 Not Found</h1>
         <p className="mb-6 text-lg">We couldn&apos;t find that requested resource</p>
         <Link
           href="/dashboard"

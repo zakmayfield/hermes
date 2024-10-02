@@ -10,6 +10,7 @@ export type StyleProps = ILayout &
   IOther;
 
 export type StylePropKeys = keyof StyleProps;
+export type ResolvedClasses = Record<string, string>;
 
 interface ILayout {
   width?: Sizes | ExtendedSizes | Full | None;

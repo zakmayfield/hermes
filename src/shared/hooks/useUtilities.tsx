@@ -1,9 +1,9 @@
 "use client";
-import { RefAttributes, useMemo, useState } from "react";
+import { RefAttributes, useState } from "react";
 import { toast } from "react-toastify";
 import { ITooltip, TooltipRefProps, Tooltip } from "react-tooltip";
 import { FaChevronDown } from "react-icons/fa";
-import { Btn, Text, Wrapper } from "@/tw-styled/components";
+import { Btn } from "@/tw-styled/components";
 
 type ToastVariants = "success" | "error" | "warn" | "info";
 type TooltipProps = ITooltip & RefAttributes<TooltipRefProps>;
@@ -52,11 +52,9 @@ export const utilityHooks = {
       const { id, title, body } = item;
 
       return (
-        <Wrapper style={{ parentWrapper: { rounded: "lg", bg: "bg-slate-800" } }}>
-          <Wrapper
-            style={{ childrenWrapper: { flex: "row", paddingX: "lg", paddingY: "md" } }}
-          >
-            <Text>{title}</Text>
+        <div>
+          <div>
+            <p>{title}</p>
             <Btn
               Icon={FaChevronDown}
               handleClick={() => handle_expand(id)}
@@ -67,36 +65,26 @@ export const utilityHooks = {
                 }
               }}
             />
-          </Wrapper>
+          </div>
 
-          <Wrapper
-            style={{
-              parentWrapper: { className: (!is_expanded(id) && "hidden") || "" },
-              childrenWrapper: { padding: "lg", gap: "lg" }
-            }}
-          >
+          <div>
             {body.map((item) => (
-              <Wrapper
-                key={`${item.id}`}
-                style={{ parentWrapper: { padding: "sm" } }}
-              >
-                {item.child}
-              </Wrapper>
+              <div key={item.id}>{item.child}</div>
             ))}
-          </Wrapper>
-        </Wrapper>
+          </div>
+        </div>
       );
     };
 
     const Accordion = () => (
-      <Wrapper style={{ childrenWrapper: { padding: "lg", flex: "col" } }}>
+      <div>
         {data.map((item) => (
           <AccordionItem
             key={item.id}
             {...item}
           />
         ))}
-      </Wrapper>
+      </div>
     );
 
     return { Accordion, handle_expand, is_expanded };

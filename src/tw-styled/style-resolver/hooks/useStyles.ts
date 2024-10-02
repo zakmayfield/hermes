@@ -53,7 +53,6 @@ export const useStyles = <T extends ComponentStyleProp>(props: UseStyles<T>) => 
           childrenWrapper: {
             flex: "col",
             gap: "sm",
-            width: "full",
             ...style?.childrenWrapper
           },
           children: {

@@ -1,18 +1,19 @@
-import React, { isValidElement, useMemo } from "react";
+import React, { isValidElement, useMemo, useRef } from "react";
 import { WrapperProps } from "@/tw-styled/components";
 import { ResolvedClasses } from "@/tw-styled/types";
+import { HeadingProps } from "../components";
+
+type BaseHookProps = {
+  classes: ResolvedClasses;
+};
 
 export const hooks = {
-  useWrapperUi: (props: {
-    as: WrapperProps["as"];
-    children: WrapperProps["children"];
-    classes: ResolvedClasses;
-  }) => {
+  useWrapperUi: (props: BaseHookProps & Pick<WrapperProps, "as" | "children">) => {
     const { as = "div", children, classes } = props;
 
     const ParentWrapper = useMemo(() => {
       const parent = (props: React.ComponentProps<typeof as>) => {
-        const { children, className } = props;
+        const { children } = props;
         return React.createElement(
           as,
           { ...props, className: classes.parentWrapper },
@@ -47,7 +48,28 @@ export const hooks = {
     return { ParentWrapper, ChildrenWrapper };
   },
 
-  useHeadingUi: () => {
-    return { x: "123" };
+  useHeadingUi: (
+    props: BaseHookProps & Pick<HeadingProps, "as" | "text" | "children">
+  ) => {
+    const { as = "h1", text = "", children, classes } = props;
+
+    const ChildrenWrapper = useMemo(() => {
+      return <div className={classes.childrenWrapper}>{children}</div>;
+    }, []);
+
+    const HeadingElement = useMemo(() => {
+      return React.createElement(as, { className: classes.heading }, text);
+    }, [as, text]);
+
+    const Heading = () => (
+      <div className={classes.parentWrapper}>
+        {HeadingElement}
+        {ChildrenWrapper}
+      </div>
+    );
+
+    return {
+      Heading
+    };
   }
 };

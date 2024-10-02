@@ -15,7 +15,7 @@ export type WrapperProps = {
 };
 
 export const Wrapper = (props: WrapperProps) => {
-  const { as = "div", children, style } = props;
+  const { style, ...rest } = props;
 
   const styles = useStyles({
     key: "wrapper",
@@ -25,8 +25,7 @@ export const Wrapper = (props: WrapperProps) => {
   const classes = useStyleResolver({ ...styles });
 
   const ui = hooks.useWrapperUi({
-    as,
-    children,
+    ...rest,
     classes
   });
 

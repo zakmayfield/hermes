@@ -1,11 +1,12 @@
 import React, { useMemo } from "react";
 import { Children, HeadingElements, StyleProps } from "@/tw-styled/types";
 import { useStyleResolver, useStyles } from "@/tw-styled";
+import { hooks } from "../hooks";
 
 export type HeadingProps = {
   children?: Children;
   as?: HeadingElements;
-  title?: string;
+  text?: string;
   style?: {
     parentWrapper?: StyleProps;
     heading?: StyleProps;
@@ -14,28 +15,13 @@ export type HeadingProps = {
 };
 
 export const Heading = (props: HeadingProps) => {
-  const { as = "h1", title = "", children, style } = props;
+  const { style, ...rest } = props;
 
-  const styles = useStyles({
-    key: "heading",
-    style
-  });
+  const styles = useStyles({ key: "heading", style });
   const classes = useStyleResolver({ ...styles });
+  const ui = hooks.useHeadingUi({ ...rest, classes });
 
-  const ChildrenWrapper =
-    children &&
-    useMemo(() => {
-      return <div className={classes.childrenWrapper}>{children}</div>;
-    }, []);
+  const Heading = ui.Heading;
 
-  const Heading = useMemo(() => {
-    return React.createElement(as, { className: classes.heading }, title);
-  }, [as, title, classes]);
-
-  return (
-    <div className={classes.parentWrapper}>
-      {Heading}
-      {ChildrenWrapper}
-    </div>
-  );
+  return <Heading />;
 };

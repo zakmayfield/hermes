@@ -29,6 +29,15 @@ export const typeNarrowHandler = (styleKey: StylePropKeys, styleValue: string) =
     case "position":
       map = getStyleMapFromGroup("layout", styleKey);
       return map[styleValue as keyof typeof map];
+    case "space":
+      map = getStyleMapFromGroup("layout", styleKey);
+      return map[styleValue as keyof typeof map];
+    case "spaceX":
+      map = getStyleMapFromGroup("layout", styleKey);
+      return map[styleValue as keyof typeof map];
+    case "spaceY":
+      map = getStyleMapFromGroup("layout", styleKey);
+      return map[styleValue as keyof typeof map];
 
     // PADDING
     case "padding":

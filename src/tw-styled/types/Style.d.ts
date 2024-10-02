@@ -20,6 +20,9 @@ interface ILayout {
   rounded?: Sizes | "xl" | None;
   display?: Displays | None;
   position?: Positions | None;
+  space?: Sizes;
+  spaceY?: Sizes;
+  spaceX?: Sizes;
 }
 
 interface IPadding {

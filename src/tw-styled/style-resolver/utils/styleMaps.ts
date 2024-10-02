@@ -74,6 +74,24 @@ const layoutMap = {
       fixed: "fixed",
       sticky: "sticky",
       static: "static"
+    },
+    spaceY: {
+      ...baseMap,
+      sm: "space-y-2",
+      md: "space-y-4",
+      lg: "space-y-6"
+    },
+    spaceX: {
+      ...baseMap,
+      sm: "space-x-2",
+      md: "space-x-4",
+      lg: "space-x-4"
+    },
+    space: {
+      ...baseMap,
+      sm: "space-y-2 space-x-2",
+      md: "space-y-4 space-x-4",
+      lg: "space-y-6 space-x-6"
     }
   }
 } satisfies Map;

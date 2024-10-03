@@ -37,7 +37,7 @@ export const Btn = (props: BtnProps) => {
         isDisabled: rest.isDisabled
       },
       btn: {
-        variant: rest.variant
+        variant: rest.variant || "ghost"
       }
     }
   });

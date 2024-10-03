@@ -11,7 +11,6 @@ const meta = {
   },
   args: {
     isDisabled: false,
-    isLoading: false,
     text: "Submit"
   }
 } satisfies Meta<typeof Btn>;

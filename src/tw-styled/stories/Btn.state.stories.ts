@@ -11,7 +11,6 @@ const meta = {
   },
   args: {
     isDisabled: false,
-    isLoading: false,
     text: "Submit"
   }
 } satisfies Meta<typeof Btn>;
@@ -23,17 +22,5 @@ export const Disabled: BtnStateStory = {
   args: {
     variant: "primary",
     isDisabled: true
-  }
-};
-
-export const Loading: BtnStateStory = {
-  args: {
-    variant: "primary",
-    isLoading: true,
-    style: {
-      buttonStyles: {
-        buttonSize: "sm"
-      }
-    }
   }
 };

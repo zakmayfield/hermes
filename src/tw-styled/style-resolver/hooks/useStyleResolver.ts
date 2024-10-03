@@ -1,6 +1,6 @@
 import { ComponentStyleProp, StylePropKeys } from "@/tw-styled/types";
-import { merge } from "@/tw-styled";
-import { isValidObject, typeNarrowHandler } from "@/tw-styled/style-resolver/utils";
+import { isValidObject, typeNarrowHandler } from "../utils";
+import { merge } from "@/tw-styled/tools";
 
 export const useStyleResolver = (styleProp: ComponentStyleProp) => {
   const result: Record<string, string> = {};

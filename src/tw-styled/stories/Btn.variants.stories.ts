@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { Btn } from "@/tw-styled/components";
+import { Btn } from "../ui";
 
 const meta = {
   title: "Btn/Variant",

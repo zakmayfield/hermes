@@ -1,60 +1,31 @@
 "use client";
 
-import React, { FC, FormEvent } from "react";
-import { Btn } from "./Btn";
+import React, { FormEvent } from "react";
 import { StyleProps } from "@/tw-styled/types";
-import { useStyleResolver, useStyles } from "@/tw-styled";
+import { styleHooks, uiHooks } from "../hooks";
+import { useStyleResolver } from "@/tw-styled/tools";
 
 export type FormProps = {
   children?: React.ReactNode;
-  title?: string;
+  titleText?: string;
   buttonText?: string;
   isPending?: boolean;
   onSubmit?: (e: FormEvent<HTMLFormElement>) => void;
   style?: {
-    form?: StyleProps;
-    heading?: StyleProps;
-    contentWrapper?: StyleProps;
-    button?: StyleProps;
+    formStyles?: StyleProps;
+    titleStyles?: StyleProps;
+    childrenWrapperStyles?: StyleProps;
+    childrenStyles?: StyleProps;
+    buttonStyles?: StyleProps;
   };
 };
 
-export const Form: FC<FormProps> = (props) => {
-  const { children, title, onSubmit, buttonText = "Submit", isPending, style } = props;
+export const Form = (props: FormProps) => {
+  const { style, ...rest } = props;
 
-  const styles = useStyles({
-    key: "form",
-    style
-  });
+  const styles = styleHooks.useFormStyles({ style });
   const classes = useStyleResolver({ ...styles });
+  const { Form } = uiHooks.useFormUi({ classes, ...rest });
 
-  const heading = title && <h3 className={classes.heading}>{title}</h3>;
-
-  const button = (
-    <Btn
-      type="submit"
-      text={buttonText}
-      isDisabled={isPending}
-      isLoading={isPending}
-      variant="ghost"
-      style={{
-        button: {
-          className: classes.button
-        }
-      }}
-    />
-  );
-
-  return (
-    <form
-      className={classes.form}
-      onSubmit={onSubmit}
-    >
-      {heading}
-      <div className={classes.contentWrapper}>
-        {children}
-        {button}
-      </div>
-    </form>
-  );
+  return <Form />;
 };

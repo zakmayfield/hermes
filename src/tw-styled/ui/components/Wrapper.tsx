@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import { Children, StyleProps, WrapperElements } from "@/tw-styled/types";
-import { styleHooks, useStyleResolver } from "@/tw-styled";
-import { uiHooks } from "../hooks";
+import { styleHooks, uiHooks } from "../hooks";
+import { useStyleResolver } from "@/tw-styled/tools";
 
 export type WrapperProps = {
   children?: Children;

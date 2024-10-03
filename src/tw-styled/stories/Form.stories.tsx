@@ -1,5 +1,5 @@
-import { Form } from "@/tw-styled/components";
 import { Meta, StoryObj } from "@storybook/react";
+import { Form } from "../ui";
 
 const meta = {
   title: "Form",

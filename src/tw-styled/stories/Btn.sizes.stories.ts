@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { Btn } from "@/tw-styled/components";
+import { Btn } from "../ui";
 
 const meta = {
   title: "Btn/Size",
@@ -29,10 +29,10 @@ export const Sm: BtnSizesStory = {
   args: {
     text: "Submit",
     style: {
-      parentWrapper: {
+      parentWrapperStyles: {
         width: "full"
       },
-      button: {
+      buttonStyles: {
         buttonSize: "sm"
       }
     }
@@ -43,10 +43,10 @@ export const Md: BtnSizesStory = {
   args: {
     text: "Submit",
     style: {
-      parentWrapper: {
+      parentWrapperStyles: {
         width: "full"
       },
-      button: {
+      buttonStyles: {
         buttonSize: "md"
       }
     }
@@ -57,10 +57,10 @@ export const Lg: BtnSizesStory = {
   args: {
     text: "Submit",
     style: {
-      parentWrapper: {
+      parentWrapperStyles: {
         width: "full"
       },
-      button: {
+      buttonStyles: {
         buttonSize: "lg"
       }
     }
@@ -71,10 +71,10 @@ export const Full: BtnSizesStory = {
   args: {
     text: "Submit",
     style: {
-      parentWrapper: {
+      parentWrapperStyles: {
         width: "full"
       },
-      button: {
+      buttonStyles: {
         buttonSize: "full"
       }
     }

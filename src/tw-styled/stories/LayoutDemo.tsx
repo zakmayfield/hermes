@@ -1,6 +1,7 @@
-import { useStyleResolver, useStyles } from "@/tw-styled/style-resolver/hooks";
+import { useStyleResolver } from "@/tw-styled/style-resolver/hooks";
 import { Children, HeadingElements, StyleProps } from "@/tw-styled/types";
-import React, { useCallback, useMemo } from "react";
+import React, { useMemo } from "react";
+import { styleHooks } from "../ui/hooks";
 
 type LayoutDemoProps = {
   children?: "1" | "2" | "3";
@@ -148,11 +149,7 @@ export const LayoutDemo = (props: LayoutDemoProps) => {
   const { children = "1", title = "a", headingAs = "h1", borders = false, style } = props;
   const border = (borders && " border") || "";
 
-  const styles = useStyles({
-    key: "layout",
-    style
-  });
-
+  const styles = styleHooks.useLayoutStyles({ style });
   const classes = useStyleResolver({ ...styles });
 
   const titleComp = getHeading(title, classes, border, headingAs);

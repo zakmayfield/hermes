@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { Btn } from "@/tw-styled/components";
+import { Btn } from "../ui";
 
 const meta = {
   title: "Btn/State",
@@ -31,7 +31,7 @@ export const Loading: BtnStateStory = {
     variant: "primary",
     isLoading: true,
     style: {
-      button: {
+      buttonStyles: {
         buttonSize: "sm"
       }
     }

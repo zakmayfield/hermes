@@ -1,6 +1,21 @@
 import React, { isValidElement, useMemo } from "react";
-import { WrapperProps, HeadingProps, LayoutProps } from "@/tw-styled/ui";
+import {
+  WrapperProps,
+  HeadingProps,
+  LayoutProps,
+  TextProps,
+  SpinProps,
+  PulseProps,
+  FieldErrorProps,
+  InputProps,
+  FormProps,
+  BtnProps,
+  FieldError
+} from "@/tw-styled/ui";
 import { ResolvedClasses } from "@/tw-styled/types";
+import { PiSpinnerGap, PiYinYangDuotone } from "react-icons/pi";
+import { merge, useIcons } from "@/tw-styled/tools";
+import { utilityHooks } from "@/shared/hooks";
 
 type Props<T> = { classes: ResolvedClasses } & Omit<T, "style">;
 
@@ -141,5 +156,332 @@ export const uiHooks = {
 
     const Layout = () => getLayout();
     return { Layout };
+  },
+
+  useTextUi: (props: Props<TextProps>) => {
+    const { as = "p", children, described_by, is_hidden, classes } = props;
+
+    const Text = () =>
+      useMemo(() => {
+        return React.createElement(
+          as,
+          {
+            "aria-describedby": described_by,
+            hidden: is_hidden,
+            className: classes.parentWrapper
+          },
+          children
+        );
+      }, [as, children, described_by, is_hidden, classes]);
+
+    return { Text };
+  },
+
+  useSpinUi: (props: Props<SpinProps>) => {
+    const { classes } = props;
+
+    const icon = <PiSpinnerGap className={classes.icon} />;
+    const Spin = () => <div className={classes.parentWrapper}>{icon}</div>;
+
+    return { Spin };
+  },
+
+  usePulseUi: (props: Props<PulseProps>) => {
+    const { classes, size } = props;
+
+    switch (size) {
+      default:
+        return () => (
+          <div className={classes.parentWrapper}>
+            <div className={classes.childrenWrapper}>
+              <div className={classes.children} />
+              <div className={merge("w-full " + classes.children)} />
+            </div>
+          </div>
+        );
+      case "md":
+        return () => (
+          <div className={classes.parentWrapper}>
+            <div className={classes.childrenWrapper}>
+              <div className={merge("w-1/3 " + classes.children)} />
+              <div className={merge("flex-grow " + classes.children)} />
+            </div>
+
+            <div className={classes.childrenWrapper}>
+              <div className={merge("flex-grow " + classes.children + " p-10")} />
+              <div className={merge("w-1/3 " + classes.children)} />
+            </div>
+          </div>
+        );
+      case "lg":
+        return () => (
+          <div className={classes.parentWrapper}>
+            <div className={classes.childrenWrapper}>
+              <div className={merge("w-1/3 " + classes.children + " p-6")} />
+              <div className={merge("flex-grow " + classes.children + " p-6")} />
+            </div>
+
+            <div className={classes.childrenWrapper}>
+              <div className={merge("w-2/3 " + classes.children + " p-20")} />
+
+              <div className={"flex-grow " + classes.childrenWrapper + " flex-col"}>
+                <div className={merge(classes.children + " p-6")} />
+                <div className={merge("flex-grow " + classes.children + " p-6")} />
+              </div>
+            </div>
+
+            <div className={classes.childrenWrapper}>
+              <div className={merge("flex-grow " + classes.children + " p-12")} />
+              <div className={merge("flex-grow " + classes.children + " p-12")} />
+            </div>
+          </div>
+        );
+    }
+  },
+
+  useFieldErrorUi: (props: Props<FieldErrorProps>) => {
+    const { message, described_by, is_error_hidden } = props;
+
+    const FieldError = () =>
+      useMemo(() => {
+        return (
+          <p
+            aria-describedby={described_by}
+            hidden={is_error_hidden}
+          >
+            {message}
+          </p>
+        );
+      }, [message, described_by, is_error_hidden]);
+
+    return { FieldError };
+  },
+
+  useInputUi: (props: Props<InputProps<any>>) => {
+    const {
+      classes,
+      register,
+      name,
+      labelText,
+      error,
+      type,
+      is_label_hidden,
+      is_error_hidden,
+      is_error_icon_hidden
+    } = props;
+
+    const {
+      parentWrapperStyles,
+      labelStyles,
+      inputWrapperStyles,
+      inputStyles,
+      errorIconStyles
+    } = classes;
+
+    const inputName = name as string;
+
+    const icons = useIcons({
+      names: ["error"]
+    });
+
+    const { Tooltip } = utilityHooks.useTooltip({
+      content: error?.message,
+      anchorSelect: `#${inputName}_error_icon`,
+      place: "top-end",
+      variant: "error"
+    });
+
+    const InputElement = () =>
+      useMemo(() => {
+        return (
+          <input
+            className={inputStyles}
+            type={type}
+            placeholder={labelText}
+            aria-label={inputName}
+            aria-invalid={!!error}
+            {...register?.(inputName)}
+          />
+        );
+      }, [inputStyles, type, inputName]);
+
+    const ErrorIconElement = () => error && <icons.error className={errorIconStyles} />;
+    const TooltipElement = () => error && <Tooltip />;
+
+    const InputWrapper = () => (
+      <div className={inputWrapperStyles}>
+        <InputElement />
+        <ErrorIconElement />
+        <TooltipElement />
+      </div>
+    );
+
+    const LabelElement = () =>
+      useMemo(() => {
+        return (
+          <label
+            htmlFor={inputName}
+            hidden={is_label_hidden}
+            className={labelStyles}
+          >
+            {labelText}
+          </label>
+        );
+      }, [labelText, labelStyles, inputName, is_label_hidden]);
+
+    const ErrorElement = () =>
+      useMemo(() => {
+        return (
+          <FieldError
+            message={error?.message}
+            described_by={inputName}
+            is_error_hidden={is_error_hidden}
+          />
+        );
+      }, [error, inputName, is_error_hidden]);
+
+    const Input = () => (
+      <div className={parentWrapperStyles}>
+        <LabelElement />
+        <InputWrapper />
+        <ErrorElement />
+      </div>
+    );
+
+    return { Input };
+  },
+
+  useFormUi: (props: Props<FormProps>) => {
+    const {
+      titleText,
+      children,
+      buttonText = "Submit",
+      isPending = false,
+      onSubmit,
+      classes
+    } = props;
+
+    const {
+      formStyles,
+      titleStyles,
+      childrenWrapperStyles,
+      childrenStyles,
+      buttonStyles
+    } = classes;
+
+    const Title = () =>
+      useMemo(() => {
+        return <h3 className={titleStyles}>{titleText}</h3>;
+      }, [titleStyles]);
+
+    const Button = () =>
+      useMemo(() => {
+        return (
+          <button
+            type="submit"
+            disabled={isPending}
+            className={buttonStyles}
+          >
+            {buttonText}
+          </button>
+        );
+      }, [buttonText, buttonStyles, isPending]);
+
+    const Childs = () =>
+      useMemo(() => {
+        return React.Children.map(children, (child) => {
+          if (isValidElement(child)) {
+            return React.createElement(
+              child.type,
+              { ...child.props, className: childrenStyles },
+              child.props.children
+            );
+          }
+        });
+      }, [children, childrenStyles]);
+
+    const ChildrenWrapper = () => (
+      <div className={childrenWrapperStyles}>
+        <Childs />
+      </div>
+    );
+
+    const Form = () =>
+      useMemo(() => {
+        return (
+          <form
+            onSubmit={onSubmit}
+            className={formStyles}
+          >
+            <Title />
+            <ChildrenWrapper />
+            <Button />
+          </form>
+        );
+      }, [formStyles]);
+
+    return { Form };
+  },
+
+  useBtnUi: (props: Props<BtnProps>) => {
+    const {
+      classes,
+      type = "button",
+      text = "Submit",
+      mouseActions,
+      isDisabled = false,
+      isLoading = false,
+      Icon,
+      handleClick
+    } = props;
+
+    const {
+      parentWrapperStyles,
+      buttonStyles,
+      contentWrapperStyles,
+      textStyles,
+      iconStyles
+    } = classes;
+
+    const IconElement = () =>
+      useMemo(() => {
+        return Icon && <Icon className={iconStyles} />;
+      }, [Icon, iconStyles]);
+
+    const TextElement = () =>
+      useMemo(() => {
+        return <span className={textStyles}>{text}</span>;
+      }, [text, textStyles]);
+
+    const ContentWrapper = () => (
+      <div className={contentWrapperStyles}>
+        <IconElement />
+        <TextElement />
+      </div>
+    );
+
+    const Button = () =>
+      useMemo(() => {
+        return (
+          <button
+            type={type}
+            className={buttonStyles}
+            disabled={isDisabled || isLoading}
+            aria-disabled={isDisabled || isLoading}
+            onClick={handleClick}
+            {...mouseActions}
+          >
+            <ContentWrapper />
+          </button>
+        );
+      }, [type, isDisabled, isLoading, buttonStyles, handleClick]);
+
+    const Btn = () => (
+      <div className={parentWrapperStyles}>
+        <Button />
+      </div>
+    );
+
+    return { Btn };
   }
 };

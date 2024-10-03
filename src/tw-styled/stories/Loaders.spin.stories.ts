@@ -1,5 +1,5 @@
-import { Spin } from "@/tw-styled/components";
 import { Meta, StoryObj } from "@storybook/react";
+import { Spin } from "../ui";
 
 const meta = {
   title: "Loaders/Spin",

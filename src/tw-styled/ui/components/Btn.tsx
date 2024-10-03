@@ -2,7 +2,8 @@
 import { IconType } from "react-icons";
 import { PiSpinnerGap } from "react-icons/pi";
 import { BtnVariants, StyleProps } from "@/tw-styled/types";
-import { useStyleResolver, useStyles } from "@/tw-styled";
+import { styleHooks, uiHooks } from "../hooks";
+import { useStyleResolver } from "@/tw-styled/tools";
 
 export type BtnProps = {
   Icon?: IconType;
@@ -17,65 +18,31 @@ export type BtnProps = {
     onMouseLeave?(): void;
   };
   style?: {
-    parentWrapper?: StyleProps;
-    button?: StyleProps;
-    contentWrapper?: StyleProps;
-    content?: StyleProps;
-    spinner?: StyleProps;
+    parentWrapperStyles?: StyleProps;
+    buttonStyles?: StyleProps;
+    contentWrapperStyles?: StyleProps;
+    textStyles?: StyleProps;
+    iconStyles?: StyleProps;
   };
 };
 
 export const Btn = (props: BtnProps) => {
-  const {
-    type = "button",
-    text = "Submit",
-    variant = "ghost",
-    isLoading = false,
-    isDisabled = false,
-    Icon,
-    handleClick,
-    mouseActions,
-    style
-  } = props;
+  const { style, ...rest } = props;
 
-  const disabled = isDisabled || isLoading;
-
-  const styles = useStyles({
-    key: "btn",
+  const styles = styleHooks.useBtnStyles({
     style,
     options: {
       state: {
-        isLoading,
-        isDisabled
+        isLoading: rest.isLoading,
+        isDisabled: rest.isDisabled
       },
       btn: {
-        variant
+        variant: rest.variant
       }
     }
   });
   const classes = useStyleResolver({ ...styles });
+  const { Btn } = uiHooks.useBtnUi({ classes, ...rest });
 
-  return (
-    <div className={classes.parentWrapper}>
-      <button
-        type={type}
-        disabled={disabled}
-        aria-disabled={disabled}
-        className={classes.button}
-        onClick={handleClick}
-        {...mouseActions}
-      >
-        {isLoading && (props.style?.button?.width || props.style?.button?.buttonSize) ? (
-          <div className={classes.contentWrapper}>
-            <PiSpinnerGap className={classes.spinner} />
-          </div>
-        ) : (
-          <div className={classes.contentWrapper}>
-            {Icon && <Icon className={classes.content} />}
-            {text && <span className={classes.content}>{text}</span>}
-          </div>
-        )}
-      </button>
-    </div>
-  );
+  return <Btn />;
 };

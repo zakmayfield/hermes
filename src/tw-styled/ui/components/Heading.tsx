@@ -1,7 +1,7 @@
 import React from "react";
 import { Children, HeadingElements, StyleProps } from "@/tw-styled/types";
-import { useStyleResolver, styleHooks } from "@/tw-styled";
-import { uiHooks } from "../hooks";
+import { uiHooks, styleHooks } from "../hooks";
+import { useStyleResolver } from "@/tw-styled/tools";
 
 export type HeadingProps = {
   children?: Children;

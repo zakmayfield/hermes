@@ -1,4 +1,4 @@
-import { useStyleMaps } from "@/tw-styled/style-resolver/hooks";
+import { useStyleMaps } from "../hooks/useStyleMaps";
 import { StylePropKeys } from "@/tw-styled/types";
 
 export const typeNarrowHandler = (styleKey: StylePropKeys, styleValue: string) => {

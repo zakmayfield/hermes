@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import { styleHooks, useStyleResolver } from "@/tw-styled";
 import { Children, HeadingElements, StyleProps } from "@/tw-styled/types";
-import { uiHooks } from "../hooks";
+import { useStyleResolver } from "@/tw-styled/tools";
+import { styleHooks, uiHooks } from "../hooks";
 
 export type LayoutProps = {
   children?: Children;

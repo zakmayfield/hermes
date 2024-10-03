@@ -1,5 +1,5 @@
-import { Pulse } from "@/tw-styled/components";
 import { Meta, StoryObj } from "@storybook/react";
+import { Pulse } from "../ui";
 
 const meta = {
   title: "Loaders/Pulse",

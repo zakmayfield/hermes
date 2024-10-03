@@ -1,6 +1,6 @@
-import { merge, useStyleResolver, useStyles } from "@/tw-styled";
+import { useStyleResolver } from "@/tw-styled/tools";
 import { StyleProps } from "@/tw-styled/types";
-import { PiSpinnerGap } from "react-icons/pi";
+import { styleHooks, uiHooks } from "../hooks";
 
 export type SpinProps = {
   style?: {
@@ -12,20 +12,9 @@ export type SpinProps = {
 export const Spin = (props: SpinProps) => {
   const { style } = props;
 
-  const styles = useStyles({
-    key: "spin",
-    style
-  });
+  const styles = styleHooks.useSpinStyles({ style });
   const classes = useStyleResolver({ ...styles });
+  const { Spin } = uiHooks.useSpinUi({ classes });
 
-  return (
-    <div className={classes.parentWrapper}>
-      <PiSpinnerGap className={merge(classes.icon)} />
-    </div>
-  );
-};
-
-export const useSpin = (props: SpinProps) => {
-  const Loader = () => <Spin {...props} />;
-  return { SpinLoader: Loader };
+  return <Spin />;
 };

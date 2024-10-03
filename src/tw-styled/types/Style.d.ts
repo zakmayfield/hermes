@@ -81,6 +81,7 @@ interface IButton {
   buttonSize?: Sizes | Full | None;
   buttonWidth?: Sizes | Full | None;
   buttonHeight?: Sizes | None;
+  buttonVariant?: "ghost" | "primary" | "warning" | None;
 }
 
 interface ILoader {

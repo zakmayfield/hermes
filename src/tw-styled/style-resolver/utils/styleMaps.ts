@@ -389,6 +389,12 @@ const buttonMap = {
       sm: "min-h-[2.63rem]",
       md: "min-h-[2.75rem]",
       lg: "min-h-[2.87rem]"
+    },
+    buttonVariant: {
+      ...baseMap,
+      ghost: "hover:bg-white hover:bg-opacity-10",
+      primary: "bg-green-700 hover:bg-opacity-80",
+      warning: "bg-red-700 hover:bg-opacity-80"
     }
   }
 } satisfies Map;

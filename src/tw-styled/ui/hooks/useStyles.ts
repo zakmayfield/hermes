@@ -247,7 +247,7 @@ export const styleHooks = {
           ...style?.buttonStyles
         }
       } satisfies FormProps["style"];
-    }, []);
+    }, [style]);
   },
 
   useBtnStyles: (props: UseStyleProps) => {
@@ -258,27 +258,10 @@ export const styleHooks = {
       const variant = btn?.variant || "ghost";
 
       const getDynamicStyles = () => {
-        const btn_state = is_disabled ? "disabled" : "enabled";
-
-        const color_styles = {
-          ghost: {
-            enabled: "hover:bg-white hover:bg-opacity-10",
-            disabled: "bg-slate-600 bg-opacity-20 border-gray-200 border-opacity-50"
-          },
-          primary: {
-            enabled: "bg-green-700 hover:bg-opacity-80",
-            disabled: "bg-green-700 bg-opacity-50"
-          },
-          warning: {
-            enabled: "bg-red-700 hover:bg-opacity-80",
-            disabled: "bg-red-700 bg-opacity-50"
-          }
-        };
-
         return {
           buttonStyles: {
             border: btn?.variant === "ghost" ? "sm" : "none",
-            className: color_styles[variant][btn_state]
+            buttonVariant: variant
           },
           contentWrapperStyles: {
             textColor: is_disabled ? "light" : "none",
@@ -312,6 +295,6 @@ export const styleHooks = {
           ...style?.iconStyles
         }
       } satisfies BtnProps["style"];
-    }, []);
+    }, [style, state, btn]);
   }
 };

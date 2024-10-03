@@ -137,14 +137,6 @@ export const typeNarrowHandler = (styleKey: StylePropKeys, styleValue: string) =
       map = getStyleMapFromGroup("typography", styleKey);
       return map[styleValue as keyof typeof map];
 
-    // BACKGROUND
-    case "bgColor":
-      map = getStyleMapFromGroup("background", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "bgOpacity":
-      map = getStyleMapFromGroup("background", styleKey);
-      return map[styleValue as keyof typeof map];
-
     // ANIMATIONS
     case "animate":
       map = getStyleMapFromGroup("animations", styleKey);
@@ -159,6 +151,20 @@ export const typeNarrowHandler = (styleKey: StylePropKeys, styleValue: string) =
       return map[styleValue as keyof typeof map];
     case "buttonHeight":
       map = getStyleMapFromGroup("button", styleKey);
+      return map[styleValue as keyof typeof map];
+    case "buttonVariant":
+      map = getStyleMapFromGroup("button", styleKey);
+      return map[styleValue as keyof typeof map];
+    case "buttonVariantDisabled":
+      map = getStyleMapFromGroup("button", styleKey);
+      return map[styleValue as keyof typeof map];
+
+    // BACKGROUND
+    case "bgColor":
+      map = getStyleMapFromGroup("background", styleKey);
+      return map[styleValue as keyof typeof map];
+    case "bgOpacity":
+      map = getStyleMapFromGroup("background", styleKey);
       return map[styleValue as keyof typeof map];
 
     // LOADER

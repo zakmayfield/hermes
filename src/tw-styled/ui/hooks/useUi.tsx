@@ -10,11 +10,12 @@ import {
   InputProps,
   FormProps,
   BtnProps,
-  FieldError
+  FieldError,
+  Btn
 } from "@/tw-styled/ui";
 import { ResolvedClasses } from "@/tw-styled/types";
-import { PiSpinnerGap, PiYinYangDuotone } from "react-icons/pi";
-import { merge, useIcons } from "@/tw-styled/tools";
+import { PiSpinnerGap } from "react-icons/pi";
+import { merge, useIcons, useStyleResolver } from "@/tw-styled/tools";
 import { utilityHooks } from "@/shared/hooks";
 
 type Props<T> = { classes: ResolvedClasses } & Omit<T, "style">;
@@ -240,7 +241,7 @@ export const uiHooks = {
   },
 
   useFieldErrorUi: (props: Props<FieldErrorProps>) => {
-    const { message, described_by, is_error_hidden } = props;
+    const { message, described_by, is_error_hidden, classes } = props;
 
     const FieldError = () =>
       useMemo(() => {
@@ -248,11 +249,12 @@ export const uiHooks = {
           <p
             aria-describedby={described_by}
             hidden={is_error_hidden}
+            className={classes.parentWrapper}
           >
             {message}
           </p>
         );
-      }, [message, described_by, is_error_hidden]);
+      }, [message, described_by, is_error_hidden, classes]);
 
     return { FieldError };
   },
@@ -305,7 +307,14 @@ export const uiHooks = {
         );
       }, [inputStyles, type, inputName]);
 
-    const ErrorIconElement = () => error && <icons.error className={errorIconStyles} />;
+    const ErrorIconElement = () =>
+      error && (
+        <icons.error
+          id={`${inputName}_error_icon`}
+          className={errorIconStyles}
+        />
+      );
+
     const TooltipElement = () => error && <Tooltip />;
 
     const InputWrapper = () => (
@@ -355,10 +364,14 @@ export const uiHooks = {
     const {
       titleText,
       children,
-      buttonText = "Submit",
       isPending = false,
       onSubmit,
-      classes
+      classes,
+      button: {
+        buttonText = "Submit",
+        buttonVariant = "ghost",
+        buttonWidth = "full"
+      } = {}
     } = props;
 
     const {
@@ -372,20 +385,33 @@ export const uiHooks = {
     const Title = () =>
       useMemo(() => {
         return <h3 className={titleStyles}>{titleText}</h3>;
-      }, [titleStyles]);
+      }, [titleStyles, titleText]);
 
+    const buttonClasses = useStyleResolver({
+      button: {
+        buttonVariant,
+        buttonWidth,
+        padding: "sm",
+        paddingX: "md",
+        rounded: "md",
+        buttonHeight: "sm",
+        border: buttonVariant === "ghost" ? "sm" : "none",
+        className: buttonStyles
+      }
+    });
     const Button = () =>
       useMemo(() => {
         return (
           <button
             type="submit"
             disabled={isPending}
-            className={buttonStyles}
+            aria-disabled={isPending}
+            className={buttonClasses.button}
           >
             {buttonText}
           </button>
         );
-      }, [buttonText, buttonStyles, isPending]);
+      }, [buttonText, buttonStyles, isPending, buttonVariant, buttonClasses]);
 
     const Childs = () =>
       useMemo(() => {
@@ -406,19 +432,18 @@ export const uiHooks = {
       </div>
     );
 
-    const Form = () =>
-      useMemo(() => {
-        return (
-          <form
-            onSubmit={onSubmit}
-            className={formStyles}
-          >
-            <Title />
-            <ChildrenWrapper />
-            <Button />
-          </form>
-        );
-      }, [formStyles]);
+    const Form = () => {
+      return (
+        <form
+          onSubmit={onSubmit}
+          className={formStyles}
+        >
+          {titleText && <Title />}
+          <ChildrenWrapper />
+          <Button />
+        </form>
+      );
+    };
 
     return { Form };
   },

@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import { Children, StyleProps, WrapperElements } from "@/tw-styled/types";
-import { useStyleResolver, useStyles } from "@/tw-styled";
-import { hooks } from "../hooks";
+import { styleHooks, useStyleResolver } from "@/tw-styled";
+import { uiHooks } from "../hooks";
 
 export type WrapperProps = {
   children?: Children;
@@ -17,20 +17,11 @@ export type WrapperProps = {
 export const Wrapper = (props: WrapperProps) => {
   const { style, ...rest } = props;
 
-  const styles = useStyles({
-    key: "wrapper",
-    style
-  });
-
+  const styles = styleHooks.useWrapperStyles({ style });
   const classes = useStyleResolver({ ...styles });
+  const ui = uiHooks.useWrapperUi({ ...rest, classes });
 
-  const ui = hooks.useWrapperUi({
-    ...rest,
-    classes
-  });
+  const Wrapper = ui.Wrapper;
 
-  const Wrapper = ui.ParentWrapper;
-  const ChildrenWrapper = ui.ChildrenWrapper;
-
-  return <Wrapper>{ChildrenWrapper}</Wrapper>;
+  return <Wrapper />;
 };

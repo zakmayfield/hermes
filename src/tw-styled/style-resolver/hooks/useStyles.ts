@@ -10,8 +10,8 @@ import {
   SpinProps,
   TextProps,
   WrapperProps
-} from "../../components";
-import { BtnVariants, ComponentStyleProp, Themes } from "@/tw-styled/types";
+} from "@/tw-styled/ui";
+import { BtnVariants, ComponentStyleProp, StyleProp, Themes } from "@/tw-styled/types";
 
 type StyleHookKeys =
   | "layout"
@@ -38,6 +38,95 @@ type UseStyles<T> = {
       variant: BtnVariants;
     };
   };
+};
+
+type UseStyleProps = {
+  style?: StyleProp;
+  options?: StyleOptions;
+};
+
+type StyleOptions = {
+  state?: { isLoading: boolean; isDisabled: boolean };
+  theme?: Themes;
+  input?: {
+    is_error?: boolean;
+  };
+  btn?: {
+    variant: BtnVariants;
+  };
+};
+
+export const styleHooks = {
+  useWrapperStyles: (props: UseStyleProps) => {
+    const { style } = props;
+
+    const styles = useMemo(() => {
+      return {
+        parentWrapper: {
+          ...style?.parentWrapper
+        },
+        childrenWrapper: {
+          flex: "col",
+          gap: "sm",
+          ...style?.childrenWrapper
+        },
+        children: {
+          ...style?.children
+        }
+      } satisfies WrapperProps["style"];
+    }, [style]);
+
+    return styles;
+  },
+
+  useHeadingStyles: (props: UseStyleProps) => {
+    const { style } = props;
+
+    const styles = useMemo(() => {
+      return {
+        parentWrapper: {
+          ...style?.parentWrapper
+        },
+        heading: {
+          ...style?.heading
+        },
+        childrenWrapper: {
+          ...style?.childrenWrapper
+        }
+      } satisfies HeadingProps["style"];
+    }, [style]);
+
+    return styles;
+  },
+
+  useLayoutStyles: (props: UseStyleProps) => {
+    const { style } = props;
+
+    const styles = useMemo(() => {
+      return {
+        parentWrapper: {
+          ...style?.parentWrapper
+        },
+        headingWrapper: {
+          ...style?.headingWrapper
+        },
+        heading: {
+          ...style?.heading
+        },
+        headingChildren: {
+          ...style?.headingChildren
+        },
+        childrenWrapper: {
+          ...style?.childrenWrapper
+        },
+        children: {
+          ...style?.children
+        }
+      } satisfies LayoutProps["style"];
+    }, [style]);
+
+    return styles;
+  }
 };
 
 export const useStyles = <T extends ComponentStyleProp>(props: UseStyles<T>) => {

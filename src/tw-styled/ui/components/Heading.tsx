@@ -1,7 +1,7 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { Children, HeadingElements, StyleProps } from "@/tw-styled/types";
-import { useStyleResolver, useStyles } from "@/tw-styled";
-import { hooks } from "../hooks";
+import { useStyleResolver, styleHooks } from "@/tw-styled";
+import { uiHooks } from "../hooks";
 
 export type HeadingProps = {
   children?: Children;
@@ -17,9 +17,9 @@ export type HeadingProps = {
 export const Heading = (props: HeadingProps) => {
   const { style, ...rest } = props;
 
-  const styles = useStyles({ key: "heading", style });
+  const styles = styleHooks.useHeadingStyles({ style });
   const classes = useStyleResolver({ ...styles });
-  const ui = hooks.useHeadingUi({ ...rest, classes });
+  const ui = uiHooks.useHeadingUi({ ...rest, classes });
 
   const Heading = ui.Heading;
 

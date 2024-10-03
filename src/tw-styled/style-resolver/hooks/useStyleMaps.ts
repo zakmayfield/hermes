@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import {
   alignmentMap,
   animationsMap,
@@ -13,50 +12,31 @@ import {
 } from "@/tw-styled/style-resolver/utils";
 
 export const useStyleMaps = () => {
-  const styleMapGroups = useMemo(() => {
-    return {
-      ...layoutMap,
-      ...paddingMap,
-      ...marginMap,
-      ...alignmentMap,
-      ...typographyMap,
-      ...backgroundMap,
-      ...animationsMap,
-      ...buttonMap,
-      ...loaderMap,
-      ...otherMap
-    };
-  }, []);
+  const styleMapGroups = {
+    ...layoutMap,
+    ...paddingMap,
+    ...marginMap,
+    ...alignmentMap,
+    ...typographyMap,
+    ...backgroundMap,
+    ...animationsMap,
+    ...buttonMap,
+    ...loaderMap,
+    ...otherMap
+  };
 
   type StyleMapGroupKeys = keyof typeof styleMapGroups;
 
-  const getAllStyleMaps = () =>
-    useMemo(() => {
-      return {
-        ...styleMapGroups.layout,
-        ...styleMapGroups.padding,
-        ...styleMapGroups.margin,
-        ...styleMapGroups.alignment,
-        ...styleMapGroups.typography,
-        ...styleMapGroups.background,
-        ...styleMapGroups.animations,
-        ...styleMapGroups.button,
-        ...styleMapGroups.loader,
-        ...styleMapGroups.other
-      };
-    }, []);
-
+  // Using `useMemo` causes an error stating that more or fewer hooks were rendered
   const getStyleMapFromGroup = <T extends StyleMapGroupKeys>(
     group: T,
     map: keyof (typeof styleMapGroups)[T]
-  ) =>
-    useMemo(() => {
-      const groupMap = styleMapGroups[group];
-      return { ...groupMap[map] };
-    }, []);
+  ) => {
+    const groupMap = styleMapGroups[group];
+    return { ...groupMap[map] };
+  };
 
   return {
-    getAllStyleMaps,
     getStyleMapFromGroup
   };
 };

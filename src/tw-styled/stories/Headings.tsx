@@ -41,7 +41,8 @@ export const Headings = () => {
               border: "sm"
             },
             childrenWrapper: {
-              border: "sm"
+              border: "sm",
+              padding: "sm"
             }
           }}
         >

@@ -1,3 +1,5 @@
+import { BtnVariants } from "./Theming";
+
 export type StyleProps = ILayout &
   IPadding &
   IMargin &
@@ -81,7 +83,7 @@ interface IButton {
   buttonSize?: Sizes | Full | None;
   buttonWidth?: Sizes | Full | None;
   buttonHeight?: Sizes | None;
-  buttonVariant?: "ghost" | "primary" | "warning" | None;
+  buttonVariant?: BtnVariants | None;
 }
 
 interface ILoader {
@@ -125,7 +127,7 @@ type Places = "left" | "center" | "right";
 type Animations = "spin" | "pulse";
 
 type FontWeight = "light" | "normal" | "bold";
-type TextColor = "white" | "light" | "medium" | "dark" | "black";
+type TextColor = "disabled";
 type TextDecorations = "underline" | "line-through";
 type TextAlign = "left" | "center" | "right" | "justify";
 type LineHeight = "tight" | "normal" | "loose";
@@ -133,6 +135,14 @@ type LetterSpacing = "tight" | "normal" | "wide";
 
 type Opacities = "light" | "medium" | "dark" | "opaque";
 
-type BgColor = "white" | "lighter" | "light" | "medium" | "dark" | "darker" | "black";
+type BgColor =
+  | "primary"
+  | "primary-shimmer"
+  | "secondary"
+  | "secondary-shimmer"
+  | "tertiary"
+  | "tertiary-shimmer"
+  | "accent"
+  | "accent-shimmer";
 
 type Cursors = "pointer" | "not-allowed";

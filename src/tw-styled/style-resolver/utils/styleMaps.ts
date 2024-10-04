@@ -296,11 +296,7 @@ const typographyMap = {
     },
     textColor: {
       ...baseMap,
-      white: "text-white",
-      light: "text-gray-50",
-      medium: "text-gray-500",
-      dark: "text-gray-900",
-      black: "text-black"
+      disabled: "text-disabled"
     },
     textOpacity: {
       ...baseMap,
@@ -340,13 +336,17 @@ const backgroundMap = {
   background: {
     bgColor: {
       ...baseMap,
-      white: "bg-white",
-      lighter: "bg-slate-200",
-      light: "bg-slate-300",
-      medium: "bg-slate-600",
-      dark: "bg-slate-800",
-      darker: "bg-slate-900",
-      black: "bg-black"
+      primary: "bg-primary",
+      "primary-shimmer": "bg-primary-shimmer",
+
+      secondary: "bg-secondary",
+      "secondary-shimmer": "bg-secondary-shimmer",
+
+      tertiary: "bg-tertiary",
+      "tertiary-shimmer": "bg-tertiary-shimmer",
+
+      accent: "bg-accent",
+      "accent-shimmer": "bg-accent-shimmer"
     },
     bgOpacity: {
       ...baseMap,
@@ -375,7 +375,7 @@ const buttonMap = {
       sm: "max-w-[10rem] w-full min-h-[2.63rem]",
       md: "max-w-[15rem] w-full min-h-[2.75rem]",
       lg: "max-w-[20rem] w-full min-h-[2.87rem]",
-      full: "w-full"
+      full: "w-full min-h-[2.75rem]"
     },
     buttonWidth: {
       ...baseMap,
@@ -392,9 +392,14 @@ const buttonMap = {
     },
     buttonVariant: {
       ...baseMap,
-      ghost: "hover:bg-white hover:bg-opacity-10",
-      primary: "bg-green-700 hover:bg-opacity-80",
-      warning: "bg-red-700 hover:bg-opacity-80"
+      ghost: "bg-btn-ghost hover:bg-btn-ghost-hover border",
+      "ghost-disabled": "bg-btn-ghost-disabled border-disabled",
+
+      primary: "bg-btn-primary hover:bg-btn-primary-hover",
+      "primary-disabled": "bg-btn-primary-disabled",
+
+      warning: "bg-btn-warning hover:bg-btn-warning-hover",
+      "warning-disabled": "bg-btn-warning-disabled"
     }
   }
 } satisfies Map;

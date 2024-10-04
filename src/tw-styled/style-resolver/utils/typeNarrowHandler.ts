@@ -155,9 +155,6 @@ export const typeNarrowHandler = (styleKey: StylePropKeys, styleValue: string) =
     case "buttonVariant":
       map = getStyleMapFromGroup("button", styleKey);
       return map[styleValue as keyof typeof map];
-    case "buttonVariantDisabled":
-      map = getStyleMapFromGroup("button", styleKey);
-      return map[styleValue as keyof typeof map];
 
     // BACKGROUND
     case "bgColor":

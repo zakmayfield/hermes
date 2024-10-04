@@ -257,35 +257,22 @@ export const styleHooks = {
       const is_disabled = state?.isLoading || state?.isDisabled;
       const variant = btn?.variant || "ghost";
 
-      const getDynamicStyles = () => {
-        return {
-          buttonStyles: {
-            border: btn?.variant === "ghost" ? "sm" : "none",
-            buttonVariant: variant
-          },
-          contentWrapperStyles: {
-            textColor: is_disabled ? "light" : "none",
-            textOpacity: is_disabled ? "medium" : "none"
-          }
-        } satisfies BtnProps["style"];
-      };
-
       return {
         buttonStyles: {
           padding: "sm",
           paddingX: "md",
           rounded: "md",
           buttonHeight: "sm",
-          ...getDynamicStyles()?.buttonStyles,
+          buttonVariant: variant,
           ...style?.buttonStyles
         },
         contentWrapperStyles: {
           flex: "row",
           flexRowPosition: "center-center",
-          ...getDynamicStyles()?.contentWrapperStyles,
           ...style?.contentWrapperStyles
         },
         textStyles: {
+          textColor: is_disabled ? "disabled" : "foreground",
           ...style?.textStyles
         },
         iconStyles: {

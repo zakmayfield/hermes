@@ -3,26 +3,51 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background-color: 255 255 255;
+  --foreground-color: 23 23 23;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background-color: 10 10 10;
+    --foreground-color: 237 237 237;
   }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  @apply text-foreground;
+  @apply bg-background;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .border-disabled {
+    @apply border;
+    border-color: theme("borderColor.foreground-disabled");
+  }
+
+  .text-disabled {
+    text-color: theme("textColor.foreground-disabled");
+  }
+}
+
+@layer base {
+  :root {
+    /* Bg Colors */
+    --primary-color: 15 23 42; /* bg-slate-900 */
+    --secondary-color: 30 41 59; /* bg-slate-800 */
+    --tertiary-color: 51 65 85; /* bg-slate-700 */
+    --accent-color: 71 85 105; /* bg-slate-600 */
+
+    /* Btn Variants */
+    --btn-disabled: 148 163 184 / 0.2; /* bg-slate-400 */
+    --btn-ghost-bg: 6 182 212; /* bg-cyan-500 */
+    --btn-primary-bg: 21 128 61; /* bg-green-700 */
+    --btn-warning-bg: 185 28 28; /* bg-red-700 */
   }
 }
 

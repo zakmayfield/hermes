@@ -82,9 +82,12 @@ export const styleHooks = {
     const styles = useMemo(() => {
       return {
         parentWrapper: {
+          padding: "lg",
+          spaceY: "lg",
           ...style?.parentWrapper
         },
         headingWrapper: {
+          spaceY: "sm",
           ...style?.headingWrapper
         },
         heading: {
@@ -94,6 +97,9 @@ export const styleHooks = {
           ...style?.headingChildren
         },
         childrenWrapper: {
+          padding: "md",
+          flex: "col",
+          gap: "lg",
           ...style?.childrenWrapper
         },
         children: {

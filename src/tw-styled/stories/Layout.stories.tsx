@@ -39,22 +39,27 @@ export const Default: StoryObj<typeof meta> = {
   args: {
     style: {
       parentWrapper: {
+        rounded: "lg",
         border: "sm",
-        padding: "md",
-        flex: "col",
-        gap: "lg",
         className: "border-orange-500"
       },
-      headingWrapper: { border: "sm" },
-      heading: { border: "sm" },
-      headingChildren: { border: "sm" },
+      headingWrapper: {
+        rounded: "lg",
+        border: "sm"
+      },
+      heading: {},
+      headingChildren: {},
       childrenWrapper: {
+        rounded: "lg",
         border: "sm",
-        padding: "md",
-        spaceY: "sm",
         className: "border-blue-500"
       },
-      children: { border: "sm", padding: "sm", className: "border-red-500" }
+      children: {
+        rounded: "lg",
+        border: "sm",
+        padding: "sm",
+        className: "border-red-500"
+      }
     }
   }
 };

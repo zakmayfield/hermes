@@ -43,17 +43,7 @@ export const Demo: FormDemoStory = {
     },
     style: {
       formStyles: {
-        border: "sm",
-        rounded: "md",
-        width: "md",
-        place: "center",
-        padding: "md",
-        spaceY: "lg",
-        paddingY: "lg"
-      },
-      childrenWrapperStyles: {
-        flex: "col",
-        gap: "md"
+        place: "center"
       }
     }
   }

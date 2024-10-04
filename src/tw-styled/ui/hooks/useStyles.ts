@@ -236,12 +236,20 @@ export const styleHooks = {
     return useMemo(() => {
       return {
         formStyles: {
+          border: "sm",
+          rounded: "md",
+          width: "md",
+          padding: "md",
+          spaceY: "lg",
+          paddingY: "lg",
           ...style?.formStyles
         },
         titleStyles: {
           ...style?.titleStyles
         },
         childrenWrapperStyles: {
+          flex: "col",
+          gap: "md",
           ...style?.childrenWrapperStyles
         },
         childrenStyles: {

@@ -1,6 +1,6 @@
 import { Heading } from "@/tw-styled/ui";
 
-export const Headings = () => {
+export const HeadingDemo = () => {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-3">

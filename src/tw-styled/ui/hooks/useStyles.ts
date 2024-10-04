@@ -271,9 +271,6 @@ export const styleHooks = {
       };
 
       return {
-        parentWrapperStyles: {
-          ...style?.parentWrapperStyles
-        },
         buttonStyles: {
           padding: "sm",
           paddingX: "md",

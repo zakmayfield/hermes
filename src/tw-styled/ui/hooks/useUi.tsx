@@ -460,13 +460,7 @@ export const uiHooks = {
       handleClick
     } = props;
 
-    const {
-      parentWrapperStyles,
-      buttonStyles,
-      contentWrapperStyles,
-      textStyles,
-      iconStyles
-    } = classes;
+    const { buttonStyles, contentWrapperStyles, textStyles, iconStyles } = classes;
 
     const IconElement = () =>
       useMemo(() => {
@@ -501,11 +495,7 @@ export const uiHooks = {
         );
       }, [type, isDisabled, isLoading, buttonStyles, handleClick]);
 
-    const Btn = () => (
-      <div className={parentWrapperStyles}>
-        <Button />
-      </div>
-    );
+    const Btn = () => <Button />;
 
     return { Btn };
   }

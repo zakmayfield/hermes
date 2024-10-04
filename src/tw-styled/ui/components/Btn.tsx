@@ -1,6 +1,5 @@
 "use client";
 import { IconType } from "react-icons";
-import { PiSpinnerGap } from "react-icons/pi";
 import { BtnVariants, StyleProps } from "@/tw-styled/types";
 import { styleHooks, uiHooks } from "../hooks";
 import { useStyleResolver } from "@/tw-styled/tools";
@@ -18,7 +17,6 @@ export type BtnProps = {
     onMouseLeave?(): void;
   };
   style?: {
-    parentWrapperStyles?: StyleProps;
     buttonStyles?: StyleProps;
     contentWrapperStyles?: StyleProps;
     textStyles?: StyleProps;

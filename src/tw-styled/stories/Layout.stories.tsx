@@ -35,7 +35,7 @@ const meta = {
 } satisfies Meta<typeof Layout>;
 export default meta;
 
-export const Default: StoryObj<typeof meta> = {
+export const Demo: StoryObj<typeof meta> = {
   args: {
     style: {
       parentWrapper: {

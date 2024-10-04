@@ -7,4 +7,4 @@ const meta = {
 } satisfies Meta<typeof HeadingDemo>;
 export default meta;
 
-export const All: StoryObj<typeof meta> = {};
+export const Demo: StoryObj<typeof meta> = {};

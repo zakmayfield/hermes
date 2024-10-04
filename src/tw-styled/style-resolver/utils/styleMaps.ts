@@ -15,7 +15,6 @@ export type MapGroupKeys =
   | "background"
   | "animations"
   | "button"
-  | "loader"
   | "other";
 
 export type StyleMap = Record<StylePropKeys, Record<string, string>>;

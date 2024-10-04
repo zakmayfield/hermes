@@ -52,9 +52,7 @@ const meta = {
 } satisfies Meta<typeof LayoutDemo>;
 export default meta;
 
-export const Demo: StoryObj<typeof meta> = {};
-
-export const DemoWithSpacing: StoryObj<typeof meta> = {
+export const WithSpacing: StoryObj<typeof meta> = {
   args: {
     borders: true,
     children: "2",

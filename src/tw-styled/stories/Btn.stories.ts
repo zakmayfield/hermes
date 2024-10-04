@@ -3,7 +3,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { BtnDemo } from "./BtnDemo";
 
 const meta = {
-  title: "Btn/Demo",
+  title: "Btn",
   component: BtnDemo
 } satisfies Meta<typeof BtnDemo>;
 

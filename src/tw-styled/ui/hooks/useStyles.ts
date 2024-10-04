@@ -12,7 +12,7 @@ import {
   TextProps,
   WrapperProps
 } from "@/tw-styled/ui";
-import { BtnVariants, PartialStyleProp, Themes } from "@/tw-styled/types";
+import { BtnVariants, IButton, PartialStyleProp, Themes } from "@/tw-styled/types";
 
 type UseStyleProps = {
   style?: PartialStyleProp;
@@ -27,6 +27,9 @@ type StyleOptions = {
   };
   btn?: {
     variant?: BtnVariants;
+    buttonWidth?: IButton["buttonWidth"];
+    buttonHeight?: IButton["buttonHeight"];
+    buttonSize?: IButton["buttonSize"];
   };
 };
 
@@ -256,7 +259,13 @@ export const styleHooks = {
 
     return useMemo(() => {
       const is_disabled = state?.isDisabled;
-      const variant = btn?.variant || "ghost";
+
+      const {
+        variant = "ghost",
+        buttonWidth = "none",
+        buttonHeight = "none",
+        buttonSize = "none"
+      } = btn || {};
 
       const textColor = is_disabled ? "disabled" : "none";
       const buttonVariant = is_disabled ? `${variant}-disabled` : variant;
@@ -266,7 +275,9 @@ export const styleHooks = {
           padding: "sm",
           paddingX: "md",
           rounded: "md",
-          buttonHeight: "sm",
+          buttonWidth,
+          buttonHeight,
+          buttonSize,
           buttonVariant: buttonVariant as ExtendedBtnVariants,
           ...style?.buttonStyles
         },

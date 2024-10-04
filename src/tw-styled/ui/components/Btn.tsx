@@ -1,6 +1,11 @@
 "use client";
 import { IconType } from "react-icons";
-import { BtnVariants, ButtonStyleProps, DefaultStyleProps } from "@/tw-styled/types";
+import {
+  BtnVariants,
+  ButtonStyleProps,
+  DefaultStyleProps,
+  IButton
+} from "@/tw-styled/types";
 import { styleHooks, uiHooks } from "../hooks";
 import { useStyleResolver } from "@/tw-styled/tools";
 
@@ -11,6 +16,9 @@ export type BtnProps = {
   handleClick?(): void;
   isDisabled?: boolean;
   variant?: BtnVariants;
+  buttonWidth?: IButton["buttonWidth"];
+  buttonHeight?: IButton["buttonHeight"];
+  buttonSize?: IButton["buttonSize"];
   mouseActions?: {
     onMouseEnter?(): void;
     onMouseLeave?(): void;
@@ -25,15 +33,19 @@ export type BtnProps = {
 
 export const Btn = (props: BtnProps) => {
   const { style, ...rest } = props;
+  const { isDisabled, variant, buttonWidth, buttonHeight, buttonSize } = rest;
 
   const styles = styleHooks.useBtnStyles({
     style,
     options: {
       state: {
-        isDisabled: rest.isDisabled
+        isDisabled
       },
       btn: {
-        variant: rest.variant
+        variant,
+        buttonWidth,
+        buttonHeight,
+        buttonSize
       }
     }
   });

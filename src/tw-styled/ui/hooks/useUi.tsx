@@ -361,18 +361,7 @@ export const uiHooks = {
   },
 
   useFormUi: (props: Props<FormProps>) => {
-    const {
-      titleText,
-      children,
-      isPending = false,
-      onSubmit,
-      classes,
-      button: {
-        buttonText = "Submit",
-        buttonVariant = "ghost",
-        buttonWidth = "full"
-      } = {}
-    } = props;
+    const { titleText, children, isPending = false, onSubmit, classes, button } = props;
 
     const {
       formStyles,
@@ -389,21 +378,31 @@ export const uiHooks = {
 
     const Button = () =>
       useMemo(() => {
+        const {
+          buttonText = "Submit",
+          buttonVariant = "ghost",
+          buttonWidth = "full",
+          buttonHeight = "none",
+          buttonSize = "none"
+        } = button || {};
+
         return (
           <Btn
             type="submit"
             text={buttonText}
             isDisabled={isPending}
+            variant={buttonVariant}
+            buttonWidth={buttonWidth}
+            buttonHeight={buttonHeight}
+            buttonSize={buttonSize}
             style={{
               buttonStyles: {
-                buttonWidth,
-                buttonVariant,
                 className: buttonStyles
               }
             }}
           />
         );
-      }, [buttonText, buttonStyles, isPending, buttonVariant]);
+      }, [button, buttonStyles, isPending]);
 
     const Childs = () =>
       useMemo(() => {

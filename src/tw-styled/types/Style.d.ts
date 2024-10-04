@@ -101,7 +101,7 @@ interface IAnimations {
   animate?: Animations | None;
 }
 
-interface IButton {
+export interface IButton {
   buttonSize?: Sizes | Full | None;
   buttonWidth?: Sizes | Full | None;
   buttonHeight?: Sizes | None;

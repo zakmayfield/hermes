@@ -20,7 +20,7 @@ export const Md: PulseLoaderStory = {
     size: "md",
     style: {
       parentWrapper: {
-        padding: "lg"
+        width: "lg"
       }
     }
   }
@@ -30,8 +30,7 @@ export const Lg: PulseLoaderStory = {
     size: "lg",
     style: {
       parentWrapper: {
-        width: "xl",
-        padding: "lg"
+        width: "xl"
       }
     }
   }

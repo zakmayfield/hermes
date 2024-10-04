@@ -66,8 +66,6 @@ export const uiHooks = {
   useHeadingUi: (props: Props<HeadingProps>) => {
     const { as = "h1", text = "", children, classes } = props;
 
-    // TODO: *** when updating styles via the style prop there is a runtime error stating that either more or fewer hooks were rendered ***
-
     const ChildrenWrapper = useMemo(() => {
       return <div className={classes.childrenWrapper}>{children}</div>;
     }, [children, classes]);

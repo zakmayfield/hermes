@@ -169,7 +169,7 @@ export const styleHooks = {
           gap: "sm",
           padding: "sm",
           className: themes[theme].parentTheme,
-          ...style?.wrapper
+          ...style?.parentWrapper
         },
         childrenWrapper: {
           flex: "row",
@@ -180,7 +180,7 @@ export const styleHooks = {
           animate: "pulse",
           padding: "md",
           rounded: "xl",
-          className: themes[theme!].childrenTheme,
+          className: themes[theme].childrenTheme,
           ...style?.children
         }
       } satisfies PulseProps["style"];

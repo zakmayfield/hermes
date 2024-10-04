@@ -7,16 +7,18 @@ export const typeNarrowHandler = (styleKey: StylePropKeys, styleValue: string) =
   let map;
 
   switch (styleKey) {
-    // LAYOUT
+    // DIMENSIONS
     case "width":
-      map = getStyleMapFromGroup("layout", styleKey);
+      map = getStyleMapFromGroup("dimensions", styleKey);
       return map[styleValue as keyof typeof map];
     case "height":
-      map = getStyleMapFromGroup("layout", styleKey);
+      map = getStyleMapFromGroup("dimensions", styleKey);
       return map[styleValue as keyof typeof map];
     case "maxHeight":
-      map = getStyleMapFromGroup("layout", styleKey);
+      map = getStyleMapFromGroup("dimensions", styleKey);
       return map[styleValue as keyof typeof map];
+
+    // LAYOUT
     case "border":
       map = getStyleMapFromGroup("layout", styleKey);
       return map[styleValue as keyof typeof map];
@@ -29,14 +31,19 @@ export const typeNarrowHandler = (styleKey: StylePropKeys, styleValue: string) =
     case "position":
       map = getStyleMapFromGroup("layout", styleKey);
       return map[styleValue as keyof typeof map];
-    case "space":
+    case "place":
       map = getStyleMapFromGroup("layout", styleKey);
+      return map[styleValue as keyof typeof map];
+
+    // SPACE
+    case "space":
+      map = getStyleMapFromGroup("space", styleKey);
       return map[styleValue as keyof typeof map];
     case "spaceX":
-      map = getStyleMapFromGroup("layout", styleKey);
+      map = getStyleMapFromGroup("space", styleKey);
       return map[styleValue as keyof typeof map];
     case "spaceY":
-      map = getStyleMapFromGroup("layout", styleKey);
+      map = getStyleMapFromGroup("space", styleKey);
       return map[styleValue as keyof typeof map];
 
     // PADDING
@@ -101,9 +108,6 @@ export const typeNarrowHandler = (styleKey: StylePropKeys, styleValue: string) =
     case "gap":
       map = getStyleMapFromGroup("alignment", styleKey);
       return map[styleValue as keyof typeof map];
-    case "place":
-      map = getStyleMapFromGroup("alignment", styleKey);
-      return map[styleValue as keyof typeof map];
     case "flexRowPosition":
       map = getStyleMapFromGroup("alignment", styleKey);
       return map[styleValue as keyof typeof map];
@@ -162,11 +166,6 @@ export const typeNarrowHandler = (styleKey: StylePropKeys, styleValue: string) =
       return map[styleValue as keyof typeof map];
     case "bgOpacity":
       map = getStyleMapFromGroup("background", styleKey);
-      return map[styleValue as keyof typeof map];
-
-    // LOADER
-    case "loaderWidth":
-      map = getStyleMapFromGroup("loader", styleKey);
       return map[styleValue as keyof typeof map];
 
     // OTHER

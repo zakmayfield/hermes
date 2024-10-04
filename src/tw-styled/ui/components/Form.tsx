@@ -1,7 +1,7 @@
 "use client";
 
 import React, { FormEvent } from "react";
-import { BtnVariants, StyleProps } from "@/tw-styled/types";
+import { BtnVariants, ButtonStyleProps, DefaultStyleProps } from "@/tw-styled/types";
 import { styleHooks, uiHooks } from "../hooks";
 import { useStyleResolver } from "@/tw-styled/tools";
 
@@ -13,14 +13,14 @@ export type FormProps = {
   button?: {
     buttonText?: string;
     buttonVariant?: BtnVariants;
-    buttonWidth?: StyleProps["buttonWidth"];
+    buttonWidth?: ButtonStyleProps["buttonWidth"];
   };
   style?: {
-    formStyles?: StyleProps;
-    titleStyles?: StyleProps;
-    childrenWrapperStyles?: StyleProps;
-    childrenStyles?: StyleProps;
-    buttonStyles?: StyleProps;
+    formStyles?: DefaultStyleProps;
+    titleStyles?: DefaultStyleProps;
+    childrenWrapperStyles?: DefaultStyleProps;
+    childrenStyles?: DefaultStyleProps;
+    buttonStyles?: ButtonStyleProps;
   };
 };
 

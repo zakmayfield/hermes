@@ -5,7 +5,9 @@ const baseMap = {
 };
 
 export type MapGroupKeys =
+  | "dimensions"
   | "layout"
+  | "space"
   | "padding"
   | "margin"
   | "alignment"
@@ -20,8 +22,8 @@ export type StyleMap = Record<StylePropKeys, Record<string, string>>;
 
 type Map = Partial<Record<MapGroupKeys, Partial<StyleMap>>>;
 
-const layoutMap = {
-  layout: {
+const dimensionsMap = {
+  dimensions: {
     width: {
       ...baseMap,
       sm: "max-w-sm w-full",
@@ -45,7 +47,12 @@ const layoutMap = {
       sm: "max-h-[10rem]",
       md: "max-h-[15rem]",
       lg: "max-h-[20rem]"
-    },
+    }
+  }
+};
+
+const layoutMap = {
+  layout: {
     border: {
       ...baseMap,
       sm: "border",
@@ -75,6 +82,17 @@ const layoutMap = {
       sticky: "sticky",
       static: "static"
     },
+    place: {
+      ...baseMap,
+      left: "mr-auto",
+      center: "mx-auto",
+      right: "ml-auto"
+    }
+  }
+} satisfies Map;
+
+const spaceMap = {
+  space: {
     spaceY: {
       ...baseMap,
       sm: "space-y-2",
@@ -94,7 +112,7 @@ const layoutMap = {
       lg: "space-y-6 space-x-6"
     }
   }
-} satisfies Map;
+};
 
 const paddingMap = {
   padding: {
@@ -246,12 +264,6 @@ const alignmentMap = {
       sm: "gap-2",
       md: "gap-4",
       lg: "gap-6"
-    },
-    place: {
-      ...baseMap,
-      left: "mr-auto",
-      center: "mx-auto",
-      right: "ml-auto"
     },
     flexRowPosition: {
       ...baseMap,
@@ -405,18 +417,6 @@ const buttonMap = {
   }
 } satisfies Map;
 
-const loaderMap = {
-  loader: {
-    loaderWidth: {
-      ...baseMap,
-      sm: "max-w-sm",
-      md: "max-w-lg",
-      lg: "max-w-2xl",
-      full: "w-full"
-    }
-  }
-} satisfies Map;
-
 const otherMap = {
   other: {
     cursor: {
@@ -435,7 +435,9 @@ const otherMap = {
 } satisfies Map;
 
 export {
+  dimensionsMap,
   layoutMap,
+  spaceMap,
   paddingMap,
   marginMap,
   alignmentMap,
@@ -443,6 +445,5 @@ export {
   backgroundMap,
   animationsMap,
   buttonMap,
-  loaderMap,
   otherMap
 };

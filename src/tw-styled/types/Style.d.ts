@@ -1,6 +1,9 @@
+import { LoaderStyleProps } from "./Style.d";
 import { BtnVariants, ExtendedBtnVariants } from "./Theming";
 
-export type StyleProps = ILayout &
+type StyleProps = IDimensions &
+  ILayout &
+  ISpace &
   IPadding &
   IMargin &
   IAlignment &
@@ -8,21 +11,41 @@ export type StyleProps = ILayout &
   IBackground &
   IAnimations &
   IButton &
-  ILoader &
-  IOther;
+  IOther &
+  IClassName;
 
 export type StylePropKeys = keyof StyleProps;
 export type ResolvedClasses = Record<string, string>;
-export type StyleProp = Record<string, StyleProps>;
+export type PartialStyleProp = Record<string, Partial<StyleProps>>;
 
-interface ILayout {
+export type ButtonStyleProps = StyleProps;
+export type DefaultStyleProps = IDimensions &
+  ILayout &
+  ISpace &
+  IPadding &
+  IMargin &
+  IAlignment &
+  ITypography &
+  IBackground &
+  IAnimations &
+  IOther &
+  IClassName;
+
+interface IDimensions {
   width?: Sizes | ExtendedSizes | Full | None;
   height?: Sizes | Screen | Full | None;
   maxHeight?: Sizes | None;
+}
+
+interface ILayout {
   border?: Sizes | None;
   rounded?: Sizes | "xl" | None;
   display?: Displays | None;
   position?: Positions | None;
+  place?: Places | None;
+}
+
+interface ISpace {
   space?: Sizes;
   spaceY?: Sizes;
   spaceX?: Sizes;
@@ -56,7 +79,6 @@ interface IAlignment {
   flexWrap?: FlexWrap | None;
   flexSize?: FlexSize | None;
   gap?: Sizes | None;
-  place?: Places | None;
 }
 
 interface ITypography {
@@ -86,13 +108,12 @@ interface IButton {
   buttonVariant?: ExtendedBtnVariants;
 }
 
-interface ILoader {
-  loaderWidth?: Sizes | Full | None;
-}
-
 interface IOther {
   opacity?: Opacities | None;
   cursor?: Cursors | None;
+}
+
+interface IClassName {
   className?: string;
 }
 

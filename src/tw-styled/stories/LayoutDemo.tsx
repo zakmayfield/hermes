@@ -1,5 +1,5 @@
 import { useStyleResolver } from "@/tw-styled/style-resolver/hooks";
-import { Children, HeadingElements, StyleProps } from "@/tw-styled/types";
+import { Children, DefaultStyleProps, HeadingElements } from "@/tw-styled/types";
 import React, { useMemo } from "react";
 import { styleHooks } from "../ui/hooks";
 
@@ -9,11 +9,11 @@ type LayoutDemoProps = {
   borders?: boolean;
   headingAs?: HeadingElements;
   style?: {
-    parentWrapper?: StyleProps;
-    childrenWrapper?: StyleProps;
-    children?: StyleProps;
-    headingWrapper?: StyleProps;
-    headingChildren?: StyleProps;
+    parentWrapper?: DefaultStyleProps;
+    childrenWrapper?: DefaultStyleProps;
+    children?: DefaultStyleProps;
+    headingWrapper?: DefaultStyleProps;
+    headingChildren?: DefaultStyleProps;
   };
 };
 

@@ -1,14 +1,14 @@
 import { useStyleResolver } from "@/tw-styled/tools";
-import { Sizes, StyleProps, Themes } from "@/tw-styled/types";
+import { DefaultStyleProps, Sizes, Themes } from "@/tw-styled/types";
 import { styleHooks, uiHooks } from "../hooks";
 
 export type PulseProps = {
   theme?: Themes;
   size?: Sizes;
   style?: {
-    parentWrapper?: StyleProps;
-    childrenWrapper?: StyleProps;
-    children?: StyleProps;
+    parentWrapper?: DefaultStyleProps;
+    childrenWrapper?: DefaultStyleProps;
+    children?: DefaultStyleProps;
   };
 };
 

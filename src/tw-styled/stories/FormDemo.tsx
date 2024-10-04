@@ -1,7 +1,5 @@
-import { useStyleResolver } from "../tools";
-import { BtnVariants, StyleProps } from "../types";
-import { Form, FormProps, Input } from "../ui";
-import { styleHooks } from "../ui/hooks";
+import { BtnVariants, ButtonStyleProps, DefaultStyleProps } from "../types";
+import { Form, Input } from "../ui";
 
 type FormDemoProps = {
   title?: string;
@@ -13,11 +11,11 @@ type FormDemoProps = {
     buttonWidth?: "sm" | "md" | "lg" | "full" | "none";
   };
   style?: {
-    formStyles?: StyleProps;
-    titleStyles?: StyleProps;
-    childrenWrapperStyles?: StyleProps;
-    childrenStyles?: StyleProps;
-    buttonStyles?: StyleProps;
+    formStyles?: DefaultStyleProps;
+    titleStyles?: DefaultStyleProps;
+    childrenWrapperStyles?: DefaultStyleProps;
+    childrenStyles?: DefaultStyleProps;
+    buttonStyles?: ButtonStyleProps;
   };
 };
 

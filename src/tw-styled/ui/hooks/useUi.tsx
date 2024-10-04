@@ -13,7 +13,7 @@ import {
   FieldError,
   Btn
 } from "@/tw-styled/ui";
-import { ResolvedClasses } from "@/tw-styled/types";
+import { ButtonStyleProps, ResolvedClasses } from "@/tw-styled/types";
 import { PiSpinnerGap } from "react-icons/pi";
 import { merge, useIcons, useStyleResolver } from "@/tw-styled/tools";
 import { utilityHooks } from "@/shared/hooks";
@@ -387,31 +387,23 @@ export const uiHooks = {
         return <h3 className={titleStyles}>{titleText}</h3>;
       }, [titleStyles, titleText]);
 
-    const buttonClasses = useStyleResolver({
-      button: {
-        buttonVariant,
-        buttonWidth,
-        padding: "sm",
-        paddingX: "md",
-        rounded: "md",
-        buttonHeight: "sm",
-        border: buttonVariant === "ghost" ? "sm" : "none",
-        className: buttonStyles
-      }
-    });
     const Button = () =>
       useMemo(() => {
         return (
-          <button
+          <Btn
             type="submit"
-            disabled={isPending}
-            aria-disabled={isPending}
-            className={buttonClasses.button}
-          >
-            {buttonText}
-          </button>
+            text={buttonText}
+            isDisabled={isPending}
+            style={{
+              buttonStyles: {
+                buttonWidth,
+                buttonVariant,
+                className: buttonStyles
+              }
+            }}
+          />
         );
-      }, [buttonText, buttonStyles, isPending, buttonVariant, buttonClasses]);
+      }, [buttonText, buttonStyles, isPending, buttonVariant]);
 
     const Childs = () =>
       useMemo(() => {

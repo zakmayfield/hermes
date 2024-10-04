@@ -1,11 +1,11 @@
 import { useStyleResolver } from "@/tw-styled/tools";
-import { StyleProps } from "@/tw-styled/types";
+import { DefaultStyleProps } from "@/tw-styled/types";
 import { styleHooks, uiHooks } from "../hooks";
 
 export type SpinProps = {
   style?: {
-    parentWrapper?: StyleProps;
-    icon?: StyleProps;
+    parentWrapper?: DefaultStyleProps;
+    icon?: DefaultStyleProps;
   };
 };
 

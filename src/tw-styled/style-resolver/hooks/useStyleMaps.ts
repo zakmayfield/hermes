@@ -3,17 +3,21 @@ import {
   animationsMap,
   backgroundMap,
   buttonMap,
+  dimensionsMap,
   layoutMap,
   loaderMap,
   marginMap,
   otherMap,
   paddingMap,
+  spaceMap,
   typographyMap
 } from "@/tw-styled/style-resolver/utils";
 
 export const useStyleMaps = () => {
   const styleMapGroups = {
+    ...dimensionsMap,
     ...layoutMap,
+    ...spaceMap,
     ...paddingMap,
     ...marginMap,
     ...alignmentMap,

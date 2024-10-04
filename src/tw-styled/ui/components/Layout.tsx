@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Children, HeadingElements, StyleProps } from "@/tw-styled/types";
+import { Children, DefaultStyleProps, HeadingElements } from "@/tw-styled/types";
 import { useStyleResolver } from "@/tw-styled/tools";
 import { styleHooks, uiHooks } from "../hooks";
 
@@ -10,12 +10,12 @@ export type LayoutProps = {
   headingAs?: HeadingElements;
   headingChildren?: Children;
   style?: {
-    parentWrapper?: StyleProps;
-    headingWrapper?: StyleProps;
-    heading?: StyleProps;
-    headingChildren?: StyleProps;
-    childrenWrapper?: StyleProps;
-    children?: StyleProps;
+    parentWrapper?: DefaultStyleProps;
+    headingWrapper?: DefaultStyleProps;
+    heading?: DefaultStyleProps;
+    headingChildren?: DefaultStyleProps;
+    childrenWrapper?: DefaultStyleProps;
+    children?: DefaultStyleProps;
   };
 };
 

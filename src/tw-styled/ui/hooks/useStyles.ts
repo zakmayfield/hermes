@@ -12,10 +12,10 @@ import {
   TextProps,
   WrapperProps
 } from "@/tw-styled/ui";
-import { BtnVariants, StyleProp, Themes } from "@/tw-styled/types";
+import { BtnVariants, PartialStyleProp, Themes } from "@/tw-styled/types";
 
 type UseStyleProps = {
-  style?: StyleProp;
+  style?: PartialStyleProp;
   options?: StyleOptions;
 };
 

@@ -1,8 +1,8 @@
-import { ComponentStyleProp, StylePropKeys } from "@/tw-styled/types";
+import { PartialStyleProp, StylePropKeys } from "@/tw-styled/types";
 import { isValidObject, typeNarrowHandler } from "../utils";
 import { merge } from "@/tw-styled/tools";
 
-export const useStyleResolver = (styleProp: ComponentStyleProp) => {
+export const useStyleResolver = (styleProp: PartialStyleProp) => {
   const result: Record<string, string> = {};
 
   for (const stylePropKey in styleProp) {

@@ -4,7 +4,7 @@ import {
   FieldValues,
   UseFormRegister
 } from "react-hook-form";
-import { StyleProps } from "@/tw-styled/types";
+import { DefaultStyleProps } from "@/tw-styled/types";
 import { useStyleResolver } from "@/tw-styled/tools";
 import { styleHooks, uiHooks } from "../hooks";
 
@@ -21,11 +21,11 @@ export type InputProps<T extends FieldValues> = InputStyleProps & {
 
 export type InputStyleProps = {
   style?: {
-    parentWrapperStyles?: StyleProps;
-    labelStyles?: StyleProps;
-    inputWrapperStyles?: StyleProps;
-    inputStyles?: StyleProps;
-    errorIconStyles?: StyleProps;
+    parentWrapperStyles?: DefaultStyleProps;
+    labelStyles?: DefaultStyleProps;
+    inputWrapperStyles?: DefaultStyleProps;
+    inputStyles?: DefaultStyleProps;
+    errorIconStyles?: DefaultStyleProps;
   };
 };
 

@@ -1,6 +1,6 @@
 "use client";
 import React, { useMemo } from "react";
-import { Children, StyleProps, TextElements } from "@/tw-styled/types";
+import { Children, DefaultStyleProps, TextElements } from "@/tw-styled/types";
 import { styleHooks, uiHooks } from "../hooks";
 import { useStyleResolver } from "@/tw-styled/tools";
 
@@ -10,7 +10,7 @@ export type TextProps = {
   described_by?: string;
   is_hidden?: boolean;
   style?: {
-    parentWrapper?: StyleProps;
+    parentWrapper?: DefaultStyleProps;
   };
 };
 

@@ -1,5 +1,5 @@
 import { useStyleResolver } from "@/tw-styled/tools";
-import { StyleProps } from "@/tw-styled/types";
+import { DefaultStyleProps } from "@/tw-styled/types";
 import { styleHooks, uiHooks } from "../hooks";
 
 export type FieldErrorProps = {
@@ -7,7 +7,7 @@ export type FieldErrorProps = {
   described_by?: string;
   is_error_hidden?: boolean;
   style?: {
-    parentWrapper: StyleProps;
+    parentWrapper: DefaultStyleProps;
   };
 };
 

@@ -10,7 +10,7 @@ const config: Config = {
       colors: {
         background: useRgb("--background-color"),
         foreground: useRgb("--foreground-color"),
-        "foreground-disabled": useRgb("--foreground-color", 0.6),
+        "foreground-disabled": useRgb("--foreground-color", 0.4),
         "background-disabled": useRgb("--background-color", 0.6)
       },
       backgroundColor: {

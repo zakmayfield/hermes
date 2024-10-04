@@ -455,7 +455,6 @@ export const uiHooks = {
       text = "Submit",
       mouseActions,
       isDisabled = false,
-      isLoading = false,
       Icon,
       handleClick
     } = props;
@@ -485,15 +484,15 @@ export const uiHooks = {
           <button
             type={type}
             className={buttonStyles}
-            disabled={isDisabled || isLoading}
-            aria-disabled={isDisabled || isLoading}
+            disabled={isDisabled}
+            aria-disabled={isDisabled}
             onClick={handleClick}
             {...mouseActions}
           >
             <ContentWrapper />
           </button>
         );
-      }, [type, isDisabled, isLoading, buttonStyles, handleClick]);
+      }, [type, isDisabled, buttonStyles, handleClick]);
 
     const Btn = () => <Button />;
 

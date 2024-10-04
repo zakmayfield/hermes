@@ -1,9 +1,9 @@
 export type Themes = "light" | "dark";
 
-export type BtnVariants =
-  | "primary"
+export type BtnVariants = "none" | "primary" | "warning" | "ghost";
+
+export type ExtendedBtnVariants =
+  | BtnVariants
   | "primary-disabled"
-  | "warning"
   | "warning-disabled"
-  | "ghost"
   | "ghost-disabled";

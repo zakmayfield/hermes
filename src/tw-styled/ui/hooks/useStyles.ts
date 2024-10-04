@@ -1,3 +1,4 @@
+import { ExtendedBtnVariants } from "./../../types/Theming.d";
 import { useMemo } from "react";
 import {
   BtnProps,
@@ -19,7 +20,7 @@ type UseStyleProps = {
 };
 
 type StyleOptions = {
-  state?: { isLoading?: boolean; isDisabled?: boolean };
+  state?: { isDisabled?: boolean };
   theme?: Themes;
   input?: {
     is_error?: boolean;
@@ -254,8 +255,11 @@ export const styleHooks = {
     const { style, options: { state, btn } = {} } = props;
 
     return useMemo(() => {
-      const is_disabled = state?.isLoading || state?.isDisabled;
+      const is_disabled = state?.isDisabled;
       const variant = btn?.variant || "ghost";
+
+      const textColor = is_disabled ? "disabled" : "none";
+      const buttonVariant = is_disabled ? `${variant}-disabled` : variant;
 
       return {
         buttonStyles: {
@@ -263,7 +267,7 @@ export const styleHooks = {
           paddingX: "md",
           rounded: "md",
           buttonHeight: "sm",
-          buttonVariant: variant,
+          buttonVariant: buttonVariant as ExtendedBtnVariants,
           ...style?.buttonStyles
         },
         contentWrapperStyles: {
@@ -272,7 +276,7 @@ export const styleHooks = {
           ...style?.contentWrapperStyles
         },
         textStyles: {
-          textColor: is_disabled ? "disabled" : "foreground",
+          textColor,
           ...style?.textStyles
         },
         iconStyles: {

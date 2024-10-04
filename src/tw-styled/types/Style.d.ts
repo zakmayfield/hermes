@@ -1,4 +1,4 @@
-import { BtnVariants } from "./Theming";
+import { BtnVariants, ExtendedBtnVariants } from "./Theming";
 
 export type StyleProps = ILayout &
   IPadding &
@@ -83,7 +83,7 @@ interface IButton {
   buttonSize?: Sizes | Full | None;
   buttonWidth?: Sizes | Full | None;
   buttonHeight?: Sizes | None;
-  buttonVariant?: BtnVariants | None;
+  buttonVariant?: ExtendedBtnVariants;
 }
 
 interface ILoader {

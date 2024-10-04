@@ -392,6 +392,7 @@ const buttonMap = {
     },
     buttonVariant: {
       ...baseMap,
+
       ghost: "bg-btn-ghost hover:bg-btn-ghost-hover border",
       "ghost-disabled": "bg-btn-ghost-disabled border-disabled",
 

@@ -9,7 +9,6 @@ export type BtnProps = {
   type?: "button" | "reset" | "submit";
   text?: string;
   handleClick?(): void;
-  isLoading?: boolean;
   isDisabled?: boolean;
   variant?: BtnVariants;
   mouseActions?: {
@@ -17,6 +16,12 @@ export type BtnProps = {
     onMouseLeave?(): void;
   };
   style?: {
+    // Remove `buttonX` styles from general StyleProps and use `StyleProps & IButton`
+    // this will allow the Btn componenent to take a `width` prop which maps the style
+    // this will also remove the ability to select `buttonWidth` from elements like a `div`
+    // or other elements that are not buttons, like textStyles for instance.
+    // this same logic can be applied to all style props, allowing for granular control
+    // over which styles are availble to use on the element.
     buttonStyles?: StyleProps;
     contentWrapperStyles?: StyleProps;
     textStyles?: StyleProps;
@@ -31,11 +36,10 @@ export const Btn = (props: BtnProps) => {
     style,
     options: {
       state: {
-        isLoading: rest.isLoading,
         isDisabled: rest.isDisabled
       },
       btn: {
-        variant: rest.variant || "ghost"
+        variant: rest.variant
       }
     }
   });

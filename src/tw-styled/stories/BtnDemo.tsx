@@ -1,8 +1,6 @@
 import { Btn } from "../ui";
 
-type BtnDemoProps = {};
-
-export const BtnDemo = (props: BtnDemoProps) => {
+export const BtnDemo = () => {
   return (
     <div className="space-y-6">
       <div className="space-y-3">
@@ -19,21 +17,9 @@ export const BtnDemo = (props: BtnDemoProps) => {
         <div className="p-6 space-y-3">
           <div className="space-x-3">
             <Btn style={{}} />
-            <Btn
-              style={{
-                buttonStyles: { buttonWidth: "sm" }
-              }}
-            />
-            <Btn
-              style={{
-                buttonStyles: { buttonWidth: "md" }
-              }}
-            />
-            <Btn
-              style={{
-                buttonStyles: { buttonWidth: "lg" }
-              }}
-            />
+            <Btn buttonWidth="sm" />
+            <Btn buttonWidth="md" />
+            <Btn buttonWidth="lg" />
           </div>
 
           <Btn style={{ buttonStyles: { width: "full" } }} />
@@ -43,19 +29,14 @@ export const BtnDemo = (props: BtnDemoProps) => {
       <div className="space-y-3">
         <h3>Disabled</h3>
         <div className="p-6 space-x-3">
-          <Btn
-            isDisabled={true}
-            isLoading={true}
-          />
+          <Btn isDisabled={true} />
           <Btn
             variant="primary"
             isDisabled={true}
-            isLoading={true}
           />
           <Btn
             variant="warning"
             isDisabled={true}
-            isLoading={true}
           />
         </div>
       </div>

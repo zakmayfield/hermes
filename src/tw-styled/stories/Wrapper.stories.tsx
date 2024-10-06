@@ -38,7 +38,7 @@ const meta = {
 export default meta;
 export type WrapperStory = StoryObj<typeof meta>;
 
-export const Default: WrapperStory = {
+export const Demo: WrapperStory = {
   args: {
     style: {
       parentWrapper: {

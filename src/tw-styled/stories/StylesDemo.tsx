@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { Btn } from "../ui";
 
-type StylesDemoProps = {};
-
-export const StylesDemo = (props: StylesDemoProps) => {
+export const StylesDemo = () => {
   const [isDisabled, setIsDisabled] = useState(false);
 
   return (

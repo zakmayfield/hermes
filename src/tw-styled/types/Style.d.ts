@@ -105,7 +105,7 @@ export interface IButton {
   buttonSize?: Sizes | Full | None;
   buttonWidth?: Sizes | Full | None;
   buttonHeight?: Sizes | None;
-  buttonVariant?: ExtendedBtnVariants;
+  buttonVariant?: BtnVariants;
 }
 
 interface IOther {

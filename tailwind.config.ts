@@ -26,8 +26,6 @@ const config: Config = {
         accent: useRgb("--accent-color"),
         "accent-shimmer": useRgb("--accent-color", 0.5),
 
-        "btn-disabled": useRgb("--btn-disabled"),
-
         "btn-ghost": useRgb("--btn-ghost-bg", 0.05),
         "btn-ghost-hover": useRgb("--btn-ghost-bg", 0.1),
         "btn-ghost-disabled": useRgb("--btn-ghost-bg", 0.1),

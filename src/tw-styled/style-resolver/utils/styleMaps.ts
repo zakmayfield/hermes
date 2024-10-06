@@ -403,15 +403,9 @@ const buttonMap = {
     },
     buttonVariant: {
       ...baseMap,
-
-      ghost: "bg-btn-ghost hover:bg-btn-ghost-hover border",
-      "ghost-disabled": "bg-btn-ghost-disabled border-disabled",
-
-      primary: "bg-btn-primary hover:bg-btn-primary-hover",
-      "primary-disabled": "bg-btn-primary-disabled",
-
-      warning: "bg-btn-warning hover:bg-btn-warning-hover",
-      "warning-disabled": "bg-btn-warning-disabled"
+      ghost: "btn-ghost",
+      primary: "btn-primary",
+      warning: "btn-warning"
     }
   }
 } satisfies Map;

@@ -385,15 +385,14 @@ const buttonMap = {
       ...baseMap,
       sm: "btn-sm",
       md: "btn-md",
-      lg: "btn-lg",
-      full: "btn-full"
+      lg: "btn-lg"
     },
     buttonWidth: {
       ...baseMap,
-      sm: "max-w-[10rem] w-full",
-      md: "max-w-[15rem] w-full",
-      lg: "max-w-[20rem] w-full",
-      full: "w-full"
+      sm: "btn-w-sm",
+      md: "btn-w-md",
+      lg: "btn-w-lg",
+      full: "btn-w-full"
     },
     buttonHeight: {
       ...baseMap,

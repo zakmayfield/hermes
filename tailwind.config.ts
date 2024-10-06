@@ -8,6 +8,11 @@ const useRgb = (variable: string, opacity?: number) =>
   opacity ? `rgb(var(${variable}) / ${opacity})` : `rgb(var(${variable}))`;
 
 const testComponents: TwPluginRules = {
+  ".demo": {
+    padding: "1.5rem",
+    borderRadius: "0.375rem",
+    borderWidth: "1px"
+  },
   ".demo-col": {
     padding: "1.5rem",
     borderRadius: "0.375rem",
@@ -53,6 +58,21 @@ const buttonComponents: TwPluginRules = {
   },
   ".btn-warning": {
     backgroundColor: useRgb("--btn-warning-bg")
+  },
+  ".btn-sm": {
+    maxWidth: "10rem",
+    width: "100%",
+    minHeight: "2.63rem"
+  },
+  ".btn-md": {
+    maxWidth: "15rem",
+    width: "100%",
+    minHeight: "2.75rem"
+  },
+  ".btn-lg": {
+    maxWidth: "20rem",
+    width: "100%",
+    minHeight: "2.87rem"
   }
 };
 
@@ -63,6 +83,21 @@ const utilities: TwPluginRules = {
   },
   ".element-hovered": {
     filter: "brightness(1.15)"
+  },
+  ".btn-w-sm": {
+    maxWidth: "10rem",
+    width: "100%"
+  },
+  ".btn-w-md": {
+    maxWidth: "15rem",
+    width: "100%"
+  },
+  ".btn-w-lg": {
+    maxWidth: "20rem",
+    width: "100%"
+  },
+  ".btn-w-full": {
+    width: "100%"
   }
 };
 

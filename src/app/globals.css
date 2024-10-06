@@ -65,24 +65,6 @@
   }
 }
 
-@layer components {
-  .btn-sm {
-    @apply max-w-[10rem] w-full min-h-[2.63rem];
-  }
-
-  .btn-md {
-    @apply max-w-[15rem] w-full min-h-[2.75rem];
-  }
-
-  .btn-lg {
-    @apply max-w-[20rem] w-full min-h-[2.87rem];
-  }
-
-  .btn-full {
-    @apply w-full min-h-[2.75rem];
-  }
-}
-
 body {
   @apply text-foreground;
   @apply bg-background;

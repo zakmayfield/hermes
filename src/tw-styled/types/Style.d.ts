@@ -102,7 +102,7 @@ interface IAnimations {
 }
 
 export interface IButton {
-  buttonSize?: Sizes | Full | None;
+  buttonSize?: Sizes | None;
   buttonWidth?: Sizes | Full | None;
   buttonHeight?: Sizes | None;
   buttonVariant?: BtnVariants;

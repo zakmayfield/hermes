@@ -2,20 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background-color: 255 255 255;
-  --foreground-color: 23 23 23;
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
     --background-color: 10 10 10;
+    --background-color-disabled: 10 10 10 / 0.6;
     --foreground-color: 237 237 237;
+    --foreground-color-disabled: 237 237 237 / 0.6;
   }
 }
 
 @layer base {
   :root {
+    /* Layout */
+    --background-color: 255 255 255;
+    --background-color-disabled: 255 255 255 / 0.6;
+    --foreground-color: 23 23 23;
+    --foreground-color-disabled: 23 23 23 / 0.6;
+
     /* Bg Colors */
     --primary-color: 15 23 42; /* bg-slate-900 */
     --secondary-color: 30 41 59; /* bg-slate-800 */
@@ -23,7 +26,7 @@
     --accent-color: 71 85 105; /* bg-slate-600 */
 
     /* Btn Variants */
-    --btn-ghost-bg: 6 182 212; /* bg-cyan-500 */
+    --btn-ghost-bg: 23 37 84 / 0.2; /* bg-cyan-500 */
     --btn-primary-bg: 21 128 61; /* bg-green-700 */
     --btn-warning-bg: 185 28 28; /* bg-red-700 */
   }
@@ -52,12 +55,7 @@
   }
 
   button {
-    @apply p-2 px-4 rounded-md;
-
-    &:disabled {
-      @apply text-foreground-disabled;
-      border-color: theme("borderColor.foreground-disabled");
-    }
+    @apply btn;
   }
 }
 
@@ -65,52 +63,23 @@
   .text-balance {
     text-wrap: balance;
   }
-
-  .border-disabled {
-    @apply border;
-    border-color: theme("borderColor.foreground-disabled");
-  }
-
-  .text-disabled {
-    color: theme("textColor.foreground-disabled");
-  }
 }
 
 @layer components {
-  .btn-ghost {
-    @apply bg-btn-ghost border;
-
-    &:hover {
-      @apply bg-btn-ghost-hover;
-    }
-
-    &:disabled {
-      @apply bg-btn-ghost-disabled;
-    }
+  .btn-sm {
+    @apply max-w-[10rem] w-full min-h-[2.63rem];
   }
 
-  .btn-primary {
-    @apply bg-btn-primary;
-
-    &:hover {
-      @apply bg-btn-primary-hover;
-    }
-
-    &:disabled {
-      @apply bg-btn-primary-disabled;
-    }
+  .btn-md {
+    @apply max-w-[15rem] w-full min-h-[2.75rem];
   }
 
-  .btn-warning {
-    @apply bg-btn-warning;
+  .btn-lg {
+    @apply max-w-[20rem] w-full min-h-[2.87rem];
+  }
 
-    &:hover {
-      @apply bg-btn-warning-hover;
-    }
-
-    &:disabled {
-      @apply bg-btn-warning-disabled;
-    }
+  .btn-full {
+    @apply w-full min-h-[2.75rem];
   }
 }
 

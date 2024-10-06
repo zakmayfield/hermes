@@ -268,19 +268,15 @@ export const styleHooks = {
   },
 
   useBtnStyles: (props: UseStyleProps) => {
-    const { style, options: { state, btn } = {} } = props;
+    const { style, options: { btn } = {} } = props;
 
     return useMemo(() => {
-      const is_disabled = state?.isDisabled;
-
       const {
         variant = "ghost",
         buttonWidth = "none",
         buttonHeight = "none",
         buttonSize = "none"
       } = btn || {};
-
-      const textColor = is_disabled ? "disabled" : "none";
 
       return {
         buttonStyles: {
@@ -299,13 +295,12 @@ export const styleHooks = {
           ...style?.contentWrapperStyles
         },
         textStyles: {
-          textColor,
           ...style?.textStyles
         },
         iconStyles: {
           ...style?.iconStyles
         }
       } satisfies BtnProps["style"];
-    }, [style, state, btn]);
+    }, [style, btn]);
   }
 };

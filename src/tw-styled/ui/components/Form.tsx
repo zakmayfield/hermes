@@ -1,12 +1,7 @@
 "use client";
 
 import React, { FormEvent } from "react";
-import {
-  BtnVariants,
-  ButtonStyleProps,
-  DefaultStyleProps,
-  IButton
-} from "@/tw-styled/types";
+import { DefaultStyleProps, IButton } from "@/tw-styled/types";
 import { styleHooks, uiHooks } from "../hooks";
 import { useStyleResolver } from "@/tw-styled/tools";
 
@@ -17,7 +12,7 @@ export type FormProps = {
   onSubmit?: (e: FormEvent<HTMLFormElement>) => void;
   button?: {
     buttonText?: string;
-    buttonVariant?: BtnVariants;
+    buttonVariant?: IButton["buttonVariant"];
     buttonWidth?: IButton["buttonWidth"];
     buttonHeight?: IButton["buttonHeight"];
     buttonSize?: IButton["buttonSize"];
@@ -27,7 +22,7 @@ export type FormProps = {
     titleStyles?: DefaultStyleProps;
     childrenWrapperStyles?: DefaultStyleProps;
     childrenStyles?: DefaultStyleProps;
-    buttonStyles?: ButtonStyleProps;
+    buttonStyles?: DefaultStyleProps;
   };
 };
 

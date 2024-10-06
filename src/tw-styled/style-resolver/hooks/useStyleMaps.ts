@@ -5,7 +5,6 @@ import {
   buttonMap,
   dimensionsMap,
   layoutMap,
-  loaderMap,
   marginMap,
   otherMap,
   paddingMap,
@@ -25,7 +24,6 @@ export const useStyleMaps = () => {
     ...backgroundMap,
     ...animationsMap,
     ...buttonMap,
-    ...loaderMap,
     ...otherMap
   };
 

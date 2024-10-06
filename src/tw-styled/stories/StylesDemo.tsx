@@ -8,10 +8,7 @@ export const StylesDemo = (props: StylesDemoProps) => {
 
   return (
     <div className="demo-col">
-      <div
-        className="demo bg-primary hover:element-hovered"
-        children={<p>child</p>}
-      />
+      <div className="demo bg-primary hover:element-hovered" />
 
       <div className="demo-row">
         <button

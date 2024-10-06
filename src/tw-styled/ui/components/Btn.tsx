@@ -1,11 +1,6 @@
 "use client";
 import { IconType } from "react-icons";
-import {
-  BtnVariants,
-  ButtonStyleProps,
-  DefaultStyleProps,
-  IButton
-} from "@/tw-styled/types";
+import { BtnVariants, DefaultStyleProps, IButton } from "@/tw-styled/types";
 import { styleHooks, uiHooks } from "../hooks";
 import { useStyleResolver } from "@/tw-styled/tools";
 
@@ -24,7 +19,7 @@ export type BtnProps = {
     onMouseLeave?(): void;
   };
   style?: {
-    buttonStyles?: ButtonStyleProps;
+    buttonStyles?: DefaultStyleProps;
     contentWrapperStyles?: DefaultStyleProps;
     textStyles?: DefaultStyleProps;
     iconStyles?: DefaultStyleProps;

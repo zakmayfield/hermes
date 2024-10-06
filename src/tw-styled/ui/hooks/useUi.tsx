@@ -13,9 +13,9 @@ import {
   FieldError,
   Btn
 } from "@/tw-styled/ui";
-import { ButtonStyleProps, ResolvedClasses } from "@/tw-styled/types";
+import { ResolvedClasses } from "@/tw-styled/types";
 import { PiSpinnerGap } from "react-icons/pi";
-import { merge, useIcons, useStyleResolver } from "@/tw-styled/tools";
+import { merge, useIcons } from "@/tw-styled/tools";
 import { utilityHooks } from "@/shared/hooks";
 
 type Props<T> = { classes: ResolvedClasses } & Omit<T, "style">;

@@ -1,4 +1,4 @@
-import { BtnVariants, ButtonStyleProps, DefaultStyleProps } from "../types";
+import { BtnVariants, DefaultStyleProps } from "../types";
 import { Form, Input } from "../ui";
 
 type FormDemoProps = {
@@ -15,7 +15,7 @@ type FormDemoProps = {
     titleStyles?: DefaultStyleProps;
     childrenWrapperStyles?: DefaultStyleProps;
     childrenStyles?: DefaultStyleProps;
-    buttonStyles?: ButtonStyleProps;
+    buttonStyles?: DefaultStyleProps;
   };
 };
 

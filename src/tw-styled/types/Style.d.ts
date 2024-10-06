@@ -18,7 +18,7 @@ export type StylePropKeys = keyof StyleProps;
 export type ResolvedClasses = Record<string, string>;
 export type PartialStyleProp = Record<string, Partial<StyleProps>>;
 
-export type ButtonStyleProps = StyleProps;
+// Without IButton
 export type DefaultStyleProps = IDimensions &
   ILayout &
   ISpace &
@@ -101,6 +101,7 @@ interface IAnimations {
   animate?: Animations | None;
 }
 
+// Used within the Style Resolver for button style maps
 export interface IButton {
   buttonSize?: Sizes | None;
   buttonWidth?: Sizes | Full | None;

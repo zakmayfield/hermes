@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
-import { ToastContainer } from "react-toastify";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { ToastContainer } from "react-toastify";
 import { quicksand } from "@/utils/ui";
 import { CoreProvider } from "@/lib/providers";
+import { getAuthSession } from "@/lib/auth/auth.options";
+import { Layout } from "@/tw-styled/ui";
+import { FooterLayout, HeaderLayout } from "@/features/templates";
 import "./globals.css";
 import "react-toastify/ReactToastify.min.css";
 import "react-tooltip/dist/react-tooltip.css";
-import { getAuthSession } from "@/lib/auth/auth.options";
-import { NavigationTemplate } from "@/features/navigation/templates";
-import { FooterTemplate } from "@/features/footer/templates";
-import { Layout } from "@/tw-styled/ui";
 
 export const metadata: Metadata = {
   title: "Hermes",
@@ -24,15 +23,15 @@ export default async function RootLayout({
   const session = await getAuthSession();
   const is_auth = !!session;
 
-  const Nav = is_auth && <NavigationTemplate />;
-  const Footer = is_auth && <FooterTemplate />;
+  const Header = is_auth && <HeaderLayout />;
+  const Footer = is_auth && <FooterLayout />;
 
   return (
     <html lang="en">
       <CoreProvider>
         <body className={`${quicksand.className} antialiased`}>
           {/* NAV */}
-          {Nav}
+          {Header}
 
           <Layout
             style={{

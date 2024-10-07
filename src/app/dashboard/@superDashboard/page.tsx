@@ -1,5 +1,3 @@
-import { SuperDashboardPage } from "@/features/dashboard/templates/super";
-
-export default function SuperDashboard() {
-  return <SuperDashboardPage />;
+export default function Page() {
+  return <div>Super Dashboard Page</div>;
 }

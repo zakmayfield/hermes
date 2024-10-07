@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
 
-export const SuperNavigation = () => {
+export const Nav = () => {
   const segment = useSelectedLayoutSegment();
 
   return (

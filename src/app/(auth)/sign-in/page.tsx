@@ -1,5 +1,9 @@
-import { SignInPage } from "@/features/authentication/templates";
+import { SignInForm } from "@/features/authentication/atoms";
 
 export default function SignIn() {
-  return <SignInPage />;
+  return (
+    <div>
+      <SignInForm />
+    </div>
+  );
 }

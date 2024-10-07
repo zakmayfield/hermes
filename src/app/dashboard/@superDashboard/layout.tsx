@@ -1,9 +1,5 @@
-import { SuperDashboardLayoutTemplate } from "@/features/dashboard/templates/super";
+import { SuperDashboardLayout } from "@/features/dashboard/super/templates";
 
-export default async function SuperDashboardLayout({
-  children
-}: {
-  children: React.ReactNode;
-}) {
-  return <SuperDashboardLayoutTemplate>{children}</SuperDashboardLayoutTemplate>;
+export default async function Layout({ children }: { children: React.ReactNode }) {
+  return <SuperDashboardLayout>{children}</SuperDashboardLayout>;
 }

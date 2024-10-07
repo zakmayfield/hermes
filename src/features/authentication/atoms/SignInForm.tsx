@@ -1,17 +1,21 @@
+"use client";
 import { formHooks } from "@/shared/hooks";
 import { Form } from "@/tw-styled/ui";
+import { SignInInputs } from "./Inputs";
 
 export const SignInForm = () => {
-  const { FormProvider, submitHandler, methods } = formHooks.useSignInForm();
+  const { FormProvider, submitHandler } = formHooks.useSignInForm();
 
   return (
     <FormProvider>
       <Form
+        titleText="Sign In"
         submitHandler={submitHandler}
-        style={{ formStyles: { place: "center" } }}
+        style={{
+          formStyles: { place: "center" }
+        }}
       >
-        <input {...methods.register("email")} />
-        <input {...methods.register("password")} />
+        <SignInInputs />
       </Form>
     </FormProvider>
   );

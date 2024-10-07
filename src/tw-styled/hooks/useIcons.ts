@@ -6,10 +6,12 @@ import {
   PiShoppingCart,
   PiShoppingCartDuotone,
   PiWarningCircle,
-  PiWarningCircleDuotone
+  PiWarningCircleDuotone,
+  PiInfo,
+  PiInfoDuotone
 } from "react-icons/pi";
 
-type IconNames = "spin" | "cart" | "error";
+type IconNames = "spin" | "cart" | "error" | "info";
 type IconVariants = "base" | "duotone";
 
 type UseIconsProps = {
@@ -24,7 +26,8 @@ export const useIcons = (props: UseIconsProps) => {
     return {
       spin: PiSpinnerGap,
       cart: PiShoppingCart,
-      error: PiWarningCircle
+      error: PiWarningCircle,
+      info: PiInfo
     };
   }, []);
 
@@ -32,7 +35,8 @@ export const useIcons = (props: UseIconsProps) => {
     return {
       spin: PiSpinnerGapDuotone,
       cart: PiShoppingCartDuotone,
-      error: PiWarningCircleDuotone
+      error: PiWarningCircleDuotone,
+      info: PiInfoDuotone
     };
   }, []);
 

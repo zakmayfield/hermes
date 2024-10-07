@@ -1,16 +1,18 @@
-import { DashboardLayoutTemplate } from "@/features/dashboard/templates";
+import { DashboardLayout } from "@/features/templates";
 import { getAuthSession } from "@/lib/auth/auth.options";
 import { redirect } from "next/navigation";
 
-export default async function DashboardLayout({
-  superDashboard,
-  adminDashboard,
-  userDashboard
-}: {
+type LayoutProps = {
   superDashboard: React.ReactNode;
   adminDashboard: React.ReactNode;
   userDashboard: React.ReactNode;
-}) {
+};
+
+export default async function Layout({
+  superDashboard,
+  adminDashboard,
+  userDashboard
+}: LayoutProps) {
   const session = await getAuthSession();
   if (!session) redirect("/sign-in");
 
@@ -21,5 +23,5 @@ export default async function DashboardLayout({
     (user_roles.includes("ADMIN") && !user_roles.includes("SUPER") && adminDashboard) ||
     (!user_roles.includes("ADMIN") && !user_roles.includes("SUPER") && userDashboard);
 
-  return <DashboardLayoutTemplate>{dashboard}</DashboardLayoutTemplate>;
+  return <DashboardLayout>{dashboard}</DashboardLayout>;
 }

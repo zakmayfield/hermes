@@ -1,5 +1,16 @@
-import { ManagePermissionsPage } from "@/features/dashboard/templates/super";
+import { ManagePermissionsLayout } from "@/features/dashboard/super/templates";
+import {
+  AdminPermissionsList,
+  SuperPermissionsList,
+  UserPermissionsList
+} from "@/features/dashboard/super/molecules";
 
 export default function ManagePermissions() {
-  return <ManagePermissionsPage />;
+  return (
+    <ManagePermissionsLayout>
+      <SuperPermissionsList />
+      <AdminPermissionsList />
+      <UserPermissionsList />
+    </ManagePermissionsLayout>
+  );
 }

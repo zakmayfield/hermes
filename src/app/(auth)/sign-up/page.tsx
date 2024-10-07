@@ -1,5 +1,9 @@
-import { SignUpPage } from "@/features/authentication/templates";
+import { SignUpForm } from "@/features/authentication/atoms";
 
 export default function SignUp() {
-  return <SignUpPage />;
+  return (
+    <div>
+      <SignUpForm />
+    </div>
+  );
 }

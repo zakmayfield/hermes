@@ -62,28 +62,16 @@ export const formHooks = {
   },
 
   useSignInForm: () => {
-    const { defaultValues, resolver } = validators.getSignInFormValidator();
-    type SignInFormData = typeof defaultValues;
-    type SignInFormResponse = SignInResponse | undefined;
+    const formMeta = validators.getSignInFormValidator();
 
-    const { mutate, isPending } = customHooks.useCustomMutation<
-      SignInFormResponse,
-      SignInFormData
-    >({
-      mutationFn: async (data) => await signIn("sign-in", data)
+    type FormData = typeof formMeta.defaultValues;
+    type Response = SignInResponse | undefined;
+    const signInMutation = async (data: FormData) => await signIn("sign-in", data);
+    const { mutate } = customHooks.useCustomMutation({
+      mutationFn: signInMutation
     });
 
-    const {
-      register,
-      onSubmit,
-      formState: { errors }
-    } = customHooks.useCustomForm<SignInFormResponse, SignInFormData>({
-      defaultValues,
-      resolver,
-      mutate
-    });
-
-    return { register, onSubmit, errors, isPending };
+    return useFormCtx<FormData, Response>({ ...formMeta, mutate });
   },
 
   useChangePasswordForm: () => {

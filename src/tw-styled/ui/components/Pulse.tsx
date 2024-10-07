@@ -1,6 +1,7 @@
 import { useStyleResolver } from "@/tw-styled/tools";
 import { DefaultStyleProps, Sizes, Themes } from "@/tw-styled/types";
-import { styleHooks, uiHooks } from "../hooks";
+import { uiHooks } from "../hooks";
+import { defaultStyles } from "./Pulse.defaultStyles";
 
 export type PulseProps = {
   theme?: Themes;
@@ -13,10 +14,9 @@ export type PulseProps = {
 };
 
 export const Pulse = (props: PulseProps) => {
-  const { style, ...rest } = props;
+  const { style, theme, ...rest } = props;
 
-  const styles = styleHooks.usePulseStyles({ style, options: { theme: rest.theme } });
-  const classes = useStyleResolver({ ...styles });
+  const classes = useStyleResolver({ ...defaultStyles(style, theme) });
   const Pulse = uiHooks.usePulseUi({ classes, ...rest });
 
   return <Pulse />;

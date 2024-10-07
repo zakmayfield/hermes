@@ -7,11 +7,11 @@ import {
   SpinProps,
   PulseProps,
   FieldErrorProps,
-  InputProps,
   FormProps,
   BtnProps,
   FieldError,
-  Btn
+  Btn,
+  FormFieldProps
 } from "@/tw-styled/ui";
 import { ResolvedClasses } from "@/tw-styled/types";
 import { PiSpinnerGap } from "react-icons/pi";
@@ -239,123 +239,22 @@ export const uiHooks = {
   },
 
   useFieldErrorUi: (props: Props<FieldErrorProps>) => {
-    const { message, described_by, is_error_hidden, classes } = props;
+    const { errorMessage, described_by, error_hidden, classes } = props;
 
     const FieldError = () =>
       useMemo(() => {
         return (
           <p
             aria-describedby={described_by}
-            hidden={is_error_hidden}
+            hidden={error_hidden}
             className={classes.parentWrapper}
           >
-            {message}
+            {errorMessage}
           </p>
         );
-      }, [message, described_by, is_error_hidden, classes]);
+      }, [errorMessage, described_by, error_hidden, classes]);
 
     return { FieldError };
-  },
-
-  useInputUi: (props: Props<InputProps<any>>) => {
-    const {
-      classes,
-      register,
-      name,
-      labelText,
-      error,
-      type,
-      is_label_hidden,
-      is_error_hidden,
-      is_error_icon_hidden
-    } = props;
-
-    const {
-      parentWrapperStyles,
-      labelStyles,
-      inputWrapperStyles,
-      inputStyles,
-      errorIconStyles
-    } = classes;
-
-    const inputName = name as string;
-
-    const icons = useIcons({
-      names: ["error"]
-    });
-
-    const { Tooltip } = utilityHooks.useTooltip({
-      content: error?.message,
-      anchorSelect: `#${inputName}_error_icon`,
-      place: "top-end",
-      variant: "error"
-    });
-
-    const InputElement = () =>
-      useMemo(() => {
-        return (
-          <input
-            className={inputStyles}
-            type={type}
-            placeholder={labelText}
-            aria-label={inputName}
-            aria-invalid={!!error}
-            {...register?.(inputName)}
-          />
-        );
-      }, [inputStyles, type, inputName]);
-
-    const ErrorIconElement = () =>
-      error && (
-        <icons.error
-          id={`${inputName}_error_icon`}
-          className={errorIconStyles}
-        />
-      );
-
-    const TooltipElement = () => error && <Tooltip />;
-
-    const InputWrapper = () => (
-      <div className={inputWrapperStyles}>
-        <InputElement />
-        <ErrorIconElement />
-        <TooltipElement />
-      </div>
-    );
-
-    const LabelElement = () =>
-      useMemo(() => {
-        return (
-          <label
-            htmlFor={inputName}
-            hidden={is_label_hidden}
-            className={labelStyles}
-          >
-            {labelText}
-          </label>
-        );
-      }, [labelText, labelStyles, inputName, is_label_hidden]);
-
-    const ErrorElement = () =>
-      useMemo(() => {
-        return (
-          <FieldError
-            message={error?.message}
-            described_by={inputName}
-            is_error_hidden={is_error_hidden}
-          />
-        );
-      }, [error, inputName, is_error_hidden]);
-
-    const Input = () => (
-      <div className={parentWrapperStyles}>
-        <LabelElement />
-        <InputWrapper />
-        <ErrorElement />
-      </div>
-    );
-
-    return { Input };
   },
 
   useFormUi: (props: Props<FormProps>) => {
@@ -495,5 +394,92 @@ export const uiHooks = {
     const Btn = () => <Button />;
 
     return { Btn };
+  },
+
+  useFormFieldUi: (props: Props<FormFieldProps<any>>) => {
+    const {
+      classes: {
+        parentWrapper,
+        label,
+        input,
+        fieldError,
+        labelInputWrapper,
+        errorIcon,
+        errorInputWrapper
+      },
+      inputType = "text",
+      name,
+      labelText,
+      errorMessage,
+      hiddenElements: { error_hidden, label_hidden, error_icon_hidden } = {},
+      register
+    } = props;
+
+    const icons = useIcons({
+      names: ["error"]
+    });
+
+    const { Tooltip } = utilityHooks.useTooltip({
+      content: errorMessage,
+      anchorSelect: `#${name as string}_error_icon`,
+      place: "top-end",
+      variant: "error"
+    });
+
+    const Label = () => (
+      <label
+        htmlFor={name as string}
+        hidden={label_hidden}
+        className={label}
+      >
+        {labelText}
+      </label>
+    );
+
+    const Input = () => (
+      <input
+        {...register?.(name as string)}
+        type={inputType}
+        placeholder={labelText}
+        aria-label={name as string}
+        aria-invalid={!!errorMessage}
+        className={input}
+      />
+    );
+
+    const Error = () => (
+      <FieldError
+        errorMessage={errorMessage}
+        described_by={name as string}
+        error_hidden={error_hidden}
+        style={{ parentWrapper: { className: fieldError } }}
+      />
+    );
+
+    const ErrorIcon = () =>
+      errorMessage && (
+        <icons.error
+          id={`${name as string}_error_icon`}
+          className={errorIcon}
+        />
+      );
+
+    const FormField = () => (
+      <div className={parentWrapper}>
+        <div className={labelInputWrapper}>
+          <Label />
+
+          <div className={errorInputWrapper}>
+            <Input />
+            <ErrorIcon />
+            <Tooltip />
+          </div>
+        </div>
+
+        <Error />
+      </div>
+    );
+
+    return { FormField };
   }
 };

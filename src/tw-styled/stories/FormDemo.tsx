@@ -1,5 +1,5 @@
 import { BtnVariants, DefaultStyleProps } from "../types";
-import { Form, Input } from "../ui";
+import { Form, FormField } from "../ui";
 
 type FormDemoProps = {
   title?: string;
@@ -47,15 +47,15 @@ export const FormDemo = (props: FormDemoProps) => {
         isPending={isPending}
         style={{ ...style }}
       >
-        <Input
+        <FormField
           name={formVarsOne.name}
           labelText={formVarsOne.labelText}
-          error={errorOne}
+          errorMessage={errorOne?.message}
         />
-        <Input
+        <FormField
           name={formVarsTwo.name}
           labelText={formVarsTwo.labelText}
-          error={errorTwo}
+          errorMessage={errorTwo?.message}
         />
       </Form>
     </div>

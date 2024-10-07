@@ -2,7 +2,8 @@
 import React from "react";
 import { Children, DefaultStyleProps, HeadingElements } from "@/tw-styled/types";
 import { useStyleResolver } from "@/tw-styled/tools";
-import { styleHooks, uiHooks } from "../hooks";
+import { uiHooks } from "../hooks";
+import { defaultStyles } from "./Layout.defaultStyles";
 
 export type LayoutProps = {
   children?: Children;
@@ -22,8 +23,7 @@ export type LayoutProps = {
 export const Layout = (props: LayoutProps) => {
   const { style, ...rest } = props;
 
-  const styles = styleHooks.useLayoutStyles({ style });
-  const classes = useStyleResolver({ ...styles });
+  const classes = useStyleResolver({ ...defaultStyles(style) });
   const { Layout } = uiHooks.useLayoutUi({ classes, ...rest });
 
   return <Layout />;

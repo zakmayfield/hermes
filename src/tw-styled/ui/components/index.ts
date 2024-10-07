@@ -2,7 +2,7 @@ export * from "./Btn";
 export * from "./FieldError";
 export * from "./Form";
 export * from "./Heading";
-export * from "./Input";
+export * from "./FormField";
 export * from "./Layout";
 export * from "./Pulse";
 export * from "./Spin";

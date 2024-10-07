@@ -1,8 +1,9 @@
 "use client";
 import { IconType } from "react-icons";
 import { DefaultStyleProps, IButton } from "@/tw-styled/types";
-import { styleHooks, uiHooks } from "../hooks";
+import { uiHooks } from "../hooks";
 import { useStyleResolver } from "@/tw-styled/tools";
+import { defaultStyles } from "./Btn.defaultStyles";
 
 export type BtnProps = {
   handleClick?(): void;
@@ -29,19 +30,9 @@ export type BtnProps = {
 };
 
 export const Btn = (props: BtnProps) => {
-  const { style, ...rest } = props;
-  const { isDisabled, initialButtonProps } = rest;
+  const { style, initialButtonProps, ...rest } = props;
+  const classes = useStyleResolver({ ...defaultStyles(style, initialButtonProps) });
 
-  const styles = styleHooks.useBtnStyles({
-    style,
-    options: {
-      state: {
-        isDisabled
-      },
-      btn: { ...initialButtonProps }
-    }
-  });
-  const classes = useStyleResolver({ ...styles });
   const { Btn } = uiHooks.useBtnUi({ classes, ...rest });
 
   return <Btn />;

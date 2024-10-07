@@ -6,9 +6,21 @@ export const BtnDemo = () => {
       <div className="space-y-3">
         <h3>Variant</h3>
         <div className="p-6 space-x-3">
-          <Btn variant="ghost" />
-          <Btn variant="primary" />
-          <Btn variant="warning" />
+          <Btn
+            initialButtonProps={{
+              variant: "ghost"
+            }}
+          />
+          <Btn
+            initialButtonProps={{
+              variant: "primary"
+            }}
+          />
+          <Btn
+            initialButtonProps={{
+              variant: "warning"
+            }}
+          />
         </div>
       </div>
 
@@ -17,9 +29,21 @@ export const BtnDemo = () => {
         <div className="p-6 space-y-3">
           <div className="space-x-3">
             <Btn style={{}} />
-            <Btn buttonWidth="sm" />
-            <Btn buttonWidth="md" />
-            <Btn buttonWidth="lg" />
+            <Btn
+              initialButtonProps={{
+                width: "sm"
+              }}
+            />
+            <Btn
+              initialButtonProps={{
+                width: "md"
+              }}
+            />
+            <Btn
+              initialButtonProps={{
+                width: "lg"
+              }}
+            />
           </div>
 
           <Btn style={{ buttonStyles: { width: "full" } }} />
@@ -31,11 +55,15 @@ export const BtnDemo = () => {
         <div className="p-6 space-x-3">
           <Btn isDisabled={true} />
           <Btn
-            variant="primary"
+            initialButtonProps={{
+              variant: "primary"
+            }}
             isDisabled={true}
           />
           <Btn
-            variant="warning"
+            initialButtonProps={{
+              variant: "warning"
+            }}
             isDisabled={true}
           />
         </div>

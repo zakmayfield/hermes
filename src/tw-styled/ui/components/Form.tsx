@@ -2,8 +2,9 @@
 
 import React from "react";
 import { Children, DefaultStyleProps, IButton } from "@/tw-styled/types";
-import { styleHooks, uiHooks } from "../hooks";
+import { uiHooks } from "../hooks";
 import { useStyleResolver } from "@/tw-styled/tools";
+import { defaultStyles } from "./Form.defaultStyles";
 
 export type FormProps = {
   children?: Children;
@@ -29,8 +30,7 @@ export type FormProps = {
 export const Form = (props: FormProps) => {
   const { style, ...rest } = props;
 
-  const styles = styleHooks.useFormStyles({ style });
-  const classes = useStyleResolver({ ...styles });
+  const classes = useStyleResolver({ ...defaultStyles(style) });
   const { Form } = uiHooks.useFormUi({ classes, ...rest });
 
   return <Form />;

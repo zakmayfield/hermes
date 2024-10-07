@@ -1,6 +1,7 @@
 import { useStyleResolver } from "@/tw-styled/tools";
 import { DefaultStyleProps } from "@/tw-styled/types";
-import { styleHooks, uiHooks } from "../hooks";
+import { uiHooks } from "../hooks";
+import { defaultStyles } from "./Spin.defaultStyles";
 
 export type SpinProps = {
   style?: {
@@ -12,8 +13,7 @@ export type SpinProps = {
 export const Spin = (props: SpinProps) => {
   const { style } = props;
 
-  const styles = styleHooks.useSpinStyles({ style });
-  const classes = useStyleResolver({ ...styles });
+  const classes = useStyleResolver({ ...defaultStyles(style) });
   const { Spin } = uiHooks.useSpinUi({ classes });
 
   return <Spin />;

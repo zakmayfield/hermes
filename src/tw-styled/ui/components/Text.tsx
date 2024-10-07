@@ -1,8 +1,9 @@
 "use client";
-import React, { useMemo } from "react";
+import React from "react";
 import { Children, DefaultStyleProps, TextElements } from "@/tw-styled/types";
-import { styleHooks, uiHooks } from "../hooks";
+import { uiHooks } from "../hooks";
 import { useStyleResolver } from "@/tw-styled/tools";
+import { defaultStyles } from "./Text.defaultStyles";
 
 export type TextProps = {
   as?: TextElements;
@@ -17,8 +18,7 @@ export type TextProps = {
 export const Text = (props: TextProps) => {
   const { style, ...rest } = props;
 
-  const styles = styleHooks.useTextStyles({ style });
-  const classes = useStyleResolver(styles);
+  const classes = useStyleResolver({ ...defaultStyles(style) });
   const { Text } = uiHooks.useTextUi({ classes, ...rest });
 
   return <Text />;

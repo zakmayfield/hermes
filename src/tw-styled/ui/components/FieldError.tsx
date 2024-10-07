@@ -1,21 +1,21 @@
 import { useStyleResolver } from "@/tw-styled/tools";
 import { DefaultStyleProps } from "@/tw-styled/types";
-import { styleHooks, uiHooks } from "../hooks";
+import { uiHooks } from "../hooks";
+import { defaultStyles } from "./FieldError.defaultStyles";
 
 export type FieldErrorProps = {
-  message?: string;
+  errorMessage?: string;
   described_by?: string;
-  is_error_hidden?: boolean;
+  error_hidden?: boolean;
   style?: {
-    parentWrapper: DefaultStyleProps;
+    parentWrapper?: DefaultStyleProps;
   };
 };
 
 export const FieldError = (props: FieldErrorProps) => {
   const { style, ...rest } = props;
 
-  const styles = styleHooks.useFieldErrorStyles({ style });
-  const classes = useStyleResolver({ ...styles });
+  const classes = useStyleResolver({ ...defaultStyles(style) });
   const { FieldError } = uiHooks.useFieldErrorUi({ classes, ...rest });
 
   return <FieldError />;

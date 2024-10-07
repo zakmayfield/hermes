@@ -8,13 +8,15 @@ import {
   useForm
 } from "react-hook-form";
 
-type UseFormCtxProps<T extends FieldValues, K> = {
-  defaultValues: DefaultValues<T>;
-  resolver: Resolver<T>;
-  mutate?: UseMutateFunction<K, Error, T, unknown>;
+type UseFormCtxProps<FormData extends FieldValues, Response> = {
+  defaultValues: DefaultValues<FormData>;
+  resolver: Resolver<FormData>;
+  mutate?: UseMutateFunction<Response, Error, FormData, unknown>;
 };
 
-export const useFormCtx = <T extends FieldValues, K>(props: UseFormCtxProps<T, K>) => {
+export const useFormCtx = <FormData extends FieldValues, Response>(
+  props: UseFormCtxProps<FormData, Response>
+) => {
   const { defaultValues, resolver, mutate } = props;
 
   const methods = useForm({
@@ -29,7 +31,7 @@ export const useFormCtx = <T extends FieldValues, K>(props: UseFormCtxProps<T, K
   );
 
   // evoke mutation
-  const onSubmit = (data: FieldValues) => mutate?.(data as T);
+  const onSubmit = (data: FieldValues) => mutate?.(data as FormData);
   const submitHandler = methods.handleSubmit(onSubmit);
 
   return {

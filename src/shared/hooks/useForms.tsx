@@ -11,16 +11,26 @@ export const formHooks = {
     const formMeta = validators.getTestFormValidator();
 
     // define mutation logic
-    type Variables = typeof formMeta.defaultValues;
+    type FormData = typeof formMeta.defaultValues;
     type Response = { x: string };
+
+    const testMutation = async (formData: FormData) => {
+      // throw new Error("Test Error");
+      console.log({ formData });
+      return { x: "foobar" };
+    };
+
     const { mutate } = customHooks.useCustomMutation({
-      mutationFn: async (props: Variables) => await { x: "foobar" },
-      handleSuccess(data, variables) {
-        console.log({ data, variables });
+      mutationFn: testMutation,
+      handleSuccess(data) {
+        console.log({ response: data });
+      },
+      handleError(error) {
+        console.log({ error });
       }
     });
 
-    return useFormCtx<Variables, Response>({ ...formMeta, mutate });
+    return useFormCtx<FormData, Response>({ ...formMeta, mutate });
   },
 
   useSignUpForm: () => {

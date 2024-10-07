@@ -5,10 +5,10 @@ type FormDemoProps = {
   title?: string;
   fieldError?: boolean;
   isPending?: boolean;
-  button?: {
-    buttonText?: string;
-    buttonVariant?: BtnVariants;
-    buttonWidth?: "sm" | "md" | "lg" | "full" | "none";
+  buttonProps?: {
+    text?: string;
+    variant?: BtnVariants;
+    width?: "sm" | "md" | "lg" | "full" | "none";
   };
   style?: {
     formStyles?: DefaultStyleProps;
@@ -29,13 +29,7 @@ const formVarsTwo = {
 };
 
 export const FormDemo = (props: FormDemoProps) => {
-  const {
-    title,
-    button: { buttonText, buttonWidth, buttonVariant } = {},
-    fieldError = false,
-    isPending = false,
-    style
-  } = props;
+  const { title, buttonProps, fieldError = false, isPending = false, style } = props;
 
   const errorOne =
     (fieldError && { type: "required", message: `${formVarsOne.name} is required` }) ||
@@ -49,7 +43,7 @@ export const FormDemo = (props: FormDemoProps) => {
     <div>
       <Form
         titleText={title}
-        button={{ buttonText, buttonWidth, buttonVariant }}
+        buttonProps={{ ...buttonProps }}
         isPending={isPending}
         style={{ ...style }}
       >

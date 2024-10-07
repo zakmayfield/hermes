@@ -22,7 +22,7 @@ const meta = {
         disable: true
       }
     },
-    button: {
+    buttonProps: {
       control: {
         disable: true
       }
@@ -36,10 +36,10 @@ export type FormDemoStory = StoryObj<typeof meta>;
 export const Demo: FormDemoStory = {
   args: {
     title: "Form Title",
-    button: {
-      buttonWidth: "full",
-      buttonText: "Foobar",
-      buttonVariant: "ghost"
+    buttonProps: {
+      width: "full",
+      text: "Foobar",
+      variant: "ghost"
     },
     style: {
       formStyles: {

@@ -1,22 +1,24 @@
 "use client";
 import { IconType } from "react-icons";
-import { BtnVariants, DefaultStyleProps, IButton } from "@/tw-styled/types";
+import { DefaultStyleProps, IButton } from "@/tw-styled/types";
 import { styleHooks, uiHooks } from "../hooks";
 import { useStyleResolver } from "@/tw-styled/tools";
 
 export type BtnProps = {
+  handleClick?(): void;
   Icon?: IconType;
   type?: "button" | "reset" | "submit";
   text?: string;
-  handleClick?(): void;
   isDisabled?: boolean;
-  variant?: BtnVariants;
-  buttonWidth?: IButton["buttonWidth"];
-  buttonHeight?: IButton["buttonHeight"];
-  buttonSize?: IButton["buttonSize"];
   mouseActions?: {
     onMouseEnter?(): void;
     onMouseLeave?(): void;
+  };
+  initialButtonProps?: {
+    variant?: IButton["buttonVariant"];
+    width?: IButton["buttonWidth"];
+    height?: IButton["buttonHeight"];
+    size?: IButton["buttonSize"];
   };
   style?: {
     buttonStyles?: DefaultStyleProps;
@@ -28,7 +30,7 @@ export type BtnProps = {
 
 export const Btn = (props: BtnProps) => {
   const { style, ...rest } = props;
-  const { isDisabled, variant, buttonWidth, buttonHeight, buttonSize } = rest;
+  const { isDisabled, initialButtonProps } = rest;
 
   const styles = styleHooks.useBtnStyles({
     style,
@@ -36,12 +38,7 @@ export const Btn = (props: BtnProps) => {
       state: {
         isDisabled
       },
-      btn: {
-        variant,
-        buttonWidth,
-        buttonHeight,
-        buttonSize
-      }
+      btn: { ...initialButtonProps }
     }
   });
   const classes = useStyleResolver({ ...styles });

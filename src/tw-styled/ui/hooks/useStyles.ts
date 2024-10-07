@@ -24,12 +24,7 @@ type StyleOptions = {
   input?: {
     is_error?: boolean;
   };
-  btn?: {
-    variant?: BtnVariants;
-    buttonWidth?: IButton["buttonWidth"];
-    buttonHeight?: IButton["buttonHeight"];
-    buttonSize?: IButton["buttonSize"];
-  };
+  btn?: BtnProps["initialButtonProps"];
 };
 
 export const styleHooks = {
@@ -273,9 +268,9 @@ export const styleHooks = {
     return useMemo(() => {
       const {
         variant = "ghost",
-        buttonWidth = "none",
-        buttonHeight = "none",
-        buttonSize = "none"
+        width = "none",
+        height = "none",
+        size = "none"
       } = btn || {};
 
       return {
@@ -283,9 +278,9 @@ export const styleHooks = {
           padding: "sm",
           paddingX: "md",
           rounded: "md",
-          buttonWidth,
-          buttonHeight,
-          buttonSize,
+          buttonWidth: width,
+          buttonHeight: height,
+          buttonSize: size,
           buttonVariant: variant,
           ...style?.buttonStyles
         },

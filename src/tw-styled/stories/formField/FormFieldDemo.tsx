@@ -1,4 +1,4 @@
-import { FormField } from "../ui";
+import { FormField } from "@/tw-styled/ui";
 
 type FormFieldDemoProps = {
   errorMessage?: boolean;

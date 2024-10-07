@@ -1,5 +1,5 @@
-import { BtnVariants, DefaultStyleProps } from "../types";
-import { Form, FormField } from "../ui";
+import { BtnVariants, DefaultStyleProps } from "@/tw-styled/types";
+import { Form, FormField } from "@/tw-styled/ui";
 
 type FormDemoProps = {
   title?: string;

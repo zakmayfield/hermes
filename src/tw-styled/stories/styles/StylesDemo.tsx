@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Btn } from "../ui";
+import { Btn } from "@/tw-styled/ui";
 
 export const StylesDemo = () => {
   const [isDisabled, setIsDisabled] = useState(false);
@@ -17,19 +17,27 @@ export const StylesDemo = () => {
         </button>
 
         <Btn
-          variant="ghost"
+          initialButtonProps={{
+            variant: "ghost"
+          }}
           isDisabled={isDisabled}
         />
         <Btn
-          variant="primary"
+          initialButtonProps={{
+            variant: "primary"
+          }}
           isDisabled={isDisabled}
         />
         <Btn
-          variant="warning"
+          initialButtonProps={{
+            variant: "warning"
+          }}
           isDisabled={isDisabled}
         />
         <Btn
-          variant="none"
+          initialButtonProps={{
+            variant: "none"
+          }}
           isDisabled={isDisabled}
         />
       </div>

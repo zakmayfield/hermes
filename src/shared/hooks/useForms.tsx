@@ -9,7 +9,18 @@ import { useFormCtx } from "./useFormCtx";
 export const formHooks = {
   useTestForm: () => {
     const formMeta = validators.getTestFormValidator();
-    return useFormCtx({ ...formMeta });
+
+    // define mutation logic
+    type Variables = typeof formMeta.defaultValues;
+    type Response = { x: string };
+    const { mutate } = customHooks.useCustomMutation({
+      mutationFn: async (props: Variables) => await { x: "foobar" },
+      handleSuccess(data, variables) {
+        console.log({ data, variables });
+      }
+    });
+
+    return useFormCtx<Variables, Response>({ ...formMeta, mutate });
   },
 
   useSignUpForm: () => {

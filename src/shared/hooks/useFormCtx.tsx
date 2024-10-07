@@ -1,4 +1,5 @@
 import { Children } from "@/tw-styled/types";
+import { UseMutateFunction } from "@tanstack/react-query";
 import {
   DefaultValues,
   FieldValues,
@@ -7,12 +8,14 @@ import {
   useForm
 } from "react-hook-form";
 
-type UseFormCtxProps<T extends FieldValues> = {
+type UseFormCtxProps<T extends FieldValues, K> = {
   defaultValues: DefaultValues<T>;
   resolver: Resolver<T>;
+  mutate?: UseMutateFunction<K, Error, T, unknown>;
 };
-export const useFormCtx = <T extends FieldValues>(props: UseFormCtxProps<T>) => {
-  const { defaultValues, resolver } = props;
+
+export const useFormCtx = <T extends FieldValues, K>(props: UseFormCtxProps<T, K>) => {
+  const { defaultValues, resolver, mutate } = props;
 
   const methods = useForm({
     defaultValues: { ...defaultValues },
@@ -25,7 +28,8 @@ export const useFormCtx = <T extends FieldValues>(props: UseFormCtxProps<T>) => 
     </div>
   );
 
-  const onSubmit = (data: FieldValues) => console.log(data);
+  // evoke mutation
+  const onSubmit = (data: FieldValues) => mutate?.(data as T);
   const submitHandler = methods.handleSubmit(onSubmit);
 
   return {

@@ -4,43 +4,12 @@ import { customHooks } from "./useCustom";
 import { utilityHooks } from "./useUtilities";
 import { validators } from "../validators";
 import { signIn, SignInResponse } from "next-auth/react";
-import { useMemo } from "react";
+import { useFormCtx } from "./useFormCtx";
 
 export const formHooks = {
   useTestForm: () => {
-    const { notify } = utilityHooks.useToast();
-
-    const { resolver, defaultValues } = validators.getTestFormValidator();
-    type TestFormData = typeof defaultValues;
-    type TestFormResponse = { status: "success" | "error" };
-
-    const { mutate } = customHooks.useCustomMutation<TestFormResponse, TestFormData>({
-      mutationFn: async () => {
-        return {
-          status: "success"
-        };
-      },
-      handleError(error) {
-        notify(error.message, "error");
-      },
-      handleSuccess() {
-        notify("success");
-        handleReset();
-      }
-    });
-
-    const {
-      register,
-      onSubmit,
-      handleReset,
-      formState: { errors }
-    } = customHooks.useCustomForm<TestFormResponse, TestFormData>({
-      defaultValues,
-      resolver,
-      mutate
-    });
-
-    return { register, onSubmit, formErrors: errors };
+    const formMeta = validators.getTestFormValidator();
+    return useFormCtx({ ...formMeta });
   },
 
   useSignUpForm: () => {

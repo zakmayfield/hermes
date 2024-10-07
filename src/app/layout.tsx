@@ -9,7 +9,7 @@ import "react-tooltip/dist/react-tooltip.css";
 import { getAuthSession } from "@/lib/auth/auth.options";
 import { NavigationTemplate } from "@/features/navigation/templates";
 import { FooterTemplate } from "@/features/footer/templates";
-import { Layout } from "@/tw-styled/components";
+import { Layout } from "@/tw-styled/ui";
 
 export const metadata: Metadata = {
   title: "Hermes",

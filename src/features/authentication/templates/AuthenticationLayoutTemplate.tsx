@@ -13,9 +13,9 @@ export const AuthenticationLayoutTemplate = (
   return (
     <div>
       <div>
-        <div>
+        {/* <div>
           <Logo />
-        </div>
+        </div> */}
 
         {children}
 

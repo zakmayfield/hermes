@@ -15,7 +15,7 @@ export type BtnProps = {
     onMouseEnter?(): void;
     onMouseLeave?(): void;
   };
-  initialButtonProps?: {
+  options?: {
     variant?: IButton["buttonVariant"];
     width?: IButton["buttonWidth"];
     height?: IButton["buttonHeight"];
@@ -30,9 +30,9 @@ export type BtnProps = {
 };
 
 export const Btn = (props: BtnProps) => {
-  const { style, initialButtonProps, ...rest } = props;
+  const { style, options, ...rest } = props;
 
-  const classes = useStyleResolver({ ...defaultStyles(style, initialButtonProps) });
+  const classes = useStyleResolver({ ...defaultStyles(style, options) });
   const { Btn } = useBtnUi({ classes, ...rest });
 
   return <Btn />;

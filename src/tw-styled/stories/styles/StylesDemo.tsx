@@ -17,25 +17,25 @@ export const StylesDemo = () => {
         </button>
 
         <Btn
-          initialButtonProps={{
+          options={{
             variant: "ghost"
           }}
           isDisabled={isDisabled}
         />
         <Btn
-          initialButtonProps={{
+          options={{
             variant: "primary"
           }}
           isDisabled={isDisabled}
         />
         <Btn
-          initialButtonProps={{
+          options={{
             variant: "warning"
           }}
           isDisabled={isDisabled}
         />
         <Btn
-          initialButtonProps={{
+          options={{
             variant: "none"
           }}
           isDisabled={isDisabled}

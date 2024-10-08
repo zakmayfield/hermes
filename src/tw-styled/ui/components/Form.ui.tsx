@@ -36,7 +36,7 @@ export const useFormUi = (props: UiProps<FormProps>) => {
           type="submit"
           isDisabled={isPending}
           text={text}
-          initialButtonProps={{
+          options={{
             variant,
             width,
             height,

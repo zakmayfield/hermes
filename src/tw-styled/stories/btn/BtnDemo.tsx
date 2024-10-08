@@ -7,17 +7,17 @@ export const BtnDemo = () => {
         <h3>Variant</h3>
         <div className="p-6 space-x-3">
           <Btn
-            initialButtonProps={{
+            options={{
               variant: "ghost"
             }}
           />
           <Btn
-            initialButtonProps={{
+            options={{
               variant: "primary"
             }}
           />
           <Btn
-            initialButtonProps={{
+            options={{
               variant: "warning"
             }}
           />
@@ -30,17 +30,17 @@ export const BtnDemo = () => {
           <div className="space-x-3">
             <Btn style={{}} />
             <Btn
-              initialButtonProps={{
+              options={{
                 width: "sm"
               }}
             />
             <Btn
-              initialButtonProps={{
+              options={{
                 width: "md"
               }}
             />
             <Btn
-              initialButtonProps={{
+              options={{
                 width: "lg"
               }}
             />
@@ -55,13 +55,13 @@ export const BtnDemo = () => {
         <div className="p-6 space-x-3">
           <Btn isDisabled={true} />
           <Btn
-            initialButtonProps={{
+            options={{
               variant: "primary"
             }}
             isDisabled={true}
           />
           <Btn
-            initialButtonProps={{
+            options={{
               variant: "warning"
             }}
             isDisabled={true}

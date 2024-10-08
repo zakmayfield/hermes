@@ -3,17 +3,17 @@ import { BtnProps } from "./Btn";
 
 export const defaultStyles = (
   style?: PartialStyleProp,
-  initialButtonProps?: BtnProps["initialButtonProps"]
+  options?: BtnProps["options"]
 ) => {
   return {
     buttonStyles: {
       padding: "sm",
       paddingX: "md",
       rounded: "md",
-      buttonWidth: initialButtonProps?.width || "none",
-      buttonHeight: initialButtonProps?.height || "none",
-      buttonSize: initialButtonProps?.size || "none",
-      buttonVariant: initialButtonProps?.variant || "ghost",
+      buttonWidth: options?.width || "none",
+      buttonHeight: options?.height || "none",
+      buttonSize: options?.size || "none",
+      buttonVariant: options?.variant || "ghost",
       ...style?.buttonStyles
     },
     contentWrapperStyles: {

@@ -1,7 +1,7 @@
 import { useStyleResolver } from "@/tw-styled/tools";
 import { DefaultStyleProps } from "@/tw-styled/types";
-import { uiHooks } from "../hooks";
 import { defaultStyles } from "./FieldError.defaultStyles";
+import { useFieldErrorUi } from "./FieldError.ui";
 
 export type FieldErrorProps = {
   errorMessage?: string;
@@ -16,7 +16,7 @@ export const FieldError = (props: FieldErrorProps) => {
   const { style, ...rest } = props;
 
   const classes = useStyleResolver({ ...defaultStyles(style) });
-  const { FieldError } = uiHooks.useFieldErrorUi({ classes, ...rest });
+  const { FieldError } = useFieldErrorUi({ classes, ...rest });
 
   return <FieldError />;
 };

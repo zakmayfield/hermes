@@ -17,6 +17,7 @@ type StyleProps = IDimensions &
 export type StylePropKeys = keyof StyleProps;
 export type ResolvedClasses = Record<string, string>;
 export type PartialStyleProp = Record<string, Partial<StyleProps>>;
+export type UiProps<T> = { classes: ResolvedClasses } & Omit<T, "style">;
 
 // Without IButton
 export type DefaultStyleProps = IDimensions &

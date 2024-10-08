@@ -1,8 +1,8 @@
 import { useStyleResolver } from "@/tw-styled/tools";
 import { DefaultStyleProps } from "@/tw-styled/types";
-import { uiHooks } from "../hooks";
 import { FieldValues, UseFormRegister } from "react-hook-form";
 import { defaultStyles } from "./FormField.defaultStyles";
+import { useFormFieldUi } from "./FormField.ui";
 
 export type FormFieldProps<T extends FieldValues> = {
   inputType?: "text" | "password";
@@ -31,7 +31,7 @@ export const FormField = <T extends FieldValues>(props: FormFieldProps<T>) => {
 
   const classes = useStyleResolver({ ...defaultStyles(style) });
 
-  const { FormField } = uiHooks.useFormFieldUi({ classes, ...rest });
+  const { FormField } = useFormFieldUi({ classes, ...rest });
 
   return <FormField />;
 };

@@ -1,8 +1,8 @@
 import React from "react";
 import { Children, DefaultStyleProps, HeadingElements } from "@/tw-styled/types";
-import { uiHooks } from "../hooks";
 import { useStyleResolver } from "@/tw-styled/tools";
 import { defaultStyles } from "./Heading.defaultStyles";
+import { useHeadingUi } from "./Heading.ui";
 
 export type HeadingProps = {
   children?: Children;
@@ -19,9 +19,7 @@ export const Heading = (props: HeadingProps) => {
   const { style, ...rest } = props;
 
   const classes = useStyleResolver({ ...defaultStyles(style) });
-  const ui = uiHooks.useHeadingUi({ ...rest, classes });
-
-  const Heading = ui.Heading;
+  const { Heading } = useHeadingUi({ ...rest, classes });
 
   return <Heading />;
 };

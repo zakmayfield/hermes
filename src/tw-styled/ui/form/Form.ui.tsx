@@ -1,7 +1,7 @@
 import React from "react";
 import { UiProps } from "@/tw-styled/types";
 import { FormProps } from "./Form";
-import { Btn } from "./Btn";
+import { Btn } from "../btn/Btn";
 
 export const useFormUi = (props: UiProps<FormProps>) => {
   const {

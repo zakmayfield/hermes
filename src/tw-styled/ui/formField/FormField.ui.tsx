@@ -2,7 +2,7 @@ import { UiProps } from "@/tw-styled/types";
 import { FormFieldProps } from "./FormField";
 import { useIcons } from "@/tw-styled/tools";
 import { utilityHooks } from "@/shared/hooks";
-import { FieldError } from "./FieldError";
+import { FieldError } from "../fieldError/FieldError";
 import React from "react";
 
 export const useFormFieldUi = (props: UiProps<FormFieldProps<any>>) => {

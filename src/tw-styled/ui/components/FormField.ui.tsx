@@ -35,17 +35,15 @@ export const useFormFieldUi = (props: UiProps<FormFieldProps<any>>) => {
     variant: "error"
   });
 
-  const Label = React.useMemo(() => {
-    return (
-      <label
-        htmlFor={name as string}
-        hidden={label_hidden}
-        className={label}
-      >
-        {labelText}
-      </label>
-    );
-  }, [labelText, label_hidden, label]);
+  const Label = (
+    <label
+      htmlFor={name as string}
+      hidden={label_hidden}
+      className={label}
+    >
+      {labelText}
+    </label>
+  );
 
   const Input = React.useMemo(() => {
     return (
@@ -58,7 +56,7 @@ export const useFormFieldUi = (props: UiProps<FormFieldProps<any>>) => {
         className={input}
       />
     );
-  }, [name, inputType, input]);
+  }, [errorMessage, name, inputType, labelText, register, input]);
 
   const Error = React.useMemo(() => {
     return (
@@ -71,16 +69,12 @@ export const useFormFieldUi = (props: UiProps<FormFieldProps<any>>) => {
     );
   }, [errorMessage, name, error_hidden, fieldError]);
 
-  const ErrorIcon = React.useMemo(() => {
-    return (
-      errorMessage && (
-        <icons.error
-          id={`${name as string}_error_icon`}
-          className={errorIcon}
-        />
-      )
-    );
-  }, [errorMessage, errorIcon]);
+  const ErrorIcon = errorMessage && (
+    <icons.error
+      id={`${name as string}_error_icon`}
+      className={errorIcon}
+    />
+  );
 
   const FormField = (
     <div className={parentWrapper}>

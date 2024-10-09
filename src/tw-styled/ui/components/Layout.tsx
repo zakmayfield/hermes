@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { Children, BaseStyleProps, HeadingElements } from "@/tw-styled/types";
 import { useStyleResolver } from "@/tw-styled/tools";
 import { defaultStyles } from "./Layout.defaultStyles";

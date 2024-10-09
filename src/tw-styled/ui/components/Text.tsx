@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { Children, BaseStyleProps, TextElements } from "@/tw-styled/types";
 import { useStyleResolver } from "@/tw-styled/tools";
 import { defaultStyles } from "./Text.defaultStyles";
@@ -19,7 +18,7 @@ export const Text = (props: TextProps) => {
   const { style, ...rest } = props;
 
   const classes = useStyleResolver({ ...defaultStyles(style) });
-  const { Text } = useTextUi({ classes, ...rest });
+  const Text = useTextUi({ classes, ...rest });
 
-  return <Text />;
+  return Text;
 };

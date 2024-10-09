@@ -16,7 +16,7 @@ export const FieldError = (props: FieldErrorProps) => {
   const { style, ...rest } = props;
 
   const classes = useStyleResolver({ ...defaultStyles(style) });
-  const { FieldError } = useFieldErrorUi({ classes, ...rest });
+  const FieldError = useFieldErrorUi({ classes, ...rest });
 
-  return <FieldError />;
+  return FieldError;
 };

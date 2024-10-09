@@ -15,40 +15,37 @@ export const useBtnUi = (props: UiProps<BtnProps>) => {
 
   const { buttonStyles, contentWrapperStyles, textStyles, iconStyles } = classes;
 
-  const IconElement = () =>
-    React.useMemo(() => {
-      return Icon && <Icon className={iconStyles} />;
-    }, [Icon, iconStyles]);
+  const IconElement = React.useMemo(() => {
+    return Icon && <Icon className={iconStyles} />;
+  }, [Icon, iconStyles]);
 
-  const TextElement = () =>
-    React.useMemo(() => {
-      return <span className={textStyles}>{text}</span>;
-    }, [text, textStyles]);
+  const TextElement = React.useMemo(() => {
+    return <span className={textStyles}>{text}</span>;
+  }, [text, textStyles]);
 
-  const ContentWrapper = () => (
-    <div className={contentWrapperStyles}>
-      <IconElement />
-      <TextElement />
-    </div>
-  );
+  const ContentWrapper = React.useMemo(() => {
+    return (
+      <div className={contentWrapperStyles}>
+        {IconElement}
+        {TextElement}
+      </div>
+    );
+  }, [contentWrapperStyles, IconElement, TextElement]);
 
-  const Button = () =>
-    React.useMemo(() => {
-      return (
-        <button
-          type={type}
-          className={buttonStyles}
-          disabled={isDisabled}
-          aria-disabled={isDisabled}
-          onClick={handleClick}
-          {...mouseActions}
-        >
-          <ContentWrapper />
-        </button>
-      );
-    }, [type, isDisabled, buttonStyles, handleClick]);
+  const Btn = React.useMemo(() => {
+    return (
+      <button
+        type={type}
+        className={buttonStyles}
+        disabled={isDisabled}
+        aria-disabled={isDisabled}
+        onClick={handleClick}
+        {...mouseActions}
+      >
+        {ContentWrapper}
+      </button>
+    );
+  }, [type, isDisabled, buttonStyles, mouseActions, handleClick, ContentWrapper]);
 
-  const Btn = () => <Button />;
-
-  return { Btn };
+  return Btn;
 };

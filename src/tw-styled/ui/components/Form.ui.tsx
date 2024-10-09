@@ -16,40 +16,36 @@ export const useFormUi = (props: UiProps<FormProps>) => {
   const { formStyles, titleStyles, childrenWrapperStyles, childrenStyles, buttonStyles } =
     classes;
 
-  const Title = () =>
-    React.useMemo(() => {
-      return <h3 className={titleStyles}>{titleText}</h3>;
-    }, [titleStyles, titleText]);
+  const Title = titleText && <h3 className={titleStyles}>{titleText}</h3>;
 
-  const Button = () =>
-    React.useMemo(() => {
-      const {
-        text = "Submit",
-        variant = "ghost",
-        width = "full",
-        height = "none",
-        size = "none"
-      } = buttonProps || {};
+  const Button = React.useMemo(() => {
+    const {
+      text = "Submit",
+      variant = "ghost",
+      width = "full",
+      height = "none",
+      size = "none"
+    } = buttonProps || {};
 
-      return (
-        <Btn
-          type="submit"
-          isDisabled={isPending}
-          text={text}
-          options={{
-            variant,
-            width,
-            height,
-            size
-          }}
-          style={{
-            buttonStyles: {
-              className: buttonStyles
-            }
-          }}
-        />
-      );
-    }, [buttonProps, buttonStyles, isPending]);
+    return (
+      <Btn
+        type="submit"
+        isDisabled={isPending}
+        text={text}
+        options={{
+          variant,
+          width,
+          height,
+          size
+        }}
+        style={{
+          buttonStyles: {
+            className: buttonStyles
+          }
+        }}
+      />
+    );
+  }, [buttonProps, buttonStyles, isPending]);
 
   const Children = React.useMemo(() => {
     return React.Children.map(children, (child) => {
@@ -68,11 +64,11 @@ export const useFormUi = (props: UiProps<FormProps>) => {
       onSubmit={submitHandler}
       className={formStyles}
     >
-      {titleText && <Title />}
+      {Title}
 
       <div className={childrenWrapperStyles}>{Children}</div>
 
-      <Button />
+      {Button}
     </form>
   );
 

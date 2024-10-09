@@ -1,3 +1,4 @@
+"use client";
 import { UseMutateFunction } from "@tanstack/react-query";
 import { DefaultValues, FieldValues, Resolver, useForm } from "react-hook-form";
 

@@ -14,7 +14,7 @@ export const Spin = (props: SpinProps) => {
   const { style } = props;
 
   const classes = useStyleResolver({ ...defaultStyles(style) });
-  const { Spin } = useSpinUi({ classes });
+  const Spin = useSpinUi({ classes });
 
-  return <Spin />;
+  return Spin;
 };

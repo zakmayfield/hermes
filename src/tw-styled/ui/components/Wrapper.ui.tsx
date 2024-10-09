@@ -5,41 +5,35 @@ import React from "react";
 export const useWrapperUi = (props: UiProps<WrapperProps>) => {
   const { as = "div", children, classes } = props;
 
-  const getChilds = () =>
-    React.useMemo(() => {
-      const childs = React.Children.map(children, (child) => {
-        if (React.isValidElement(child)) {
-          return React.createElement(
-            child.type,
-            {
-              ...child.props,
-              key: child.key,
-              className: classes.children
-            },
-            child.props.children
-          );
-        } else {
-          return <div className={classes.children}>{children}</div>;
-        }
-      });
+  const { children: childrenStyles, childrenWrapper, parentWrapper } = classes;
 
-      return childs;
-    }, [children, classes]);
+  const Children = React.useMemo(() => {
+    const childs = React.Children.map(children, (child) => {
+      if (React.isValidElement(child)) {
+        return React.createElement(
+          child.type,
+          {
+            ...child.props,
+            key: child.key,
+            className: childrenStyles
+          },
+          child.props.children
+        );
+      } else {
+        return <div className={childrenStyles}>{children}</div>;
+      }
+    });
 
-  const getChildsWrapper = () => (
-    <div className={classes.childrenWrapper}>{getChilds()}</div>
-  );
+    return childs;
+  }, [children, childrenStyles]);
 
-  const getWrapper = () =>
-    React.useMemo(() => {
-      return React.createElement(
-        as,
-        { className: classes.parentWrapper },
-        getChildsWrapper()
-      );
-    }, [as, classes]);
+  const ChildrenWrapper = React.useMemo(() => {
+    return <div className={childrenWrapper}>{Children}</div>;
+  }, [Children, childrenWrapper]);
 
-  const Wrapper = () => getWrapper();
+  const Wrapper = React.useMemo(() => {
+    return React.createElement(as, { className: parentWrapper }, ChildrenWrapper);
+  }, [as, ChildrenWrapper, parentWrapper]);
 
-  return { Wrapper };
+  return Wrapper;
 };

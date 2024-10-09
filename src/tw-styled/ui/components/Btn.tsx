@@ -33,7 +33,7 @@ export const Btn = (props: BtnProps) => {
   const { style, options, ...rest } = props;
 
   const classes = useStyleResolver({ ...defaultStyles(style, options) });
-  const { Btn } = useBtnUi({ classes, ...rest });
+  const Btn = useBtnUi({ classes, ...rest });
 
-  return <Btn />;
+  return Btn;
 };

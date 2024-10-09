@@ -4,23 +4,22 @@ import React from "react";
 
 export const useHeadingUi = (props: UiProps<HeadingProps>) => {
   const { as = "h1", text = "", children, classes } = props;
+  const { childrenWrapper, heading, parentWrapper } = classes;
 
   const ChildrenWrapper = React.useMemo(() => {
-    return <div className={classes.childrenWrapper}>{children}</div>;
-  }, [children, classes]);
+    return <div className={childrenWrapper}>{children}</div>;
+  }, [children, childrenWrapper]);
 
   const HeadingElement = React.useMemo(() => {
-    return React.createElement(as, { className: classes.heading }, text);
-  }, [as, text, classes]);
+    return React.createElement(as, { className: heading }, text);
+  }, [as, text, heading]);
 
-  const Heading = () => (
-    <div className={classes.parentWrapper}>
+  const Heading = (
+    <div className={parentWrapper}>
       {HeadingElement}
       {ChildrenWrapper}
     </div>
   );
 
-  return {
-    Heading
-  };
+  return Heading;
 };

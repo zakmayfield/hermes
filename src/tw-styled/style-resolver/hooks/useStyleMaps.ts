@@ -16,19 +16,21 @@ import { StylePropKeys } from "@/tw-styled/types";
 import React from "react";
 
 export const useStyleMaps = () => {
-  const styleGroups = {
-    ...dimensionsGroup,
-    ...layoutGroup,
-    ...spaceGroup,
-    ...paddingGroup,
-    ...marginGroup,
-    ...alignmentGroup,
-    ...typographyGroup,
-    ...backgroundGroup,
-    ...animationGroup,
-    ...buttonGroup,
-    ...otherGroup
-  };
+  const styleGroups = React.useMemo(() => {
+    return {
+      ...dimensionsGroup,
+      ...layoutGroup,
+      ...spaceGroup,
+      ...paddingGroup,
+      ...marginGroup,
+      ...alignmentGroup,
+      ...typographyGroup,
+      ...backgroundGroup,
+      ...animationGroup,
+      ...buttonGroup,
+      ...otherGroup
+    };
+  }, []);
 
   const handleMapValue = React.useCallback(
     (payload: { group: StyleGroups; styleKey: StylePropKeys; styleValue: string }) => {

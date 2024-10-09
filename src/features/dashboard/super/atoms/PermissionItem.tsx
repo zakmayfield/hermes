@@ -31,7 +31,7 @@ export const PermissionItem = (props: PermissionItemProps) => {
       <div>
         <p>{permission_level ? "✅" : "🚫"}</p>
         <icons.info id={`${permission_id}_info_icon`} />
-        <Tooltip />
+        {Tooltip}
       </div>
     </div>
   );

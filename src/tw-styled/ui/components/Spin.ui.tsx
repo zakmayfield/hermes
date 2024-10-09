@@ -10,7 +10,7 @@ export const useSpinUi = (props: UiProps<SpinProps>) => {
   });
 
   const icon = <icons.spin className={classes.icon} />;
-  const Spin = () => <div className={classes.parentWrapper}>{icon}</div>;
+  const Spin = <div className={classes.parentWrapper}>{icon}</div>;
 
-  return { Spin };
+  return Spin;
 };

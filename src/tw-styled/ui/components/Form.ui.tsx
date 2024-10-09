@@ -51,37 +51,30 @@ export const useFormUi = (props: UiProps<FormProps>) => {
       );
     }, [buttonProps, buttonStyles, isPending]);
 
-  const Childs = () =>
-    React.useMemo(() => {
-      return React.Children.map(children, (child) => {
-        if (React.isValidElement(child)) {
-          return React.createElement(
-            child.type,
-            { ...child.props, className: childrenStyles },
-            child.props.children
-          );
-        }
-      });
-    }, [children, childrenStyles]);
+  const Children = React.useMemo(() => {
+    return React.Children.map(children, (child) => {
+      if (React.isValidElement(child)) {
+        return React.createElement(
+          child.type,
+          { ...child.props, className: childrenStyles },
+          child.props.children
+        );
+      }
+    });
+  }, [children, childrenStyles]);
 
-  const ChildrenWrapper = () => (
-    <div className={childrenWrapperStyles}>
-      <Childs />
-    </div>
+  const Form = (
+    <form
+      onSubmit={submitHandler}
+      className={formStyles}
+    >
+      {titleText && <Title />}
+
+      <div className={childrenWrapperStyles}>{Children}</div>
+
+      <Button />
+    </form>
   );
 
-  const Form = () => {
-    return (
-      <form
-        onSubmit={submitHandler}
-        className={formStyles}
-      >
-        {titleText && <Title />}
-        <ChildrenWrapper />
-        <Button />
-      </form>
-    );
-  };
-
-  return { Form };
+  return Form;
 };

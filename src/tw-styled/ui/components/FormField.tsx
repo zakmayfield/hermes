@@ -30,8 +30,7 @@ export const FormField = <T extends FieldValues>(props: FormFieldProps<T>) => {
   const { style, ...rest } = props;
 
   const classes = useStyleResolver({ ...defaultStyles(style) });
+  const FormField = useFormFieldUi({ classes, ...rest });
 
-  const { FormField } = useFormFieldUi({ classes, ...rest });
-
-  return <FormField />;
+  return FormField;
 };

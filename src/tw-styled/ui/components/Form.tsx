@@ -31,7 +31,7 @@ export const Form = (props: FormProps) => {
   const { style, ...rest } = props;
 
   const classes = useStyleResolver({ ...defaultStyles(style) });
-  const { Form } = useFormUi({ classes, ...rest });
+  const Form = useFormUi({ classes, ...rest });
 
-  return <Form />;
+  return Form;
 };

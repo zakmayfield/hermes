@@ -1,12 +1,5 @@
-import { Children } from "@/tw-styled/types";
 import { UseMutateFunction } from "@tanstack/react-query";
-import {
-  DefaultValues,
-  FieldValues,
-  FormProvider,
-  Resolver,
-  useForm
-} from "react-hook-form";
+import { DefaultValues, FieldValues, Resolver, useForm } from "react-hook-form";
 
 type UseFormCtxProps<FormData extends FieldValues, Response> = {
   defaultValues: DefaultValues<FormData>;
@@ -24,18 +17,11 @@ export const useFormCtx = <FormData extends FieldValues, Response>(
     resolver
   });
 
-  const Provider = ({ children }: { children?: Children }) => (
-    <div>
-      <FormProvider {...methods}>{children}</FormProvider>
-    </div>
-  );
-
   // evoke mutation
   const onSubmit = (data: FieldValues) => mutate?.(data as FormData);
   const submitHandler = methods.handleSubmit(onSubmit);
 
   return {
-    FormProvider: Provider,
     submitHandler,
     methods
   };

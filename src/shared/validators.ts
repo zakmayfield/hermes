@@ -17,7 +17,10 @@ export const validators = {
       test_2: z.string().min(1, { message: "test_2 is required" })
     });
 
-    return useValidator(validator);
+    return {
+      resolver: zodResolver(validator),
+      defaultValues: { test_1: "", test_2: "" } as z.infer<typeof validator>
+    };
   },
 
   getSignUpFormValidator: () => {
@@ -36,7 +39,7 @@ export const validators = {
 
   getSignInFormValidator: () => {
     const validator = z.object({
-      email: z.string().email(),
+      email: z.string().email({ message: "Email is required " }),
       password: z.string().min(1, { message: "Password is required" })
     });
 

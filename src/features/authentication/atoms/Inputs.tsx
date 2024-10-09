@@ -1,23 +1,30 @@
+"use client";
 import { validators } from "@/shared/validators";
 import { FormField } from "@/tw-styled/ui";
 import { useFormContext } from "react-hook-form";
 
 export const SignInInputs = () => {
   const { defaultValues } = validators.getSignInFormValidator();
-  const methods = useFormContext<typeof defaultValues>();
+
+  const {
+    register,
+    formState: { errors }
+  } = useFormContext<typeof defaultValues>();
 
   return (
     <div className="flex flex-col gap-4">
       <FormField
         name={"email"}
         labelText={"Email"}
-        errorMessage={methods.formState.errors.email?.message}
+        errorMessage={errors.email?.message}
+        register={register}
       />
       <FormField
         inputType={"password"}
         name={"password"}
         labelText={"Password"}
-        errorMessage={methods.formState.errors.password?.message}
+        errorMessage={errors.password?.message}
+        register={register}
       />
     </div>
   );

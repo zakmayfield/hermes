@@ -1,5 +1,5 @@
-import { PartialStyleProp } from "@/tw-styled/types";
+import { PartialStyleProps } from "@/tw-styled/types";
 
-export const isValidObject = <T extends PartialStyleProp>(obj: T, key: string) => {
+export const isValidObject = <T extends PartialStyleProps>(obj: T, key: string) => {
   return Object.keys(obj[key]).length !== 0;
 };

@@ -1,7 +1,7 @@
-import { PartialStyleProp } from "@/tw-styled/types";
+import { PartialStyleProps } from "@/tw-styled/types";
 import { TextProps } from "./Text";
 
-export const defaultStyles = (style?: PartialStyleProp) => {
+export const defaultStyles = (style?: PartialStyleProps) => {
   return {
     parentWrapper: {
       ...style?.parentWrapper

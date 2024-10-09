@@ -1,7 +1,7 @@
-import { PartialStyleProp } from "@/tw-styled/types";
+import { PartialStyleProps } from "@/tw-styled/types";
 import { PulseProps } from "./Pulse";
 
-export const defaultStyles = (style?: PartialStyleProp, theme?: PulseProps["theme"]) => {
+export const defaultStyles = (style?: PartialStyleProps, theme?: PulseProps["theme"]) => {
   const themes = {
     light: {
       parentTheme: "bg-slate-100",

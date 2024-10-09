@@ -1,5 +1,5 @@
 import { useStyleResolver } from "@/tw-styled/tools";
-import { DefaultStyleProps } from "@/tw-styled/types";
+import { BaseStyleProps } from "@/tw-styled/types";
 import { defaultStyles } from "./FieldError.defaultStyles";
 import { useFieldErrorUi } from "./FieldError.ui";
 
@@ -8,7 +8,7 @@ export type FieldErrorProps = {
   described_by?: string;
   error_hidden?: boolean;
   style?: {
-    parentWrapper?: DefaultStyleProps;
+    parentWrapper?: BaseStyleProps;
   };
 };
 

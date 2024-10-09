@@ -13,13 +13,8 @@ type StyleProps = IDimensions &
   IOther &
   IClassName;
 
-export type StylePropKeys = keyof StyleProps;
-export type ResolvedClasses = Record<string, string>;
-export type PartialStyleProp = Record<string, Partial<StyleProps>>;
-export type UiProps<T> = { classes: ResolvedClasses } & Omit<T, "style">;
-
 // Without IButton
-export type DefaultStyleProps = IDimensions &
+export type BaseStyleProps = IDimensions &
   ILayout &
   ISpace &
   IPadding &
@@ -30,6 +25,10 @@ export type DefaultStyleProps = IDimensions &
   IAnimations &
   IOther &
   IClassName;
+
+export type StylePropKeys = keyof StyleProps;
+export type PartialStyleProps = Record<string, Partial<StyleProps>>;
+export type UiProps<T> = { classes: Record<string, string> } & Omit<T, "style">;
 
 interface IDimensions {
   width?: Sizes | ExtendedSizes | Full | None;

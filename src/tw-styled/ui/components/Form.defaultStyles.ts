@@ -1,7 +1,7 @@
-import { PartialStyleProp } from "@/tw-styled/types";
+import { PartialStyleProps } from "@/tw-styled/types";
 import { FormProps } from "./Form";
 
-export const defaultStyles = (style?: PartialStyleProp) => {
+export const defaultStyles = (style?: PartialStyleProps) => {
   return {
     formStyles: {
       border: "sm",

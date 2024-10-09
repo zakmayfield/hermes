@@ -1,5 +1,5 @@
 import React from "react";
-import { Children, DefaultStyleProps, HeadingElements } from "@/tw-styled/types";
+import { Children, BaseStyleProps, HeadingElements } from "@/tw-styled/types";
 import { useStyleResolver } from "@/tw-styled/tools";
 import { defaultStyles } from "./Heading.defaultStyles";
 import { useHeadingUi } from "./Heading.ui";
@@ -9,9 +9,9 @@ export type HeadingProps = {
   as?: HeadingElements;
   text?: string;
   style?: {
-    parentWrapper?: DefaultStyleProps;
-    heading?: DefaultStyleProps;
-    childrenWrapper?: DefaultStyleProps;
+    parentWrapper?: BaseStyleProps;
+    heading?: BaseStyleProps;
+    childrenWrapper?: BaseStyleProps;
   };
 };
 

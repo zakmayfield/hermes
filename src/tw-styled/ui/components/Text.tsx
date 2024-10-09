@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Children, DefaultStyleProps, TextElements } from "@/tw-styled/types";
+import { Children, BaseStyleProps, TextElements } from "@/tw-styled/types";
 import { useStyleResolver } from "@/tw-styled/tools";
 import { defaultStyles } from "./Text.defaultStyles";
 import { useTextUi } from "./Text.ui";
@@ -11,7 +11,7 @@ export type TextProps = {
   described_by?: string;
   is_hidden?: boolean;
   style?: {
-    parentWrapper?: DefaultStyleProps;
+    parentWrapper?: BaseStyleProps;
   };
 };
 

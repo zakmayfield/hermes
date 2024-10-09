@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Children, DefaultStyleProps, IButton } from "@/tw-styled/types";
+import { Children, BaseStyleProps, IButton } from "@/tw-styled/types";
 import { useStyleResolver } from "@/tw-styled/tools";
 import { defaultStyles } from "./Form.defaultStyles";
 import { useFormUi } from "./Form.ui";
@@ -19,11 +19,11 @@ export type FormProps = {
     size?: IButton["buttonSize"];
   };
   style?: {
-    formStyles?: DefaultStyleProps;
-    titleStyles?: DefaultStyleProps;
-    childrenWrapperStyles?: DefaultStyleProps;
-    childrenStyles?: DefaultStyleProps;
-    buttonStyles?: DefaultStyleProps;
+    formStyles?: BaseStyleProps;
+    titleStyles?: BaseStyleProps;
+    childrenWrapperStyles?: BaseStyleProps;
+    childrenStyles?: BaseStyleProps;
+    buttonStyles?: BaseStyleProps;
   };
 };
 

@@ -1,5 +1,5 @@
 import { useStyleResolver } from "@/tw-styled/tools";
-import { DefaultStyleProps } from "@/tw-styled/types";
+import { BaseStyleProps } from "@/tw-styled/types";
 import { FieldValues, UseFormRegister } from "react-hook-form";
 import { defaultStyles } from "./FormField.defaultStyles";
 import { useFormFieldUi } from "./FormField.ui";
@@ -16,13 +16,13 @@ export type FormFieldProps<T extends FieldValues> = {
     error_icon_hidden?: boolean;
   };
   style?: {
-    parentWrapper?: DefaultStyleProps;
-    label?: DefaultStyleProps;
-    input?: DefaultStyleProps;
-    fieldError?: DefaultStyleProps;
-    labelInputWrapper?: DefaultStyleProps;
-    errorIcon?: DefaultStyleProps;
-    errorInputWrapper?: DefaultStyleProps;
+    parentWrapper?: BaseStyleProps;
+    label?: BaseStyleProps;
+    input?: BaseStyleProps;
+    fieldError?: BaseStyleProps;
+    labelInputWrapper?: BaseStyleProps;
+    errorIcon?: BaseStyleProps;
+    errorInputWrapper?: BaseStyleProps;
   };
 };
 

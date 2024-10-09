@@ -1,6 +1,6 @@
 "use client";
 import { IconType } from "react-icons";
-import { DefaultStyleProps, IButton } from "@/tw-styled/types";
+import { BaseStyleProps, IButton } from "@/tw-styled/types";
 import { useStyleResolver } from "@/tw-styled/tools";
 import { defaultStyles } from "./Btn.defaultStyles";
 import { useBtnUi } from "./Btn.ui";
@@ -22,10 +22,10 @@ export type BtnProps = {
     size?: IButton["buttonSize"];
   };
   style?: {
-    buttonStyles?: DefaultStyleProps;
-    contentWrapperStyles?: DefaultStyleProps;
-    textStyles?: DefaultStyleProps;
-    iconStyles?: DefaultStyleProps;
+    buttonStyles?: BaseStyleProps;
+    contentWrapperStyles?: BaseStyleProps;
+    textStyles?: BaseStyleProps;
+    iconStyles?: BaseStyleProps;
   };
 };
 

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Children, DefaultStyleProps, WrapperElements } from "@/tw-styled/types";
+import { Children, BaseStyleProps, WrapperElements } from "@/tw-styled/types";
 import { useStyleResolver } from "@/tw-styled/tools";
 import { defaultStyles } from "./Wrapper.defaultStyles";
 import { useWrapperUi } from "./Wrapper.ui";
@@ -9,9 +9,9 @@ export type WrapperProps = {
   children?: Children;
   as?: WrapperElements;
   style?: {
-    parentWrapper?: DefaultStyleProps;
-    childrenWrapper?: DefaultStyleProps;
-    children?: DefaultStyleProps;
+    parentWrapper?: BaseStyleProps;
+    childrenWrapper?: BaseStyleProps;
+    children?: BaseStyleProps;
   };
 };
 

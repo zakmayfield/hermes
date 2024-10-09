@@ -1,8 +1,8 @@
-import { PartialStyleProp } from "@/tw-styled/types";
+import { PartialStyleProps } from "@/tw-styled/types";
 import { BtnProps } from "./Btn";
 
 export const defaultStyles = (
-  style?: PartialStyleProp,
+  style?: PartialStyleProps,
   options?: BtnProps["options"]
 ) => {
   return {

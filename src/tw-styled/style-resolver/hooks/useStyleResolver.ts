@@ -1,6 +1,7 @@
 import { PartialStyleProp, StylePropKeys } from "@/tw-styled/types";
-import { isValidObject, useTypeNarrower } from "../utils";
+import { isValidObject } from "../utils";
 import { merge } from "@/tw-styled/tools";
+import { useTypeNarrower } from "./useTypeNarrower";
 
 export const useStyleResolver = (styleProp: PartialStyleProp) => {
   const result: Record<string, string> = {};

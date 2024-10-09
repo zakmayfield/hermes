@@ -38,7 +38,7 @@ export const useStyleMaps = () => {
 
       return value as string;
     },
-    []
+    [styleGroups]
   );
 
   return {

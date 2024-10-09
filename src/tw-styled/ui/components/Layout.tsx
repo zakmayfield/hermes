@@ -24,7 +24,7 @@ export const Layout = (props: LayoutProps) => {
   const { style, ...rest } = props;
 
   const classes = useStyleResolver({ ...defaultStyles(style) });
-  const { Layout } = useLayoutUi({ classes, ...rest });
+  const Layout = useLayoutUi({ classes, ...rest });
 
-  return <Layout />;
+  return Layout;
 };

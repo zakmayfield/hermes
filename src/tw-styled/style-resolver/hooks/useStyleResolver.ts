@@ -4,6 +4,7 @@ import { merge } from "@/tw-styled/tools";
 import { useTypeNarrower } from "./useTypeNarrower";
 
 export const useStyleResolver = (styleProp: PartialStyleProp) => {
+  const { handleTypeNarrow } = useTypeNarrower();
   const result: Record<string, string> = {};
 
   for (const stylePropKey in styleProp) {
@@ -13,7 +14,7 @@ export const useStyleResolver = (styleProp: PartialStyleProp) => {
           .map((key) => {
             const styleKey = key as StylePropKeys;
             const styleValue = styleProp[stylePropKey][styleKey] || "none";
-            return useTypeNarrower(styleKey, styleValue);
+            return handleTypeNarrow(styleKey, styleValue);
           })
           .join(" ")
       );

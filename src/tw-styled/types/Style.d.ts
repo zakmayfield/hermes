@@ -37,6 +37,8 @@ interface IDimensions {
   maxHeight?: Sizes | None;
 }
 
+export type DimensionKeys = keyof IDimensions;
+
 interface ILayout {
   border?: Sizes | None;
   rounded?: Sizes | "xl" | None;
@@ -45,11 +47,15 @@ interface ILayout {
   place?: Places | None;
 }
 
+export type LayoutKeys = keyof ILayout;
+
 interface ISpace {
   space?: Sizes;
   spaceY?: Sizes;
   spaceX?: Sizes;
 }
+
+export type SpaceKeys = keyof ISpace;
 
 interface IPadding {
   padding?: Sizes | Zero | None;
@@ -61,6 +67,8 @@ interface IPadding {
   paddingRight?: Sizes | Zero | None;
 }
 
+export type PaddingKeys = keyof IPadding;
+
 interface IMargin {
   margin?: Sizes | Zero | None;
   marginX?: Sizes | Zero | None;
@@ -71,6 +79,8 @@ interface IMargin {
   marginRight?: Sizes | Zero | None;
 }
 
+export type MarginKeys = keyof IMargin;
+
 interface IAlignment {
   flex?: FlexDirections | None;
   flexRowPosition?: FlexPositions | None;
@@ -80,6 +90,8 @@ interface IAlignment {
   flexSize?: FlexSize | None;
   gap?: Sizes | None;
 }
+
+export type AlignmentKeys = keyof IAlignment;
 
 interface ITypography {
   fontSize?: Sizes | None;
@@ -92,14 +104,20 @@ interface ITypography {
   letterSpacing?: LetterSpacing | None;
 }
 
+export type TypographyKeys = keyof ITypography;
+
 interface IBackground {
   bgColor?: BgColor | None;
   bgOpacity?: Opacities | None;
 }
 
-interface IAnimations {
-  animate?: Animations | None;
+export type BackgroundKeys = keyof IBackground;
+
+interface IAnimation {
+  animate?: Animation | None;
 }
+
+export type AnimationKeys = keyof IAnimation;
 
 // Used within the Style Resolver for button style maps
 export interface IButton {
@@ -109,10 +127,14 @@ export interface IButton {
   buttonVariant?: BtnVariants;
 }
 
+export type ButtonKeys = keyof IButton;
+
 interface IOther {
   opacity?: Opacities | None;
   cursor?: Cursors | None;
 }
+
+export type OtherKeys = keyof IOther;
 
 interface IClassName {
   className?: string;
@@ -146,7 +168,7 @@ type FlexWrap = "wrap" | "nowrap";
 type FontWeights = "light" | "normal" | "bold";
 type Places = "left" | "center" | "right";
 
-type Animations = "spin" | "pulse";
+type Animation = "spin" | "pulse";
 
 type FontWeight = "light" | "normal" | "bold";
 type TextColor = "disabled";

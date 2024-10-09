@@ -7,7 +7,7 @@ export const usePulseUi = (props: UiProps<PulseProps>) => {
 
   switch (size) {
     default:
-      return () => (
+      return (
         <div className={classes.parentWrapper}>
           <div className={classes.childrenWrapper}>
             <div className={classes.children} />
@@ -16,7 +16,7 @@ export const usePulseUi = (props: UiProps<PulseProps>) => {
         </div>
       );
     case "md":
-      return () => (
+      return (
         <div className={classes.parentWrapper}>
           <div className={classes.childrenWrapper}>
             <div className={merge("w-1/3 " + classes.children)} />
@@ -30,7 +30,7 @@ export const usePulseUi = (props: UiProps<PulseProps>) => {
         </div>
       );
     case "lg":
-      return () => (
+      return (
         <div className={classes.parentWrapper}>
           <div className={classes.childrenWrapper}>
             <div className={merge("w-1/3 " + classes.children + " p-6")} />

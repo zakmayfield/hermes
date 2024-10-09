@@ -1,27 +1,56 @@
-import { StylePropKeys } from "@/tw-styled/types";
+import {
+  AlignmentKeys,
+  AnimationKeys,
+  BackgroundKeys,
+  ButtonKeys,
+  DimensionKeys,
+  LayoutKeys,
+  MarginKeys,
+  OtherKeys,
+  PaddingKeys,
+  SpaceKeys,
+  StylePropKeys,
+  TypographyKeys
+} from "@/tw-styled/types";
+
+export enum StyleGroups {
+  DIMENSIONS = "dimensions",
+  LAYOUT = "layout",
+  SPACE = "space",
+  PADDING = "padding",
+  MARGIN = "margin",
+  ALIGNMENT = "alignment",
+  TYPOGRAPHY = "typography",
+  BACKGROUND = "background",
+  ANIMATION = "animation",
+  BUTTON = "button",
+  OTHER = "other"
+}
+
+export type StyleGroupKeys =
+  | StyleGroups.DIMENSIONS
+  | StyleGroups.LAYOUT
+  | StyleGroups.SPACE
+  | StyleGroups.PADDING
+  | StyleGroups.MARGIN
+  | StyleGroups.ALIGNMENT
+  | StyleGroups.TYPOGRAPHY
+  | StyleGroups.BACKGROUND
+  | StyleGroups.ANIMATION
+  | StyleGroups.BUTTON
+  | StyleGroups.OTHER;
+
+type StyleGroup<T extends StyleGroupKeys, K extends StylePropKeys> = Record<
+  T,
+  Record<K, Record<string, string>>
+>;
 
 const baseMap = {
   none: ""
 };
 
-export type MapGroupKeys =
-  | "dimensions"
-  | "layout"
-  | "space"
-  | "padding"
-  | "margin"
-  | "alignment"
-  | "typography"
-  | "background"
-  | "animations"
-  | "button"
-  | "other";
-
-export type StyleMap = Record<StylePropKeys, Record<string, string>>;
-
-type Map = Partial<Record<MapGroupKeys, Partial<StyleMap>>>;
-
-const dimensionsMap = {
+// DIMENSIONS
+const dimensionsGroup = {
   dimensions: {
     width: {
       ...baseMap,
@@ -48,9 +77,10 @@ const dimensionsMap = {
       lg: "max-h-[20rem]"
     }
   }
-};
+} satisfies StyleGroup<StyleGroups.DIMENSIONS, DimensionKeys>;
 
-const layoutMap = {
+// LAYOUT
+const layoutGroup = {
   layout: {
     border: {
       ...baseMap,
@@ -88,9 +118,10 @@ const layoutMap = {
       right: "ml-auto"
     }
   }
-} satisfies Map;
+} satisfies StyleGroup<StyleGroups.LAYOUT, LayoutKeys>;
 
-const spaceMap = {
+// SPACE
+const spaceGroup = {
   space: {
     spaceY: {
       ...baseMap,
@@ -111,9 +142,10 @@ const spaceMap = {
       lg: "space-y-6 space-x-6"
     }
   }
-};
+} satisfies StyleGroup<StyleGroups.SPACE, SpaceKeys>;
 
-const paddingMap = {
+// PADDING
+const paddingGroup = {
   padding: {
     padding: {
       ...baseMap,
@@ -171,9 +203,10 @@ const paddingMap = {
       lg: "pr-6"
     }
   }
-} satisfies Map;
+} satisfies StyleGroup<StyleGroups.PADDING, PaddingKeys>;
 
-const marginMap = {
+// MARGIN
+const marginGroup = {
   margin: {
     margin: {
       ...baseMap,
@@ -231,9 +264,10 @@ const marginMap = {
       lg: "mr-6"
     }
   }
-} satisfies Map;
+} satisfies StyleGroup<StyleGroups.MARGIN, MarginKeys>;
 
-const alignmentMap = {
+// ALIGNMENT
+const alignmentGroup = {
   alignment: {
     flex: {
       ...baseMap,
@@ -289,9 +323,10 @@ const alignmentMap = {
       "bottom-right": "items-end justify-end"
     }
   }
-} satisfies Map;
+} satisfies StyleGroup<StyleGroups.ALIGNMENT, AlignmentKeys>;
 
-const typographyMap = {
+// TYPOGRAPHY
+const typographyGroup = {
   typography: {
     fontSize: {
       ...baseMap,
@@ -341,9 +376,10 @@ const typographyMap = {
       wide: "tracking-wide"
     }
   }
-} satisfies Map;
+} satisfies StyleGroup<StyleGroups.TYPOGRAPHY, TypographyKeys>;
 
-const backgroundMap = {
+// BACKGROUND
+const backgroundGroup = {
   background: {
     bgColor: {
       ...baseMap,
@@ -367,19 +403,21 @@ const backgroundMap = {
       opaque: "bg-opacity-100"
     }
   }
-} satisfies Map;
+} satisfies StyleGroup<StyleGroups.BACKGROUND, BackgroundKeys>;
 
-const animationsMap = {
-  animations: {
+// ANIMATION
+const animationGroup = {
+  animation: {
     animate: {
       ...baseMap,
       spin: "animate-spin",
       pulse: "animate-pulse"
     }
   }
-} satisfies Map;
+} satisfies StyleGroup<StyleGroups.ANIMATION, AnimationKeys>;
 
-const buttonMap = {
+// BUTTON
+const buttonGroup = {
   button: {
     buttonSize: {
       ...baseMap,
@@ -407,9 +445,10 @@ const buttonMap = {
       warning: "btn-warning"
     }
   }
-} satisfies Map;
+} satisfies StyleGroup<StyleGroups.BUTTON, ButtonKeys>;
 
-const otherMap = {
+// OTHER
+const otherGroup = {
   other: {
     cursor: {
       ...baseMap,
@@ -424,18 +463,18 @@ const otherMap = {
       opaque: "opacity-100"
     }
   }
-} satisfies Map;
+} satisfies StyleGroup<StyleGroups.OTHER, OtherKeys>;
 
 export {
-  dimensionsMap,
-  layoutMap,
-  spaceMap,
-  paddingMap,
-  marginMap,
-  alignmentMap,
-  typographyMap,
-  backgroundMap,
-  animationsMap,
-  buttonMap,
-  otherMap
+  dimensionsGroup,
+  layoutGroup,
+  spaceGroup,
+  paddingGroup,
+  marginGroup,
+  alignmentGroup,
+  typographyGroup,
+  backgroundGroup,
+  animationGroup,
+  buttonGroup,
+  otherGroup
 };

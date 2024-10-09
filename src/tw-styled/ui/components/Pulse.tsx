@@ -19,7 +19,7 @@ export const Pulse = (props: PulseProps) => {
   const classes = useStyleResolver({ ...defaultStyles(style, theme) });
   const Pulse = usePulseUi({ classes, ...rest });
 
-  return <Pulse />;
+  return Pulse;
 };
 
 export const usePulse = (props: PulseProps) => {

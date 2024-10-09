@@ -1,183 +1,105 @@
+import { useCallback } from "react";
 import { useStyleMaps } from "./useStyleMaps";
 import { StylePropKeys } from "@/tw-styled/types";
+import { StyleGroups } from "../utils";
 
-export const useTypeNarrower = (styleKey: StylePropKeys, styleValue: string) => {
-  const { getStyleMapFromGroup } = useStyleMaps();
+export const useTypeNarrower = () => {
+  const { handleMapValue } = useStyleMaps();
 
-  let map;
+  const handleTypeNarrow = useCallback((styleKey: StylePropKeys, styleValue: string) => {
+    const payload = {
+      styleKey,
+      styleValue
+    };
 
-  switch (styleKey) {
-    // DIMENSIONS
-    case "width":
-      map = getStyleMapFromGroup("dimensions", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "height":
-      map = getStyleMapFromGroup("dimensions", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "maxHeight":
-      map = getStyleMapFromGroup("dimensions", styleKey);
-      return map[styleValue as keyof typeof map];
+    switch (styleKey) {
+      // DIMENSIONS
+      case "width":
+      case "height":
+      case "maxHeight":
+        return handleMapValue({ group: StyleGroups.DIMENSIONS, ...payload });
 
-    // LAYOUT
-    case "border":
-      map = getStyleMapFromGroup("layout", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "rounded":
-      map = getStyleMapFromGroup("layout", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "display":
-      map = getStyleMapFromGroup("layout", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "position":
-      map = getStyleMapFromGroup("layout", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "place":
-      map = getStyleMapFromGroup("layout", styleKey);
-      return map[styleValue as keyof typeof map];
+      // LAYOUT
+      case "border":
+      case "rounded":
+      case "display":
+      case "position":
+      case "place":
+        return handleMapValue({ group: StyleGroups.LAYOUT, ...payload });
 
-    // SPACE
-    case "space":
-      map = getStyleMapFromGroup("space", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "spaceX":
-      map = getStyleMapFromGroup("space", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "spaceY":
-      map = getStyleMapFromGroup("space", styleKey);
-      return map[styleValue as keyof typeof map];
+      // SPACE
+      case "space":
+      case "spaceX":
+      case "spaceY":
+        return handleMapValue({ group: StyleGroups.SPACE, ...payload });
 
-    // PADDING
-    case "padding":
-      map = getStyleMapFromGroup("padding", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "paddingX":
-      map = getStyleMapFromGroup("padding", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "paddingY":
-      map = getStyleMapFromGroup("padding", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "paddingTop":
-      map = getStyleMapFromGroup("padding", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "paddingBottom":
-      map = getStyleMapFromGroup("padding", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "paddingLeft":
-      map = getStyleMapFromGroup("padding", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "paddingRight":
-      map = getStyleMapFromGroup("padding", styleKey);
-      return map[styleValue as keyof typeof map];
+      // PADDING
+      case "padding":
+      case "paddingX":
+      case "paddingY":
+      case "paddingTop":
+      case "paddingBottom":
+      case "paddingLeft":
+      case "paddingRight":
+        return handleMapValue({ group: StyleGroups.PADDING, ...payload });
 
-    // MARGIN
-    case "margin":
-      map = getStyleMapFromGroup("margin", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "marginX":
-      map = getStyleMapFromGroup("margin", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "marginY":
-      map = getStyleMapFromGroup("margin", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "marginTop":
-      map = getStyleMapFromGroup("margin", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "marginBottom":
-      map = getStyleMapFromGroup("margin", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "marginLeft":
-      map = getStyleMapFromGroup("margin", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "marginRight":
-      map = getStyleMapFromGroup("margin", styleKey);
-      return map[styleValue as keyof typeof map];
+      // MARGIN
+      case "margin":
+      case "marginX":
+      case "marginY":
+      case "marginTop":
+      case "marginBottom":
+      case "marginLeft":
+      case "marginRight":
+        return handleMapValue({ group: StyleGroups.MARGIN, ...payload });
 
-    // ALIGNMENT
-    case "flex":
-      map = getStyleMapFromGroup("alignment", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "flexSpacing":
-      map = getStyleMapFromGroup("alignment", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "flexWrap":
-      map = getStyleMapFromGroup("alignment", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "flexSize":
-      map = getStyleMapFromGroup("alignment", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "gap":
-      map = getStyleMapFromGroup("alignment", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "flexRowPosition":
-      map = getStyleMapFromGroup("alignment", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "flexColPosition":
-      map = getStyleMapFromGroup("alignment", styleKey);
-      return map[styleValue as keyof typeof map];
+      // ALIGNMENT
+      case "flex":
+      case "flexSpacing":
+      case "flexWrap":
+      case "flexSize":
+      case "gap":
+      case "flexRowPosition":
+      case "flexColPosition":
+        return handleMapValue({ group: StyleGroups.ALIGNMENT, ...payload });
 
-    // TYPOGRAPHY
-    case "fontSize":
-      map = getStyleMapFromGroup("typography", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "fontWeight":
-      map = getStyleMapFromGroup("typography", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "textColor":
-      map = getStyleMapFromGroup("typography", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "textOpacity":
-      map = getStyleMapFromGroup("typography", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "textDecoration":
-      map = getStyleMapFromGroup("typography", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "textAlign":
-      map = getStyleMapFromGroup("typography", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "lineHeight":
-      map = getStyleMapFromGroup("typography", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "letterSpacing":
-      map = getStyleMapFromGroup("typography", styleKey);
-      return map[styleValue as keyof typeof map];
+      // TYPOGRAPHY
+      case "fontSize":
+      case "fontWeight":
+      case "textColor":
+      case "textOpacity":
+      case "textDecoration":
+      case "textAlign":
+      case "lineHeight":
+      case "letterSpacing":
+        return handleMapValue({ group: StyleGroups.TYPOGRAPHY, ...payload });
 
-    // ANIMATIONS
-    case "animate":
-      map = getStyleMapFromGroup("animations", styleKey);
-      return map[styleValue as keyof typeof map];
+      // ANIMATION
+      case "animate":
+        return handleMapValue({ group: StyleGroups.ANIMATION, ...payload });
 
-    // BUTTON
-    case "buttonSize":
-      map = getStyleMapFromGroup("button", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "buttonWidth":
-      map = getStyleMapFromGroup("button", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "buttonHeight":
-      map = getStyleMapFromGroup("button", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "buttonVariant":
-      map = getStyleMapFromGroup("button", styleKey);
-      return map[styleValue as keyof typeof map];
+      // BUTTON
+      case "buttonSize":
+      case "buttonWidth":
+      case "buttonHeight":
+      case "buttonVariant":
+        return handleMapValue({ group: StyleGroups.BUTTON, ...payload });
 
-    // BACKGROUND
-    case "bgColor":
-      map = getStyleMapFromGroup("background", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "bgOpacity":
-      map = getStyleMapFromGroup("background", styleKey);
-      return map[styleValue as keyof typeof map];
+      // BACKGROUND
+      case "bgColor":
+      case "bgOpacity":
+        return handleMapValue({ group: StyleGroups.BACKGROUND, ...payload });
 
-    // OTHER
-    case "cursor":
-      map = getStyleMapFromGroup("other", styleKey);
-      return map[styleValue as keyof typeof map];
-    case "opacity":
-      map = getStyleMapFromGroup("other", styleKey);
-      return map[styleValue as keyof typeof map];
+      // OTHER
+      case "cursor":
+      case "opacity":
+        return handleMapValue({ group: StyleGroups.OTHER, ...payload });
 
-    // CLASSNAME
-    case "className":
-      return styleValue === "none" ? "" : styleValue;
-  }
+      // CLASSNAME
+      case "className":
+        return styleValue === "none" ? "" : styleValue;
+    }
+  }, []);
+
+  return { handleTypeNarrow };
 };

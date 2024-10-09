@@ -1,4 +1,4 @@
-import { SignUpForm } from "@/features/authentication/atoms";
+import { SignUpForm } from "@/features/authentication/molecules";
 
 export default function SignUp() {
   return (

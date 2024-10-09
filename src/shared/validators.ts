@@ -23,23 +23,9 @@ export const validators = {
     };
   },
 
-  getSignUpFormValidator: () => {
+  authValidator: () => {
     const validator = z.object({
       email: z.string().email(),
-      password: z.string().min(1, { message: "Password is required" })
-    });
-
-    const { defaultValues, resolver } = useValidator(validator);
-
-    return {
-      defaultValues,
-      resolver
-    };
-  },
-
-  getSignInFormValidator: () => {
-    const validator = z.object({
-      email: z.string().email({ message: "Email is required " }),
       password: z.string().min(1, { message: "Password is required" })
     });
 

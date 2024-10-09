@@ -3,8 +3,8 @@ import { validators } from "@/shared/validators";
 import { FormField } from "@/tw-styled/ui";
 import { useFormContext } from "react-hook-form";
 
-export const SignInInputs = () => {
-  const { defaultValues } = validators.getSignInFormValidator();
+export const AuthInputs = () => {
+  const { defaultValues } = validators.authValidator();
 
   const {
     register,

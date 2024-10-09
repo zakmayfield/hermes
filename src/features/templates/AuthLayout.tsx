@@ -1,6 +1,7 @@
 "use client";
 
-import { Logo, SwitchForm } from "@/features/authentication/atoms";
+import { Logo } from "@/features/authentication/atoms";
+import { SwitchForm } from "@/features/authentication/molecules";
 
 type AuthenticationLayoutTemplateProps = {
   children: React.ReactNode;

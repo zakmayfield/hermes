@@ -34,41 +34,26 @@ export const formHooks = {
   },
 
   useSignUpForm: () => {
-    const { resolver, defaultValues } = validators.getSignUpFormValidator();
-    type SignUpFormData = typeof defaultValues;
-    type SignUpFormResponse = SignInResponse | undefined;
+    const formMeta = validators.authValidator();
 
-    const { mutate, isPending } = customHooks.useCustomMutation<
-      SignUpFormResponse,
-      SignUpFormData
-    >({
-      mutationFn: async (data) => await signIn("sign-up", { ...data }),
-      handleError(error) {
-        console.log(error.message);
-      }
+    type FormData = typeof formMeta.defaultValues;
+    type Response = SignInResponse | undefined;
+
+    const signUpMutation = async (data: FormData) => await signIn("sign-up", data);
+    const { mutate } = customHooks.useCustomMutation({
+      mutationFn: signUpMutation
     });
 
-    const {
-      register,
-      onSubmit,
-      formState: { errors }
-    } = customHooks.useCustomForm<SignUpFormResponse, SignUpFormData>({
-      defaultValues,
-      resolver,
-      mutate
-    });
-
-    return { register, onSubmit, formErrors: errors, isPending };
+    return useFormCtx<FormData, Response>({ ...formMeta, mutate });
   },
 
   useSignInForm: () => {
-    const formMeta = validators.getSignInFormValidator();
+    const formMeta = validators.authValidator();
 
     type FormData = typeof formMeta.defaultValues;
     type Response = SignInResponse | undefined;
 
     const signInMutation = async (data: FormData) => await signIn("sign-in", data);
-
     const { mutate } = customHooks.useCustomMutation({
       mutationFn: signInMutation
     });

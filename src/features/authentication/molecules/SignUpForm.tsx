@@ -1,23 +1,23 @@
 "use client";
-import { Form } from "@/tw-styled/ui";
 import { formHooks } from "@/shared/hooks";
+import { Form } from "@/tw-styled/ui";
 import { FormProvider } from "react-hook-form";
-import { SignInInputs } from "./Inputs";
+import { AuthInputs } from "../atoms";
 
-export const SignInForm = () => {
-  const { submitHandler, methods } = formHooks.useSignInForm();
+export const SignUpForm = () => {
+  const { methods, submitHandler } = formHooks.useSignUpForm();
 
   return (
-    <div className="demo-col">
+    <div>
       <FormProvider {...methods}>
         <Form
-          titleText="Sign In"
+          titleText="Sign Up"
           submitHandler={submitHandler}
           style={{
             formStyles: { place: "center" }
           }}
         >
-          <SignInInputs />
+          <AuthInputs />
         </Form>
       </FormProvider>
     </div>

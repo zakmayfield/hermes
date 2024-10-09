@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
-const useValidator = <T extends z.ZodTypeAny>(validator: T) => {
+const handleValidator = <T extends z.ZodTypeAny>(validator: T) => {
   type DefaultValues = z.infer<T>;
 
   return {
@@ -29,7 +29,7 @@ export const validators = {
       password: z.string().min(1, { message: "Password is required" })
     });
 
-    const { defaultValues, resolver } = useValidator(validator);
+    const { defaultValues, resolver } = handleValidator(validator);
 
     return {
       defaultValues,

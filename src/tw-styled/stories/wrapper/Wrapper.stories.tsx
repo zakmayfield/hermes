@@ -23,10 +23,10 @@ const meta = {
       options: ["a"],
       mapping: {
         a: [
-          <div>
+          <div key={0}>
             content 1 <div>sub content 1 abcdefg</div>
           </div>,
-          <div>
+          <div key={1}>
             content 2 <div>sub content 2 hijklmnop</div>
           </div>
         ]

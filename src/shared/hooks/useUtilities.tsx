@@ -6,18 +6,6 @@ import { ITooltip, TooltipRefProps, Tooltip } from "react-tooltip";
 type ToastVariants = "success" | "error" | "warn" | "info";
 type TooltipProps = ITooltip & RefAttributes<TooltipRefProps>;
 
-type AccordionProps = {
-  data: AccordionItem[];
-};
-type AccordionItem = {
-  id: string;
-  title: string;
-  body: {
-    id: string;
-    child: React.ReactNode;
-  }[];
-};
-
 export const utilityHooks = {
   useToast: () => {
     const notify = (message: string, variant?: ToastVariants) => {

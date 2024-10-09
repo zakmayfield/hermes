@@ -1,5 +1,5 @@
 import { PartialStyleProp, StylePropKeys } from "@/tw-styled/types";
-import { isValidObject, typeNarrowHandler } from "../utils";
+import { isValidObject, useTypeNarrower } from "../utils";
 import { merge } from "@/tw-styled/tools";
 
 export const useStyleResolver = (styleProp: PartialStyleProp) => {
@@ -12,7 +12,7 @@ export const useStyleResolver = (styleProp: PartialStyleProp) => {
           .map((key) => {
             const styleKey = key as StylePropKeys;
             const styleValue = styleProp[stylePropKey][styleKey] || "none";
-            return typeNarrowHandler(styleKey, styleValue);
+            return useTypeNarrower(styleKey, styleValue);
           })
           .join(" ")
       );

@@ -16,9 +16,13 @@ const meta = {
     children: {
       options: ["a", "b", "c"],
       mapping: {
-        a: [<div>Content 1</div>],
-        b: [<div>Content 1</div>, <div>Content 2</div>],
-        c: [<div>Content 1</div>, <div>Content 2</div>, <div>Content 3</div>]
+        a: [<div key={0}>Content 1</div>],
+        b: [<div key={0}>Content 1</div>, <div key={1}>Content 2</div>],
+        c: [
+          <div key={0}>Content 1</div>,
+          <div key={1}>Content 2</div>,
+          <div key={2}>Content 3</div>
+        ]
       }
     },
     style: {

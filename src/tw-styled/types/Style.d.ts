@@ -1,5 +1,4 @@
-import { LoaderStyleProps } from "./Style.d";
-import { BtnVariants, ExtendedBtnVariants } from "./Theming";
+import { BtnVariants } from "./Theming";
 
 type StyleProps = IDimensions &
   ILayout &

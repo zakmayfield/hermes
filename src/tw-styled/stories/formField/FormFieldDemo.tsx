@@ -19,6 +19,7 @@ export const FormFieldDemo = (props: FormFieldDemoProps) => {
     <div className="demo space-y-6 max-w-sm">
       {fieldKeys.map((key) => (
         <FormField
+          key={key}
           name={key}
           labelText={key}
           errorMessage={meta[key as keyof typeof meta].errorMessage}

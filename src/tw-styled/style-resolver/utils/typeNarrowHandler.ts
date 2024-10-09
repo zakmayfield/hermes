@@ -1,7 +1,7 @@
 import { useStyleMaps } from "../hooks/useStyleMaps";
 import { StylePropKeys } from "@/tw-styled/types";
 
-export const typeNarrowHandler = (styleKey: StylePropKeys, styleValue: string) => {
+export const useTypeNarrower = (styleKey: StylePropKeys, styleValue: string) => {
   const { getStyleMapFromGroup } = useStyleMaps();
 
   let map;

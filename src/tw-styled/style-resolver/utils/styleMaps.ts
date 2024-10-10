@@ -384,16 +384,9 @@ const backgroundGroup = {
     bgColor: {
       ...baseMap,
       primary: "bg-primary",
-      "primary-shimmer": "bg-primary-shimmer",
-
       secondary: "bg-secondary",
-      "secondary-shimmer": "bg-secondary-shimmer",
-
       tertiary: "bg-tertiary",
-      "tertiary-shimmer": "bg-tertiary-shimmer",
-
-      accent: "bg-accent",
-      "accent-shimmer": "bg-accent-shimmer"
+      accent: "bg-accent"
     },
     bgOpacity: {
       ...baseMap,

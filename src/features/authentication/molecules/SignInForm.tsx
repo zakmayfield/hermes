@@ -8,7 +8,7 @@ export const SignInForm = () => {
   const { submitHandler, methods } = formHooks.useSignInForm();
 
   return (
-    <div>
+    <div className="">
       <FormProvider {...methods}>
         <Form
           titleText="Sign In"

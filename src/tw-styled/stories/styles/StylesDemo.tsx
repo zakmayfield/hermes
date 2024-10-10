@@ -10,7 +10,7 @@ export const StylesDemo = () => {
 
       <div className="demo-row">
         <button
-          className="max-w-xs w-full"
+          className="max-w-xs"
           onClick={() => setIsDisabled(!isDisabled)}
         >
           {isDisabled ? "Enable" : "Disable"}

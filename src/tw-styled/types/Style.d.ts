@@ -178,14 +178,6 @@ type LetterSpacing = "tight" | "normal" | "wide";
 
 type Opacities = "light" | "medium" | "dark" | "opaque";
 
-type BgColor =
-  | "primary"
-  | "primary-shimmer"
-  | "secondary"
-  | "secondary-shimmer"
-  | "tertiary"
-  | "tertiary-shimmer"
-  | "accent"
-  | "accent-shimmer";
+type BgColor = "primary" | "secondary" | "tertiary" | "accent";
 
 type Cursors = "pointer" | "not-allowed";

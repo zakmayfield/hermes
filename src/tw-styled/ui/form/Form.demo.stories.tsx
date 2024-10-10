@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { FormDemo } from "./FormDemo";
+import { FormDemo } from "./Form.demo";
 
 const meta = {
   title: "Form",

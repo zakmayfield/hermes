@@ -8,7 +8,7 @@ type StyleProps = IDimensions &
   IAlignment &
   ITypography &
   IBackground &
-  IAnimations &
+  IAnimation &
   IButton &
   IOther &
   IClassName;
@@ -22,7 +22,7 @@ export type BaseStyleProps = IDimensions &
   IAlignment &
   ITypography &
   IBackground &
-  IAnimations &
+  IAnimation &
   IOther &
   IClassName;
 

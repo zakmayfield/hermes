@@ -1,6 +1,6 @@
 import React from "react";
-import { ThemeCtx } from "./theme";
 import { Children } from "../types";
+import { ThemeCtx } from "./themeCtx";
 
 export const ThemeContext = React.createContext<ThemeCtx | null>(null);
 

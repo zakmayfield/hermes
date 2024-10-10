@@ -6,7 +6,7 @@ export const StylesDemo = () => {
 
   return (
     <div className="demo-col">
-      <div className="demo bg-primary hover:element-hovered" />
+      <div className="demo tex" />
 
       <div className="demo-row">
         <button

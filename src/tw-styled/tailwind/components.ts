@@ -1,5 +1,5 @@
 import { TwPluginRules } from "./config";
-import { useRgb } from "./utils";
+import { useRgb } from "./useRgb";
 
 const demo: TwPluginRules = {
   ".demo": {

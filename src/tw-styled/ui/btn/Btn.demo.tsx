@@ -1,4 +1,4 @@
-import { Btn } from "@/tw-styled/ui";
+import { Btn } from "./Btn";
 
 export const BtnDemo = () => {
   return (

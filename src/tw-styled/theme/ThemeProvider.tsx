@@ -1,8 +1,8 @@
 import React from "react";
 import { Children } from "../types";
-import { ThemeCtx } from "./themeCtx";
+import { themeCtx, ThemeCtx } from "./themeCtx";
 
-export const ThemeContext = React.createContext<ThemeCtx | null>(null);
+export const ThemeContext = React.createContext<ThemeCtx>(themeCtx);
 
 export const ThemeProvider = ({
   theme,

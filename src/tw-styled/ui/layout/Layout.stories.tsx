@@ -1,4 +1,4 @@
-import { Layout } from "@/tw-styled/ui";
+import { Layout } from "./Layout";
 import { Meta, StoryObj } from "@storybook/react";
 
 const meta = {

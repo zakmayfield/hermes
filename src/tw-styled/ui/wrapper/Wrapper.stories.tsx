@@ -1,4 +1,4 @@
-import { Wrapper } from "@/tw-styled/ui";
+import { Wrapper } from "./Wrapper";
 import { Meta, StoryObj } from "@storybook/react";
 
 const meta = {

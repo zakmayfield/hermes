@@ -1,4 +1,4 @@
-import { Heading } from "@/tw-styled/ui";
+import { Heading } from "./Heading";
 
 export const HeadingDemo = () => {
   return (

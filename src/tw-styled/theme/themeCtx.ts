@@ -1,10 +1,6 @@
-enum ThemeBuckets {
-  COLORS = "colors"
-}
+type ThemeBuckets = "colors";
 
-type ThemeBucketKeys = ThemeBuckets.COLORS;
-
-type ThemeCtx = Record<ThemeBucketKeys, Record<string, string>>;
+type ThemeCtx = Record<ThemeBuckets, Record<string, string>>;
 
 const themeCtx = {
   colors: {
@@ -18,4 +14,4 @@ const themeCtx = {
 } satisfies ThemeCtx;
 
 export { themeCtx };
-export type { ThemeBucketKeys, ThemeCtx };
+export type { ThemeBuckets, ThemeCtx };

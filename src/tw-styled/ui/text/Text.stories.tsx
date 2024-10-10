@@ -1,4 +1,4 @@
-import { Text } from "@/tw-styled/ui";
+import { Text } from "./Text";
 import { Meta, StoryObj } from "@storybook/react";
 
 const meta = {

@@ -1,6 +1,6 @@
 import { PartialStyleProps, StylePropKeys } from "@/tw-styled/types";
 import { isValidObject } from "../utils";
-import { merge } from "@/tw-styled/tools";
+import { mergeClasses } from "@/tw-styled/tools";
 import { useTypeNarrower } from "./useTypeNarrower";
 
 export const useStyleResolver = (styleProp: PartialStyleProps) => {
@@ -9,7 +9,7 @@ export const useStyleResolver = (styleProp: PartialStyleProps) => {
 
   for (const stylePropKey in styleProp) {
     if (isValidObject(styleProp, stylePropKey)) {
-      result[stylePropKey] = merge(
+      result[stylePropKey] = mergeClasses(
         Object.keys(styleProp[stylePropKey])
           .map((key) => {
             const styleKey = key as StylePropKeys;

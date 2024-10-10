@@ -6,8 +6,6 @@ export const StylesDemo = () => {
 
   return (
     <div className="demo-col">
-      <div className="demo tex" />
-
       <div className="demo-row">
         <button
           className="max-w-xs"

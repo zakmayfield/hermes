@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { Pulse } from "@/tw-styled/ui";
+import { Pulse } from "./Pulse";
 
 const meta = {
   title: "Loaders/Pulse",

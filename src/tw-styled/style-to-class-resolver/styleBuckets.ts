@@ -103,6 +103,27 @@ export const spaceYBucket = {
 } satisfies BucketType<SpacingKeys, SpaceYBucketValues>;
 
 /*
+  --- GAP
+*/
+enum GapBucketValues {
+  none = "",
+  sm = `gap-[var(--space-sm)]`,
+  md = `gap-[var(--space-md)]`,
+  lg = `gap-[var(--space-lg)]`,
+  xl = `gap-[var(--space-xl)]`,
+  "2xl" = `gap-[var(--space-2xl)]`
+}
+
+export const gapBucket = {
+  none: GapBucketValues.none,
+  sm: GapBucketValues.sm,
+  md: GapBucketValues.md,
+  lg: GapBucketValues.lg,
+  xl: GapBucketValues.xl,
+  "2xl": GapBucketValues["2xl"]
+} satisfies BucketType<SpacingKeys, GapBucketValues>;
+
+/*
   --- PADDING
 */
 enum PaddingBucketValues {
@@ -333,3 +354,105 @@ export const maxHeightBucket = {
   xl: MaxHeightBucketValues.xl,
   full: MaxHeightBucketValues.full
 } satisfies BucketType<SizeKeys, MaxHeightBucketValues>;
+
+/*
+  --- DISPLAY
+*/
+
+enum DisplayBucketValues {
+  none = "",
+  block = `block`,
+  inline = `inline`,
+  "inline-block" = `inline-block`,
+  "inline-flex" = `inline-flex`,
+  "hidden" = `hidden`,
+  "flex-row" = "flex flex-row",
+  "flex-col" = "flex flex-col"
+}
+
+export const displayBucket = {
+  none: DisplayBucketValues.none,
+  block: DisplayBucketValues.block,
+  inline: DisplayBucketValues.inline,
+  "inline-block": DisplayBucketValues["inline-block"],
+  "inline-flex": DisplayBucketValues["inline-flex"],
+  hidden: DisplayBucketValues.hidden,
+  "flex-row": DisplayBucketValues["flex-row"],
+  "flex-col": DisplayBucketValues["flex-col"]
+} satisfies BucketType<string, DisplayBucketValues>;
+
+export type DisplayKeys = keyof typeof displayBucket;
+
+/*
+  --- FLEX
+*/
+
+export type FlexPositionKeys =
+  | "none"
+  | "top-left"
+  | "center-left"
+  | "bottom-left"
+  | "top-center"
+  | "center-center"
+  | "bottom-center"
+  | "top-right"
+  | "center-right"
+  | "bottom-right";
+
+enum FlexRowPositionBucketValues {
+  none = "none",
+  "top-left" = "items-start",
+  "center-left" = "items-center justify-start",
+  "bottom-left" = "items-end",
+  "top-center" = "items-start justify-center",
+  "center-center" = "items-center justify-center",
+  "bottom-center" = "items-end justify-center",
+  "top-right" = "items-start justify-end",
+  "center-right" = "items-center justify-end",
+  "bottom-right" = "items-end justify-end"
+}
+
+export const FlexRowPositionBucket = {
+  none: FlexRowPositionBucketValues.none,
+
+  "top-left": FlexRowPositionBucketValues["top-left"],
+  "top-center": FlexRowPositionBucketValues["top-center"],
+  "top-right": FlexRowPositionBucketValues["top-right"],
+
+  "center-left": FlexRowPositionBucketValues["center-left"],
+  "center-center": FlexRowPositionBucketValues["center-center"],
+  "center-right": FlexRowPositionBucketValues["center-right"],
+
+  "bottom-left": FlexRowPositionBucketValues["bottom-left"],
+  "bottom-center": FlexRowPositionBucketValues["bottom-center"],
+  "bottom-right": FlexRowPositionBucketValues["bottom-right"]
+} satisfies BucketType<FlexPositionKeys, FlexRowPositionBucketValues>;
+
+enum FlexColPositionBucketValues {
+  none = "none",
+  "top-left" = "justify-start",
+  "center-left" = "justify-center",
+  "bottom-left" = "justify-end",
+  "top-center" = "items-center justify-start",
+  "center-center" = "items-center justify-center",
+  "bottom-center" = "items-center justify-end",
+  "top-right" = "items-end justify-start",
+  "center-right" = "items-end justify-end",
+  "bottom-right" = "items-end justify-end"
+}
+
+export const FlexColPositionBucket = {
+  none: FlexColPositionBucketValues.none,
+
+  "top-left": FlexColPositionBucketValues["top-left"],
+  "top-center": FlexColPositionBucketValues["top-center"],
+  "top-right": FlexColPositionBucketValues["top-right"],
+
+  "center-left": FlexColPositionBucketValues["center-left"],
+  "center-center": FlexColPositionBucketValues["center-center"],
+  "center-right": FlexColPositionBucketValues["center-right"],
+
+  "bottom-left": FlexColPositionBucketValues["bottom-left"],
+  "bottom-center": FlexColPositionBucketValues["bottom-center"],
+  "bottom-right": FlexColPositionBucketValues["bottom-right"]
+} satisfies BucketType<FlexPositionKeys, FlexColPositionBucketValues>;

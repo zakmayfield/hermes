@@ -7,7 +7,7 @@ export const StylesDemo = () => {
   const theme = useThemeCtx();
 
   const result = styleToClass({
-    foobar: {}
+    foobar: { display: "flex-row", gap: "lg" }
   });
 
   console.log({ result });

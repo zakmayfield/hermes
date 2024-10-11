@@ -1,8 +1,14 @@
 import {
   backgroundColorBucket,
   type ColorKeys,
+  displayBucket,
+  type DisplayKeys,
+  FlexColPositionBucket,
+  type FlexPositionKeys,
+  FlexRowPositionBucket,
   fontSizeBucket,
   type FontSizeKeys,
+  gapBucket,
   heightBucket,
   marginBucket,
   marginXBucket,
@@ -29,6 +35,7 @@ type Styles = {
   marginY: SpacingKeys;
   spaceX: SpacingKeys;
   spaceY: SpacingKeys;
+  gap: SpacingKeys;
 
   width: SizeKeys;
   maxWidth: SizeKeys;
@@ -38,6 +45,11 @@ type Styles = {
   backgroundColor: ColorKeys;
   textColor: ColorKeys;
   fontSize: FontSizeKeys;
+
+  display: DisplayKeys;
+
+  flexRowPosition: FlexPositionKeys;
+  flexColPosition: FlexPositionKeys;
 };
 
 type PartialStyleProps = Partial<Styles>;
@@ -74,6 +86,9 @@ export const styleToClass = (props: StyleToClassProps) => {
           case "spaceY":
             return spaceYBucket[styleValue as SpacingKeys];
 
+          case "gap":
+            return gapBucket[styleValue as SpacingKeys];
+
           case "width":
             return widthBucket[styleValue as SizeKeys];
           case "maxWidth":
@@ -91,6 +106,14 @@ export const styleToClass = (props: StyleToClassProps) => {
 
           case "fontSize":
             return fontSizeBucket[styleValue as FontSizeKeys];
+
+          case "display":
+            return displayBucket[styleValue as DisplayKeys];
+
+          case "flexRowPosition":
+            return FlexRowPositionBucket[styleValue as FlexPositionKeys];
+          case "flexColPosition":
+            return FlexColPositionBucket[styleValue as FlexPositionKeys];
         }
       })
       .join(" ");

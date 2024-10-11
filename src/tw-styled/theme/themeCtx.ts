@@ -1,15 +1,36 @@
 type ThemeBuckets = "colors";
 
-type ThemeCtx = Record<ThemeBuckets, Record<string, string>>;
+type ColorBucketKeys =
+  | "background"
+  | "foreground"
+  | "primary"
+  | "secondary"
+  | "tertiary"
+  | "accent";
+
+enum ColorBucketValues {
+  background = "--background",
+  foreground = "--foreground",
+  primary = "--primary",
+  secondary = "--secondary",
+  tertiary = "--tertiary",
+  accent = "--accent"
+}
+
+type ThemeCtx = Record<ThemeBuckets, Record<ColorBucketKeys, ColorBucketValues>>;
+
+const useVar = (str: string) => {
+  return `var(${str})` as ColorBucketValues;
+};
 
 const themeCtx = {
   colors: {
-    background: "--background-color",
-    foreground: "--foreground-color",
-    primary: "--primary-color",
-    secondary: "--secondary-color",
-    tertiary: "--tertiary-color",
-    accent: "--accent-color"
+    background: useVar(ColorBucketValues.background),
+    foreground: useVar(ColorBucketValues.foreground),
+    primary: useVar(ColorBucketValues.primary),
+    secondary: useVar(ColorBucketValues.secondary),
+    tertiary: useVar(ColorBucketValues.tertiary),
+    accent: useVar(ColorBucketValues.accent)
   }
 } satisfies ThemeCtx;
 

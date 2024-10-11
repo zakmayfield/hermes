@@ -88,7 +88,6 @@ export const useTypeNarrower = () => {
 
         // BACKGROUND
         case "bgColor":
-        case "bgOpacity":
           return handleMapValue({ group: StyleGroups.BACKGROUND, ...payload });
 
         // OTHER

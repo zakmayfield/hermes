@@ -107,7 +107,6 @@ export type TypographyKeys = keyof ITypography;
 
 interface IBackground {
   bgColor?: BgColor | None;
-  bgOpacity?: Opacities | None;
 }
 
 export type BackgroundKeys = keyof IBackground;
@@ -164,7 +163,6 @@ type FlexPositions =
 type FlexSpacing = "space-between" | "space-evenly" | "space-around";
 type FlexSize = "grow" | "shrink" | "nogrow" | "noshrink";
 type FlexWrap = "wrap" | "nowrap";
-type FontWeights = "light" | "normal" | "bold";
 type Places = "left" | "center" | "right";
 
 type Animation = "spin" | "pulse";
@@ -178,6 +176,6 @@ type LetterSpacing = "tight" | "normal" | "wide";
 
 type Opacities = "light" | "medium" | "dark" | "opaque";
 
-type BgColor = "primary" | "secondary" | "tertiary" | "accent";
+type BgColor = "background" | "primary" | "secondary" | "tertiary" | "accent";
 
 type Cursors = "pointer" | "not-allowed";

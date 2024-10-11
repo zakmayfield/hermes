@@ -13,12 +13,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: useRgb(themeCtx.colors.background),
-        foreground: useRgb(themeCtx.colors.foreground),
-        primary: useRgb(themeCtx.colors.primary),
-        secondary: useRgb(themeCtx.colors.secondary),
-        tertiary: useRgb(themeCtx.colors.tertiary),
-        accent: useRgb(themeCtx.colors.accent)
+        background: themeCtx.colors.background,
+        foreground: themeCtx.colors.foreground,
+        primary: themeCtx.colors.primary,
+        secondary: themeCtx.colors.secondary,
+        tertiary: themeCtx.colors.tertiary,
+        accent: themeCtx.colors.accent
       }
     }
   },

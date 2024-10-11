@@ -383,17 +383,11 @@ const backgroundGroup = {
   background: {
     bgColor: {
       ...baseMap,
+      background: "bg-background",
       primary: "bg-primary",
       secondary: "bg-secondary",
       tertiary: "bg-tertiary",
       accent: "bg-accent"
-    },
-    bgOpacity: {
-      ...baseMap,
-      light: "bg-opacity-30",
-      medium: "bg-opacity-60",
-      dark: "bg-opacity-90",
-      opaque: "bg-opacity-100"
     }
   }
 } satisfies StyleGroup<StyleGroups.BACKGROUND, BackgroundKeys>;

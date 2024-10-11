@@ -2,23 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background-color: 10 10 10;
-    --foreground-color: 237 237 237;
-  }
-}
-
 @layer base {
   :root {
-    --background-color: 255 255 255;
-    --foreground-color: 23 23 23;
+    @media (prefers-color-scheme: dark) {
+      --background: #090f15;
+      --foreground: #f8fafc;
+      --primary: #0f172a;
+      --secondary: #1e293b;
+      --tertiary: #334155;
+      --accent: #475569;
+    }
 
-    /* Color Palette */
-    --primary-color: 15 23 42; /* bg-slate-900 */
-    --secondary-color: 30 41 59; /* bg-slate-800 */
-    --tertiary-color: 51 65 85; /* bg-slate-700 */
-    --accent-color: 71 85 105; /* bg-slate-600 */
+    --background: #f8fafc;
+    --foreground: #020617;
+    --primary: #e2e8f0;
+    --secondary: #cbd5e1;
+    --tertiary: #94a3b8;
+    --accent: #64748b;
 
     /* Btn Variant Colors */
     --btn-ghost-bg: 23 37 84 / 0.2; /* bg-cyan-500 */
@@ -46,7 +46,7 @@
   }
 
   input {
-    @apply text-black px-2 py-1 rounded;
+    @apply px-2 py-1 rounded text-foreground;
   }
 
   button {

@@ -1,43 +1,31 @@
-import React, { useState } from "react";
-import { Btn } from "@/tw-styled/ui";
+"use client";
+import React from "react";
+import { useThemeCtx } from "../theme";
+import { useStyleResolver } from "../tools";
 
 export const StylesDemo = () => {
-  const [isDisabled, setIsDisabled] = useState(false);
+  const theme = useThemeCtx();
+  console.log(theme.colors.primary);
+
+  const x = useStyleResolver({
+    foobar: { bgColor: "primary" }
+  });
 
   return (
-    <div className="demo-col">
-      <div className="demo-row">
-        <button
-          className="max-w-xs"
-          onClick={() => setIsDisabled(!isDisabled)}
-        >
-          {isDisabled ? "Enable" : "Disable"}
-        </button>
-
-        <Btn
-          options={{
-            variant: "ghost"
-          }}
-          isDisabled={isDisabled}
-        />
-        <Btn
-          options={{
-            variant: "primary"
-          }}
-          isDisabled={isDisabled}
-        />
-        <Btn
-          options={{
-            variant: "warning"
-          }}
-          isDisabled={isDisabled}
-        />
-        <Btn
-          options={{
-            variant: "none"
-          }}
-          isDisabled={isDisabled}
-        />
+    <div className="demo-col space-y-6">
+      <div className={`demo bg-primary`}>
+        <div className="demo bg-secondary">
+          <div className="demo bg-tertiary">
+            <div className="demo bg-accent">
+              <p
+                className={`demo ${x.foobar}`}
+                style={{ backgroundColor: theme.colors.secondary }}
+              >
+                Hello World
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -24,6 +24,30 @@
     --btn-ghost-bg: 23 37 84 / 0.2; /* bg-cyan-500 */
     --btn-primary-bg: 21 128 61; /* bg-green-700 */
     --btn-warning-bg: 185 28 28; /* bg-red-700 */
+
+    /* SPACING */
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 2.5rem;
+
+    /* FONT SIZE */
+    --font-sm: 0.75rem;
+    --font-md: 1rem;
+    --font-lg: 1.25rem;
+    --font-xl: 1.5rem;
+    --font-2xl: 1.75rem;
+    --font-3xl: 2rem;
+    --font-4xl: 2.25rem;
+
+    /* DIMENSION SIZES */
+    --size-xs: 18rem;
+    --size-sm: 24rem;
+    --size-md: 30rem;
+    --size-lg: 36rem;
+    --size-xl: 42rem;
+    --size-full: 100%;
   }
 
   h1 {

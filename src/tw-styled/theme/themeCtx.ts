@@ -1,38 +1,41 @@
-type ThemeBuckets = "colors";
+type ThemeBuckets = "colors" | "spacing" | "fontSize";
 
-type ColorBucketKeys =
-  | "background"
-  | "foreground"
-  | "primary"
-  | "secondary"
-  | "tertiary"
-  | "accent";
-
-enum ColorBucketValues {
-  background = "--background",
-  foreground = "--foreground",
-  primary = "--primary",
-  secondary = "--secondary",
-  tertiary = "--tertiary",
-  accent = "--accent"
-}
-
-type ThemeCtx = Record<ThemeBuckets, Record<ColorBucketKeys, ColorBucketValues>>;
-
-const useVar = (str: string) => {
-  return `var(${str})` as ColorBucketValues;
-};
+type ThemeCtx = Record<ThemeBuckets, Record<string, string>>;
 
 const themeCtx = {
   colors: {
-    background: useVar(ColorBucketValues.background),
-    foreground: useVar(ColorBucketValues.foreground),
-    primary: useVar(ColorBucketValues.primary),
-    secondary: useVar(ColorBucketValues.secondary),
-    tertiary: useVar(ColorBucketValues.tertiary),
-    accent: useVar(ColorBucketValues.accent)
+    background: "var(--background)",
+    foreground: "var(--foreground)",
+    primary: "var(--primary)",
+    secondary: "var(--secondary)",
+    tertiary: "var(--tertiary)",
+    accent: "var(--accent)"
+  },
+  spacing: {
+    sm: "var(--space-sm)",
+    md: "var(--space-md)",
+    lg: "var(--space-lg)",
+    xl: "var(--space-xl)",
+    "2xl": "var(--space-2xl)"
+  },
+  fontSize: {
+    sm: "var(--font-sm)",
+    md: "var(--font-md)",
+    lg: "var(--font-lg)",
+    xl: "var(--font-xl)",
+    "2xl": "var(--font-2xl)",
+    "3xl": "var(--font-3xl)",
+    "4xl": "var(--font-4xl)"
+  },
+  size: {
+    xs: "var(--size-xs)",
+    sm: "var(--size-sm)",
+    md: "var(--size-md)",
+    lg: "var(--size-lg)",
+    xl: "var(--size-xl)",
+    full: "var(--size-full)"
   }
-} satisfies ThemeCtx;
+};
 
 export { themeCtx };
 export type { ThemeBuckets, ThemeCtx };

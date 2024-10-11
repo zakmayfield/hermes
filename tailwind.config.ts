@@ -1,6 +1,6 @@
 import plugin from "tailwindcss/plugin";
 import type { Config } from "tailwindcss";
-import { components, useRgb, utilities } from "./src/tw-styled/tailwind";
+import { components, utilities } from "./src/tw-styled/tailwind";
 import { themeCtx } from "./src/tw-styled/theme/themeCtx";
 
 const config: Config = {
@@ -13,12 +13,31 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: themeCtx.colors.background,
-        foreground: themeCtx.colors.foreground,
-        primary: themeCtx.colors.primary,
-        secondary: themeCtx.colors.secondary,
-        tertiary: themeCtx.colors.tertiary,
-        accent: themeCtx.colors.accent
+        ...themeCtx.colors
+      },
+      padding: {
+        ...themeCtx.spacing
+      },
+      margin: {
+        ...themeCtx.spacing
+      },
+      space: {
+        ...themeCtx.spacing
+      },
+      fontSize: {
+        ...themeCtx.fontSize
+      },
+      maxWidth: {
+        ...themeCtx.size
+      },
+      width: {
+        ...themeCtx.size
+      },
+      maxHeight: {
+        ...themeCtx.size
+      },
+      height: {
+        ...themeCtx.size
       }
     }
   },

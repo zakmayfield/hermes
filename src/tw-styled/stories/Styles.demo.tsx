@@ -1,28 +1,25 @@
 "use client";
 import React from "react";
 import { useThemeCtx } from "../theme";
-import { useStyleResolver } from "../tools";
+import { styleToClass } from "../style-to-class-resolver";
 
 export const StylesDemo = () => {
   const theme = useThemeCtx();
-  console.log(theme.colors.primary);
 
-  const x = useStyleResolver({
-    foobar: { bgColor: "primary" }
+  const result = styleToClass({
+    foobar: {}
   });
 
+  console.log({ result });
+
   return (
-    <div className="demo-col space-y-6">
+    <div className="space-y-6">
       <div className={`demo bg-primary`}>
         <div className="demo bg-secondary">
           <div className="demo bg-tertiary">
-            <div className="demo bg-accent">
-              <p
-                className={`demo ${x.foobar}`}
-                style={{ backgroundColor: theme.colors.secondary }}
-              >
-                Hello World
-              </p>
+            <div className={`demo bg-accent ${result.foobar}`}>
+              <p className={`demo`}>Hello There</p>
+              <p className={`demo`}>General Kenobi</p>
             </div>
           </div>
         </div>

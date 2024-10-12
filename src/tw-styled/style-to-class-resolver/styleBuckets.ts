@@ -1,3 +1,5 @@
+import { Styles } from ".";
+
 type BucketType<T extends string, K> = Record<T, K>;
 
 /*
@@ -59,74 +61,11 @@ export const textColorBucket = {
 } satisfies BucketType<ColorKeys, TextColorBucketValues>;
 
 /*
-  --- SPACING KEYS
+  --- SPACING
 */
 export type SpacingKeys = "none" | "sm" | "md" | "lg" | "xl" | "2xl";
 
-/*
-  --- SPACE
-*/
-enum SpaceXBucketValues {
-  none = "",
-  sm = `space-x-[var(--space-sm)]`,
-  md = `space-x-[var(--space-md)]`,
-  lg = `space-x-[var(--space-lg)]`,
-  xl = `space-x-[var(--space-xl)]`,
-  "2xl" = `space-x-[var(--space-2xl)]`
-}
-
-export const spaceXBucket = {
-  none: SpaceXBucketValues.none,
-  sm: SpaceXBucketValues.sm,
-  md: SpaceXBucketValues.md,
-  lg: SpaceXBucketValues.lg,
-  xl: SpaceXBucketValues.xl,
-  "2xl": SpaceXBucketValues["2xl"]
-} satisfies BucketType<SpacingKeys, SpaceXBucketValues>;
-
-enum SpaceYBucketValues {
-  none = "",
-  sm = `space-y-[var(--space-sm)]`,
-  md = `space-y-[var(--space-md)]`,
-  lg = `space-y-[var(--space-lg)]`,
-  xl = `space-y-[var(--space-xl)]`,
-  "2xl" = `space-y-[var(--space-2xl)]`
-}
-
-export const spaceYBucket = {
-  none: SpaceYBucketValues.none,
-  sm: SpaceYBucketValues.sm,
-  md: SpaceYBucketValues.md,
-  lg: SpaceYBucketValues.lg,
-  xl: SpaceYBucketValues.xl,
-  "2xl": SpaceYBucketValues["2xl"]
-} satisfies BucketType<SpacingKeys, SpaceYBucketValues>;
-
-/*
-  --- GAP
-*/
-enum GapBucketValues {
-  none = "",
-  sm = `gap-[var(--space-sm)]`,
-  md = `gap-[var(--space-md)]`,
-  lg = `gap-[var(--space-lg)]`,
-  xl = `gap-[var(--space-xl)]`,
-  "2xl" = `gap-[var(--space-2xl)]`
-}
-
-export const gapBucket = {
-  none: GapBucketValues.none,
-  sm: GapBucketValues.sm,
-  md: GapBucketValues.md,
-  lg: GapBucketValues.lg,
-  xl: GapBucketValues.xl,
-  "2xl": GapBucketValues["2xl"]
-} satisfies BucketType<SpacingKeys, GapBucketValues>;
-
-/*
-  --- PADDING
-*/
-enum PaddingBucketValues {
+enum PaddingBucket {
   none = "",
   sm = `p-[var(--space-sm)]`,
   md = `p-[var(--space-md)]`,
@@ -135,16 +74,7 @@ enum PaddingBucketValues {
   "2xl" = `p-[var(--space-2xl)]`
 }
 
-export const paddingBucket = {
-  none: PaddingBucketValues.none,
-  sm: PaddingBucketValues.sm,
-  md: PaddingBucketValues.md,
-  lg: PaddingBucketValues.lg,
-  xl: PaddingBucketValues.xl,
-  "2xl": PaddingBucketValues["2xl"]
-} satisfies BucketType<SpacingKeys, PaddingBucketValues>;
-
-enum PaddingXBucketValues {
+enum PaddingXBucket {
   none = "",
   sm = `px-[var(--space-sm)]`,
   md = `px-[var(--space-md)]`,
@@ -153,16 +83,7 @@ enum PaddingXBucketValues {
   "2xl" = `px-[var(--space-2xl)]`
 }
 
-export const paddingXBucket = {
-  none: PaddingXBucketValues.none,
-  sm: PaddingXBucketValues.sm,
-  md: PaddingXBucketValues.md,
-  lg: PaddingXBucketValues.lg,
-  xl: PaddingXBucketValues.xl,
-  "2xl": PaddingXBucketValues["2xl"]
-} satisfies BucketType<SpacingKeys, PaddingXBucketValues>;
-
-enum PaddingYBucketValues {
+enum PaddingYBucket {
   none = "",
   sm = `py-[var(--space-sm)]`,
   md = `py-[var(--space-md)]`,
@@ -171,19 +92,7 @@ enum PaddingYBucketValues {
   "2xl" = `py-[var(--space-2xl)]`
 }
 
-export const paddingYBucket = {
-  none: PaddingYBucketValues.none,
-  sm: PaddingYBucketValues.sm,
-  md: PaddingYBucketValues.md,
-  lg: PaddingYBucketValues.lg,
-  xl: PaddingYBucketValues.xl,
-  "2xl": PaddingYBucketValues["2xl"]
-} satisfies BucketType<SpacingKeys, PaddingYBucketValues>;
-
-/*
-  --- MARGIN
-*/
-enum MarginBucketValues {
+enum MarginBucket {
   none = "",
   sm = `m-[var(--space-sm)]`,
   md = `m-[var(--space-md)]`,
@@ -192,16 +101,7 @@ enum MarginBucketValues {
   "2xl" = `m-[var(--space-2xl)]`
 }
 
-export const marginBucket = {
-  none: MarginBucketValues.none,
-  sm: MarginBucketValues.sm,
-  md: MarginBucketValues.md,
-  lg: MarginBucketValues.lg,
-  xl: MarginBucketValues.xl,
-  "2xl": MarginBucketValues["2xl"]
-} satisfies BucketType<SpacingKeys, MarginBucketValues>;
-
-enum MarginXBucketValues {
+enum MarginXBucket {
   none = "",
   sm = `mx-[var(--space-sm)]`,
   md = `mx-[var(--space-md)]`,
@@ -210,16 +110,7 @@ enum MarginXBucketValues {
   "2xl" = `mx-[var(--space-2xl)]`
 }
 
-export const marginXBucket = {
-  none: MarginXBucketValues.none,
-  sm: MarginXBucketValues.sm,
-  md: MarginXBucketValues.md,
-  lg: MarginXBucketValues.lg,
-  xl: MarginXBucketValues.xl,
-  "2xl": MarginXBucketValues["2xl"]
-} satisfies BucketType<SpacingKeys, MarginXBucketValues>;
-
-enum MarginYBucketValues {
+enum MarginYBucket {
   none = "",
   sm = `my-[var(--space-sm)]`,
   md = `my-[var(--space-md)]`,
@@ -228,14 +119,107 @@ enum MarginYBucketValues {
   "2xl" = `my-[var(--space-2xl)]`
 }
 
-export const marginYBucket = {
-  none: MarginYBucketValues.none,
-  sm: MarginYBucketValues.sm,
-  md: MarginYBucketValues.md,
-  lg: MarginYBucketValues.lg,
-  xl: MarginYBucketValues.xl,
-  "2xl": MarginYBucketValues["2xl"]
-} satisfies BucketType<SpacingKeys, MarginYBucketValues>;
+enum SpaceXBucket {
+  none = "",
+  sm = `space-x-[var(--space-sm)]`,
+  md = `space-x-[var(--space-md)]`,
+  lg = `space-x-[var(--space-lg)]`,
+  xl = `space-x-[var(--space-xl)]`,
+  "2xl" = `space-x-[var(--space-2xl)]`
+}
+
+enum SpaceYBucket {
+  none = "",
+  sm = `space-y-[var(--space-sm)]`,
+  md = `space-y-[var(--space-md)]`,
+  lg = `space-y-[var(--space-lg)]`,
+  xl = `space-y-[var(--space-xl)]`,
+  "2xl" = `space-y-[var(--space-2xl)]`
+}
+
+enum GapBucket {
+  none = "",
+  sm = `gap-[var(--space-sm)]`,
+  md = `gap-[var(--space-md)]`,
+  lg = `gap-[var(--space-lg)]`,
+  xl = `gap-[var(--space-xl)]`,
+  "2xl" = `gap-[var(--space-2xl)]`
+}
+
+export const spacingBucket = {
+  padding: {
+    none: "",
+    sm: PaddingBucket.sm,
+    md: PaddingBucket.md,
+    lg: PaddingBucket.lg,
+    xl: PaddingBucket.xl,
+    "2xl": PaddingBucket["2xl"]
+  },
+  paddingX: {
+    none: "",
+    sm: PaddingXBucket.sm,
+    md: PaddingXBucket.md,
+    lg: PaddingXBucket.lg,
+    xl: PaddingXBucket.xl,
+    "2xl": PaddingXBucket["2xl"]
+  },
+  paddingY: {
+    none: "",
+    sm: PaddingYBucket.sm,
+    md: PaddingYBucket.md,
+    lg: PaddingYBucket.lg,
+    xl: PaddingYBucket.xl,
+    "2xl": PaddingYBucket["2xl"]
+  },
+  margin: {
+    none: "",
+    sm: MarginBucket.sm,
+    md: MarginBucket.md,
+    lg: MarginBucket.lg,
+    xl: MarginBucket.xl,
+    "2xl": MarginBucket["2xl"]
+  },
+  marginX: {
+    none: "",
+    sm: MarginXBucket.sm,
+    md: MarginXBucket.md,
+    lg: MarginXBucket.lg,
+    xl: MarginXBucket.xl,
+    "2xl": MarginXBucket["2xl"]
+  },
+  marginY: {
+    none: "",
+    sm: MarginYBucket.sm,
+    md: MarginYBucket.md,
+    lg: MarginYBucket.lg,
+    xl: MarginYBucket.xl,
+    "2xl": MarginYBucket["2xl"]
+  },
+  spaceX: {
+    none: "",
+    sm: SpaceXBucket.sm,
+    md: SpaceXBucket.md,
+    lg: SpaceXBucket.lg,
+    xl: SpaceXBucket.xl,
+    "2xl": SpaceXBucket["2xl"]
+  },
+  spaceY: {
+    none: "",
+    sm: SpaceYBucket.sm,
+    md: SpaceYBucket.md,
+    lg: SpaceYBucket.lg,
+    xl: SpaceYBucket.xl,
+    "2xl": SpaceYBucket["2xl"]
+  },
+  gap: {
+    none: "",
+    sm: GapBucket.sm,
+    md: GapBucket.md,
+    lg: GapBucket.lg,
+    xl: GapBucket.xl,
+    "2xl": GapBucket["2xl"]
+  }
+} satisfies Partial<Record<keyof Styles, Record<SpacingKeys, string>>>;
 
 /*
   --- FONT

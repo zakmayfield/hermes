@@ -17,7 +17,7 @@ export const StylesDemo = () => {
       <div className={`demo bg-primary`}>
         <div className="demo bg-secondary">
           <div className="demo bg-tertiary">
-            <div className={`demo bg-accent ${result.foobar}`}>
+            <div className={`demo bg-accent ${result.get("foobar")}`}>
               <p className={`demo`}>Hello There</p>
               <p className={`demo`}>General Kenobi</p>
             </div>

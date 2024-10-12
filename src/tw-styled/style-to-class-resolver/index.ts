@@ -8,25 +8,17 @@ import {
   FlexRowPositionBucket,
   fontSizeBucket,
   type FontSizeKeys,
-  gapBucket,
   heightBucket,
-  marginBucket,
-  marginXBucket,
-  marginYBucket,
   maxHeightBucket,
   maxWidthBucket,
-  paddingBucket,
-  paddingXBucket,
-  paddingYBucket,
   type SizeKeys,
-  spaceXBucket,
-  spaceYBucket,
+  spacingBucket,
   type SpacingKeys,
   textColorBucket,
   widthBucket
 } from "./styleBuckets";
 
-type Styles = {
+export type Styles = {
   padding: SpacingKeys;
   paddingX: SpacingKeys;
   paddingY: SpacingKeys;
@@ -55,69 +47,65 @@ type Styles = {
 type PartialStyleProps = Partial<Styles>;
 type StyleToClassProps = Record<string, PartialStyleProps>;
 
-export const styleToClass = (props: StyleToClassProps) => {
-  const result: Record<string, string> = {};
+function extractClassName(styleKey: keyof Styles, styleValue: string) {
+  switch (styleKey) {
+    case "padding":
+    case "paddingX":
+    case "paddingY":
+    case "margin":
+    case "marginX":
+    case "marginY":
+    case "spaceX":
+    case "spaceY":
+    case "gap":
+      return spacingBucket[styleKey][styleValue as SpacingKeys];
 
-  for (const propKey in props) {
-    const propValue = props[propKey];
+    case "width":
+      return widthBucket[styleValue as SizeKeys];
+    case "maxWidth":
+      return maxWidthBucket[styleValue as SizeKeys];
 
-    result[propKey] = Object.keys(propValue)
-      .map((style) => {
-        const styleKey = style as keyof Styles;
-        const styleValue = propValue[styleKey] || "none";
+    case "height":
+      return heightBucket[styleValue as SizeKeys];
+    case "maxHeight":
+      return maxHeightBucket[styleValue as SizeKeys];
 
-        switch (styleKey) {
-          case "padding":
-            return paddingBucket[styleValue as SpacingKeys];
-          case "paddingX":
-            return paddingXBucket[styleValue as SpacingKeys];
-          case "paddingY":
-            return paddingYBucket[styleValue as SpacingKeys];
+    case "backgroundColor":
+      return backgroundColorBucket[styleValue as ColorKeys];
+    case "textColor":
+      return textColorBucket[styleValue as ColorKeys];
 
-          case "margin":
-            return marginBucket[styleValue as SpacingKeys];
-          case "marginX":
-            return marginXBucket[styleValue as SpacingKeys];
-          case "marginY":
-            return marginYBucket[styleValue as SpacingKeys];
+    case "fontSize":
+      return fontSizeBucket[styleValue as FontSizeKeys];
 
-          case "spaceX":
-            return spaceXBucket[styleValue as SpacingKeys];
-          case "spaceY":
-            return spaceYBucket[styleValue as SpacingKeys];
+    case "display":
+      return displayBucket[styleValue as DisplayKeys];
 
-          case "gap":
-            return gapBucket[styleValue as SpacingKeys];
+    case "flexRowPosition":
+      return FlexRowPositionBucket[styleValue as FlexPositionKeys];
+    case "flexColPosition":
+      return FlexColPositionBucket[styleValue as FlexPositionKeys];
+  }
+}
 
-          case "width":
-            return widthBucket[styleValue as SizeKeys];
-          case "maxWidth":
-            return maxWidthBucket[styleValue as SizeKeys];
+export const styleToClass = (style: StyleToClassProps) => {
+  const ResultMap = new Map();
 
-          case "height":
-            return heightBucket[styleValue as SizeKeys];
-          case "maxHeight":
-            return maxHeightBucket[styleValue as SizeKeys];
+  for (const propKey in style) {
+    const value = style[propKey];
 
-          case "backgroundColor":
-            return backgroundColorBucket[styleValue as ColorKeys];
-          case "textColor":
-            return textColorBucket[styleValue as ColorKeys];
-
-          case "fontSize":
-            return fontSizeBucket[styleValue as FontSizeKeys];
-
-          case "display":
-            return displayBucket[styleValue as DisplayKeys];
-
-          case "flexRowPosition":
-            return FlexRowPositionBucket[styleValue as FlexPositionKeys];
-          case "flexColPosition":
-            return FlexColPositionBucket[styleValue as FlexPositionKeys];
-        }
-      })
-      .join(" ");
+    ResultMap.set(
+      propKey,
+      Object.keys(value)
+        .map((key) => {
+          const styleKey = key as keyof Styles;
+          const styleValue = value[styleKey] || "none";
+          return extractClassName(styleKey, styleValue);
+        })
+        .join(" ")
+        .trim()
+    );
   }
 
-  return result;
+  return ResultMap;
 };

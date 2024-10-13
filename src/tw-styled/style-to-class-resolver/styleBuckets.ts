@@ -1,9 +1,12 @@
 import { Styles } from ".";
 
-type BucketType<T extends string, K> = Record<T, K>;
+type BucketType2<T extends string, K> = Record<T, K>;
+type BucketType<Keys extends string> = Partial<
+  Record<keyof Styles, Record<Keys, string>>
+>;
 
 /*
-  --- COLOR KEYS
+  --- COLOR
 */
 export type ColorKeys =
   | "none"
@@ -14,10 +17,7 @@ export type ColorKeys =
   | "tertiary"
   | "accent";
 
-/*
-  --- BACKGROUND COLOR
-*/
-enum BackgroundColorBucketValues {
+enum BackgroundColorBucket {
   none = "",
   background = "bg-[var(--background)]",
   foreground = "bg-[var(--foreground)]",
@@ -27,20 +27,7 @@ enum BackgroundColorBucketValues {
   accent = "bg-[var(--accent)]"
 }
 
-export const backgroundColorBucket = {
-  none: BackgroundColorBucketValues.none,
-  background: BackgroundColorBucketValues.background,
-  foreground: BackgroundColorBucketValues.foreground,
-  primary: BackgroundColorBucketValues.primary,
-  secondary: BackgroundColorBucketValues.secondary,
-  tertiary: BackgroundColorBucketValues.tertiary,
-  accent: BackgroundColorBucketValues.accent
-} satisfies BucketType<ColorKeys, BackgroundColorBucketValues>;
-
-/*
-  --- TEXT COLOR
-*/
-enum TextColorBucketValues {
+enum TextColorBucket {
   none = "",
   background = "text-[color:var(--background)]",
   foreground = "text-[color:var(--foreground)]",
@@ -50,15 +37,45 @@ enum TextColorBucketValues {
   accent = "text-[color:var(--accent)]"
 }
 
-export const textColorBucket = {
-  none: TextColorBucketValues.none,
-  background: TextColorBucketValues.background,
-  foreground: TextColorBucketValues.foreground,
-  primary: TextColorBucketValues.primary,
-  secondary: TextColorBucketValues.secondary,
-  tertiary: TextColorBucketValues.tertiary,
-  accent: TextColorBucketValues.accent
-} satisfies BucketType<ColorKeys, TextColorBucketValues>;
+enum BorderColorBucket {
+  none = "",
+  background = "border-[color:var(--background)]",
+  foreground = "border-[color:var(--foreground)]",
+  primary = "border-[color:var(--primary)]",
+  secondary = "border-[color:var(--secondary)]",
+  tertiary = "border-[color:var(--tertiary)]",
+  accent = "border-[color:var(--accent)]"
+}
+
+export const colorBucket = {
+  backgroundColor: {
+    none: BackgroundColorBucket.none,
+    background: BackgroundColorBucket.background,
+    foreground: BackgroundColorBucket.foreground,
+    primary: BackgroundColorBucket.primary,
+    secondary: BackgroundColorBucket.secondary,
+    tertiary: BackgroundColorBucket.tertiary,
+    accent: BackgroundColorBucket.accent
+  },
+  textColor: {
+    none: TextColorBucket.none,
+    background: TextColorBucket.background,
+    foreground: TextColorBucket.foreground,
+    primary: TextColorBucket.primary,
+    secondary: TextColorBucket.secondary,
+    tertiary: TextColorBucket.tertiary,
+    accent: TextColorBucket.accent
+  },
+  borderColor: {
+    none: BorderColorBucket.none,
+    background: BorderColorBucket.background,
+    foreground: BorderColorBucket.foreground,
+    primary: BorderColorBucket.primary,
+    secondary: BorderColorBucket.secondary,
+    tertiary: BorderColorBucket.tertiary,
+    accent: BorderColorBucket.accent
+  }
+} satisfies BucketType<ColorKeys>;
 
 /*
   --- SPACING
@@ -219,7 +236,7 @@ export const spacingBucket = {
     xl: GapBucket.xl,
     "2xl": GapBucket["2xl"]
   }
-} satisfies Partial<Record<keyof Styles, Record<SpacingKeys, string>>>;
+} satisfies BucketType<SpacingKeys>;
 
 /*
   --- FONT
@@ -244,19 +261,16 @@ export const fontSizeBucket = {
   "2xl": FontSizeBucketValues["2xl"],
   "3xl": FontSizeBucketValues["3xl"],
   "4xl": FontSizeBucketValues["4xl"]
-} satisfies BucketType<string, FontSizeBucketValues>;
+} satisfies BucketType2<string, FontSizeBucketValues>;
 
 export type FontSizeKeys = keyof typeof fontSizeBucket;
 
 /*
-  --- SIZE KEYS
+  --- DIMENSION
 */
-export type SizeKeys = "none" | "xs" | "sm" | "md" | "lg" | "xl" | "full";
+export type DimensionKeys = "none" | "xs" | "sm" | "md" | "lg" | "xl" | "full";
 
-/*
-  --- WIDTH
-*/
-enum WidthBucketValues {
+enum WidthBucket {
   none = "",
   xs = `w-[var(--size-xs)]`,
   sm = `w-[var(--size-sm)]`,
@@ -266,17 +280,17 @@ enum WidthBucketValues {
   full = `w-[var(--size-full)]`
 }
 
-export const widthBucket = {
-  none: WidthBucketValues.none,
-  xs: WidthBucketValues.xs,
-  sm: WidthBucketValues.sm,
-  md: WidthBucketValues.md,
-  lg: WidthBucketValues.lg,
-  xl: WidthBucketValues.xl,
-  full: WidthBucketValues.full
-} satisfies BucketType<SizeKeys, WidthBucketValues>;
+enum MinWidthBucket {
+  none = "",
+  xs = `min-w-[var(--size-xs)]`,
+  sm = `min-w-[var(--size-sm)]`,
+  md = `min-w-[var(--size-md)]`,
+  lg = `min-w-[var(--size-lg)]`,
+  xl = `min-w-[var(--size-xl)]`,
+  full = `min-w-[var(--size-full)]`
+}
 
-enum MaxWidthBucketValues {
+enum MaxWidthBucket {
   none = "",
   xs = `max-w-[var(--size-xs)]`,
   sm = `max-w-[var(--size-sm)]`,
@@ -286,20 +300,7 @@ enum MaxWidthBucketValues {
   full = `max-w-[var(--size-full)]`
 }
 
-export const maxWidthBucket = {
-  none: MaxWidthBucketValues.none,
-  xs: MaxWidthBucketValues.xs,
-  sm: MaxWidthBucketValues.sm,
-  md: MaxWidthBucketValues.md,
-  lg: MaxWidthBucketValues.lg,
-  xl: MaxWidthBucketValues.xl,
-  full: MaxWidthBucketValues.full
-} satisfies BucketType<SizeKeys, MaxWidthBucketValues>;
-
-/*
-  --- HEIGHT
-*/
-enum HeightBucketValues {
+enum HeightBucket {
   none = "",
   xs = `h-[var(--size-xs)]`,
   sm = `h-[var(--size-sm)]`,
@@ -309,17 +310,17 @@ enum HeightBucketValues {
   full = `h-[var(--size-full)]`
 }
 
-export const heightBucket = {
-  none: HeightBucketValues.none,
-  xs: HeightBucketValues.xs,
-  sm: HeightBucketValues.sm,
-  md: HeightBucketValues.md,
-  lg: HeightBucketValues.lg,
-  xl: HeightBucketValues.xl,
-  full: HeightBucketValues.full
-} satisfies BucketType<SizeKeys, HeightBucketValues>;
+enum MinHeightBucket {
+  none = "",
+  xs = `min-h-[var(--size-xs)]`,
+  sm = `min-h-[var(--size-sm)]`,
+  md = `min-h-[var(--size-md)]`,
+  lg = `min-h-[var(--size-lg)]`,
+  xl = `min-h-[var(--size-xl)]`,
+  full = `min-h-[var(--size-full)]`
+}
 
-enum MaxHeightBucketValues {
+enum MaxHeightBucket {
   none = "",
   xs = `max-h-[var(--size-xs)]`,
   sm = `max-h-[var(--size-sm)]`,
@@ -329,15 +330,62 @@ enum MaxHeightBucketValues {
   full = `max-h-[var(--size-full)]`
 }
 
-export const maxHeightBucket = {
-  none: MaxHeightBucketValues.none,
-  xs: MaxHeightBucketValues.xs,
-  sm: MaxHeightBucketValues.sm,
-  md: MaxHeightBucketValues.md,
-  lg: MaxHeightBucketValues.lg,
-  xl: MaxHeightBucketValues.xl,
-  full: MaxHeightBucketValues.full
-} satisfies BucketType<SizeKeys, MaxHeightBucketValues>;
+export const dimensionBucket = {
+  width: {
+    none: WidthBucket.none,
+    xs: WidthBucket.xs,
+    sm: WidthBucket.sm,
+    md: WidthBucket.md,
+    lg: WidthBucket.lg,
+    xl: WidthBucket.xl,
+    full: WidthBucket.full
+  },
+  minWidth: {
+    none: MinWidthBucket.none,
+    xs: MinWidthBucket.xs,
+    sm: MinWidthBucket.sm,
+    md: MinWidthBucket.md,
+    lg: MinWidthBucket.lg,
+    xl: MinWidthBucket.xl,
+    full: MinWidthBucket.full
+  },
+  maxWidth: {
+    none: MaxWidthBucket.none,
+    xs: MaxWidthBucket.xs,
+    sm: MaxWidthBucket.sm,
+    md: MaxWidthBucket.md,
+    lg: MaxWidthBucket.lg,
+    xl: MaxWidthBucket.xl,
+    full: MaxWidthBucket.full
+  },
+  height: {
+    none: HeightBucket.none,
+    xs: HeightBucket.xs,
+    sm: HeightBucket.sm,
+    md: HeightBucket.md,
+    lg: HeightBucket.lg,
+    xl: HeightBucket.xl,
+    full: HeightBucket.full
+  },
+  minHeight: {
+    none: MinHeightBucket.none,
+    xs: MinHeightBucket.xs,
+    sm: MinHeightBucket.sm,
+    md: MinHeightBucket.md,
+    lg: MinHeightBucket.lg,
+    xl: MinHeightBucket.xl,
+    full: MinHeightBucket.full
+  },
+  maxHeight: {
+    none: MaxHeightBucket.none,
+    xs: MaxHeightBucket.xs,
+    sm: MaxHeightBucket.sm,
+    md: MaxHeightBucket.md,
+    lg: MaxHeightBucket.lg,
+    xl: MaxHeightBucket.xl,
+    full: MaxHeightBucket.full
+  }
+} satisfies BucketType<DimensionKeys>;
 
 /*
   --- DISPLAY
@@ -363,12 +411,12 @@ export const displayBucket = {
   hidden: DisplayBucketValues.hidden,
   "flex-row": DisplayBucketValues["flex-row"],
   "flex-col": DisplayBucketValues["flex-col"]
-} satisfies BucketType<string, DisplayBucketValues>;
+} satisfies BucketType2<string, DisplayBucketValues>;
 
 export type DisplayKeys = keyof typeof displayBucket;
 
 /*
-  --- FLEX
+  --- FLEX POSITION
 */
 
 export type FlexPositionKeys =
@@ -383,7 +431,7 @@ export type FlexPositionKeys =
   | "center-right"
   | "bottom-right";
 
-enum FlexRowPositionBucketValues {
+enum FlexRowPositionBucket {
   none = "none",
   "top-left" = "items-start",
   "center-left" = "items-center justify-start",
@@ -396,23 +444,7 @@ enum FlexRowPositionBucketValues {
   "bottom-right" = "items-end justify-end"
 }
 
-export const FlexRowPositionBucket = {
-  none: FlexRowPositionBucketValues.none,
-
-  "top-left": FlexRowPositionBucketValues["top-left"],
-  "top-center": FlexRowPositionBucketValues["top-center"],
-  "top-right": FlexRowPositionBucketValues["top-right"],
-
-  "center-left": FlexRowPositionBucketValues["center-left"],
-  "center-center": FlexRowPositionBucketValues["center-center"],
-  "center-right": FlexRowPositionBucketValues["center-right"],
-
-  "bottom-left": FlexRowPositionBucketValues["bottom-left"],
-  "bottom-center": FlexRowPositionBucketValues["bottom-center"],
-  "bottom-right": FlexRowPositionBucketValues["bottom-right"]
-} satisfies BucketType<FlexPositionKeys, FlexRowPositionBucketValues>;
-
-enum FlexColPositionBucketValues {
+enum FlexColPositionBucket {
   none = "none",
   "top-left" = "justify-start",
   "center-left" = "justify-center",
@@ -425,18 +457,35 @@ enum FlexColPositionBucketValues {
   "bottom-right" = "items-end justify-end"
 }
 
-export const FlexColPositionBucket = {
-  none: FlexColPositionBucketValues.none,
+export const flexPositionBucket = {
+  flexRowPosition: {
+    none: FlexRowPositionBucket.none,
 
-  "top-left": FlexColPositionBucketValues["top-left"],
-  "top-center": FlexColPositionBucketValues["top-center"],
-  "top-right": FlexColPositionBucketValues["top-right"],
+    "top-left": FlexRowPositionBucket["top-left"],
+    "top-center": FlexRowPositionBucket["top-center"],
+    "top-right": FlexRowPositionBucket["top-right"],
 
-  "center-left": FlexColPositionBucketValues["center-left"],
-  "center-center": FlexColPositionBucketValues["center-center"],
-  "center-right": FlexColPositionBucketValues["center-right"],
+    "center-left": FlexRowPositionBucket["center-left"],
+    "center-center": FlexRowPositionBucket["center-center"],
+    "center-right": FlexRowPositionBucket["center-right"],
 
-  "bottom-left": FlexColPositionBucketValues["bottom-left"],
-  "bottom-center": FlexColPositionBucketValues["bottom-center"],
-  "bottom-right": FlexColPositionBucketValues["bottom-right"]
-} satisfies BucketType<FlexPositionKeys, FlexColPositionBucketValues>;
+    "bottom-left": FlexRowPositionBucket["bottom-left"],
+    "bottom-center": FlexRowPositionBucket["bottom-center"],
+    "bottom-right": FlexRowPositionBucket["bottom-right"]
+  },
+  flexColPosition: {
+    none: FlexColPositionBucket.none,
+
+    "top-left": FlexColPositionBucket["top-left"],
+    "top-center": FlexColPositionBucket["top-center"],
+    "top-right": FlexColPositionBucket["top-right"],
+
+    "center-left": FlexColPositionBucket["center-left"],
+    "center-center": FlexColPositionBucket["center-center"],
+    "center-right": FlexColPositionBucket["center-right"],
+
+    "bottom-left": FlexColPositionBucket["bottom-left"],
+    "bottom-center": FlexColPositionBucket["bottom-center"],
+    "bottom-right": FlexColPositionBucket["bottom-right"]
+  }
+} satisfies BucketType<FlexPositionKeys>;

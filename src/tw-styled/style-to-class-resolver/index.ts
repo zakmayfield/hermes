@@ -1,21 +1,16 @@
 import {
-  backgroundColorBucket,
+  colorBucket,
   type ColorKeys,
+  dimensionBucket,
+  type DimensionKeys,
   displayBucket,
   type DisplayKeys,
-  FlexColPositionBucket,
+  flexPositionBucket,
   type FlexPositionKeys,
-  FlexRowPositionBucket,
   fontSizeBucket,
   type FontSizeKeys,
-  heightBucket,
-  maxHeightBucket,
-  maxWidthBucket,
-  type SizeKeys,
   spacingBucket,
-  type SpacingKeys,
-  textColorBucket,
-  widthBucket
+  type SpacingKeys
 } from "./styleBuckets";
 
 export type Styles = {
@@ -29,13 +24,17 @@ export type Styles = {
   spaceY: SpacingKeys;
   gap: SpacingKeys;
 
-  width: SizeKeys;
-  maxWidth: SizeKeys;
-  height: SizeKeys;
-  maxHeight: SizeKeys;
+  width: DimensionKeys;
+  minWidth: DimensionKeys;
+  maxWidth: DimensionKeys;
+  height: DimensionKeys;
+  minHeight: DimensionKeys;
+  maxHeight: DimensionKeys;
 
   backgroundColor: ColorKeys;
   textColor: ColorKeys;
+  borderColor: ColorKeys;
+
   fontSize: FontSizeKeys;
 
   display: DisplayKeys;
@@ -61,19 +60,17 @@ function extractClassName(styleKey: keyof Styles, styleValue: string) {
       return spacingBucket[styleKey][styleValue as SpacingKeys];
 
     case "width":
-      return widthBucket[styleValue as SizeKeys];
+    case "minWidth":
     case "maxWidth":
-      return maxWidthBucket[styleValue as SizeKeys];
-
     case "height":
-      return heightBucket[styleValue as SizeKeys];
+    case "minHeight":
     case "maxHeight":
-      return maxHeightBucket[styleValue as SizeKeys];
+      return dimensionBucket[styleKey][styleValue as DimensionKeys];
 
     case "backgroundColor":
-      return backgroundColorBucket[styleValue as ColorKeys];
     case "textColor":
-      return textColorBucket[styleValue as ColorKeys];
+    case "borderColor":
+      return colorBucket[styleKey][styleValue as ColorKeys];
 
     case "fontSize":
       return fontSizeBucket[styleValue as FontSizeKeys];
@@ -82,9 +79,8 @@ function extractClassName(styleKey: keyof Styles, styleValue: string) {
       return displayBucket[styleValue as DisplayKeys];
 
     case "flexRowPosition":
-      return FlexRowPositionBucket[styleValue as FlexPositionKeys];
     case "flexColPosition":
-      return FlexColPositionBucket[styleValue as FlexPositionKeys];
+      return flexPositionBucket[styleKey][styleValue as FlexPositionKeys];
   }
 }
 

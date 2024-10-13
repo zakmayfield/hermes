@@ -1,17 +1,25 @@
 import {
   colorBucket,
-  type ColorKeys,
   dimensionBucket,
-  type DimensionKeys,
   displayBucket,
-  type DisplayKeys,
   flexPositionBucket,
-  type FlexPositionKeys,
+  flexSizeBucket,
+  flexSpacingBucket,
+  flexWrapBucket,
   fontSizeBucket,
-  type FontSizeKeys,
-  spacingBucket,
-  type SpacingKeys
-} from "./styleBuckets";
+  spacingBucket
+} from "./buckets";
+import { Keyof } from "./types";
+
+type SpacingKeys = Keyof<(typeof spacingBucket)["padding"]>;
+type DimensionKeys = Keyof<(typeof dimensionBucket)["width"]>;
+type ColorKeys = Keyof<(typeof colorBucket)["backgroundColor"]>;
+type FlexPositionKeys = Keyof<(typeof flexPositionBucket)["flexRowPosition"]>;
+type DisplayKeys = Keyof<typeof displayBucket>;
+type FontSizeKeys = Keyof<typeof fontSizeBucket>;
+type FlexSpacingKeys = Keyof<typeof flexSpacingBucket>;
+type FlexWrapKeys = Keyof<typeof flexWrapBucket>;
+type FlexSizeKeys = Keyof<typeof flexSizeBucket>;
 
 export type Styles = {
   padding: SpacingKeys;
@@ -41,6 +49,10 @@ export type Styles = {
 
   flexRowPosition: FlexPositionKeys;
   flexColPosition: FlexPositionKeys;
+
+  flexSpacing: FlexSpacingKeys;
+  flexWrap: FlexWrapKeys;
+  flexSize: FlexSizeKeys;
 };
 
 type PartialStyleProps = Partial<Styles>;
@@ -81,6 +93,13 @@ function extractClassName(styleKey: keyof Styles, styleValue: string) {
     case "flexRowPosition":
     case "flexColPosition":
       return flexPositionBucket[styleKey][styleValue as FlexPositionKeys];
+
+    case "flexSpacing":
+      return flexSpacingBucket[styleValue as FlexSpacingKeys];
+    case "flexWrap":
+      return flexWrapBucket[styleValue as FlexWrapKeys];
+    case "flexSize":
+      return flexSizeBucket[styleValue as FlexSizeKeys];
   }
 }
 

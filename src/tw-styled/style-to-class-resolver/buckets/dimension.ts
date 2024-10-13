@@ -2,62 +2,62 @@ import { Keyof, MultiBucket } from "../types";
 
 enum WidthBucket {
   none = "",
-  xs = `w-[var(--size-xs)]`,
-  sm = `w-[var(--size-sm)]`,
-  md = `w-[var(--size-md)]`,
-  lg = `w-[var(--size-lg)]`,
-  xl = `w-[var(--size-xl)]`,
-  full = `w-[var(--size-full)]`
+  xs = `w-xs`,
+  sm = `w-sm`,
+  md = `w-md`,
+  lg = `w-lg`,
+  xl = `w-xl`,
+  full = `w-full`
 }
 
 enum MinWidthBucket {
   none = "",
-  xs = `min-w-[var(--size-xs)]`,
-  sm = `min-w-[var(--size-sm)]`,
-  md = `min-w-[var(--size-md)]`,
-  lg = `min-w-[var(--size-lg)]`,
-  xl = `min-w-[var(--size-xl)]`,
-  full = `min-w-[var(--size-full)]`
+  xs = `min-w-xs`,
+  sm = `min-w-sm`,
+  md = `min-w-md`,
+  lg = `min-w-lg`,
+  xl = `min-w-xl`,
+  full = `min-w-full`
 }
 
 enum MaxWidthBucket {
   none = "",
-  xs = `max-w-[var(--size-xs)]`,
-  sm = `max-w-[var(--size-sm)]`,
-  md = `max-w-[var(--size-md)]`,
-  lg = `max-w-[var(--size-lg)]`,
-  xl = `max-w-[var(--size-xl)]`,
-  full = `max-w-[var(--size-full)]`
+  xs = `max-w-xs`,
+  sm = `max-w-sm`,
+  md = `max-w-md`,
+  lg = `max-w-lg`,
+  xl = `max-w-xl`,
+  full = `max-w-full`
 }
 
 enum HeightBucket {
   none = "",
-  xs = `h-[var(--size-xs)]`,
-  sm = `h-[var(--size-sm)]`,
-  md = `h-[var(--size-md)]`,
-  lg = `h-[var(--size-lg)]`,
-  xl = `h-[var(--size-xl)]`,
-  full = `h-[var(--size-full)]`
+  xs = `h-xs`,
+  sm = `h-sm`,
+  md = `h-md`,
+  lg = `h-lg`,
+  xl = `h-xl`,
+  full = `h-full`
 }
 
 enum MinHeightBucket {
   none = "",
-  xs = `min-h-[var(--size-xs)]`,
-  sm = `min-h-[var(--size-sm)]`,
-  md = `min-h-[var(--size-md)]`,
-  lg = `min-h-[var(--size-lg)]`,
-  xl = `min-h-[var(--size-xl)]`,
-  full = `min-h-[var(--size-full)]`
+  xs = `min-h-xs`,
+  sm = `min-h-sm`,
+  md = `min-h-md`,
+  lg = `min-h-lg`,
+  xl = `min-h-xl`,
+  full = `min-h-full`
 }
 
 enum MaxHeightBucket {
   none = "",
-  xs = `max-h-[var(--size-xs)]`,
-  sm = `max-h-[var(--size-sm)]`,
-  md = `max-h-[var(--size-md)]`,
-  lg = `max-h-[var(--size-lg)]`,
-  xl = `max-h-[var(--size-xl)]`,
-  full = `max-h-[var(--size-full)]`
+  xs = `max-h-xs`,
+  sm = `max-h-sm`,
+  md = `max-h-md`,
+  lg = `max-h-lg`,
+  xl = `max-h-xl`,
+  full = `max-h-full`
 }
 
 export const dimensionBucket = {

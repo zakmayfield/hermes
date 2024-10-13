@@ -1,11 +1,8 @@
 "use client";
 import React from "react";
-import { useThemeCtx } from "../theme";
 import { styleToClass } from "../style-to-class-resolver";
 
 export const StylesDemo = () => {
-  const theme = useThemeCtx();
-
   const result = styleToClass({
     foobar: {
       display: "flex-row",
@@ -15,8 +12,7 @@ export const StylesDemo = () => {
       textDecoration: "underline",
       border: "sm",
       borderRadius: "lg",
-      padding: "lg",
-      borderColor: "primary"
+      padding: "lg"
     }
   });
 
@@ -29,7 +25,6 @@ export const StylesDemo = () => {
           <div className="demo bg-tertiary">
             <div className={`demo bg-accent ${result.get("foobar")}`}>
               <p className={`${result.get("foobaz")}`}>Hello There</p>
-              <p className={`demo`}>General Kenobi</p>
             </div>
           </div>
         </div>

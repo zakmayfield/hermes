@@ -2,74 +2,74 @@ import { Keyof, MultiBucket } from "../types";
 
 enum PaddingBucket {
   none = "",
-  sm = `p-[var(--space-sm)]`,
-  md = `p-[var(--space-md)]`,
-  lg = `p-[var(--space-lg)]`,
-  xl = `p-[var(--space-xl)]`,
-  "2xl" = `p-[var(--space-2xl)]`
+  sm = `p-sm`,
+  md = `p-md`,
+  lg = `p-lg`,
+  xl = `p-xl`,
+  "2xl" = `p-2xl`
 }
 
 enum PaddingXBucket {
   none = "",
-  sm = `px-[var(--space-sm)]`,
-  md = `px-[var(--space-md)]`,
-  lg = `px-[var(--space-lg)]`,
-  xl = `px-[var(--space-xl)]`,
-  "2xl" = `px-[var(--space-2xl)]`
+  sm = `px-sm`,
+  md = `px-md`,
+  lg = `px-lg`,
+  xl = `px-xl`,
+  "2xl" = `px-2xl`
 }
 
 enum PaddingYBucket {
   none = "",
-  sm = `py-[var(--space-sm)]`,
-  md = `py-[var(--space-md)]`,
-  lg = `py-[var(--space-lg)]`,
-  xl = `py-[var(--space-xl)]`,
-  "2xl" = `py-[var(--space-2xl)]`
+  sm = `py-sm`,
+  md = `py-md`,
+  lg = `py-lg`,
+  xl = `py-xl`,
+  "2xl" = `py-2xl`
 }
 
 enum MarginBucket {
   none = "",
-  sm = `m-[var(--space-sm)]`,
-  md = `m-[var(--space-md)]`,
-  lg = `m-[var(--space-lg)]`,
-  xl = `m-[var(--space-xl)]`,
-  "2xl" = `m-[var(--space-2xl)]`
+  sm = `m-sm`,
+  md = `m-md`,
+  lg = `m-lg`,
+  xl = `m-xl`,
+  "2xl" = `m-2xl`
 }
 
 enum MarginXBucket {
   none = "",
-  sm = `mx-[var(--space-sm)]`,
-  md = `mx-[var(--space-md)]`,
-  lg = `mx-[var(--space-lg)]`,
-  xl = `mx-[var(--space-xl)]`,
-  "2xl" = `mx-[var(--space-2xl)]`
+  sm = `mx-sm`,
+  md = `mx-md`,
+  lg = `mx-lg`,
+  xl = `mx-xl`,
+  "2xl" = `mx-2xl`
 }
 
 enum MarginYBucket {
   none = "",
-  sm = `my-[var(--space-sm)]`,
-  md = `my-[var(--space-md)]`,
-  lg = `my-[var(--space-lg)]`,
-  xl = `my-[var(--space-xl)]`,
-  "2xl" = `my-[var(--space-2xl)]`
+  sm = `my-sm`,
+  md = `my-md`,
+  lg = `my-lg`,
+  xl = `my-xl`,
+  "2xl" = `my-2xl`
 }
 
 enum SpaceXBucket {
   none = "",
-  sm = `space-x-[var(--space-sm)]`,
-  md = `space-x-[var(--space-md)]`,
-  lg = `space-x-[var(--space-lg)]`,
-  xl = `space-x-[var(--space-xl)]`,
-  "2xl" = `space-x-[var(--space-2xl)]`
+  sm = `space-x-sm`,
+  md = `space-x-md`,
+  lg = `space-x-lg`,
+  xl = `space-x-xl`,
+  "2xl" = `space-x-2xl`
 }
 
 enum SpaceYBucket {
   none = "",
-  sm = `space-y-[var(--space-sm)]`,
-  md = `space-y-[var(--space-md)]`,
-  lg = `space-y-[var(--space-lg)]`,
-  xl = `space-y-[var(--space-xl)]`,
-  "2xl" = `space-y-[var(--space-2xl)]`
+  sm = `space-y-sm`,
+  md = `space-y-md`,
+  lg = `space-y-lg`,
+  xl = `space-y-xl`,
+  "2xl" = `space-y-2xl`
 }
 
 enum GapBucket {

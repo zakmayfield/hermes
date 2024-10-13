@@ -30,10 +30,16 @@ const config: Config = {
       maxWidth: {
         ...themeCtx.size
       },
+      minWidth: {
+        ...themeCtx.size
+      },
       width: {
         ...themeCtx.size
       },
       maxHeight: {
+        ...themeCtx.size
+      },
+      minHeight: {
         ...themeCtx.size
       },
       height: {

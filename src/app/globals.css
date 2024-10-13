@@ -5,20 +5,20 @@
 @layer base {
   :root {
     @media (prefers-color-scheme: dark) {
-      --background: #090f15;
-      --foreground: #f8fafc;
-      --primary: #0f172a;
-      --secondary: #1e293b;
-      --tertiary: #334155;
-      --accent: #475569;
+      --background: 9 15 21;
+      --foreground: 248 250 252;
+      --primary: 15 23 42;
+      --secondary: 30 41 59;
+      --tertiary: 51 65 85;
+      --accent: 71 85 105;
     }
 
-    --background: #f8fafc;
-    --foreground: #020617;
-    --primary: #e2e8f0;
-    --secondary: #cbd5e1;
-    --tertiary: #94a3b8;
-    --accent: #64748b;
+    --background: 248 250 252;
+    --foreground: 2 6 23;
+    --primary: 226 232 240;
+    --secondary: 203 213 225;
+    --tertiary: 148 163 184;
+    --accent: 100 116 139;
 
     /* Btn Variant Colors */
     --btn-ghost-bg: 23 37 84 / 0.2; /* bg-cyan-500 */
@@ -42,12 +42,17 @@
     --font-4xl: 2.25rem;
 
     /* DIMENSION SIZES */
-    --size-xs: 18rem;
-    --size-sm: 24rem;
-    --size-md: 30rem;
-    --size-lg: 36rem;
-    --size-xl: 42rem;
+    --size-xs: 16rem;
+    --size-sm: 22rem;
+    --size-md: 28rem;
+    --size-lg: 34rem;
+    --size-xl: 40rem;
     --size-full: 100%;
+  }
+
+  body {
+    @apply text-foreground bg-background;
+    font-family: Arial, Helvetica, sans-serif;
   }
 
   h1 {
@@ -70,7 +75,7 @@
   }
 
   input {
-    @apply px-2 py-1 rounded text-foreground;
+    @apply px-2 py-1 rounded border dark:text-background dark:border-0;
   }
 
   button {
@@ -84,8 +89,10 @@
   }
 }
 
-body {
-  @apply text-foreground;
-  @apply bg-background;
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .demo,
+  .demo-col,
+  .demo-row {
+    @apply border-foreground;
+  }
 }

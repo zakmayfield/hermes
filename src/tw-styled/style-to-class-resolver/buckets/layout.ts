@@ -56,9 +56,9 @@ export const placeBucket = {
 
 enum BorderBucket {
   none = "",
-  sm = "border",
-  md = "border-2",
-  lg = "border-4"
+  sm = "border border-foreground",
+  md = "border-2 border-foreground",
+  lg = "border-4 border-foreground"
 }
 
 export const borderBucket = {

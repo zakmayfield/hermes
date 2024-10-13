@@ -4,12 +4,12 @@ type ThemeCtx = Record<ThemeBuckets, Record<string, string>>;
 
 const themeCtx = {
   colors: {
-    background: "var(--background)",
-    foreground: "var(--foreground)",
-    primary: "var(--primary)",
-    secondary: "var(--secondary)",
-    tertiary: "var(--tertiary)",
-    accent: "var(--accent)"
+    background: "rgb(var(--background))",
+    foreground: "rgb(var(--foreground))",
+    primary: "rgb(var(--primary))",
+    secondary: "rgb(var(--secondary))",
+    tertiary: "rgb(var(--tertiary))",
+    accent: "rgb(var(--accent))"
   },
   spacing: {
     sm: "var(--space-sm)",

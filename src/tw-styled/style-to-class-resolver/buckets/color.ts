@@ -2,32 +2,32 @@ import { Keyof, MultiBucket } from "../types";
 
 enum BackgroundColorBucket {
   none = "",
-  background = "bg-[var(--background)]",
-  foreground = "bg-[var(--foreground)]",
-  primary = "bg-[var(--primary)]",
-  secondary = "bg-[var(--secondary)]",
-  tertiary = "bg-[var(--tertiary)]",
-  accent = "bg-[var(--accent)]"
+  background = "bg-background",
+  foreground = "bg-foreground",
+  primary = "bg-primary",
+  secondary = "bg-secondary",
+  tertiary = "bg-tertiary",
+  accent = "bg-accent"
 }
 
 enum TextColorBucket {
   none = "",
-  background = "text-[color:var(--background)]",
-  foreground = "text-[color:var(--foreground)]",
-  primary = "text-[color:var(--primary)]",
-  secondary = "text-[color:var(--secondary)]",
-  tertiary = "text-[color:var(--tertiary)]",
-  accent = "text-[color:var(--accent)]"
+  background = "text-background",
+  foreground = "text-foreground",
+  primary = "text-primary",
+  secondary = "text-secondary",
+  tertiary = "text-tertiary",
+  accent = "text-accent"
 }
 
 enum BorderColorBucket {
   none = "",
-  background = "border-[color:var(--background)]",
-  foreground = "border-[color:var(--foreground)]",
-  primary = "border-[color:var(--primary)]",
-  secondary = "border-[color:var(--secondary)]",
-  tertiary = "border-[color:var(--tertiary)]",
-  accent = "border-[color:var(--accent)]"
+  background = "border-background",
+  foreground = "border-foreground",
+  primary = "border-primary",
+  secondary = "border-secondary",
+  tertiary = "border-teritary",
+  accent = "border-accent"
 }
 
 export const colorBucket = {

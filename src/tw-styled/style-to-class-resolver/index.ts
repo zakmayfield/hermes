@@ -1,4 +1,6 @@
 import {
+  borderBucket,
+  borderRadiusBucket,
   colorBucket,
   dimensionBucket,
   displayBucket,
@@ -7,7 +9,14 @@ import {
   flexSpacingBucket,
   flexWrapBucket,
   fontSizeBucket,
-  spacingBucket
+  fontWeightBucket,
+  letterSpacingBucket,
+  lineHeightBucket,
+  placeBucket,
+  positionBucket,
+  spacingBucket,
+  textAlignBucket,
+  textDecorationBucket
 } from "./buckets";
 import { Keyof } from "./types";
 
@@ -15,8 +24,20 @@ type SpacingKeys = Keyof<(typeof spacingBucket)["padding"]>;
 type DimensionKeys = Keyof<(typeof dimensionBucket)["width"]>;
 type ColorKeys = Keyof<(typeof colorBucket)["backgroundColor"]>;
 type FlexPositionKeys = Keyof<(typeof flexPositionBucket)["flexRowPosition"]>;
+
 type DisplayKeys = Keyof<typeof displayBucket>;
+type PositionKeys = Keyof<typeof positionBucket>;
+type PlaceKeys = Keyof<typeof placeBucket>;
+type BorderKeys = Keyof<typeof borderBucket>;
+type BorderRadiusKeys = Keyof<typeof borderRadiusBucket>;
+
 type FontSizeKeys = Keyof<typeof fontSizeBucket>;
+type FontWeightKeys = Keyof<typeof fontWeightBucket>;
+type TextAlignKeys = Keyof<typeof textAlignBucket>;
+type TextDecorationKeys = Keyof<typeof textDecorationBucket>;
+type LineHeightKeys = Keyof<typeof lineHeightBucket>;
+type LetterSpacingKeys = Keyof<typeof letterSpacingBucket>;
+
 type FlexSpacingKeys = Keyof<typeof flexSpacingBucket>;
 type FlexWrapKeys = Keyof<typeof flexWrapBucket>;
 type FlexSizeKeys = Keyof<typeof flexSizeBucket>;
@@ -44,8 +65,17 @@ export type Styles = {
   borderColor: ColorKeys;
 
   fontSize: FontSizeKeys;
+  fontWeight: FontWeightKeys;
+  textAlign: TextAlignKeys;
+  textDecoration: TextDecorationKeys;
+  lineHeight: LineHeightKeys;
+  letterSpacing: LetterSpacingKeys;
+  border: BorderKeys;
+  borderRadius: BorderRadiusKeys;
 
   display: DisplayKeys;
+  position: PositionKeys;
+  place: PlaceKeys;
 
   flexRowPosition: FlexPositionKeys;
   flexColPosition: FlexPositionKeys;
@@ -86,9 +116,27 @@ function extractClassName(styleKey: keyof Styles, styleValue: string) {
 
     case "fontSize":
       return fontSizeBucket[styleValue as FontSizeKeys];
+    case "fontWeight":
+      return fontWeightBucket[styleValue as FontWeightKeys];
+    case "textAlign":
+      return textAlignBucket[styleValue as TextAlignKeys];
+    case "textDecoration":
+      return textDecorationBucket[styleValue as TextDecorationKeys];
+    case "lineHeight":
+      return lineHeightBucket[styleValue as LineHeightKeys];
+    case "letterSpacing":
+      return letterSpacingBucket[styleValue as LetterSpacingKeys];
 
     case "display":
       return displayBucket[styleValue as DisplayKeys];
+    case "position":
+      return positionBucket[styleValue as PositionKeys];
+    case "place":
+      return placeBucket[styleValue as PlaceKeys];
+    case "border":
+      return borderBucket[styleValue as BorderKeys];
+    case "borderRadius":
+      return borderRadiusBucket[styleValue as BorderRadiusKeys];
 
     case "flexRowPosition":
     case "flexColPosition":

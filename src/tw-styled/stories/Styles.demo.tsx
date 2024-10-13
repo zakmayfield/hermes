@@ -10,6 +10,13 @@ export const StylesDemo = () => {
     foobar: {
       display: "flex-row",
       gap: "lg"
+    },
+    foobaz: {
+      textDecoration: "underline",
+      border: "sm",
+      borderRadius: "lg",
+      padding: "lg",
+      borderColor: "primary"
     }
   });
 
@@ -21,7 +28,7 @@ export const StylesDemo = () => {
         <div className="demo bg-secondary">
           <div className="demo bg-tertiary">
             <div className={`demo bg-accent ${result.get("foobar")}`}>
-              <p className={`demo`}>Hello There</p>
+              <p className={`${result.get("foobaz")}`}>Hello There</p>
               <p className={`demo`}>General Kenobi</p>
             </div>
           </div>

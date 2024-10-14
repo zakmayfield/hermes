@@ -1,5 +1,5 @@
 import { TwPluginRules } from "./config";
-import { useRgb } from "./useRgb";
+import { rgb } from "./useRgb";
 
 const demo: TwPluginRules = {
   ".demo": {
@@ -44,17 +44,17 @@ const btnVariants: TwPluginRules = {
     borderWidth: "1px",
     backgroundColor: "transparent",
     "&:hover": {
-      backgroundColor: useRgb("--btn-ghost-bg")
+      backgroundColor: rgb("--btn-ghost-bg")
     },
     "&:disabled": {
       backgroundColor: "transparent"
     }
   },
   ".btn-primary": {
-    backgroundColor: useRgb("--btn-primary-bg")
+    backgroundColor: rgb("--btn-primary-bg")
   },
   ".btn-warning": {
-    backgroundColor: useRgb("--btn-warning-bg")
+    backgroundColor: rgb("--btn-warning-bg")
   }
 };
 

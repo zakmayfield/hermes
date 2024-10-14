@@ -1,5 +1,5 @@
 import * as buckets from "./buckets";
-import { Keyof, Styles, StyleToClassProps } from "./types";
+import { Keyof, Styles } from "./types";
 
 export const extractClassName = (styleKey: keyof Styles, styleValue: string) => {
   switch (styleKey) {

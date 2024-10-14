@@ -1,4 +1,4 @@
-type ThemeBuckets = "colors" | "spacing" | "fontSize";
+type ThemeBuckets = "colors" | "spacing" | "fontSize" | "size";
 
 type ThemeCtx = Record<ThemeBuckets, Record<string, string>>;
 

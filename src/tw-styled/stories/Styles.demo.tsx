@@ -29,6 +29,11 @@ export const StylesDemo = () => {
           </div>
         </div>
       </div>
+
+      <div className="demo flex flex-col h-48 items-end justify-center">
+        <div className="demo" />
+        <div className="demo" />
+      </div>
     </div>
   );
 };

@@ -16,13 +16,13 @@ enum FlexRowPositionBucket {
 enum FlexColPositionBucket {
   none = "none",
   "top-left" = "justify-start",
-  "center-left" = "justify-center",
-  "bottom-left" = "justify-end",
   "top-center" = "items-center justify-start",
-  "center-center" = "items-center justify-center",
-  "bottom-center" = "items-center justify-end",
   "top-right" = "items-end justify-start",
-  "center-right" = "items-end justify-end",
+  "center-left" = "justify-center",
+  "center-center" = "items-center justify-center",
+  "center-right" = "items-end justify-center",
+  "bottom-left" = "justify-end",
+  "bottom-center" = "items-center justify-end",
   "bottom-right" = "items-end justify-end"
 }
 

@@ -60,11 +60,15 @@ export type Styles = {
   buttonWidth: Keyof<typeof buckets.buttonWidthBucket>;
   buttonHeight: Keyof<typeof buckets.buttonHeightBucket>;
   buttonVariant: Keyof<typeof buckets.buttonVariantBucket>;
+
+  className: string;
 };
 
 type ButtonStyles = "buttonSize" | "buttonWidth" | "buttonHeight" | "buttonVariant";
 
-export type BaseStyles = Omit<Styles, ButtonStyles>;
+export type BaseStyles = Partial<Omit<Styles, ButtonStyles>>;
 
 type PartialStyleProps = Partial<Styles>;
 export type StyleToClassProps = Record<string, PartialStyleProps>;
+
+export type UiClassesProp<T> = Omit<T, "style"> & { classes: Map<string, string> };

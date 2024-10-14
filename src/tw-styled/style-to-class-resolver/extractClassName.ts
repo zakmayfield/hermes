@@ -109,5 +109,8 @@ export const extractClassName = (styleKey: keyof Styles, styleValue: string) => 
       return buckets.buttonVariantBucket[
         styleValue as Keyof<typeof buckets.buttonVariantBucket>
       ];
+
+    case "className":
+      return styleValue;
   }
 };

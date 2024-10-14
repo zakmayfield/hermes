@@ -44,17 +44,17 @@ export const Demo: WrapperStory = {
       parentWrapper: {
         border: "sm",
         padding: "lg",
-        rounded: "md"
+        borderRadius: "md"
       },
       children: {
         border: "sm",
         padding: "lg",
-        rounded: "md"
+        borderRadius: "md"
       },
       childrenWrapper: {
         border: "sm",
         padding: "lg",
-        rounded: "md"
+        borderRadius: "md"
       }
     }
   }

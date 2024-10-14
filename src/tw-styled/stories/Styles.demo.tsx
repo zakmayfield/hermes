@@ -3,36 +3,15 @@ import React from "react";
 import { styleToClass } from "../style-to-class-resolver";
 
 export const StylesDemo = () => {
-  const result = styleToClass({
-    foobar: {
-      display: "flex-row",
-      gap: "lg"
-    },
-    foobaz: {
-      textDecoration: "underline",
-      border: "sm",
-      borderRadius: "lg",
-      padding: "lg"
-    }
+  const classes = styleToClass({
+    a: { backgroundColor: "primary", className: "demo" },
+    b: { backgroundColor: "secondary", className: "demo" }
   });
 
-  console.log({ result });
-
   return (
-    <div className="space-y-6">
-      <div className={`demo bg-primary`}>
-        <div className="demo bg-secondary">
-          <div className="demo bg-tertiary">
-            <div className={`demo bg-accent ${result.get("foobar")}`}>
-              <p className={`${result.get("foobaz")}`}>Hello There</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="demo flex flex-col h-48 items-end justify-center">
-        <div className="demo" />
-        <div className="demo" />
+    <div className="demo h-screen">
+      <div className={classes.get("a")}>
+        <div className={classes.get("b")}></div>
       </div>
     </div>
   );

@@ -1,8 +1,9 @@
 "use client";
-import { Children, BaseStyleProps, HeadingElements } from "@/tw-styled/types";
-import { useStyleResolver } from "@/tw-styled/tools";
+import { Children, HeadingElements, BaseStyles } from "@/tw-styled/types";
+import { useStyleToClass } from "@/tw-styled/tools";
 import { defaultStyles } from "./Layout.defaultStyles";
 import { useLayoutUi } from "./Layout.ui";
+import { useDefaultStyles } from "../hooks";
 
 export type LayoutProps = {
   children?: Children;
@@ -10,19 +11,20 @@ export type LayoutProps = {
   headingAs?: HeadingElements;
   headingChildren?: Children;
   style?: {
-    parentWrapper?: BaseStyleProps;
-    headingWrapper?: BaseStyleProps;
-    heading?: BaseStyleProps;
-    headingChildren?: BaseStyleProps;
-    childrenWrapper?: BaseStyleProps;
-    children?: BaseStyleProps;
+    parentWrapper?: BaseStyles;
+    headingWrapper?: BaseStyles;
+    heading?: BaseStyles;
+    headingChildren?: BaseStyles;
+    childrenWrapper?: BaseStyles;
+    children?: BaseStyles;
   };
 };
 
 export const Layout = (props: LayoutProps) => {
   const { style, ...rest } = props;
 
-  const classes = useStyleResolver({ ...defaultStyles(style) });
+  const styles = useDefaultStyles(style, defaultStyles);
+  const classes = useStyleToClass(styles);
   const Layout = useLayoutUi({ classes, ...rest });
 
   return Layout;

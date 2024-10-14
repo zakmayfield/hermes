@@ -43,23 +43,24 @@ export const Demo: StoryObj<typeof meta> = {
   args: {
     style: {
       parentWrapper: {
-        rounded: "lg",
+        borderRadius: "lg",
         border: "sm",
         className: "border-orange-500"
       },
       headingWrapper: {
-        rounded: "lg",
-        border: "sm"
+        borderRadius: "lg",
+        border: "sm",
+        padding: "lg"
       },
       heading: {},
       headingChildren: {},
       childrenWrapper: {
-        rounded: "lg",
+        borderRadius: "lg",
         border: "sm",
         className: "border-blue-500"
       },
       children: {
-        rounded: "lg",
+        borderRadius: "lg",
         border: "sm",
         padding: "sm",
         className: "border-red-500"

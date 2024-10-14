@@ -1,7 +1,7 @@
-import { PartialStyleProps } from "@/tw-styled/types";
+import { StyleToClassProps } from "@/tw-styled/types";
 import { LayoutProps } from "./Layout";
 
-export const defaultStyles = (style?: PartialStyleProps) => {
+export const defaultStyles = (style?: StyleToClassProps) => {
   return {
     parentWrapper: {
       padding: "lg",
@@ -20,7 +20,7 @@ export const defaultStyles = (style?: PartialStyleProps) => {
     },
     childrenWrapper: {
       padding: "md",
-      flex: "col",
+      display: "flex-col",
       gap: "lg",
       ...style?.childrenWrapper
     },

@@ -1,18 +1,16 @@
-import { UiProps } from "@/tw-styled/types";
+import { UiClassesProp } from "@/tw-styled/types";
 import { LayoutProps } from "./Layout";
 import React from "react";
 
-export const useLayoutUi = (props: UiProps<LayoutProps>) => {
+export const useLayoutUi = (props: UiClassesProp<LayoutProps>) => {
   const { children, classes, headingAs = "h1", title, headingChildren } = props;
 
-  const {
-    parentWrapper: parentWrapperClasses,
-    headingWrapper: headingWrapperClasses,
-    heading: headingClasses,
-    headingChildren: headingChildrenClasses,
-    childrenWrapper: childrenWrapperClasses,
-    children: childrenClasses
-  } = classes;
+  const parentWrapperClasses = classes.get("parentWrapper");
+  const headingWrapperClasses = classes.get("headingWrapper");
+  const headingClasses = classes.get("heading");
+  const headingChildrenClasses = classes.get("headingChildren");
+  const childrenWrapperClasses = classes.get("childrenWrapper");
+  const childrenClasses = classes.get("children");
 
   const Children = React.useMemo(() => {
     const childs = React.Children.map(children, (child) => {

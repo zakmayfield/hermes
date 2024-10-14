@@ -15,6 +15,7 @@ export type FieldErrorProps = {
 export const FieldError = (props: FieldErrorProps) => {
   const { style, ...rest } = props;
 
+  // TODO: *** Implement memoized style to class resolver ***
   const classes = useStyleResolver({ ...defaultStyles(style) });
   const FieldError = useFieldErrorUi({ classes, ...rest });
 

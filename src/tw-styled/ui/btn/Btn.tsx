@@ -32,6 +32,7 @@ export type BtnProps = {
 export const Btn = (props: BtnProps) => {
   const { style, options, ...rest } = props;
 
+  // TODO: *** Implement memoized style to class resolver ***
   const classes = useStyleResolver({ ...defaultStyles(style, options) });
   const Btn = useBtnUi({ classes, ...rest });
 

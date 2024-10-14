@@ -1,4 +1,4 @@
-import { PartialStyleProps, StyleToClassProps } from "@/tw-styled/types";
+import { StyleToClassProps } from "@/tw-styled/types";
 import { FormFieldProps } from "./FormField";
 
 export const defaultStyles = (style?: StyleToClassProps) => {

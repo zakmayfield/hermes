@@ -1,4 +1,4 @@
-import { BtnVariants, BaseStyleProps } from "@/tw-styled/types";
+import { BtnVariants, BaseStyles, FullStyles } from "@/tw-styled/types";
 import { Form, FormField } from "@/tw-styled/ui";
 
 type FormDemoProps = {
@@ -11,11 +11,11 @@ type FormDemoProps = {
     width?: "sm" | "md" | "lg" | "full" | "none";
   };
   style?: {
-    formStyles?: BaseStyleProps;
-    titleStyles?: BaseStyleProps;
-    childrenWrapperStyles?: BaseStyleProps;
-    childrenStyles?: BaseStyleProps;
-    buttonStyles?: BaseStyleProps;
+    formStyles?: BaseStyles;
+    titleStyles?: BaseStyles;
+    childrenWrapperStyles?: BaseStyles;
+    childrenStyles?: BaseStyles;
+    buttonStyles?: FullStyles;
   };
 };
 

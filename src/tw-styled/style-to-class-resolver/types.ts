@@ -67,6 +67,7 @@ export type Styles = {
 type ButtonStyles = "buttonSize" | "buttonWidth" | "buttonHeight" | "buttonVariant";
 
 export type BaseStyles = Partial<Omit<Styles, ButtonStyles>>;
+export type FullStyles = Partial<Styles>;
 
 type PartialStyleProps = Partial<Styles>;
 export type StyleToClassProps = Record<string, PartialStyleProps>;

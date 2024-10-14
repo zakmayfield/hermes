@@ -1,9 +1,9 @@
 import React from "react";
-import { UiProps } from "@/tw-styled/types";
+import { UiClassesProp } from "@/tw-styled/types";
 import { FormProps } from "./Form";
 import { Btn } from "../btn/Btn";
 
-export const useFormUi = (props: UiProps<FormProps>) => {
+export const useFormUi = (props: UiClassesProp<FormProps>) => {
   const {
     submitHandler,
     isPending = false,
@@ -13,8 +13,11 @@ export const useFormUi = (props: UiProps<FormProps>) => {
     buttonProps
   } = props;
 
-  const { formStyles, titleStyles, childrenWrapperStyles, childrenStyles, buttonStyles } =
-    classes;
+  const formStyles = classes.get("formStyles");
+  const titleStyles = classes.get("titleStyles");
+  const childrenWrapperStyles = classes.get("childrenWrapperStyles");
+  const childrenStyles = classes.get("childrenStyles");
+  const buttonStyles = classes.get("buttonStyles");
 
   const Title = titleText && <h3 className={titleStyles}>{titleText}</h3>;
 

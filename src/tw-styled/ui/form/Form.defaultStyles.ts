@@ -1,11 +1,11 @@
-import { PartialStyleProps } from "@/tw-styled/types";
+import { StyleToClassProps } from "@/tw-styled/types";
 import { FormProps } from "./Form";
 
-export const defaultStyles = (style?: PartialStyleProps) => {
+export const defaultStyles = (style?: StyleToClassProps) => {
   return {
     formStyles: {
       border: "sm",
-      rounded: "md",
+      borderRadius: "md",
       width: "md",
       padding: "md",
       spaceY: "lg",
@@ -16,7 +16,7 @@ export const defaultStyles = (style?: PartialStyleProps) => {
       ...style?.titleStyles
     },
     childrenWrapperStyles: {
-      flex: "col",
+      display: "flex-col",
       gap: "md",
       ...style?.childrenWrapperStyles
     },

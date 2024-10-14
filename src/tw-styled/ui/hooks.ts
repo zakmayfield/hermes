@@ -7,5 +7,5 @@ export const useDefaultStyles = (
 ) => {
   return React.useMemo(() => {
     return cb?.(style) || { ...style };
-  }, [style]);
+  }, [style, cb]);
 };

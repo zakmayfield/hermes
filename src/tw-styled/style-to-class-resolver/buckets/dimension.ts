@@ -37,7 +37,7 @@ enum HeightBucket {
   md = `h-md`,
   lg = `h-lg`,
   xl = `h-xl`,
-  full = `h-full`
+  full = `h-screen`
 }
 
 enum MinHeightBucket {
@@ -47,7 +47,7 @@ enum MinHeightBucket {
   md = `min-h-md`,
   lg = `min-h-lg`,
   xl = `min-h-xl`,
-  full = `min-h-full`
+  full = `min-h-screen`
 }
 
 enum MaxHeightBucket {
@@ -57,7 +57,7 @@ enum MaxHeightBucket {
   md = `max-h-md`,
   lg = `max-h-lg`,
   xl = `max-h-xl`,
-  full = `max-h-full`
+  full = `max-h-screen`
 }
 
 export const dimensionBucket = {

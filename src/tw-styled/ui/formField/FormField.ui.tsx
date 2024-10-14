@@ -1,21 +1,13 @@
-import { UiProps } from "@/tw-styled/types";
+import { UiClassesProp } from "@/tw-styled/types";
 import { FormFieldProps } from "./FormField";
 import { useIcons } from "@/tw-styled/tools";
 import { utilityHooks } from "@/shared/hooks";
 import { FieldError } from "../fieldError/FieldError";
 import React from "react";
 
-export const useFormFieldUi = (props: UiProps<FormFieldProps<any>>) => {
+export const useFormFieldUi = (props: UiClassesProp<FormFieldProps<any>>) => {
   const {
-    classes: {
-      parentWrapper,
-      label,
-      input,
-      fieldError,
-      labelInputWrapper,
-      errorIcon,
-      errorInputWrapper
-    },
+    classes,
     inputType = "text",
     name,
     labelText,
@@ -23,6 +15,14 @@ export const useFormFieldUi = (props: UiProps<FormFieldProps<any>>) => {
     hiddenElements: { error_hidden, label_hidden } = {},
     register
   } = props;
+
+  const parentWrapperClasses = classes.get("parentWrapper");
+  const labelClasses = classes.get("label");
+  const inputClasses = classes.get("input");
+  const fieldErrorClasses = classes.get("fieldError");
+  const labelInputWrapperClasses = classes.get("labelInputWrapper");
+  const errorIconClasses = classes.get("errorIcon");
+  const errorInputWrapperClasses = classes.get("errorInputWrapper");
 
   const icons = useIcons({
     names: ["error"]
@@ -39,7 +39,7 @@ export const useFormFieldUi = (props: UiProps<FormFieldProps<any>>) => {
     <label
       htmlFor={name as string}
       hidden={label_hidden}
-      className={label}
+      className={labelClasses}
     >
       {labelText}
     </label>
@@ -53,10 +53,10 @@ export const useFormFieldUi = (props: UiProps<FormFieldProps<any>>) => {
         placeholder={labelText}
         aria-label={name as string}
         aria-invalid={!!errorMessage}
-        className={input}
+        className={inputClasses}
       />
     );
-  }, [errorMessage, name, inputType, labelText, register, input]);
+  }, [errorMessage, name, inputType, labelText, register, inputClasses]);
 
   const Error = React.useMemo(() => {
     return (
@@ -64,24 +64,24 @@ export const useFormFieldUi = (props: UiProps<FormFieldProps<any>>) => {
         errorMessage={errorMessage}
         described_by={name as string}
         error_hidden={error_hidden}
-        style={{ parentWrapper: { className: fieldError } }}
+        style={{ parentWrapper: { className: fieldErrorClasses } }}
       />
     );
-  }, [errorMessage, name, error_hidden, fieldError]);
+  }, [errorMessage, name, error_hidden, fieldErrorClasses]);
 
   const ErrorIcon = errorMessage && (
     <icons.error
       id={`${name as string}_error_icon`}
-      className={errorIcon}
+      className={errorIconClasses}
     />
   );
 
   const FormField = (
-    <div className={parentWrapper}>
-      <div className={labelInputWrapper}>
+    <div className={parentWrapperClasses}>
+      <div className={labelInputWrapperClasses}>
         {Label}
 
-        <div className={errorInputWrapper}>
+        <div className={errorInputWrapperClasses}>
           {Input}
           {ErrorIcon}
           {Tooltip}

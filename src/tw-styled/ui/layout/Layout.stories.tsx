@@ -45,6 +45,7 @@ export const Demo: StoryObj<typeof meta> = {
       parentWrapper: {
         borderRadius: "lg",
         border: "sm",
+        height: "full",
         className: "border-orange-500"
       },
       headingWrapper: {

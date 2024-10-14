@@ -6,6 +6,6 @@ export const useDefaultStyles = (
   cb?: (style?: StyleToClassProps) => StyleToClassProps
 ) => {
   return React.useMemo(() => {
-    return cb?.(style) || {};
+    return cb?.(style) || { ...style };
   }, [style]);
 };

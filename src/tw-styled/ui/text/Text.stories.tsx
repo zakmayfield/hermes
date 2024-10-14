@@ -13,4 +13,16 @@ const meta = {
 export default meta;
 export type TextStory = StoryObj<typeof meta>;
 
-export const Demo: TextStory = {};
+export const Demo: TextStory = {
+  args: {
+    style: {
+      parentWrapper: {
+        border: "sm",
+        padding: "lg",
+        borderRadius: "lg",
+        backgroundColor: "primary",
+        lineHeight: "tight"
+      }
+    }
+  }
+};

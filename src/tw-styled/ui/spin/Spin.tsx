@@ -1,19 +1,20 @@
-import { useStyleResolver } from "@/tw-styled/tools";
-import { BaseStyleProps } from "@/tw-styled/types";
-import { defaultStyles } from "./Spin.defaultStyles";
+import { useStyleToClass } from "@/tw-styled/tools";
+import { BaseStyles } from "@/tw-styled/types";
+import { useSpinStyles } from "./Spin.styles";
 import { useSpinUi } from "./Spin.ui";
 
 export type SpinProps = {
   style?: {
-    parentWrapper?: BaseStyleProps;
-    icon?: BaseStyleProps;
+    parentWrapper?: BaseStyles;
+    icon?: BaseStyles;
   };
 };
 
 export const Spin = (props: SpinProps) => {
   const { style } = props;
 
-  const classes = useStyleResolver({ ...defaultStyles(style) });
+  const styles = useSpinStyles(style);
+  const classes = useStyleToClass(styles);
   const Spin = useSpinUi({ classes });
 
   return Spin;

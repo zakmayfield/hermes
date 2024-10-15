@@ -1,7 +1,7 @@
-import { PartialStyleProps } from "@/tw-styled/types";
+import { StyleToClassProps } from "@/tw-styled/types";
 import { SpinProps } from "./Spin";
 
-export const defaultStyles = (style?: PartialStyleProps) => {
+export const useSpinStyles = (style?: StyleToClassProps) => {
   return {
     parentWrapper: {
       ...style?.wrapper
@@ -9,7 +9,7 @@ export const defaultStyles = (style?: PartialStyleProps) => {
     icon: {
       place: "center",
       fontSize: "lg",
-      animate: "spin",
+      animation: "spin",
       ...style?.icon
     }
   } satisfies SpinProps["style"];

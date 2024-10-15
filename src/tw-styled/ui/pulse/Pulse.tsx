@@ -1,6 +1,6 @@
 import { useStyleToClass } from "@/tw-styled/tools";
 import { BaseStyles, Sizes, Themes } from "@/tw-styled/types";
-import { usePulseStyles } from "./Pulse.defaultStyles";
+import { usePulseStyles } from "./Pulse.styles";
 import { usePulseUi } from "./Pulse.ui";
 
 export type PulseProps = {

@@ -1,21 +1,23 @@
-import { UiProps } from "@/tw-styled/types";
+import { UiClassesProp } from "@/tw-styled/types";
 import { FieldErrorProps } from "./FieldError";
 import React from "react";
 
-export const useFieldErrorUi = (props: UiProps<FieldErrorProps>) => {
+export const useFieldErrorUi = (props: UiClassesProp<FieldErrorProps>) => {
   const { errorMessage, described_by, error_hidden, classes } = props;
+
+  const parentWrapper = classes.get("parentWrapper");
 
   const FieldError = React.useMemo(() => {
     return (
       <p
         aria-describedby={described_by}
         hidden={error_hidden}
-        className={classes.parentWrapper}
+        className={parentWrapper}
       >
         {errorMessage}
       </p>
     );
-  }, [errorMessage, described_by, error_hidden, classes]);
+  }, [errorMessage, described_by, error_hidden, parentWrapper]);
 
   return FieldError;
 };

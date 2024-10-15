@@ -1,7 +1,7 @@
-import { PartialStyleProps } from "@/tw-styled/types";
+import { StyleToClassProps } from "@/tw-styled/types";
 import { FieldErrorProps } from "./FieldError";
 
-export const defaultStyles = (style?: PartialStyleProps) => {
+export const defaultStyles = (style?: StyleToClassProps) => {
   return {
     parentWrapper: {
       ...style?.parentWrapper

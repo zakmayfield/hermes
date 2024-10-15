@@ -1,23 +1,26 @@
 "use client";
-import { Children, BaseStyleProps, WrapperElements } from "@/tw-styled/types";
-import { useStyleResolver } from "@/tw-styled/tools";
+import { Children, WrapperElements, BaseStyles } from "@/tw-styled/types";
 import { defaultStyles } from "./Wrapper.defaultStyles";
 import { useWrapperUi } from "./Wrapper.ui";
+import { useStyleToClass } from "@/tw-styled/tools";
+import { useDefaultStyles } from "../hooks";
 
 export type WrapperProps = {
   children?: Children;
   as?: WrapperElements;
   style?: {
-    parentWrapper?: BaseStyleProps;
-    childrenWrapper?: BaseStyleProps;
-    children?: BaseStyleProps;
+    parentWrapper?: BaseStyles;
+    childrenWrapper?: BaseStyles;
+    children?: BaseStyles;
   };
 };
 
 export const Wrapper = (props: WrapperProps) => {
   const { style, ...rest } = props;
 
-  const classes = useStyleResolver({ ...defaultStyles(style) });
+  const styles = useDefaultStyles(style, defaultStyles);
+  const classes = useStyleToClass(styles);
+
   const Wrapper = useWrapperUi({ ...rest, classes });
 
   return Wrapper;

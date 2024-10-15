@@ -1,22 +1,23 @@
-import { useStyleResolver } from "@/tw-styled/tools";
-import { BaseStyleProps, Sizes, Themes } from "@/tw-styled/types";
-import { defaultStyles } from "./Pulse.defaultStyles";
+import { useStyleToClass } from "@/tw-styled/tools";
+import { BaseStyles, Themes } from "@/tw-styled/types";
+import { usePulseStyles } from "./Pulse.styles";
 import { usePulseUi } from "./Pulse.ui";
 
 export type PulseProps = {
   theme?: Themes;
-  size?: Sizes;
+  size?: "sm" | "md" | "lg";
   style?: {
-    parentWrapper?: BaseStyleProps;
-    childrenWrapper?: BaseStyleProps;
-    children?: BaseStyleProps;
+    parentWrapper?: BaseStyles;
+    childrenWrapper?: BaseStyles;
+    children?: BaseStyles;
   };
 };
 
 export const Pulse = (props: PulseProps) => {
   const { style, theme, ...rest } = props;
 
-  const classes = useStyleResolver({ ...defaultStyles(style, theme) });
+  const styles = usePulseStyles(style, theme);
+  const classes = useStyleToClass(styles);
   const Pulse = usePulseUi({ classes, ...rest });
 
   return Pulse;

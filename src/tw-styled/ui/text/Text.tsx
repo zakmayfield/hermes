@@ -1,8 +1,9 @@
 "use client";
-import { Children, BaseStyleProps, TextElements } from "@/tw-styled/types";
-import { useStyleResolver } from "@/tw-styled/tools";
+import { Children, TextElements, BaseStyles } from "@/tw-styled/types";
+import { useStyleToClass } from "@/tw-styled/tools";
 import { defaultStyles } from "./Text.defaultStyles";
 import { useTextUi } from "./Text.ui";
+import { useDefaultStyles } from "../hooks";
 
 export type TextProps = {
   as?: TextElements;
@@ -10,14 +11,15 @@ export type TextProps = {
   described_by?: string;
   is_hidden?: boolean;
   style?: {
-    parentWrapper?: BaseStyleProps;
+    parentWrapper?: BaseStyles;
   };
 };
 
 export const Text = (props: TextProps) => {
   const { style, ...rest } = props;
 
-  const classes = useStyleResolver({ ...defaultStyles(style) });
+  const styles = useDefaultStyles(style, defaultStyles);
+  const classes = useStyleToClass(styles);
   const Text = useTextUi({ classes, ...rest });
 
   return Text;

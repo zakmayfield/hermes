@@ -36,10 +36,11 @@ export default async function RootLayout({
           <Layout
             style={{
               parentWrapper: {
-                width: "3xl",
+                width: "xl",
                 place: "center",
                 border: "sm",
-                height: "screen",
+                // TODO: *** Configure "screen" option for height ***
+                height: "full",
                 className: "border-orange-500"
               }
             }}

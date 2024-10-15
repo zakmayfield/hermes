@@ -1,21 +1,24 @@
-import { UiProps } from "@/tw-styled/types";
+import { UiClassesProp } from "@/tw-styled/types";
 import { HeadingProps } from "./Heading";
 import React from "react";
 
-export const useHeadingUi = (props: UiProps<HeadingProps>) => {
+export const useHeadingUi = (props: UiClassesProp<HeadingProps>) => {
   const { as = "h1", text = "", children, classes } = props;
-  const { childrenWrapper, heading, parentWrapper } = classes;
+
+  const childrenWrapperClasses = classes.get("childrenWrapper");
+  const headingClasses = classes.get("heading");
+  const parentWrapperClasses = classes.get("parentWrapper");
 
   const ChildrenWrapper = React.useMemo(() => {
-    return <div className={childrenWrapper}>{children}</div>;
-  }, [children, childrenWrapper]);
+    return <div className={childrenWrapperClasses}>{children}</div>;
+  }, [children, childrenWrapperClasses]);
 
   const HeadingElement = React.useMemo(() => {
-    return React.createElement(as, { className: heading }, text);
-  }, [as, text, heading]);
+    return React.createElement(as, { className: headingClasses }, text);
+  }, [as, text, headingClasses]);
 
   const Heading = (
-    <div className={parentWrapper}>
+    <div className={parentWrapperClasses}>
       {HeadingElement}
       {ChildrenWrapper}
     </div>

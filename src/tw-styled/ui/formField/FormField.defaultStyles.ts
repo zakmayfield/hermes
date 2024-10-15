@@ -1,10 +1,10 @@
-import { PartialStyleProps } from "@/tw-styled/types";
+import { StyleToClassProps } from "@/tw-styled/types";
 import { FormFieldProps } from "./FormField";
 
-export const defaultStyles = (style?: PartialStyleProps) => {
+export const defaultStyles = (style?: StyleToClassProps) => {
   return {
     parentWrapper: {
-      flex: "col",
+      display: "flex-col",
       gap: "sm",
       ...style?.parentWrapper
     },
@@ -20,7 +20,7 @@ export const defaultStyles = (style?: PartialStyleProps) => {
       ...style?.fieldError
     },
     labelInputWrapper: {
-      flex: "col",
+      display: "flex-col",
       gap: "sm",
       ...style?.labelInputWrapper
     },
@@ -31,7 +31,7 @@ export const defaultStyles = (style?: PartialStyleProps) => {
       ...style?.errorIcon
     },
     errorInputWrapper: {
-      flex: "row",
+      display: "flex-row",
       width: "full",
       position: "relative",
       ...style?.errorInputWrapper

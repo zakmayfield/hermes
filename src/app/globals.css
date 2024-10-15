@@ -2,33 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background-color: 10 10 10;
-    --background-color-disabled: 10 10 10 / 0.6;
-    --foreground-color: 237 237 237;
-    --foreground-color-disabled: 237 237 237 / 0.6;
-  }
-}
-
 @layer base {
   :root {
-    /* Layout */
-    --background-color: 255 255 255;
-    --background-color-disabled: 255 255 255 / 0.6;
-    --foreground-color: 23 23 23;
-    --foreground-color-disabled: 23 23 23 / 0.6;
+    @media (prefers-color-scheme: dark) {
+      --background: 9 15 21;
+      --foreground: 248 250 252;
+      --primary: 15 23 42;
+      --secondary: 30 41 59;
+      --tertiary: 51 65 85;
+      --accent: 71 85 105;
+    }
 
-    /* Bg Colors */
-    --primary-color: 15 23 42; /* bg-slate-900 */
-    --secondary-color: 30 41 59; /* bg-slate-800 */
-    --tertiary-color: 51 65 85; /* bg-slate-700 */
-    --accent-color: 71 85 105; /* bg-slate-600 */
+    --background: 248 250 252;
+    --foreground: 2 6 23;
+    --primary: 226 232 240;
+    --secondary: 203 213 225;
+    --tertiary: 148 163 184;
+    --accent: 100 116 139;
 
-    /* Btn Variants */
+    /* Btn Variant Colors */
     --btn-ghost-bg: 23 37 84 / 0.2; /* bg-cyan-500 */
     --btn-primary-bg: 21 128 61; /* bg-green-700 */
     --btn-warning-bg: 185 28 28; /* bg-red-700 */
+
+    /* SPACING */
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 2.5rem;
+
+    /* FONT SIZE */
+    --font-sm: 0.75rem;
+    --font-md: 1rem;
+    --font-lg: 1.25rem;
+    --font-xl: 1.5rem;
+    --font-2xl: 1.75rem;
+    --font-3xl: 2rem;
+    --font-4xl: 2.25rem;
+
+    /* DIMENSION SIZES */
+    --size-xs: 16rem;
+    --size-sm: 22rem;
+    --size-md: 28rem;
+    --size-lg: 34rem;
+    --size-xl: 40rem;
+    --size-full: 100%;
+  }
+
+  body {
+    @apply text-foreground bg-background;
+    font-family: Arial, Helvetica, sans-serif;
   }
 
   h1 {
@@ -51,7 +75,7 @@
   }
 
   input {
-    @apply text-black px-2 py-1 rounded;
+    @apply px-2 py-1 rounded border dark:text-background dark:border-0;
   }
 
   button {
@@ -65,8 +89,10 @@
   }
 }
 
-body {
-  @apply text-foreground;
-  @apply bg-background;
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .demo,
+  .demo-col,
+  .demo-row {
+    @apply border-foreground;
+  }
 }

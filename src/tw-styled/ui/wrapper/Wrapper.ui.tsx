@@ -1,11 +1,13 @@
-import { UiProps } from "@/tw-styled/types";
+import { UiClassesProp } from "@/tw-styled/types";
 import { WrapperProps } from "./Wrapper";
 import React from "react";
 
-export const useWrapperUi = (props: UiProps<WrapperProps>) => {
+export const useWrapperUi = (props: UiClassesProp<WrapperProps>) => {
   const { as = "div", children, classes } = props;
 
-  const { children: childrenStyles, childrenWrapper, parentWrapper } = classes;
+  const childrenClasses = classes.get("children");
+  const childrenWrapperClasses = classes.get("childrenWrapper");
+  const parentWrapperClasses = classes.get("parentWrapper");
 
   const Children = React.useMemo(() => {
     const childs = React.Children.map(children, (child) => {
@@ -15,25 +17,25 @@ export const useWrapperUi = (props: UiProps<WrapperProps>) => {
           {
             ...child.props,
             key: child.key,
-            className: childrenStyles
+            className: childrenClasses
           },
           child.props.children
         );
       } else {
-        return <div className={childrenStyles}>{children}</div>;
+        return <div className={childrenClasses}>{children}</div>;
       }
     });
 
     return childs;
-  }, [children, childrenStyles]);
+  }, [children, childrenClasses]);
 
   const ChildrenWrapper = React.useMemo(() => {
-    return <div className={childrenWrapper}>{Children}</div>;
-  }, [Children, childrenWrapper]);
+    return <div className={childrenWrapperClasses}>{Children}</div>;
+  }, [Children, childrenWrapperClasses]);
 
   const Wrapper = React.useMemo(() => {
-    return React.createElement(as, { className: parentWrapper }, ChildrenWrapper);
-  }, [as, ChildrenWrapper, parentWrapper]);
+    return React.createElement(as, { className: parentWrapperClasses }, ChildrenWrapper);
+  }, [as, ChildrenWrapper, parentWrapperClasses]);
 
   return Wrapper;
 };

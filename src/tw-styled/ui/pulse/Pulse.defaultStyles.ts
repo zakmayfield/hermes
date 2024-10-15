@@ -1,7 +1,10 @@
-import { PartialStyleProps } from "@/tw-styled/types";
+import { StyleToClassProps } from "@/tw-styled/types";
 import { PulseProps } from "./Pulse";
 
-export const defaultStyles = (style?: PartialStyleProps, theme?: PulseProps["theme"]) => {
+export const usePulseStyles = (
+  style?: StyleToClassProps,
+  theme?: PulseProps["theme"]
+) => {
   const themes = {
     light: {
       parentTheme: "bg-slate-100",
@@ -15,24 +18,24 @@ export const defaultStyles = (style?: PartialStyleProps, theme?: PulseProps["the
 
   return {
     parentWrapper: {
-      animate: "pulse",
-      rounded: "lg",
+      animation: "pulse",
+      borderRadius: "lg",
       width: "md",
-      flex: "col",
+      display: "flex-col",
       gap: "sm",
       padding: "sm",
       className: themes[theme || "dark"].parentTheme,
       ...style?.parentWrapper
     },
     childrenWrapper: {
-      flex: "row",
+      display: "flex-row",
       gap: "sm",
       ...style?.childrenWrapper
     },
     children: {
-      animate: "pulse",
+      animation: "pulse",
       padding: "md",
-      rounded: "xl",
+      borderRadius: "xl",
       className: themes[theme || "dark"].childrenTheme,
       ...style?.children
     }

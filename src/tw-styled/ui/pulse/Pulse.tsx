@@ -1,11 +1,11 @@
 import { useStyleToClass } from "@/tw-styled/tools";
-import { BaseStyles, Sizes, Themes } from "@/tw-styled/types";
+import { BaseStyles, Themes } from "@/tw-styled/types";
 import { usePulseStyles } from "./Pulse.styles";
 import { usePulseUi } from "./Pulse.ui";
 
 export type PulseProps = {
   theme?: Themes;
-  size?: Sizes;
+  size?: "sm" | "md" | "lg";
   style?: {
     parentWrapper?: BaseStyles;
     childrenWrapper?: BaseStyles;

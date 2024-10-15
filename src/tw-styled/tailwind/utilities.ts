@@ -14,36 +14,18 @@ const btnSize: TwPluginRules = {
   ".btn-sm": {
     maxWidth: "10rem",
     width: "100%",
-    minHeight: "2.63rem"
+    height: "2.63rem"
   },
   ".btn-md": {
     maxWidth: "15rem",
     width: "100%",
-    minHeight: "2.75rem"
+    height: "2.93rem"
   },
   ".btn-lg": {
     maxWidth: "20rem",
     width: "100%",
-    minHeight: "2.87rem"
+    height: "3.13rem"
   }
 };
 
-const btnWidth: TwPluginRules = {
-  ".btn-w-sm": {
-    maxWidth: "10rem",
-    width: "100%"
-  },
-  ".btn-w-md": {
-    maxWidth: "15rem",
-    width: "100%"
-  },
-  ".btn-w-lg": {
-    maxWidth: "20rem",
-    width: "100%"
-  },
-  ".btn-w-full": {
-    width: "100%"
-  }
-};
-
-export { state, btnSize, btnWidth };
+export { state, btnSize };

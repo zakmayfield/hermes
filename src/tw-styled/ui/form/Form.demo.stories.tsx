@@ -37,13 +37,15 @@ export const Demo: FormDemoStory = {
   args: {
     title: "Form Title",
     buttonProps: {
-      width: "full",
       text: "Foobar",
       variant: "ghost"
     },
     style: {
       formStyles: {
         place: "center"
+      },
+      buttonStyles: {
+        width: "full"
       }
     }
   }

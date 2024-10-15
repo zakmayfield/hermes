@@ -1,7 +1,7 @@
 import React from "react";
 import { UiClassesProp } from "@/tw-styled/types";
 import { FormProps } from "./Form";
-import { Btn } from "../btn/Btn";
+import { Button } from "../button/Button";
 
 export const useFormUi = (props: UiClassesProp<FormProps>) => {
   const {
@@ -21,28 +21,18 @@ export const useFormUi = (props: UiClassesProp<FormProps>) => {
 
   const Title = titleText && <h3 className={titleStyles}>{titleText}</h3>;
 
-  const Button = React.useMemo(() => {
-    const {
-      text = "Submit",
-      variant = "ghost",
-      width = "full",
-      height = "none",
-      size = "none"
-    } = buttonProps || {};
-
+  const Btn = React.useMemo(() => {
     return (
-      <Btn
-        type="submit"
-        isDisabled={isPending}
-        text={text}
+      <Button
+        text={buttonProps?.text}
         options={{
-          variant,
-          width,
-          height,
-          size
+          type: "submit",
+          isDisabled: isPending,
+          variant: buttonProps?.variant
         }}
         style={{
-          buttonStyles: {
+          button: {
+            width: "full",
             className: buttonStyles
           }
         }}
@@ -71,7 +61,7 @@ export const useFormUi = (props: UiClassesProp<FormProps>) => {
 
       <div className={childrenWrapperStyles}>{Children}</div>
 
-      {Button}
+      {Btn}
     </form>
   );
 

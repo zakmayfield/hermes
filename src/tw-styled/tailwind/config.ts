@@ -1,13 +1,12 @@
 import { CSSRuleObject } from "tailwindcss/types/config";
-import { btnWidth, state, btnSize } from "./utilities";
+import { state, btnSize } from "./utilities";
 import { btn, btnVariants, demo } from "./components";
 
 type TwPluginRules = CSSRuleObject | CSSRuleObject[];
 
 const utilities: TwPluginRules = {
   ...state,
-  ...btnSize,
-  ...btnWidth
+  ...btnSize
 };
 
 const components: TwPluginRules = {

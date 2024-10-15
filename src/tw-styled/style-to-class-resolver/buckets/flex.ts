@@ -1,7 +1,6 @@
 import { Keyof, MultiBucket, SingleBucket } from "../types";
 
 enum FlexRowPositionBucket {
-  none = "none",
   "top-left" = "items-start",
   "center-left" = "items-center justify-start",
   "bottom-left" = "items-end",
@@ -14,7 +13,6 @@ enum FlexRowPositionBucket {
 }
 
 enum FlexColPositionBucket {
-  none = "none",
   "top-left" = "justify-start",
   "top-center" = "items-center justify-start",
   "top-right" = "items-end justify-start",
@@ -28,8 +26,6 @@ enum FlexColPositionBucket {
 
 export const flexPositionBucket = {
   flexRowPosition: {
-    none: FlexRowPositionBucket.none,
-
     "top-left": FlexRowPositionBucket["top-left"],
     "top-center": FlexRowPositionBucket["top-center"],
     "top-right": FlexRowPositionBucket["top-right"],
@@ -43,8 +39,6 @@ export const flexPositionBucket = {
     "bottom-right": FlexRowPositionBucket["bottom-right"]
   },
   flexColPosition: {
-    none: FlexColPositionBucket.none,
-
     "top-left": FlexColPositionBucket["top-left"],
     "top-center": FlexColPositionBucket["top-center"],
     "top-right": FlexColPositionBucket["top-right"],
@@ -60,20 +54,17 @@ export const flexPositionBucket = {
 } satisfies MultiBucket<Keyof<typeof FlexRowPositionBucket>>;
 
 enum FlexSpacingBucket {
-  none = "",
   "space-between" = "justify-between",
   "space-evenly" = "justify-evenly",
   "space-around" = "justify-around"
 }
 
 enum FlexWrapBucket {
-  none = "",
   wrap = "flex-wrap",
   nowrap = "flex-nowrap"
 }
 
 enum FlexSizeBucket {
-  none = "",
   grow = "flex-grow",
   shrink = "flex-shrink",
   nogrow = "flex-grow-0",
@@ -81,20 +72,17 @@ enum FlexSizeBucket {
 }
 
 export const flexSpacingBucket = {
-  none: FlexSpacingBucket.none,
   "space-between": FlexSpacingBucket["space-between"],
   "space-evenly": FlexSpacingBucket["space-evenly"],
   "space-around": FlexSpacingBucket["space-around"]
 } satisfies SingleBucket<Keyof<typeof FlexSpacingBucket>, FlexSpacingBucket>;
 
 export const flexWrapBucket = {
-  none: FlexWrapBucket.none,
   wrap: FlexWrapBucket.wrap,
   nowrap: FlexWrapBucket.nowrap
 } satisfies SingleBucket<Keyof<typeof FlexWrapBucket>, FlexWrapBucket>;
 
 export const flexSizeBucket = {
-  none: FlexSizeBucket.none,
   grow: FlexSizeBucket.grow,
   shrink: FlexSizeBucket.shrink,
   nogrow: FlexSizeBucket.nogrow,

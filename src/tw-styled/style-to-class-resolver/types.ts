@@ -57,8 +57,6 @@ export type Styles = {
   cursor: Keyof<typeof buckets.cursorBucket>;
 
   buttonSize: Keyof<typeof buckets.buttonSizeBucket>;
-  buttonWidth: Keyof<typeof buckets.buttonWidthBucket>;
-  buttonHeight: Keyof<typeof buckets.buttonHeightBucket>;
   buttonVariant: Keyof<typeof buckets.buttonVariantBucket>;
 
   className: string;

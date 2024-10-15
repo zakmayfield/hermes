@@ -1,7 +1,6 @@
 import { Keyof, MultiBucket } from "../types";
 
 enum BackgroundColorBucket {
-  none = "",
   background = "bg-background",
   foreground = "bg-foreground",
   primary = "bg-primary",
@@ -11,7 +10,6 @@ enum BackgroundColorBucket {
 }
 
 enum TextColorBucket {
-  none = "",
   background = "text-background",
   foreground = "text-foreground",
   primary = "text-primary",
@@ -21,7 +19,6 @@ enum TextColorBucket {
 }
 
 enum BorderColorBucket {
-  none = "",
   background = "border-background",
   foreground = "border-foreground",
   primary = "border-primary",
@@ -32,7 +29,6 @@ enum BorderColorBucket {
 
 export const colorBucket = {
   backgroundColor: {
-    none: BackgroundColorBucket.none,
     background: BackgroundColorBucket.background,
     foreground: BackgroundColorBucket.foreground,
     primary: BackgroundColorBucket.primary,
@@ -41,7 +37,6 @@ export const colorBucket = {
     accent: BackgroundColorBucket.accent
   },
   textColor: {
-    none: TextColorBucket.none,
     background: TextColorBucket.background,
     foreground: TextColorBucket.foreground,
     primary: TextColorBucket.primary,
@@ -50,7 +45,6 @@ export const colorBucket = {
     accent: TextColorBucket.accent
   },
   borderColor: {
-    none: BorderColorBucket.none,
     background: BorderColorBucket.background,
     foreground: BorderColorBucket.foreground,
     primary: BorderColorBucket.primary,

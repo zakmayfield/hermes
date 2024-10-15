@@ -1,4 +1,4 @@
-export * from "./btn/Btn";
+export * from "./button/Button";
 export * from "./fieldError/FieldError";
 export * from "./form/Form";
 export * from "./formField/FormField";

@@ -97,14 +97,6 @@ export const extractClassName = (styleKey: keyof Styles, styleValue: string) => 
       return buckets.buttonSizeBucket[
         styleValue as Keyof<typeof buckets.buttonSizeBucket>
       ];
-    case "buttonWidth":
-      return buckets.buttonWidthBucket[
-        styleValue as Keyof<typeof buckets.buttonWidthBucket>
-      ];
-    case "buttonHeight":
-      return buckets.buttonHeightBucket[
-        styleValue as Keyof<typeof buckets.buttonHeightBucket>
-      ];
     case "buttonVariant":
       return buckets.buttonVariantBucket[
         styleValue as Keyof<typeof buckets.buttonVariantBucket>

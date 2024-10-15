@@ -1,7 +1,6 @@
 import { Keyof, MultiBucket } from "../types";
 
 enum PaddingBucket {
-  none = "",
   sm = `p-sm`,
   md = `p-md`,
   lg = `p-lg`,
@@ -10,7 +9,6 @@ enum PaddingBucket {
 }
 
 enum PaddingXBucket {
-  none = "",
   sm = `px-sm`,
   md = `px-md`,
   lg = `px-lg`,
@@ -19,7 +17,6 @@ enum PaddingXBucket {
 }
 
 enum PaddingYBucket {
-  none = "",
   sm = `py-sm`,
   md = `py-md`,
   lg = `py-lg`,
@@ -28,7 +25,6 @@ enum PaddingYBucket {
 }
 
 enum MarginBucket {
-  none = "",
   sm = `m-sm`,
   md = `m-md`,
   lg = `m-lg`,
@@ -37,7 +33,6 @@ enum MarginBucket {
 }
 
 enum MarginXBucket {
-  none = "",
   sm = `mx-sm`,
   md = `mx-md`,
   lg = `mx-lg`,
@@ -46,7 +41,6 @@ enum MarginXBucket {
 }
 
 enum MarginYBucket {
-  none = "",
   sm = `my-sm`,
   md = `my-md`,
   lg = `my-lg`,
@@ -55,7 +49,6 @@ enum MarginYBucket {
 }
 
 enum SpaceXBucket {
-  none = "",
   sm = `space-x-sm`,
   md = `space-x-md`,
   lg = `space-x-lg`,
@@ -64,7 +57,6 @@ enum SpaceXBucket {
 }
 
 enum SpaceYBucket {
-  none = "",
   sm = `space-y-sm`,
   md = `space-y-md`,
   lg = `space-y-lg`,
@@ -73,7 +65,6 @@ enum SpaceYBucket {
 }
 
 enum GapBucket {
-  none = "",
   sm = `gap-[var(--space-sm)]`,
   md = `gap-[var(--space-md)]`,
   lg = `gap-[var(--space-lg)]`,
@@ -83,7 +74,6 @@ enum GapBucket {
 
 export const spacingBucket = {
   padding: {
-    none: "",
     sm: PaddingBucket.sm,
     md: PaddingBucket.md,
     lg: PaddingBucket.lg,
@@ -91,7 +81,6 @@ export const spacingBucket = {
     "2xl": PaddingBucket["2xl"]
   },
   paddingX: {
-    none: "",
     sm: PaddingXBucket.sm,
     md: PaddingXBucket.md,
     lg: PaddingXBucket.lg,
@@ -99,7 +88,6 @@ export const spacingBucket = {
     "2xl": PaddingXBucket["2xl"]
   },
   paddingY: {
-    none: "",
     sm: PaddingYBucket.sm,
     md: PaddingYBucket.md,
     lg: PaddingYBucket.lg,
@@ -107,7 +95,6 @@ export const spacingBucket = {
     "2xl": PaddingYBucket["2xl"]
   },
   margin: {
-    none: "",
     sm: MarginBucket.sm,
     md: MarginBucket.md,
     lg: MarginBucket.lg,
@@ -115,7 +102,6 @@ export const spacingBucket = {
     "2xl": MarginBucket["2xl"]
   },
   marginX: {
-    none: "",
     sm: MarginXBucket.sm,
     md: MarginXBucket.md,
     lg: MarginXBucket.lg,
@@ -123,7 +109,6 @@ export const spacingBucket = {
     "2xl": MarginXBucket["2xl"]
   },
   marginY: {
-    none: "",
     sm: MarginYBucket.sm,
     md: MarginYBucket.md,
     lg: MarginYBucket.lg,
@@ -131,7 +116,6 @@ export const spacingBucket = {
     "2xl": MarginYBucket["2xl"]
   },
   spaceX: {
-    none: "",
     sm: SpaceXBucket.sm,
     md: SpaceXBucket.md,
     lg: SpaceXBucket.lg,
@@ -139,7 +123,6 @@ export const spacingBucket = {
     "2xl": SpaceXBucket["2xl"]
   },
   spaceY: {
-    none: "",
     sm: SpaceYBucket.sm,
     md: SpaceYBucket.md,
     lg: SpaceYBucket.lg,
@@ -147,7 +130,6 @@ export const spacingBucket = {
     "2xl": SpaceYBucket["2xl"]
   },
   gap: {
-    none: "",
     sm: GapBucket.sm,
     md: GapBucket.md,
     lg: GapBucket.lg,

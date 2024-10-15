@@ -1,7 +1,6 @@
 import { Keyof, SingleBucket } from "../types";
 
 enum DisplayBucket {
-  none = "",
   block = `block`,
   inline = `inline`,
   "inline-block" = `inline-block`,
@@ -12,7 +11,6 @@ enum DisplayBucket {
 }
 
 export const displayBucket = {
-  none: DisplayBucket.none,
   block: DisplayBucket.block,
   inline: DisplayBucket.inline,
   "inline-block": DisplayBucket["inline-block"],
@@ -23,7 +21,6 @@ export const displayBucket = {
 } satisfies SingleBucket<Keyof<typeof DisplayBucket>, DisplayBucket>;
 
 enum PositionBucket {
-  none = "",
   relative = "relative",
   absolute = "absolute",
   fixed = "fixed",
@@ -32,7 +29,6 @@ enum PositionBucket {
 }
 
 export const positionBucket = {
-  none: PositionBucket.none,
   relative: PositionBucket.relative,
   absolute: PositionBucket.absolute,
   fixed: PositionBucket.fixed,
@@ -41,35 +37,30 @@ export const positionBucket = {
 } satisfies SingleBucket<Keyof<typeof PositionBucket>, PositionBucket>;
 
 enum PlaceBucket {
-  none = "",
   left = "mr-auto",
   center = "mx-auto",
   right = "ml-auto"
 }
 
 export const placeBucket = {
-  none: PlaceBucket.none,
   left: PlaceBucket.left,
   center: PlaceBucket.center,
   right: PlaceBucket.right
 } satisfies SingleBucket<Keyof<typeof PlaceBucket>, PlaceBucket>;
 
 enum BorderBucket {
-  none = "",
   sm = "border border-foreground",
   md = "border-2 border-foreground",
   lg = "border-4 border-foreground"
 }
 
 export const borderBucket = {
-  none: BorderBucket.none,
   sm: BorderBucket.sm,
   md: BorderBucket.md,
   lg: BorderBucket.lg
 } satisfies SingleBucket<Keyof<typeof BorderBucket>, BorderBucket>;
 
 enum BorderRadiusBucket {
-  none = "",
   sm = "rounded",
   md = "rounded-md",
   lg = "rounded-lg",
@@ -77,7 +68,6 @@ enum BorderRadiusBucket {
 }
 
 export const borderRadiusBucket = {
-  none: BorderRadiusBucket.none,
   sm: BorderRadiusBucket.sm,
   md: BorderRadiusBucket.md,
   lg: BorderRadiusBucket.lg,

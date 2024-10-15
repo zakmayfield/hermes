@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Children, IButton, BaseStyles, FullStyles } from "@/tw-styled/types";
+import { Children, BaseStyles, FullStyles, Styles } from "@/tw-styled/types";
 import { useStyleToClass } from "@/tw-styled/tools";
 import { defaultStyles } from "./Form.defaultStyles";
 import { useFormUi } from "./Form.ui";
@@ -14,10 +14,8 @@ export type FormProps = {
   submitHandler?: (e?: React.BaseSyntheticEvent) => Promise<void>;
   buttonProps?: {
     text?: string;
-    variant?: IButton["buttonVariant"];
-    width?: IButton["buttonWidth"];
-    height?: IButton["buttonHeight"];
-    size?: IButton["buttonSize"];
+    variant?: Styles["buttonVariant"];
+    size?: Styles["buttonSize"];
   };
   style?: {
     formStyles?: BaseStyles;

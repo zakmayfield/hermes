@@ -1,7 +1,6 @@
 import { Keyof, MultiBucket } from "../types";
 
 enum WidthBucket {
-  none = "",
   xs = `w-xs`,
   sm = `w-sm`,
   md = `w-md`,
@@ -11,7 +10,6 @@ enum WidthBucket {
 }
 
 enum MinWidthBucket {
-  none = "",
   xs = `min-w-xs`,
   sm = `min-w-sm`,
   md = `min-w-md`,
@@ -21,7 +19,6 @@ enum MinWidthBucket {
 }
 
 enum MaxWidthBucket {
-  none = "",
   xs = `max-w-xs`,
   sm = `max-w-sm`,
   md = `max-w-md`,
@@ -31,7 +28,6 @@ enum MaxWidthBucket {
 }
 
 enum HeightBucket {
-  none = "",
   xs = `h-xs`,
   sm = `h-sm`,
   md = `h-md`,
@@ -41,7 +37,6 @@ enum HeightBucket {
 }
 
 enum MinHeightBucket {
-  none = "",
   xs = `min-h-xs`,
   sm = `min-h-sm`,
   md = `min-h-md`,
@@ -51,7 +46,6 @@ enum MinHeightBucket {
 }
 
 enum MaxHeightBucket {
-  none = "",
   xs = `max-h-xs`,
   sm = `max-h-sm`,
   md = `max-h-md`,
@@ -62,7 +56,6 @@ enum MaxHeightBucket {
 
 export const dimensionBucket = {
   width: {
-    none: WidthBucket.none,
     xs: WidthBucket.xs,
     sm: WidthBucket.sm,
     md: WidthBucket.md,
@@ -71,7 +64,6 @@ export const dimensionBucket = {
     full: WidthBucket.full
   },
   minWidth: {
-    none: MinWidthBucket.none,
     xs: MinWidthBucket.xs,
     sm: MinWidthBucket.sm,
     md: MinWidthBucket.md,
@@ -80,7 +72,6 @@ export const dimensionBucket = {
     full: MinWidthBucket.full
   },
   maxWidth: {
-    none: MaxWidthBucket.none,
     xs: MaxWidthBucket.xs,
     sm: MaxWidthBucket.sm,
     md: MaxWidthBucket.md,
@@ -89,7 +80,6 @@ export const dimensionBucket = {
     full: MaxWidthBucket.full
   },
   height: {
-    none: HeightBucket.none,
     xs: HeightBucket.xs,
     sm: HeightBucket.sm,
     md: HeightBucket.md,
@@ -98,7 +88,6 @@ export const dimensionBucket = {
     full: HeightBucket.full
   },
   minHeight: {
-    none: MinHeightBucket.none,
     xs: MinHeightBucket.xs,
     sm: MinHeightBucket.sm,
     md: MinHeightBucket.md,
@@ -107,7 +96,6 @@ export const dimensionBucket = {
     full: MinHeightBucket.full
   },
   maxHeight: {
-    none: MaxHeightBucket.none,
     xs: MaxHeightBucket.xs,
     sm: MaxHeightBucket.sm,
     md: MaxHeightBucket.md,

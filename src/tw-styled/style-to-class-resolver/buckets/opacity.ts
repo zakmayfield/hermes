@@ -1,7 +1,6 @@
 import { Keyof, MultiBucket } from "../types";
 
 enum OpacityBucket {
-  none = "",
   light = "opacity-30",
   medium = "opacity-60",
   dark = "opacity-90",
@@ -10,7 +9,6 @@ enum OpacityBucket {
 
 export const opacityBucket = {
   opacity: {
-    none: OpacityBucket.none,
     light: OpacityBucket.light,
     medium: OpacityBucket.medium,
     dark: OpacityBucket.dark,

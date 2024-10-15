@@ -8,19 +8,34 @@ const styleToClass = (style: StyleToClassProps) => {
   for (const propKey in style) {
     const value = style[propKey];
 
-    ResultMap.set(
-      propKey,
-      Object.keys(value).map((key) => {
-        const styleKey = key as keyof Styles;
-        const styleValue = value[styleKey] || "none";
+    const classes = Object.keys(value).map((key) => {
+      const styleKey = key as keyof Styles;
+      const styleValue = value[styleKey];
+
+      // Do not evoke `extractClassName` if no styleValue
+      if (styleValue) {
         return extractClassName(styleKey, styleValue);
-      })
-    );
+      }
+    });
+
+    ResultMap.set(propKey, classes);
   }
 
-  ResultMap.forEach((value, key, map) =>
-    !value.length ? map.delete(key) : map.set(key, value.join(" ").trim())
-  );
+  const deleteEntry = (key: string, map: Map<any, any>) => {
+    map.delete(key);
+  };
+
+  const setValue = (value: string, key: string, map: Map<any, any>) => {
+    map.set(key, value);
+  };
+
+  const processMapResult = (value: string[], key: string, map: Map<any, any>) => {
+    const formattedValue = value.join(" ").trim();
+
+    !formattedValue ? deleteEntry(key, map) : setValue(formattedValue, key, map);
+  };
+
+  ResultMap.forEach(processMapResult);
 
   return ResultMap;
 };

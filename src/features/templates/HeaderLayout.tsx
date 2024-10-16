@@ -8,7 +8,11 @@ export const HeaderLayout = () => {
   return (
     <Wrapper
       style={{
-        parentWrapper: { padding: "md", backgroundColor: "primary" },
+        parentWrapper: {
+          paddingY: "md",
+          paddingX: "lg",
+          backgroundColor: "primary"
+        },
         childrenWrapper: {
           display: "flex-row",
           flexRowPosition: "center-right",

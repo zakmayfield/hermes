@@ -1,10 +1,10 @@
-import { SuperNav } from "@/features/dashboard/super/atoms";
+import { AdminNav } from "@/features/dashboard/admin/atoms";
 import { Wrapper } from "@/tw-styled/ui";
 
-export default async function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <Wrapper style={{ childrenWrapper: { display: "flex-col", gap: "md" } }}>
-      <SuperNav />
+      <AdminNav />
 
       <Wrapper
         style={{

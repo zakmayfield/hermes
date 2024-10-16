@@ -28,7 +28,7 @@ export const RoleSwitch = () => {
   };
 
   return (
-    <div className="absolute top-1/4 bottom-1/4 flex items-center">
+    <div className="absolute left-0 top-1/4 bottom-1/4 flex items-center">
       <form action={mutate}>
         {isLoading ? (
           <PiSpinnerGap className="animate-spin" />

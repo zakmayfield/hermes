@@ -8,6 +8,8 @@ enum WidthBucket {
   md = `w-md`,
   lg = `w-lg`,
   xl = `w-xl`,
+  "2xl" = "w-2xl",
+  "3xl" = "w-3xl",
   full = `w-full`
 }
 
@@ -19,6 +21,8 @@ enum MinWidthBucket {
   md = `min-w-md`,
   lg = `min-w-lg`,
   xl = `min-w-xl`,
+  "2xl" = "min-w-2xl",
+  "3xl" = "min-w-3xl",
   full = `min-w-full`
 }
 
@@ -30,6 +34,8 @@ enum MaxWidthBucket {
   md = `max-w-md`,
   lg = `max-w-lg`,
   xl = `max-w-xl`,
+  "2xl" = "max-w-2xl",
+  "3xl" = "max-w-3xl",
   full = `max-w-full`
 }
 
@@ -42,6 +48,8 @@ export const widthtBucket = {
     md: WidthBucket.md,
     lg: WidthBucket.lg,
     xl: WidthBucket.xl,
+    "2xl": WidthBucket["2xl"],
+    "3xl": WidthBucket["3xl"],
     full: WidthBucket.full
   },
   minWidth: {
@@ -52,6 +60,8 @@ export const widthtBucket = {
     md: MinWidthBucket.md,
     lg: MinWidthBucket.lg,
     xl: MinWidthBucket.xl,
+    "2xl": MinWidthBucket["2xl"],
+    "3xl": MinWidthBucket["3xl"],
     full: MinWidthBucket.full
   },
   maxWidth: {
@@ -62,6 +72,8 @@ export const widthtBucket = {
     md: MaxWidthBucket.md,
     lg: MaxWidthBucket.lg,
     xl: MaxWidthBucket.xl,
+    "2xl": MaxWidthBucket["2xl"],
+    "3xl": MaxWidthBucket["3xl"],
     full: MaxWidthBucket.full
   }
 } satisfies MultiBucket<Keyof<typeof WidthBucket>>;

@@ -1,3 +1,4 @@
+import { Wrapper } from "@/tw-styled/ui";
 import { NavItem, TNavItem } from "./NavItem";
 
 export const NavList = () => {
@@ -11,22 +12,20 @@ export const NavList = () => {
       id: "2",
       text: "Dashboard",
       href: "/dashboard"
-    },
-    {
-      id: "3",
-      text: "Test Route",
-      href: "/test-route"
     }
   ];
 
   return (
-    <nav>
+    <Wrapper
+      as="nav"
+      style={{ childrenWrapper: { display: "flex-row", gap: "md" } }}
+    >
       {nav_items.map((item) => (
         <NavItem
           key={item.id}
           {...item}
         />
       ))}
-    </nav>
+    </Wrapper>
   );
 };

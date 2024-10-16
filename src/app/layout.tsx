@@ -35,10 +35,6 @@ export default async function RootLayout({
 
           <Layout
             style={{
-              parentWrapper: {
-                border: "sm",
-                className: "border-orange-500"
-              },
               childrenWrapper: { minHeight: "screen" }
             }}
           >

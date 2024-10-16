@@ -8,14 +8,14 @@ export const HeaderLayout = () => {
   return (
     <Wrapper
       style={{
-        parentWrapper: { padding: "md" },
+        parentWrapper: { padding: "md", backgroundColor: "primary" },
         childrenWrapper: {
           display: "flex-row",
           flexRowPosition: "center-right",
           // relative position so `RoleSwitch` has an achor
           position: "relative",
           gap: "md",
-          width: "3xl",
+          maxWidth: "3xl",
           place: "center"
         }
       }}

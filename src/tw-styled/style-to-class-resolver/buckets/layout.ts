@@ -1,5 +1,15 @@
 import { Keyof, SingleBucket } from "../types";
 
+enum BoxSizingBucket {
+  "border-box" = "box-border",
+  "content-box" = "box-content"
+}
+
+export const boxSizingBucket = {
+  "border-box": BoxSizingBucket["border-box"],
+  "content-box": BoxSizingBucket["content-box"]
+} satisfies SingleBucket<Keyof<typeof BoxSizingBucket>, BoxSizingBucket>;
+
 enum DisplayBucket {
   block = `block`,
   inline = `inline`,

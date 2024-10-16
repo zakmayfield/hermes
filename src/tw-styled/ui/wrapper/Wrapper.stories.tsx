@@ -46,11 +46,6 @@ export const Demo: WrapperStory = {
         padding: "lg",
         borderRadius: "md"
       },
-      children: {
-        border: "sm",
-        padding: "lg",
-        borderRadius: "md"
-      },
       childrenWrapper: {
         border: "sm",
         padding: "lg",

@@ -9,6 +9,8 @@ export type SingleBucket<T extends string, K> = Record<T, K>;
 export type Keyof<T extends object> = keyof T;
 
 export type Styles = {
+  boxSizing: Keyof<typeof buckets.boxSizingBucket>;
+
   padding: Keyof<(typeof buckets.spacingBucket)["padding"]>;
   paddingX: Keyof<(typeof buckets.spacingBucket)["padding"]>;
   paddingY: Keyof<(typeof buckets.spacingBucket)["padding"]>;
@@ -19,12 +21,13 @@ export type Styles = {
   spaceY: Keyof<(typeof buckets.spacingBucket)["padding"]>;
   gap: Keyof<(typeof buckets.spacingBucket)["padding"]>;
 
-  width: Keyof<(typeof buckets.dimensionBucket)["width"]>;
-  minWidth: Keyof<(typeof buckets.dimensionBucket)["width"]>;
-  maxWidth: Keyof<(typeof buckets.dimensionBucket)["width"]>;
-  height: Keyof<(typeof buckets.dimensionBucket)["width"]>;
-  minHeight: Keyof<(typeof buckets.dimensionBucket)["width"]>;
-  maxHeight: Keyof<(typeof buckets.dimensionBucket)["width"]>;
+  width: Keyof<(typeof buckets.widthtBucket)["width"]>;
+  minWidth: Keyof<(typeof buckets.widthtBucket)["width"]>;
+  maxWidth: Keyof<(typeof buckets.widthtBucket)["width"]>;
+
+  height: Keyof<(typeof buckets.heightBucket)["height"]>;
+  minHeight: Keyof<(typeof buckets.heightBucket)["height"]>;
+  maxHeight: Keyof<(typeof buckets.heightBucket)["height"]>;
 
   backgroundColor: Keyof<(typeof buckets.colorBucket)["backgroundColor"]>;
   textColor: Keyof<(typeof buckets.colorBucket)["backgroundColor"]>;

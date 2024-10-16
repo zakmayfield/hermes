@@ -3,17 +3,26 @@ import { LayoutProps } from "./Layout";
 import React from "react";
 
 export const useLayoutUi = (props: UiClassesProp<LayoutProps>) => {
-  const { children, classes, headingAs = "h1", title, headingChildren } = props;
+  const { classes, options, children } = props;
+
+  const { as = "div", titleAs = "h1", titleText } = options || {};
 
   const parentWrapperClasses = classes.get("parentWrapper");
-  const headingWrapperClasses = classes.get("headingWrapper");
-  const headingClasses = classes.get("heading");
-  const headingChildrenClasses = classes.get("headingChildren");
+  const titleWrapperClasses = classes.get("titleWrapper");
+  const titleClasses = classes.get("title");
   const childrenWrapperClasses = classes.get("childrenWrapper");
   const childrenClasses = classes.get("children");
 
+  const Title = React.useMemo(() => {
+    return React.createElement(titleAs, { className: titleClasses }, titleText);
+  }, [titleAs, titleClasses, titleText]);
+
+  const TitleWrapper = React.useMemo(() => {
+    return titleText && <div className={titleWrapperClasses}>{Title}</div>;
+  }, [titleWrapperClasses, titleText, Title]);
+
   const Children = React.useMemo(() => {
-    const childs = React.Children.map(children, (child) => {
+    return React.Children.map(children, (child) => {
       if (React.isValidElement(child)) {
         return React.createElement(
           child.type,
@@ -24,41 +33,18 @@ export const useLayoutUi = (props: UiClassesProp<LayoutProps>) => {
         return <div className={childrenClasses}>{child}</div>;
       }
     });
-
-    return childs;
   }, [children, childrenClasses]);
 
-  const ChildrenWrapper = <div className={childrenWrapperClasses}>{Children}</div>;
+  const ChildrenWrapper = React.useMemo(() => {
+    return <div className={childrenWrapperClasses}>{Children}</div>;
+  }, [childrenWrapperClasses, Children]);
 
-  const HeadingChildren = React.useMemo(() => {
-    return React.Children.map(headingChildren, (child) => {
-      if (React.isValidElement(child)) {
-        return React.createElement(
-          child.type,
-          { ...child.props, key: child.key, className: headingChildrenClasses },
-          child.props.children
-        );
-      } else {
-        return <div className={headingChildrenClasses}>{child}</div>;
-      }
-    });
-  }, [headingChildren, headingChildrenClasses]);
-
-  const HeadingElement = React.useMemo(() => {
-    return React.createElement(headingAs, { className: headingClasses }, title);
-  }, [headingAs, title, headingClasses]);
-
-  const HeadingWrapper = (
-    <div className={headingWrapperClasses}>
-      {HeadingElement} {HeadingChildren}
-    </div>
-  );
-
-  const Layout = (
-    <div className={parentWrapperClasses}>
-      {HeadingWrapper} {ChildrenWrapper}
-    </div>
-  );
+  const Layout = React.useMemo(() => {
+    return React.createElement(as, { className: parentWrapperClasses }, [
+      TitleWrapper,
+      ChildrenWrapper
+    ]);
+  }, [as, parentWrapperClasses, TitleWrapper, ChildrenWrapper]);
 
   return Layout;
 };

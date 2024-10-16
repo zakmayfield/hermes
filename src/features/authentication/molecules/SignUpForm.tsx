@@ -13,9 +13,11 @@ export const SignUpForm = () => {
         <Form
           titleText="Sign Up"
           submitHandler={submitHandler}
-          style={{
-            formStyles: { place: "center" }
+          buttonProps={{
+            text: "Sign Up",
+            variant: "primary"
           }}
+          style={{ formStyles: { backgroundColor: "primary" } }}
         >
           <AuthInputs />
         </Form>

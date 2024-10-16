@@ -3,6 +3,9 @@ import { Keyof, Styles } from "./types";
 
 export const extractClassName = (styleKey: keyof Styles, styleValue: string) => {
   switch (styleKey) {
+    case "boxSizing":
+      return buckets.boxSizingBucket[styleValue as Keyof<typeof buckets.boxSizingBucket>];
+
     case "padding":
     case "paddingX":
     case "paddingY":
@@ -19,11 +22,15 @@ export const extractClassName = (styleKey: keyof Styles, styleValue: string) => 
     case "width":
     case "minWidth":
     case "maxWidth":
+      return buckets.widthtBucket[styleKey][
+        styleValue as Keyof<(typeof buckets.widthtBucket)["width"]>
+      ];
+
     case "height":
     case "minHeight":
     case "maxHeight":
-      return buckets.dimensionBucket[styleKey][
-        styleValue as Keyof<(typeof buckets.dimensionBucket)["width"]>
+      return buckets.heightBucket[styleKey][
+        styleValue as Keyof<(typeof buckets.heightBucket)["height"]>
       ];
 
     case "backgroundColor":

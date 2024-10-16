@@ -28,6 +28,8 @@ const themeCtx = {
     "4xl": "var(--font-4xl)"
   },
   size: {
+    "3xs": "var(--size-3xs)",
+    "2xs": "var(--size-2xs)",
     xs: "var(--size-xs)",
     sm: "var(--size-sm)",
     md: "var(--size-md)",

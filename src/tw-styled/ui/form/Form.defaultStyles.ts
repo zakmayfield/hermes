@@ -4,12 +4,11 @@ import { FormProps } from "./Form";
 export const defaultStyles = (style?: StyleToClassProps) => {
   return {
     formStyles: {
-      border: "sm",
-      borderRadius: "md",
+      borderRadius: "lg",
       width: "md",
-      padding: "md",
       spaceY: "lg",
-      paddingY: "lg",
+      paddingX: "lg",
+      paddingY: "2xl",
       ...style?.formStyles
     },
     titleStyles: {

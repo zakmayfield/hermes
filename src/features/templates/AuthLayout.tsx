@@ -1,7 +1,8 @@
 "use client";
 
-import { Logo } from "@/features/authentication/atoms";
+import { Logo } from "@/shared/components";
 import { SwitchForm } from "@/features/authentication/molecules";
+import { Layout } from "@/tw-styled/ui";
 
 type AuthenticationLayoutTemplateProps = {
   children: React.ReactNode;
@@ -10,21 +11,24 @@ type AuthenticationLayoutTemplateProps = {
 export const AuthLayout = (props: AuthenticationLayoutTemplateProps) => {
   const { children } = props;
 
-  const logoWrapper = (
-    <div>
-      <Logo />
-    </div>
-  );
-
-  const childrenWrapper = <div>{children}</div>;
-
-  const switchForm = <SwitchForm />;
-
   return (
-    <div>
-      {logoWrapper}
-      {childrenWrapper}
-      {switchForm}
-    </div>
+    <Layout
+      options={{
+        as: "main"
+      }}
+      style={{
+        childrenWrapper: {
+          display: "flex-col",
+          gap: "xl",
+          flexColPosition: "top-center"
+        }
+      }}
+    >
+      <Logo style={{ wrapper: { width: "sm" } }} />
+
+      {children}
+
+      <SwitchForm />
+    </Layout>
   );
 };

@@ -7,12 +7,7 @@ export const defaultStyles = (style?: StyleToClassProps) => {
       ...style?.parentWrapper
     },
     childrenWrapper: {
-      display: "flex-col",
-      gap: "sm",
       ...style?.childrenWrapper
-    },
-    children: {
-      ...style?.children
     }
   } satisfies WrapperProps["style"];
 };

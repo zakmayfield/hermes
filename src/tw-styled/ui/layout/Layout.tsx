@@ -1,5 +1,10 @@
 "use client";
-import { Children, HeadingElements, BaseStyles } from "@/tw-styled/types";
+import {
+  Children,
+  HeadingElements,
+  BaseStyles,
+  WrapperElements
+} from "@/tw-styled/types";
 import { useStyleToClass } from "@/tw-styled/tools";
 import { defaultStyles } from "./Layout.defaultStyles";
 import { useLayoutUi } from "./Layout.ui";
@@ -7,14 +12,15 @@ import { useDefaultStyles } from "../hooks";
 
 export type LayoutProps = {
   children?: Children;
-  title?: string;
-  headingAs?: HeadingElements;
-  headingChildren?: Children;
+  options?: {
+    as?: WrapperElements;
+    titleText?: string;
+    titleAs?: HeadingElements;
+  };
   style?: {
     parentWrapper?: BaseStyles;
-    headingWrapper?: BaseStyles;
-    heading?: BaseStyles;
-    headingChildren?: BaseStyles;
+    titleWrapper?: BaseStyles;
+    title?: BaseStyles;
     childrenWrapper?: BaseStyles;
     children?: BaseStyles;
   };

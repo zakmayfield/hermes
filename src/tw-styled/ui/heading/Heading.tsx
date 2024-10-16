@@ -19,9 +19,7 @@ export const Heading = (props: HeadingProps) => {
   const { style, ...rest } = props;
 
   const styles = useDefaultStyles(style, defaultStyles);
-  console.log(styles);
   const classes = useStyleToClass(styles);
-  console.log(classes);
   const Heading = useHeadingUi({ ...rest, classes });
 
   return Heading;

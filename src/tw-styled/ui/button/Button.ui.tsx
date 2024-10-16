@@ -6,7 +6,8 @@ export const useButtonUi = (props: UiClassesProp<ButtonProps>) => {
   const {
     text = "Submit",
     options: { type = "submit", isDisabled = false } = {},
-    classes
+    classes,
+    handleClick
   } = props;
 
   const buttonClasses = classes.get("button");
@@ -23,6 +24,7 @@ export const useButtonUi = (props: UiClassesProp<ButtonProps>) => {
         disabled={isDisabled}
         aria-disabled={isDisabled}
         className={buttonClasses}
+        onClick={handleClick}
       >
         {Text}
       </button>

@@ -29,7 +29,7 @@ export const useButtonUi = (props: UiClassesProp<ButtonProps>) => {
         {Text}
       </button>
     );
-  }, [type, isDisabled, buttonClasses, Text]);
+  }, [type, isDisabled, buttonClasses, Text, handleClick]);
 
   return Button;
 };

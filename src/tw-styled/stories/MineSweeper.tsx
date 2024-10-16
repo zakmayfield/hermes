@@ -53,6 +53,8 @@ export const MineSweeper = () => {
     return GridMap;
   };
 
+  getGridMap();
+
   return (
     <div className="demo">
       <div className={classes.get("grid")}></div>

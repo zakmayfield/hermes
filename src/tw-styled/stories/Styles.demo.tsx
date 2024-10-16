@@ -1,12 +1,8 @@
 "use client";
 import React from "react";
-import { useStyleToClass } from "../style-to-class-resolver";
 import { Layout } from "../ui";
 
 export const StylesDemo = () => {
-  const classes = useStyleToClass({
-    a: {}
-  });
   return (
     <Layout
       options={{ as: "main", titleText: "Foobar" }}

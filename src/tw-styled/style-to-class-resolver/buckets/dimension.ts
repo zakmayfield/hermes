@@ -1,6 +1,8 @@
 import { Keyof, MultiBucket } from "../types";
 
 enum WidthBucket {
+  "3xs" = `w-3xs`,
+  "2xs" = `w-2xs`,
   xs = `w-xs`,
   sm = `w-sm`,
   md = `w-md`,
@@ -10,6 +12,8 @@ enum WidthBucket {
 }
 
 enum MinWidthBucket {
+  "3xs" = `min-w-3xs`,
+  "2xs" = `min-w-2xs`,
   xs = `min-w-xs`,
   sm = `min-w-sm`,
   md = `min-w-md`,
@@ -19,6 +23,8 @@ enum MinWidthBucket {
 }
 
 enum MaxWidthBucket {
+  "3xs" = `max-w-3xs`,
+  "2xs" = `max-w-2xs`,
   xs = `max-w-xs`,
   sm = `max-w-sm`,
   md = `max-w-md`,
@@ -29,6 +35,8 @@ enum MaxWidthBucket {
 
 export const widthtBucket = {
   width: {
+    "3xs": WidthBucket["3xs"],
+    "2xs": WidthBucket["2xs"],
     xs: WidthBucket.xs,
     sm: WidthBucket.sm,
     md: WidthBucket.md,
@@ -37,6 +45,8 @@ export const widthtBucket = {
     full: WidthBucket.full
   },
   minWidth: {
+    "3xs": MinWidthBucket["3xs"],
+    "2xs": MinWidthBucket["2xs"],
     xs: MinWidthBucket.xs,
     sm: MinWidthBucket.sm,
     md: MinWidthBucket.md,
@@ -45,6 +55,8 @@ export const widthtBucket = {
     full: MinWidthBucket.full
   },
   maxWidth: {
+    "3xs": MaxWidthBucket["3xs"],
+    "2xs": MaxWidthBucket["2xs"],
     xs: MaxWidthBucket.xs,
     sm: MaxWidthBucket.sm,
     md: MaxWidthBucket.md,
@@ -55,6 +67,8 @@ export const widthtBucket = {
 } satisfies MultiBucket<Keyof<typeof WidthBucket>>;
 
 enum HeightBucket {
+  "3xs" = `h-3xs`,
+  "2xs" = `h-2xs`,
   xs = `h-xs`,
   sm = `h-sm`,
   md = `h-md`,
@@ -65,6 +79,8 @@ enum HeightBucket {
 }
 
 enum MinHeightBucket {
+  "3xs" = `min-h-3xs`,
+  "2xs" = `min-h-2xs`,
   xs = `min-h-xs`,
   sm = `min-h-sm`,
   md = `min-h-md`,
@@ -75,6 +91,8 @@ enum MinHeightBucket {
 }
 
 enum MaxHeightBucket {
+  "3xs" = `max-h-3xs`,
+  "2xs" = `max-h-2xs`,
   xs = `max-h-xs`,
   sm = `max-h-sm`,
   md = `max-h-md`,
@@ -86,6 +104,8 @@ enum MaxHeightBucket {
 
 export const heightBucket = {
   height: {
+    "3xs": HeightBucket["3xs"],
+    "2xs": HeightBucket["2xs"],
     xs: HeightBucket.xs,
     sm: HeightBucket.sm,
     md: HeightBucket.md,
@@ -95,6 +115,8 @@ export const heightBucket = {
     full: HeightBucket.full
   },
   minHeight: {
+    "3xs": MinHeightBucket["3xs"],
+    "2xs": MinHeightBucket["2xs"],
     xs: MinHeightBucket.xs,
     sm: MinHeightBucket.sm,
     md: MinHeightBucket.md,
@@ -104,6 +126,8 @@ export const heightBucket = {
     full: MinHeightBucket.full
   },
   maxHeight: {
+    "3xs": MaxHeightBucket["3xs"],
+    "2xs": MaxHeightBucket["2xs"],
     xs: MaxHeightBucket.xs,
     sm: MaxHeightBucket.sm,
     md: MaxHeightBucket.md,

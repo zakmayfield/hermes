@@ -42,6 +42,8 @@
     --font-4xl: 2.25rem;
 
     /* DIMENSION SIZES */
+    --size-3xs: 4rem;
+    --size-2xs: 10rem;
     --size-xs: 16rem;
     --size-sm: 22rem;
     --size-md: 28rem;
@@ -75,7 +77,7 @@
   }
 
   input {
-    @apply px-2 py-1 rounded border dark:text-background dark:border-0;
+    @apply px-2 py-1 rounded border dark:text-background;
   }
 
   button {

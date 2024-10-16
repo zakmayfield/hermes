@@ -36,13 +36,10 @@ export default async function RootLayout({
           <Layout
             style={{
               parentWrapper: {
-                width: "xl",
-                place: "center",
                 border: "sm",
-                // TODO: *** Configure "screen" option for height ***
-                height: "full",
                 className: "border-orange-500"
-              }
+              },
+              childrenWrapper: { minHeight: "screen" }
             }}
           >
             {children}

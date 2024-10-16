@@ -5,23 +5,15 @@ export const defaultStyles = (style?: StyleToClassProps) => {
   return {
     parentWrapper: {
       padding: "lg",
-      spaceY: "lg",
       ...style?.parentWrapper
     },
-    headingWrapper: {
-      spaceY: "sm",
-      ...style?.headingWrapper
+    titleWrapper: {
+      ...style?.titleWrapper
     },
-    heading: {
-      ...style?.heading
-    },
-    headingChildren: {
-      ...style?.headingChildren
+    title: {
+      ...style?.title
     },
     childrenWrapper: {
-      padding: "md",
-      display: "flex-col",
-      gap: "lg",
       ...style?.childrenWrapper
     },
     children: {

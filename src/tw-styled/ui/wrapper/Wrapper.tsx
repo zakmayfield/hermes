@@ -11,7 +11,6 @@ export type WrapperProps = {
   style?: {
     parentWrapper?: BaseStyles;
     childrenWrapper?: BaseStyles;
-    children?: BaseStyles;
   };
 };
 

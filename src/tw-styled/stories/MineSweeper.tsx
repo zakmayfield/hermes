@@ -23,7 +23,7 @@ export const MineSweeper = () => {
     const totalBombs = 4;
     let bombCount = 0;
 
-    let bombPlacement: number[] = [];
+    const bombPlacement: number[] = [];
 
     const GridMap = new Map();
 

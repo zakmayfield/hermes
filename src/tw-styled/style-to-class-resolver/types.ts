@@ -9,6 +9,8 @@ export type SingleBucket<T extends string, K> = Record<T, K>;
 export type Keyof<T extends object> = keyof T;
 
 export type Styles = {
+  boxSizing: Keyof<typeof buckets.boxSizingBucket>;
+
   padding: Keyof<(typeof buckets.spacingBucket)["padding"]>;
   paddingX: Keyof<(typeof buckets.spacingBucket)["padding"]>;
   paddingY: Keyof<(typeof buckets.spacingBucket)["padding"]>;

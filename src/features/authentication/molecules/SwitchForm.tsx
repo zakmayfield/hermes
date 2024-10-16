@@ -1,5 +1,6 @@
 "use client";
 
+import { Wrapper } from "@/tw-styled/ui";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -11,21 +12,20 @@ export const SwitchForm = () => {
     ? "Need to create an account?"
     : "Already have an account?";
 
-  const text = <p>{switch_text}</p>;
-
-  const switch_link = (
-    <Link
-      href={`/sign-${is_sign_in ? "up" : "in"}`}
-      className="underline"
-    >
-      Sign {is_sign_in ? "Up" : "In"} Here
-    </Link>
-  );
-
   return (
-    <div>
-      {text}
-      {switch_link}
-    </div>
+    <Wrapper
+      style={{
+        childrenWrapper: { display: "flex-row", gap: "md" }
+      }}
+    >
+      <p>{switch_text}</p>
+
+      <Link
+        href={`/sign-${is_sign_in ? "up" : "in"}`}
+        className="underline"
+      >
+        Sign {is_sign_in ? "Up" : "In"} Here
+      </Link>
+    </Wrapper>
   );
 };

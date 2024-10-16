@@ -27,34 +27,7 @@ enum MaxWidthBucket {
   full = `max-w-full`
 }
 
-enum HeightBucket {
-  xs = `h-xs`,
-  sm = `h-sm`,
-  md = `h-md`,
-  lg = `h-lg`,
-  xl = `h-xl`,
-  full = `h-screen`
-}
-
-enum MinHeightBucket {
-  xs = `min-h-xs`,
-  sm = `min-h-sm`,
-  md = `min-h-md`,
-  lg = `min-h-lg`,
-  xl = `min-h-xl`,
-  full = `min-h-screen`
-}
-
-enum MaxHeightBucket {
-  xs = `max-h-xs`,
-  sm = `max-h-sm`,
-  md = `max-h-md`,
-  lg = `max-h-lg`,
-  xl = `max-h-xl`,
-  full = `max-h-screen`
-}
-
-export const dimensionBucket = {
+export const widthtBucket = {
   width: {
     xs: WidthBucket.xs,
     sm: WidthBucket.sm,
@@ -78,13 +51,47 @@ export const dimensionBucket = {
     lg: MaxWidthBucket.lg,
     xl: MaxWidthBucket.xl,
     full: MaxWidthBucket.full
-  },
+  }
+} satisfies MultiBucket<Keyof<typeof WidthBucket>>;
+
+enum HeightBucket {
+  xs = `h-xs`,
+  sm = `h-sm`,
+  md = `h-md`,
+  lg = `h-lg`,
+  xl = `h-xl`,
+  screen = "h-screen",
+  full = `h-full`
+}
+
+enum MinHeightBucket {
+  xs = `min-h-xs`,
+  sm = `min-h-sm`,
+  md = `min-h-md`,
+  lg = `min-h-lg`,
+  xl = `min-h-xl`,
+  screen = "min-h-screen",
+  full = `min-h-full`
+}
+
+enum MaxHeightBucket {
+  xs = `max-h-xs`,
+  sm = `max-h-sm`,
+  md = `max-h-md`,
+  lg = `max-h-lg`,
+  xl = `max-h-xl`,
+  screen = "max-h-screen",
+  full = `max-h-full`
+}
+
+export const heightBucket = {
   height: {
     xs: HeightBucket.xs,
     sm: HeightBucket.sm,
     md: HeightBucket.md,
     lg: HeightBucket.lg,
     xl: HeightBucket.xl,
+    screen: HeightBucket.screen,
     full: HeightBucket.full
   },
   minHeight: {
@@ -93,6 +100,7 @@ export const dimensionBucket = {
     md: MinHeightBucket.md,
     lg: MinHeightBucket.lg,
     xl: MinHeightBucket.xl,
+    screen: MinHeightBucket.screen,
     full: MinHeightBucket.full
   },
   maxHeight: {
@@ -101,6 +109,7 @@ export const dimensionBucket = {
     md: MaxHeightBucket.md,
     lg: MaxHeightBucket.lg,
     xl: MaxHeightBucket.xl,
+    screen: MaxHeightBucket.screen,
     full: MaxHeightBucket.full
   }
-} satisfies MultiBucket<Keyof<typeof WidthBucket>>;
+} satisfies MultiBucket<Keyof<typeof HeightBucket>>;

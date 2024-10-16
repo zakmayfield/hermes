@@ -19,12 +19,13 @@ export type Styles = {
   spaceY: Keyof<(typeof buckets.spacingBucket)["padding"]>;
   gap: Keyof<(typeof buckets.spacingBucket)["padding"]>;
 
-  width: Keyof<(typeof buckets.dimensionBucket)["width"]>;
-  minWidth: Keyof<(typeof buckets.dimensionBucket)["width"]>;
-  maxWidth: Keyof<(typeof buckets.dimensionBucket)["width"]>;
-  height: Keyof<(typeof buckets.dimensionBucket)["width"]>;
-  minHeight: Keyof<(typeof buckets.dimensionBucket)["width"]>;
-  maxHeight: Keyof<(typeof buckets.dimensionBucket)["width"]>;
+  width: Keyof<(typeof buckets.widthtBucket)["width"]>;
+  minWidth: Keyof<(typeof buckets.widthtBucket)["width"]>;
+  maxWidth: Keyof<(typeof buckets.widthtBucket)["width"]>;
+
+  height: Keyof<(typeof buckets.heightBucket)["height"]>;
+  minHeight: Keyof<(typeof buckets.heightBucket)["height"]>;
+  maxHeight: Keyof<(typeof buckets.heightBucket)["height"]>;
 
   backgroundColor: Keyof<(typeof buckets.colorBucket)["backgroundColor"]>;
   textColor: Keyof<(typeof buckets.colorBucket)["backgroundColor"]>;

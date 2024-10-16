@@ -1,9 +1,7 @@
 "use client";
 import { Children, TextElements, BaseStyles } from "@/tw-styled/types";
 import { useStyleToClass } from "@/tw-styled/tools";
-import { defaultStyles } from "./Text.defaultStyles";
-import { useTextUi } from "./Text.ui";
-import { useDefaultStyles } from "../hooks";
+import React from "react";
 
 export type TextProps = {
   as?: TextElements;
@@ -16,11 +14,27 @@ export type TextProps = {
 };
 
 export const Text = (props: TextProps) => {
-  const { style, ...rest } = props;
+  const { style, as = "p", children, described_by, is_hidden } = props;
 
-  const styles = useDefaultStyles(style, defaultStyles);
+  const styles = {
+    parentWrapper: {
+      ...style?.parentWrapper
+    }
+  } satisfies TextProps["style"];
+
   const classes = useStyleToClass(styles);
-  const Text = useTextUi({ classes, ...rest });
+
+  const Text = React.useMemo(() => {
+    return React.createElement(
+      as,
+      {
+        "aria-describedby": described_by,
+        hidden: is_hidden,
+        className: classes.get("parentWrapper")
+      },
+      children
+    );
+  }, [as, children, described_by, is_hidden, classes]);
 
   return Text;
 };

@@ -1,8 +1,6 @@
 import { useStyleToClass } from "@/tw-styled/tools";
 import { BaseStyles } from "@/tw-styled/types";
-import { defaultStyles } from "./FieldError.defaultStyles";
-import { useFieldErrorUi } from "./FieldError.ui";
-import { useDefaultStyles } from "../hooks";
+import React from "react";
 
 export type FieldErrorProps = {
   errorMessage?: string;
@@ -14,11 +12,27 @@ export type FieldErrorProps = {
 };
 
 export const FieldError = (props: FieldErrorProps) => {
-  const { style, ...rest } = props;
+  const { style, errorMessage, described_by, error_hidden } = props;
 
-  const styles = useDefaultStyles(style, defaultStyles);
+  const styles = {
+    parentWrapper: {
+      ...style?.parentWrapper
+    }
+  } satisfies FieldErrorProps["style"];
+
   const classes = useStyleToClass(styles);
-  const FieldError = useFieldErrorUi({ classes, ...rest });
+
+  const FieldError = React.useMemo(() => {
+    return (
+      <p
+        aria-describedby={described_by}
+        hidden={error_hidden}
+        className={classes.get("parentWrapper")}
+      >
+        {errorMessage}
+      </p>
+    );
+  }, [errorMessage, described_by, error_hidden, classes]);
 
   return FieldError;
 };

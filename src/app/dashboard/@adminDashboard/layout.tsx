@@ -1,22 +1,27 @@
 import { AdminNav } from "@/features/dashboard/admin/atoms";
-import { Wrapper } from "@/tw-styled/ui";
+import { Box } from "@/tw-styled/ui";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <Wrapper style={{ childrenWrapper: { display: "flex-col", gap: "md" } }}>
+    <Box
+      style={{
+        wrapper: { display: "flex-col", gap: "md", flexSize: "grow" }
+      }}
+    >
       <AdminNav />
 
-      <Wrapper
+      <Box
         style={{
-          parentWrapper: {
+          wrapper: {
+            padding: "lg",
             borderRadius: "lg",
-            backgroundColor: "secondary",
-            padding: "lg"
+            flexSize: "grow",
+            backgroundColor: "primary"
           }
         }}
       >
         {children}
-      </Wrapper>
-    </Wrapper>
+      </Box>
+    </Box>
   );
 }

@@ -1,12 +1,11 @@
 "use client";
-import React from "react";
+import { Box } from "../ui";
 
 export const StylesDemo = () => {
   return (
-    <div className="demo flex flex-row items-start">
-      <div className="demo p-24" />
-      <div className="demo" />
-      <div className="demo p-16" />
-    </div>
+    <Box style={{ wrapper: { className: "demo", minHeight: "lg", display: "flex-col" } }}>
+      <Box style={{ wrapper: { className: "demo" } }} />
+      <Box style={{ wrapper: { className: "demo", flexSize: "grow" } }} />
+    </Box>
   );
 };

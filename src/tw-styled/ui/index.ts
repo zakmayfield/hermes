@@ -1,3 +1,4 @@
+export * from "./box/Box";
 export * from "./button/Button";
 export * from "./fieldError/FieldError";
 export * from "./form/Form";

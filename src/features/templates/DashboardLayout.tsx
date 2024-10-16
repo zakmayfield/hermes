@@ -15,10 +15,13 @@ export const DashboardLayout = (props: DashboardLayoutProps) => {
         parentWrapper: {
           borderRadius: "lg",
           maxWidth: "3xl",
-          minHeight: "lg",
           place: "center",
           backgroundColor: "secondary",
           spaceY: "lg"
+        },
+        childrenWrapper: {
+          minHeight: "md",
+          display: "flex-col"
         }
       }}
     >

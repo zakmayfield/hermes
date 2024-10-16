@@ -1,22 +1,27 @@
 import { SuperNav } from "@/features/dashboard/super/atoms";
-import { Wrapper } from "@/tw-styled/ui";
+import { Box } from "@/tw-styled/ui";
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <Wrapper style={{ childrenWrapper: { display: "flex-col", gap: "md" } }}>
+    <Box
+      style={{
+        wrapper: { display: "flex-col", gap: "md", flexSize: "grow" }
+      }}
+    >
       <SuperNav />
 
-      <Wrapper
+      <Box
         style={{
-          parentWrapper: {
+          wrapper: {
+            padding: "lg",
             borderRadius: "lg",
-            backgroundColor: "primary",
-            padding: "lg"
+            flexSize: "grow",
+            backgroundColor: "primary"
           }
         }}
       >
         {children}
-      </Wrapper>
-    </Wrapper>
+      </Box>
+    </Box>
   );
 }

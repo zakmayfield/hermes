@@ -10,7 +10,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
         style={{
           parentWrapper: {
             borderRadius: "lg",
-            backgroundColor: "secondary",
+            backgroundColor: "primary",
             padding: "lg"
           }
         }}

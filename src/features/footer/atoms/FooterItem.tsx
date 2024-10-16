@@ -12,7 +12,7 @@ export const FooterItem = (props: FooterItemProps) => {
     <Wrapper
       style={{
         parentWrapper: {
-          backgroundColor: "secondary",
+          backgroundColor: "primary",
           padding: "lg",
           borderRadius: "lg",
           maxWidth: "lg",

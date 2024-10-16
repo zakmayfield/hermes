@@ -17,7 +17,7 @@ export const DashboardLayout = (props: DashboardLayoutProps) => {
           maxWidth: "3xl",
           minHeight: "lg",
           place: "center",
-          backgroundColor: "primary",
+          backgroundColor: "secondary",
           spaceY: "lg"
         }
       }}

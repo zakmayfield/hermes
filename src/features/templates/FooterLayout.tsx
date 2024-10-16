@@ -8,7 +8,7 @@ export const FooterLayout = () => {
     <Wrapper
       as="footer"
       style={{
-        parentWrapper: { backgroundColor: "primary", padding: "lg" },
+        parentWrapper: { backgroundColor: "secondary", padding: "lg" },
         childrenWrapper: {
           maxWidth: "3xl",
           place: "center",

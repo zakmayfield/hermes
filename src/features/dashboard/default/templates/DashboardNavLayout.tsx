@@ -12,7 +12,7 @@ export const DashboardNavLayout = ({ children }: { children?: Children }) => {
           gap: "md",
           padding: "md",
           borderRadius: "lg",
-          backgroundColor: "secondary"
+          backgroundColor: "primary"
         }
       }}
     >

@@ -11,7 +11,6 @@ export const SignInForm = () => {
     <div>
       <FormProvider {...methods}>
         <Form
-          titleText="Sign In"
           submitHandler={submitHandler}
           buttonProps={{
             text: "Sign In",

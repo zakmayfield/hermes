@@ -1,4 +1,4 @@
-import { Wrapper } from "@/tw-styled/ui";
+import { Box } from "@/tw-styled/ui";
 import { NavItem, TNavItem } from "./NavItem";
 
 export const NavList = () => {
@@ -16,9 +16,9 @@ export const NavList = () => {
   ];
 
   return (
-    <Wrapper
+    <Box
       as="nav"
-      style={{ childrenWrapper: { display: "flex-row", gap: "md" } }}
+      style={{ wrapper: { display: "flex-row", gap: "md" } }}
     >
       {nav_items.map((item) => (
         <NavItem
@@ -26,6 +26,6 @@ export const NavList = () => {
           {...item}
         />
       ))}
-    </Wrapper>
+    </Box>
   );
 };

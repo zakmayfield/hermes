@@ -8,4 +8,3 @@ export * from "./layout/Layout";
 export * from "./pulse/Pulse";
 export * from "./spin/Spin";
 export * from "./text/Text";
-export * from "./wrapper/Wrapper";

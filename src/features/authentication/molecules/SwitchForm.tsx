@@ -1,6 +1,6 @@
 "use client";
 
-import { Wrapper } from "@/tw-styled/ui";
+import { Box } from "@/tw-styled/ui";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -13,9 +13,9 @@ export const SwitchForm = () => {
     : "Already have an account?";
 
   return (
-    <Wrapper
+    <Box
       style={{
-        childrenWrapper: { display: "flex-row", gap: "md" }
+        wrapper: { display: "flex-row", gap: "md" }
       }}
     >
       <p>{switch_text}</p>
@@ -26,6 +26,6 @@ export const SwitchForm = () => {
       >
         Sign {is_sign_in ? "Up" : "In"} Here
       </Link>
-    </Wrapper>
+    </Box>
   );
 };

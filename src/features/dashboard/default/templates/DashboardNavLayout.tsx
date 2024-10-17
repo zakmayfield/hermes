@@ -1,13 +1,13 @@
 "use client";
 import { Children } from "@/tw-styled/types";
-import { Wrapper } from "@/tw-styled/ui";
+import { Box } from "@/tw-styled/ui";
 
 export const DashboardNavLayout = ({ children }: { children?: Children }) => {
   return (
-    <Wrapper
+    <Box
       as="nav"
       style={{
-        childrenWrapper: {
+        wrapper: {
           display: "flex-row",
           gap: "md",
           padding: "md",
@@ -17,6 +17,6 @@ export const DashboardNavLayout = ({ children }: { children?: Children }) => {
       }}
     >
       {children}
-    </Wrapper>
+    </Box>
   );
 };

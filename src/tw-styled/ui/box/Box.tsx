@@ -11,7 +11,6 @@ type BoxProps = {
   };
 };
 
-// TODO: *** Replace `Wrapper` component with `Box` ***
 export const Box = (props: BoxProps) => {
   const { as = "div", style, children } = props;
 

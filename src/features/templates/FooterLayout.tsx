@@ -1,38 +1,47 @@
 "use client";
 
-import { Wrapper } from "@/tw-styled/ui";
+import { Box } from "@/tw-styled/ui";
 import { FooterItem } from "../footer/atoms";
 
 export const FooterLayout = () => {
   return (
-    <Wrapper
+    <Box
       as="footer"
       style={{
-        parentWrapper: { backgroundColor: "secondary", padding: "lg" },
-        childrenWrapper: {
-          maxWidth: "3xl",
-          place: "center",
-          display: "flex-col",
-          flexSpacing: "space-around",
-          gap: "lg",
-          padding: "sm",
-          className: "md:flex-row"
-        }
+        wrapper: { backgroundColor: "secondary", padding: "lg" }
       }}
     >
-      <FooterItem title="Hours">
-        <Wrapper>
-          <p>hours content</p>
-        </Wrapper>
-      </FooterItem>
+      <Box
+        style={{
+          wrapper: {
+            maxWidth: "3xl",
+            place: "center",
+            display: "flex-col",
+            flexSpacing: "space-around",
+            gap: "lg",
+            padding: "sm",
+            className: "md:flex-row"
+          }
+        }}
+      >
+        <FooterItem title="Hours">
+          <Box>
+            <p>hours content</p>
+          </Box>
+        </FooterItem>
 
-      <FooterItem title="Contact">
-        <p>contact content</p>
-      </FooterItem>
+        <FooterItem title="Contact">
+          <Box>
+            <p>contact content</p>
+          </Box>
+        </FooterItem>
 
-      <FooterItem title="Address">
-        <p>address content</p>
-      </FooterItem>
-    </Wrapper>
+        <FooterItem title="Address">
+          <Box>
+            <p>address content</p>
+          </Box>
+        </FooterItem>
+      </Box>
+    </Box>
   );
 };

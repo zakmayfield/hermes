@@ -1,9 +1,7 @@
-"use client";
-
+import { FooterItem } from "./FooterItem";
 import { Box } from "@/tw-styled/ui";
-import { FooterItem } from "../footer/atoms";
 
-export const FooterLayout = () => {
+export const Footer = () => {
   return (
     <Box
       as="footer"

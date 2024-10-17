@@ -1,27 +1,10 @@
 import { AdminNav } from "@/features/dashboard/admin/atoms";
-import { Box } from "@/tw-styled/ui";
+import { SegmentLayout } from "@/features/dashboard/core";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
-  return (
-    <Box
-      style={{
-        wrapper: { display: "flex-col", gap: "md", flexSize: "grow" }
-      }}
-    >
-      <AdminNav />
-
-      <Box
-        style={{
-          wrapper: {
-            padding: "lg",
-            borderRadius: "lg",
-            flexSize: "grow",
-            backgroundColor: "primary"
-          }
-        }}
-      >
-        {children}
-      </Box>
-    </Box>
-  );
+export default function AdminDashboardLayout({
+  children
+}: {
+  children: React.ReactNode;
+}) {
+  return <SegmentLayout nav={<AdminNav />}>{children}</SegmentLayout>;
 }

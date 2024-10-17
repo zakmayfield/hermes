@@ -1,5 +1,5 @@
-import { DashboardLayout } from "@/features/templates";
 import { getAuthSession } from "@/lib/auth/auth.options";
+import { Layout } from "@/tw-styled/ui";
 import { redirect } from "next/navigation";
 
 type LayoutProps = {
@@ -8,7 +8,7 @@ type LayoutProps = {
   userDashboard: React.ReactNode;
 };
 
-export default async function Layout({
+export default async function DashboardLayout({
   superDashboard,
   adminDashboard,
   userDashboard
@@ -23,5 +23,25 @@ export default async function Layout({
     (user_roles.includes("ADMIN") && !user_roles.includes("SUPER") && adminDashboard) ||
     (!user_roles.includes("ADMIN") && !user_roles.includes("SUPER") && userDashboard);
 
-  return <DashboardLayout>{dashboard}</DashboardLayout>;
+  return (
+    <Layout
+      options={{ as: "main", titleText: "Dashboard" }}
+      style={{
+        parentWrapper: {
+          borderRadius: "lg",
+          maxWidth: "3xl",
+          place: "center",
+          backgroundColor: "secondary",
+          spaceY: "lg",
+          padding: "lg"
+        },
+        childrenWrapper: {
+          minHeight: "md",
+          display: "flex-col"
+        }
+      }}
+    >
+      {dashboard}
+    </Layout>
+  );
 }

@@ -4,7 +4,7 @@ import { ToastContainer } from "react-toastify";
 import { quicksand } from "@/utils/ui";
 import { CoreProvider } from "@/lib/providers";
 import { getAuthSession } from "@/lib/auth/auth.options";
-import { Layout } from "@/tw-styled/ui";
+import { Box } from "@/tw-styled/ui";
 import { Footer, Header } from "@/shared/components";
 import "./globals.css";
 import "react-toastify/ReactToastify.min.css";
@@ -30,13 +30,13 @@ export default async function RootLayout({
           {/* NAV */}
           {is_auth && <Header />}
 
-          <Layout
+          <Box
             style={{
-              childrenWrapper: { minHeight: "screen" }
+              wrapper: { minHeight: "screen", padding: "lg" }
             }}
           >
             {children}
-          </Layout>
+          </Box>
 
           {/* FOOTER */}
           {is_auth && <Footer />}

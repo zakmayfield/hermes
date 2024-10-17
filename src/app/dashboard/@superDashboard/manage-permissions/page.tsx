@@ -1,4 +1,4 @@
-import { ManagePermissionsLayout } from "@/features/dashboard/super/templates";
+import { Layout } from "@/tw-styled/ui";
 import {
   AdminPermissionsList,
   SuperPermissionsList,
@@ -7,10 +7,10 @@ import {
 
 export default function ManagePermissions() {
   return (
-    <ManagePermissionsLayout>
+    <Layout options={{ titleText: "Manage Permissions", titleAs: "h3" }}>
       <SuperPermissionsList />
       <AdminPermissionsList />
       <UserPermissionsList />
-    </ManagePermissionsLayout>
+    </Layout>
   );
 }

@@ -1,13 +1,13 @@
 "use client";
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
-import { DashboardNavLayout } from "../../default/templates";
+import { SegmentNav } from "../../core";
 
 export const AdminNav = () => {
   const segment = useSelectedLayoutSegment();
 
   return (
-    <DashboardNavLayout>
+    <SegmentNav>
       <Link
         href="/dashboard"
         className={`${(!segment && "underline") || ""}`}
@@ -26,6 +26,6 @@ export const AdminNav = () => {
       >
         Foobaz
       </Link>
-    </DashboardNavLayout>
+    </SegmentNav>
   );
 };

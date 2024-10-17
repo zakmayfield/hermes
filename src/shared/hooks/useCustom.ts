@@ -43,16 +43,6 @@ export const customHooks = {
     });
   },
 
-  useCustomQuery: <T>(props: UseCustomQueryParams<T>) => {
-    const { queryKey, queryFn, staleTime = Infinity } = props;
-
-    return useQuery<T, Error>({
-      queryKey,
-      queryFn,
-      staleTime
-    });
-  },
-
   useCustomForm: <R, T extends FieldValues>(props: UseCustomFormParams<R, T>) => {
     const { defaultValues, resolver, mutate } = props;
 

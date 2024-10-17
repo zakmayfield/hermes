@@ -19,10 +19,6 @@ export const utilityHooks = {
   },
 
   useTooltip: (props: TooltipProps) => {
-    const tt = <Tooltip {...props} />;
-
-    return {
-      Tooltip: tt
-    };
+    return <Tooltip {...props} />;
   }
 };

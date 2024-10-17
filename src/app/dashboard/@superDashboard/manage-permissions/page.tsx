@@ -1,16 +1,22 @@
 import { Layout } from "@/tw-styled/ui";
 import {
-  AdminPermissionsList,
-  SuperPermissionsList,
-  UserPermissionsList
+  AdminPermissions,
+  SuperPermissions,
+  UserPermissions
 } from "@/features/dashboard/super/molecules";
 
-export default function ManagePermissions() {
+export default async function ManagePermissions() {
   return (
-    <Layout options={{ titleText: "Manage Permissions", titleAs: "h3" }}>
-      <SuperPermissionsList />
-      <AdminPermissionsList />
-      <UserPermissionsList />
+    <Layout
+      options={{ titleText: "Manage Permissions", titleAs: "h2" }}
+      style={{
+        parentWrapper: { spaceY: "md" },
+        childrenWrapper: { display: "flex-col", gap: "lg", place: "center" }
+      }}
+    >
+      <SuperPermissions />
+      <AdminPermissions />
+      <UserPermissions />
     </Layout>
   );
 }

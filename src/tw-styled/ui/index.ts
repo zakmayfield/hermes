@@ -5,6 +5,7 @@ export * from "./form/Form";
 export * from "./formField/FormField";
 export * from "./heading/Heading";
 export * from "./layout/Layout";
+export * from "./navbar/Navbar";
 export * from "./pulse/Pulse";
 export * from "./spin/Spin";
 export * from "./text/Text";

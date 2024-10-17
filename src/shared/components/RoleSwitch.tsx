@@ -1,3 +1,4 @@
+"use client";
 import { ChangeEvent } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { PiSpinnerGap } from "react-icons/pi";

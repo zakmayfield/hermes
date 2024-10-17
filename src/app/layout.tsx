@@ -4,11 +4,12 @@ import { ToastContainer } from "react-toastify";
 import { quicksand } from "@/utils/ui";
 import { CoreProvider } from "@/lib/providers";
 import { getAuthSession } from "@/lib/auth/auth.options";
-import { FooterLayout, HeaderLayout } from "@/features/templates";
+import { FooterLayout } from "@/features/templates";
 import "./globals.css";
 import "react-toastify/ReactToastify.min.css";
 import "react-tooltip/dist/react-tooltip.css";
 import { Layout } from "@/tw-styled/ui";
+import { Header } from "@/shared/components";
 
 export const metadata: Metadata = {
   title: "Hermes",
@@ -23,7 +24,6 @@ export default async function RootLayout({
   const session = await getAuthSession();
   const is_auth = !!session;
 
-  const Header = is_auth && <HeaderLayout />;
   const Footer = is_auth && <FooterLayout />;
 
   return (
@@ -31,7 +31,7 @@ export default async function RootLayout({
       <CoreProvider>
         <body className={`${quicksand.className} antialiased`}>
           {/* NAV */}
-          {Header}
+          {is_auth && <Header />}
 
           <Layout
             style={{

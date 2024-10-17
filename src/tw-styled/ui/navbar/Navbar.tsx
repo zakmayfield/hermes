@@ -13,7 +13,7 @@ export const Navbar = (props: NavbarProps) => {
   const { children, style } = props;
 
   const styles = {
-    nav: { padding: "sm", width: "full", ...style?.nav }
+    nav: { padding: "sm", ...style?.nav }
   } satisfies NavbarProps["style"];
 
   const classes = useStyleToClass(styles);

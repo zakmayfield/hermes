@@ -18,7 +18,7 @@ export const SuperPermissions = () => {
       {isLoading ? (
         <Pulse
           size="sm"
-          style={{ parentWrapper: { maxWidth: "lg" } }}
+          style={{ parentWrapper: { className: "lg:max-w-lg" } }}
         />
       ) : (
         <Box

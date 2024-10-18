@@ -9,7 +9,7 @@ export const usePulseStyles = (style?: StyleToClassProps) => {
       display: "flex-col",
       gap: "sm",
       padding: "md",
-      backgroundColor: "accent",
+      backgroundColor: "tertiary",
       ...style?.parentWrapper
     },
     childrenWrapper: {
@@ -21,7 +21,7 @@ export const usePulseStyles = (style?: StyleToClassProps) => {
       animation: "pulse",
       padding: "md",
       borderRadius: "xl",
-      backgroundColor: "tertiary",
+      backgroundColor: "secondary",
       ...style?.children
     }
   } satisfies PulseProps["style"];

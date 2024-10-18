@@ -13,6 +13,7 @@
       --accent: 71 85 105;
     }
 
+    /* TODO: lighten the `light` colors */
     --background: 248 250 252;
     --foreground: 2 6 23;
     --primary: 226 232 240;

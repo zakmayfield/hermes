@@ -41,7 +41,9 @@ const themeCtx = {
     xl: "var(--size-xl)",
     "2xl": "var(--size-2xl)",
     "3xl": "var(--size-3xl)",
-    full: "var(--size-full)"
+    full: "var(--size-full)",
+    half: "var(--size-half)",
+    third: "var(--size-third)"
   }
 };
 

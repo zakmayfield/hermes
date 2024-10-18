@@ -1,3 +1,4 @@
+import { flexSpacingBucket } from "./buckets/flex";
 import * as buckets from "./buckets";
 import { Keyof, Styles } from "./types";
 
@@ -74,18 +75,22 @@ export const extractClassName = (styleKey: keyof Styles, styleValue: string) => 
 
     case "flexRowPosition":
     case "flexColPosition":
-      return buckets.flexPositionBucket[styleKey][
-        styleValue as Keyof<(typeof buckets.flexPositionBucket)["flexRowPosition"]>
+      return buckets.flexDirPositionBucket[styleKey][
+        styleValue as Keyof<typeof buckets.FlexDirPosition>
+      ];
+
+    case "flexAlign":
+    case "flexJustify":
+      return buckets.flexPosition[styleKey][
+        styleValue as Keyof<typeof buckets.FlexPosition>
       ];
 
     case "flexSpacing":
-      return buckets.flexSpacingBucket[
-        styleValue as Keyof<typeof buckets.flexSpacingBucket>
-      ];
+      return buckets.flexSpacingBucket[styleValue as Keyof<typeof buckets.FlexSpacing>];
     case "flexWrap":
-      return buckets.flexWrapBucket[styleValue as Keyof<typeof buckets.flexWrapBucket>];
+      return buckets.flexWrapBucket[styleValue as Keyof<typeof buckets.FlexWrap>];
     case "flexSize":
-      return buckets.flexSizeBucket[styleValue as Keyof<typeof buckets.flexSizeBucket>];
+      return buckets.flexSizeBucket[styleValue as Keyof<typeof buckets.FlexSize>];
 
     case "animation":
       return buckets.animationBucket[styleValue as Keyof<typeof buckets.animationBucket>];

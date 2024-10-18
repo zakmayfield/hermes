@@ -20,7 +20,7 @@
     --tertiary: 148 163 184;
     --accent: 100 116 139;
     --success: 58 142 63; /* bg-green-700 #15803D */
-    --warning: 185 28 28; /* bg-red-700 #B91C1C */
+    --warning: 213 56 56; /* bg-red-700 #B91C1C */
     --caution: 142 166 22 /* #8EA616 */;
     --ghost: 23 37 84 / 0.2; /* bg-cyan-500 */
 
@@ -51,6 +51,8 @@
     --size-2xl: 60rem;
     --size-3xl: 80rem;
     --size-full: 100%;
+    --size-half: 50%;
+    --size-third: 33%;
   }
 
   body {

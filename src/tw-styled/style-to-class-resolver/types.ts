@@ -48,12 +48,15 @@ export type Styles = {
   border: Keyof<typeof buckets.borderBucket>;
   borderRadius: Keyof<typeof buckets.borderRadiusBucket>;
 
-  flexRowPosition: Keyof<(typeof buckets.flexPositionBucket)["flexRowPosition"]>;
-  flexColPosition: Keyof<(typeof buckets.flexPositionBucket)["flexRowPosition"]>;
+  flexRowPosition: Keyof<typeof buckets.FlexDirPosition>;
+  flexColPosition: Keyof<typeof buckets.FlexDirPosition>;
 
-  flexSpacing: Keyof<typeof buckets.flexSpacingBucket>;
-  flexWrap: Keyof<typeof buckets.flexWrapBucket>;
-  flexSize: Keyof<typeof buckets.flexSizeBucket>;
+  flexAlign: Keyof<typeof buckets.FlexPosition>;
+  flexJustify: Keyof<typeof buckets.FlexPosition>;
+
+  flexSpacing: Keyof<typeof buckets.FlexSpacing>;
+  flexWrap: Keyof<typeof buckets.FlexWrap>;
+  flexSize: Keyof<typeof buckets.FlexSize>;
 
   animation: Keyof<typeof buckets.animationBucket>;
 

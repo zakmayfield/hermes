@@ -4,7 +4,6 @@ import { usePulseStyles } from "./Pulse.styles";
 import { usePulseUi } from "./Pulse.ui";
 
 export type PulseProps = {
-  theme?: Themes;
   size?: "sm" | "md" | "lg";
   style?: {
     parentWrapper?: BaseStyles;
@@ -14,9 +13,9 @@ export type PulseProps = {
 };
 
 export const Pulse = (props: PulseProps) => {
-  const { style, theme, ...rest } = props;
+  const { style, ...rest } = props;
 
-  const styles = usePulseStyles(style, theme);
+  const styles = usePulseStyles(style);
   const classes = useStyleToClass(styles);
   const Pulse = usePulseUi({ classes, ...rest });
 

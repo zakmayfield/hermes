@@ -3,12 +3,7 @@ import { Pulse } from "./Pulse";
 
 const meta = {
   title: "Loaders/Pulse",
-  component: Pulse,
-  argTypes: {
-    theme: {
-      options: ["light", "dark"]
-    }
-  }
+  component: Pulse
 } satisfies Meta<typeof Pulse>;
 
 export default meta;

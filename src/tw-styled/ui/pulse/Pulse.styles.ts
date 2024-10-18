@@ -1,21 +1,7 @@
-import { Styles, StyleToClassProps } from "@/tw-styled/types";
+import { StyleToClassProps } from "@/tw-styled/types";
 import { PulseProps } from "./Pulse";
 
-export const usePulseStyles = (
-  style?: StyleToClassProps,
-  theme?: PulseProps["theme"]
-) => {
-  const themes = {
-    light: {
-      parentTheme: "accent",
-      childrenTheme: "tertiary"
-    },
-    dark: {
-      parentTheme: "accent",
-      childrenTheme: "tertiary"
-    }
-  };
-
+export const usePulseStyles = (style?: StyleToClassProps) => {
   return {
     parentWrapper: {
       animation: "pulse",
@@ -23,8 +9,7 @@ export const usePulseStyles = (
       display: "flex-col",
       gap: "sm",
       padding: "md",
-      backgroundColor: themes[theme || "dark"].parentTheme as Styles["backgroundColor"],
-      className: themes[theme || "dark"].parentTheme,
+      backgroundColor: "accent",
       ...style?.parentWrapper
     },
     childrenWrapper: {
@@ -36,7 +21,7 @@ export const usePulseStyles = (
       animation: "pulse",
       padding: "md",
       borderRadius: "xl",
-      backgroundColor: themes[theme || "dark"].childrenTheme as Styles["backgroundColor"],
+      backgroundColor: "tertiary",
       ...style?.children
     }
   } satisfies PulseProps["style"];

@@ -9,7 +9,11 @@ const themeCtx = {
     primary: "rgb(var(--primary))",
     secondary: "rgb(var(--secondary))",
     tertiary: "rgb(var(--tertiary))",
-    accent: "rgb(var(--accent))"
+    accent: "rgb(var(--accent))",
+    success: "rgb(var(--success))",
+    warning: "rgb(var(--warning))",
+    caution: "rgb(var(--caution))",
+    ghost: "rgb(var(--ghost))"
   },
   spacing: {
     sm: "var(--space-sm)",

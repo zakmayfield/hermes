@@ -19,11 +19,10 @@
     --secondary: 203 213 225;
     --tertiary: 148 163 184;
     --accent: 100 116 139;
-
-    /* Btn Variant Colors */
-    --btn-ghost-bg: 23 37 84 / 0.2; /* bg-cyan-500 */
-    --btn-primary-bg: 21 128 61; /* bg-green-700 */
-    --btn-warning-bg: 185 28 28; /* bg-red-700 */
+    --success: 58 142 63; /* bg-green-700 #15803D */
+    --warning: 185 28 28; /* bg-red-700 #B91C1C */
+    --caution: 142 166 22 /* #8EA616 */;
+    --ghost: 23 37 84 / 0.2; /* bg-cyan-500 */
 
     /* SPACING */
     --space-sm: 0.5rem;

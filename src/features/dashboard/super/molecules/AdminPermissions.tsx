@@ -4,11 +4,12 @@ import { useQuery } from "@tanstack/react-query";
 import { PermissionItem, PermissionList } from "../atoms";
 import { fetchRolePermissions } from "@/shared/queries";
 import { Box } from "@/tw-styled/ui";
+import { Roles } from "@prisma/client";
 
 export const AdminPermissions = () => {
   const { data } = useQuery({
-    queryKey: ["permissions:admin"],
-    queryFn: async () => fetchRolePermissions("ADMIN"),
+    queryKey: [`permissions:${Roles.ADMIN}`],
+    queryFn: async () => fetchRolePermissions({ role: Roles.ADMIN }),
     staleTime: Infinity
   });
 

@@ -1,10 +1,10 @@
 "use client";
 
 import { customHooks } from "./useCustom";
-import { utilityHooks } from "./useUtilities";
 import { validators } from "../validators";
 import { signIn, SignInResponse } from "next-auth/react";
 import { useFormCtx } from "./useFormCtx";
+import { useToast } from "./useToast";
 
 export const formHooks = {
   useTestForm: () => {
@@ -62,15 +62,15 @@ export const formHooks = {
   },
 
   useChangePasswordForm: () => {
-    const { notify } = utilityHooks.useToast();
+    const { toast } = useToast();
 
     const { mutate } = customHooks.useCustomMutation<void, { x: string; y: string }>({
       mutationFn: async () => {},
       handleError(error) {
-        notify(error.message, "error");
+        toast(error.message, "error");
       },
       handleSuccess() {
-        notify("success"), handleReset();
+        toast("success"), handleReset();
       }
     });
 

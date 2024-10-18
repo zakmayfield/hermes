@@ -2,12 +2,7 @@
 
 import { getAuthSession } from "@/lib/auth/auth.options";
 import { db } from "@/lib/prisma";
-import { Roles } from "@prisma/client";
-
-export const fetchRoles = async () => {
-  const roles = await db.role.findMany();
-  return roles;
-};
+import { Permission, Role, RolePermissions, Roles } from "@prisma/client";
 
 export const fetchUserRoles = async () => {
   const user_id = await getAuthSession().then((session) => session?.user.id);
@@ -19,14 +14,38 @@ export const fetchUserRoles = async () => {
   return user_roles;
 };
 
-export const fetchRolePermissions = async (role?: Roles) => {
-  const permissions = await db.rolePermissions.findMany({
+type FetchRoleByIdInput = {
+  role_id: string;
+};
+
+type FetchRoleByIdOutput = Role;
+
+export const fetchRoleById = async ({
+  role_id
+}: FetchRoleByIdInput): Promise<FetchRoleByIdOutput | null> => {
+  return await db.role.findUnique({ where: { role_id } });
+};
+
+export type FetchRolePermissionsInput = {
+  role: Roles;
+};
+
+export type FetchRolePermissionsOutput = {
+  permission: Permission;
+  role_id: RolePermissions["role_id"];
+  permission_id: RolePermissions["permission_id"];
+  permission_level: RolePermissions["permission_level"];
+}[];
+
+export const fetchRolePermissions = async ({
+  role
+}: FetchRolePermissionsInput): Promise<FetchRolePermissionsOutput> => {
+  return await db.rolePermissions.findMany({
     where: { role: { name: role } },
     include: {
       permission: true
     }
   });
-  return permissions;
 };
 
 export const fetchPermissionsByRole = async (role: Roles) => {

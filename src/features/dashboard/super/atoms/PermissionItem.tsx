@@ -1,39 +1,102 @@
 "use client";
-import { utilityHooks } from "@/shared/hooks";
+import React from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Permission, RolePermissions } from "@prisma/client";
+import { togglePermissionLevel } from "@/shared/actions";
+import { fetchRoleById, FetchRolePermissionsOutput } from "@/shared/queries";
+import { useToast, useTooltip } from "@/shared/hooks";
 import { useIcons } from "@/tw-styled/tools";
 import { Box, Card, Heading } from "@/tw-styled/ui";
-import { Permission, RolePermissions } from "@prisma/client";
 
 type PermissionItemProps = RolePermissions & {
   permission: Permission;
 };
 
-const permissionDescriptions = {
-  READ_PRODUCTS: "Enables a user to view products",
-  CREATE_ORDER: "Enables a user to create orders",
-  APPROVE_USER: "Enables an admin to approve user accounts",
-  DELETE_USER: "Enables an admin to delete user accounts",
-  CREATE_ADMIN: "Enables an admin to create admin accounts",
-  DELETE_ADMIN: "Enables an admin to delete admin accounts",
-  UPDATE_USER: "Enables an admin to update user accounts"
-};
-
 export const PermissionItem = (props: PermissionItemProps) => {
   const {
-    permission: { name, permission_id },
-    permission_level
+    role_id,
+    permission_id,
+    permission_level,
+    permission: { name: permission_name }
   } = props;
 
-  const Tooltip = utilityHooks.useTooltip({
+  const Tooltip = useTooltip({
     place: "top-end",
     anchorSelect: `#${permission_id}_info_icon`
   });
 
   const icons = useIcons({
-    names: ["info"],
+    names: ["info", "check", "x"],
     variant: "duotone"
   });
 
+  const { toast } = useToast();
+
+  const queryClient = useQueryClient();
+
+  const { mutate } = useMutation({
+    mutationFn: togglePermissionLevel,
+    async onSuccess(data) {
+      const role = await fetchRoleById({ role_id }).then((r) => r?.name);
+
+      queryClient.setQueryData<FetchRolePermissionsOutput>(
+        [`permissions:${role}`],
+        (oldData) => {
+          return oldData
+            ? oldData.map((rp) =>
+                rp.permission_id === data.permission_id
+                  ? {
+                      ...rp,
+                      permission_level: data.permission_level
+                    }
+                  : rp
+              )
+            : oldData;
+        }
+      );
+
+      function getToastMessage() {
+        const disabledMessage = `Disabled ${role}:${permission_name}`;
+        const enabledMessage = `Enabled ${role}:${permission_name}`;
+
+        return !data.permission_level ? disabledMessage : enabledMessage;
+      }
+
+      toast(getToastMessage());
+    },
+
+    onError(error) {
+      console.log({ error });
+    }
+  });
+
+  enum PermissionName {
+    READ_PRODUCTS = "READ_PRODUCTS",
+    CREATE_ORDER = "CREATE_ORDER",
+    APPROVE_USER = "APPROVE_USER",
+    DELETE_USER = "DELETE_USER",
+    CREATE_ADMIN = "CREATE_ADMIN",
+    DELETE_ADMIN = "DELETE_ADMIN",
+    UPDATE_USER = "UPDATE_USER"
+  }
+
+  const permissionDescriptions: Record<PermissionName, string> = React.useMemo(() => {
+    return {
+      [PermissionName.READ_PRODUCTS]: "Enable product view",
+      [PermissionName.CREATE_ORDER]: "Enables order creation",
+      [PermissionName.APPROVE_USER]: "Enables user account approval",
+      [PermissionName.DELETE_USER]: "Enables user account deletion",
+      [PermissionName.CREATE_ADMIN]: "Enables admin account creation",
+      [PermissionName.DELETE_ADMIN]: "Enables admin account deletion",
+      [PermissionName.UPDATE_USER]: "Enables user account updates"
+    };
+  }, [PermissionName]);
+
+  const getPermissionDescription = (permission_name: string) => {
+    return permissionDescriptions[permission_name as keyof typeof PermissionName];
+  };
+
+  // TODO: *** Configure: complete card UI / configure loading UI ***
   return (
     <Card style={{ wrapper: { backgroundColor: "tertiary", className: "md:max-w-sm" } }}>
       <Box
@@ -46,20 +109,20 @@ export const PermissionItem = (props: PermissionItemProps) => {
         }}
       >
         <Heading
-          text={name}
+          text={permission_name}
           as="h6"
         />
         <icons.info
           id={`${permission_id}_info_icon`}
-          data-tooltip-html={
-            permissionDescriptions[name as keyof typeof permissionDescriptions]
-          }
+          data-tooltip-html={getPermissionDescription(permission_name)}
         />
         {Tooltip}
       </Box>
 
       <Box>
-        <p>{permission_level ? "✅" : "🚫"}</p>
+        <p onClick={() => mutate({ role_id, permission_id, permission_level })}>
+          {permission_level ? <icons.check /> : <icons.x />}
+        </p>
       </Box>
     </Card>
   );

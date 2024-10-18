@@ -5,8 +5,7 @@ import {
   MutationFunction,
   QueryFunction,
   QueryKey,
-  useMutation,
-  useQuery
+  useMutation
 } from "@tanstack/react-query";
 import { UseMutateFunction } from "@tanstack/react-query";
 

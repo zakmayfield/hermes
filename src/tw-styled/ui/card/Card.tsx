@@ -6,7 +6,6 @@ type CardProps = {
   children?: Children;
   options?: {
     title?: string;
-    size?: "sm" | "md" | "lg";
   };
   style?: {
     wrapper?: BaseStyles;
@@ -16,13 +15,7 @@ type CardProps = {
 };
 
 export const Card = (props: CardProps) => {
-  const { style, options: { title = "", size = "sm" } = {}, children } = props;
-
-  const cardSizeMap = {
-    sm: "xs",
-    md: "sm",
-    lg: "lg"
-  };
+  const { style, options: { title = "" } = {}, children } = props;
 
   const styles = {
     wrapper: {

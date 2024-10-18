@@ -4,9 +4,7 @@ import { Box } from "../box/Box";
 import { Heading } from "../heading/Heading";
 import { Card } from "./Card";
 
-type CardDemoProps = {};
-
-export const CardDemo = (props: CardDemoProps) => {
+export const CardDemo = () => {
   const icons = useIcons({
     names: ["info"]
   });
@@ -19,10 +17,7 @@ export const CardDemo = (props: CardDemoProps) => {
         <div>Body content</div>
       </Card>
 
-      <Card
-        options={{ size: "sm" }}
-        style={{ wrapper: { backgroundColor: "primary" } }}
-      >
+      <Card style={{ wrapper: { backgroundColor: "primary" } }}>
         <Box
           style={{
             wrapper: {

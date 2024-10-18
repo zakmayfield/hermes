@@ -1,4 +1,3 @@
-import { flexSpacingBucket } from "./buckets/flex";
 import * as buckets from "./buckets";
 import { Keyof, Styles } from "./types";
 

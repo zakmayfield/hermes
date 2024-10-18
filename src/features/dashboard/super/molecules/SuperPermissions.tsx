@@ -15,7 +15,15 @@ export const SuperPermissions = () => {
 
   return (
     <PermissionList title="Super">
-      <Box style={{ wrapper: { display: "flex-row", gap: "md", flexWrap: "wrap" } }}>
+      <Box
+        style={{
+          wrapper: {
+            display: "flex-row",
+            gap: "md",
+            flexWrap: "wrap"
+          }
+        }}
+      >
         {data?.map((p) => (
           <PermissionItem
             key={p.permission_id}

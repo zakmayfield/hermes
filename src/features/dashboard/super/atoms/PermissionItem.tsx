@@ -6,7 +6,7 @@ import { togglePermissionLevel } from "@/shared/actions";
 import { fetchRoleById, FetchRolePermissionsOutput } from "@/shared/queries";
 import { useToast, useTooltip } from "@/shared/hooks";
 import { useIcons } from "@/tw-styled/tools";
-import { Box, Card, Heading, Icon } from "@/tw-styled/ui";
+import { Box, Button, Card, Heading, Icon } from "@/tw-styled/ui";
 
 type PermissionItemProps = RolePermissions & {
   permission: Permission;
@@ -22,7 +22,7 @@ export const PermissionItem = (props: PermissionItemProps) => {
 
   const Tooltip = useTooltip({
     place: "top-end",
-    anchorSelect: `#${permission_id}_info_icon`
+    anchorSelect: `#${permission_id}_description`
   });
 
   const icons = useIcons({
@@ -96,15 +96,79 @@ export const PermissionItem = (props: PermissionItemProps) => {
     return permissionDescriptions[permission_name as keyof typeof PermissionName];
   };
 
-  // TODO: *** complete card UI / configure loading UI ***
+  const isEnabled = React.useMemo(() => {
+    return !!permission_level;
+  }, [permission_level]);
+
+  // TODO: *** configure loading UI ***
   return (
-    <Card style={{ wrapper: { backgroundColor: "tertiary", className: "md:max-w-sm" } }}>
-      <Box
+    <Card
+      style={{
+        wrapper: {
+          backgroundColor: "secondary",
+          flexSize: "remaining",
+          className: "lg:max-w-half"
+        },
+        body: { display: "flex-col", gap: "md", className: "sm:flex-row" }
+      }}
+    >
+      <Box style={{ wrapper: { display: "flex-row", flexAlign: "center", gap: "sm" } }}>
+        {/* STATUS ICON */}
+        {isEnabled ? (
+          <Icon
+            name="check"
+            variant="duotone"
+            style={{ icon: { fontSize: "xl", textColor: "success" } }}
+          />
+        ) : (
+          <Icon
+            name="x"
+            variant="duotone"
+            style={{ icon: { fontSize: "xl", textColor: "warning" } }}
+          />
+        )}
+
+        {/* PERMISSION NAME */}
+        <Heading
+          as="h6"
+          text={permission_name}
+        />
+
+        {/* PERMISSION INFO */}
+        <Box>
+          <icons.info
+            id={`${permission_id}_description`}
+            data-tooltip-html={getPermissionDescription(permission_name)}
+          />
+          {Tooltip}
+        </Box>
+      </Box>
+
+      {/* TOGGLE PERMISSION BUTTON */}
+      <Button
+        handleClick={() => mutate({ role_id, permission_id, permission_level })}
+        text={isEnabled ? "disable" : "enable"}
+        style={{
+          button: {
+            textColor: isEnabled ? "warning" : "success",
+            border: "sm",
+            borderColor: isEnabled ? "warning" : "success",
+            padding: "none",
+            paddingY: "sm",
+            paddingX: "sm",
+            width: "full",
+            className: "ml-auto sm:w-auto sm:py-1"
+          }
+        }}
+      />
+
+      {/* HEADER */}
+      {/* <Box
         style={{
           wrapper: {
             display: "flex-row",
-            flexRowPosition: "center-center",
-            flexSpacing: "space-between"
+            gap: "sm",
+            className: "items-center"
           }
         }}
       >
@@ -112,29 +176,38 @@ export const PermissionItem = (props: PermissionItemProps) => {
           text={permission_name}
           as="h6"
         />
+
         <icons.info
           id={`${permission_id}_info_icon`}
           data-tooltip-html={getPermissionDescription(permission_name)}
         />
-        {Tooltip}
-      </Box>
 
-      <Box>
+        {Tooltip}
+      </Box> */}
+
+      {/* BODY */}
+      {/* <Box style={{ wrapper: { display: "flex-row", className: "items-center" } }}>
+        <Button
+          text={!permission_level ? "enable" : "disable"}
+          options={{ variant: "ghost" }}
+          style={{ button: { padding: "none", paddingX: "sm" } }}
+        />
+
         <p onClick={() => mutate({ role_id, permission_id, permission_level })}>
           {permission_level ? (
             <Icon
               name="check"
               variant="duotone"
-              style={{ icon: { fontSize: "lg", textColor: "success" } }}
+              style={{ icon: { fontSize: "xl", textColor: "success" } }}
             />
           ) : (
             <Icon
               name="x"
-              style={{ icon: { fontSize: "lg" } }}
+              style={{ icon: { fontSize: "xl", textColor: "warning" } }}
             />
           )}
         </p>
-      </Box>
+      </Box> */}
     </Card>
   );
 };

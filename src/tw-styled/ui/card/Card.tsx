@@ -26,7 +26,6 @@ export const Card = (props: CardProps) => {
 
   const styles = {
     wrapper: {
-      width: "full",
       borderRadius: "lg",
       padding: "md",
       ...style?.wrapper

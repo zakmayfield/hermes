@@ -6,6 +6,7 @@ import React from "react";
 type IconProps = {
   name: IconNames;
   variant?: IconVariants;
+
   style?: {
     icon?: BaseStyles;
   };
@@ -13,6 +14,7 @@ type IconProps = {
 
 export const Icon = (props: IconProps) => {
   const { name, variant = "base", style } = props;
+
   const iconResult = useIcons({ names: [name], variant });
 
   const styles = {
@@ -21,5 +23,7 @@ export const Icon = (props: IconProps) => {
 
   const classes = useStyleToClass(styles);
 
-  return React.createElement(iconResult[name], { className: classes.get("icon") });
+  return React.createElement(iconResult[name], {
+    className: classes.get("icon")
+  });
 };

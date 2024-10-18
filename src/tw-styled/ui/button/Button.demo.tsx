@@ -19,6 +19,10 @@ export const ButtonDemo = () => {
           text="Warning"
           options={{ variant: "warning" }}
         />
+        <Button
+          text="Caution"
+          options={{ variant: "caution" }}
+        />
       </div>
 
       <h3>Disabled</h3>
@@ -26,6 +30,7 @@ export const ButtonDemo = () => {
         <Button options={{ variant: "ghost", isDisabled }} />
         <Button options={{ variant: "primary", isDisabled }} />
         <Button options={{ variant: "warning", isDisabled }} />
+        <Button options={{ variant: "caution", isDisabled }} />
       </div>
 
       <h3>Size</h3>

@@ -6,7 +6,7 @@ import { togglePermissionLevel } from "@/shared/actions";
 import { fetchRoleById, FetchRolePermissionsOutput } from "@/shared/queries";
 import { useToast, useTooltip } from "@/shared/hooks";
 import { useIcons } from "@/tw-styled/tools";
-import { Box, Card, Heading } from "@/tw-styled/ui";
+import { Box, Card, Heading, Icon } from "@/tw-styled/ui";
 
 type PermissionItemProps = RolePermissions & {
   permission: Permission;
@@ -26,7 +26,7 @@ export const PermissionItem = (props: PermissionItemProps) => {
   });
 
   const icons = useIcons({
-    names: ["info", "check", "x"],
+    names: ["info"],
     variant: "duotone"
   });
 
@@ -96,7 +96,7 @@ export const PermissionItem = (props: PermissionItemProps) => {
     return permissionDescriptions[permission_name as keyof typeof PermissionName];
   };
 
-  // TODO: *** Configure: complete card UI / configure loading UI ***
+  // TODO: *** complete card UI / configure loading UI ***
   return (
     <Card style={{ wrapper: { backgroundColor: "tertiary", className: "md:max-w-sm" } }}>
       <Box
@@ -121,7 +121,18 @@ export const PermissionItem = (props: PermissionItemProps) => {
 
       <Box>
         <p onClick={() => mutate({ role_id, permission_id, permission_level })}>
-          {permission_level ? <icons.check /> : <icons.x />}
+          {permission_level ? (
+            <Icon
+              name="check"
+              variant="duotone"
+              style={{ icon: { fontSize: "lg", textColor: "success" } }}
+            />
+          ) : (
+            <Icon
+              name="x"
+              style={{ icon: { fontSize: "lg" } }}
+            />
+          )}
         </p>
       </Box>
     </Card>

@@ -1,10 +1,11 @@
 import * as buckets from "./buckets";
 import { Keyof, Styles } from "./types";
 
+// TODO: *** Configure better enum structure, see `spacing` ***
 export const extractClassName = (styleKey: keyof Styles, styleValue: string) => {
   switch (styleKey) {
     case "boxSizing":
-      return buckets.boxSizingBucket[styleValue as Keyof<typeof buckets.boxSizingBucket>];
+      return buckets.boxSizingBucket[styleValue as Keyof<typeof buckets.BoxSizing>];
 
     case "padding":
     case "paddingX":
@@ -15,30 +16,22 @@ export const extractClassName = (styleKey: keyof Styles, styleValue: string) => 
     case "spaceX":
     case "spaceY":
     case "gap":
-      return buckets.spacingBucket[styleKey][
-        styleValue as Keyof<(typeof buckets.spacingBucket)["padding"]>
-      ];
+      return buckets.spacingBucket[styleKey][styleValue as Keyof<typeof buckets.Spacing>];
 
     case "width":
     case "minWidth":
     case "maxWidth":
-      return buckets.widthtBucket[styleKey][
-        styleValue as Keyof<(typeof buckets.widthtBucket)["width"]>
-      ];
+      return buckets.widthtBucket[styleKey][styleValue as Keyof<typeof buckets.Width>];
 
     case "height":
     case "minHeight":
     case "maxHeight":
-      return buckets.heightBucket[styleKey][
-        styleValue as Keyof<(typeof buckets.heightBucket)["height"]>
-      ];
+      return buckets.heightBucket[styleKey][styleValue as Keyof<typeof buckets.Height>];
 
     case "backgroundColor":
     case "textColor":
     case "borderColor":
-      return buckets.colorBucket[styleKey][
-        styleValue as Keyof<(typeof buckets.colorBucket)["backgroundColor"]>
-      ];
+      return buckets.colorBucket[styleKey][styleValue as Keyof<typeof buckets.Color>];
 
     case "opacity":
       return buckets.opacityBucket[styleKey][
@@ -106,7 +99,7 @@ export const extractClassName = (styleKey: keyof Styles, styleValue: string) => 
       ];
     case "buttonVariant":
       return buckets.buttonVariantBucket[
-        styleValue as Keyof<typeof buckets.buttonVariantBucket>
+        styleValue as Keyof<typeof buckets.ButtonVariant>
       ];
 
     case "className":

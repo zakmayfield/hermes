@@ -1,55 +1,53 @@
 import { Keyof, MultiBucket } from "../types";
 
-enum BackgroundColorBucket {
-  background = "bg-background",
-  foreground = "bg-foreground",
-  primary = "bg-primary",
-  secondary = "bg-secondary",
-  tertiary = "bg-tertiary",
-  accent = "bg-accent"
-}
-
-enum TextColorBucket {
-  background = "text-background",
-  foreground = "text-foreground",
-  primary = "text-primary",
-  secondary = "text-secondary",
-  tertiary = "text-tertiary",
-  accent = "text-accent"
-}
-
-enum BorderColorBucket {
-  background = "border-background",
-  foreground = "border-foreground",
-  primary = "border-primary",
-  secondary = "border-secondary",
-  tertiary = "border-teritary",
-  accent = "border-accent"
+export enum Color {
+  background = "background",
+  foreground = "foreground",
+  primary = "primary",
+  secondary = "secondary",
+  tertiary = "tertiary",
+  accent = "accent",
+  success = "success",
+  warning = "warning",
+  caution = "caution",
+  ghost = "ghost"
 }
 
 export const colorBucket = {
   backgroundColor: {
-    background: BackgroundColorBucket.background,
-    foreground: BackgroundColorBucket.foreground,
-    primary: BackgroundColorBucket.primary,
-    secondary: BackgroundColorBucket.secondary,
-    tertiary: BackgroundColorBucket.tertiary,
-    accent: BackgroundColorBucket.accent
+    [Color.background]: "bg-background",
+    [Color.foreground]: "bg-foreground",
+    [Color.primary]: "bg-primary",
+    [Color.secondary]: "bg-secondary",
+    [Color.tertiary]: "bg-tertiary",
+    [Color.accent]: "bg-accent",
+    [Color.success]: "bg-success",
+    [Color.warning]: "bg-warning",
+    [Color.caution]: "bg-caution",
+    [Color.ghost]: "bg-ghost"
   },
   textColor: {
-    background: TextColorBucket.background,
-    foreground: TextColorBucket.foreground,
-    primary: TextColorBucket.primary,
-    secondary: TextColorBucket.secondary,
-    tertiary: TextColorBucket.tertiary,
-    accent: TextColorBucket.accent
+    [Color.background]: "text-background",
+    [Color.foreground]: "text-foreground",
+    [Color.primary]: "text-primary",
+    [Color.secondary]: "text-secondary",
+    [Color.tertiary]: "text-tertiary",
+    [Color.accent]: "text-accent",
+    [Color.success]: "text-success",
+    [Color.warning]: "text-warning",
+    [Color.caution]: "text-caution",
+    [Color.ghost]: "text-ghost"
   },
   borderColor: {
-    background: BorderColorBucket.background,
-    foreground: BorderColorBucket.foreground,
-    primary: BorderColorBucket.primary,
-    secondary: BorderColorBucket.secondary,
-    tertiary: BorderColorBucket.tertiary,
-    accent: BorderColorBucket.accent
+    [Color.background]: "border-background",
+    [Color.foreground]: "border-foreground",
+    [Color.primary]: "border-primary",
+    [Color.secondary]: "border-secondary",
+    [Color.tertiary]: "border-tertiary",
+    [Color.accent]: "border-accent",
+    [Color.success]: "border-success",
+    [Color.warning]: "border-warning",
+    [Color.caution]: "border-caution",
+    [Color.ghost]: "border-ghost"
   }
-} satisfies MultiBucket<Keyof<typeof BackgroundColorBucket>>;
+} satisfies MultiBucket<Keyof<typeof Color>>;

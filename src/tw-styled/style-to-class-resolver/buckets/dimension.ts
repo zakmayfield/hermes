@@ -1,151 +1,101 @@
 import { Keyof, MultiBucket } from "../types";
 
-enum WidthBucket {
-  "3xs" = `w-3xs`,
-  "2xs" = `w-2xs`,
-  xs = `w-xs`,
-  sm = `w-sm`,
-  md = `w-md`,
-  lg = `w-lg`,
-  xl = `w-xl`,
-  "2xl" = "w-2xl",
-  "3xl" = "w-3xl",
-  full = `w-full`
+export enum Width {
+  "3xs" = "3xs",
+  "2xs" = "2xs",
+  xs = "xs",
+  sm = "sm",
+  md = "md",
+  lg = "lg",
+  xl = "xl",
+  "2xl" = "2xl",
+  "3xl" = "3xl",
+  full = "full"
 }
 
-enum MinWidthBucket {
-  "3xs" = `min-w-3xs`,
-  "2xs" = `min-w-2xs`,
-  xs = `min-w-xs`,
-  sm = `min-w-sm`,
-  md = `min-w-md`,
-  lg = `min-w-lg`,
-  xl = `min-w-xl`,
-  "2xl" = "min-w-2xl",
-  "3xl" = "min-w-3xl",
-  full = `min-w-full`
-}
-
-enum MaxWidthBucket {
-  "3xs" = `max-w-3xs`,
-  "2xs" = `max-w-2xs`,
-  xs = `max-w-xs`,
-  sm = `max-w-sm`,
-  md = `max-w-md`,
-  lg = `max-w-lg`,
-  xl = `max-w-xl`,
-  "2xl" = "max-w-2xl",
-  "3xl" = "max-w-3xl",
-  full = `max-w-full`
+export enum Height {
+  "3xs" = "3xs",
+  "2xs" = "2xs",
+  xs = "xs",
+  sm = "sm",
+  md = "md",
+  lg = "lg",
+  xl = "xl",
+  screen = "screen",
+  full = "full"
 }
 
 export const widthtBucket = {
   width: {
-    "3xs": WidthBucket["3xs"],
-    "2xs": WidthBucket["2xs"],
-    xs: WidthBucket.xs,
-    sm: WidthBucket.sm,
-    md: WidthBucket.md,
-    lg: WidthBucket.lg,
-    xl: WidthBucket.xl,
-    "2xl": WidthBucket["2xl"],
-    "3xl": WidthBucket["3xl"],
-    full: WidthBucket.full
+    [Width["3xs"]]: "w-3xs",
+    [Width["2xs"]]: "w-2xs",
+    [Width.xs]: "w-xs",
+    [Width.sm]: "w-sm",
+    [Width.md]: "w-md",
+    [Width.lg]: "w-lg",
+    [Width.xl]: "w-xl",
+    [Width["2xl"]]: "w-2xl",
+    [Width["3xl"]]: "w-3xl",
+    [Width.full]: "w-full"
   },
   minWidth: {
-    "3xs": MinWidthBucket["3xs"],
-    "2xs": MinWidthBucket["2xs"],
-    xs: MinWidthBucket.xs,
-    sm: MinWidthBucket.sm,
-    md: MinWidthBucket.md,
-    lg: MinWidthBucket.lg,
-    xl: MinWidthBucket.xl,
-    "2xl": MinWidthBucket["2xl"],
-    "3xl": MinWidthBucket["3xl"],
-    full: MinWidthBucket.full
+    [Width["3xs"]]: "min-w-3xs",
+    [Width["2xs"]]: "min-w-2xs",
+    [Width.xs]: "min-w-xs",
+    [Width.sm]: "min-w-sm",
+    [Width.md]: "min-w-md",
+    [Width.lg]: "min-w-lg",
+    [Width.xl]: "min-w-xl",
+    [Width["2xl"]]: "min-w-2xl",
+    [Width["3xl"]]: "min-w-3xl",
+    [Width.full]: "min-w-full"
   },
   maxWidth: {
-    "3xs": MaxWidthBucket["3xs"],
-    "2xs": MaxWidthBucket["2xs"],
-    xs: MaxWidthBucket.xs,
-    sm: MaxWidthBucket.sm,
-    md: MaxWidthBucket.md,
-    lg: MaxWidthBucket.lg,
-    xl: MaxWidthBucket.xl,
-    "2xl": MaxWidthBucket["2xl"],
-    "3xl": MaxWidthBucket["3xl"],
-    full: MaxWidthBucket.full
+    [Width["3xs"]]: "max-w-3xs",
+    [Width["2xs"]]: "max-w-2xs",
+    [Width.xs]: "max-w-xs",
+    [Width.sm]: "max-w-sm",
+    [Width.md]: "max-w-md",
+    [Width.lg]: "max-w-lg",
+    [Width.xl]: "max-w-xl",
+    [Width["2xl"]]: "max-w-2xl",
+    [Width["3xl"]]: "max-w-3xl",
+    [Width.full]: "max-w-full"
   }
-} satisfies MultiBucket<Keyof<typeof WidthBucket>>;
-
-enum HeightBucket {
-  "3xs" = `h-3xs`,
-  "2xs" = `h-2xs`,
-  xs = `h-xs`,
-  sm = `h-sm`,
-  md = `h-md`,
-  lg = `h-lg`,
-  xl = `h-xl`,
-  screen = "h-screen",
-  full = `h-full`
-}
-
-enum MinHeightBucket {
-  "3xs" = `min-h-3xs`,
-  "2xs" = `min-h-2xs`,
-  xs = `min-h-xs`,
-  sm = `min-h-sm`,
-  md = `min-h-md`,
-  lg = `min-h-lg`,
-  xl = `min-h-xl`,
-  screen = "min-h-screen",
-  full = `min-h-full`
-}
-
-enum MaxHeightBucket {
-  "3xs" = `max-h-3xs`,
-  "2xs" = `max-h-2xs`,
-  xs = `max-h-xs`,
-  sm = `max-h-sm`,
-  md = `max-h-md`,
-  lg = `max-h-lg`,
-  xl = `max-h-xl`,
-  screen = "max-h-screen",
-  full = `max-h-full`
-}
+} satisfies MultiBucket<Keyof<typeof Width>>;
 
 export const heightBucket = {
   height: {
-    "3xs": HeightBucket["3xs"],
-    "2xs": HeightBucket["2xs"],
-    xs: HeightBucket.xs,
-    sm: HeightBucket.sm,
-    md: HeightBucket.md,
-    lg: HeightBucket.lg,
-    xl: HeightBucket.xl,
-    screen: HeightBucket.screen,
-    full: HeightBucket.full
+    [Height["3xs"]]: "h-3xs",
+    [Height["2xs"]]: "h-2xs",
+    [Height.xs]: "h-xs",
+    [Height.sm]: "h-sm",
+    [Height.md]: "h-md",
+    [Height.lg]: "h-lg",
+    [Height.xl]: "h-xl",
+    [Height.screen]: "h-screen",
+    [Height.full]: "h-full"
   },
   minHeight: {
-    "3xs": MinHeightBucket["3xs"],
-    "2xs": MinHeightBucket["2xs"],
-    xs: MinHeightBucket.xs,
-    sm: MinHeightBucket.sm,
-    md: MinHeightBucket.md,
-    lg: MinHeightBucket.lg,
-    xl: MinHeightBucket.xl,
-    screen: MinHeightBucket.screen,
-    full: MinHeightBucket.full
+    [Height["3xs"]]: "min-h-3xs",
+    [Height["2xs"]]: "min-h-2xs",
+    [Height.xs]: "min-h-xs",
+    [Height.sm]: "min-h-sm",
+    [Height.md]: "min-h-md",
+    [Height.lg]: "min-h-lg",
+    [Height.xl]: "min-h-xl",
+    [Height.screen]: "min-h-screen",
+    [Height.full]: "min-h-full"
   },
   maxHeight: {
-    "3xs": MaxHeightBucket["3xs"],
-    "2xs": MaxHeightBucket["2xs"],
-    xs: MaxHeightBucket.xs,
-    sm: MaxHeightBucket.sm,
-    md: MaxHeightBucket.md,
-    lg: MaxHeightBucket.lg,
-    xl: MaxHeightBucket.xl,
-    screen: MaxHeightBucket.screen,
-    full: MaxHeightBucket.full
+    [Height["3xs"]]: "max-h-3xs",
+    [Height["2xs"]]: "max-h-2xs",
+    [Height.xs]: "max-h-xs",
+    [Height.sm]: "max-h-sm",
+    [Height.md]: "max-h-md",
+    [Height.lg]: "max-h-lg",
+    [Height.xl]: "max-h-xl",
+    [Height.screen]: "max-h-screen",
+    [Height.full]: "max-h-full"
   }
-} satisfies MultiBucket<Keyof<typeof HeightBucket>>;
+} satisfies MultiBucket<Keyof<typeof Height>>;

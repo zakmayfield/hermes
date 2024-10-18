@@ -20,10 +20,9 @@ export const usePulseStyles = (
     parentWrapper: {
       animation: "pulse",
       borderRadius: "lg",
-      width: "md",
       display: "flex-col",
       gap: "sm",
-      padding: "sm",
+      padding: "md",
       className: themes[theme || "dark"].parentTheme,
       ...style?.parentWrapper
     },

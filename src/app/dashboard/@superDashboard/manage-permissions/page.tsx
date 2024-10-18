@@ -14,9 +14,9 @@ export default async function ManagePermissions() {
         childrenWrapper: { display: "flex-col", gap: "lg", place: "center" }
       }}
     >
-      <SuperPermissions />
-      <AdminPermissions />
       <UserPermissions />
+      <AdminPermissions />
+      <SuperPermissions />
     </Layout>
   );
 }

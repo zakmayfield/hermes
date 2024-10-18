@@ -100,7 +100,6 @@ export const PermissionItem = (props: PermissionItemProps) => {
     return !!permission_level;
   }, [permission_level]);
 
-  // TODO: *** configure loading UI ***
   return (
     <Card
       style={{

@@ -5,6 +5,7 @@ export * from "./fieldError/FieldError";
 export * from "./form/Form";
 export * from "./formField/FormField";
 export * from "./heading/Heading";
+export * from "./icon/Icon";
 export * from "./layout/Layout";
 export * from "./navbar/Navbar";
 export * from "./pulse/Pulse";

@@ -15,8 +15,8 @@ import {
   PiXCircleDuotone
 } from "react-icons/pi";
 
-type IconNames = "spin" | "cart" | "error" | "info" | "check" | "x";
-type IconVariants = "base" | "duotone";
+export type IconNames = "spin" | "cart" | "error" | "info" | "check" | "x";
+export type IconVariants = "base" | "duotone";
 
 type UseIconsProps = {
   names: IconNames[];

@@ -40,7 +40,7 @@ export const AdminPermissions = () => {
   );
 
   return (
-    <PermissionList title="Admin">
+    <PermissionList title="Configure Admin Permissions">
       {loading}
       {permissions}
     </PermissionList>

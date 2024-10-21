@@ -109,9 +109,22 @@ model UserRoles {
   @@unique([user_id, role_id])
 }
 
+enum Permissions {
+  APPROVE_USER
+  CREATE_USER
+  UPDATE_USER
+  DELETE_USER
+  DELETE_ADMIN
+  GRANT_PERMISSIONS
+  REVOKE_PERMISSIONS
+  // TODO: *** Add additional permissions like creating products, invoice management, ect ***
+}
+
 model Permission {
-  permission_id String @id @default(cuid())
-  name          String @unique
+  permission_id String      @id @default(cuid())
+  name          Permissions @unique
+  display_name  String?
+  description   String?
 
   role_permissions RolePermissions[]
   user_permissions UserPermissions[]
@@ -123,7 +136,7 @@ model RolePermissions {
   permission_level Int    @default(1)
 
   role       Role       @relation(fields: [role_id], references: [role_id])
-  permission Permission @relation(fields: [permission_id], references: [permission_id])
+  permission Permission @relation(fields: [permission_id], references: [permission_id], onDelete: Cascade)
 
   @@unique([role_id, permission_id])
 }

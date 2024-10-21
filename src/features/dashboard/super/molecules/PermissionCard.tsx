@@ -123,35 +123,5 @@ export const PermissionCard = (props: FetchRolePermissionsOutput) => {
 
       {togglePermissionButton}
     </Box>
-    // <Box
-    //   style={{
-    //     wrapper: {
-    //       padding: "sm",
-    //       borderRadius: "lg",
-    //       display: "flex-col",
-    //       gap: "sm",
-    //       backgroundColor: "secondary",
-    //       flexSize: "grow",
-    //       className: "sm:flex-row sm:justify-between "
-    //     }
-    //   }}
-    // >
-    //   <Box
-    //     style={{
-    //       wrapper: {
-    //         display: "flex-row",
-    //         flexAlign: "center",
-    //         gap: "sm",
-    //         minWidth: "sm"
-    //       }
-    //     }}
-    //   >
-    //     {statusIcon}
-    //     {displayName}
-    //     {info}
-    //   </Box>
-
-    //   {togglePermissionButton}
-    // </Box>
   );
 };

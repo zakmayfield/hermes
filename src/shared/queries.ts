@@ -30,20 +30,20 @@ export type FetchRolePermissionsInput = {
   role: Roles;
 };
 
-export type FetchRolePermissionsOutput = {
-  permission: Permission;
-  role_id: RolePermissions["role_id"];
-  permission_id: RolePermissions["permission_id"];
-  permission_level: RolePermissions["permission_level"];
-}[];
+export type FetchRolePermissionsOutput = RolePermissions & {
+  permission: Omit<Permission, "permission_id">;
+};
 
 export const fetchRolePermissions = async ({
   role
-}: FetchRolePermissionsInput): Promise<FetchRolePermissionsOutput> => {
+}: FetchRolePermissionsInput): Promise<FetchRolePermissionsOutput[]> => {
   return await db.rolePermissions.findMany({
     where: { role: { name: role } },
+    // TODO: *** order by createdat ***
     include: {
-      permission: true
+      permission: {
+        omit: { permission_id: true }
+      }
     }
   });
 };

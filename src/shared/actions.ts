@@ -5,13 +5,13 @@ import { db } from "@/lib/prisma";
 import { Roles } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
-type TogglePermissionLevel = {
+export type TogglePermissionLevelInput = {
   role_id: string;
   permission_id: string;
   permission_level: number;
 };
 
-export const togglePermissionLevel = async (payload: TogglePermissionLevel) => {
+export const togglePermissionLevel = async (payload: TogglePermissionLevelInput) => {
   const { role_id, permission_id, permission_level } = payload;
 
   function toggle() {

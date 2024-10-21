@@ -1,5 +1,5 @@
 import { useStyleToClass } from "@/tw-styled/tools";
-import { BaseStyles, Themes } from "@/tw-styled/types";
+import { BaseStyles } from "@/tw-styled/types";
 import { usePulseStyles } from "./Pulse.styles";
 import { usePulseUi } from "./Pulse.ui";
 

@@ -24,7 +24,20 @@ export const AdminPermissions = () => {
       />
     ));
 
-  const permissions = data && !isLoading && <Box>{permissionItems}</Box>;
+  const permissions = data && !isLoading && (
+    <Box
+      style={{
+        wrapper: {
+          display: "flex-col",
+          gap: "md",
+          flexWrap: "wrap",
+          className: "sm:flex-row"
+        }
+      }}
+    >
+      {permissionItems}
+    </Box>
+  );
 
   return (
     <PermissionList title="Admin">

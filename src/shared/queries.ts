@@ -40,6 +40,9 @@ export const fetchRolePermissions = async ({
   return await db.rolePermissions.findMany({
     where: { role: { name: role } },
     // TODO: *** order by createdat ***
+    orderBy: {
+      permission: { name: "asc" }
+    },
     include: {
       permission: {
         omit: { permission_id: true }

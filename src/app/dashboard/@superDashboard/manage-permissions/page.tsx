@@ -1,9 +1,5 @@
 import { Layout } from "@/tw-styled/ui";
-import {
-  AdminPermissions,
-  SuperPermissions,
-  UserPermissions
-} from "@/features/dashboard/super/molecules";
+import { AdminPermissions } from "@/features/dashboard/super/templates";
 
 export default async function ManagePermissions() {
   return (
@@ -14,9 +10,7 @@ export default async function ManagePermissions() {
         childrenWrapper: { display: "flex-col", gap: "lg", place: "center" }
       }}
     >
-      <UserPermissions />
       <AdminPermissions />
-      <SuperPermissions />
     </Layout>
   );
 }

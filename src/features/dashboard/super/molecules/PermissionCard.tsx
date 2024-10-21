@@ -2,7 +2,7 @@
 import React from "react";
 import { useTooltip } from "@/shared/hooks";
 import { FetchRolePermissionsOutput } from "@/shared/queries";
-import { Icon, Heading, Button, Box } from "@/tw-styled/ui";
+import { Icon, Heading, Button, Box, Text } from "@/tw-styled/ui";
 import { useIsPermissionEnabled, useTogglePermission } from "./PermissionCard.hooks";
 import { useIcons } from "@/tw-styled/tools";
 
@@ -86,29 +86,72 @@ export const PermissionCard = (props: FetchRolePermissionsOutput) => {
           padding: "sm",
           borderRadius: "lg",
           display: "flex-col",
-          gap: "sm",
+          gap: "md",
           backgroundColor: "secondary",
           flexSize: "grow",
-          className: "sm:flex-row sm:justify-between "
+          className: "sm:flex-row sm:justify-between sm:items-start"
         }
       }}
     >
-      <Box
-        style={{
-          wrapper: {
-            display: "flex-row",
-            flexAlign: "center",
-            gap: "sm",
-            minWidth: "sm"
-          }
-        }}
-      >
-        {statusIcon}
-        {displayName}
-        {info}
+      <Box style={{ wrapper: { width: "sm" } }}>
+        <Box
+          style={{
+            wrapper: {
+              display: "flex-row",
+              flexAlign: "center",
+              gap: "sm"
+            }
+          }}
+        >
+          {statusIcon}
+          {displayName}
+          {info}
+        </Box>
+
+        <Text
+          style={{
+            parentWrapper: {
+              textColor: "accent",
+              paddingL: "lg",
+              className: "italic"
+            }
+          }}
+        >
+          {description}
+        </Text>
       </Box>
 
       {togglePermissionButton}
     </Box>
+    // <Box
+    //   style={{
+    //     wrapper: {
+    //       padding: "sm",
+    //       borderRadius: "lg",
+    //       display: "flex-col",
+    //       gap: "sm",
+    //       backgroundColor: "secondary",
+    //       flexSize: "grow",
+    //       className: "sm:flex-row sm:justify-between "
+    //     }
+    //   }}
+    // >
+    //   <Box
+    //     style={{
+    //       wrapper: {
+    //         display: "flex-row",
+    //         flexAlign: "center",
+    //         gap: "sm",
+    //         minWidth: "sm"
+    //       }
+    //     }}
+    //   >
+    //     {statusIcon}
+    //     {displayName}
+    //     {info}
+    //   </Box>
+
+    //   {togglePermissionButton}
+    // </Box>
   );
 };

@@ -10,6 +10,8 @@ export const extractClassName = (styleKey: keyof Styles, styleValue: string) => 
     case "padding":
     case "paddingX":
     case "paddingY":
+    case "paddingL":
+    case "paddingR":
     case "margin":
     case "marginX":
     case "marginY":

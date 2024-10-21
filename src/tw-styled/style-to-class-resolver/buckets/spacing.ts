@@ -34,6 +34,22 @@ export const spacingBucket = {
     [Spacing.xl]: "py-xl",
     [Spacing["2xl"]]: "py-2xl"
   },
+  paddingL: {
+    [Spacing.none]: "pl-0",
+    [Spacing.sm]: "pl-sm",
+    [Spacing.md]: "pl-md",
+    [Spacing.lg]: "pl-lg",
+    [Spacing.xl]: "pl-xl",
+    [Spacing["2xl"]]: "pl-2xl"
+  },
+  paddingR: {
+    [Spacing.none]: "pr-0",
+    [Spacing.sm]: "pr-sm",
+    [Spacing.md]: "pr-md",
+    [Spacing.lg]: "pr-lg",
+    [Spacing.xl]: "pr-xl",
+    [Spacing["2xl"]]: "pr-2xl"
+  },
   margin: {
     [Spacing.none]: "m-0",
     [Spacing.sm]: "m-sm",

@@ -14,6 +14,8 @@ export type Styles = {
   padding: Keyof<typeof buckets.Spacing>;
   paddingX: Keyof<typeof buckets.Spacing>;
   paddingY: Keyof<typeof buckets.Spacing>;
+  paddingL: Keyof<typeof buckets.Spacing>;
+  paddingR: Keyof<typeof buckets.Spacing>;
   margin: Keyof<typeof buckets.Spacing>;
   marginX: Keyof<typeof buckets.Spacing>;
   marginY: Keyof<typeof buckets.Spacing>;

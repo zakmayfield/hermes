@@ -1,5 +1,5 @@
 import { BaseStyles, Styles } from "@/tw-styled/types";
-import { Form, FormField } from "@/tw-styled/ui";
+import { Form2, FormField } from "@/tw-styled/ui";
 
 type FormDemoProps = {
   title?: string;
@@ -41,7 +41,7 @@ export const FormDemo = (props: FormDemoProps) => {
 
   return (
     <div>
-      <Form
+      <Form2
         titleText={title}
         buttonProps={{ ...buttonProps }}
         isPending={isPending}
@@ -57,7 +57,7 @@ export const FormDemo = (props: FormDemoProps) => {
           labelText={formVarsTwo.labelText}
           errorMessage={errorTwo?.message}
         />
-      </Form>
+      </Form2>
     </div>
   );
 };

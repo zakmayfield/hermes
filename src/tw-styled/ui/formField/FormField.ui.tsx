@@ -1,7 +1,7 @@
 import { UiClassesProp } from "@/tw-styled/types";
 import { FormFieldProps } from "./FormField";
 import { useIcons } from "@/tw-styled/tools";
-import { FieldError } from "../fieldError/FieldError";
+import { FieldError2 } from "../fieldError2/FieldError";
 import React from "react";
 import { useTooltip } from "@/shared/hooks";
 
@@ -60,7 +60,7 @@ export const useFormFieldUi = (props: UiClassesProp<FormFieldProps<any>>) => {
 
   const Error = React.useMemo(() => {
     return (
-      <FieldError
+      <FieldError2
         errorMessage={errorMessage}
         described_by={name as string}
         error_hidden={error_hidden}

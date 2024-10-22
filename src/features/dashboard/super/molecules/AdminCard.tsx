@@ -42,7 +42,7 @@ export const AdminCard = ({ admin }: { admin: AuthorizedAdmin }) => {
 
       {isModalOpen && (
         <Modal>
-          <div className="w-md p-xl rounded-lg bg-primary space-y-md shadow-2xl">
+          <div className="max-w-md w-full mx-lg p-xl rounded-lg bg-primary space-y-md shadow-2xl">
             <div>
               <h5>Are you sure you want to remove this admin?</h5>
 

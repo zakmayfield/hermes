@@ -1,38 +1,15 @@
-import { useStyleToClass } from "@/tw-styled/tools";
+import { useStyleToClass } from "@/tw-styled/style-to-class-resolver";
 import { BaseStyles } from "@/tw-styled/types";
-import React from "react";
 
-export type FieldErrorProps = {
-  errorMessage?: string;
-  described_by?: string;
-  error_hidden?: boolean;
-  style?: {
-    parentWrapper?: BaseStyles;
-  };
+type FieldErrorProps = {
+  message: string;
+  style?: BaseStyles;
 };
 
 export const FieldError = (props: FieldErrorProps) => {
-  const { style, errorMessage, described_by, error_hidden } = props;
-
-  const styles = {
-    parentWrapper: {
-      ...style?.parentWrapper
-    }
-  } satisfies FieldErrorProps["style"];
-
+  const { message, style } = props;
+  const styles = { fieldError: { ...style } };
   const classes = useStyleToClass(styles);
 
-  const FieldError = React.useMemo(() => {
-    return (
-      <p
-        aria-describedby={described_by}
-        hidden={error_hidden}
-        className={classes.get("parentWrapper")}
-      >
-        {errorMessage}
-      </p>
-    );
-  }, [errorMessage, described_by, error_hidden, classes]);
-
-  return FieldError;
+  return <span className={classes.get("fieldError")}>{message}</span>;
 };

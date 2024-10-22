@@ -153,4 +153,10 @@ model UserPermissions {
   @@unique([user_id, permission_id])
 }
 
+model AuthorizedAdmin {
+  authorized_admin_id String   @id @default(cuid())
+  email               String   @unique
+  created_at          DateTime @default(now())
+}
+
 // ----- END USER

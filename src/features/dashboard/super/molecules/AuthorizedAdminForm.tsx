@@ -18,7 +18,6 @@ export const AuthorizedAdminForm = () => {
       options={{ title: "Add Authorized Admins", heading: "h3" }}
       style={{
         form: {
-          maxWidth: "sm",
           width: "full",
           display: "flex-col",
           gap: "md",

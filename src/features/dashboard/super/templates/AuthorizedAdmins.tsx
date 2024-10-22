@@ -10,7 +10,9 @@ export const AuthorizedAdmins = () => {
         display: "flex-col",
         gap: "lg",
         flexAlign: "center",
-        className: "lg:flex-row lg:items-start lg:justify-center"
+        width: "full",
+        place: "center",
+        className: "lg:flex-row lg:items-start lg:max-w-2xl"
       }}
     >
       <AuthorizedAdminForm />

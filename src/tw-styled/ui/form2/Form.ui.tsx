@@ -1,7 +1,7 @@
 import React from "react";
 import { UiClassesProp } from "@/tw-styled/types";
 import { FormProps } from "./Form";
-import { Button } from "../button/Button";
+import { Button2 } from "../button2/Button";
 
 export const useFormUi = (props: UiClassesProp<FormProps>) => {
   const {
@@ -23,7 +23,7 @@ export const useFormUi = (props: UiClassesProp<FormProps>) => {
 
   const Btn = React.useMemo(() => {
     return (
-      <Button
+      <Button2
         text={buttonProps?.text}
         options={{
           type: "submit",

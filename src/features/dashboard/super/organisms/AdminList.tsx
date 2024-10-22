@@ -17,7 +17,6 @@ export const AdminList = () => {
   return (
     <Box
       style={{
-        maxWidth: "sm",
         width: "full",
         display: "flex-col",
         gap: "md"

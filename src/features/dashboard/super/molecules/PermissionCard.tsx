@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useTooltip } from "@/shared/hooks";
-import { Icon, Heading, Button, Box, Text } from "@/tw-styled/ui";
+import { Icon, Heading, Button2, Box, Text } from "@/tw-styled/ui";
 import { useIcons } from "@/tw-styled/tools";
 import {
   useIsPermissionEnabled,
@@ -66,7 +66,7 @@ export const PermissionCard = (props: FetchRolePermissionsOutput) => {
   );
 
   const togglePermissionButton = (
-    <Button
+    <Button2
       handleClick={togglePermission}
       text={isEnabled ? "disable" : "enable"}
       style={{

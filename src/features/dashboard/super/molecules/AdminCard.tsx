@@ -15,7 +15,7 @@ export const AdminCard = ({ admin }: { admin: AuthorizedAdmin }) => {
     >
       <button
         onClick={() => mutate({ authorized_admin_id: admin.authorized_admin_id })}
-        className="p-0 px-sm py-xs bg-warning"
+        className="p-0 px-lg lg:px-sm py-xs bg-warning"
       >
         <Icon
           name="x"

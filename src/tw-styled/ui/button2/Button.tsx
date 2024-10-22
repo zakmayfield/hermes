@@ -20,7 +20,7 @@ export type ButtonProps = {
   handleClick?: () => void;
 };
 
-export const Button = (props: ButtonProps) => {
+export const Button2 = (props: ButtonProps) => {
   const { style, options, ...rest } = props;
 
   const styles = useButtonStyles({ style, options });

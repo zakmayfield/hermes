@@ -6,6 +6,8 @@ import {
 } from "../templates/AuthorizedAdmins.hooks";
 import { Box, FieldError, Form, Input, Label, SubmitButton } from "@/tw-styled/ui";
 
+// TODO: *** ERROR HANDLING ***
+
 export const AuthorizedAdminForm = () => {
   const { mutate } = useAddAuthorizedAdmin();
   const { methods, submitHandler } = useAuthorizedAdminsForm(mutate);
@@ -17,6 +19,7 @@ export const AuthorizedAdminForm = () => {
       style={{
         form: {
           maxWidth: "sm",
+          width: "full",
           display: "flex-col",
           gap: "md",
           backgroundColor: "secondary",
@@ -44,7 +47,7 @@ export const AuthorizedAdminForm = () => {
         </Box>
 
         <SubmitButton
-          options={{ variant: "primary" }}
+          options={{ variant: "primary", text: "Authorize Admin" }}
           style={{ padding: "none", paddingX: "md", paddingY: "xs", width: "full" }}
         />
       </Box>

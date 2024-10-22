@@ -8,6 +8,7 @@ import {
   addAuthorizedAdmin,
   AddAuthorizedAdminInput,
   AddAuthorizedAdminOutput,
+  deleteAuthorizedAdmin,
   fetchAuthorizedAdmins
 } from "./AuthorizedAdmins.db";
 import { validators } from "@/shared/validators";
@@ -37,6 +38,25 @@ export const useAddAuthorizedAdmin = () => {
     },
     onError() {
       toast("Unable to add authorized admin", "error");
+    }
+  });
+
+  return { mutate };
+};
+
+export const useDeleteAuthorizedAdmin = () => {
+  const queryClient = useQueryClient();
+
+  const { mutate } = useMutation({
+    mutationFn: deleteAuthorizedAdmin,
+    onSuccess(data) {
+      queryClient.setQueryData<AuthorizedAdmin[]>(["authorized_admins"], (oldData) => {
+        return oldData
+          ? oldData.filter(
+              (admin) => admin.authorized_admin_id !== data.authorized_admin_id
+            )
+          : oldData;
+      });
     }
   });
 

@@ -14,5 +14,16 @@ export const AdminList = () => {
       />
     ));
 
-  return <Box>{adminCards}</Box>;
+  return (
+    <Box
+      style={{
+        maxWidth: "sm",
+        width: "full",
+        display: "flex-col",
+        gap: "md"
+      }}
+    >
+      {adminCards}
+    </Box>
+  );
 };

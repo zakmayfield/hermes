@@ -18,3 +18,13 @@ export const addAuthorizedAdmin = async ({
     data: { email }
   });
 };
+
+type DeleteAuthorizedAdminInput = { authorized_admin_id: string };
+type DeleteAuthorizedAdminOutput = AuthorizedAdmin;
+
+export const deleteAuthorizedAdmin = async (
+  props: DeleteAuthorizedAdminInput
+): Promise<DeleteAuthorizedAdminOutput> => {
+  const { authorized_admin_id } = props;
+  return await db.authorizedAdmin.delete({ where: { authorized_admin_id } });
+};

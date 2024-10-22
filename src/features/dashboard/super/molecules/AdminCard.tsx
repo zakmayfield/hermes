@@ -1,4 +1,4 @@
-import { Box, Icon } from "@/tw-styled/ui";
+import { Box, Button, Icon } from "@/tw-styled/ui";
 import { AuthorizedAdmin } from "@prisma/client";
 import { useDeleteAuthorizedAdmin } from "../templates/AuthorizedAdmins.hooks";
 
@@ -13,15 +13,16 @@ export const AdminCard = ({ admin }: { admin: AuthorizedAdmin }) => {
         gap: "sm"
       }}
     >
-      <button
-        onClick={() => mutate({ authorized_admin_id: admin.authorized_admin_id })}
-        className="p-0 px-lg lg:px-sm py-xs bg-warning"
+      <Button
+        handleClick={() => mutate({ authorized_admin_id: admin.authorized_admin_id })}
+        options={{ variant: "warning" }}
+        style={{ padding: "none", paddingX: "lg", paddingY: "xs", className: "lg:px-sm" }}
       >
         <Icon
-          name="x"
+          name="trash"
           style={{ icon: { fontSize: "lg" } }}
         />
-      </button>
+      </Button>
 
       <Box
         style={{

@@ -12,10 +12,12 @@ import {
   PiInfo,
   PiInfoDuotone,
   PiXCircle,
-  PiXCircleDuotone
+  PiXCircleDuotone,
+  PiTrash,
+  PiTrashDuotone
 } from "react-icons/pi";
 
-export type IconNames = "spin" | "cart" | "error" | "info" | "check" | "x";
+export type IconNames = "spin" | "cart" | "error" | "info" | "check" | "x" | "trash";
 export type IconVariants = "base" | "duotone";
 
 type UseIconsProps = {
@@ -28,22 +30,24 @@ export const useIcons = (props: UseIconsProps) => {
 
   const getBaseIcons = useCallback(() => {
     return {
-      spin: PiSpinnerGap,
       cart: PiShoppingCart,
+      check: PiCheckCircle,
       error: PiWarningCircle,
       info: PiInfo,
-      check: PiCheckCircle,
+      spin: PiSpinnerGap,
+      trash: PiTrash,
       x: PiXCircle
     };
   }, []);
 
   const getVariantIcons = useCallback(() => {
     return {
-      spin: PiSpinnerGapDuotone,
       cart: PiShoppingCartDuotone,
+      check: PiCheckCircleDuotone,
       error: PiWarningCircleDuotone,
       info: PiInfoDuotone,
-      check: PiCheckCircleDuotone,
+      spin: PiSpinnerGapDuotone,
+      trash: PiTrashDuotone,
       x: PiXCircleDuotone
     };
   }, []);

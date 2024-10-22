@@ -2,6 +2,19 @@ import React from "react";
 import { extractClassName } from "./extractClassName";
 import { Styles, StyleToClassProps } from "./types";
 
+/*
+  STYLE PROP EXAMPLE:
+
+  style: {
+    foo: { width: "full" }
+    bar: { border: "sm" }
+  }
+
+  ** Note that `styleToClass` expects a prop type of `Record<string, Record<string, Partial<Styles>>>` **
+  
+  See: src/tw-styled/style-to-class-resolver/types.ts
+*/
+
 const styleToClass = (style: StyleToClassProps) => {
   const ResultMap = new Map();
 

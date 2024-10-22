@@ -85,25 +85,21 @@ export const PermissionCard = (props: FetchRolePermissionsOutput) => {
   return (
     <Box
       style={{
-        wrapper: {
-          padding: "sm",
-          borderRadius: "lg",
-          display: "flex-col",
-          gap: "md",
-          backgroundColor: "secondary",
-          flexSize: "grow",
-          className: "sm:flex-row sm:justify-between sm:items-start"
-        }
+        padding: "sm",
+        borderRadius: "lg",
+        display: "flex-col",
+        gap: "md",
+        backgroundColor: "secondary",
+        flexSize: "grow",
+        className: "sm:flex-row sm:justify-between sm:items-start"
       }}
     >
-      <Box style={{ wrapper: { width: "sm" } }}>
+      <Box style={{ width: "sm" }}>
         <Box
           style={{
-            wrapper: {
-              display: "flex-row",
-              flexAlign: "center",
-              gap: "sm"
-            }
+            display: "flex-row",
+            flexAlign: "center",
+            gap: "sm"
           }}
         >
           {statusIcon}

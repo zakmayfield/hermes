@@ -6,13 +6,11 @@ export const SegmentNav = ({ children }: { children?: Children }) => {
     <Box
       as="nav"
       style={{
-        wrapper: {
-          display: "flex-row",
-          gap: "md",
-          padding: "md",
-          borderRadius: "lg",
-          backgroundColor: "primary"
-        }
+        display: "flex-row",
+        gap: "md",
+        padding: "md",
+        borderRadius: "lg",
+        backgroundColor: "primary"
       }}
     >
       {children}

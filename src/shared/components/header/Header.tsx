@@ -20,24 +20,20 @@ export const Header = () => {
   return (
     <Box
       style={{
-        wrapper: {
-          paddingY: "md",
-          paddingX: "lg",
-          backgroundColor: "primary"
-        }
+        paddingY: "md",
+        paddingX: "lg",
+        backgroundColor: "primary"
       }}
     >
       <Box
         style={{
-          wrapper: {
-            display: "flex-row",
-            flexRowPosition: "center-right",
-            // relative position so `RoleSwitch` has an achor
-            position: "relative",
-            gap: "md",
-            maxWidth: "3xl",
-            place: "center"
-          }
+          display: "flex-row",
+          flexRowPosition: "center-right",
+          // relative position so `RoleSwitch` has an achor
+          position: "relative",
+          gap: "md",
+          maxWidth: "3xl",
+          place: "center"
         }}
       >
         {/* ROLE SWITCH */}

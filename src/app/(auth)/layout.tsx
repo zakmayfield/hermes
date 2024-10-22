@@ -11,7 +11,9 @@ export default async function AuthenticationLayout({
     <Box
       as="main"
       style={{
-        wrapper: { display: "flex-col", gap: "xl", flexColPosition: "top-center" }
+        display: "flex-col",
+        gap: "xl",
+        flexColPosition: "top-center"
       }}
     >
       <Logo style={{ wrapper: { width: "sm" } }} />

@@ -6,20 +6,19 @@ export const Footer = () => {
     <Box
       as="footer"
       style={{
-        wrapper: { backgroundColor: "secondary", padding: "lg" }
+        backgroundColor: "secondary",
+        padding: "lg"
       }}
     >
       <Box
         style={{
-          wrapper: {
-            maxWidth: "3xl",
-            place: "center",
-            display: "flex-col",
-            flexSpacing: "space-around",
-            gap: "lg",
-            padding: "sm",
-            className: "md:flex-row"
-          }
+          maxWidth: "3xl",
+          place: "center",
+          display: "flex-col",
+          flexSpacing: "space-around",
+          gap: "lg",
+          padding: "sm",
+          className: "md:flex-row"
         }}
       >
         <FooterItem title="Hours">

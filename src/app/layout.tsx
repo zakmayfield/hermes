@@ -32,7 +32,8 @@ export default async function RootLayout({
 
           <Box
             style={{
-              wrapper: { minHeight: "screen", padding: "lg" }
+              minHeight: "screen",
+              padding: "lg"
             }}
           >
             {children}

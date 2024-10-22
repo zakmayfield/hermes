@@ -15,7 +15,8 @@ export const SwitchForm = () => {
   return (
     <Box
       style={{
-        wrapper: { display: "flex-row", gap: "md" }
+        display: "flex-row",
+        gap: "md"
       }}
     >
       <p>{switch_text}</p>

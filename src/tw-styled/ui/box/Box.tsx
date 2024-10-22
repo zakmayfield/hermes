@@ -6,17 +6,15 @@ import React from "react";
 type BoxProps = {
   children?: Children;
   as?: WrapperElements;
-  style?: {
-    wrapper?: BaseStyles;
-  };
+  style?: BaseStyles;
 };
 
 export const Box = (props: BoxProps) => {
   const { as = "div", style, children } = props;
 
   const styles = {
-    wrapper: { ...style?.wrapper }
-  } satisfies BoxProps["style"];
+    wrapper: { ...style } satisfies BaseStyles
+  };
 
   const classes = useStyleToClass(styles);
 

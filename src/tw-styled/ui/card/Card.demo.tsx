@@ -20,11 +20,9 @@ export const CardDemo = () => {
       <Card style={{ wrapper: { backgroundColor: "primary" } }}>
         <Box
           style={{
-            wrapper: {
-              display: "flex-row",
-              flexRowPosition: "center-center",
-              flexSpacing: "space-between"
-            }
+            display: "flex-row",
+            flexRowPosition: "center-center",
+            flexSpacing: "space-between"
           }}
         >
           <Heading

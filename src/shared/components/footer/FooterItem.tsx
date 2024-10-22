@@ -11,22 +11,18 @@ export const FooterItem = (props: FooterItemProps) => {
   return (
     <Box
       style={{
-        wrapper: {
-          backgroundColor: "primary",
-          padding: "lg",
-          borderRadius: "lg",
-          maxWidth: "lg",
-          width: "full",
-          className: `md:w-md`
-        }
+        backgroundColor: "primary",
+        padding: "lg",
+        borderRadius: "lg",
+        maxWidth: "lg",
+        width: "full",
+        className: `md:w-md`
       }}
     >
       <Box
         style={{
-          wrapper: {
-            display: "flex-col",
-            gap: "md"
-          }
+          display: "flex-col",
+          gap: "md"
         }}
       >
         <Heading

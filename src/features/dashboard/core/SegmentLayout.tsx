@@ -10,19 +10,19 @@ export const SegmentLayout = (props: SegmentLayoutProps) => {
   return (
     <Box
       style={{
-        wrapper: { display: "flex-col", gap: "md", flexSize: "grow" }
+        display: "flex-col",
+        gap: "md",
+        flexSize: "grow"
       }}
     >
       {nav}
 
       <Box
         style={{
-          wrapper: {
-            padding: "lg",
-            borderRadius: "lg",
-            flexSize: "grow",
-            backgroundColor: "primary"
-          }
+          padding: "lg",
+          borderRadius: "lg",
+          flexSize: "grow",
+          backgroundColor: "primary"
         }}
       >
         {children}

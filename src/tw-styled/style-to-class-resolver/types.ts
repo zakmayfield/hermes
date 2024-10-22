@@ -1,4 +1,3 @@
-import { fontStyleBucket } from "./buckets/typography";
 import * as buckets from "./buckets";
 
 export type MultiBucket<Keys extends string> = Partial<

@@ -1,3 +1,4 @@
+import { fontStyleBucket } from "./buckets/typography";
 import * as buckets from "./buckets";
 
 export type MultiBucket<Keys extends string> = Partial<
@@ -43,6 +44,7 @@ export type Styles = {
   textDecoration: Keyof<typeof buckets.textDecorationBucket>;
   lineHeight: Keyof<typeof buckets.lineHeightBucket>;
   letterSpacing: Keyof<typeof buckets.letterSpacingBucket>;
+  fontStyle: Keyof<typeof buckets.FontStyle>;
 
   display: Keyof<typeof buckets.displayBucket>;
   position: Keyof<typeof buckets.positionBucket>;

@@ -20,7 +20,9 @@
     --secondary: 203 213 225;
     --tertiary: 148 163 184;
     --accent: 100 116 139;
+    --success-light: 74 168 80;
     --success: 58 142 63; /* bg-green-700 #15803D */
+    --warning-light: 243 81 81;
     --warning: 213 56 56; /* bg-red-700 #B91C1C */
     --caution: 142 166 22 /* #8EA616 */;
     --ghost: 23 37 84 / 0.2; /* bg-cyan-500 */

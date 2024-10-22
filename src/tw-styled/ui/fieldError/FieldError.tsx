@@ -8,7 +8,14 @@ type FieldErrorProps = {
 
 export const FieldError = (props: FieldErrorProps) => {
   const { message, style } = props;
-  const styles = { fieldError: { ...style } };
+  const styles = {
+    fieldError: {
+      paddingY: "xs",
+      textColor: "warning-light",
+      fontStyle: "italic",
+      ...style
+    } satisfies BaseStyles
+  };
   const classes = useStyleToClass(styles);
 
   return <span className={classes.get("fieldError")}>{message}</span>;

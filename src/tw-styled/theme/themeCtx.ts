@@ -10,7 +10,9 @@ const themeCtx = {
     secondary: "rgb(var(--secondary))",
     tertiary: "rgb(var(--tertiary))",
     accent: "rgb(var(--accent))",
+    "success-light": "rgb(var(--success-light))",
     success: "rgb(var(--success))",
+    "warning-light": "rgb(var(--warning-light))",
     warning: "rgb(var(--warning))",
     caution: "rgb(var(--caution))",
     ghost: "rgb(var(--ghost))"

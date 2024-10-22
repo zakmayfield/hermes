@@ -60,6 +60,8 @@ export const extractClassName = (styleKey: keyof Styles, styleValue: string) => 
       return buckets.letterSpacingBucket[
         styleValue as Keyof<typeof buckets.letterSpacingBucket>
       ];
+    case "fontStyle":
+      return buckets.fontStyleBucket[styleValue as Keyof<typeof buckets.FontStyle>];
 
     case "display":
       return buckets.displayBucket[styleValue as Keyof<typeof buckets.displayBucket>];

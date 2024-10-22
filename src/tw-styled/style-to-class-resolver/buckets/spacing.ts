@@ -2,6 +2,7 @@ import { Keyof, MultiBucket } from "../types";
 
 export enum Spacing {
   none = "none",
+  xs = "xs",
   sm = "sm",
   md = "md",
   lg = "lg",
@@ -12,6 +13,7 @@ export enum Spacing {
 export const spacingBucket = {
   padding: {
     [Spacing.none]: "p-0",
+    [Spacing.xs]: "p-xs",
     [Spacing.sm]: "p-sm",
     [Spacing.md]: "p-md",
     [Spacing.lg]: "p-lg",
@@ -20,6 +22,7 @@ export const spacingBucket = {
   },
   paddingX: {
     [Spacing.none]: "px-0",
+    [Spacing.xs]: "px-xs",
     [Spacing.sm]: "px-sm",
     [Spacing.md]: "px-md",
     [Spacing.lg]: "px-lg",
@@ -28,6 +31,7 @@ export const spacingBucket = {
   },
   paddingY: {
     [Spacing.none]: "py-0",
+    [Spacing.xs]: "py-xs",
     [Spacing.sm]: "py-sm",
     [Spacing.md]: "py-md",
     [Spacing.lg]: "py-lg",
@@ -36,6 +40,7 @@ export const spacingBucket = {
   },
   paddingL: {
     [Spacing.none]: "pl-0",
+    [Spacing.xs]: "pl-xs",
     [Spacing.sm]: "pl-sm",
     [Spacing.md]: "pl-md",
     [Spacing.lg]: "pl-lg",
@@ -44,6 +49,7 @@ export const spacingBucket = {
   },
   paddingR: {
     [Spacing.none]: "pr-0",
+    [Spacing.xs]: "pr-xs",
     [Spacing.sm]: "pr-sm",
     [Spacing.md]: "pr-md",
     [Spacing.lg]: "pr-lg",
@@ -52,6 +58,7 @@ export const spacingBucket = {
   },
   margin: {
     [Spacing.none]: "m-0",
+    [Spacing.xs]: "m-xs",
     [Spacing.sm]: "m-sm",
     [Spacing.md]: "m-md",
     [Spacing.lg]: "m-lg",
@@ -60,6 +67,7 @@ export const spacingBucket = {
   },
   marginX: {
     [Spacing.none]: "mx-0",
+    [Spacing.xs]: "mx-xs",
     [Spacing.sm]: "mx-sm",
     [Spacing.md]: "mx-md",
     [Spacing.lg]: "mx-lg",
@@ -68,6 +76,7 @@ export const spacingBucket = {
   },
   marginY: {
     [Spacing.none]: "my-0",
+    [Spacing.xs]: "my-xs",
     [Spacing.sm]: "my-sm",
     [Spacing.md]: "my-md",
     [Spacing.lg]: "my-lg",
@@ -76,6 +85,7 @@ export const spacingBucket = {
   },
   spaceX: {
     [Spacing.none]: "space-x-0",
+    [Spacing.xs]: "space-x-xs",
     [Spacing.sm]: "space-x-sm",
     [Spacing.md]: "space-x-md",
     [Spacing.lg]: "space-x-lg",
@@ -84,6 +94,7 @@ export const spacingBucket = {
   },
   spaceY: {
     [Spacing.none]: "space-y-0",
+    [Spacing.xs]: "space-y-xs",
     [Spacing.sm]: "space-y-sm",
     [Spacing.md]: "space-y-md",
     [Spacing.lg]: "space-y-lg",
@@ -92,6 +103,7 @@ export const spacingBucket = {
   },
   gap: {
     [Spacing.none]: "gap-0",
+    [Spacing.xs]: "gap-[var(--space-xs)]",
     [Spacing.sm]: "gap-[var(--space-sm)]",
     [Spacing.md]: "gap-[var(--space-md)]",
     [Spacing.lg]: "gap-[var(--space-lg)]",

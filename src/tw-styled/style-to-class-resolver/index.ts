@@ -10,9 +10,12 @@ import { Styles, StyleToClassProps } from "./types";
     bar: { border: "sm" }
   }
 
-  ** Note that `styleToClass` expects a prop type of `Record<string, Record<string, Partial<Styles>>>` **
-  
-  See: src/tw-styled/style-to-class-resolver/types.ts
+  Extract classNames with *.get("foo") syntax
+
+  ** 
+    Note that `styleToClass` expects a prop type of `Record<string, Record<string, Partial<Styles>>>` 
+    See: src/tw-styled/style-to-class-resolver/types.ts
+  **
 */
 
 const styleToClass = (style: StyleToClassProps) => {

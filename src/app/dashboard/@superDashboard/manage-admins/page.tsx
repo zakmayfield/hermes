@@ -1,3 +1,13 @@
+import { AuthorizedAdmins } from "@/features/dashboard/super/templates";
+import { Layout } from "@/tw-styled/ui";
+
 export default function ManageAdminsPage() {
-  return <div>Manage Admins</div>;
+  return (
+    <Layout
+      options={{ titleText: "Manage Authorized Admins", titleAs: "h2" }}
+      style={{ parentWrapper: { spaceY: "lg" } }}
+    >
+      <AuthorizedAdmins />
+    </Layout>
+  );
 }

@@ -2,7 +2,7 @@
 
 import { getAuthSession } from "@/lib/auth/auth.options";
 import { db } from "@/lib/prisma";
-import { Roles } from "@prisma/client";
+import { AuthorizedAdmin, Roles } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
 export type TogglePermissionLevelInput = {
@@ -21,6 +21,16 @@ export const togglePermissionLevel = async (payload: TogglePermissionLevelInput)
   return await db.rolePermissions.update({
     where: { role_id_permission_id: { role_id, permission_id } },
     data: { permission_level: toggle() }
+  });
+};
+
+export const addAuthorizedAdmin = async ({
+  email
+}: {
+  email: string;
+}): Promise<AuthorizedAdmin> => {
+  return await db.authorizedAdmin.create({
+    data: { email }
   });
 };
 

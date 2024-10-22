@@ -2,7 +2,13 @@
 
 import { getAuthSession } from "@/lib/auth/auth.options";
 import { db } from "@/lib/prisma";
-import { Permission, Role, RolePermissions, Roles } from "@prisma/client";
+import {
+  AuthorizedAdmin,
+  Permission,
+  Role,
+  RolePermissions,
+  Roles
+} from "@prisma/client";
 
 export const fetchUserRoles = async () => {
   const user_id = await getAuthSession().then((session) => session?.user.id);
@@ -39,7 +45,6 @@ export const fetchRolePermissions = async ({
 }: FetchRolePermissionsInput): Promise<FetchRolePermissionsOutput[]> => {
   return await db.rolePermissions.findMany({
     where: { role: { name: role } },
-    // TODO: *** order by createdat ***
     orderBy: {
       permission: { name: "asc" }
     },
@@ -66,4 +71,10 @@ export const fetchUserPermissions = async () => {
     include: { user_permissions: { select: { granted_at: true, revoked_at: true } } }
   });
   return user_permissions;
+};
+
+export type FetchAuthorizedAdminsOutput = AuthorizedAdmin;
+
+export const fetchAuthorizedAdmins = async (): Promise<FetchAuthorizedAdminsOutput[]> => {
+  return await db.authorizedAdmin.findMany({ orderBy: { created_at: "desc" } });
 };

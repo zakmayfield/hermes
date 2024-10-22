@@ -36,8 +36,8 @@ export const useAddAuthorizedAdmin = () => {
         return oldData ? [data, ...oldData] : oldData;
       });
     },
-    onError() {
-      toast("Unable to add authorized admin", "error");
+    onError(error) {
+      toast(error.message, "error");
     }
   });
 

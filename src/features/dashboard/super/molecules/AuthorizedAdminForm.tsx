@@ -6,8 +6,6 @@ import {
 } from "../templates/AuthorizedAdmins.hooks";
 import { Box, FieldError, Form, Input, Label, SubmitButton } from "@/tw-styled/ui";
 
-// TODO: *** ERROR HANDLING ***
-
 export const AuthorizedAdminForm = () => {
   const { mutate } = useAddAuthorizedAdmin();
   const { methods, submitHandler } = useAuthorizedAdminsForm(mutate);

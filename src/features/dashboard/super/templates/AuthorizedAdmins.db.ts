@@ -14,9 +14,19 @@ export type AddAuthorizedAdminOutput = AuthorizedAdmin;
 export const addAuthorizedAdmin = async ({
   email
 }: AddAuthorizedAdminInput): Promise<AddAuthorizedAdminOutput> => {
-  return await db.authorizedAdmin.create({
-    data: { email: email.toLowerCase() }
-  });
+  try {
+    return await db.authorizedAdmin.create({
+      data: { email: email.toLowerCase() }
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      if (error.message.includes("Unique constraint")) {
+        throw new Error(`${email} is already authorized`);
+      }
+    }
+
+    throw new Error("Unable to authorize admin");
+  }
 };
 
 type DeleteAuthorizedAdminInput = { authorized_admin_id: string };

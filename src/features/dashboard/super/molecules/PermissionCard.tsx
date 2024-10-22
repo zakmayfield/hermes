@@ -1,10 +1,13 @@
 "use client";
 import React from "react";
 import { useTooltip } from "@/shared/hooks";
-import { FetchRolePermissionsOutput } from "@/shared/queries";
 import { Icon, Heading, Button, Box, Text } from "@/tw-styled/ui";
-import { useIsPermissionEnabled, useTogglePermission } from "./PermissionCard.hooks";
 import { useIcons } from "@/tw-styled/tools";
+import {
+  useIsPermissionEnabled,
+  useTogglePermission
+} from "../templates/AdminPermissions.hooks";
+import { FetchRolePermissionsOutput } from "../templates/AdminPermissions.db";
 
 export const PermissionCard = (props: FetchRolePermissionsOutput) => {
   const {

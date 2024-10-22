@@ -1,17 +1,11 @@
 "use client";
-import { fetchRolePermissions } from "@/shared/queries";
 import { Pulse, Box } from "@/tw-styled/ui";
-import { $Enums } from "@prisma/client";
-import { useQuery } from "@tanstack/react-query";
 import { PermissionList } from "../organisms";
 import { PermissionCard } from "../molecules";
+import { useFetchPermissions } from "./AdminPermissions.hooks";
 
 export const AdminPermissions = () => {
-  const { data, isLoading } = useQuery({
-    queryKey: [`permissions:${$Enums.Roles.ADMIN}`],
-    queryFn: async () => fetchRolePermissions({ role: $Enums.Roles.ADMIN }),
-    staleTime: Infinity
-  });
+  const { data, isLoading } = useFetchPermissions();
 
   const loading = isLoading && <Pulse size="lg" />;
 

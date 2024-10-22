@@ -1,9 +1,23 @@
-import { togglePermissionLevel } from "@/shared/actions";
-import { useToast } from "@/shared/hooks";
-import { fetchRoleById, FetchRolePermissionsOutput } from "@/shared/queries";
-import { $Enums } from "@prisma/client";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
 import React from "react";
+import { $Enums } from "@prisma/client";
+import { useToast } from "@/shared/hooks";
+import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
+import {
+  fetchRoleById,
+  fetchRolePermissions,
+  FetchRolePermissionsOutput,
+  togglePermissionLevel
+} from "./AdminPermissions.db";
+
+export const useFetchPermissions = () => {
+  const { data, isLoading } = useQuery({
+    queryKey: [`permissions:${$Enums.Roles.ADMIN}`],
+    queryFn: async () => fetchRolePermissions({ role: $Enums.Roles.ADMIN }),
+    staleTime: Infinity
+  });
+
+  return { data, isLoading };
+};
 
 export const useIsPermissionEnabled = (permission_level: number) => {
   return React.useMemo(() => {

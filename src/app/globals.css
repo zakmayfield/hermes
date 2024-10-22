@@ -79,12 +79,13 @@
     @apply text-lg;
   }
 
-  input {
-    @apply px-2 py-1 rounded border dark:text-background;
-  }
-
   button {
     @apply btn;
+  }
+
+  input,
+  textarea {
+    @apply dark:text-background;
   }
 }
 

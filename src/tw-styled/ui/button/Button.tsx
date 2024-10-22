@@ -9,7 +9,7 @@ type ButtonProps = {
     type?: "button" | "submit";
     isDisabled?: boolean;
   };
-  style: BaseStyles;
+  style?: BaseStyles;
 };
 
 export const Button = (props: ButtonProps) => {

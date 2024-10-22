@@ -15,7 +15,7 @@ export const addAuthorizedAdmin = async ({
   email
 }: AddAuthorizedAdminInput): Promise<AddAuthorizedAdminOutput> => {
   return await db.authorizedAdmin.create({
-    data: { email }
+    data: { email: email.toLowerCase() }
   });
 };
 

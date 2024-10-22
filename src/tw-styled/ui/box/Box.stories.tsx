@@ -13,9 +13,7 @@ export const Default: BoxStory = {
   args: {
     children: "Hello World",
     style: {
-      wrapper: {
-        className: "demo"
-      }
+      className: "demo"
     }
   }
 };

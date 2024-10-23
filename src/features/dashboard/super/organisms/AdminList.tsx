@@ -1,13 +1,15 @@
-import { Box } from "@/tw-styled/ui";
+import { Box, Pulse } from "@/tw-styled/ui";
 import { AdminCard } from "../molecules";
 import { useFetchAuthorizedAdmins } from "../templates/AuthorizedAdmins.hooks";
 import { useIcons } from "@/tw-styled/tools";
 import { useTooltip } from "@/shared/hooks";
 
 export const AdminList = () => {
-  const { data } = useFetchAuthorizedAdmins();
+  const { data, isLoading } = useFetchAuthorizedAdmins();
   const icons = useIcons({ names: ["info"] });
   const tooltip = useTooltip({ anchorSelect: "#delete_authorized_admin_info" });
+
+  const loading = isLoading && <Pulse size="md" />;
 
   const adminCards =
     data &&
@@ -19,7 +21,9 @@ export const AdminList = () => {
     ));
 
   const emptyAdmins = data && data.length === 0 && (
-    <p className="text-foreground/70 italic">Authorize an email to get started</p>
+    <p className="text-foreground/70 italic text-center lg:text-left">
+      Authorize an email to get started
+    </p>
   );
 
   return (
@@ -39,6 +43,7 @@ export const AdminList = () => {
         />
         {tooltip}
       </div>
+      {loading}
       {adminCards}
       {emptyAdmins}
     </Box>

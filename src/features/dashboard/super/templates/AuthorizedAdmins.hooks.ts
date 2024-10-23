@@ -9,19 +9,20 @@ import {
   AddAuthorizedAdminInput,
   AddAuthorizedAdminOutput,
   deleteAuthorizedAdmin,
-  fetchAuthorizedAdmins
+  fetchAuthorizedAdmins,
+  revokeAdminRole
 } from "./AuthorizedAdmins.db";
 import { validators } from "@/shared/validators";
 import { AuthorizedAdmin } from "@prisma/client";
 import { useFormContext, useToast } from "@/shared/hooks";
 
 export const useFetchAuthorizedAdmins = () => {
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["authorized_admins"],
     queryFn: async () => await fetchAuthorizedAdmins()
   });
 
-  return { data };
+  return { data, isLoading };
 };
 
 export const useAddAuthorizedAdmin = () => {
@@ -49,7 +50,7 @@ export const useDeleteAuthorizedAdmin = () => {
 
   const { mutate } = useMutation({
     mutationFn: deleteAuthorizedAdmin,
-    onSuccess(data) {
+    async onSuccess(data) {
       queryClient.setQueryData<AuthorizedAdmin[]>(["authorized_admins"], (oldData) => {
         return oldData
           ? oldData.filter(
@@ -57,6 +58,8 @@ export const useDeleteAuthorizedAdmin = () => {
             )
           : oldData;
       });
+
+      await revokeAdminRole(data.email);
     }
   });
 

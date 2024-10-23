@@ -5,6 +5,9 @@ import { useState } from "react";
 import { Modal } from "@/shared/components";
 
 export const AdminCard = ({ admin }: { admin: AuthorizedAdmin }) => {
+  /*
+    Deleting an authorized admin will revoke the users admin role
+  */
   const { mutate } = useDeleteAuthorizedAdmin();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -42,11 +45,14 @@ export const AdminCard = ({ admin }: { admin: AuthorizedAdmin }) => {
 
       {isModalOpen && (
         <Modal>
-          <div className="max-w-md w-full mx-lg p-xl rounded-lg bg-primary space-y-md shadow-2xl">
-            <div>
+          <div className="max-w-md w-full mx-lg p-xl rounded-lg bg-primary space-y-lg shadow-2xl">
+            <div className="space-y-md">
               <h5>Are you sure you want to remove this admin?</h5>
 
-              <h6 className="text-foreground/60 italic text-center">{admin.email}</h6>
+              <p className="text-foreground/60 italic">
+                Caution: removing <span className="text-foreground">{admin.email}</span>{" "}
+                will revoke their administrative privileges.
+              </p>
             </div>
 
             <div className="flex gap-[var(--space-lg)]">

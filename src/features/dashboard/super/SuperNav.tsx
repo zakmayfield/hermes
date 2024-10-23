@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
-import { SegmentNav } from "../../core";
+import { SegmentNav } from "..";
 
 export const SuperNav = () => {
   const segment = useSelectedLayoutSegment();
@@ -13,6 +13,12 @@ export const SuperNav = () => {
         className={`${(!segment && "underline") || ""}`}
       >
         Dashboard
+      </Link>
+      <Link
+        href="/dashboard/manage-users"
+        className={`${(segment === "manage-users" && "underline") || ""}`}
+      >
+        Users
       </Link>
       <Link
         href="/dashboard/manage-admins"

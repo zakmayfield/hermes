@@ -1,5 +1,5 @@
-import { AdminNav } from "@/features/dashboard/admin/atoms";
-import { SegmentLayout } from "@/features/dashboard/core";
+import { AdminNav } from "@/features/dashboard/admin";
+import { SegmentLayout } from "@/features/dashboard";
 
 export default function AdminDashboardLayout({
   children

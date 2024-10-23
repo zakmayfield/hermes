@@ -1,5 +1,5 @@
 import { Layout } from "@/tw-styled/ui";
-import { AdminPermissions } from "@/features/dashboard/super/templates";
+import { AdminPermissions } from "@/features/dashboard/super/admin-permissions/templates";
 
 export default async function ManagePermissions() {
   return (

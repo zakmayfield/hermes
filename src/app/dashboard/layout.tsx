@@ -21,7 +21,7 @@ export default async function DashboardLayout({
   const dashboard =
     (user_role.includes("SUPER") && superDashboard) ||
     (user_role.includes("ADMIN") && adminDashboard) ||
-    (!user_role.includes("ADMIN") && userDashboard);
+    (user_role.includes("USER") && userDashboard);
 
   return (
     <Layout

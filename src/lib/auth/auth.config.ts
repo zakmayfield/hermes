@@ -5,7 +5,6 @@ import { compare, genSalt, hash } from "bcryptjs";
 import { db } from "@/lib/prisma";
 import { JwtPayload, sign, verify } from "jsonwebtoken";
 import { SECRET } from "@/utils/constants";
-import { fetchRoles } from "@/shared/queries";
 
 //^ adapter
 type NextAuthAdapter = NextAuthOptions["adapter"];
@@ -154,8 +153,6 @@ const providers: NextAuthProviders = [
       const isAuthorizedAdmin = !!(await db.authorizedAdmin.findUnique({
         where: { email }
       }));
-
-      const roles = await fetchRoles();
 
       // create
       async function createUser() {

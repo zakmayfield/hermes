@@ -1,8 +1,8 @@
 import { Box, Pulse } from "@/tw-styled/ui";
-import { AdminCard } from "../molecules";
 import { useFetchAuthorizedAdmins } from "../templates/AuthorizedAdmins.hooks";
 import { useIcons } from "@/tw-styled/tools";
 import { useTooltip } from "@/shared/hooks";
+import { AdminCard } from "../molecules";
 
 export const AdminList = () => {
   const { data, isLoading } = useFetchAuthorizedAdmins();

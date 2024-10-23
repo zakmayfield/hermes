@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
-import { SegmentNav } from "../../core";
+import { SegmentNav } from "../..";
 
 export const UserNav = () => {
   const segment = useSelectedLayoutSegment();

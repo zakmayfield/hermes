@@ -1,4 +1,4 @@
-import { AuthorizedAdmins } from "@/features/dashboard/super/templates";
+import { AuthorizedAdmins } from "@/features/dashboard/super/authorized-admins/templates";
 import { Layout } from "@/tw-styled/ui";
 
 export default function ManageAdminsPage() {

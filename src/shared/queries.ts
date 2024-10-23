@@ -4,14 +4,23 @@ import { getAuthSession } from "@/lib/auth/auth.options";
 import { db } from "@/lib/prisma";
 import { Roles } from "@prisma/client";
 
-export const fetchUserRoles = async () => {
-  const user_id = await getAuthSession().then((session) => session?.user.id);
+export const fetchUser = async (email: string) => {
+  return await db.user.findUnique({ where: { email } });
+};
 
-  const user_roles = await db.role.findMany({
-    where: { user_roles: { some: { user_id } } }
-  });
+export const fetchRoles = async () => {
+  return await db.role.findMany();
+};
 
-  return user_roles;
+export const fetchAuthUserRole = async () => {
+  const email = await getAuthSession().then((session) => session?.user.email);
+
+  return await db.user
+    .findUnique({
+      where: { email },
+      select: { role: true }
+    })
+    .then((u) => u?.role.name);
 };
 
 export const fetchPermissionsByRole = async (role: Roles) => {

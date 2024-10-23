@@ -11,54 +11,10 @@ export const changeRole = async (data: FormData) => {
 
   const user_id = session?.user.id as string;
 
-  const roles = await db.role.findMany();
-
-  await db.userRoles.deleteMany({
-    where: { user_id: session?.user.id }
+  await db.user.update({
+    where: { id: user_id },
+    data: { role: { connect: { name: form_value } } }
   });
-
-  if (form_value === "USER") {
-    await db.userRoles.create({
-      data: {
-        user_id,
-        role_id: roles.find((role) => role.name === form_value)?.role_id as string
-      }
-    });
-  }
-
-  if (form_value === "ADMIN") {
-    await db.userRoles.createMany({
-      data: [
-        {
-          user_id,
-          role_id: roles.find((role) => role.name === "USER")?.role_id as string
-        },
-        {
-          user_id,
-          role_id: roles.find((role) => role.name === form_value)?.role_id as string
-        }
-      ]
-    });
-  }
-
-  if (form_value === "SUPER") {
-    await db.userRoles.createMany({
-      data: [
-        {
-          user_id,
-          role_id: roles.find((role) => role.name === "USER")?.role_id as string
-        },
-        {
-          user_id,
-          role_id: roles.find((role) => role.name === "ADMIN")?.role_id as string
-        },
-        {
-          user_id,
-          role_id: roles.find((role) => role.name === form_value)?.role_id as string
-        }
-      ]
-    });
-  }
 
   revalidatePath("/dashboard", "layout");
 };

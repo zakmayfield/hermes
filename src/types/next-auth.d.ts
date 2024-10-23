@@ -14,7 +14,7 @@ declare module "next-auth" {
     user: User & {
       email: string;
       onboarding_status?: OnboardingStatus;
-      roles: Roles[];
+      role: Roles;
     };
   }
 }
@@ -24,6 +24,6 @@ declare module "next-auth/jwt" {
     id: string;
     email: string;
     onboarding_status?: OnboardingStatus;
-    roles: Roles[];
+    role: Roles;
   }
 }

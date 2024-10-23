@@ -5,6 +5,7 @@ import { compare, genSalt, hash } from "bcryptjs";
 import { db } from "@/lib/prisma";
 import { JwtPayload, sign, verify } from "jsonwebtoken";
 import { SECRET } from "@/utils/constants";
+import { fetchRoles } from "@/shared/queries";
 
 //^ adapter
 type NextAuthAdapter = NextAuthOptions["adapter"];
@@ -150,6 +151,12 @@ const providers: NextAuthProviders = [
 
       const { hashed_pw } = await encryptPassword();
 
+      const isAuthorizedAdmin = !!(await db.authorizedAdmin.findUnique({
+        where: { email }
+      }));
+
+      const roles = await fetchRoles();
+
       // create
       async function createUser() {
         const user = await db.user.create({
@@ -163,14 +170,8 @@ const providers: NextAuthProviders = [
                 expires: expires_date
               }
             },
-            roles: {
-              create: {
-                role: {
-                  connect: {
-                    name: "USER"
-                  }
-                }
-              }
+            role: {
+              connect: { name: isAuthorizedAdmin ? "ADMIN" : "USER" }
             }
           },
           include: {
@@ -210,13 +211,9 @@ const callbacks: NextAuthCallbacks = {
             status: true
           }
         },
-        roles: {
+        role: {
           select: {
-            role: {
-              select: {
-                name: true
-              }
-            }
+            name: true
           }
         }
       }
@@ -227,14 +224,14 @@ const callbacks: NextAuthCallbacks = {
       return token;
     }
 
-    const user_roles = db_user.roles.map((role) => role.role.name);
+    const user_role = db_user.role.name;
     const onboarding_status = db_user.onboarding?.status;
 
     return {
       id: db_user.id,
       email: db_user.email,
       onboarding_status,
-      roles: user_roles
+      role: user_role
     };
   },
 
@@ -243,7 +240,7 @@ const callbacks: NextAuthCallbacks = {
       session.user.id = token.id;
       session.user.email = token.email;
       session.user.onboarding_status = token.onboarding_status;
-      session.user.roles = token.roles;
+      session.user.role = token.role;
     }
 
     return session;

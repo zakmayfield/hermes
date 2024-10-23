@@ -16,12 +16,12 @@ export default async function DashboardLayout({
   const session = await getAuthSession();
   if (!session) redirect("/sign-in");
 
-  const user_roles = session.user.roles;
+  const user_role = session.user.role;
 
   const dashboard =
-    (user_roles.includes("SUPER") && superDashboard) ||
-    (user_roles.includes("ADMIN") && !user_roles.includes("SUPER") && adminDashboard) ||
-    (!user_roles.includes("ADMIN") && !user_roles.includes("SUPER") && userDashboard);
+    (user_role.includes("SUPER") && superDashboard) ||
+    (user_role.includes("ADMIN") && adminDashboard) ||
+    (!user_role.includes("ADMIN") && userDashboard);
 
   return (
     <Layout

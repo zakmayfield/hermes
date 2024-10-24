@@ -64,6 +64,10 @@
     font-family: Arial, Helvetica, sans-serif;
   }
 
+  dialog {
+    @apply text-foreground bg-background;
+  }
+
   h1 {
     @apply text-4xl;
   }

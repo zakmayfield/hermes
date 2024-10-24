@@ -1,3 +1,5 @@
-export default function Page() {
-  return <div>Manage Users (SUPER)</div>;
+import { ManageUsersLayout } from "@/features/dashboard/manage-users/templates";
+
+export default function ManageUsersPage() {
+  return <ManageUsersLayout />;
 }

@@ -1,6 +1,7 @@
 import { getAuthSession } from "@/lib/auth/auth.options";
 import { Layout } from "@/tw-styled/ui";
 import { redirect } from "next/navigation";
+import React from "react";
 
 type LayoutProps = {
   superDashboard: React.ReactNode;

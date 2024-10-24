@@ -15,8 +15,8 @@ export const SuperNav = () => {
         Dashboard
       </Link>
       <Link
-        href="/dashboard/manage-users"
-        className={`${(segment === "manage-users" && "underline") || ""}`}
+        href="/dashboard/manage-users-super"
+        className={`${(segment === "manage-users-super" && "underline") || ""}`}
       >
         Users
       </Link>

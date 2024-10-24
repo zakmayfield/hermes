@@ -15,8 +15,8 @@ export const AdminNav = () => {
         Dashboard
       </Link>
       <Link
-        href="/dashboard/manage-users"
-        className={`${(segment === "manage-users" && "underline") || ""}`}
+        href="/dashboard/manage-users-admin"
+        className={`${(segment === "manage-users-admin" && "underline") || ""}`}
       >
         Users
       </Link>

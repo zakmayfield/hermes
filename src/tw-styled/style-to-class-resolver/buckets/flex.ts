@@ -1,90 +1,101 @@
 import { Keyof, MultiBucket, SingleBucket } from "../types";
 
-enum FlexRowPositionBucket {
-  "top-left" = "items-start",
-  "center-left" = "items-center justify-start",
-  "bottom-left" = "items-end",
-  "top-center" = "items-start justify-center",
-  "center-center" = "items-center justify-center",
-  "bottom-center" = "items-end justify-center",
-  "top-right" = "items-start justify-end",
-  "center-right" = "items-center justify-end",
-  "bottom-right" = "items-end justify-end"
+export enum FlexPosition {
+  start = "start",
+  center = "center",
+  end = "end"
 }
 
-enum FlexColPositionBucket {
-  "top-left" = "justify-start",
-  "top-center" = "items-center justify-start",
-  "top-right" = "items-end justify-start",
-  "center-left" = "justify-center",
-  "center-center" = "items-center justify-center",
-  "center-right" = "items-end justify-center",
-  "bottom-left" = "justify-end",
-  "bottom-center" = "items-center justify-end",
-  "bottom-right" = "items-end justify-end"
+export const flexPosition = {
+  flexAlign: {
+    [FlexPosition.start]: "items-start",
+    [FlexPosition.center]: "items-center",
+    [FlexPosition.end]: "items-end"
+  },
+  flexJustify: {
+    [FlexPosition.start]: "justify-start",
+    [FlexPosition.center]: "justify-center",
+    [FlexPosition.end]: "justify-end"
+  }
+} satisfies MultiBucket<Keyof<typeof FlexPosition>>;
+
+export enum FlexDirPosition {
+  "top-left" = "top-left",
+  "top-center" = "top-center",
+  "top-right" = "top-right",
+
+  "center-left" = "center-left",
+  "center-center" = "center-center",
+  "center-right" = "center-right",
+  "bottom-left" = "bottom-left",
+
+  "bottom-center" = "bottom-center",
+  "bottom-right" = "bottom-right"
 }
 
-export const flexPositionBucket = {
+export const flexDirPositionBucket = {
   flexRowPosition: {
-    "top-left": FlexRowPositionBucket["top-left"],
-    "top-center": FlexRowPositionBucket["top-center"],
-    "top-right": FlexRowPositionBucket["top-right"],
+    [FlexDirPosition["top-left"]]: "items-start",
+    [FlexDirPosition["top-center"]]: "items-start justify-center",
+    [FlexDirPosition["top-right"]]: "items-start justify-end",
 
-    "center-left": FlexRowPositionBucket["center-left"],
-    "center-center": FlexRowPositionBucket["center-center"],
-    "center-right": FlexRowPositionBucket["center-right"],
+    [FlexDirPosition["center-left"]]: "items-center justify-start",
+    [FlexDirPosition["center-center"]]: "items-center justify-center",
+    [FlexDirPosition["center-right"]]: "items-center justify-end",
 
-    "bottom-left": FlexRowPositionBucket["bottom-left"],
-    "bottom-center": FlexRowPositionBucket["bottom-center"],
-    "bottom-right": FlexRowPositionBucket["bottom-right"]
+    [FlexDirPosition["bottom-left"]]: "items-end",
+    [FlexDirPosition["bottom-center"]]: "items-end justify-center",
+    [FlexDirPosition["bottom-right"]]: "items-end justify-end"
   },
   flexColPosition: {
-    "top-left": FlexColPositionBucket["top-left"],
-    "top-center": FlexColPositionBucket["top-center"],
-    "top-right": FlexColPositionBucket["top-right"],
+    [FlexDirPosition["top-left"]]: "justify-start",
+    [FlexDirPosition["top-center"]]: "items-center justify-start",
+    [FlexDirPosition["top-right"]]: "items-end justify-start",
 
-    "center-left": FlexColPositionBucket["center-left"],
-    "center-center": FlexColPositionBucket["center-center"],
-    "center-right": FlexColPositionBucket["center-right"],
+    [FlexDirPosition["center-left"]]: "justify-center",
+    [FlexDirPosition["center-center"]]: "items-center justify-center",
+    [FlexDirPosition["center-right"]]: "items-end justify-center",
 
-    "bottom-left": FlexColPositionBucket["bottom-left"],
-    "bottom-center": FlexColPositionBucket["bottom-center"],
-    "bottom-right": FlexColPositionBucket["bottom-right"]
+    [FlexDirPosition["bottom-left"]]: "justify-end",
+    [FlexDirPosition["bottom-center"]]: "items-center justify-end",
+    [FlexDirPosition["bottom-right"]]: "items-end justify-end"
   }
-} satisfies MultiBucket<Keyof<typeof FlexRowPositionBucket>>;
+} satisfies MultiBucket<Keyof<typeof FlexDirPosition>>;
 
-enum FlexSpacingBucket {
-  "space-between" = "justify-between",
-  "space-evenly" = "justify-evenly",
-  "space-around" = "justify-around"
-}
-
-enum FlexWrapBucket {
-  wrap = "flex-wrap",
-  nowrap = "flex-nowrap"
-}
-
-enum FlexSizeBucket {
-  grow = "flex-grow",
-  shrink = "flex-shrink",
-  nogrow = "flex-grow-0",
-  noshrink = "flex-shrink-0"
+export enum FlexSpacing {
+  "space-between" = "space-between",
+  "space-evenly" = "space-evenly",
+  "space-around" = "space-around"
 }
 
 export const flexSpacingBucket = {
-  "space-between": FlexSpacingBucket["space-between"],
-  "space-evenly": FlexSpacingBucket["space-evenly"],
-  "space-around": FlexSpacingBucket["space-around"]
-} satisfies SingleBucket<Keyof<typeof FlexSpacingBucket>, FlexSpacingBucket>;
+  [FlexSpacing["space-between"]]: "justify-between",
+  [FlexSpacing["space-evenly"]]: "justify-evenly",
+  [FlexSpacing["space-around"]]: "justify-around"
+} satisfies SingleBucket<Keyof<typeof FlexSpacing>, string>;
+
+export enum FlexWrap {
+  wrap = "wrap",
+  nowrap = "nowrap"
+}
 
 export const flexWrapBucket = {
-  wrap: FlexWrapBucket.wrap,
-  nowrap: FlexWrapBucket.nowrap
-} satisfies SingleBucket<Keyof<typeof FlexWrapBucket>, FlexWrapBucket>;
+  [FlexWrap.wrap]: "flex-wrap",
+  [FlexWrap.nowrap]: "flex-nowrap"
+} satisfies SingleBucket<Keyof<typeof FlexWrap>, string>;
+
+export enum FlexSize {
+  grow = "grow",
+  shrink = "shrink",
+  nogrow = "nogrow",
+  noshrink = "noshrink",
+  remaining = "remaining"
+}
 
 export const flexSizeBucket = {
-  grow: FlexSizeBucket.grow,
-  shrink: FlexSizeBucket.shrink,
-  nogrow: FlexSizeBucket.nogrow,
-  noshrink: FlexSizeBucket.grow
-} satisfies SingleBucket<Keyof<typeof FlexSizeBucket>, FlexSizeBucket>;
+  [FlexSize.grow]: "flex-grow",
+  [FlexSize.shrink]: "flex-shrink",
+  [FlexSize.nogrow]: "flex-grow-0",
+  [FlexSize.noshrink]: "flex-shrink-0",
+  [FlexSize.remaining]: "flex-1"
+} satisfies SingleBucket<Keyof<typeof FlexSize>, string>;

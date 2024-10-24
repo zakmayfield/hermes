@@ -1,31 +1,35 @@
-"use client";
-
 import { useStyleToClass } from "@/tw-styled/style-to-class-resolver";
-import { BaseStyles, FullStyles } from "@/tw-styled/types";
-import { useButtonUi } from "./Button.ui";
-import { useButtonStyles } from "./Button.styles";
+import { BaseStyles, Children, FullStyles, Styles } from "@/tw-styled/types";
 
-export type ButtonProps = {
-  options?: {
-    type?: "button" | "reset" | "submit";
-    isDisabled?: boolean;
-    variant?: FullStyles["buttonVariant"];
-    size?: FullStyles["buttonSize"];
-  };
-  style?: {
-    button?: BaseStyles;
-    text?: BaseStyles;
-  };
-  text?: string;
+type ButtonProps = {
+  children?: Children;
   handleClick?: () => void;
+  options?: {
+    variant?: Styles["buttonVariant"];
+    type?: "button" | "submit";
+    isDisabled?: boolean;
+  };
+  style?: BaseStyles;
 };
 
 export const Button = (props: ButtonProps) => {
-  const { style, options, ...rest } = props;
+  const { children, handleClick, options, style } = props;
 
-  const styles = useButtonStyles({ style, options });
+  const styles = {
+    button: { buttonVariant: options?.variant, ...style } satisfies FullStyles
+  };
+
   const classes = useStyleToClass(styles);
-  const Button = useButtonUi({ classes, options, ...rest });
 
-  return Button;
+  return (
+    <button
+      onClick={handleClick}
+      type={options?.type || "button"}
+      disabled={options?.isDisabled}
+      aria-disabled={options?.isDisabled}
+      className={classes.get("button")}
+    >
+      {children}
+    </button>
+  );
 };

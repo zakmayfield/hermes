@@ -4,7 +4,6 @@ import { LayoutProps } from "./Layout";
 export const defaultStyles = (style?: StyleToClassProps) => {
   return {
     parentWrapper: {
-      padding: "lg",
       ...style?.parentWrapper
     },
     titleWrapper: {

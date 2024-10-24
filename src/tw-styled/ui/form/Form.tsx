@@ -1,37 +1,38 @@
 "use client";
-
+import { useStyleToClass } from "@/tw-styled/style-to-class-resolver";
+import { BaseStyles, Children, HeadingElements } from "@/tw-styled/types";
 import React from "react";
-import { Children, BaseStyles, FullStyles, Styles } from "@/tw-styled/types";
-import { useStyleToClass } from "@/tw-styled/tools";
-import { defaultStyles } from "./Form.defaultStyles";
-import { useFormUi } from "./Form.ui";
-import { useDefaultStyles } from "../hooks";
 
-export type FormProps = {
+type FormProps = {
   children?: Children;
-  titleText?: string;
-  isPending?: boolean;
-  submitHandler?: (e?: React.BaseSyntheticEvent) => Promise<void>;
-  buttonProps?: {
-    text?: string;
-    variant?: Styles["buttonVariant"];
-    size?: Styles["buttonSize"];
-  };
+  submitHandler: (e?: React.BaseSyntheticEvent) => Promise<void>;
+  options?: { title?: string; heading?: HeadingElements };
   style?: {
-    formStyles?: BaseStyles;
-    titleStyles?: BaseStyles;
-    childrenWrapperStyles?: BaseStyles;
-    childrenStyles?: BaseStyles;
-    buttonStyles?: FullStyles;
+    form?: BaseStyles;
+    title?: BaseStyles;
   };
 };
 
 export const Form = (props: FormProps) => {
-  const { style, ...rest } = props;
-
-  const styles = useDefaultStyles(style, defaultStyles);
+  const { children, submitHandler, style, options } = props;
+  const styles = { form: { ...style?.form }, title: { ...style?.title } };
   const classes = useStyleToClass(styles);
-  const Form = useFormUi({ classes, ...rest });
 
-  return Form;
+  return (
+    <form
+      onSubmit={submitHandler}
+      className={classes.get("form")}
+    >
+      {options?.title &&
+        React.createElement(
+          options?.heading || "h3",
+          {
+            className: classes.get("title")
+          },
+          options.title
+        )}
+
+      {children}
+    </form>
+  );
 };

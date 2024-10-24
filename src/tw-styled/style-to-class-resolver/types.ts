@@ -9,29 +9,31 @@ export type SingleBucket<T extends string, K> = Record<T, K>;
 export type Keyof<T extends object> = keyof T;
 
 export type Styles = {
-  boxSizing: Keyof<typeof buckets.boxSizingBucket>;
+  boxSizing: Keyof<typeof buckets.BoxSizing>;
 
-  padding: Keyof<(typeof buckets.spacingBucket)["padding"]>;
-  paddingX: Keyof<(typeof buckets.spacingBucket)["padding"]>;
-  paddingY: Keyof<(typeof buckets.spacingBucket)["padding"]>;
-  margin: Keyof<(typeof buckets.spacingBucket)["padding"]>;
-  marginX: Keyof<(typeof buckets.spacingBucket)["padding"]>;
-  marginY: Keyof<(typeof buckets.spacingBucket)["padding"]>;
-  spaceX: Keyof<(typeof buckets.spacingBucket)["padding"]>;
-  spaceY: Keyof<(typeof buckets.spacingBucket)["padding"]>;
-  gap: Keyof<(typeof buckets.spacingBucket)["padding"]>;
+  padding: Keyof<typeof buckets.Spacing>;
+  paddingX: Keyof<typeof buckets.Spacing>;
+  paddingY: Keyof<typeof buckets.Spacing>;
+  paddingL: Keyof<typeof buckets.Spacing>;
+  paddingR: Keyof<typeof buckets.Spacing>;
+  margin: Keyof<typeof buckets.Spacing>;
+  marginX: Keyof<typeof buckets.Spacing>;
+  marginY: Keyof<typeof buckets.Spacing>;
+  spaceX: Keyof<typeof buckets.Spacing>;
+  spaceY: Keyof<typeof buckets.Spacing>;
+  gap: Keyof<typeof buckets.Spacing>;
 
-  width: Keyof<(typeof buckets.widthtBucket)["width"]>;
-  minWidth: Keyof<(typeof buckets.widthtBucket)["width"]>;
-  maxWidth: Keyof<(typeof buckets.widthtBucket)["width"]>;
+  width: Keyof<typeof buckets.Width>;
+  minWidth: Keyof<typeof buckets.Width>;
+  maxWidth: Keyof<typeof buckets.Width>;
 
-  height: Keyof<(typeof buckets.heightBucket)["height"]>;
-  minHeight: Keyof<(typeof buckets.heightBucket)["height"]>;
-  maxHeight: Keyof<(typeof buckets.heightBucket)["height"]>;
+  height: Keyof<typeof buckets.Height>;
+  minHeight: Keyof<typeof buckets.Height>;
+  maxHeight: Keyof<typeof buckets.Height>;
 
-  backgroundColor: Keyof<(typeof buckets.colorBucket)["backgroundColor"]>;
-  textColor: Keyof<(typeof buckets.colorBucket)["backgroundColor"]>;
-  borderColor: Keyof<(typeof buckets.colorBucket)["backgroundColor"]>;
+  backgroundColor: Keyof<typeof buckets.Color>;
+  textColor: Keyof<typeof buckets.Color>;
+  borderColor: Keyof<typeof buckets.Color>;
 
   opacity: Keyof<(typeof buckets.opacityBucket)["opacity"]>;
 
@@ -41,6 +43,7 @@ export type Styles = {
   textDecoration: Keyof<typeof buckets.textDecorationBucket>;
   lineHeight: Keyof<typeof buckets.lineHeightBucket>;
   letterSpacing: Keyof<typeof buckets.letterSpacingBucket>;
+  fontStyle: Keyof<typeof buckets.FontStyle>;
 
   display: Keyof<typeof buckets.displayBucket>;
   position: Keyof<typeof buckets.positionBucket>;
@@ -48,19 +51,22 @@ export type Styles = {
   border: Keyof<typeof buckets.borderBucket>;
   borderRadius: Keyof<typeof buckets.borderRadiusBucket>;
 
-  flexRowPosition: Keyof<(typeof buckets.flexPositionBucket)["flexRowPosition"]>;
-  flexColPosition: Keyof<(typeof buckets.flexPositionBucket)["flexRowPosition"]>;
+  flexRowPosition: Keyof<typeof buckets.FlexDirPosition>;
+  flexColPosition: Keyof<typeof buckets.FlexDirPosition>;
 
-  flexSpacing: Keyof<typeof buckets.flexSpacingBucket>;
-  flexWrap: Keyof<typeof buckets.flexWrapBucket>;
-  flexSize: Keyof<typeof buckets.flexSizeBucket>;
+  flexAlign: Keyof<typeof buckets.FlexPosition>;
+  flexJustify: Keyof<typeof buckets.FlexPosition>;
+
+  flexSpacing: Keyof<typeof buckets.FlexSpacing>;
+  flexWrap: Keyof<typeof buckets.FlexWrap>;
+  flexSize: Keyof<typeof buckets.FlexSize>;
 
   animation: Keyof<typeof buckets.animationBucket>;
 
   cursor: Keyof<typeof buckets.cursorBucket>;
 
   buttonSize: Keyof<typeof buckets.buttonSizeBucket>;
-  buttonVariant: Keyof<typeof buckets.buttonVariantBucket>;
+  buttonVariant: Keyof<typeof buckets.ButtonVariant>;
 
   className: string;
 };

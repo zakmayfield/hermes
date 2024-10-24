@@ -9,9 +9,16 @@ const themeCtx = {
     primary: "rgb(var(--primary))",
     secondary: "rgb(var(--secondary))",
     tertiary: "rgb(var(--tertiary))",
-    accent: "rgb(var(--accent))"
+    accent: "rgb(var(--accent))",
+    "success-light": "rgb(var(--success-light))",
+    success: "rgb(var(--success))",
+    "warning-light": "rgb(var(--warning-light))",
+    warning: "rgb(var(--warning))",
+    caution: "rgb(var(--caution))",
+    ghost: "rgb(var(--ghost))"
   },
   spacing: {
+    xs: "var(--space-xs)",
     sm: "var(--space-sm)",
     md: "var(--space-md)",
     lg: "var(--space-lg)",
@@ -35,7 +42,11 @@ const themeCtx = {
     md: "var(--size-md)",
     lg: "var(--size-lg)",
     xl: "var(--size-xl)",
-    full: "var(--size-full)"
+    "2xl": "var(--size-2xl)",
+    "3xl": "var(--size-3xl)",
+    full: "var(--size-full)",
+    half: "var(--size-half)",
+    third: "var(--size-third)"
   }
 };
 

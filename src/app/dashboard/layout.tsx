@@ -1,6 +1,7 @@
-import { DashboardLayout } from "@/features/templates";
 import { getAuthSession } from "@/lib/auth/auth.options";
+import { Layout } from "@/tw-styled/ui";
 import { redirect } from "next/navigation";
+import React from "react";
 
 type LayoutProps = {
   superDashboard: React.ReactNode;
@@ -8,7 +9,7 @@ type LayoutProps = {
   userDashboard: React.ReactNode;
 };
 
-export default async function Layout({
+export default async function DashboardLayout({
   superDashboard,
   adminDashboard,
   userDashboard
@@ -16,12 +17,32 @@ export default async function Layout({
   const session = await getAuthSession();
   if (!session) redirect("/sign-in");
 
-  const user_roles = session.user.roles;
+  const user_role = session.user.role;
 
   const dashboard =
-    (user_roles.includes("SUPER") && superDashboard) ||
-    (user_roles.includes("ADMIN") && !user_roles.includes("SUPER") && adminDashboard) ||
-    (!user_roles.includes("ADMIN") && !user_roles.includes("SUPER") && userDashboard);
+    (user_role.includes("SUPER") && superDashboard) ||
+    (user_role.includes("ADMIN") && adminDashboard) ||
+    (user_role.includes("USER") && userDashboard);
 
-  return <DashboardLayout>{dashboard}</DashboardLayout>;
+  return (
+    <Layout
+      options={{ as: "main", titleText: "Dashboard" }}
+      style={{
+        parentWrapper: {
+          borderRadius: "lg",
+          maxWidth: "3xl",
+          place: "center",
+          backgroundColor: "secondary",
+          spaceY: "lg",
+          padding: "lg"
+        },
+        childrenWrapper: {
+          minHeight: "md",
+          display: "flex-col"
+        }
+      }}
+    >
+      {dashboard}
+    </Layout>
+  );
 }

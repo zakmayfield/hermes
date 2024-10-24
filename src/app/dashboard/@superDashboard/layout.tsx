@@ -1,5 +1,10 @@
-import { SuperDashboardLayout } from "@/features/dashboard/super/templates";
+import { SegmentLayout } from "@/features/dashboard";
+import { SuperNav } from "@/features/dashboard/super";
 
-export default async function Layout({ children }: { children: React.ReactNode }) {
-  return <SuperDashboardLayout>{children}</SuperDashboardLayout>;
+export default async function SuperDashboardLayout({
+  children
+}: {
+  children: React.ReactNode;
+}) {
+  return <SegmentLayout nav={<SuperNav />}>{children}</SegmentLayout>;
 }

@@ -1,6 +1,8 @@
 import { useCallback, useMemo } from "react";
 import { IconType } from "react-icons";
 import {
+  PiCheckCircle,
+  PiCheckCircleDuotone,
   PiSpinnerGap,
   PiSpinnerGapDuotone,
   PiShoppingCart,
@@ -8,11 +10,15 @@ import {
   PiWarningCircle,
   PiWarningCircleDuotone,
   PiInfo,
-  PiInfoDuotone
+  PiInfoDuotone,
+  PiXCircle,
+  PiXCircleDuotone,
+  PiTrash,
+  PiTrashDuotone
 } from "react-icons/pi";
 
-type IconNames = "spin" | "cart" | "error" | "info";
-type IconVariants = "base" | "duotone";
+export type IconNames = "spin" | "cart" | "error" | "info" | "check" | "x" | "trash";
+export type IconVariants = "base" | "duotone";
 
 type UseIconsProps = {
   names: IconNames[];
@@ -24,19 +30,25 @@ export const useIcons = (props: UseIconsProps) => {
 
   const getBaseIcons = useCallback(() => {
     return {
-      spin: PiSpinnerGap,
       cart: PiShoppingCart,
+      check: PiCheckCircle,
       error: PiWarningCircle,
-      info: PiInfo
+      info: PiInfo,
+      spin: PiSpinnerGap,
+      trash: PiTrash,
+      x: PiXCircle
     };
   }, []);
 
   const getVariantIcons = useCallback(() => {
     return {
-      spin: PiSpinnerGapDuotone,
       cart: PiShoppingCartDuotone,
+      check: PiCheckCircleDuotone,
       error: PiWarningCircleDuotone,
-      info: PiInfoDuotone
+      info: PiInfoDuotone,
+      spin: PiSpinnerGapDuotone,
+      trash: PiTrashDuotone,
+      x: PiXCircleDuotone
     };
   }, []);
 

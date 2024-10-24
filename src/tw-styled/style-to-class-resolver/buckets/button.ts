@@ -12,14 +12,16 @@ export const buttonSizeBucket = {
   lg: ButtonSizeBucket.lg
 } satisfies SingleBucket<Keyof<typeof ButtonSizeBucket>, ButtonSizeBucket>;
 
-enum ButtonVariantBucket {
-  ghost = "btn-ghost",
-  primary = "btn-primary",
-  warning = "btn-warning"
+export enum ButtonVariant {
+  ghost = "ghost",
+  primary = "primary",
+  warning = "warning",
+  caution = "caution"
 }
 
 export const buttonVariantBucket = {
-  ghost: ButtonVariantBucket.ghost,
-  primary: ButtonVariantBucket.primary,
-  warning: ButtonVariantBucket.warning
-} satisfies SingleBucket<Keyof<typeof ButtonVariantBucket>, ButtonVariantBucket>;
+  [ButtonVariant.ghost]: "btn-ghost",
+  [ButtonVariant.primary]: "btn-primary",
+  [ButtonVariant.warning]: "btn-warning",
+  [ButtonVariant.caution]: "btn-caution"
+} satisfies SingleBucket<Keyof<typeof ButtonVariant>, string>;

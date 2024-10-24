@@ -81,3 +81,11 @@ export const letterSpacingBucket = {
   normal: LetterSpacingBucket.normal,
   wide: LetterSpacingBucket.wide
 } satisfies SingleBucket<Keyof<typeof LetterSpacingBucket>, LetterSpacingBucket>;
+
+export enum FontStyle {
+  italic = "italic"
+}
+
+export const fontStyleBucket = {
+  [FontStyle.italic]: "italic"
+} satisfies SingleBucket<Keyof<typeof FontStyle>, string>;

@@ -1,10 +1,17 @@
 "use client";
+import { Button2 } from "@/tw-styled/ui";
 import { signOut } from "next-auth/react";
 
 export const SignOutButton = () => {
   return (
     <div>
-      <button onClick={() => signOut()}>Logout</button>
+      <Button2
+        text="Logout"
+        options={{
+          variant: "ghost"
+        }}
+        handleClick={() => signOut()}
+      />
     </div>
   );
 };

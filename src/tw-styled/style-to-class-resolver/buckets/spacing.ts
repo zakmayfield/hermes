@@ -1,139 +1,113 @@
 import { Keyof, MultiBucket } from "../types";
 
-enum PaddingBucket {
-  sm = `p-sm`,
-  md = `p-md`,
-  lg = `p-lg`,
-  xl = `p-xl`,
-  "2xl" = `p-2xl`
-}
-
-enum PaddingXBucket {
-  sm = `px-sm`,
-  md = `px-md`,
-  lg = `px-lg`,
-  xl = `px-xl`,
-  "2xl" = `px-2xl`
-}
-
-enum PaddingYBucket {
-  sm = `py-sm`,
-  md = `py-md`,
-  lg = `py-lg`,
-  xl = `py-xl`,
-  "2xl" = `py-2xl`
-}
-
-enum MarginBucket {
-  sm = `m-sm`,
-  md = `m-md`,
-  lg = `m-lg`,
-  xl = `m-xl`,
-  "2xl" = `m-2xl`
-}
-
-enum MarginXBucket {
-  sm = `mx-sm`,
-  md = `mx-md`,
-  lg = `mx-lg`,
-  xl = `mx-xl`,
-  "2xl" = `mx-2xl`
-}
-
-enum MarginYBucket {
-  sm = `my-sm`,
-  md = `my-md`,
-  lg = `my-lg`,
-  xl = `my-xl`,
-  "2xl" = `my-2xl`
-}
-
-enum SpaceXBucket {
-  sm = `space-x-sm`,
-  md = `space-x-md`,
-  lg = `space-x-lg`,
-  xl = `space-x-xl`,
-  "2xl" = `space-x-2xl`
-}
-
-enum SpaceYBucket {
-  sm = `space-y-sm`,
-  md = `space-y-md`,
-  lg = `space-y-lg`,
-  xl = `space-y-xl`,
-  "2xl" = `space-y-2xl`
-}
-
-enum GapBucket {
-  sm = `gap-[var(--space-sm)]`,
-  md = `gap-[var(--space-md)]`,
-  lg = `gap-[var(--space-lg)]`,
-  xl = `gap-[var(--space-xl)]`,
-  "2xl" = `gap-[var(--space-2xl)]`
+export enum Spacing {
+  none = "none",
+  xs = "xs",
+  sm = "sm",
+  md = "md",
+  lg = "lg",
+  xl = "xl",
+  "2xl" = "2xl"
 }
 
 export const spacingBucket = {
   padding: {
-    sm: PaddingBucket.sm,
-    md: PaddingBucket.md,
-    lg: PaddingBucket.lg,
-    xl: PaddingBucket.xl,
-    "2xl": PaddingBucket["2xl"]
+    [Spacing.none]: "p-0",
+    [Spacing.xs]: "p-xs",
+    [Spacing.sm]: "p-sm",
+    [Spacing.md]: "p-md",
+    [Spacing.lg]: "p-lg",
+    [Spacing.xl]: "p-xl",
+    [Spacing["2xl"]]: "p-2xl"
   },
   paddingX: {
-    sm: PaddingXBucket.sm,
-    md: PaddingXBucket.md,
-    lg: PaddingXBucket.lg,
-    xl: PaddingXBucket.xl,
-    "2xl": PaddingXBucket["2xl"]
+    [Spacing.none]: "px-0",
+    [Spacing.xs]: "px-xs",
+    [Spacing.sm]: "px-sm",
+    [Spacing.md]: "px-md",
+    [Spacing.lg]: "px-lg",
+    [Spacing.xl]: "px-xl",
+    [Spacing["2xl"]]: "px-2xl"
   },
   paddingY: {
-    sm: PaddingYBucket.sm,
-    md: PaddingYBucket.md,
-    lg: PaddingYBucket.lg,
-    xl: PaddingYBucket.xl,
-    "2xl": PaddingYBucket["2xl"]
+    [Spacing.none]: "py-0",
+    [Spacing.xs]: "py-xs",
+    [Spacing.sm]: "py-sm",
+    [Spacing.md]: "py-md",
+    [Spacing.lg]: "py-lg",
+    [Spacing.xl]: "py-xl",
+    [Spacing["2xl"]]: "py-2xl"
+  },
+  paddingL: {
+    [Spacing.none]: "pl-0",
+    [Spacing.xs]: "pl-xs",
+    [Spacing.sm]: "pl-sm",
+    [Spacing.md]: "pl-md",
+    [Spacing.lg]: "pl-lg",
+    [Spacing.xl]: "pl-xl",
+    [Spacing["2xl"]]: "pl-2xl"
+  },
+  paddingR: {
+    [Spacing.none]: "pr-0",
+    [Spacing.xs]: "pr-xs",
+    [Spacing.sm]: "pr-sm",
+    [Spacing.md]: "pr-md",
+    [Spacing.lg]: "pr-lg",
+    [Spacing.xl]: "pr-xl",
+    [Spacing["2xl"]]: "pr-2xl"
   },
   margin: {
-    sm: MarginBucket.sm,
-    md: MarginBucket.md,
-    lg: MarginBucket.lg,
-    xl: MarginBucket.xl,
-    "2xl": MarginBucket["2xl"]
+    [Spacing.none]: "m-0",
+    [Spacing.xs]: "m-xs",
+    [Spacing.sm]: "m-sm",
+    [Spacing.md]: "m-md",
+    [Spacing.lg]: "m-lg",
+    [Spacing.xl]: "m-xl",
+    [Spacing["2xl"]]: "m-2xl"
   },
   marginX: {
-    sm: MarginXBucket.sm,
-    md: MarginXBucket.md,
-    lg: MarginXBucket.lg,
-    xl: MarginXBucket.xl,
-    "2xl": MarginXBucket["2xl"]
+    [Spacing.none]: "mx-0",
+    [Spacing.xs]: "mx-xs",
+    [Spacing.sm]: "mx-sm",
+    [Spacing.md]: "mx-md",
+    [Spacing.lg]: "mx-lg",
+    [Spacing.xl]: "mx-xl",
+    [Spacing["2xl"]]: "mx-2xl"
   },
   marginY: {
-    sm: MarginYBucket.sm,
-    md: MarginYBucket.md,
-    lg: MarginYBucket.lg,
-    xl: MarginYBucket.xl,
-    "2xl": MarginYBucket["2xl"]
+    [Spacing.none]: "my-0",
+    [Spacing.xs]: "my-xs",
+    [Spacing.sm]: "my-sm",
+    [Spacing.md]: "my-md",
+    [Spacing.lg]: "my-lg",
+    [Spacing.xl]: "my-xl",
+    [Spacing["2xl"]]: "my-2xl"
   },
   spaceX: {
-    sm: SpaceXBucket.sm,
-    md: SpaceXBucket.md,
-    lg: SpaceXBucket.lg,
-    xl: SpaceXBucket.xl,
-    "2xl": SpaceXBucket["2xl"]
+    [Spacing.none]: "space-x-0",
+    [Spacing.xs]: "space-x-xs",
+    [Spacing.sm]: "space-x-sm",
+    [Spacing.md]: "space-x-md",
+    [Spacing.lg]: "space-x-lg",
+    [Spacing.xl]: "space-x-xl",
+    [Spacing["2xl"]]: "space-x-2xl"
   },
   spaceY: {
-    sm: SpaceYBucket.sm,
-    md: SpaceYBucket.md,
-    lg: SpaceYBucket.lg,
-    xl: SpaceYBucket.xl,
-    "2xl": SpaceYBucket["2xl"]
+    [Spacing.none]: "space-y-0",
+    [Spacing.xs]: "space-y-xs",
+    [Spacing.sm]: "space-y-sm",
+    [Spacing.md]: "space-y-md",
+    [Spacing.lg]: "space-y-lg",
+    [Spacing.xl]: "space-y-xl",
+    [Spacing["2xl"]]: "space-y-2xl"
   },
   gap: {
-    sm: GapBucket.sm,
-    md: GapBucket.md,
-    lg: GapBucket.lg,
-    xl: GapBucket.xl,
-    "2xl": GapBucket["2xl"]
+    [Spacing.none]: "gap-0",
+    [Spacing.xs]: "gap-[var(--space-xs)]",
+    [Spacing.sm]: "gap-[var(--space-sm)]",
+    [Spacing.md]: "gap-[var(--space-md)]",
+    [Spacing.lg]: "gap-[var(--space-lg)]",
+    [Spacing.xl]: "gap-[var(--space-xl)]",
+    [Spacing["2xl"]]: "gap-[var(--space-2xl)]"
   }
-} satisfies MultiBucket<Keyof<typeof PaddingBucket>>;
+} satisfies MultiBucket<Keyof<typeof Spacing>>;

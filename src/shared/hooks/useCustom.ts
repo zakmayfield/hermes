@@ -5,8 +5,7 @@ import {
   MutationFunction,
   QueryFunction,
   QueryKey,
-  useMutation,
-  useQuery
+  useMutation
 } from "@tanstack/react-query";
 import { UseMutateFunction } from "@tanstack/react-query";
 
@@ -40,16 +39,6 @@ export const customHooks = {
       onError(error, variables) {
         handleError?.(error, variables);
       }
-    });
-  },
-
-  useCustomQuery: <T>(props: UseCustomQueryParams<T>) => {
-    const { queryKey, queryFn, staleTime = Infinity } = props;
-
-    return useQuery<T, Error>({
-      queryKey,
-      queryFn,
-      staleTime
     });
   },
 

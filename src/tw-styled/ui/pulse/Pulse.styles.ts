@@ -1,30 +1,15 @@
 import { StyleToClassProps } from "@/tw-styled/types";
 import { PulseProps } from "./Pulse";
 
-export const usePulseStyles = (
-  style?: StyleToClassProps,
-  theme?: PulseProps["theme"]
-) => {
-  const themes = {
-    light: {
-      parentTheme: "bg-slate-100",
-      childrenTheme: "bg-slate-300"
-    },
-    dark: {
-      parentTheme: "bg-slate-600",
-      childrenTheme: "bg-slate-700"
-    }
-  };
-
+export const usePulseStyles = (style?: StyleToClassProps) => {
   return {
     parentWrapper: {
       animation: "pulse",
       borderRadius: "lg",
-      width: "md",
       display: "flex-col",
       gap: "sm",
-      padding: "sm",
-      className: themes[theme || "dark"].parentTheme,
+      padding: "md",
+      backgroundColor: "tertiary",
       ...style?.parentWrapper
     },
     childrenWrapper: {
@@ -36,7 +21,7 @@ export const usePulseStyles = (
       animation: "pulse",
       padding: "md",
       borderRadius: "xl",
-      className: themes[theme || "dark"].childrenTheme,
+      backgroundColor: "secondary",
       ...style?.children
     }
   } satisfies PulseProps["style"];

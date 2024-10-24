@@ -18,7 +18,16 @@ export const useLayoutUi = (props: UiClassesProp<LayoutProps>) => {
   }, [titleAs, titleClasses, titleText]);
 
   const TitleWrapper = React.useMemo(() => {
-    return titleText && <div className={titleWrapperClasses}>{Title}</div>;
+    return (
+      titleText && (
+        <div
+          key={0}
+          className={titleWrapperClasses}
+        >
+          {Title}
+        </div>
+      )
+    );
   }, [titleWrapperClasses, titleText, Title]);
 
   const Children = React.useMemo(() => {
@@ -36,7 +45,14 @@ export const useLayoutUi = (props: UiClassesProp<LayoutProps>) => {
   }, [children, childrenClasses]);
 
   const ChildrenWrapper = React.useMemo(() => {
-    return <div className={childrenWrapperClasses}>{Children}</div>;
+    return (
+      <div
+        key={1}
+        className={childrenWrapperClasses}
+      >
+        {Children}
+      </div>
+    );
   }, [childrenWrapperClasses, Children]);
 
   const Layout = React.useMemo(() => {

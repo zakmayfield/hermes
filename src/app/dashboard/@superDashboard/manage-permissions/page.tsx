@@ -1,16 +1,16 @@
-import { ManagePermissionsLayout } from "@/features/dashboard/super/templates";
-import {
-  AdminPermissionsList,
-  SuperPermissionsList,
-  UserPermissionsList
-} from "@/features/dashboard/super/molecules";
+import { Layout } from "@/tw-styled/ui";
+import { AdminPermissions } from "@/features/dashboard/super/admin-permissions/templates";
 
-export default function ManagePermissions() {
+export default async function ManagePermissions() {
   return (
-    <ManagePermissionsLayout>
-      <SuperPermissionsList />
-      <AdminPermissionsList />
-      <UserPermissionsList />
-    </ManagePermissionsLayout>
+    <Layout
+      options={{ titleText: "Manage Permissions", titleAs: "h2" }}
+      style={{
+        parentWrapper: { spaceY: "md" },
+        childrenWrapper: { display: "flex-col", gap: "lg", place: "center" }
+      }}
+    >
+      <AdminPermissions />
+    </Layout>
   );
 }

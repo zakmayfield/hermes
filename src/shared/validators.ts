@@ -35,5 +35,15 @@ export const validators = {
       defaultValues,
       resolver
     };
+  },
+
+  authorizedAdminsValidator: () => {
+    const validator = z.object({
+      email: z.string().email()
+    });
+
+    const { defaultValues, resolver } = handleValidator(validator);
+
+    return { defaultValues, resolver };
   }
 };

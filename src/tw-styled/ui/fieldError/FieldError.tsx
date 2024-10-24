@@ -1,24 +1,22 @@
-import { useStyleToClass } from "@/tw-styled/tools";
+import { useStyleToClass } from "@/tw-styled/style-to-class-resolver";
 import { BaseStyles } from "@/tw-styled/types";
-import { defaultStyles } from "./FieldError.defaultStyles";
-import { useFieldErrorUi } from "./FieldError.ui";
-import { useDefaultStyles } from "../hooks";
 
-export type FieldErrorProps = {
-  errorMessage?: string;
-  described_by?: string;
-  error_hidden?: boolean;
-  style?: {
-    parentWrapper?: BaseStyles;
-  };
+type FieldErrorProps = {
+  message: string;
+  style?: BaseStyles;
 };
 
 export const FieldError = (props: FieldErrorProps) => {
-  const { style, ...rest } = props;
-
-  const styles = useDefaultStyles(style, defaultStyles);
+  const { message, style } = props;
+  const styles = {
+    fieldError: {
+      paddingY: "xs",
+      textColor: "warning-light",
+      fontStyle: "italic",
+      ...style
+    } satisfies BaseStyles
+  };
   const classes = useStyleToClass(styles);
-  const FieldError = useFieldErrorUi({ classes, ...rest });
 
-  return FieldError;
+  return <span className={classes.get("fieldError")}>{message}</span>;
 };

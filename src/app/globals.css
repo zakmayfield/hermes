@@ -13,19 +13,22 @@
       --accent: 71 85 105;
     }
 
+    /* TODO: lighten the `light` colors */
     --background: 248 250 252;
     --foreground: 2 6 23;
     --primary: 226 232 240;
     --secondary: 203 213 225;
     --tertiary: 148 163 184;
     --accent: 100 116 139;
-
-    /* Btn Variant Colors */
-    --btn-ghost-bg: 23 37 84 / 0.2; /* bg-cyan-500 */
-    --btn-primary-bg: 21 128 61; /* bg-green-700 */
-    --btn-warning-bg: 185 28 28; /* bg-red-700 */
+    --success-light: 74 168 80;
+    --success: 58 142 63; /* bg-green-700 #15803D */
+    --warning-light: 243 100 100;
+    --warning: 213 56 56; /* bg-red-700 #B91C1C */
+    --caution: 142 166 22 /* #8EA616 */;
+    --ghost: 23 37 84 / 0.2; /* bg-cyan-500 */
 
     /* SPACING */
+    --space-xs: 0.25rem;
     --space-sm: 0.5rem;
     --space-md: 1rem;
     --space-lg: 1.5rem;
@@ -33,7 +36,7 @@
     --space-2xl: 2.5rem;
 
     /* FONT SIZE */
-    --font-sm: 0.75rem;
+    --font-sm: 0.9rem;
     --font-md: 1rem;
     --font-lg: 1.25rem;
     --font-xl: 1.5rem;
@@ -42,14 +45,18 @@
     --font-4xl: 2.25rem;
 
     /* DIMENSION SIZES */
-    --size-3xs: 4rem;
+    --size-3xs: 7rem;
     --size-2xs: 10rem;
     --size-xs: 16rem;
     --size-sm: 22rem;
     --size-md: 28rem;
     --size-lg: 34rem;
     --size-xl: 40rem;
+    --size-2xl: 60rem;
+    --size-3xl: 80rem;
     --size-full: 100%;
+    --size-half: 50%;
+    --size-third: 33%;
   }
 
   body {
@@ -57,31 +64,35 @@
     font-family: Arial, Helvetica, sans-serif;
   }
 
+  dialog {
+    @apply text-foreground bg-background;
+  }
+
   h1 {
     @apply text-4xl;
-    @apply font-normal;
   }
 
   h2 {
-    @apply text-3xl;
+    @apply text-2xl;
   }
 
   h3,
   h4 {
-    @apply text-2xl;
+    @apply text-xl;
   }
 
   h5,
   h6 {
-    @apply text-xl;
-  }
-
-  input {
-    @apply px-2 py-1 rounded border dark:text-background;
+    @apply text-lg;
   }
 
   button {
     @apply btn;
+  }
+
+  input,
+  textarea {
+    @apply dark:text-background;
   }
 }
 

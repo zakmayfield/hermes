@@ -44,17 +44,20 @@ const btnVariants: TwPluginRules = {
     borderWidth: "1px",
     backgroundColor: "transparent",
     "&:hover": {
-      backgroundColor: rgb("--btn-ghost-bg")
+      backgroundColor: rgb("--ghost")
     },
     "&:disabled": {
       backgroundColor: "transparent"
     }
   },
   ".btn-primary": {
-    backgroundColor: rgb("--btn-primary-bg")
+    backgroundColor: rgb("--success")
   },
   ".btn-warning": {
-    backgroundColor: rgb("--btn-warning-bg")
+    backgroundColor: rgb("--warning")
+  },
+  ".btn-caution": {
+    backgroundColor: rgb("--caution")
   }
 };
 

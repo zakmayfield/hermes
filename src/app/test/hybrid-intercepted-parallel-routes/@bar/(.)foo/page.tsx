@@ -1,4 +1,4 @@
-import { DialogModal, Modal } from "../../Modal";
+import { DialogModal } from "../../Modal";
 
 export default function Page() {
   return <DialogModal />;

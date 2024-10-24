@@ -9,7 +9,7 @@ export default function Layout({
   dashOne: React.ReactNode;
   dashTwo: React.ReactNode;
 }) {
-  let isTrue = true;
+  const isTrue = true;
   const dash = isTrue ? dashOne : dashTwo;
 
   return (

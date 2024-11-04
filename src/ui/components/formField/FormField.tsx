@@ -1,20 +1,56 @@
-import { UiClassesProp } from "@/tw-styled/types";
-import { FormFieldProps } from "./FormField";
-import { useIcons } from "@/tw-styled/tools";
-import { FieldError2 } from "../fieldError2/FieldError";
 import React from "react";
+import { useStyleToClass } from "@/tw-styled/tools";
+import { FormFieldProps } from "./FormField.types";
+import { useIcons } from "@/tw-styled/tools";
 import { useTooltip } from "@/shared/hooks";
+import { FieldError } from "@/ui/components";
 
-export const useFormFieldUi = (props: UiClassesProp<FormFieldProps<any>>) => {
+export const FormField: React.FC<FormFieldProps<any>> = (props) => {
   const {
-    classes,
-    inputType = "text",
-    name,
-    labelText,
+    style,
     errorMessage,
-    hiddenElements: { error_hidden, label_hidden } = {},
+    name,
+    inputType,
+    labelText,
+    hiddenElements: { error_hidden, error_icon_hidden, label_hidden } = {},
     register
   } = props;
+
+  const classes = useStyleToClass({
+    parentWrapper: {
+      display: "flex-col",
+      gap: "sm",
+      ...style?.parentWrapper
+    },
+    label: {
+      ...style?.label
+    },
+    input: {
+      flexSize: "grow",
+      ...style?.input
+    },
+    fieldError: {
+      className: "italic text-red-300",
+      ...style?.fieldError
+    },
+    labelInputWrapper: {
+      display: "flex-col",
+      gap: "sm",
+      ...style?.labelInputWrapper
+    },
+    errorIcon: {
+      position: "absolute",
+      fontSize: "lg",
+      className: "text-red-500 right-2 h-full",
+      ...style?.errorIcon
+    },
+    errorInputWrapper: {
+      display: "flex-row",
+      width: "full",
+      position: "relative",
+      ...style?.errorInputWrapper
+    }
+  });
 
   const parentWrapperClasses = classes.get("parentWrapper");
   const labelClasses = classes.get("label");
@@ -60,11 +96,11 @@ export const useFormFieldUi = (props: UiClassesProp<FormFieldProps<any>>) => {
 
   const Error = React.useMemo(() => {
     return (
-      <FieldError2
-        errorMessage={errorMessage}
+      <FieldError
+        message={errorMessage}
         described_by={name as string}
         error_hidden={error_hidden}
-        style={{ parentWrapper: { className: fieldErrorClasses } }}
+        style={{ className: fieldErrorClasses }}
       />
     );
   }, [errorMessage, name, error_hidden, fieldErrorClasses]);
@@ -76,7 +112,7 @@ export const useFormFieldUi = (props: UiClassesProp<FormFieldProps<any>>) => {
     />
   );
 
-  const FormField = (
+  return (
     <div className={parentWrapperClasses}>
       <div className={labelInputWrapperClasses}>
         {Label}
@@ -91,6 +127,4 @@ export const useFormFieldUi = (props: UiClassesProp<FormFieldProps<any>>) => {
       {Error}
     </div>
   );
-
-  return FormField;
 };

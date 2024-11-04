@@ -1,19 +1,9 @@
 import { useStyleToClass } from "@/tw-styled/style-to-class-resolver";
-import { BaseStyles } from "@/tw-styled/types";
-
-type LabelProps = {
-  options?: {
-    text: string;
-    htmlFor: string;
-    visuallyHidden?: boolean;
-  };
-  style?: BaseStyles;
-};
+import { LabelProps } from "./Label.types";
 
 export const Label = (props: LabelProps) => {
   const { options, style } = props;
-  const styles = { label: { ...style } };
-  const classes = useStyleToClass(styles);
+  const classes = useStyleToClass({ label: { ...style } });
 
   return (
     <label

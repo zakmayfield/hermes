@@ -1,6 +1,6 @@
 "use client";
 import { validators } from "@/shared/validators";
-import { FormField } from "@/tw-styled/ui";
+import { FormField } from "@/ui/components";
 import { useFormContext } from "react-hook-form";
 
 export const AuthInputs = () => {

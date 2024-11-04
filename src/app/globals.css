@@ -57,6 +57,7 @@
     --size-full: 100%;
     --size-half: 50%;
     --size-third: 33%;
+    --size-screen: 100vh;
   }
 
   body {

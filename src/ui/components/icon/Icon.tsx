@@ -1,7 +1,8 @@
 "use client";
 import React from "react";
-import { useIcons, useStyleToClass } from "@/tw-styled/tools";
+import { useStyleToClass } from "@/tw-styled/tools";
 import { IconProps } from "./Icon.types";
+import { useIcons } from "@/shared/hooks";
 
 export const Icon = (props: IconProps) => {
   const { name, variant = "base", style } = props;

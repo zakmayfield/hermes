@@ -1,5 +1,6 @@
-import { mergeClasses, useStyleToClass } from "@/tw-styled/tools";
+import { useStyleToClass } from "@/tw-styled/tools";
 import { PulseProps } from "./Pulse.types";
+import { mergeClasses } from "@/utils/class-merge";
 
 export const Pulse = (props: PulseProps) => {
   const { style, size } = props;

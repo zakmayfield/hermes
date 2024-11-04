@@ -1,7 +1,6 @@
-import { Children } from "@/tw-styled/types";
 import { Box } from "@/ui/components";
 
-export const SegmentNav = ({ children }: { children?: Children }) => {
+export const SegmentNav = ({ children }: { children?: React.ReactNode }) => {
   return (
     <Box
       as="nav"

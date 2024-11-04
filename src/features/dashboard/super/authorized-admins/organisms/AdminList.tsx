@@ -1,6 +1,5 @@
 import { useFetchAuthorizedAdmins } from "../templates/AuthorizedAdmins.hooks";
-import { useIcons } from "@/tw-styled/tools";
-import { useTooltip } from "@/shared/hooks";
+import { useIcons, useTooltip } from "@/shared/hooks";
 import { AdminCard } from "../molecules";
 import { Box, Pulse } from "@/ui/components";
 

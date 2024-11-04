@@ -1,6 +1,6 @@
 "use client";
 
-import { themeCtx, ThemeProvider } from "@/tw-styled/theme";
+import { themeCtx, ThemeProvider } from "@/utils/theme";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { SessionProvider } from "next-auth/react";
 import { ReactNode } from "react";

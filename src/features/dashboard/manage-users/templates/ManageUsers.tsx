@@ -1,8 +1,7 @@
 "use client";
 import React from "react";
 import { User } from "@prisma/client";
-import { useTooltip } from "@/shared/hooks";
-import { useIcons } from "@/tw-styled/tools";
+import { useIcons, useTooltip } from "@/shared/hooks";
 import { useFetchUnapprovedUsers, useToggleUserApproval } from "./ManageUsers.hooks";
 import { Button, Icon, Pulse } from "@/ui/components";
 
@@ -32,7 +31,7 @@ export const ManageUsers = () => {
       >
         <Icon
           name="check"
-          style={{ icon: { fontSize: "xl", textAlign: "center", className: "mx-auto" } }}
+          style={{ fontSize: "xl", textAlign: "center", className: "mx-auto" }}
         />
       </Button>
     </div>

@@ -1,4 +1,4 @@
-type ThemeBuckets = "colors" | "spacing" | "fontSize" | "size";
+type ThemeBuckets = "colors" | "spacing" | "fontSize" | "size" | "height";
 
 type ThemeCtx = Record<ThemeBuckets, Record<string, string>>;
 
@@ -47,6 +47,9 @@ const themeCtx = {
     full: "var(--size-full)",
     half: "var(--size-half)",
     third: "var(--size-third)"
+  },
+  height: {
+    screen: "var(--size-screen)"
   }
 };
 

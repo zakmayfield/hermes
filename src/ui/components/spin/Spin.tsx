@@ -1,10 +1,11 @@
-import { useIcons, useStyleToClass } from "@/tw-styled/tools";
+import { useStyleToClass } from "@/tw-styled/tools";
 import { SpinProps } from "./Spin.types";
+import { useIcons } from "@/shared/hooks";
 
 export const Spin = (props: SpinProps) => {
   const { style } = props;
 
-  const styles = {
+  const classes = useStyleToClass({
     parentWrapper: {
       ...style?.parentWrapper
     },
@@ -14,9 +15,7 @@ export const Spin = (props: SpinProps) => {
       animation: "spin",
       ...style?.icon
     }
-  } satisfies SpinProps["style"];
-
-  const classes = useStyleToClass(styles);
+  });
 
   const icons = useIcons({
     names: ["spin"]

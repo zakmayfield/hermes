@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
-import { useTooltip } from "@/shared/hooks";
-import { useIcons } from "@/tw-styled/tools";
+import { useIcons, useTooltip } from "@/shared/hooks";
 import {
   useIsPermissionEnabled,
   useTogglePermission
@@ -39,12 +38,12 @@ export const PermissionCard = (props: FetchRolePermissionsOutput) => {
   const statusIcon = isEnabled ? (
     <Icon
       name="check"
-      style={{ icon: { fontSize: "xl", textColor: "success" } }}
+      style={{ fontSize: "xl", textColor: "success" }}
     />
   ) : (
     <Icon
       name="x"
-      style={{ icon: { fontSize: "xl", textColor: "warning" } }}
+      style={{ fontSize: "xl", textColor: "warning" }}
     />
   );
 

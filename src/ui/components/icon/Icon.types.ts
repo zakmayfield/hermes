@@ -1,4 +1,4 @@
-import { IconNames, IconVariants } from "@/tw-styled/tools";
+import { IconNames, IconVariants } from "@/shared/hooks";
 import { BaseStyles } from "@/tw-styled/types";
 
 export type IconProps = {

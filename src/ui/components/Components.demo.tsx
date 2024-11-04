@@ -7,6 +7,11 @@ export const ComponentsDemo = () => {
   return (
     <div className="space-y-lg">
       <div className="demo">
+        <h2 className="w-xs border-b mb-lg">Styles</h2>
+        <div className="border h-sm" />
+      </div>
+
+      <div className="demo">
         <h2 className="w-xs border-b mb-lg">Button</h2>
         <Button style={{ border: "sm" }}>Submit</Button>
       </div>

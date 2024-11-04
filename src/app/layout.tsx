@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ToastContainer } from "react-toastify";
-import { quicksand } from "@/utils/ui";
+import { quicksand } from "@/utils/fonts";
 import { CoreProvider } from "@/lib/providers";
 import { getAuthSession } from "@/lib/auth/auth.options";
 import { Footer, Header } from "@/shared/components";

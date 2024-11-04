@@ -1,8 +1,7 @@
 import React from "react";
 import { useStyleToClass } from "@/tw-styled/tools";
 import { FormFieldProps } from "./FormField.types";
-import { useIcons } from "@/tw-styled/tools";
-import { useTooltip } from "@/shared/hooks";
+import { useIcons, useTooltip } from "@/shared/hooks";
 import { FieldError } from "@/ui/components";
 
 export const FormField: React.FC<FormFieldProps<any>> = (props) => {
@@ -12,7 +11,7 @@ export const FormField: React.FC<FormFieldProps<any>> = (props) => {
     name,
     inputType,
     labelText,
-    hiddenElements: { error_hidden, error_icon_hidden, label_hidden } = {},
+    hiddenElements: { error_hidden, label_hidden } = {},
     register
   } = props;
 

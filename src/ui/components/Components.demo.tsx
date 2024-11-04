@@ -8,7 +8,7 @@ export const ComponentsDemo = () => {
     <div className="space-y-lg">
       <div className="demo">
         <h2 className="w-xs border-b mb-lg">Styles</h2>
-        <div className="border h-sm" />
+        <div className="border" />
       </div>
 
       <div className="demo">

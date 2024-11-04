@@ -35,7 +35,7 @@ export type Styles = {
   textColor: Keyof<typeof buckets.Color>;
   borderColor: Keyof<typeof buckets.Color>;
 
-  opacity: Keyof<(typeof buckets.opacityBucket)["opacity"]>;
+  opacity: Keyof<typeof buckets.OpacityBucket>;
 
   fontSize: Keyof<typeof buckets.fontSizeBucket>;
   fontWeight: Keyof<typeof buckets.fontWeightBucket>;

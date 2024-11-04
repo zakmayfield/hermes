@@ -1,17 +1,15 @@
-import { Keyof, MultiBucket } from "../types";
+import { Keyof, SingleBucket } from "../types";
 
-enum OpacityBucket {
-  light = "opacity-30",
-  medium = "opacity-60",
-  dark = "opacity-90",
-  opaque = "opacity-100"
+export enum OpacityBucket {
+  light = "light",
+  medium = "medium",
+  dark = "dark",
+  opaque = "opaque"
 }
 
 export const opacityBucket = {
-  opacity: {
-    light: OpacityBucket.light,
-    medium: OpacityBucket.medium,
-    dark: OpacityBucket.dark,
-    opaque: OpacityBucket.opaque
-  }
-} satisfies MultiBucket<Keyof<typeof OpacityBucket>>;
+  [OpacityBucket.light]: "opacity-30",
+  [OpacityBucket.medium]: "opacity-60",
+  [OpacityBucket.dark]: "opacity-90",
+  [OpacityBucket.opaque]: "opacity-100"
+} satisfies SingleBucket<Keyof<typeof OpacityBucket>, string>;

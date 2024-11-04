@@ -1,7 +1,8 @@
 import { SignOutButton } from "@/features/authentication/atoms";
 import { RoleSwitch } from "./RoleSwitch";
-import { Box, Navbar } from "@/tw-styled/ui";
+import { Navbar } from "@/tw-styled/ui";
 import Link from "next/link";
+import { Box } from "@/ui/components";
 
 const navbarItems = [
   {

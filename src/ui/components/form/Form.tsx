@@ -1,17 +1,7 @@
 "use client";
-import { useStyleToClass } from "@/tw-styled/style-to-class-resolver";
-import { BaseStyles, Children, HeadingElements } from "@/tw-styled/types";
 import React from "react";
-
-type FormProps = {
-  children?: Children;
-  submitHandler: (e?: React.BaseSyntheticEvent) => Promise<void>;
-  options?: { title?: string; heading?: HeadingElements };
-  style?: {
-    form?: BaseStyles;
-    title?: BaseStyles;
-  };
-};
+import { useStyleToClass } from "@/tw-styled/style-to-class-resolver";
+import { FormProps } from "./Form.types";
 
 export const Form = (props: FormProps) => {
   const { children, submitHandler, style, options } = props;

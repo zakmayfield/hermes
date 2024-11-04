@@ -1,5 +1,5 @@
 "use client";
-import { Box } from "@/tw-styled/ui";
+import { Box } from "@/ui/components";
 import { AdminList, AuthorizedAdminForm } from "../organisms";
 
 export const AuthorizedAdmins = () => {

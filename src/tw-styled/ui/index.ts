@@ -1,11 +1,5 @@
-export * from "./box/Box";
-export * from "./button/Button";
-export * from "./button2/Button";
-export * from "./card/Card";
 export * from "./fieldError/FieldError";
 export * from "./fieldError2/FieldError";
-export * from "./form/Form";
-export * from "./form2/Form";
 export * from "./formField/FormField";
 export * from "./heading/Heading";
 export * from "./icon/Icon";
@@ -16,4 +10,3 @@ export * from "./navbar/Navbar";
 export * from "./pulse/Pulse";
 export * from "./spin/Spin";
 export * from "./submitButton/SubmitButton";
-export * from "./text/Text";

@@ -1,5 +1,5 @@
 import { Children } from "@/tw-styled/types";
-import { Box } from "@/tw-styled/ui";
+import { Box } from "@/ui/components";
 
 export const SegmentNav = ({ children }: { children?: Children }) => {
   return (

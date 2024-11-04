@@ -1,6 +1,6 @@
 import { SwitchForm } from "@/features/authentication/molecules";
 import { Logo } from "@/shared/components";
-import { Box } from "@/tw-styled/ui";
+import { Box } from "@/ui/components";
 
 export default async function AuthenticationLayout({
   children

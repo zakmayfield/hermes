@@ -1,4 +1,5 @@
-import { Box, Heading } from "@/tw-styled/ui";
+import { Heading } from "@/tw-styled/ui";
+import { Box } from "@/ui/components";
 
 type PermissionListProps = { children: React.ReactNode; title: string };
 

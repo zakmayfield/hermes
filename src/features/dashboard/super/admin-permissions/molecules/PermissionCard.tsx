@@ -1,13 +1,14 @@
 "use client";
 import React from "react";
 import { useTooltip } from "@/shared/hooks";
-import { Icon, Heading, Button2, Box, Text } from "@/tw-styled/ui";
+import { Icon, Heading } from "@/tw-styled/ui";
 import { useIcons } from "@/tw-styled/tools";
 import {
   useIsPermissionEnabled,
   useTogglePermission
 } from "../templates/AdminPermissions.hooks";
 import { FetchRolePermissionsOutput } from "../templates/AdminPermissions.db";
+import { Box, Button, Text } from "@/ui/components";
 
 export const PermissionCard = (props: FetchRolePermissionsOutput) => {
   const {
@@ -66,20 +67,19 @@ export const PermissionCard = (props: FetchRolePermissionsOutput) => {
   );
 
   const togglePermissionButton = (
-    <Button2
+    <Button
       handleClick={togglePermission}
-      text={isEnabled ? "disable" : "enable"}
       style={{
-        button: {
-          textColor: isEnabled ? "warning" : "success",
-          border: "sm",
-          borderColor: isEnabled ? "warning" : "success",
-          padding: "none",
-          paddingY: "sm",
-          paddingX: "sm"
-        }
+        textColor: isEnabled ? "warning" : "success",
+        border: "sm",
+        borderColor: isEnabled ? "warning" : "success",
+        padding: "none",
+        paddingY: "sm",
+        paddingX: "sm"
       }}
-    />
+    >
+      {isEnabled ? "disable" : "enable"}
+    </Button>
   );
 
   return (

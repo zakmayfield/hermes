@@ -1,8 +1,8 @@
 "use client";
 import { formHooks } from "@/shared/hooks";
-import { Form2 } from "@/tw-styled/ui";
 import { FormProvider } from "react-hook-form";
 import { AuthInputs } from "../atoms";
+import { Button, Form } from "@/ui/components";
 
 export const SignUpForm = () => {
   const { methods, submitHandler } = formHooks.useSignUpForm();
@@ -10,16 +10,13 @@ export const SignUpForm = () => {
   return (
     <div>
       <FormProvider {...methods}>
-        <Form2
+        <Form
           submitHandler={submitHandler}
-          buttonProps={{
-            text: "Sign Up",
-            variant: "primary"
-          }}
-          style={{ formStyles: { backgroundColor: "primary" } }}
+          style={{ form: { backgroundColor: "primary", width: "md", padding: "lg" } }}
         >
           <AuthInputs />
-        </Form2>
+          <Button options={{ variant: "primary" }}>Sign Up</Button>
+        </Form>
       </FormProvider>
     </div>
   );

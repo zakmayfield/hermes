@@ -27,7 +27,7 @@ const demo: TwPluginRules = {
 
 const btn: TwPluginRules = {
   ".btn": {
-    padding: "0.5rem 1rem",
+    padding: "0.25rem 0.5rem",
     borderRadius: "0.375rem",
     "&:hover": {
       filter: "brightness(1.15)"

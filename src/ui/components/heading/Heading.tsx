@@ -1,17 +1,7 @@
-import { Children, HeadingElements, BaseStyles } from "@/tw-styled/types";
-import { useStyleToClass } from "@/tw-styled/tools";
+"use client";
 import React from "react";
-
-export type HeadingProps = {
-  children?: Children;
-  as?: HeadingElements;
-  text?: string;
-  style?: {
-    parentWrapper?: BaseStyles;
-    heading?: BaseStyles;
-    childrenWrapper?: BaseStyles;
-  };
-};
+import { useStyleToClass } from "@/tw-styled/tools";
+import { HeadingProps } from "./Heading.types";
 
 export const Heading = (props: HeadingProps) => {
   const { style, as = "h1", text = "", children } = props;

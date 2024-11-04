@@ -1,10 +1,10 @@
 import { SignInForm } from "@/features/authentication/molecules";
-import { Layout } from "@/tw-styled/ui";
+import { Layout } from "@/ui/components";
 
 export default function SignIn() {
   return (
     <Layout
-      options={{ titleText: "Sign In" }}
+      options={{ title: <h1>Sign In</h1> }}
       style={{ parentWrapper: { padding: "none", spaceY: "md" } }}
     >
       <SignInForm />

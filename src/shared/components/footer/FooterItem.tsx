@@ -1,6 +1,5 @@
 import { Children } from "@/tw-styled/types";
-import { Heading } from "@/tw-styled/ui";
-import { Box } from "@/ui/components";
+import { Box, Heading } from "@/ui/components";
 
 type FooterItemProps = {
   children?: Children;

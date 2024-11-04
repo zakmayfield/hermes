@@ -1,3 +1,4 @@
+"use client";
 import { useStyleToClass } from "@/tw-styled/style-to-class-resolver";
 import { ButtonProps } from "./Button.types";
 

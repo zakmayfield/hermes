@@ -1,7 +1,7 @@
 "use client";
+import React from "react";
 import { Children, TextElements, BaseStyles } from "@/tw-styled/types";
 import { useStyleToClass } from "@/tw-styled/tools";
-import React from "react";
 
 export type TextProps = {
   as?: TextElements;

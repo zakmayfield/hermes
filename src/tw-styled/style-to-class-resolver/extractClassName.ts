@@ -36,9 +36,7 @@ export const extractClassName = (styleKey: keyof Styles, styleValue: string) => 
       return buckets.colorBucket[styleKey][styleValue as Keyof<typeof buckets.Color>];
 
     case "opacity":
-      return buckets.opacityBucket[styleKey][
-        styleValue as Keyof<(typeof buckets.opacityBucket)["opacity"]>
-      ];
+      return buckets.opacityBucket[styleValue as Keyof<typeof buckets.OpacityBucket>];
 
     case "fontSize":
       return buckets.fontSizeBucket[styleValue as Keyof<typeof buckets.fontSizeBucket>];

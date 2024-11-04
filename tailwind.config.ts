@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 import plugin from "tailwindcss/plugin";
-import { components, utilities } from "./src/utils/tailwind";
+import { components, utilities } from "./src/utils/tailwind/index";
 import { themeCtx } from "./src/utils/theme/themeCtx";
 
 const config: Config = {

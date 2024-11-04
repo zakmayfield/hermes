@@ -26,7 +26,7 @@ export const AdminCard = ({ admin }: { admin: AuthorizedAdmin }) => {
       >
         <Icon
           name="trash"
-          style={{ icon: { fontSize: "lg" } }}
+          style={{ fontSize: "lg" }}
         />
       </Button>
 

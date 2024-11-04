@@ -1,28 +1,16 @@
 "use client";
 import React from "react";
-import { Children, TextElements, BaseStyles } from "@/tw-styled/types";
 import { useStyleToClass } from "@/tw-styled/tools";
-
-export type TextProps = {
-  as?: TextElements;
-  children?: Children;
-  described_by?: string;
-  is_hidden?: boolean;
-  style?: {
-    parentWrapper?: BaseStyles;
-  };
-};
+import { TextProps } from "./Text.types";
 
 export const Text = (props: TextProps) => {
   const { style, as = "p", children, described_by, is_hidden } = props;
 
-  const styles = {
+  const classes = useStyleToClass({
     parentWrapper: {
-      ...style?.parentWrapper
+      ...style
     }
-  } satisfies TextProps["style"];
-
-  const classes = useStyleToClass(styles);
+  });
 
   const Text = React.useMemo(() => {
     return React.createElement(

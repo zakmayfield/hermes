@@ -1,12 +1,5 @@
 import { useIcons, useStyleToClass } from "@/tw-styled/tools";
-import { BaseStyles } from "@/tw-styled/types";
-
-export type SpinProps = {
-  style?: {
-    parentWrapper?: BaseStyles;
-    icon?: BaseStyles;
-  };
-};
+import { SpinProps } from "./Spin.types";
 
 export const Spin = (props: SpinProps) => {
   const { style } = props;

@@ -4,10 +4,10 @@ import {
   useAddAuthorizedAdmin,
   useAuthorizedAdminsForm
 } from "../templates/AuthorizedAdmins.hooks";
-import { FieldError, Input, Label, SubmitButton } from "@/tw-styled/ui";
+import { FieldError, Input, Label } from "@/tw-styled/ui";
 import { useIcons } from "@/tw-styled/tools";
 import { useTooltip } from "@/shared/hooks";
-import { Box, Form } from "@/ui/components";
+import { Box, Form, SubmitButton } from "@/ui/components";
 
 export const AuthorizedAdminForm = () => {
   const { mutate } = useAddAuthorizedAdmin();

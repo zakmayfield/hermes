@@ -1,9 +1,8 @@
 "use client";
-import { Pulse } from "@/tw-styled/ui";
 import { PermissionList } from "../organisms";
 import { PermissionCard } from "../molecules";
 import { useFetchPermissions } from "./AdminPermissions.hooks";
-import { Box } from "@/ui/components";
+import { Box, Pulse } from "@/ui/components";
 
 export const AdminPermissions = () => {
   const { data, isLoading } = useFetchPermissions();

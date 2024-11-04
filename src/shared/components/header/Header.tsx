@@ -1,8 +1,7 @@
 import { SignOutButton } from "@/features/authentication/atoms";
 import { RoleSwitch } from "./RoleSwitch";
-import { Navbar } from "@/tw-styled/ui";
 import Link from "next/link";
-import { Box } from "@/ui/components";
+import { Box, Navbar } from "@/ui/components";
 
 const navbarItems = [
   {
@@ -41,7 +40,7 @@ export const Header = () => {
         <RoleSwitch />
 
         {/* NAVBAR */}
-        <Navbar style={{ nav: { display: "flex-row", gap: "md" } }}>
+        <Navbar style={{ display: "flex-row", gap: "md" }}>
           {navbarItems.map((item) => (
             <Link
               href={item.href}

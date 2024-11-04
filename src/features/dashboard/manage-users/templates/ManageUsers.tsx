@@ -1,11 +1,10 @@
 "use client";
 import React from "react";
-import { Icon, Pulse } from "@/tw-styled/ui";
 import { User } from "@prisma/client";
 import { useTooltip } from "@/shared/hooks";
 import { useIcons } from "@/tw-styled/tools";
 import { useFetchUnapprovedUsers, useToggleUserApproval } from "./ManageUsers.hooks";
-import { Button } from "@/ui/components";
+import { Button, Icon, Pulse } from "@/ui/components";
 
 export const ManageUsers = () => {
   const { data, isLoading } = useFetchUnapprovedUsers();

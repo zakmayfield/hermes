@@ -5,7 +5,7 @@ import { FieldError, Form, Icon, Input, Label, Stack, SubmitButton } from "..";
 
 export const ComponentsDemo = () => {
   const foobarTooltip = useTooltip({
-    anchorSelect: "#foobar",
+    anchorSelect: "#foobar_error",
     content: "foobar tooltip",
     place: "top-end",
     variant: "error"
@@ -33,7 +33,7 @@ export const ComponentsDemo = () => {
               />
               <Icon
                 name="error"
-                id="foobar"
+                id="foobar_error"
                 style={{
                   textColor: "warning-light",
                   position: "absolute",

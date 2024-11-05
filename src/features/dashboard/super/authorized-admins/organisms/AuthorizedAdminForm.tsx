@@ -43,6 +43,7 @@ export const AuthorizedAdminForm = () => {
           <Input
             options={{
               type: "text",
+              id: "email",
               name: "email",
               placeholder: "johnsmith@email.com",
               register: methods.register

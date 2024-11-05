@@ -2,14 +2,10 @@
 
 import { getAuthSession } from "@/lib/auth/auth.options";
 import { db } from "@/lib/prisma";
-import { Roles } from "@prisma/client";
+import { $Enums, Permission, Roles, UserPermissions } from "@prisma/client";
 
 export const fetchUser = async (email: string) => {
   return await db.user.findUnique({ where: { email } });
-};
-
-export const fetchRoles = async () => {
-  return await db.role.findMany();
 };
 
 export const fetchAuthUserRole = async () => {
@@ -31,11 +27,13 @@ export const fetchPermissionsByRole = async (role: Roles) => {
   return role_permissions;
 };
 
-export const fetchUserPermissions = async () => {
-  const user_id = await getAuthSession().then((s) => s?.user.id);
-  const user_permissions = await db.permission.findMany({
+export const fetchUserPermissionsById = async (user_id: string) => {
+  return await db.permission.findMany({
     where: { user_permissions: { some: { user_id } } },
     include: { user_permissions: { select: { granted_at: true, revoked_at: true } } }
   });
-  return user_permissions;
+};
+
+export const fetchAdmins = async () => {
+  return await db.user.findMany({ where: { role: { name: "ADMIN" } } });
 };

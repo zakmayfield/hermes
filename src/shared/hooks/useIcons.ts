@@ -14,10 +14,20 @@ import {
   PiXCircle,
   PiXCircleDuotone,
   PiTrash,
-  PiTrashDuotone
+  PiTrashDuotone,
+  PiCaretCircleDown,
+  PiCaretCircleDownDuotone
 } from "react-icons/pi";
 
-export type IconNames = "spin" | "cart" | "error" | "info" | "check" | "x" | "trash";
+export type IconNames =
+  | "spin"
+  | "cart"
+  | "error"
+  | "info"
+  | "check"
+  | "x"
+  | "trash"
+  | "downarrow";
 export type IconVariants = "base" | "duotone";
 
 type UseIconsProps = {
@@ -32,6 +42,7 @@ export const useIcons = (props: UseIconsProps) => {
     return {
       cart: PiShoppingCart,
       check: PiCheckCircle,
+      downarrow: PiCaretCircleDown,
       error: PiWarningCircle,
       info: PiInfo,
       spin: PiSpinnerGap,
@@ -44,6 +55,7 @@ export const useIcons = (props: UseIconsProps) => {
     return {
       cart: PiShoppingCartDuotone,
       check: PiCheckCircleDuotone,
+      downarrow: PiCaretCircleDownDuotone,
       error: PiWarningCircleDuotone,
       info: PiInfoDuotone,
       spin: PiSpinnerGapDuotone,

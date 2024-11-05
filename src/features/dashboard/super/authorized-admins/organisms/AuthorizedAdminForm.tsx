@@ -51,7 +51,7 @@ export const AuthorizedAdminForm = () => {
           />
 
           {methods.formState.errors.email?.message && (
-            <FieldError message={methods.formState.errors.email.message} />
+            <FieldError options={{ message: methods.formState.errors.email.message }} />
           )}
         </Box>
 

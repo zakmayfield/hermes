@@ -7,7 +7,9 @@ export const Input: React.FC<InputProps<any>> = (props) => {
   const { options, style } = props;
   const { register, ...rest } = options || {};
 
-  const classes = useClassNameResolver({ input: { ...style } });
+  const classes = useClassNameResolver({
+    input: { borderRadius: "sm", padding: "xs", ...style }
+  });
 
   function setClassName() {
     return { className: classes.get("input") };

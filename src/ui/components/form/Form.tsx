@@ -5,8 +5,15 @@ import { FormProps } from "./Form.types";
 
 export const Form = (props: FormProps) => {
   const { children, submitHandler, style, options } = props;
-  const styles = { form: { ...style?.form }, title: { ...style?.title } };
-  const classes = useClassNameResolver(styles);
+  const classes = useClassNameResolver({
+    form: {
+      display: "flex-col",
+      gap: "md",
+      borderRadius: "lg",
+      ...style?.form
+    },
+    title: { ...style?.title }
+  });
 
   return (
     <form

@@ -96,9 +96,11 @@ export const FormField: React.FC<FormFieldProps<any>> = (props) => {
   const Error = React.useMemo(() => {
     return (
       <FieldError
-        message={errorMessage}
-        described_by={name as string}
-        error_hidden={error_hidden}
+        options={{
+          message: errorMessage,
+          described_by: name as string,
+          error_hidden: error_hidden
+        }}
         style={{ className: fieldErrorClasses }}
       />
     );

@@ -1,4 +1,5 @@
-import { BaseStyles, HeadingElements } from "@/tw-styled/types";
+import { BaseStyles } from "@/tw-styled/types";
+import { HeadingElements } from "@/ui/types";
 
 export type HeadingProps = {
   children?: React.ReactNode;

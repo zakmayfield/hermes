@@ -1,4 +1,5 @@
-import { BaseStyles, WrapperElements } from "@/tw-styled/types";
+import { BaseStyles } from "@/tw-styled/types";
+import { WrapperElements } from "@/ui/types";
 
 export type LayoutProps = {
   children?: React.ReactNode;

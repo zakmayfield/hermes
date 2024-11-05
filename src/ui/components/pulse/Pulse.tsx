@@ -1,11 +1,11 @@
-import { useStyleToClass } from "@/tw-styled/tools";
+import { useClassNameResolver } from "@/ui";
 import { PulseProps } from "./Pulse.types";
 import { mergeClasses } from "@/utils/class-merge";
 
 export const Pulse = (props: PulseProps) => {
   const { style, size } = props;
 
-  const classes = useStyleToClass({
+  const classes = useClassNameResolver({
     parentWrapper: {
       animation: "pulse",
       borderRadius: "lg",

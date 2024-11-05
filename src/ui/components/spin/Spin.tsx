@@ -1,11 +1,11 @@
-import { useStyleToClass } from "@/tw-styled/tools";
+import { useClassNameResolver } from "@/ui";
 import { SpinProps } from "./Spin.types";
 import { useIcons } from "@/shared/hooks";
 
 export const Spin = (props: SpinProps) => {
   const { style } = props;
 
-  const classes = useStyleToClass({
+  const classes = useClassNameResolver({
     parentWrapper: {
       ...style?.parentWrapper
     },

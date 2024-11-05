@@ -1,6 +1,6 @@
 import React from "react";
 import { extractClassName } from "./extractClassName";
-import { Styles, StyleToClassProps } from "./types";
+import { Styles, StyleToClassProps } from "../types";
 
 /*
   STYLE PROP EXAMPLE:
@@ -13,12 +13,12 @@ import { Styles, StyleToClassProps } from "./types";
   Extract classNames with *.get("foo") syntax
 
   ** 
-    Note that `styleToClass` expects a prop type of `Record<string, Record<string, Partial<Styles>>>` 
+    Note that `classNameResolver` expects a prop type of `Record<string, Record<string, Partial<Styles>>>` 
     See: src/tw-styled/style-to-class-resolver/types.ts
   **
 */
 
-const styleToClass = (style: StyleToClassProps) => {
+const classNameResolver = (style: StyleToClassProps) => {
   const ResultMap = new Map();
 
   for (const propKey in style) {
@@ -56,10 +56,10 @@ const styleToClass = (style: StyleToClassProps) => {
   return ResultMap;
 };
 
-const useStyleToClass = (styles: StyleToClassProps) => {
+const useClassNameResolver = (styles: StyleToClassProps) => {
   return React.useMemo(() => {
-    return styleToClass(styles);
+    return classNameResolver(styles);
   }, [styles]);
 };
 
-export { styleToClass, useStyleToClass };
+export { classNameResolver, useClassNameResolver };

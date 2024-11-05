@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useStyleToClass } from "@/tw-styled/tools";
+import { useClassNameResolver } from "@/ui";
 import { HeadingProps } from "./Heading.types";
 
 export const Heading = (props: HeadingProps) => {
@@ -18,7 +18,7 @@ export const Heading = (props: HeadingProps) => {
     }
   } satisfies HeadingProps["style"];
 
-  const classes = useStyleToClass(styles);
+  const classes = useClassNameResolver(styles);
 
   const childrenWrapperClasses = classes.get("childrenWrapper");
   const headingClasses = classes.get("heading");

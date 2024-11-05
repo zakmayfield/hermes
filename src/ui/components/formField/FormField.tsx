@@ -1,5 +1,5 @@
 import React from "react";
-import { useStyleToClass } from "@/tw-styled/tools";
+import { useClassNameResolver } from "@/ui";
 import { FormFieldProps } from "./FormField.types";
 import { useIcons, useTooltip } from "@/shared/hooks";
 import { FieldError } from "@/ui/components";
@@ -15,7 +15,7 @@ export const FormField: React.FC<FormFieldProps<any>> = (props) => {
     register
   } = props;
 
-  const classes = useStyleToClass({
+  const classes = useClassNameResolver({
     parentWrapper: {
       display: "flex-col",
       gap: "sm",

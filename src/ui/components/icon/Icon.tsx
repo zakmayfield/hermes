@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useStyleToClass } from "@/tw-styled/tools";
+import { useClassNameResolver } from "@/ui";
 import { IconProps } from "./Icon.types";
 import { useIcons } from "@/shared/hooks";
 
@@ -9,7 +9,7 @@ export const Icon = (props: IconProps) => {
 
   const iconResult = useIcons({ names: [name], variant });
 
-  const classes = useStyleToClass({
+  const classes = useClassNameResolver({
     icon: { ...style }
   });
 

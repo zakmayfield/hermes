@@ -1,5 +1,5 @@
 import * as buckets from "./buckets";
-import { Keyof, Styles } from "./types";
+import { Keyof, Styles } from "../types";
 
 // TODO: *** Configure better enum structure, see `spacing` ***
 export const extractClassName = (styleKey: keyof Styles, styleValue: string) => {

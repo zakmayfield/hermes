@@ -1,4 +1,4 @@
-import { Keyof, SingleBucket } from "../types";
+import { Keyof, SingleBucket } from "../../types";
 
 enum FontSizeBucket {
   sm = `text-sm`,

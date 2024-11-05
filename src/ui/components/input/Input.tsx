@@ -1,13 +1,13 @@
 "use client";
 import React from "react";
-import { useStyleToClass } from "@/tw-styled/style-to-class-resolver";
+import { useClassNameResolver } from "@/ui";
 import { InputProps } from "./Input.types";
 
 export const Input: React.FC<InputProps<any>> = (props) => {
   const { options, style } = props;
   const { register, ...rest } = options || {};
 
-  const classes = useStyleToClass({ input: { ...style } });
+  const classes = useClassNameResolver({ input: { ...style } });
 
   function setClassName() {
     return { className: classes.get("input") };

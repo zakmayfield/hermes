@@ -1,10 +1,10 @@
-import { useStyleToClass } from "@/tw-styled/style-to-class-resolver";
+import { useClassNameResolver } from "@/ui";
 import { FieldErrorProps } from "./FieldError.types";
 
 export const FieldError = (props: FieldErrorProps) => {
   const { message, style } = props;
 
-  const classes = useStyleToClass({
+  const classes = useClassNameResolver({
     fieldError: {
       paddingY: "xs",
       textColor: "warning-light",

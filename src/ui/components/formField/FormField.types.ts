@@ -1,4 +1,4 @@
-import { BaseStyles } from "@/tw-styled/types";
+import { BaseStyles } from "@/ui/types";
 import { FieldValues, UseFormRegister } from "react-hook-form";
 
 export type FormFieldProps<T extends FieldValues> = {

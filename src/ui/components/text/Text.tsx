@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
-import { useStyleToClass } from "@/tw-styled/tools";
+import { useClassNameResolver } from "@/ui";
 import { TextProps } from "./Text.types";
 
 export const Text = (props: TextProps) => {
   const { style, as = "p", children, described_by, is_hidden } = props;
 
-  const classes = useStyleToClass({
+  const classes = useClassNameResolver({
     parentWrapper: {
       ...style
     }

@@ -1,9 +1,9 @@
-import { useStyleToClass } from "@/tw-styled/style-to-class-resolver";
+import { useClassNameResolver } from "@/ui";
 import { LabelProps } from "./Label.types";
 
 export const Label = (props: LabelProps) => {
   const { options, style } = props;
-  const classes = useStyleToClass({ label: { ...style } });
+  const classes = useClassNameResolver({ label: { ...style } });
 
   return (
     <label

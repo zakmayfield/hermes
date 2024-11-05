@@ -1,4 +1,4 @@
-import { Keyof, MultiBucket } from "../types";
+import { Keyof, MultiBucket } from "../../types";
 
 export enum Width {
   "3xs" = "3xs",

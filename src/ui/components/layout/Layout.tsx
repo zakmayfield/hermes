@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
-import { useStyleToClass } from "@/tw-styled/style-to-class-resolver";
+import { useClassNameResolver } from "@/ui";
 import { LayoutProps } from "./Layout.types";
 
 export const Layout = (props: LayoutProps) => {
   const { children, options, style } = props;
 
-  const classes = useStyleToClass({
+  const classes = useClassNameResolver({
     parentWrapper: { ...style?.parentWrapper },
     titleWrapper: { ...style?.titleWrapper },
     bodyWrapper: { ...style?.bodyWrapper }

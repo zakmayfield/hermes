@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
-import { useStyleToClass } from "@/tw-styled/style-to-class-resolver";
+import { useClassNameResolver } from "@/ui";
 import { FormProps } from "./Form.types";
 
 export const Form = (props: FormProps) => {
   const { children, submitHandler, style, options } = props;
   const styles = { form: { ...style?.form }, title: { ...style?.title } };
-  const classes = useStyleToClass(styles);
+  const classes = useClassNameResolver(styles);
 
   return (
     <form

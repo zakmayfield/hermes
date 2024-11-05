@@ -1,11 +1,11 @@
 "use client";
-import { useStyleToClass } from "@/tw-styled/style-to-class-resolver";
+import { useClassNameResolver } from "@/ui";
 import { ButtonProps } from "./Button.types";
 
 export const Button = (props: ButtonProps) => {
   const { children, handleClick, options, style } = props;
 
-  const classes = useStyleToClass({
+  const classes = useClassNameResolver({
     button: { buttonVariant: options?.variant, ...style }
   });
 

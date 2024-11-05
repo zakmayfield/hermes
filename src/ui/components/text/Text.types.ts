@@ -1,4 +1,4 @@
-import { BaseStyles } from "@/tw-styled/types";
+import { BaseStyles } from "@/ui/types";
 import { TextElements } from "@/ui/types";
 
 export type TextProps = {

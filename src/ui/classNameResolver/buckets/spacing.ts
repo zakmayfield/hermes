@@ -1,4 +1,4 @@
-import { Keyof, MultiBucket } from "../types";
+import { Keyof, MultiBucket } from "../../types";
 
 export enum Spacing {
   none = "none",

@@ -1,11 +1,11 @@
 "use client";
-import { useStyleToClass } from "@/tw-styled/style-to-class-resolver";
+import { useClassNameResolver } from "@/ui";
 import { NavbarProps } from "./Navbar.types";
 
 export const Navbar = (props: NavbarProps) => {
   const { children, style } = props;
 
-  const classes = useStyleToClass({
+  const classes = useClassNameResolver({
     nav: { padding: "sm", ...style }
   });
 

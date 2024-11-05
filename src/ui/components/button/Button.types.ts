@@ -1,4 +1,4 @@
-import { BaseStyles, Styles } from "@/tw-styled/types";
+import { BaseStyles, Styles } from "@/ui/types";
 
 export type ButtonProps = {
   children?: React.ReactNode;

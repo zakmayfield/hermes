@@ -1,4 +1,4 @@
-import { Keyof, SingleBucket } from "../types";
+import { Keyof, SingleBucket } from "../../types";
 
 export enum OpacityBucket {
   light = "light",

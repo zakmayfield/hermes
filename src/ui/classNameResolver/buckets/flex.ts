@@ -1,4 +1,4 @@
-import { Keyof, MultiBucket, SingleBucket } from "../types";
+import { Keyof, MultiBucket, SingleBucket } from "../../types";
 
 export enum FlexPosition {
   start = "start",

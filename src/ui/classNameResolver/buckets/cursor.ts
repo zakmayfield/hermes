@@ -1,4 +1,4 @@
-import { Keyof, SingleBucket } from "../types";
+import { Keyof, SingleBucket } from "../../types";
 
 enum CursorBucket {
   pointer = "cursor-pointer",

@@ -1,10 +1,10 @@
-import { useStyleToClass } from "@/tw-styled/style-to-class-resolver";
+import { useClassNameResolver } from "@/ui";
 import { SubmitButtonProps } from "./SubmitButton.types";
 
 export const SubmitButton = (props: SubmitButtonProps) => {
   const { options, style } = props;
 
-  const classes = useStyleToClass({
+  const classes = useClassNameResolver({
     button: { buttonVariant: options?.variant, ...style }
   });
 

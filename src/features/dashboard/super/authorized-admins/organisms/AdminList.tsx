@@ -1,13 +1,9 @@
 import { useFetchAuthorizedAdmins } from "../templates/AuthorizedAdmins.hooks";
-import { useIcons, useTooltip } from "@/shared/hooks";
 import { AdminCard } from "../molecules";
 import { Box, Pulse } from "@/ui";
 
 export const AdminList = () => {
   const { data, isLoading } = useFetchAuthorizedAdmins();
-  const icons = useIcons({ names: ["info"] });
-  const tooltip = useTooltip({ anchorSelect: "#delete_authorized_admin_info" });
-
   const loading = isLoading && <Pulse size="md" />;
 
   const adminCards =
@@ -33,16 +29,6 @@ export const AdminList = () => {
         gap: "md"
       }}
     >
-      {/* <div className="flex items-center gap-sm">
-        <h3>All Authorized Admins</h3>
-        <icons.info
-          id="delete_authorized_admin_info"
-          className="text-lg"
-          data-tooltip-html="Deleting an authorized admin will remove the users <br /> administrative privileges"
-        />
-        {tooltip}
-      </div> */}
-
       {loading}
       {adminCards}
       {emptyAdmins}

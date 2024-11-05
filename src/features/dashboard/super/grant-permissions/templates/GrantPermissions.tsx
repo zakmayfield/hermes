@@ -23,14 +23,14 @@ const PermissionItem = ({
 
   const { mutate: grant } = useMutation({
     mutationFn: grantPermission,
-    onSuccess(data) {
+    onSuccess() {
       queryClient.invalidateQueries({ queryKey: ["user_permissions"] });
     }
   });
 
   const { mutate: revoke } = useMutation({
     mutationFn: revokePermission,
-    onSuccess(data) {
+    onSuccess() {
       queryClient.invalidateQueries({ queryKey: ["user_permissions"] });
     }
   });

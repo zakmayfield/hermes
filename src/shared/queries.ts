@@ -2,7 +2,7 @@
 
 import { getAuthSession } from "@/lib/auth/auth.options";
 import { db } from "@/lib/prisma";
-import { $Enums, Permission, Roles, UserPermissions } from "@prisma/client";
+import { Roles } from "@prisma/client";
 
 export const fetchUser = async (email: string) => {
   return await db.user.findUnique({ where: { email } });

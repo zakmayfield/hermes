@@ -2,7 +2,7 @@
 import { formHooks } from "@/shared/hooks";
 import { FormProvider } from "react-hook-form";
 import { AuthInputs } from "../atoms";
-import { Button, Form } from "@/ui/components";
+import { Form, SubmitButton } from "@/ui/components";
 
 export const SignUpForm = () => {
   const { methods, submitHandler } = formHooks.useSignUpForm();
@@ -15,7 +15,10 @@ export const SignUpForm = () => {
           style={{ form: { backgroundColor: "primary", width: "md", padding: "lg" } }}
         >
           <AuthInputs />
-          <Button options={{ variant: "primary" }}>Sign Up</Button>
+          <SubmitButton
+            options={{ text: "Sign In", variant: "primary" }}
+            style={{ padding: "sm" }}
+          />
         </Form>
       </FormProvider>
     </div>

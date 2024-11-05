@@ -2,7 +2,6 @@ export * from "./box/Box";
 export * from "./button/Button";
 export * from "./fieldError/FieldError";
 export * from "./form/Form";
-export * from "./formField/FormField";
 export * from "./heading/Heading";
 export * from "./icon/Icon";
 export * from "./input/Input";

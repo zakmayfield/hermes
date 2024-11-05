@@ -14,12 +14,12 @@ const config: Config = {
     extend: {
       colors: {
         ...themeCtx.colors
+      },
+      margin: {
+        ...themeCtx.spacing
       }
     },
     padding: {
-      ...themeCtx.spacing
-    },
-    margin: {
       ...themeCtx.spacing
     },
     space: {

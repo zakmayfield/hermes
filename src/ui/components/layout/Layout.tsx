@@ -13,10 +13,22 @@ export const Layout = (props: LayoutProps) => {
   });
 
   const titleWrapper = options?.title && (
-    <div className={classes.get("titleWrapper")}>{options.title}</div>
+    <div
+      key="title"
+      className={classes.get("titleWrapper")}
+    >
+      {options.title}
+    </div>
   );
 
-  const bodyWrapper = <div className={classes.get("bodyWrapper")}>{children}</div>;
+  const bodyWrapper = (
+    <div
+      key="body"
+      className={classes.get("bodyWrapper")}
+    >
+      {children}
+    </div>
+  );
 
   return React.createElement(
     options?.as || "div",

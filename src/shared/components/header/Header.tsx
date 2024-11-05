@@ -27,10 +27,10 @@ export const Header = () => {
     >
       <Box
         style={{
-          display: "flex-row",
-          flexRowPosition: "center-right",
           // relative position so `RoleSwitch` has an achor
           position: "relative",
+          display: "flex-row",
+          flexRowPosition: "center-right",
           gap: "md",
           maxWidth: "3xl",
           place: "center"

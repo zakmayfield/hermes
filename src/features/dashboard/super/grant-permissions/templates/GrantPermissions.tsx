@@ -1,13 +1,13 @@
 "use client";
+import React from "react";
+import { Permission, User } from "@prisma/client";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   fetchAdmins,
   fetchPermissionsByRole,
   fetchUserPermissionsById
 } from "@/shared/queries";
 import { Box, Heading, Icon } from "@/ui";
-import { Permission, User } from "@prisma/client";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import React from "react";
 import { grantPermission, revokePermission } from "./GrantPermissions.db";
 
 const PermissionItem = ({

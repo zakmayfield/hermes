@@ -30,7 +30,7 @@ export const fetchPermissionsByRole = async (role: Roles) => {
 export const fetchUserPermissionsById = async (user_id: string) => {
   return await db.permission.findMany({
     where: { user_permissions: { some: { user_id } } },
-    include: { user_permissions: { select: { granted_at: true, revoked_at: true } } }
+    include: { user_permissions: { select: { granted_at: true } } }
   });
 };
 

@@ -135,8 +135,7 @@ model RolePermissions {
 model UserPermissions {
   user_id       String
   permission_id String
-  granted_at    DateTime  @default(now())
-  revoked_at    DateTime?
+  granted_at    DateTime @default(now())
 
   user       User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
   permission Permission @relation(fields: [permission_id], references: [permission_id])

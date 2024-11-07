@@ -4,8 +4,8 @@ import { useTooltip } from "@/shared/hooks";
 import {
   useIsPermissionEnabled,
   useTogglePermission
-} from "../templates/AdminPermissions.hooks";
-import { FetchRolePermissionsOutput } from "../templates/AdminPermissions.db";
+} from "../templates/ConfigurePermissions.hooks";
+import { FetchRolePermissionsOutput } from "../templates/ConfigurePermissions.db";
 import { Box, Heading, Icon, Text } from "@/ui/components";
 
 export const PermissionCard = (props: FetchRolePermissionsOutput) => {

@@ -1,16 +1,16 @@
-import { AdminPermissions } from "@/features/dashboard/super/admin-permissions/templates";
+import { ConfigurePermissions } from "@/features/dashboard/super/configure-permissions/templates";
 import { Layout } from "@/ui/components";
 
 export default async function ManagePermissions() {
   return (
     <Layout
-      options={{ title: <h2>Manage Permissions</h2> }}
+      options={{ title: <h2>Configure Permissions</h2> }}
       style={{
         parentWrapper: { spaceY: "md" },
         bodyWrapper: { display: "flex-col", gap: "lg", place: "center" }
       }}
     >
-      <AdminPermissions />
+      <ConfigurePermissions />
     </Layout>
   );
 }

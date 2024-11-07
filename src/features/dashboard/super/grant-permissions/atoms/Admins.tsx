@@ -1,9 +1,9 @@
 import { Box, Pulse } from "@/ui";
-import { AdminCard } from "../organisms";
+import { Admin } from "../organisms";
 import { useQuery } from "@tanstack/react-query";
 import { fetchAdmins, fetchPermissionsByRole } from "@/shared/queries";
 
-export const AdminCards = () => {
+export const Admins = () => {
   const { data: admins, isLoading } = useQuery({
     queryKey: ["admins"],
     queryFn: async () => await fetchAdmins(),
@@ -23,7 +23,7 @@ export const AdminCards = () => {
       ) : (
         admins &&
         admins.map((admin) => (
-          <AdminCard
+          <Admin
             key={admin.id}
             admin={admin}
             permissions={permissions}

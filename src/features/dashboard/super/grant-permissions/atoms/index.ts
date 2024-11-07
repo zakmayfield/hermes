@@ -1,2 +1,2 @@
-export * from "./AdminCards";
+export * from "./Admins";
 export * from "./GrantPermissionsHeading";

@@ -7,7 +7,7 @@ import {
   fetchRolePermissions,
   FetchRolePermissionsOutput,
   togglePermissionLevel
-} from "./AdminPermissions.db";
+} from "./ConfigurePermissions.db";
 
 export const useFetchPermissions = () => {
   const { data, isLoading } = useQuery({

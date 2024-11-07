@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { PermissionItem } from "../molecules";
 import { Icon, Pulse } from "@/ui";
 
-export const AdminCard = ({
+export const Admin = ({
   admin,
   permissions
 }: {

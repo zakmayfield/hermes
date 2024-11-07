@@ -1,16 +1,15 @@
 "use client";
-import { PermissionList } from "../organisms";
 import { PermissionCard } from "../molecules";
-import { useFetchPermissions } from "./AdminPermissions.hooks";
+import { useFetchPermissions } from "./ConfigurePermissions.hooks";
 import { Box, Pulse } from "@/ui/components";
 
-export const AdminPermissions = () => {
+export const ConfigurePermissions = () => {
   const { data, isLoading } = useFetchPermissions();
 
   const loading = isLoading && <Pulse size="lg" />;
 
   return (
-    <PermissionList title="Configure Admin Permissions">
+    <Box style={{ spaceY: "sm", minHeight: "3xs" }}>
       {loading}
 
       {data && !isLoading && (
@@ -30,6 +29,6 @@ export const AdminPermissions = () => {
             ))}
         </Box>
       )}
-    </PermissionList>
+    </Box>
   );
 };

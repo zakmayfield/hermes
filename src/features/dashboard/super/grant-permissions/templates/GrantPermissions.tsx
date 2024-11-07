@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Box } from "@/ui";
-import { AdminCards, GrantPermissionsHeading } from "../atoms";
+import { Admins, GrantPermissionsHeading } from "../atoms";
 
 export const GrantPermissions = () => {
   return (
@@ -14,7 +14,7 @@ export const GrantPermissions = () => {
       }}
     >
       <GrantPermissionsHeading />
-      <AdminCards />
+      <Admins />
     </Box>
   );
 };

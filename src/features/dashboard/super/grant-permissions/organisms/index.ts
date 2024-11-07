@@ -1,1 +1,1 @@
-export * from "./AdminCard";
+export * from "./Admin";

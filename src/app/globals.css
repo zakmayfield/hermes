@@ -36,15 +36,16 @@
     --space-2xl: 2.5rem;
 
     /* FONT SIZE */
-    --font-sm: 0.9rem;
+    --font-sm: 0.875rem;
     --font-md: 1rem;
-    --font-lg: 1.25rem;
-    --font-xl: 1.5rem;
-    --font-2xl: 1.75rem;
-    --font-3xl: 2rem;
-    --font-4xl: 2.25rem;
+    --font-lg: 1.125rem;
+    --font-xl: 1.25rem;
+    --font-2xl: 1.375rem;
+    --font-3xl: 1.75rem;
+    --font-4xl: 1.875rem;
 
     /* DIMENSION SIZES */
+    --size-4xs: 5rem;
     --size-3xs: 7rem;
     --size-2xs: 10rem;
     --size-xs: 16rem;
@@ -74,17 +75,23 @@
   }
 
   h2 {
+    @apply text-3xl;
+  }
+
+  h3 {
     @apply text-2xl;
   }
 
-  h3,
   h4 {
     @apply text-xl;
   }
 
-  h5,
-  h6 {
+  h5 {
     @apply text-lg;
+  }
+
+  h6 {
+    @apply text-md;
   }
 
   button {

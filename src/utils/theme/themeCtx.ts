@@ -35,6 +35,7 @@ const themeCtx = {
     "4xl": "var(--font-4xl)"
   },
   size: {
+    "4xs": "var(--size-4xs)",
     "3xs": "var(--size-3xs)",
     "2xs": "var(--size-2xs)",
     xs: "var(--size-xs)",

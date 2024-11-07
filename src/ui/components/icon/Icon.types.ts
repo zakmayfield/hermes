@@ -5,5 +5,6 @@ export type IconProps = {
   name: IconNames;
   id?: string;
   variant?: IconVariants;
+  tooltipHtml?: string;
   style?: BaseStyles;
 };

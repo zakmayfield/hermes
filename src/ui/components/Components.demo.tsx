@@ -1,15 +1,14 @@
 "use client";
 
-import { useTooltip } from "@/shared/hooks";
-import { FieldError, Form, Icon, Input, Label, Stack, SubmitButton } from "..";
+import React from "react";
 
 export const ComponentsDemo = () => {
-  const foobarTooltip = useTooltip({
-    anchorSelect: "#foobar_error",
-    content: "foobar tooltip",
-    place: "top-end",
-    variant: "error"
-  });
+  // const foobarTooltip = useTooltip({
+  //   anchorSelect: "#foobar_error",
+  //   content: "foobar tooltip",
+  //   place: "top-end",
+  //   variant: "error"
+  // });
 
   return (
     <div className="space-y-lg">
@@ -17,7 +16,7 @@ export const ComponentsDemo = () => {
         <h2 className="w-xs border-b mb-lg">Styles</h2>
       </div>
 
-      <div className="demo">
+      {/* <div className="demo">
         <h2 className="w-xs border-b mb-lg">Form Elements</h2>
 
         <Form
@@ -57,7 +56,7 @@ export const ComponentsDemo = () => {
             style={{ marginY: "sm", padding: "sm" }}
           />
         </Form>
-      </div>
+      </div> */}
 
       {/* <div className="demo">
         <h2 className="w-xs border-b mb-lg">Icon</h2>

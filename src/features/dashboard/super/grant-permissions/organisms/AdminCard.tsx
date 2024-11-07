@@ -3,7 +3,7 @@ import { fetchUserPermissionsById } from "@/shared/queries";
 import { Permission, User } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
 import { PermissionItem } from "../molecules";
-import { Icon } from "@/ui";
+import { Icon, Pulse } from "@/ui";
 
 export const AdminCard = ({
   admin,
@@ -14,7 +14,7 @@ export const AdminCard = ({
 }) => {
   const [isDropDownOpen, setDropDownOpen] = React.useState(false);
 
-  const { data: userPermissions } = useQuery({
+  const { data: userPermissions, isLoading } = useQuery({
     queryKey: ["user_permissions", admin.id],
     queryFn: async () => fetchUserPermissionsById(admin.id)
   });
@@ -37,16 +37,25 @@ export const AdminCard = ({
 
       {isDropDownOpen && (
         <div className="flex gap-sm flex-wrap px-sm">
-          {permissions?.map((p) => (
-            <PermissionItem
-              key={p.name}
-              user_id={admin.id}
-              permission={p}
-              checked={
-                !!userPermissions?.find((up) => up.permission_id === p.permission_id)
-              }
-            />
-          ))}
+          {isLoading
+            ? [0, 1, 2, 3, 4, 5, 6].map((p) => (
+                <Pulse
+                  style={{
+                    parentWrapper: { width: "xs", paddingY: "xs" },
+                    children: { padding: "sm" }
+                  }}
+                />
+              ))
+            : permissions?.map((p) => (
+                <PermissionItem
+                  key={p.name}
+                  user_id={admin.id}
+                  permission={p}
+                  checked={
+                    !!userPermissions?.find((up) => up.permission_id === p.permission_id)
+                  }
+                />
+              ))}
         </div>
       )}
     </div>

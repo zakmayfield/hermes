@@ -34,7 +34,8 @@ export const PermissionCard = (props: FetchRolePermissionsOutput) => {
         gap: "xs",
         flexSpacing: "space-between",
         backgroundColor: "secondary",
-        width: "sm"
+        width: "full",
+        className: "md:w-md"
       }}
     >
       {/* STATUS AND HEADING WRAPPER */}
@@ -50,7 +51,6 @@ export const PermissionCard = (props: FetchRolePermissionsOutput) => {
           style={{
             border: "sm",
             borderRadius: "xl",
-            padding: "xs",
             textColor: isEnabled ? "success" : "warning",
             borderColor: isEnabled ? "success" : "warning",
             minWidth: "4xs",

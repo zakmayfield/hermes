@@ -35,6 +35,9 @@ export const useToggleUserApproval = () => {
     onSuccess(data) {
       handleFilterCache(data);
       toast("Successfully approved user");
+    },
+    onError(error) {
+      toast(error.message, "error");
     }
   });
 

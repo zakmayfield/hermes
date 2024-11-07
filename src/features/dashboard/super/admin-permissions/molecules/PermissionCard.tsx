@@ -9,18 +9,13 @@ import { FetchRolePermissionsOutput } from "../templates/AdminPermissions.db";
 import { Box, Heading, Icon, Text } from "@/ui/components";
 
 export const PermissionCard = (props: FetchRolePermissionsOutput) => {
-  const {
-    role_id,
-    permission_id,
-    permission_level,
-    permission: { name, display_name, description }
-  } = props;
+  const { role_id, permission_id, permission_level, permission } = props;
 
   const togglePermission = useTogglePermission(
     role_id,
     permission_id,
     permission_level,
-    name
+    permission.name
   );
 
   const Tooltip = useTooltip({
@@ -36,7 +31,7 @@ export const PermissionCard = (props: FetchRolePermissionsOutput) => {
         padding: "sm",
         borderRadius: "lg",
         display: "flex-col",
-        gap: "sm",
+        gap: "xs",
         flexSpacing: "space-between",
         backgroundColor: "secondary",
         width: "sm"
@@ -80,7 +75,7 @@ export const PermissionCard = (props: FetchRolePermissionsOutput) => {
         >
           {/* HEADING */}
           <Heading
-            text={display_name as string}
+            text={permission.display_name as string}
             as="h5"
           />
 
@@ -89,7 +84,7 @@ export const PermissionCard = (props: FetchRolePermissionsOutput) => {
             <Icon
               name="info"
               id={`${permission_id}_description`}
-              tooltipHtml={description || ""}
+              tooltipHtml={permission.description || ""}
               style={{ fontSize: "lg" }}
             />
             {Tooltip}
@@ -104,7 +99,7 @@ export const PermissionCard = (props: FetchRolePermissionsOutput) => {
           className: "italic h-full"
         }}
       >
-        {description}
+        {permission.description}
       </Text>
     </Box>
   );

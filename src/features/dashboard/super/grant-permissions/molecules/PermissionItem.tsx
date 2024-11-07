@@ -33,7 +33,8 @@ export const PermissionItem = ({
         padding: "xs",
         paddingX: "sm",
         borderRadius: "md",
-        minWidth: "xs"
+        minWidth: "xs",
+        flexAlign: "center"
       }}
     >
       <input

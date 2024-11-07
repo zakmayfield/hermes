@@ -11,9 +11,8 @@ import {
 
 export const useFetchPermissions = () => {
   const { data, isLoading } = useQuery({
-    queryKey: [`permissions:${$Enums.Roles.ADMIN}`],
-    queryFn: async () => fetchRolePermissions({ role: $Enums.Roles.ADMIN }),
-    staleTime: Infinity
+    queryKey: [`role_permissions:${$Enums.Roles.ADMIN}`],
+    queryFn: async () => fetchRolePermissions({ role: $Enums.Roles.ADMIN })
   });
 
   return { data, isLoading };
@@ -29,7 +28,7 @@ export const useTogglePermission = (
   role_id: string,
   permission_id: string,
   permission_level: number,
-  name: $Enums.Permissions
+  name?: $Enums.Permissions
 ) => {
   const { toast } = useToast();
   const queryClient = useQueryClient();

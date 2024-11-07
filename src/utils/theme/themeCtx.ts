@@ -48,7 +48,8 @@ const themeCtx = {
     "3xl": "var(--size-3xl)",
     full: "var(--size-full)",
     half: "var(--size-half)",
-    third: "var(--size-third)"
+    "1/3": "var(--size-third)",
+    "2/3": "var(--size-two-thirds)"
   },
   height: {
     screen: "var(--size-screen)"

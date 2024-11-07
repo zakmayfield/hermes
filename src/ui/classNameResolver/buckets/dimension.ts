@@ -13,7 +13,8 @@ export enum Width {
   "3xl" = "3xl",
   full = "full",
   half = "half",
-  third = "third"
+  "1/3" = "1/3",
+  "2/3" = "2/3"
 }
 
 export enum Height {
@@ -43,7 +44,8 @@ export const widthtBucket = {
     [Width["3xl"]]: "w-3xl",
     [Width.full]: "w-full",
     [Width.half]: "w-half",
-    [Width.third]: "w-third"
+    [Width["1/3"]]: "w-1/3",
+    [Width["2/3"]]: "w-2/3"
   },
   minWidth: {
     [Width["4xs"]]: "min-w-4xs",
@@ -58,7 +60,8 @@ export const widthtBucket = {
     [Width["3xl"]]: "min-w-3xl",
     [Width.full]: "min-w-full",
     [Width.half]: "min-w-half",
-    [Width.third]: "min-w-third"
+    [Width["1/3"]]: "min-w-1/3",
+    [Width["2/3"]]: "min-w-2/3"
   },
   maxWidth: {
     [Width["4xs"]]: "max-w-4xs",
@@ -73,7 +76,8 @@ export const widthtBucket = {
     [Width["3xl"]]: "max-w-3xl",
     [Width.full]: "max-w-full",
     [Width.half]: "max-w-half",
-    [Width.third]: "max-w-third"
+    [Width["1/3"]]: "max-w-1/3",
+    [Width["2/3"]]: "max-w-2/3"
   }
 } satisfies MultiBucket<Keyof<typeof Width>>;
 

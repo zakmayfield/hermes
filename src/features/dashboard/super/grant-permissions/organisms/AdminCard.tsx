@@ -40,6 +40,7 @@ export const AdminCard = ({
           {isLoading
             ? [0, 1, 2, 3, 4, 5, 6].map((p) => (
                 <Pulse
+                  key={p}
                   style={{
                     parentWrapper: { width: "xs", paddingY: "xs" },
                     children: { padding: "sm" }

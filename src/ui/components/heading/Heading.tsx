@@ -4,7 +4,7 @@ import { useClassNameResolver } from "@/ui";
 import { HeadingProps } from "./Heading.types";
 
 export const Heading = (props: HeadingProps) => {
-  const { style, as = "h1", text = "", children } = props;
+  const { style, as = "h1", text = "" } = props;
 
   const classes = useClassNameResolver({
     heading: {

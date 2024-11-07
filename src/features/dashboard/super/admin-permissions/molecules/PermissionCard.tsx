@@ -6,7 +6,7 @@ import {
   useTogglePermission
 } from "../templates/AdminPermissions.hooks";
 import { FetchRolePermissionsOutput } from "../templates/AdminPermissions.db";
-import { Box, Button, Heading, Icon, Text } from "@/ui/components";
+import { Box, Heading, Icon, Text } from "@/ui/components";
 
 export const PermissionCard = (props: FetchRolePermissionsOutput) => {
   const {

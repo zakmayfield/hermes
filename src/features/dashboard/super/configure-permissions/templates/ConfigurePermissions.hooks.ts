@@ -39,7 +39,7 @@ export const useTogglePermission = (
       const role = await fetchRoleById({ role_id }).then((r) => r?.name);
 
       queryClient.setQueryData<FetchRolePermissionsOutput[]>(
-        [`permissions:${role}`],
+        [`role_permissions:${role}`],
         (oldData) => {
           return oldData
             ? oldData.map((rp) =>

@@ -28,6 +28,7 @@
     --ghost: 23 37 84 / 0.2; /* bg-cyan-500 */
 
     /* SPACING */
+    --space-none: 0rem;
     --space-xs: 0.25rem;
     --space-sm: 0.5rem;
     --space-md: 1rem;

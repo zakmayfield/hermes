@@ -18,6 +18,7 @@ const themeCtx = {
     ghost: "rgb(var(--ghost))"
   },
   spacing: {
+    none: "var(--space-none)",
     xs: "var(--space-xs)",
     sm: "var(--space-sm)",
     md: "var(--space-md)",

@@ -1,15 +1,13 @@
 "use client";
 import React from "react";
 import { User } from "@prisma/client";
-import { useIcons, useTooltip } from "@/shared/hooks";
+import { useTooltip } from "@/shared/hooks";
 import { useFetchUnapprovedUsers, useToggleUserApproval } from "./ManageUsers.hooks";
 import { Button, Icon, Pulse } from "@/ui/components";
 
 export const ManageUsers = () => {
   const { data, isLoading } = useFetchUnapprovedUsers();
   const { mutate } = useToggleUserApproval();
-
-  const icons = useIcons({ names: ["info"] });
 
   const tooltip = useTooltip({
     anchorSelect: "#user_approval_info"

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useIcons, useTooltip } from "@/shared/hooks";
+import { useTooltip } from "@/shared/hooks";
 import {
   useIsPermissionEnabled,
   useTogglePermission
@@ -26,11 +26,6 @@ export const PermissionCard = (props: FetchRolePermissionsOutput) => {
   const Tooltip = useTooltip({
     place: "top-end",
     anchorSelect: `#${permission_id}_description`
-  });
-
-  const icons = useIcons({
-    names: ["info"],
-    variant: "duotone"
   });
 
   const isEnabled = useIsPermissionEnabled(permission_level);

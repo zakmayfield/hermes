@@ -4,13 +4,12 @@ import {
   useAddAuthorizedAdmin,
   useAuthorizedAdminsForm
 } from "../templates/AuthorizedAdmins.hooks";
-import { useIcons, useTooltip } from "@/shared/hooks";
+import { useTooltip } from "@/shared/hooks";
 import { Box, FieldError, Form, Icon, Input, Label, SubmitButton } from "@/ui";
 
 export const AuthorizedAdminForm = () => {
   const { mutate } = useAddAuthorizedAdmin();
   const { methods, submitHandler } = useAuthorizedAdminsForm(mutate);
-  const icons = useIcons({ names: ["info"] });
   const tooltip = useTooltip({ anchorSelect: "#add_authorized_admins_info" });
 
   return (

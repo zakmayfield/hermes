@@ -30,90 +30,82 @@ export const PermissionCard = (props: FetchRolePermissionsOutput) => {
 
   const isEnabled = useIsPermissionEnabled(permission_level);
 
-  const statusIcon = isEnabled ? (
-    <Icon
-      name="check"
-      style={{ fontSize: "xl", textColor: "success" }}
-    />
-  ) : (
-    <Icon
-      name="x"
-      style={{ fontSize: "xl", textColor: "warning" }}
-    />
-  );
-
-  const displayName = (
-    <Heading
-      text={display_name as string}
-      as="h6"
-    />
-  );
-
-  const info = (
-    <Box>
-      <Icon
-        name="info"
-        id={`${permission_id}_description`}
-        tooltipHtml={description || ""}
-        style={{ fontSize: "lg" }}
-      />
-      {Tooltip}
-    </Box>
-  );
-
-  const togglePermissionButton = (
-    <Button
-      handleClick={togglePermission}
-      style={{
-        textColor: isEnabled ? "warning" : "success",
-        border: "sm",
-        borderColor: isEnabled ? "warning" : "success",
-        padding: "none",
-        paddingY: "sm",
-        paddingX: "sm"
-      }}
-    >
-      {isEnabled ? "disable" : "enable"}
-    </Button>
-  );
-
   return (
     <Box
       style={{
         padding: "sm",
         borderRadius: "lg",
         display: "flex-col",
-        gap: "md",
+        gap: "sm",
+        flexSpacing: "space-between",
         backgroundColor: "secondary",
-        flexSize: "grow",
-        className: "sm:flex-row sm:justify-between sm:items-start"
+        width: "sm"
       }}
     >
-      <Box style={{ width: "sm" }}>
+      {/* STATUS AND HEADING WRAPPER */}
+      <Box
+        style={{
+          display: "flex-row",
+          flexAlign: "center",
+          gap: "sm"
+        }}
+      >
+        {/* STATUS FLAG */}
+        <Box
+          style={{
+            border: "sm",
+            borderRadius: "xl",
+            padding: "xs",
+            textColor: isEnabled ? "success" : "warning",
+            borderColor: isEnabled ? "success" : "warning",
+            minWidth: "4xs",
+            width: "4xs",
+            textAlign: "center",
+            backgroundColor: "primary",
+            cursor: "pointer",
+            className: "sm:py-none"
+          }}
+        >
+          <span onClick={togglePermission}>{isEnabled ? "enabled" : "disabled"}</span>
+        </Box>
+
+        {/* HEADING AND INFO ICON WRAPPER */}
         <Box
           style={{
             display: "flex-row",
             flexAlign: "center",
-            gap: "sm"
+            flexSpacing: "space-between",
+            width: "full"
           }}
         >
-          {statusIcon}
-          {displayName}
-          {info}
-        </Box>
+          {/* HEADING */}
+          <Heading
+            text={display_name as string}
+            as="h5"
+          />
 
-        <Text
-          style={{
-            textColor: "accent",
-            paddingL: "lg",
-            className: "italic"
-          }}
-        >
-          {description}
-        </Text>
+          {/* INFO ICON */}
+          <Box>
+            <Icon
+              name="info"
+              id={`${permission_id}_description`}
+              tooltipHtml={description || ""}
+              style={{ fontSize: "lg" }}
+            />
+            {Tooltip}
+          </Box>
+        </Box>
       </Box>
 
-      {togglePermissionButton}
+      {/* DESCRIPTION */}
+      <Text
+        style={{
+          textColor: "accent",
+          className: "italic h-full"
+        }}
+      >
+        {description}
+      </Text>
     </Box>
   );
 };

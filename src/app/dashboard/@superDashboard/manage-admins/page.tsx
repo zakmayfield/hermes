@@ -9,10 +9,8 @@ export default function ManageAdminsPage() {
       style={{
         parentWrapper: { spaceY: "lg" },
         bodyWrapper: {
-          display: "flex-row",
-          gap: "lg",
-          // flexJustify: "center",
-          flexAlign: "start"
+          display: "flex-col",
+          gap: "lg"
         }
       }}
     >

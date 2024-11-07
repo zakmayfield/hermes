@@ -9,32 +9,27 @@ export const AdminPermissions = () => {
 
   const loading = isLoading && <Pulse size="lg" />;
 
-  const permissionItems =
-    data &&
-    data.map((p) => (
-      <PermissionCard
-        key={p.permission_id}
-        {...p}
-      />
-    ));
-
-  const permissions = data && !isLoading && (
-    <Box
-      style={{
-        display: "flex-col",
-        gap: "md",
-        flexWrap: "wrap",
-        className: "sm:flex-row"
-      }}
-    >
-      {permissionItems}
-    </Box>
-  );
-
   return (
     <PermissionList title="Configure Admin Permissions">
       {loading}
-      {permissions}
+
+      {data && !isLoading && (
+        <Box
+          style={{
+            display: "flex-row",
+            gap: "md",
+            flexWrap: "wrap"
+          }}
+        >
+          {data &&
+            data.map((p) => (
+              <PermissionCard
+                key={p.permission_id}
+                {...p}
+              />
+            ))}
+        </Box>
+      )}
     </PermissionList>
   );
 };

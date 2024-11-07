@@ -44,8 +44,8 @@ export const ManageUsers = () => {
   );
 
   const usersList = (
-    <div className="space-y-md lg:max-w-lg lg:w-full lg:mx-auto bg-tertiary p-md lg:p-lg rounded-md">
-      <div className="flex gap-[var(--space-sm)] items-center">
+    <div className="space-y-md bg-tertiary p-md rounded-md">
+      <div className="flex gap-sm items-center">
         <h3>Clients Awaiting Approval</h3>
         <Icon
           name="info"
@@ -56,7 +56,7 @@ export const ManageUsers = () => {
         {tooltip}
       </div>
 
-      <div className="flex flex-col gap-[var(--space-lg)] sm:gap-[var(--space-md)]">
+      <div className="flex flex-col gap-lg sm:gap-md">
         {data &&
           data.map((user) => (
             <UserCard
@@ -72,7 +72,7 @@ export const ManageUsers = () => {
   );
 
   return (
-    <div className="flex flex-col gap-[var(--space-md)]">
+    <div className="flex flex-col gap-md">
       <h2>Manage Users</h2>
       {usersList}
     </div>

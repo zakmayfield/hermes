@@ -7,8 +7,6 @@ export const GrantPermissions = () => {
   return (
     <Box
       style={{
-        maxWidth: "xl",
-        width: "full",
         backgroundColor: "secondary",
         padding: "md",
         borderRadius: "lg",

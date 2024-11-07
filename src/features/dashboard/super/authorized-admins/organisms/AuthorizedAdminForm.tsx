@@ -5,7 +5,7 @@ import {
   useAuthorizedAdminsForm
 } from "../templates/AuthorizedAdmins.hooks";
 import { useIcons, useTooltip } from "@/shared/hooks";
-import { Box, FieldError, Form, Input, Label, SubmitButton } from "@/ui/components";
+import { Box, FieldError, Form, Icon, Input, Label, SubmitButton } from "@/ui";
 
 export const AuthorizedAdminForm = () => {
   const { mutate } = useAddAuthorizedAdmin();
@@ -29,10 +29,11 @@ export const AuthorizedAdminForm = () => {
     >
       <div className="flex items-center gap-[var(--space-sm)]">
         <h3>Add Authorized Admin</h3>
-        <icons.info
+        <Icon
+          name="info"
           id="add_authorized_admins_info"
-          className="text-lg"
-          data-tooltip-html="Authorizing an email allows the user to create an <br /> adminstrator account"
+          tooltipHtml="Authorizing an email allows the user to create an <br /> adminstrator account"
+          style={{ fontSize: "lg" }}
         />
         {tooltip}
       </div>

@@ -1,6 +1,5 @@
-import { useClassNameResolver } from "@/ui";
+import { Icon, useClassNameResolver } from "@/ui";
 import { SpinProps } from "./Spin.types";
-import { useIcons } from "@/shared/hooks";
 
 export const Spin = (props: SpinProps) => {
   const { style } = props;
@@ -17,11 +16,13 @@ export const Spin = (props: SpinProps) => {
     }
   });
 
-  const icons = useIcons({
-    names: ["spin"]
-  });
+  const icon = (
+    <Icon
+      name="spin"
+      style={{ className: classes.get("icon") }}
+    />
+  );
 
-  const icon = <icons.spin className={classes.get("icon")} />;
   const Spin = <div className={classes.get("parentWrapper")}>{icon}</div>;
 
   return Spin;

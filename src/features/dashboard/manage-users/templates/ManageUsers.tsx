@@ -49,10 +49,11 @@ export const ManageUsers = () => {
     <div className="space-y-md lg:max-w-lg lg:w-full lg:mx-auto bg-tertiary p-md lg:p-lg rounded-md">
       <div className="flex gap-[var(--space-sm)] items-center">
         <h3>Clients Awaiting Approval</h3>
-        <icons.info
+        <Icon
+          name="info"
           id="user_approval_info"
-          className="text-lg"
-          data-tooltip-html="Approving a user will enable that user to view products and create orders <br /> after they have successfully onboarded"
+          tooltipHtml="Approving a user will enable that user to view products and create orders <br /> after they have successfully onboarded"
+          style={{ fontSize: "lg" }}
         />
         {tooltip}
       </div>

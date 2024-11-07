@@ -56,9 +56,11 @@ export const PermissionCard = (props: FetchRolePermissionsOutput) => {
 
   const info = (
     <Box>
-      <icons.info
+      <Icon
+        name="info"
         id={`${permission_id}_description`}
-        data-tooltip-html={description}
+        tooltipHtml={description || ""}
+        style={{ fontSize: "lg" }}
       />
       {Tooltip}
     </Box>

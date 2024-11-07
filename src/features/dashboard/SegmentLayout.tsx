@@ -1,4 +1,4 @@
-import { Box } from "@/tw-styled/ui";
+import { Box } from "@/ui/components";
 
 type SegmentLayoutProps = {
   children: React.ReactNode;

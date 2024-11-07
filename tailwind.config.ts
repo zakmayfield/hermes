@@ -1,7 +1,7 @@
-import plugin from "tailwindcss/plugin";
 import type { Config } from "tailwindcss";
-import { components, utilities } from "./src/tw-styled/tailwind";
-import { themeCtx } from "./src/tw-styled/theme/themeCtx";
+import plugin from "tailwindcss/plugin";
+import { components, utilities } from "./src/utils/tailwind/index";
+import { themeCtx } from "./src/utils/theme/themeCtx";
 
 const config: Config = {
   content: [
@@ -15,36 +15,42 @@ const config: Config = {
       colors: {
         ...themeCtx.colors
       },
-      padding: {
-        ...themeCtx.spacing
-      },
       margin: {
         ...themeCtx.spacing
-      },
-      space: {
-        ...themeCtx.spacing
-      },
-      fontSize: {
-        ...themeCtx.fontSize
-      },
-      maxWidth: {
-        ...themeCtx.size
-      },
-      minWidth: {
-        ...themeCtx.size
-      },
-      width: {
-        ...themeCtx.size
-      },
-      maxHeight: {
-        ...themeCtx.size
-      },
-      minHeight: {
-        ...themeCtx.size
-      },
-      height: {
-        ...themeCtx.size
       }
+    },
+    padding: {
+      ...themeCtx.spacing
+    },
+    space: {
+      ...themeCtx.spacing
+    },
+    gap: {
+      ...themeCtx.spacing
+    },
+    fontSize: {
+      ...themeCtx.fontSize
+    },
+    maxWidth: {
+      ...themeCtx.size
+    },
+    minWidth: {
+      ...themeCtx.size
+    },
+    width: {
+      ...themeCtx.size
+    },
+    maxHeight: {
+      ...themeCtx.size,
+      ...themeCtx.height
+    },
+    minHeight: {
+      ...themeCtx.size,
+      ...themeCtx.height
+    },
+    height: {
+      ...themeCtx.size,
+      ...themeCtx.height
     }
   },
   plugins: [

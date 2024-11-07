@@ -1,8 +1,8 @@
-import { Box, Button, Icon } from "@/tw-styled/ui";
 import { AuthorizedAdmin } from "@prisma/client";
 import { useDeleteAuthorizedAdmin } from "../templates/AuthorizedAdmins.hooks";
 import { useState } from "react";
 import { Modal } from "@/shared/components";
+import { Box, Button, Icon } from "@/ui/components";
 
 export const AdminCard = ({ admin }: { admin: AuthorizedAdmin }) => {
   /*
@@ -26,7 +26,7 @@ export const AdminCard = ({ admin }: { admin: AuthorizedAdmin }) => {
       >
         <Icon
           name="trash"
-          style={{ icon: { fontSize: "lg" } }}
+          style={{ fontSize: "lg" }}
         />
       </Button>
 

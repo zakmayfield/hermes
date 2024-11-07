@@ -1,5 +1,5 @@
 import { getAuthSession } from "@/lib/auth/auth.options";
-import { Layout } from "@/tw-styled/ui";
+import { Layout } from "@/ui/components";
 import { redirect } from "next/navigation";
 import React from "react";
 
@@ -26,7 +26,7 @@ export default async function DashboardLayout({
 
   return (
     <Layout
-      options={{ as: "main", titleText: "Dashboard" }}
+      options={{ as: "main", title: <h1>Dashboard</h1> }}
       style={{
         parentWrapper: {
           borderRadius: "lg",
@@ -36,7 +36,7 @@ export default async function DashboardLayout({
           spaceY: "lg",
           padding: "lg"
         },
-        childrenWrapper: {
+        bodyWrapper: {
           minHeight: "md",
           display: "flex-col"
         }

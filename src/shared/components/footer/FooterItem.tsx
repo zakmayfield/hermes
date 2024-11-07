@@ -1,8 +1,7 @@
-import { Children } from "@/tw-styled/types";
-import { Box, Heading } from "@/tw-styled/ui";
+import { Box, Heading } from "@/ui/components";
 
 type FooterItemProps = {
-  children?: Children;
+  children?: React.ReactNode;
   title?: string;
 };
 

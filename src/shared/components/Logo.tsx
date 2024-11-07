@@ -1,8 +1,8 @@
 "use client";
 import Image from "next/image";
 import logo from "@/assets/logo.png";
-import { BaseStyles } from "@/tw-styled/types";
-import { useStyleToClass } from "@/tw-styled/style-to-class-resolver";
+import { BaseStyles } from "@/ui/types";
+import { useClassNameResolver } from "@/ui";
 
 type LogoProps = {
   style?: {
@@ -19,7 +19,7 @@ export const Logo = (props: LogoProps) => {
     image: { ...style?.image }
   } satisfies LogoProps["style"];
 
-  const classes = useStyleToClass(styles);
+  const classes = useClassNameResolver(styles);
 
   return (
     <div className={classes.get("wrapper")}>

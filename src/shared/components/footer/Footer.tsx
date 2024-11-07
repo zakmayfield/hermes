@@ -1,5 +1,5 @@
 import { FooterItem } from "./FooterItem";
-import { Box } from "@/tw-styled/ui";
+import { Box } from "@/ui/components";
 
 export const Footer = () => {
   return (

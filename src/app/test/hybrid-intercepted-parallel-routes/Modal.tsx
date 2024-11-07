@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/tw-styled/ui";
+import { Button } from "@/ui/components";
 import { useRouter } from "next/navigation";
 import { ElementRef, useEffect, useRef } from "react";
 

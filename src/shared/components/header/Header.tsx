@@ -1,7 +1,7 @@
 import { SignOutButton } from "@/features/authentication/atoms";
 import { RoleSwitch } from "./RoleSwitch";
-import { Box, Navbar } from "@/tw-styled/ui";
 import Link from "next/link";
+import { Box, Navbar } from "@/ui/components";
 
 const navbarItems = [
   {
@@ -27,10 +27,10 @@ export const Header = () => {
     >
       <Box
         style={{
-          display: "flex-row",
-          flexRowPosition: "center-right",
           // relative position so `RoleSwitch` has an achor
           position: "relative",
+          display: "flex-row",
+          flexRowPosition: "center-right",
           gap: "md",
           maxWidth: "3xl",
           place: "center"
@@ -40,7 +40,7 @@ export const Header = () => {
         <RoleSwitch />
 
         {/* NAVBAR */}
-        <Navbar style={{ nav: { display: "flex-row", gap: "md" } }}>
+        <Navbar style={{ display: "flex-row", gap: "md" }}>
           {navbarItems.map((item) => (
             <Link
               href={item.href}

@@ -1,3 +1,10 @@
+import { UserAnalytics } from "@/features/dashboard/super/user-analytics/templates";
+import { Layout } from "@/ui";
+
 export default function Page() {
-  return <div>Super Dashboard Page</div>;
+  return (
+    <Layout options={{ title: <h2>Overview</h2> }}>
+      <UserAnalytics />
+    </Layout>
+  );
 }

@@ -1,4 +1,4 @@
-import { CartesianGrid, Label, Line, LineChart, Tooltip, XAxis, YAxis } from "recharts";
+import { CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis } from "recharts";
 
 export const useChart = (props: {
   data: any;

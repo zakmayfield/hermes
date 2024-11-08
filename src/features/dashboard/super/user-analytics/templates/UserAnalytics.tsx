@@ -6,7 +6,7 @@ import { useChart } from "@/shared/hooks";
 import { formatChartData, getPastWeekDates } from "./UserAnalytics.signup";
 
 export const UserAnalytics = () => {
-  const { data, isLoading } = useQuery({
+  const { data } = useQuery({
     queryKey: ["recent_user_analytics"],
     queryFn: async () => await recentUsers({ dateRange: 7 })
   });

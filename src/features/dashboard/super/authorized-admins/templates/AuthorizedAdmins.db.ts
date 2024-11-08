@@ -16,6 +16,15 @@ export const addAuthorizedAdmin = async ({
   email
 }: AddAuthorizedAdminInput): Promise<AddAuthorizedAdminOutput> => {
   try {
+    if (await db.user.findFirst({ where: { email } })) {
+      // Check if user exists with respective email, toggle ADMIN role if so
+      await db.user.update({
+        where: { email },
+        data: { role: { connect: { name: "ADMIN" } } }
+      });
+    }
+
+    // Add email to authorized admin list
     return await db.authorizedAdmin.create({
       data: { email: email.toLowerCase() }
     });

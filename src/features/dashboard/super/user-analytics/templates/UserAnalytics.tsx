@@ -2,20 +2,23 @@
 import { Box, Heading } from "@/ui";
 import { useQuery } from "@tanstack/react-query";
 import { recentUsers } from "./UserAnalytics.db";
+import { formatSignupData } from "./UserAnalytics.signup";
 import { useChart } from "@/shared/hooks";
-import { formatChartData, getPastWeekDates } from "./UserAnalytics.signup";
 
 export const UserAnalytics = () => {
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["recent_user_analytics"],
     queryFn: async () => await recentUsers({ dateRange: 7 })
   });
 
+  {
+    /*
+    Recharts may not be the best call for data vis because they do not support SSR out of the box 
+    so there are some inherent hydration issues: see console error
+  */
+  }
   const chart = useChart({
-    data: formatChartData({
-      dates: getPastWeekDates(),
-      users: data
-    }),
+    data: formatSignupData({ users: data }),
     xAxisDataKey: "date",
     lineDataKey: "signups",
     options: {
@@ -26,7 +29,7 @@ export const UserAnalytics = () => {
   });
 
   return (
-    <Box>
+    <Box style={{ spaceY: "md" }}>
       <Heading
         as="h3"
         text="Recent Sign Up Activity"

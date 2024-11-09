@@ -1,40 +1,49 @@
-import { User } from "@prisma/client";
+export const formatSignupData = ({ users }: { users?: { created_at: Date }[] }) => {
+  const formatDate = (date: Date) => {
+    return `${date.getMonth() + 1}/${date.getDate()}`;
+  };
 
-export function getPastWeekDates() {
-  const today = new Date();
-  const tomorrow = new Date(today.getTime() + 1 * 24 * 60 * 60 * 1000);
-  const oneWeekAgo = new Date(today.getTime() - 6 * 24 * 60 * 60 * 1000);
+  const getDateRange = () => {
+    const dayMS = 1 * 24 * 60 * 60 * 1000;
 
-  const dates = [];
+    const today = new Date();
+    const oneWeekAgo = new Date(today.getTime() - 6 * dayMS);
 
-  while (oneWeekAgo <= tomorrow) {
-    const dateString = oneWeekAgo.toISOString().split("T")[0];
-    dates.push({ date: dateString });
-    oneWeekAgo.setDate(oneWeekAgo.getDate() + 1);
-  }
+    const dates = [];
 
-  return dates.reverse();
-}
+    while (oneWeekAgo <= today) {
+      dates.push(formatDate(oneWeekAgo));
+      oneWeekAgo.setDate(oneWeekAgo.getDate() + 1);
+    }
 
-export const formatChartData = ({
-  dates,
-  users
-}: {
-  dates: { date: string }[];
-  users?: Omit<User, "password">[];
-}) => {
-  const resultMap = new Map();
-  dates.forEach((date) => resultMap.set(date.date, 0));
+    return dates.reverse();
+  };
 
-  users?.forEach((user) =>
-    resultMap.forEach(
-      (value, key, map) =>
-        user.created_at.toISOString().split("T")[0] === key && map.set(key, value + 1)
-    )
-  );
+  const getUserSignups = () => {
+    return users?.map((user) => formatDate(user.created_at));
+  };
 
-  const finalResult: { date: string; signups: number }[] = [];
-  resultMap.forEach((value, key) => finalResult.push({ date: key, signups: value }));
+  const getWeeklySignupAnalytics = () => {
+    const result = new Map();
 
-  return finalResult.reverse();
+    getDateRange().forEach((date) => result.set(date, 0));
+
+    getUserSignups()?.forEach((signupDate) =>
+      result.forEach((value, key, map) => signupDate === key && map.set(key, value + 1))
+    );
+
+    return result;
+  };
+
+  const getChartData = () => {
+    const chartData: { date: string; signups: number }[] = [];
+
+    getWeeklySignupAnalytics().forEach((value, key) =>
+      chartData.push({ date: key, signups: value })
+    );
+
+    return chartData.reverse();
+  };
+
+  return getChartData();
 };

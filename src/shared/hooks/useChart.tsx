@@ -16,7 +16,7 @@ export const useChart = (props: {
       width={options?.width || 800}
       height={options?.height || 200}
       data={data}
-      margin={{ bottom: 15, right: 55, top: 20 }}
+      margin={{ bottom: 10, right: 55, top: 20 }}
     >
       {options?.hasGrid && (
         <CartesianGrid
@@ -33,10 +33,7 @@ export const useChart = (props: {
         tickMargin={10}
       />
       <YAxis allowDecimals={false} />
-      <Tooltip
-        active={true}
-        labelStyle={{ display: "none" }}
-      />
+      <Tooltip labelStyle={{ display: "none" }} />
     </LineChart>
   );
 };

@@ -17,6 +17,10 @@ export const UserAnalytics = () => {
     so there are some inherent hydration issues: see console error
   */
   }
+
+  // TODO: *** Reintegrate dynamic loading and pass a loading prop to the `dynamic` call ***
+  // See: https://nextjs.org/docs/app/building-your-application/optimizing/lazy-loading#adding-a-custom-loading-component
+
   const chart = useChart({
     data: formatSignupData({ users: data }),
     xAxisDataKey: "date",

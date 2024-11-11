@@ -1,42 +1,43 @@
 import { PrismaClient } from "@prisma/client";
+import { hash } from "bcryptjs";
 
-const generateUsers = (numOfUsers: number) => {
+const generateUsers = async (numOfUsers: number, role: "ADMIN" | "USER") => {
   const users: { email: string; password: string }[] = [];
 
   for (let index = 0; index < numOfUsers; index++) {
-    const user = { email: `test@user${index}.com`, password: "123" };
+    const user = { email: `test@${role}${index}.com`, password: await hash("123", 10) };
     users.push(user);
   }
 
   return users;
 };
 
-console.log(generateUsers(5));
-
 const db = new PrismaClient();
 
-const testUsersSeed = async () => {
-  generateUsers(5).forEach(
+const seedTestUsers = async (role: "ADMIN" | "USER") => {
+  const users = await generateUsers(5, role);
+
+  users.forEach(
     async (user) =>
       await db.user.create({
         data: {
           email: user.email,
           password: user.password,
-          role: { connect: { name: "USER" } }
+          role: { connect: { name: role } }
         }
       })
   );
 };
 
-const deleteTestUsers = async () => {
+const deleteTestUsers = async (role: "ADMIN" | "USER") => {
   await db.user.deleteMany({
     where: {
-      email: { contains: "test@user" }
+      email: { contains: `test@${role}` }
     }
   });
 };
 
-testUsersSeed()
+seedTestUsers("ADMIN")
   .catch((e) => {
     console.error("🚫 Error while seeding: ", e.stack);
     process.exit(1);

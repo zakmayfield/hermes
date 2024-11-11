@@ -6,7 +6,7 @@ import { formatSignupData } from "./UserAnalytics.signup";
 import { useChart } from "@/shared/hooks";
 
 export const UserAnalytics = () => {
-  const { data, isLoading } = useQuery({
+  const { data } = useQuery({
     queryKey: ["recent_user_analytics"],
     queryFn: async () => await recentUsers({ dateRange: 7 })
   });

@@ -1,9 +1,15 @@
-import { useFetchAuthorizedAdmins } from "../templates/AuthorizedAdmins.hooks";
 import { AdminCard } from "../molecules";
 import { Box, Pulse } from "@/ui";
+import { useQuery } from "@tanstack/react-query";
+import { fetchAuthorizedAdmins } from "../templates/AuthorizedAdmins.db";
 
 export const AdminList = () => {
-  const { data, isLoading } = useFetchAuthorizedAdmins();
+  const { data, isLoading } = useQuery({
+    queryKey: ["authorized_admins"],
+    queryFn: async () => await fetchAuthorizedAdmins(),
+    staleTime: Infinity
+  });
+
   const loading = isLoading && <Pulse size="md" />;
 
   const adminCards =

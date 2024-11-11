@@ -1,10 +1,7 @@
 "use client";
 import React from "react";
 import { useTooltip } from "@/shared/hooks";
-import {
-  useIsPermissionEnabled,
-  useTogglePermission
-} from "../templates/ConfigurePermissions.hooks";
+import { useTogglePermission } from "../templates/ConfigurePermissions.hooks";
 import { FetchRolePermissionsOutput } from "../templates/ConfigurePermissions.db";
 import { Box, Heading, Icon, Text } from "@/ui/components";
 
@@ -23,7 +20,9 @@ export const PermissionCard = (props: FetchRolePermissionsOutput) => {
     anchorSelect: `#${permission_id}_description`
   });
 
-  const isEnabled = useIsPermissionEnabled(permission_level);
+  const isEnabled = React.useMemo(() => {
+    return !!permission_level;
+  }, [permission_level]);
 
   return (
     <Box

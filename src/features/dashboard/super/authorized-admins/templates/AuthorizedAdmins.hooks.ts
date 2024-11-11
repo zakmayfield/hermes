@@ -1,30 +1,14 @@
-import {
-  UseMutateFunction,
-  useMutation,
-  useQuery,
-  useQueryClient
-} from "@tanstack/react-query";
+import { UseMutateFunction, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   addAuthorizedAdmin,
   AddAuthorizedAdminInput,
   AddAuthorizedAdminOutput,
   deleteAuthorizedAdmin,
-  fetchAuthorizedAdmins,
   revokeAdminRole
 } from "./AuthorizedAdmins.db";
 import { validators } from "@/shared/validators";
 import { AuthorizedAdmin } from "@prisma/client";
 import { useFormContext, useToast } from "@/shared/hooks";
-
-export const useFetchAuthorizedAdmins = () => {
-  const { data, isLoading } = useQuery({
-    queryKey: ["authorized_admins"],
-    queryFn: async () => await fetchAuthorizedAdmins(),
-    staleTime: Infinity
-  });
-
-  return { data, isLoading };
-};
 
 export const useAddAuthorizedAdmin = () => {
   const { toast } = useToast();

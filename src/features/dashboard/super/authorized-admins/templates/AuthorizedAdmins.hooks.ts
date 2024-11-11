@@ -19,7 +19,8 @@ import { useFormContext, useToast } from "@/shared/hooks";
 export const useFetchAuthorizedAdmins = () => {
   const { data, isLoading } = useQuery({
     queryKey: ["authorized_admins"],
-    queryFn: async () => await fetchAuthorizedAdmins()
+    queryFn: async () => await fetchAuthorizedAdmins(),
+    staleTime: Infinity
   });
 
   return { data, isLoading };

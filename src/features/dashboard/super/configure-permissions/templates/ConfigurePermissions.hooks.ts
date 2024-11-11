@@ -12,7 +12,8 @@ import {
 export const useFetchPermissions = () => {
   const { data, isLoading } = useQuery({
     queryKey: [`role_permissions:${$Enums.Roles.ADMIN}`],
-    queryFn: async () => fetchRolePermissions({ role: $Enums.Roles.ADMIN })
+    queryFn: async () => fetchRolePermissions({ role: $Enums.Roles.ADMIN }),
+    staleTime: Infinity
   });
 
   return { data, isLoading };

@@ -16,7 +16,8 @@ export const Admin = ({
 
   const { data: userPermissions, isLoading } = useQuery({
     queryKey: ["user_permissions", admin.id],
-    queryFn: async () => fetchUserPermissionsById(admin.id)
+    queryFn: async () => fetchUserPermissionsById(admin.id),
+    staleTime: Infinity
   });
 
   return (

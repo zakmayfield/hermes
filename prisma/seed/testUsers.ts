@@ -23,7 +23,12 @@ const seedTestUsers = async (role: "ADMIN" | "USER") => {
         data: {
           email: user.email,
           password: user.password,
-          role: { connect: { name: role } }
+          role: { connect: { name: role } },
+          onboarding: {
+            create: {
+              status: role === "ADMIN" ? "COMPLETE" : "PENDING"
+            }
+          }
         }
       })
   );
@@ -37,7 +42,7 @@ const deleteTestUsers = async (role: "ADMIN" | "USER") => {
   });
 };
 
-seedTestUsers("ADMIN")
+seedTestUsers("USER")
   .catch((e) => {
     console.error("🚫 Error while seeding: ", e.stack);
     process.exit(1);

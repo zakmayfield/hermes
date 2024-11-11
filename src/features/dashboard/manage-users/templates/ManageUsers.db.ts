@@ -1,7 +1,8 @@
 "use server";
 
 import { db } from "@/lib/prisma";
-import { Onboarding, User } from "@prisma/client";
+import { hasPermission } from "@/shared/permissionValidators";
+import { $Enums, Onboarding, User } from "@prisma/client";
 
 export type FetchUnapprovedUsersOutput = Omit<User, "password">[];
 
@@ -17,10 +18,22 @@ export type ToggleUserApprovalOutput = Onboarding;
 export const toggleUserApproval = async (
   user_id: ToggleUserApprovalInput
 ): Promise<ToggleUserApprovalOutput> => {
-  return await db.onboarding.update({
-    where: { user_id },
-    data: {
-      is_approved: true
+  if (await hasPermission($Enums.Permissions.APPROVE_USER)) {
+    try {
+      return await db.onboarding.update({
+        where: { user_id },
+        data: {
+          is_approved: true
+        }
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new Error("Unable to approve user at this time");
+      }
+
+      throw new Error("Server error");
     }
-  });
+  } else {
+    throw new Error("Permission denied. Please request access from an administrator.");
+  }
 };

@@ -1,28 +1,11 @@
-import React from "react";
 import { $Enums } from "@prisma/client";
 import { useToast } from "@/shared/hooks";
-import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 import {
   fetchRoleById,
-  fetchRolePermissions,
   FetchRolePermissionsOutput,
   togglePermissionLevel
 } from "./ConfigurePermissions.db";
-
-export const useFetchPermissions = () => {
-  const { data, isLoading } = useQuery({
-    queryKey: [`role_permissions:${$Enums.Roles.ADMIN}`],
-    queryFn: async () => fetchRolePermissions({ role: $Enums.Roles.ADMIN })
-  });
-
-  return { data, isLoading };
-};
-
-export const useIsPermissionEnabled = (permission_level: number) => {
-  return React.useMemo(() => {
-    return !!permission_level;
-  }, [permission_level]);
-};
 
 export const useTogglePermission = (
   role_id: string,
@@ -39,7 +22,7 @@ export const useTogglePermission = (
       const role = await fetchRoleById({ role_id }).then((r) => r?.name);
 
       queryClient.setQueryData<FetchRolePermissionsOutput[]>(
-        [`permissions:${role}`],
+        [`role_permissions:${role}`],
         (oldData) => {
           return oldData
             ? oldData.map((rp) =>

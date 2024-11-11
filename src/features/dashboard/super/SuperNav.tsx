@@ -22,13 +22,13 @@ export const SuperNav = () => {
       </Link>
       <Link
         href="/dashboard/admins"
-        className={`${(segment === "manage-admins" && "underline") || ""}`}
+        className={`${(segment === "admins" && "underline") || ""}`}
       >
         Admins
       </Link>
       <Link
         href="/dashboard/permissions"
-        className={`${(segment === "manage-permissions" && "underline") || ""}`}
+        className={`${(segment === "permissions" && "underline") || ""}`}
       >
         Permissions
       </Link>

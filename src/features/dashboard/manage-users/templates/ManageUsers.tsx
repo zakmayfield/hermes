@@ -43,38 +43,34 @@ export const ManageUsers = () => {
     </div>
   );
 
-  const usersList = (
-    <div className="space-y-md bg-tertiary p-md rounded-md">
-      <div className="flex gap-sm items-center">
-        <h3>Clients Awaiting Approval</h3>
-        <Icon
-          name="info"
-          id="user_approval_info"
-          tooltipHtml="Approving a user will enable that user to view products and create orders <br /> after they have successfully onboarded"
-          style={{ fontSize: "lg" }}
-        />
-        {tooltip}
-      </div>
-
-      <div className="flex flex-col gap-lg sm:gap-md">
-        {data &&
-          data.map((user) => (
-            <UserCard
-              key={user.id}
-              user={user}
-            />
-          ))}
-
-        {emptyData}
-        {loading}
-      </div>
-    </div>
-  );
-
   return (
     <div className="flex flex-col gap-md">
       <h2>Manage Users</h2>
-      {usersList}
+      <div className="space-y-md bg-tertiary p-md rounded-md">
+        <div className="flex gap-sm items-center">
+          <h3>Clients Awaiting Approval</h3>
+          <Icon
+            name="info"
+            id="user_approval_info"
+            tooltipHtml="Approving a user will enable that user to view products and create orders <br /> after they have successfully onboarded"
+            style={{ fontSize: "lg" }}
+          />
+          {tooltip}
+        </div>
+
+        <div className="flex flex-col gap-lg sm:gap-md">
+          {data &&
+            data.map((user) => (
+              <UserCard
+                key={user.id}
+                user={user}
+              />
+            ))}
+
+          {emptyData}
+          {loading}
+        </div>
+      </div>
     </div>
   );
 };

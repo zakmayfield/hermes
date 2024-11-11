@@ -150,3 +150,23 @@ model AuthorizedAdmin {
 }
 
 // ----- END USER
+
+// ----- PRODUCTS
+
+model Product {
+  product_id String @id @default(cuid())
+  name       String
+  category   String
+  units      Unit[]
+}
+
+model Unit {
+  unit_id    String  @id @default(cuid())
+  size       String
+  price      Float
+  code       String
+  product_id String
+  product    Product @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
+}
+
+// ----- END PRODUCTS

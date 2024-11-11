@@ -87,3 +87,19 @@ const generateRandomBlend = (numberOfIngredients: number) => {
   return randomBlendSet;
 };
 // console.log(generateRandomBlend(5));
+
+const checkForDupes = () => {
+  const productSet = new Set();
+  const dupes: Product[] = [];
+
+  products.forEach((product) => {
+    if (productSet.has(product.name)) {
+      dupes.push(product);
+    }
+
+    productSet.add(product.name);
+  });
+
+  console.log(dupes.length);
+};
+checkForDupes();

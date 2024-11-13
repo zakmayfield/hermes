@@ -59,10 +59,12 @@ model User {
   created_at DateTime @default(now())
 
   verification_token VerificationToken[]
+  quickbooks_token   QuickbooksToken?
   onboarding         Onboarding?
   permissions        UserPermissions[]
   role               Role                @relation(fields: [role_id], references: [role_id])
   role_id            String
+  orders             Order[]
 
   image    String?
   accounts Account[]
@@ -151,6 +153,21 @@ model AuthorizedAdmin {
 
 // ----- END USER
 
+// ----- QUICKBOOKS
+
+model QuickbooksToken {
+  user_quickbooks_token_id      String   @id @default(cuid())
+  user_id                       String   @unique
+  created_at                    DateTime @default(now())
+  encrypted_access_token        String
+  encrypted_refresh_token       String
+  access_token_expiration_time  DateTime
+  refresh_token_expiration_time DateTime
+  user                          User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+// ----- END QUICKBOOKS
+
 // ----- PRODUCTS
 
 model Product {
@@ -161,12 +178,34 @@ model Product {
 }
 
 model Unit {
-  unit_id    String  @id @default(cuid())
-  size       String
-  price      Float
-  code       String
-  product_id String
-  product    Product @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
+  unit_id     String      @id @default(cuid())
+  size        String
+  price       Float
+  code        String
+  product_id  String
+  product     Product     @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
+  order_items OrderItem[]
 }
 
 // ----- END PRODUCTS
+
+// ----- ORDER
+
+model Order {
+  order_id    String      @id @default(cuid())
+  user_id     String
+  order_items OrderItem[]
+  created_at  DateTime    @default(now())
+  user        User        @relation(fields: [user_id], references: [id])
+}
+
+model OrderItem {
+  order_item_id String @id @default(cuid())
+  order_id      String
+  unit_id       String
+  quantity      Int
+  order         Order  @relation(fields: [order_id], references: [order_id], onDelete: Cascade)
+  unit          Unit   @relation(fields: [unit_id], references: [unit_id])
+}
+
+// ----- END ORDER

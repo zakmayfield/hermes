@@ -1,20 +1,21 @@
 import { Box, Pulse } from "@/ui";
 import { Admin } from "../organisms";
 import { useQuery } from "@tanstack/react-query";
-import { fetchAdmins, fetchPermissionsByRole } from "@/utils/database/queries";
 import { QueryKeys } from "@/utils/core/queryKeys";
 import { $Enums } from "@prisma/client";
+import { getUsersByRole } from "@/utils/database/user/queries";
+import { getPermissionsByRole } from "@/utils/database/permissions/queries";
 
 export const Admins = () => {
   const { data: admins, isLoading } = useQuery({
     queryKey: [QueryKeys.USERS, `role:${$Enums.Roles.ADMIN}`],
-    queryFn: async () => await fetchAdmins(),
+    queryFn: async () => await getUsersByRole($Enums.Roles.ADMIN),
     staleTime: Infinity
   });
 
   const { data: permissions } = useQuery({
     queryKey: [QueryKeys.PERMISSIONS, `role:${$Enums.Roles.ADMIN}`],
-    queryFn: async () => await fetchPermissionsByRole("ADMIN"),
+    queryFn: async () => await getPermissionsByRole($Enums.Roles.ADMIN),
     staleTime: Infinity
   });
 

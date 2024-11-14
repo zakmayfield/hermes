@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/lib/prisma";
-import { hasPermission } from "@/shared/permissionValidators";
+import { hasPermission } from "@/utils/validators/permissionValidator";
 import { $Enums, Onboarding, User } from "@prisma/client";
 
 export type FetchUnapprovedUsersOutput = Omit<User, "password">[];

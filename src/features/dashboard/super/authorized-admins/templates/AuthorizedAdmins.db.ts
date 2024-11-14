@@ -1,6 +1,6 @@
 "use server";
 import { db } from "@/lib/prisma";
-import { fetchUser } from "@/shared/queries";
+import { fetchUser } from "@/utils/database/queries";
 import { AuthorizedAdmin } from "@prisma/client";
 
 export type FetchAuthorizedAdminsOutput = AuthorizedAdmin;

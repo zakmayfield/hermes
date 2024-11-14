@@ -1,5 +1,5 @@
 "use client";
-import { validators } from "@/shared/validators";
+import { validators } from "@/utils/validators/formValidators";
 import { FieldError, Input, Label, Stack } from "@/ui/components";
 import { useFormContext } from "react-hook-form";
 

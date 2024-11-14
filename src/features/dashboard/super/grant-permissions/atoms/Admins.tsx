@@ -1,7 +1,7 @@
 import { Box, Pulse } from "@/ui";
 import { Admin } from "../organisms";
 import { useQuery } from "@tanstack/react-query";
-import { fetchAdmins, fetchPermissionsByRole } from "@/shared/queries";
+import { fetchAdmins, fetchPermissionsByRole } from "@/utils/database/queries";
 
 export const Admins = () => {
   const { data: admins, isLoading } = useQuery({

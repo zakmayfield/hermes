@@ -1,7 +1,7 @@
 "use client";
 
 import { customHooks } from "./useCustom";
-import { validators } from "../validators";
+import { validators } from "../../utils/validators/formValidators";
 import { signIn, SignInResponse } from "next-auth/react";
 import { useFormCtx } from "./useFormCtx";
 import { useToast } from "./useToast";

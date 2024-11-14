@@ -1,5 +1,5 @@
 import React from "react";
-import { fetchUserPermissionsById } from "@/shared/queries";
+import { fetchUserPermissionsById } from "@/utils/database/queries";
 import { Permission, User } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
 import { PermissionItem } from "../molecules";

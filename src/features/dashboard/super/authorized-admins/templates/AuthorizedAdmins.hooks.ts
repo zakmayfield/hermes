@@ -6,7 +6,7 @@ import {
   deleteAuthorizedAdmin,
   revokeAdminRole
 } from "./AuthorizedAdmins.db";
-import { validators } from "@/shared/validators";
+import { validators } from "@/utils/validators/formValidators";
 import { AuthorizedAdmin } from "@prisma/client";
 import { useFormContext, useToast } from "@/shared/hooks";
 

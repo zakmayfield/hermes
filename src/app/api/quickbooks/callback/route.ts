@@ -1,30 +1,9 @@
 import { fetchAccessToken } from "@/features/quickbooks/QuickBooks.server";
 import { NextRequest } from "next/server";
-import * as crypto from "crypto";
 import { db } from "@/lib/prisma";
+import { encryption_password, encryptToken } from "@/utils/security/encryption";
 
-const encryption_password = process.env.ENCRYPTION_SECRET!;
-const encryption_algorithm = process.env.ENCRYPTION_ALGO!;
-
-function encryptToken(token: string, password: string) {
-  const iv = crypto.randomBytes(16);
-  const cipher = crypto.createCipheriv(encryption_algorithm, Buffer.from(password), iv);
-  let encrypted = cipher.update(token, "utf8", "hex");
-  encrypted += cipher.final("hex");
-  return { iv: iv.toString("hex"), encrypted };
-}
-
-function decryptToken(encryptedToken: string, password: string, iv: string) {
-  const decipher = crypto.createDecipheriv(
-    encryption_algorithm,
-    Buffer.from(password),
-    Buffer.from(iv, "hex")
-  );
-  let decrypted = decipher.update(encryptedToken, "hex", "utf8");
-  decrypted += decipher.final("utf8");
-  return decrypted;
-}
-
+// TODO: *** Figure out why `session` is null when evoking `await getAuthSession()` here ***
 export async function handler(req: NextRequest) {
   try {
     const reqBody = await req.json();

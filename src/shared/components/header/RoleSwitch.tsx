@@ -2,8 +2,8 @@
 import { ChangeEvent } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { PiSpinnerGap } from "react-icons/pi";
-import { changeRole } from "@/shared/actions";
-import { fetchAuthUserRole } from "@/shared/queries";
+import { changeRole } from "@/utils/database/actions";
+import { fetchAuthUserRole } from "@/utils/database/queries";
 
 export const RoleSwitch = () => {
   const queryClient = useQueryClient();

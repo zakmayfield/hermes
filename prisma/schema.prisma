@@ -163,6 +163,7 @@ model QuickbooksToken {
   encrypted_refresh_token       String
   access_token_expiration_time  DateTime
   refresh_token_expiration_time DateTime
+  realm_id                      String
   user                          User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 

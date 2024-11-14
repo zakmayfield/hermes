@@ -34,6 +34,7 @@ async function handler(req: NextRequest) {
     const { user_quickbooks_token_id } = await db.quickbooksToken.create({
       data: {
         user_id: userId,
+        realm_id: realmId,
         encrypted_access_token: encryptedAccessTokenData.encrypted,
         encrypted_refresh_token: encryptedRefreshTokenData.encrypted,
         access_token_expiration_time: new Date(

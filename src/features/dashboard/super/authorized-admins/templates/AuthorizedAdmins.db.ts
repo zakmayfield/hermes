@@ -1,6 +1,6 @@
 "use server";
 import { db } from "@/lib/prisma";
-import { fetchUser } from "@/utils/database/queries";
+import { getUserByEmail } from "@/utils/database/user/queries";
 import { AuthorizedAdmin } from "@prisma/client";
 
 export type FetchAuthorizedAdminsOutput = AuthorizedAdmin;
@@ -50,7 +50,7 @@ export const deleteAuthorizedAdmin = async (
 };
 
 export const revokeAdminRole = async (email: string) => {
-  const user = await fetchUser(email);
+  const user = await getUserByEmail(email);
 
   if (user) {
     await db.user.update({

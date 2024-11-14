@@ -1,10 +1,10 @@
 import React from "react";
-import { fetchUserPermissionsById } from "@/utils/database/queries";
 import { Permission, User } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
 import { PermissionItem } from "../molecules";
 import { Icon, Pulse } from "@/ui";
 import { QueryKeys } from "@/utils/core/queryKeys";
+import { getUserPermissionsById } from "@/utils/database/user/queries";
 
 export const Admin = ({
   admin,
@@ -17,7 +17,7 @@ export const Admin = ({
 
   const { data: userPermissions, isLoading } = useQuery({
     queryKey: [QueryKeys.USER_PERMISSIONS, `user:${admin.id}`],
-    queryFn: async () => fetchUserPermissionsById(admin.id),
+    queryFn: async () => await getUserPermissionsById(admin.id),
     staleTime: Infinity
   });
 

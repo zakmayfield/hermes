@@ -2,16 +2,16 @@
 import { ChangeEvent } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { PiSpinnerGap } from "react-icons/pi";
-import { changeRole } from "@/utils/database/actions";
-import { fetchAuthUserRole } from "@/utils/database/queries";
 import { QueryKeys } from "@/utils/core/queryKeys";
+import { getAuthUserRole } from "@/utils/database/user/queries";
+import { changeRole } from "@/utils/database/roles/mutations";
 
 export const RoleSwitch = () => {
   const queryClient = useQueryClient();
 
   const { data, isLoading } = useQuery({
     queryKey: [QueryKeys.ACTIVE_USER_ROLE],
-    queryFn: async () => await fetchAuthUserRole()
+    queryFn: async () => await getAuthUserRole()
   });
 
   const invalidateRolesCache = () =>

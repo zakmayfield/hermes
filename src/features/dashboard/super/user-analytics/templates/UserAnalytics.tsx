@@ -1,15 +1,15 @@
 "use client";
 import { Box, Heading } from "@/ui";
 import { useQuery } from "@tanstack/react-query";
-import { recentUsers } from "./UserAnalytics.db";
-import { formatSignupData } from "./UserAnalytics.signup";
+import { formatSignupData } from "./UserAnalytics.utils";
 import { useChart } from "@/shared/hooks/ui";
 import { QueryKeys } from "@/utils/core/queryKeys";
+import { getRecentUsers } from "@/utils/database/user/queries";
 
 export const UserAnalytics = () => {
   const { data } = useQuery({
     queryKey: [QueryKeys.RECENT_USER_SIGNUPS],
-    queryFn: async () => await recentUsers({ dateRange: 7 })
+    queryFn: async () => await getRecentUsers(7)
   });
 
   {

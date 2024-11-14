@@ -3,6 +3,29 @@ import { getAuthSession } from "@/lib/auth/auth.options";
 import { db } from "@/lib/prisma";
 import { $Enums } from "@prisma/client";
 
+export const getRecentUsers = async (dateRange: 1 | 3 | 7) => {
+  const dayInMs = 1 * 24 * 60 * 60 * 1000;
+
+  const today = new Date();
+  const selectedRangeDate = new Date(today.getTime() - (dateRange || 7) * dayInMs);
+
+  try {
+    return await db.user.findMany({
+      where: {
+        role: { name: $Enums.Roles.USER },
+        AND: { created_at: { gt: selectedRangeDate } }
+      },
+      orderBy: { created_at: "desc" }
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error("Unable to fetch recent users");
+    }
+
+    throw new Error("Server error");
+  }
+};
+
 export const getUsersByRole = async (role: $Enums.Roles) => {
   return await db.user.findMany({ where: { role: { name: role } } });
 };

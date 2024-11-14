@@ -85,6 +85,8 @@ function Tab({ name }: { name: string }) {
   );
 }
 
+// TODO: *** Handle refresh token logic ***
+
 function ProductsDisplay() {
   const { activeTab } = React.useContext(TabContext);
 

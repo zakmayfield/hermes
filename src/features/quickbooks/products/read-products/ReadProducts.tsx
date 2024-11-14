@@ -36,6 +36,7 @@ export const ReadProducts = () => {
   return (
     <div>
       {data &&
+        data.length > 0 &&
         data.map((product: QbProduct) => <div key={product.Id}>{product.Name}</div>)}
     </div>
   );

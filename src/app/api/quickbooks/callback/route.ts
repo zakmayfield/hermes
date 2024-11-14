@@ -42,7 +42,9 @@ async function handler(req: NextRequest) {
         ),
         refresh_token_expiration_time: new Date(
           Date.now() + accessTokenResponse.x_refresh_token_expires_in * 1000
-        )
+        ),
+        access_token_iv: encryptedAccessTokenData.iv,
+        refresh_token_iv: encryptedRefreshTokenData.iv
       }
     });
 

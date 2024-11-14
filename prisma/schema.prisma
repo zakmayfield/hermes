@@ -164,6 +164,8 @@ model QuickbooksToken {
   access_token_expiration_time  DateTime
   refresh_token_expiration_time DateTime
   realm_id                      String
+  access_token_iv               String
+  refresh_token_iv              String
   user                          User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 

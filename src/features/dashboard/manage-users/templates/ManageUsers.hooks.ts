@@ -4,7 +4,7 @@ import {
   FetchUnapprovedUsersOutput,
   toggleUserApproval
 } from "./ManageUsers.db";
-import { useToast } from "@/shared/hooks";
+import { useToast } from "@/shared/hooks/ui";
 import { Onboarding } from "@prisma/client";
 
 export const useFetchUnapprovedUsers = () => {

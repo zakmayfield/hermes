@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useTooltip } from "@/shared/hooks";
+import { useTooltip } from "@/shared/hooks/ui";
 import { useTogglePermission } from "../templates/ConfigurePermissions.hooks";
 import { FetchRolePermissionsOutput } from "../templates/ConfigurePermissions.db";
 import { Box, Heading, Icon, Text } from "@/ui/components";

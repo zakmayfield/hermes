@@ -3,7 +3,7 @@ import { Box, Heading } from "@/ui";
 import { useQuery } from "@tanstack/react-query";
 import { recentUsers } from "./UserAnalytics.db";
 import { formatSignupData } from "./UserAnalytics.signup";
-import { useChart } from "@/shared/hooks";
+import { useChart } from "@/shared/hooks/ui";
 
 export const UserAnalytics = () => {
   const { data } = useQuery({

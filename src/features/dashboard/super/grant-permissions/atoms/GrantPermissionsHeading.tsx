@@ -1,4 +1,4 @@
-import { useTooltip } from "@/shared/hooks";
+import { useTooltip } from "@/shared/hooks/ui";
 import { Box, Heading, Icon } from "@/ui";
 
 export const GrantPermissionsHeading = () => {

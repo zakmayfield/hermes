@@ -6,9 +6,10 @@ import {
   deleteAuthorizedAdmin,
   revokeAdminRole
 } from "./AuthorizedAdmins.db";
-import { validators } from "@/utils/validators/formValidators";
+import { authorizedAdminsValidator } from "@/utils/validators/formValidators";
 import { AuthorizedAdmin } from "@prisma/client";
-import { useFormContext, useToast } from "@/shared/hooks";
+import { useToast } from "@/shared/hooks/ui";
+import { useFormContext } from "@/shared/hooks/forms";
 
 export const useAddAuthorizedAdmin = () => {
   const { toast } = useToast();
@@ -59,7 +60,7 @@ export const useAuthorizedAdminsForm = (
     unknown
   >
 ) => {
-  const formMeta = validators.authorizedAdminsValidator();
+  const formMeta = authorizedAdminsValidator();
 
   const { methods, submitHandler } = useFormContext<
     AddAuthorizedAdminInput,

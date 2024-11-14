@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { User } from "@prisma/client";
-import { useTooltip } from "@/shared/hooks";
+import { useTooltip } from "@/shared/hooks/ui";
 import { useFetchUnapprovedUsers, useToggleUserApproval } from "./ManageUsers.hooks";
 import { Button, Icon, Pulse } from "@/ui/components";
 

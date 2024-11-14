@@ -4,7 +4,7 @@ import {
   useAddAuthorizedAdmin,
   useAuthorizedAdminsForm
 } from "../templates/AuthorizedAdmins.hooks";
-import { useTooltip } from "@/shared/hooks";
+import { useTooltip } from "@/shared/hooks/ui";
 import { Box, FieldError, Form, Icon, Input, Label, SubmitButton } from "@/ui";
 
 export const AuthorizedAdminForm = () => {

@@ -2,7 +2,7 @@
 import React from "react";
 import { useClassNameResolver } from "@/ui";
 import { IconProps } from "./Icon.types";
-import { useIcons } from "@/shared/hooks";
+import { useIcons } from "@/shared/hooks/ui";
 import { IconBaseProps } from "react-icons";
 
 interface CustomIconProps extends IconBaseProps {

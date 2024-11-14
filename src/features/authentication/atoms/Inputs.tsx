@@ -1,10 +1,10 @@
 "use client";
-import { validators } from "@/utils/validators/formValidators";
+import { authValidator } from "@/utils/validators/formValidators";
 import { FieldError, Input, Label, Stack } from "@/ui/components";
 import { useFormContext } from "react-hook-form";
 
 export const AuthInputs = () => {
-  const { defaultValues } = validators.authValidator();
+  const { defaultValues } = authValidator();
 
   const {
     register,

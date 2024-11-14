@@ -1,5 +1,5 @@
 import { $Enums } from "@prisma/client";
-import { useToast } from "@/shared/hooks";
+import { useToast } from "@/shared/hooks/ui";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import {
   fetchRoleById,

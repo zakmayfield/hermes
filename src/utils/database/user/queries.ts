@@ -7,7 +7,7 @@ export const getRecentUsers = async (dateRange: 1 | 3 | 7) => {
   const dayInMs = 1 * 24 * 60 * 60 * 1000;
 
   const today = new Date();
-  const selectedRangeDate = new Date(today.getTime() - (dateRange || 7) * dayInMs);
+  const selectedRangeDate = new Date(today.getTime() - dateRange * dayInMs);
 
   try {
     return await db.user.findMany({

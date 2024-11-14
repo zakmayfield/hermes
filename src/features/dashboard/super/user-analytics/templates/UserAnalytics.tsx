@@ -4,10 +4,11 @@ import { useQuery } from "@tanstack/react-query";
 import { recentUsers } from "./UserAnalytics.db";
 import { formatSignupData } from "./UserAnalytics.signup";
 import { useChart } from "@/shared/hooks/ui";
+import { QueryKeys } from "@/utils/core/queryKeys";
 
 export const UserAnalytics = () => {
   const { data } = useQuery({
-    queryKey: ["recent_user_analytics"],
+    queryKey: [QueryKeys.RECENT_USER_SIGNUPS],
     queryFn: async () => await recentUsers({ dateRange: 7 })
   });
 

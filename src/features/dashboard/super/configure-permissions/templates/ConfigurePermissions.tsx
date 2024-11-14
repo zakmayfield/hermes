@@ -6,6 +6,8 @@ import { $Enums } from "@prisma/client";
 import { fetchRolePermissions } from "./ConfigurePermissions.db";
 
 export const ConfigurePermissions = () => {
+  // TODO: *** This query evokes a function which is identical to `fetchPermissionsByRole` - clean this up ***
+  // Note that using the same function is okay, but need to switch up the query key for caching purposes
   const { data, isLoading } = useQuery({
     queryKey: [`role_permissions:${$Enums.Roles.ADMIN}`],
     queryFn: async () => fetchRolePermissions({ role: $Enums.Roles.ADMIN }),

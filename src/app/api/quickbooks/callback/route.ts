@@ -4,6 +4,7 @@ import { db } from "@/lib/prisma";
 import { encryption_password, encryptToken } from "@/utils/security/encryption";
 
 // TODO: *** Figure out why `session` is null when evoking `await getAuthSession()` here ***
+// Note: i was exporting `handler` twice, maybe that was causing issues, test this
 async function handler(req: NextRequest) {
   try {
     const reqBody = await req.json();

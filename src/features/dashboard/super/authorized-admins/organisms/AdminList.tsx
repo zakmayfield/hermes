@@ -2,10 +2,11 @@ import { AdminCard } from "../molecules";
 import { Box, Pulse } from "@/ui";
 import { useQuery } from "@tanstack/react-query";
 import { fetchAuthorizedAdmins } from "../templates/AuthorizedAdmins.db";
+import { QueryKeys } from "@/utils/core/queryKeys";
 
 export const AdminList = () => {
   const { data, isLoading } = useQuery({
-    queryKey: ["authorized_admins"],
+    queryKey: [QueryKeys.AUTHORIZED_ADMINS_LIST],
     queryFn: async () => await fetchAuthorizedAdmins(),
     staleTime: Infinity
   });

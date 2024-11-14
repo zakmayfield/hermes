@@ -6,10 +6,11 @@ import {
 } from "./ManageUsers.db";
 import { useToast } from "@/shared/hooks/ui";
 import { Onboarding } from "@prisma/client";
+import { QueryKeys } from "@/utils/core/queryKeys";
 
 export const useFetchUnapprovedUsers = () => {
   const { data, isLoading } = useQuery({
-    queryKey: ["unapproved_users"],
+    queryKey: [QueryKeys.UNAPPROVED_USERS_LIST],
     queryFn: async () => await fetchUnapprovedUsers(),
     staleTime: Infinity
   });
@@ -24,7 +25,7 @@ export const useToggleUserApproval = () => {
 
   const handleFilterCache = (data: Onboarding) => {
     queryClient.setQueryData<FetchUnapprovedUsersOutput>(
-      ["unapproved_users"],
+      [QueryKeys.UNAPPROVED_USERS_LIST],
       (oldData) => {
         return oldData ? oldData.filter((user) => user.id !== data.user_id) : oldData;
       }

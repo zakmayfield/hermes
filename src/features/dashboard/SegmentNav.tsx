@@ -6,6 +6,7 @@ export const SegmentNav = ({ children }: { children?: React.ReactNode }) => {
       as="nav"
       style={{
         display: "flex-row",
+        flexAlign: "center",
         gap: "md",
         padding: "md",
         borderRadius: "lg",

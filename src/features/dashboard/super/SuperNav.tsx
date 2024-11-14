@@ -2,8 +2,9 @@
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { SegmentNav } from "..";
+import { QuickBooksLink } from "@/shared/components";
 
-export const SuperNav = () => {
+export const SuperNav = ({ authCodeRequestUrl }: { authCodeRequestUrl: string }) => {
   const segment = useSelectedLayoutSegment();
 
   return (
@@ -32,6 +33,8 @@ export const SuperNav = () => {
       >
         Permissions
       </Link>
+
+      <QuickBooksLink authCodeRequestUrl={authCodeRequestUrl} />
     </SegmentNav>
   );
 };

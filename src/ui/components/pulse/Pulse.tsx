@@ -1,6 +1,6 @@
 import { useClassNameResolver } from "@/ui";
 import { PulseProps } from "./Pulse.types";
-import { mergeClasses } from "@/utils/class-merge";
+import { mergeClasses } from "@/utils/core/mergeClasses";
 
 export const Pulse = (props: PulseProps) => {
   const { style, size } = props;

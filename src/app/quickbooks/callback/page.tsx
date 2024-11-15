@@ -1,5 +1,6 @@
 import { getAuthSession } from "@/lib/auth/auth.options";
 
+// TODO: *** Figure out why this page throws a 404 when redirected ***
 export default async function Page({
   searchParams
 }: {

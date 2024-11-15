@@ -13,6 +13,11 @@ import {
 } from "@/utils/security/user";
 import { createJWT } from "@/utils/security/jwt";
 import { $Enums } from "@prisma/client";
+import {
+  getQBTokenData,
+  refreshAccessToken,
+  shouldRefreshToken
+} from "@/utils/database/quickbooks/token";
 
 //^ adapter
 type NextAuthAdapter = NextAuthOptions["adapter"];
@@ -59,6 +64,21 @@ const providers: NextAuthProviders = [
       const { isPasswordMatch } = await comparePasswords(password, user.password);
       if (!isPasswordMatch) {
         throw new Error("Invalid password");
+      }
+
+      // Check QuickBooks token expiration and determine refresh
+      if (user.role_id === "cm184jlbr0001tfnb7am96fbi" || "cm184jlbr0000tfnb31tanbkr") {
+        const quickbooksTokenRecord = await getQBTokenData(user.id);
+
+        if (
+          await shouldRefreshToken(
+            user.last_login_date,
+            quickbooksTokenRecord?.access_token_expiration_time
+          )
+        ) {
+          // TODO: *** Clean up refresh token code ***
+          await refreshAccessToken(user.id);
+        }
       }
 
       await updateUserLoginDate(user.id);

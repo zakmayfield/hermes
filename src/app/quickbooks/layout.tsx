@@ -2,6 +2,7 @@ import { Nav } from "@/features/quickbooks/Nav";
 import React from "react";
 
 export default function Layout({
+  children,
   products,
   invoicing
 }: {
@@ -16,6 +17,7 @@ export default function Layout({
       <Nav />
 
       <div>
+        {children}
         {products}
         {invoicing}
       </div>

@@ -1,11 +1,6 @@
 import { Button, Form } from "@/ui";
 import { useForm } from "react-hook-form";
 
-type QbProductFields = {
-  Name: string;
-  Description: string;
-};
-
 export const CreateProduct = () => {
   // TODO: *** Implement form to create product ***
   const {} = useForm({});

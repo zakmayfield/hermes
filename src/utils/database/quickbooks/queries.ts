@@ -9,7 +9,7 @@ export const getAllProducts = async () => {
     const res = await fetch("http://localhost:3000/api/quickbooks/products", {
       headers: {
         "Content-type": "application/json",
-        "x-user-id": session?.user.id!
+        "x-user-id": session?.user.id || ""
       }
     });
 

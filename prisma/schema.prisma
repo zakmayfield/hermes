@@ -53,10 +53,11 @@ model VerificationToken {
 
 // ----- USER
 model User {
-  id         String   @id @default(cuid())
-  email      String   @unique
-  password   String
-  created_at DateTime @default(now())
+  id              String    @id @default(cuid())
+  email           String    @unique
+  password        String
+  created_at      DateTime  @default(now())
+  last_login_date DateTime?
 
   verification_token VerificationToken[]
   quickbooks_token   QuickbooksToken?

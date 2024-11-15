@@ -49,6 +49,8 @@ export const Header = () => {
               {item.text}
             </Link>
           ))}
+
+          <Link href="/quickbooks">QuickBooks</Link>
         </Navbar>
 
         {/* SIGN OUT BUTTON */}

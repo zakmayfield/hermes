@@ -53,10 +53,11 @@ model VerificationToken {
 
 // ----- USER
 model User {
-  id         String   @id @default(cuid())
-  email      String   @unique
-  password   String
-  created_at DateTime @default(now())
+  id              String    @id @default(cuid())
+  email           String    @unique
+  password        String
+  created_at      DateTime  @default(now())
+  last_login_date DateTime?
 
   verification_token VerificationToken[]
   quickbooks_token   QuickbooksToken?
@@ -102,6 +103,7 @@ enum Roles {
   USER
 }
 
+// TODO: *** Can Auth Quickbooks permission ***
 enum Permissions {
   APPROVE_USER
   CREATE_USER
@@ -164,6 +166,8 @@ model QuickbooksToken {
   access_token_expiration_time  DateTime
   refresh_token_expiration_time DateTime
   realm_id                      String
+  access_token_iv               String
+  refresh_token_iv              String
   user                          User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 

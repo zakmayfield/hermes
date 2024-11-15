@@ -8,6 +8,8 @@ export const redirect_uri = process.env.QB_REDIRECT_URI!;
 export const state = process.env.QB_STATE!;
 export const scope = process.env.QB_SCOPE!;
 
+// TODO: *** I dont think i have to send the client_id or secret with this request - test this ***
+
 export const accessTokenRequest = {
   baseUrl: access_token_base_url,
   payload: {

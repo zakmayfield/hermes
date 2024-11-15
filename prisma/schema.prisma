@@ -102,6 +102,7 @@ enum Roles {
   USER
 }
 
+// TODO: *** Can Auth Quickbooks permission ***
 enum Permissions {
   APPROVE_USER
   CREATE_USER

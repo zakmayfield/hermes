@@ -14,7 +14,8 @@ const adapter: NextAuthAdapter = PrismaAdapter(db);
 //^ strategy
 type NextAuthSessionStrategy = NextAuthOptions["session"];
 const session: NextAuthSessionStrategy = {
-  strategy: "jwt"
+  strategy: "jwt",
+  maxAge: 8 * 60 * 60
 };
 
 //^ pages

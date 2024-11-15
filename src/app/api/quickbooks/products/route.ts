@@ -1,13 +1,13 @@
 import { db } from "@/lib/prisma";
 import { decryptToken, encryption_password } from "@/utils/security/encryption";
-import { NextRequest } from "next/server";
+import { headers } from "next/headers";
 
 const baseUrl = process.env.QB_SANDBOX_BASE_URL!;
 
-async function handler(req: NextRequest) {
+async function handler() {
   try {
-    const headers = req.headers;
-    const user_id = headers.get("x-user-id");
+    const headersList = await headers();
+    const user_id = headersList.get("x-user-id");
 
     if (!user_id) {
       return new Response("Unauthenticated", { status: 401 });
@@ -24,9 +24,9 @@ async function handler(req: NextRequest) {
     }
 
     const decryptedToken = decryptToken(
-      qbToken?.encrypted_access_token!,
+      qbToken?.encrypted_access_token || "",
       encryption_password,
-      qbToken?.access_token_iv!
+      qbToken?.access_token_iv || ""
     );
 
     const url = `${baseUrl}/company/${qbToken.realm_id}/query?query=select * from Item`;

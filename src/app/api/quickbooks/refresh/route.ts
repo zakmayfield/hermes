@@ -6,8 +6,6 @@ import {
 } from "@/utils/security/encryption";
 import { NextRequest } from "next/server";
 
-const baseUrl = process.env.QB_ACCESS_TOKEN_URL!;
-
 async function handler(req: NextRequest) {
   try {
     const headersList = new Headers(req.headers);

@@ -101,6 +101,7 @@ function NavLinksList({ role }: { role: $Enums.Roles }) {
         const { icon, href, text } = item;
         return (
           <Link
+            key={item.href}
             href={href}
             className={`p-xs px-md flex items-center gap-md rounded-3xl text-xl ${
               pathname === item.href ? "bg-success/50" : "hover:bg-secondary/70"

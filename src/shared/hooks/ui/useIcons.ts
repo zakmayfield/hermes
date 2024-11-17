@@ -16,7 +16,15 @@ import {
   PiTrash,
   PiTrashDuotone,
   PiCaretCircleDown,
-  PiCaretCircleDownDuotone
+  PiCaretCircleDownDuotone,
+  PiHouse,
+  PiHouseDuotone,
+  PiCirclesThree,
+  PiCirclesThreeDuotone,
+  PiLock,
+  PiLockDuotone,
+  PiSignOut,
+  PiSignOutDuotone
 } from "react-icons/pi";
 
 export type IconNames =
@@ -27,7 +35,12 @@ export type IconNames =
   | "check"
   | "x"
   | "trash"
-  | "downarrow";
+  | "downarrow"
+  | "house"
+  | "threeCircles"
+  | "lock"
+  | "signout";
+
 export type IconVariants = "base" | "duotone";
 
 type UseIconsProps = {
@@ -44,8 +57,12 @@ export const useIcons = (props: UseIconsProps) => {
       check: PiCheckCircle,
       downarrow: PiCaretCircleDown,
       error: PiWarningCircle,
+      house: PiHouse,
       info: PiInfo,
+      lock: PiLock,
+      signout: PiSignOut,
       spin: PiSpinnerGap,
+      threeCircles: PiCirclesThree,
       trash: PiTrash,
       x: PiXCircle
     };
@@ -57,8 +74,12 @@ export const useIcons = (props: UseIconsProps) => {
       check: PiCheckCircleDuotone,
       downarrow: PiCaretCircleDownDuotone,
       error: PiWarningCircleDuotone,
+      house: PiHouseDuotone,
       info: PiInfoDuotone,
+      lock: PiLockDuotone,
+      signout: PiSignOutDuotone,
       spin: PiSpinnerGapDuotone,
+      threeCircles: PiCirclesThreeDuotone,
       trash: PiTrashDuotone,
       x: PiXCircleDuotone
     };

@@ -4,11 +4,11 @@ import { ToastContainer } from "react-toastify";
 import { quicksand } from "@/utils/core/fonts";
 import { CoreProvider } from "@/lib/providers";
 import { getAuthSession } from "@/lib/auth/auth.options";
-import { Footer, Header } from "@/shared/components";
 import "./globals.css";
 import "react-toastify/ReactToastify.min.css";
 import "react-tooltip/dist/react-tooltip.css";
 import { Box } from "@/ui/components";
+import { CoreNav } from "@/shared/components/navigation";
 
 export const metadata: Metadata = {
   title: "Hermes",
@@ -27,20 +27,18 @@ export default async function RootLayout({
     <html lang="en">
       <CoreProvider>
         <body className={`${quicksand.className} antialiased`}>
-          {/* NAV */}
-          {is_auth && <Header />}
-
           <Box
             style={{
               minHeight: "screen",
-              padding: "lg"
+              display: "flex-row"
             }}
           >
+            {is_auth && <CoreNav role={session?.user.role} />}
             {children}
           </Box>
 
           {/* FOOTER */}
-          {is_auth && <Footer />}
+          {/* {is_auth && <Footer />} */}
 
           <ToastContainer
             limit={4}

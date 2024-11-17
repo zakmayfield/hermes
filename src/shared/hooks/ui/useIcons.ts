@@ -24,8 +24,12 @@ import {
   PiLock,
   PiLockDuotone,
   PiSignOut,
-  PiSignOutDuotone
+  PiSignOutDuotone,
+  PiUsers,
+  PiUsersDuotone,
+  PiShield
 } from "react-icons/pi";
+import { SiQuickbooks } from "react-icons/si";
 
 export type IconNames =
   | "spin"
@@ -39,7 +43,10 @@ export type IconNames =
   | "house"
   | "threeCircles"
   | "lock"
-  | "signout";
+  | "signout"
+  | "users"
+  | "shield"
+  | "quickbooks";
 
 export type IconVariants = "base" | "duotone";
 
@@ -60,10 +67,13 @@ export const useIcons = (props: UseIconsProps) => {
       house: PiHouse,
       info: PiInfo,
       lock: PiLock,
+      quickbooks: SiQuickbooks,
+      shield: PiShield,
       signout: PiSignOut,
       spin: PiSpinnerGap,
       threeCircles: PiCirclesThree,
       trash: PiTrash,
+      users: PiUsers,
       x: PiXCircle
     };
   }, []);
@@ -77,10 +87,13 @@ export const useIcons = (props: UseIconsProps) => {
       house: PiHouseDuotone,
       info: PiInfoDuotone,
       lock: PiLockDuotone,
+      quickbooks: SiQuickbooks,
+      shield: PiShield,
       signout: PiSignOutDuotone,
       spin: PiSpinnerGapDuotone,
       threeCircles: PiCirclesThreeDuotone,
       trash: PiTrashDuotone,
+      users: PiUsersDuotone,
       x: PiXCircleDuotone
     };
   }, []);

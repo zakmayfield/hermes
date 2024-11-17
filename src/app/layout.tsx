@@ -4,7 +4,6 @@ import { ToastContainer } from "react-toastify";
 import { quicksand } from "@/utils/core/fonts";
 import { CoreProvider } from "@/lib/providers";
 import { getAuthSession } from "@/lib/auth/auth.options";
-import { Footer, Header } from "@/shared/components";
 import "./globals.css";
 import "react-toastify/ReactToastify.min.css";
 import "react-tooltip/dist/react-tooltip.css";

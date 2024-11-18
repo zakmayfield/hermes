@@ -7,6 +7,9 @@ import React from "react";
 type LayoutProps = {
   admin: React.ReactNode;
   user: React.ReactNode;
+  userDashboard: React.ReactNode;
+  adminDashboard: React.ReactNode;
+  superDashboard: React.ReactNode;
 };
 
 export default async function DashboardLayout({ admin, user }: LayoutProps) {

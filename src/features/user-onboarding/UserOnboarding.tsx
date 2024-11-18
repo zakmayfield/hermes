@@ -14,7 +14,6 @@ export const UserOnboarding = () => {
   return (
     <Box
       style={{
-        maxWidth: "md",
         borderRadius: "lg",
         backgroundColor: "primary",
         padding: "md",

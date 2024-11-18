@@ -15,7 +15,6 @@ export const UserApprovals = () => {
   return (
     <Box
       style={{
-        maxWidth: "md",
         borderRadius: "lg",
         backgroundColor: "primary",
         padding: "md",

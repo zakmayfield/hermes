@@ -23,7 +23,8 @@ type FetcherOptions<T> = {
  * @param options - Object containing configuration options.
  * @param options.dbFn - Function that returns a Promise resolving to the database query result.
  * @param options.fetchOptions - Object containing `fetch` options.
- * @param options.fetchOptions.url - URL to request data.
+ * @param options.fetchOptions.baseUrl - URL to request data.
+ * @param options.fetchOptions.queryParams - Optional array of query parameters.
  * @param options.fetchOptions.init - Optional initialization for `fetch` request.
  *
  * @returns Promise resolving to `ResponseData`
@@ -44,7 +45,8 @@ type FetcherOptions<T> = {
   const response = await fetcher({
     options: {
       fetchOptions: {
-        url: "https://pokeapi.co/api/v2/pokemon?limit=3",
+        url: "https://pokeapi.co/api/v2/pokemon",
+        queryParams: ["limit=3"]
         init: {
           method: "GET"
         }

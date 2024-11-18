@@ -82,10 +82,36 @@ function NavLinksList({ role }: { role: $Enums.Roles }) {
     }
   ];
 
+  const adminNavItems: NavItem[] = [
+    {
+      href: "/manage-users",
+      text: "Users",
+      icon: "users"
+    },
+    {
+      href: "/quickbooks",
+      text: "QuickBooks",
+      icon: "quickbooks"
+    }
+  ];
+
+  const superNavItems: NavItem[] = [
+    {
+      href: "/manage-admins",
+      text: "Admins",
+      icon: "lock"
+    },
+    {
+      href: "/manage-permissions",
+      text: "Permissions",
+      icon: "shield"
+    }
+  ];
+
   const navLists: Record<$Enums.Roles, NavItem[]> = {
     USER: [...coreNavItems],
-    ADMIN: [...coreNavItems],
-    SUPER: [...coreNavItems]
+    ADMIN: [...coreNavItems, ...adminNavItems],
+    SUPER: [...coreNavItems, ...adminNavItems, ...superNavItems]
   };
 
   return (

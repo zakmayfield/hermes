@@ -34,11 +34,20 @@ export default async function RootLayout({
             }}
           >
             {is_auth && <CoreNav role={session?.user.role} />}
-            {children}
-          </Box>
 
-          {/* FOOTER */}
-          {/* {is_auth && <Footer />} */}
+            <Box style={{ padding: "sm", width: "full" }}>
+              <Box
+                style={{
+                  backgroundColor: "secondary",
+                  height: "full",
+                  borderRadius: "lg",
+                  padding: "lg"
+                }}
+              >
+                {children}
+              </Box>
+            </Box>
+          </Box>
 
           <ToastContainer
             limit={4}

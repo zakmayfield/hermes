@@ -1,48 +1,27 @@
 import { getAuthSession } from "@/lib/auth/auth.options";
-import { Layout } from "@/ui/components";
+import { Layout } from "@/ui";
+import { $Enums } from "@prisma/client";
 import { redirect } from "next/navigation";
 import React from "react";
 
 type LayoutProps = {
-  superDashboard: React.ReactNode;
-  adminDashboard: React.ReactNode;
+  admin: React.ReactNode;
+  user: React.ReactNode;
   userDashboard: React.ReactNode;
+  adminDashboard: React.ReactNode;
+  superDashboard: React.ReactNode;
 };
 
-export default async function DashboardLayout({
-  superDashboard,
-  adminDashboard,
-  userDashboard
-}: LayoutProps) {
+export default async function DashboardLayout({ admin, user }: LayoutProps) {
   const session = await getAuthSession();
   if (!session) redirect("/sign-in");
 
   const user_role = session.user.role;
 
   const dashboard =
-    (user_role.includes("SUPER") && superDashboard) ||
-    (user_role.includes("ADMIN") && adminDashboard) ||
-    (user_role.includes("USER") && userDashboard);
+    user_role.includes($Enums.Roles.ADMIN) ||
+    (user_role.includes($Enums.Roles.SUPER) && admin) ||
+    (user_role.includes($Enums.Roles.USER) && user);
 
-  return (
-    <Layout
-      options={{ as: "main", title: <h1>Dashboard</h1> }}
-      style={{
-        parentWrapper: {
-          borderRadius: "lg",
-          maxWidth: "3xl",
-          place: "center",
-          backgroundColor: "secondary",
-          spaceY: "lg",
-          padding: "lg"
-        },
-        bodyWrapper: {
-          minHeight: "md",
-          display: "flex-col"
-        }
-      }}
-    >
-      {dashboard}
-    </Layout>
-  );
+  return <Layout options={{ as: "main", title: <h1>Dashboard</h1> }}>{dashboard}</Layout>;
 }

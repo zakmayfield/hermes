@@ -84,14 +84,14 @@ function NavLinksList({ role }: { role: $Enums.Roles }) {
 
   const adminNavItems: NavItem[] = [
     {
-      href: "/manage-users",
-      text: "Users",
-      icon: "users"
-    },
-    {
       href: "/quickbooks",
       text: "QuickBooks",
       icon: "quickbooks"
+    },
+    {
+      href: "/manage-users",
+      text: "Users",
+      icon: "users"
     }
   ];
 

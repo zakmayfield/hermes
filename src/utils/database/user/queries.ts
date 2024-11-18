@@ -3,6 +3,34 @@ import { getAuthSession } from "@/lib/auth/auth.options";
 import { db } from "@/lib/prisma";
 import { $Enums } from "@prisma/client";
 
+export const getUnapprovedUsers = async () => {
+  try {
+    return await db.user.findMany({
+      where: {
+        role: { name: $Enums.Roles.USER },
+        AND: { onboarding: { is_approved: false } }
+      },
+      orderBy: { created_at: "asc" }
+    });
+  } catch (error) {
+    throw new Error("Unable to get users");
+  }
+};
+
+export const getOnboardPendingUsers = async () => {
+  try {
+    return await db.user.findMany({
+      where: {
+        role: { name: $Enums.Roles.USER },
+        AND: { onboarding: { status: "PENDING" } }
+      },
+      orderBy: { created_at: "asc" }
+    });
+  } catch (error) {
+    throw new Error("Unable to get users");
+  }
+};
+
 export const getRecentUsers = async (dateRange: 1 | 3 | 7) => {
   const dayInMs = 1 * 24 * 60 * 60 * 1000;
 

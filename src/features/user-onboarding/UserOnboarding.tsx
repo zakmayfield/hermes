@@ -29,7 +29,10 @@ export const UserOnboarding = () => {
         <Box style={{ textColor: "warning", textAlign: "center" }}>{error.message}</Box>
       ) : data && data.length > 0 ? (
         data.map((user) => (
-          <Box style={{ border: "sm", padding: "sm" }}>
+          <Box
+            key={user.id}
+            style={{ border: "sm", padding: "sm" }}
+          >
             <Text>{user.email}</Text>
           </Box>
         ))

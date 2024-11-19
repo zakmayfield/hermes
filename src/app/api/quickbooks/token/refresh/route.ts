@@ -1,4 +1,6 @@
 import { db } from "@/lib/prisma";
+import { AccessTokenResponse } from "@/types/quickbooks";
+import { fetcher } from "@/utils/database/fetcher";
 import {
   decryptToken,
   encryption_password,
@@ -35,39 +37,35 @@ async function handler(req: NextRequest) {
       quickbooksTokenRecord?.refresh_token_iv
     );
 
-    console.log({ decryptedRefreshToken });
-
-    const res = await fetch(`https://oauth.platform.intuit.com/oauth2/v1/tokens/bearer`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: `Basic ${btoa(
-          `${process.env.QB_CLIENT_ID!}:${process.env.QB_CLIENT_SECRET!}`
-        )}`
-      },
-      body: `grant_type=refresh_token&refresh_token=${decryptedRefreshToken}`
+    const { error, response } = await fetcher<AccessTokenResponse>({
+      options: {
+        fetchOptions: {
+          baseUrl: "https://oauth.platform.intuit.com/oauth2/v1/tokens/bearer",
+          init: {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/x-www-form-urlencoded",
+              Authorization: `Basic ${btoa(
+                `${process.env.QB_CLIENT_ID!}:${process.env.QB_CLIENT_SECRET!}`
+              )}`
+            },
+            body: `grant_type=refresh_token&refresh_token=${decryptedRefreshToken}`
+          }
+        }
+      }
     });
 
-    if (!res.ok) {
-      const error = await res.json();
-      console.log({ error });
-      return new Response(null, {
-        status: 500,
-        statusText: "Foobar"
-      });
+    if (error) {
+      return new Response(null, { status: 500, statusText: error });
     }
 
-    const response = await res.json();
-    console.log({ response });
+    if (!response) {
+      return new Response(null, { status: 500, statusText: "Unexpected server error" });
+    }
 
     const { encrypted: EAT, iv: ATIV } = encryptToken(
       response.access_token,
-      encryption_password
-    );
-
-    const { encrypted: ERT, iv: RTIV } = encryptToken(
-      response.refresh_token,
       encryption_password
     );
 
@@ -76,16 +74,12 @@ async function handler(req: NextRequest) {
       data: {
         encrypted_access_token: EAT,
         access_token_iv: ATIV,
-        encrypted_refresh_token: ERT,
-        refresh_token_iv: RTIV,
-        access_token_expiration_time: new Date(Date.now() + response.expires_in * 1000),
-        refresh_token_expiration_time: new Date(
-          Date.now() + response.x_refresh_token_expires_in * 1000
-        )
+
+        access_token_expiration_time: new Date(Date.now() + response.expires_in * 1000)
       }
     });
 
-    return new Response(JSON.stringify({ success: true, user_id }));
+    return new Response(JSON.stringify({ success: true }));
   } catch (error) {
     if (error instanceof Error) {
       console.log({ error });

@@ -1,8 +1,8 @@
 "use server";
 
-import { getAuthSession } from "@/lib/auth/auth.options";
 import { db } from "@/lib/prisma";
 import { $Enums } from "@prisma/client";
+import { getAuthSession } from "../database/session/queries";
 
 const isPermissionEnabled = async (permission_name: $Enums.Permissions) => {
   const permission = await db.rolePermissions.findFirst({
@@ -13,10 +13,20 @@ const isPermissionEnabled = async (permission_name: $Enums.Permissions) => {
 };
 
 export const hasPermission = async (permission_name: $Enums.Permissions) => {
-  const session = await getAuthSession();
+  const sessionData = await getAuthSession();
+
+  if (!sessionData || !sessionData.response) {
+    return false;
+  }
+
+  const { id, role } = sessionData.response;
+
+  if (role === $Enums.Roles.SUPER) {
+    return true;
+  }
 
   const userPermissions = await db.userPermissions.findMany({
-    where: { user_id: session?.user?.id },
+    where: { user_id: id },
     select: { permission: { select: { name: true } } }
   });
 

@@ -1,6 +1,6 @@
 "use client";
 import { useTooltip } from "@/shared/hooks/ui";
-import { Box, Button, Heading, Icon, Pulse, Text } from "@/ui";
+import { Box, Button, Heading, Icon, Pulse } from "@/ui";
 import { QueryKeys } from "@/utils/core/queryKeys";
 import { getOnboardPendingUsers } from "@/utils/database/user/queries";
 import { User } from "@prisma/client";

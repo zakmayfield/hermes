@@ -8,7 +8,7 @@ import {
   getUnapprovedUsers,
   UserWithOnboardingStatus
 } from "@/utils/database/user/queries";
-import { $Enums, Onboarding, User } from "@prisma/client";
+import { $Enums, Onboarding } from "@prisma/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const UserApprovals = () => {

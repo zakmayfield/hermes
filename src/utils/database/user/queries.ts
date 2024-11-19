@@ -1,14 +1,27 @@
 "use server";
 import { getAuthSession } from "@/lib/auth/auth.options";
 import { db } from "@/lib/prisma";
-import { $Enums } from "@prisma/client";
+import { $Enums, User } from "@prisma/client";
 
-export const getUnapprovedUsers = async () => {
+export type UserWithOnboardingStatus = Omit<User, "password"> & {
+  onboarding: {
+    status: $Enums.OnboardingStatus;
+  } | null;
+};
+
+export const getUnapprovedUsers = async (): Promise<UserWithOnboardingStatus[]> => {
   try {
     return await db.user.findMany({
       where: {
         role: { name: $Enums.Roles.USER },
         AND: { onboarding: { is_approved: false } }
+      },
+      include: {
+        onboarding: {
+          select: {
+            status: true
+          }
+        }
       },
       orderBy: { created_at: "asc" }
     });

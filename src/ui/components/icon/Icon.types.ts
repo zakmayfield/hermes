@@ -1,4 +1,4 @@
-import { IconNames, IconVariants } from "@/shared/hooks";
+import { IconNames, IconVariants } from "@/shared/hooks/ui";
 import { BaseStyles } from "@/ui/types";
 
 export type IconProps = {

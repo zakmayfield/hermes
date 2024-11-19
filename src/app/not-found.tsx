@@ -1,45 +1,54 @@
 import Link from "next/link";
 import notfound from "@/assets/notfound.png";
 import Image from "next/image";
+import { Box, Heading, Text } from "@/ui";
 
 export default function NotFound() {
   return (
-    <div className="flex flex-col items-center 2xl:flex-row 2xl:justify-center 2xl:items-end">
-      <NotFoundImage />
-      <NotFoundInfo />
-    </div>
-  );
-}
+    <Box style={{ display: "flex-col", flexAlign: "center", gap: "lg" }}>
+      <Box
+        style={{
+          maxWidth: "sm",
+          backgroundColor: "primary",
+          borderRadius: "lg"
+        }}
+      >
+        <Image
+          src={notfound}
+          alt="not found illustration"
+          placeholder="blur"
+          priority
+        />
+      </Box>
 
-function NotFoundImage() {
-  return (
-    <div>
-      <Image
-        src={notfound}
-        alt="404 not found illustration"
-        width={500}
-        placeholder="blur"
-        aria-describedby="png image from pngtree.com"
-        className="rounded-lg"
-        priority
-      />
-    </div>
-  );
-}
-
-function NotFoundInfo() {
-  return (
-    <div className="flex items-end">
-      <div className="2xl:py-12">
-        <h1>404 Not Found</h1>
-        <p className="mb-6 text-lg">We couldn&apos;t find that requested resource</p>
-        <Link
-          href="/dashboard"
-          className="underline text-light-green-500 text-xl 2xl:lg"
+      <Box
+        style={{
+          display: "flex-col",
+          flexJustify: "center"
+        }}
+      >
+        <Box
+          style={{
+            padding: "lg",
+            borderRadius: "lg",
+            backgroundColor: "primary",
+            display: "flex-col"
+          }}
         >
-          Head back home
-        </Link>
-      </div>
-    </div>
+          <Heading text="404 Not Found" />
+
+          <Text style={{ className: "text-foreground/60" }}>
+            We couldn&apos;t find that requested resource
+          </Text>
+
+          <Link
+            href="/dashboard"
+            className="p-xs border rounded-md text-center mt-lg"
+          >
+            Head back home
+          </Link>
+        </Box>
+      </Box>
+    </Box>
   );
 }

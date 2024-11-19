@@ -15,13 +15,13 @@ const generateUsers = async (numOfUsers: number, role: "ADMIN" | "USER") => {
 const db = new PrismaClient();
 
 const seedTestUsers = async (role: "ADMIN" | "USER") => {
-  const users = await generateUsers(5, role);
+  const users = await generateUsers(3, role);
 
   users.forEach(
     async (user) =>
       await db.user.create({
         data: {
-          email: user.email,
+          email: user.email.toLowerCase(),
           password: user.password,
           role: { connect: { name: role } },
           onboarding: {
@@ -32,6 +32,17 @@ const seedTestUsers = async (role: "ADMIN" | "USER") => {
         }
       })
   );
+
+  if (role === "ADMIN") {
+    users.forEach(
+      async (user) =>
+        await db.authorizedAdmin.create({
+          data: {
+            email: user.email.toLowerCase()
+          }
+        })
+    );
+  }
 };
 
 const deleteTestUsers = async (role: "ADMIN" | "USER") => {
@@ -43,6 +54,15 @@ const deleteTestUsers = async (role: "ADMIN" | "USER") => {
 };
 
 seedTestUsers("USER")
+  .catch((e) => {
+    console.error("🚫 Error while seeding: ", e.stack);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await db.$disconnect();
+  });
+
+seedTestUsers("ADMIN")
   .catch((e) => {
     console.error("🚫 Error while seeding: ", e.stack);
     process.exit(1);

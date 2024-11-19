@@ -1,11 +1,11 @@
 "use client";
-import { formHooks } from "@/shared/hooks";
 import { FormProvider } from "react-hook-form";
 import { AuthInputs } from "../atoms/Inputs";
 import { Form, SubmitButton } from "@/ui/components";
+import { useSignInForm } from "@/shared/hooks/forms";
 
 export const SignInForm = () => {
-  const { submitHandler, methods } = formHooks.useSignInForm();
+  const { submitHandler, methods } = useSignInForm();
 
   return (
     <div>

@@ -5,4 +5,4 @@ export const authOptions: NextAuthOptions = {
   ...authConfig
 };
 
-export const getAuthSession = () => getServerSession(authOptions);
+export const getAuthSession = async () => await getServerSession(authOptions);

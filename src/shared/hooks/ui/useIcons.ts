@@ -27,7 +27,9 @@ import {
   PiSignOutDuotone,
   PiUsers,
   PiUsersDuotone,
-  PiShield
+  PiShield,
+  PiBellRinging,
+  PiBellRingingDuotone
 } from "react-icons/pi";
 import { SiQuickbooks } from "react-icons/si";
 
@@ -46,7 +48,8 @@ export type IconNames =
   | "signout"
   | "users"
   | "shield"
-  | "quickbooks";
+  | "quickbooks"
+  | "bell";
 
 export type IconVariants = "base" | "duotone";
 
@@ -60,6 +63,7 @@ export const useIcons = (props: UseIconsProps) => {
 
   const getBaseIcons = useCallback(() => {
     return {
+      bell: PiBellRinging,
       cart: PiShoppingCart,
       check: PiCheckCircle,
       downarrow: PiCaretCircleDown,
@@ -80,6 +84,7 @@ export const useIcons = (props: UseIconsProps) => {
 
   const getVariantIcons = useCallback(() => {
     return {
+      bell: PiBellRingingDuotone,
       cart: PiShoppingCartDuotone,
       check: PiCheckCircleDuotone,
       downarrow: PiCaretCircleDownDuotone,

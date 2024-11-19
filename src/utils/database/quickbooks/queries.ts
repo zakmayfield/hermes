@@ -1,6 +1,13 @@
 "use server";
 
 import { getAuthSession } from "@/lib/auth/auth.options";
+import { db } from "@/lib/prisma";
+
+export const getQuickbooksToken = async (user_id: string) => {
+  return await db.quickbooksToken.findUnique({
+    where: { user_id }
+  });
+};
 
 export const getAllProducts = async () => {
   try {

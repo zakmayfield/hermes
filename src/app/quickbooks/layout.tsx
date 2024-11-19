@@ -1,7 +1,6 @@
-import { Nav } from "@/features/quickbooks/Nav";
 import React from "react";
 
-export default function Layout({
+export default async function Layout({
   children,
   products,
   invoicing
@@ -9,18 +8,13 @@ export default function Layout({
   children: React.ReactNode;
   products: React.ReactNode;
   invoicing: React.ReactNode;
+  params: Promise<{ code: string; realmId: string }>;
 }) {
   return (
     <div>
       <h1>QuickBooks Manager</h1>
 
-      <Nav />
-
-      <div>
-        {children}
-        {products}
-        {invoicing}
-      </div>
+      {children}
     </div>
   );
 }

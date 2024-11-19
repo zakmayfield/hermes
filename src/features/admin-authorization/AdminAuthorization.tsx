@@ -1,7 +1,7 @@
 "use client";
 import { useFormContext } from "@/shared/hooks/forms";
 import { useToast } from "@/shared/hooks/ui";
-import { Box, Button, Form, Icon, Input, Pulse, SubmitButton } from "@/ui";
+import { Box, Button, Form, Icon, Input, Pulse, SubmitButton, Text } from "@/ui";
 import { authorizedAdminsValidator } from "@/utils/validators/formValidators";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
@@ -94,7 +94,9 @@ function AuthorizedAdminList() {
           />
         ))
       ) : (
-        <Box>There are no authorized admins</Box>
+        <Box style={{ backgroundColor: "secondary", padding: "lg", borderRadius: "lg" }}>
+          <Text>No authorized admins</Text>
+        </Box>
       )}
     </Box>
   );

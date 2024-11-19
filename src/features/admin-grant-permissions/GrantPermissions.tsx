@@ -1,5 +1,5 @@
 "use client";
-import { Box, Heading, Icon, Pulse } from "@/ui";
+import { Box, Heading, Icon, Pulse, Text } from "@/ui";
 import { QueryKeys } from "@/utils/core/queryKeys";
 import { toggleUserPermission } from "@/utils/database/permissions/mutations";
 import { getPermissionsByRole } from "@/utils/database/permissions/queries";
@@ -50,7 +50,11 @@ export const GrantPermissions = () => {
             />
           ))
         ) : (
-          <Box>No authorized admins</Box>
+          <Box
+            style={{ backgroundColor: "secondary", padding: "lg", borderRadius: "lg" }}
+          >
+            <Text>No admins</Text>
+          </Box>
         )}
       </div>
     </Box>

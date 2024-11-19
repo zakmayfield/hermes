@@ -37,7 +37,10 @@ export const PermissionManagement = () => {
       ) : data && data.length > 0 ? (
         <Box style={{ display: "flex-col", gap: "sm" }}>
           {data.map((rp) => (
-            <PermissionCard role_permission={rp} />
+            <PermissionCard
+              key={rp.permission_id}
+              role_permission={rp}
+            />
           ))}
         </Box>
       ) : (

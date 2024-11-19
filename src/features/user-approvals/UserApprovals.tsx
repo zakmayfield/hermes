@@ -1,9 +1,12 @@
 "use client";
 
-import { Box, Pulse, Text } from "@/ui";
+import { useToast } from "@/shared/hooks/ui";
+import { Box, Button, Icon, Pulse, Text } from "@/ui";
 import { QueryKeys } from "@/utils/core/queryKeys";
+import { toggleUserApproval } from "@/utils/database/user/mutations";
 import { getUnapprovedUsers } from "@/utils/database/user/queries";
-import { useQuery } from "@tanstack/react-query";
+import { Onboarding, User } from "@prisma/client";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const UserApprovals = () => {
   const { data, error, isLoading } = useQuery({
@@ -29,12 +32,10 @@ export const UserApprovals = () => {
         <Box style={{ textColor: "warning", textAlign: "center" }}>{error.message}</Box>
       ) : data && data.length > 0 ? (
         data.map((user) => (
-          <Box
+          <UnapprovedUser
             key={user.id}
-            style={{ border: "sm", padding: "sm" }}
-          >
-            <Text>{user.email}</Text>
-          </Box>
+            user={user}
+          />
         ))
       ) : (
         <Box style={{ textColor: "success-light" }}>All users are approved</Box>
@@ -42,3 +43,54 @@ export const UserApprovals = () => {
     </Box>
   );
 };
+
+function UnapprovedUser({ user }: { user: Omit<User, "password"> }) {
+  const { toast } = useToast();
+
+  const queryClient = useQueryClient();
+
+  const handleFilterCache = (data: Onboarding) => {
+    queryClient.setQueryData<Omit<User, "password">[]>(
+      [QueryKeys.UNAPPROVED_USERS_LIST],
+      (oldData) => {
+        return oldData ? oldData.filter((user) => user.id !== data.user_id) : oldData;
+      }
+    );
+  };
+
+  const { mutate } = useMutation({
+    mutationFn: toggleUserApproval,
+    onSuccess(data) {
+      handleFilterCache(data);
+      toast("Successfully approved user");
+    },
+    onError(error) {
+      toast(error.message, "error");
+    }
+  });
+
+  return (
+    <Box
+      style={{
+        border: "sm",
+        padding: "sm",
+        display: "flex-row",
+        flexAlign: "center",
+        gap: "sm"
+      }}
+    >
+      <Button
+        options={{ variant: "primary" }}
+        style={{ padding: "none" }}
+        handleClick={() => mutate(user.id)}
+      >
+        <Icon
+          name="check"
+          style={{ fontSize: "xl", textAlign: "center", className: "mx-auto" }}
+        />
+      </Button>
+
+      <Text>{user.email}</Text>
+    </Box>
+  );
+}

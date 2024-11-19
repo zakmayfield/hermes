@@ -11,6 +11,7 @@ export const Button = (props: ButtonProps) => {
 
   return (
     <button
+      id={options?.id}
       onClick={handleClick}
       type={options?.type || "button"}
       disabled={options?.isDisabled}

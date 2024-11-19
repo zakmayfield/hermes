@@ -1,6 +1,6 @@
 "use server";
 import { db } from "@/lib/prisma";
-import { $Enums } from "@prisma/client";
+import { $Enums, Permission, RolePermissions } from "@prisma/client";
 
 export const getPermissionsByRole = async (role: $Enums.Roles) => {
   return await db.permission.findMany({
@@ -8,6 +8,24 @@ export const getPermissionsByRole = async (role: $Enums.Roles) => {
   });
 };
 
-export const getRolePermissions = async (role: $Enums.Roles) => {
-  return await db.rolePermissions.findMany({ where: { role: { name: role } } });
+export type GetRolePermissionsInput = {
+  role: $Enums.Roles;
+};
+
+export type GetRolePermissionsOutput = RolePermissions & {
+  permission: Permission;
+};
+
+export const getRolePermissions = async ({
+  role
+}: GetRolePermissionsInput): Promise<GetRolePermissionsOutput[]> => {
+  return await db.rolePermissions.findMany({
+    where: { role: { name: role } },
+    orderBy: {
+      permission: { name: "asc" }
+    },
+    include: {
+      permission: true
+    }
+  });
 };

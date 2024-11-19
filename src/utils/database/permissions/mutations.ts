@@ -30,3 +30,22 @@ export const toggleUserPermission = async ({
       });
   }
 };
+
+export type TogglePermissionLevelInput = {
+  role_id: string;
+  permission_id: string;
+  permission_level: number;
+};
+
+export const togglePermissionLevel = async (payload: TogglePermissionLevelInput) => {
+  const { role_id, permission_id, permission_level } = payload;
+
+  function toggle() {
+    return !permission_level ? { increment: 1 } : { decrement: 1 };
+  }
+
+  return await db.rolePermissions.update({
+    where: { role_id_permission_id: { role_id, permission_id } },
+    data: { permission_level: toggle() }
+  });
+};

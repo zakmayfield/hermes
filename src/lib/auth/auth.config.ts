@@ -109,7 +109,7 @@ const providers: NextAuthProviders = [
       const isAuthorizedAdmin = await isUserAuthorizedAdmin(email);
 
       const { user } = await createUser({
-        email,
+        email: email.toLowerCase(),
         password: hashed_password,
         role: isAuthorizedAdmin ? $Enums.Roles.ADMIN : $Enums.Roles.USER,
         jwt: {

@@ -1,7 +1,9 @@
 "use client";
-import { Box, Pulse, Text } from "@/ui";
+import { useTooltip } from "@/shared/hooks/ui";
+import { Box, Button, Heading, Icon, Pulse, Text } from "@/ui";
 import { QueryKeys } from "@/utils/core/queryKeys";
 import { getOnboardPendingUsers } from "@/utils/database/user/queries";
+import { User } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
 
 export const UserOnboarding = () => {
@@ -28,18 +30,64 @@ export const UserOnboarding = () => {
         <Box style={{ textColor: "warning", textAlign: "center" }}>{error.message}</Box>
       ) : data && data.length > 0 ? (
         data.map((user) => (
-          <Box
+          <PendingUser
             key={user.id}
-            style={{ border: "sm", padding: "sm" }}
-          >
-            <Text>{user.email}</Text>
-          </Box>
+            user={user}
+          />
         ))
       ) : (
-        <Box style={{ textColor: "success-light" }}>
+        <Box
+          style={{
+            textColor: "success-light",
+            padding: "lg",
+            backgroundColor: "secondary",
+            borderRadius: "lg"
+          }}
+        >
           All users have completed onboarding
         </Box>
       )}
     </Box>
   );
 };
+
+function PendingUser({ user }: { user: Omit<User, "password"> }) {
+  const tooltip = useTooltip({
+    anchorSelect: "#notify-button",
+    content: `Send reminder email to complete onboarding`,
+    place: "top-end"
+  });
+
+  return (
+    <Box
+      style={{
+        width: "full",
+        padding: "md",
+        borderRadius: "lg",
+        backgroundColor: "secondary",
+        display: "flex-row",
+        flexAlign: "center",
+        flexSpacing: "space-between",
+        gap: "md"
+      }}
+    >
+      <Heading
+        as="h3"
+        text={user.email}
+      />
+
+      <Button
+        options={{ variant: "ghost", id: "notify-button" }}
+        style={{ display: "flex-row", flexAlign: "center", gap: "sm", paddingX: "xl" }}
+      >
+        <Icon
+          name="bell"
+          variant="duotone"
+          style={{ fontSize: "xl" }}
+        />
+
+        {tooltip}
+      </Button>
+    </Box>
+  );
+}

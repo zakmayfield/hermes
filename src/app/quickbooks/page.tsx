@@ -1,8 +1,10 @@
+import { Icon } from "@/ui";
 import { fetcher } from "@/utils/database/fetcher";
 import { getQuickbooksToken } from "@/utils/database/quickbooks/queries";
 import { getAuthSession } from "@/utils/database/session/queries";
 import { isTokenExpired } from "@/utils/security/quickbooksToken";
 import { QuickbooksToken } from "@prisma/client";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 const client_id = process.env.QB_CLIENT_ID;
@@ -25,36 +27,49 @@ export default async function Page() {
     options: { dbFn: async () => getQuickbooksToken(id) }
   });
 
-  // If no token is retrieved: authenticate with OAuth2
-  if (!quickbooksTokenResponse) {
-    redirect(OAuthURL);
-  }
+  // If refresh_token is expired: re-authenticate with OAuth2
+  const refreshToken = await isTokenExpired("refresh", quickbooksTokenResponse);
 
-  if (quickbooksTokenResponse) {
-    // If refresh_token is expired: re-authenticate with OAuth2
-    const isRefreshTokenExpired = await isTokenExpired(
-      quickbooksTokenResponse,
-      "refresh"
-    );
-
-    // If access_token is expired: refresh token
-    const isAccessTokenExpired = await isTokenExpired(quickbooksTokenResponse, "access");
-    if (isAccessTokenExpired) {
-      await fetcher({
-        options: {
-          fetchOptions: {
-            baseUrl: "http://localhost:3000/api/quickbooks/token/refresh",
-            init: {
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-                "x-user-id": id
-              }
+  // If access_token is expired: refresh token
+  const accessToken = await isTokenExpired("access", quickbooksTokenResponse);
+  if (accessToken.isValidToken && accessToken.isExpired) {
+    await fetcher({
+      options: {
+        fetchOptions: {
+          baseUrl: "http://localhost:3000/api/quickbooks/token/refresh",
+          init: {
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              "x-user-id": id
             }
           }
         }
-      });
-    }
+      }
+    });
   }
-  return <div>page</div>;
+
+  return (
+    <div className="absolute inline-flex items-center gap-sm right-0 top-0">
+      {!quickbooksTokenResponse ||
+      (refreshToken.isExpired && refreshToken.isValidToken) ? (
+        <Link
+          href={OAuthURL}
+          className="rounded-md p-xs"
+        >
+          Connect To QuickBooks
+        </Link>
+      ) : (
+        <Icon
+          name="check"
+          style={{ fontSize: "2xl", textColor: "success", margin: "xs" }}
+        />
+      )}
+
+      <Icon
+        name="quickbooks"
+        style={{ fontSize: "2xl" }}
+      />
+    </div>
+  );
 }

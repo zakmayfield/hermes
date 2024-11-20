@@ -68,14 +68,22 @@ async function handler(req: NextRequest) {
       response.access_token,
       encryption_password
     );
+    const { encrypted: ERT, iv: RTIV } = encryptToken(
+      response.refresh_token,
+      encryption_password
+    );
 
     await db.quickbooksToken.update({
       where: { user_id },
       data: {
         encrypted_access_token: EAT,
         access_token_iv: ATIV,
-
-        access_token_expiration_time: new Date(Date.now() + response.expires_in * 1000)
+        access_token_expiration_time: new Date(Date.now() + response.expires_in * 1000),
+        encrypted_refresh_token: ERT,
+        refresh_token_iv: RTIV,
+        refresh_token_expiration_time: new Date(
+          Date.now() + response.x_refresh_token_expires_in * 1000
+        )
       }
     });
 

@@ -2,7 +2,7 @@
 
 type ResponseData<T> = {
   error: string | null;
-  response?: T | null;
+  response: T | null;
 };
 
 type FetcherOptions<T> = {

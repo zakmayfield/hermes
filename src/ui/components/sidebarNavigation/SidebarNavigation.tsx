@@ -5,8 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { IconNames, useTooltip } from "@/shared/hooks/ui";
 import { $Enums } from "@prisma/client";
+import { signOut } from "next-auth/react";
 
-type SidebarNavigationProps = {};
+type SidebarNavigationProps = {
+  user_email: string;
+  role: $Enums.Roles;
+};
 
 type NavItem = {
   href: string;
@@ -15,7 +19,7 @@ type NavItem = {
 };
 
 export const SidebarNavigation = (props: SidebarNavigationProps) => {
-  const role = "SUPER";
+  const { user_email, role } = props;
 
   const [isNavExpanded, setIsNavExpanded] = React.useState(true);
   const handleToggleNav = () => setIsNavExpanded(!isNavExpanded);
@@ -63,19 +67,19 @@ export const SidebarNavigation = (props: SidebarNavigationProps) => {
       </div>
 
       {/* LOGO */}
-      <div className="bg-secondary rounded-md p-xs">
+      <div className="bg-secondary rounded-md p-xs max-h-4xs min-h-4xs w-full flex items-center">
         <Image
           priority
           src={SmallLogo}
           alt="Chasers Juice Logo"
-          className={`${baseSlideAnimation} mx-auto`}
+          className={`${baseSlideAnimation} w-4xs mx-auto`}
         />
       </div>
 
       {/* LINKS */}
       <div
-        className={`${baseSlideAnimation} bg-secondary rounded-md flex-1 flex flex-col gap-xs h-full ${
-          isNavExpanded ? "p-sm" : "p-md items-center"
+        className={`${baseSlideAnimation} bg-secondary rounded-md flex-1 flex flex-col gap-xs h-full p-md border ${
+          isNavExpanded ? "items-start" : "items-center"
         }`}
       >
         {links[role].map((item) => {
@@ -87,10 +91,35 @@ export const SidebarNavigation = (props: SidebarNavigationProps) => {
             />
           );
         })}
+
+        <button
+          onClick={() => signOut()}
+          className={`${baseSlideAnimation} relative w-full rounded-lg flex items-center gap-sm hover:bg-primary/50 mt-auto ${
+            isNavExpanded ? "justify-start py-sm px-md w-full" : "justify-center p-sm"
+          }`}
+        >
+          <Icon
+            name="signout"
+            style={{ fontSize: "2xl" }}
+          />
+          <p
+            className={`${baseSlideAnimation} duration-75 absolute left-14 w-2xs text-left ${
+              !isNavExpanded && "opacity-0"
+            }`}
+          >
+            Sign Out
+          </p>
+        </button>
       </div>
 
       {/* FOOTER */}
-      <div className="bg-secondary rounded-md min-h-4xs p-xs">footer</div>
+      <div
+        className={`bg-secondary rounded-md min-h-4xs p-xs flex items-center ${
+          !isNavExpanded && "justify-center"
+        }`}
+      >
+        {user_email}
+      </div>
     </div>
   );
 };
@@ -117,26 +146,24 @@ function LinkItem({ item, isNavExpanded }: { item: NavItem; isNavExpanded: boole
     <Link
       key={item.text}
       href={item.href}
-      className={`${baseSlideAnimation} relative w-full duration-0 text-2xl rounded-full flex items-center gap-sm ${
-        isNavExpanded
-          ? "justify-start py-sm px-md w-full"
-          : "justify-center text-3xl p-sm"
+      className={`${baseSlideAnimation} relative w-full flex items-center gap-sm rounded-lg ${
+        isNavExpanded ? "justify-start w-full p-sm px-md" : "justify-center p-xs"
       } ${pathname === item.href ? "bg-success" : "hover:bg-primary/70"}`}
     >
       <Icon
         name={item.icon}
         id={`link-to-${item.text}`}
+        style={{ fontSize: "2xl" }}
       />
       {tooltip}
 
       <p
-        className={`${baseSlideAnimation} duration-200 delay-75 absolute ${
-          isNavExpanded ? "left-14" : "opacity-0 -left-48"
+        className={`${baseSlideAnimation} duration-75 absolute left-14 ${
+          !isNavExpanded && "opacity-0"
         }`}
       >
         {item.text}
       </p>
-      {/* {isNavExpanded && item.text} */}
     </Link>
   );
 }

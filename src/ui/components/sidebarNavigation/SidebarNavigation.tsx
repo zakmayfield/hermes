@@ -12,11 +12,63 @@ type SidebarNavigationProps = {
   role: $Enums.Roles;
 };
 
-type NavItem = {
-  href: string;
+type LinkItem = {
   text: string;
   icon: IconNames;
+  href?: string;
+  children?: { href: string; text: string; icon: IconNames }[];
 };
+
+const coreLinks: LinkItem[] = [
+  {
+    text: "Home",
+    icon: "house",
+    href: "#"
+  },
+  {
+    text: "Cart",
+    icon: "cart",
+    href: "#"
+  }
+];
+const adminLinks: LinkItem[] = [
+  ...coreLinks,
+  {
+    text: "Administration",
+    icon: "lock",
+    children: [
+      {
+        text: "Users",
+        href: "/",
+        icon: "users"
+      }
+    ]
+  }
+];
+const superLinks: LinkItem[] = [
+  ...adminLinks,
+  {
+    text: "Foobar",
+    icon: "shield",
+    children: [
+      {
+        text: "Foobaz",
+        href: "#",
+        icon: "users"
+      }
+    ]
+  }
+];
+
+const links = {
+  USER: [...coreLinks],
+  ADMIN: [...adminLinks],
+  SUPER: [...superLinks]
+};
+
+const pathname = "/";
+
+const baseSlideAnimation = "transition-all ease-in-out duration-300";
 
 export const SidebarNavigation = (props: SidebarNavigationProps) => {
   const { user_email, role } = props;
@@ -24,28 +76,6 @@ export const SidebarNavigation = (props: SidebarNavigationProps) => {
   const [isNavExpanded, setIsNavExpanded] = React.useState(true);
   const handleToggleNav = () => setIsNavExpanded(!isNavExpanded);
   const baseSlideAnimation = "transition-all ease-in-out duration-300";
-
-  const coreLinks: NavItem[] = [{ href: "/", text: "Home", icon: "house" }];
-  const adminLinks: NavItem[] = [
-    {
-      href: "#",
-      text: "Users",
-      icon: "users"
-    }
-  ];
-  const superLinks: NavItem[] = [
-    {
-      href: "#",
-      text: "Admins",
-      icon: "lock"
-    }
-  ];
-
-  const links: Record<$Enums.Roles, NavItem[]> = {
-    USER: [...coreLinks],
-    ADMIN: [...coreLinks, ...adminLinks],
-    SUPER: [...coreLinks, ...adminLinks, ...superLinks]
-  };
 
   return (
     <div
@@ -124,10 +154,8 @@ export const SidebarNavigation = (props: SidebarNavigationProps) => {
   );
 };
 
-function LinkItem({ item, isNavExpanded }: { item: NavItem; isNavExpanded: boolean }) {
-  const pathname = "/";
-
-  const baseSlideAnimation = "transition-all ease-in-out duration-300";
+function LinkItem({ item, isNavExpanded }: { item: LinkItem; isNavExpanded: boolean }) {
+  const { text, href, icon, children } = item;
 
   const tooltip = useTooltip({
     anchorSelect: `#link-to-${item.text}`,
@@ -142,10 +170,14 @@ function LinkItem({ item, isNavExpanded }: { item: NavItem; isNavExpanded: boole
     }
   });
 
-  return (
+  const [isDropDownOpen, setIsDropdownOpen] = React.useState(
+    () => !!children?.find((child) => child.href === pathname)
+  );
+
+  const baseLink = !children && href && (
     <Link
-      key={item.text}
-      href={item.href}
+      key={text}
+      href={href}
       className={`${baseSlideAnimation} relative w-full flex items-center gap-sm rounded-lg ${
         isNavExpanded ? "justify-start w-full p-sm px-md" : "justify-center p-xs"
       } ${pathname === item.href ? "bg-success" : "hover:bg-primary/70"}`}
@@ -166,4 +198,60 @@ function LinkItem({ item, isNavExpanded }: { item: NavItem; isNavExpanded: boole
       </p>
     </Link>
   );
+
+  const nestedLink = children && (
+    <div className="w-full">
+      <div
+        className={`relative flex items-center gap-sm p-sm px-md cursor-pointer text-foreground/60 ${
+          !isNavExpanded && "justify-center"
+        }`}
+        onClick={() => setIsDropdownOpen(!isDropDownOpen)}
+      >
+        <Icon
+          name={icon}
+          style={{ fontSize: "2xl" }}
+        />
+
+        <div
+          className={`${baseSlideAnimation} duration-75 absolute flex items-center justify-between left-14 right-0 ${
+            !isNavExpanded && "opacity-0"
+          }`}
+        >
+          <p>{text}</p>
+          <Icon
+            name="downarrow"
+            style={{
+              fontSize: "xl",
+              className: !isDropDownOpen ? "rotate-0" : "rotate-180"
+            }}
+          />
+        </div>
+      </div>
+
+      {isDropDownOpen &&
+        children.map((child) => (
+          <Link
+            href={child.href}
+            className={`relative flex items-center gap-md p-sm px-md rounded-lg ${
+              isNavExpanded ? "ml-lg" : ""
+            } ${pathname === child.href ? "bg-success" : "hover:bg-primary/70"}`}
+          >
+            <Icon
+              name={child.icon}
+              style={{ fontSize: "2xl" }}
+            />
+
+            <p
+              className={`${baseSlideAnimation} duration-75 absolute left-14 ${
+                !isNavExpanded && "opacity-0"
+              }`}
+            >
+              {child.text}
+            </p>
+          </Link>
+        ))}
+    </div>
+  );
+
+  return children ? nestedLink : baseLink;
 }

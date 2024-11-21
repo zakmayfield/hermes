@@ -32,6 +32,7 @@ import {
   PiBellRingingDuotone
 } from "react-icons/pi";
 import { SiQuickbooks } from "react-icons/si";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 export type IconNames =
   | "spin"
@@ -49,7 +50,8 @@ export type IconNames =
   | "users"
   | "shield"
   | "quickbooks"
-  | "bell";
+  | "bell"
+  | "hamburger";
 
 export type IconVariants = "base" | "duotone";
 
@@ -68,6 +70,7 @@ export const useIcons = (props: UseIconsProps) => {
       check: PiCheckCircle,
       downarrow: PiCaretCircleDown,
       error: PiWarningCircle,
+      hamburger: RxHamburgerMenu,
       house: PiHouse,
       info: PiInfo,
       lock: PiLock,
@@ -89,6 +92,7 @@ export const useIcons = (props: UseIconsProps) => {
       check: PiCheckCircleDuotone,
       downarrow: PiCaretCircleDownDuotone,
       error: PiWarningCircleDuotone,
+      hamburger: RxHamburgerMenu,
       house: PiHouseDuotone,
       info: PiInfoDuotone,
       lock: PiLockDuotone,

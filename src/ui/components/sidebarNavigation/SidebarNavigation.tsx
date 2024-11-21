@@ -1,4 +1,4 @@
-import { Icon, Text } from "@/ui";
+import { Icon } from "@/ui";
 import React from "react";
 import SmallLogo from "@/assets/logo-sm.png";
 import Image from "next/image";
@@ -199,11 +199,14 @@ function LinkItem({ item, isNavExpanded }: { item: LinkItem; isNavExpanded: bool
     </Link>
   );
 
+  {
+    /* //TODO: Small shift isn't happening when collapsing menu for drop down title but is for other icons */
+  }
   const nestedLink = children && (
     <div className="w-full">
       <div
         className={`relative flex items-center gap-sm p-sm px-md cursor-pointer text-foreground/60 ${
-          !isNavExpanded && "justify-center"
+          isNavExpanded ? "justify-start w-full p-sm px-md" : "justify-center p-xs"
         }`}
         onClick={() => setIsDropdownOpen(!isDropDownOpen)}
       >
@@ -228,9 +231,11 @@ function LinkItem({ item, isNavExpanded }: { item: LinkItem; isNavExpanded: bool
         </div>
       </div>
 
+      {/* //***TODO: *** Add tooltip for nested children */}
       {isDropDownOpen &&
         children.map((child) => (
           <Link
+            key={child.text}
             href={child.href}
             className={`relative flex items-center gap-md p-sm px-md rounded-lg ${
               isNavExpanded ? "ml-lg" : ""

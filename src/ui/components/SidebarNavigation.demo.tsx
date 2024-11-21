@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { SidebarNavigation } from "..";
 
 export const SidebarNavigationDemo = () => {

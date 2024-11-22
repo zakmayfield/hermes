@@ -43,18 +43,29 @@ export default async function Page({
   return (
     <div>
       <div className="absolute inline-flex items-center gap-sm right-0 top-0">
-        <Spin style={{ parentWrapper: { padding: "xs" } }} />
-
         <Icon
           name="quickbooks"
-          style={{ fontSize: "2xl" }}
+          style={{ fontSize: "3xl" }}
+        />
+
+        <Spin
+          style={{
+            parentWrapper: {
+              padding: "xs",
+              className: "absolute top-3 left-4 opacity-75"
+            }
+          }}
         />
       </div>
 
       <div className="mt-lg bg-primary rounded-md w-md space-y-sm mx-auto p-lg">
         <div className="flex items-center gap-lg">
           <h2>Verifying Request</h2>
-          <Spin style={{ icon: { fontSize: "2xl" } }} />
+          <Spin
+            style={{
+              icon: { fontSize: "2xl" }
+            }}
+          />
         </div>
         <p className="text-foreground/70">Sit tight while we verify your information</p>
       </div>

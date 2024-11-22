@@ -298,6 +298,11 @@ function getLinks() {
       icon: "clipboard",
       children: [
         {
+          text: "Invoicing",
+          href: "/quickbooks",
+          icon: "quickbooks"
+        },
+        {
           text: "Users",
           href: "/manage-users",
           icon: "users"

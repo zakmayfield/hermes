@@ -62,13 +62,19 @@ export default async function Page() {
       ) : (
         <Icon
           name="check"
-          style={{ fontSize: "2xl", textColor: "success", margin: "xs" }}
+          variant="duotone"
+          style={{
+            fontSize: "2xl",
+            textColor: "success",
+            margin: "xs",
+            className: "absolute top-3 left-4 opacity-75"
+          }}
         />
       )}
 
       <Icon
         name="quickbooks"
-        style={{ fontSize: "2xl" }}
+        style={{ fontSize: "3xl" }}
       />
     </div>
   );

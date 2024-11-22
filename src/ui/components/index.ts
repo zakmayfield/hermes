@@ -9,6 +9,7 @@ export * from "./label/Label";
 export * from "./layout/Layout";
 export * from "./navbar/Navbar";
 export * from "./pulse/Pulse";
+export * from "./sidebarNavigation/SidebarNavigation";
 export * from "./spin/Spin";
 export * from "./stack/Stack";
 export * from "./submitButton/SubmitButton";

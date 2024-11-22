@@ -1,6 +1,7 @@
 import { Keyof, MultiBucket } from "../../types";
 
 export enum Width {
+  "none" = "none",
   "4xs" = "4xs",
   "3xs" = "3xs",
   "2xs" = "2xs",
@@ -18,6 +19,7 @@ export enum Width {
 }
 
 export enum Height {
+  "none" = "none",
   "4xs" = "4xs",
   "3xs" = "3xs",
   "2xs" = "2xs",
@@ -32,6 +34,7 @@ export enum Height {
 
 export const widthtBucket = {
   width: {
+    [Width.none]: "w-none",
     [Width["4xs"]]: "w-4xs",
     [Width["3xs"]]: "w-3xs",
     [Width["2xs"]]: "w-2xs",
@@ -48,6 +51,7 @@ export const widthtBucket = {
     [Width["2/3"]]: "w-2/3"
   },
   minWidth: {
+    [Width.none]: "min-w-none",
     [Width["4xs"]]: "min-w-4xs",
     [Width["3xs"]]: "min-w-3xs",
     [Width["2xs"]]: "min-w-2xs",
@@ -64,6 +68,7 @@ export const widthtBucket = {
     [Width["2/3"]]: "min-w-2/3"
   },
   maxWidth: {
+    [Width.none]: "max-w-none",
     [Width["4xs"]]: "max-w-4xs",
     [Width["3xs"]]: "max-w-3xs",
     [Width["2xs"]]: "max-w-2xs",
@@ -83,6 +88,7 @@ export const widthtBucket = {
 
 export const heightBucket = {
   height: {
+    [Height.none]: "h-none",
     [Height["4xs"]]: "h-4xs",
     [Height["3xs"]]: "h-3xs",
     [Height["2xs"]]: "h-2xs",
@@ -95,6 +101,7 @@ export const heightBucket = {
     [Height.full]: "h-full"
   },
   minHeight: {
+    [Height.none]: "min-h-none",
     [Height["4xs"]]: "min-h-4xs",
     [Height["3xs"]]: "min-h-3xs",
     [Height["2xs"]]: "min-h-2xs",
@@ -107,6 +114,7 @@ export const heightBucket = {
     [Height.full]: "min-h-full"
   },
   maxHeight: {
+    [Height.none]: "max-h-none",
     [Height["4xs"]]: "max-h-4xs",
     [Height["3xs"]]: "max-h-3xs",
     [Height["2xs"]]: "max-h-2xs",

@@ -7,8 +7,7 @@ import { getAuthSession } from "@/lib/auth/auth.options";
 import "./globals.css";
 import "react-toastify/ReactToastify.min.css";
 import "react-tooltip/dist/react-tooltip.css";
-import { Box } from "@/ui/components";
-import { CoreNav } from "@/shared/components/navigation";
+import { Box, SidebarNavigation } from "@/ui";
 
 export const metadata: Metadata = {
   title: "Hermes",
@@ -30,10 +29,11 @@ export default async function RootLayout({
           <Box
             style={{
               minHeight: "screen",
-              display: "flex-row"
+              display: "flex-row",
+              position: "relative"
             }}
           >
-            {is_auth && <CoreNav role={session?.user.role} />}
+            {is_auth && <SidebarNavigation role={session?.user.role} />}
 
             <Box style={{ padding: "sm", width: "full" }}>
               <Box

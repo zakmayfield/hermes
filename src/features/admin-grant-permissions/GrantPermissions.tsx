@@ -95,7 +95,7 @@ function GrantPermissionsItem({
 
         <div onClick={() => setDropDownOpen(!isDropDownOpen)}>
           <Icon
-            name="downarrow"
+            name="downarrowCircle"
             style={{
               fontSize: "xl",
               cursor: "pointer",

@@ -29,9 +29,21 @@ import {
   PiUsersDuotone,
   PiShield,
   PiBellRinging,
-  PiBellRingingDuotone
+  PiBellRingingDuotone,
+  PiGlobe,
+  PiGlobeDuotone,
+  PiCrown,
+  PiCrownDuotone,
+  PiGear,
+  PiGearDuotone,
+  PiClipboardText,
+  PiClipboardTextDuotone,
+  PiArrowURightDown,
+  PiArrowURightDownDuotone,
+  PiArrowsDownUp
 } from "react-icons/pi";
 import { SiQuickbooks } from "react-icons/si";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 export type IconNames =
   | "spin"
@@ -41,7 +53,7 @@ export type IconNames =
   | "check"
   | "x"
   | "trash"
-  | "downarrow"
+  | "downarrowCircle"
   | "house"
   | "threeCircles"
   | "lock"
@@ -49,7 +61,14 @@ export type IconNames =
   | "users"
   | "shield"
   | "quickbooks"
-  | "bell";
+  | "bell"
+  | "hamburger"
+  | "globe"
+  | "crown"
+  | "gear"
+  | "clipboard"
+  | "uArrowDown"
+  | "arrowsUpDown";
 
 export type IconVariants = "base" | "duotone";
 
@@ -63,11 +82,17 @@ export const useIcons = (props: UseIconsProps) => {
 
   const getBaseIcons = useCallback(() => {
     return {
+      arrowsUpDown: PiArrowsDownUp,
       bell: PiBellRinging,
       cart: PiShoppingCart,
       check: PiCheckCircle,
-      downarrow: PiCaretCircleDown,
+      clipboard: PiClipboardText,
+      crown: PiCrown,
+      downarrowCircle: PiCaretCircleDown,
       error: PiWarningCircle,
+      gear: PiGear,
+      globe: PiGlobe,
+      hamburger: RxHamburgerMenu,
       house: PiHouse,
       info: PiInfo,
       lock: PiLock,
@@ -77,6 +102,7 @@ export const useIcons = (props: UseIconsProps) => {
       spin: PiSpinnerGap,
       threeCircles: PiCirclesThree,
       trash: PiTrash,
+      uArrowDown: PiArrowURightDown,
       users: PiUsers,
       x: PiXCircle
     };
@@ -84,11 +110,17 @@ export const useIcons = (props: UseIconsProps) => {
 
   const getVariantIcons = useCallback(() => {
     return {
+      arrowsUpDown: PiArrowsDownUp,
       bell: PiBellRingingDuotone,
       cart: PiShoppingCartDuotone,
       check: PiCheckCircleDuotone,
-      downarrow: PiCaretCircleDownDuotone,
+      clipboard: PiClipboardTextDuotone,
+      crown: PiCrownDuotone,
+      downarrowCircle: PiCaretCircleDownDuotone,
       error: PiWarningCircleDuotone,
+      gear: PiGearDuotone,
+      globe: PiGlobeDuotone,
+      hamburger: RxHamburgerMenu,
       house: PiHouseDuotone,
       info: PiInfoDuotone,
       lock: PiLockDuotone,
@@ -98,6 +130,7 @@ export const useIcons = (props: UseIconsProps) => {
       spin: PiSpinnerGapDuotone,
       threeCircles: PiCirclesThreeDuotone,
       trash: PiTrashDuotone,
+      uArrowDown: PiArrowURightDownDuotone,
       users: PiUsersDuotone,
       x: PiXCircleDuotone
     };

@@ -26,14 +26,16 @@ const baseSlideAnimation = "transition-all ease-in-out duration-300";
 export const SidebarNavigation = (props: SidebarNavigationProps) => {
   const { user_email, role } = props;
 
-  const [isNavExpanded, setIsNavExpanded] = React.useState(true);
+  const [isNavExpanded, setIsNavExpanded] = React.useState(false);
   const handleToggleNav = () => setIsNavExpanded(!isNavExpanded);
 
   return (
     <div
       aria-expanded={isNavExpanded}
       className={`bg-primary relative flex flex-col gap-md ${baseSlideAnimation} ${
-        isNavExpanded ? "p-lg min-w-sm max-w-sm w-full" : "p-sm min-w-3xs max-w-3xs w-ful"
+        isNavExpanded
+          ? "p-lg sm:min-w-sm sm:max-w-sm w-full"
+          : "p-sm min-w-3xs max-w-3xs w-ful"
       }`}
     >
       {/* Open/Close Button */}

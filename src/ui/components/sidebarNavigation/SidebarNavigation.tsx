@@ -1,3 +1,4 @@
+"use client";
 import { Icon } from "@/ui";
 import React from "react";
 import SmallLogo from "@/assets/logo-sm.png";
@@ -19,55 +20,7 @@ type LinkItem = {
   children?: { href: string; text: string; icon: IconNames }[];
 };
 
-const coreLinks: LinkItem[] = [
-  {
-    text: "Home",
-    icon: "house",
-    href: "#"
-  },
-  {
-    text: "Cart",
-    icon: "cart",
-    href: "#"
-  }
-];
-const adminLinks: LinkItem[] = [
-  ...coreLinks,
-  {
-    text: "Administration",
-    icon: "lock",
-    children: [
-      {
-        text: "Users",
-        href: "/",
-        icon: "users"
-      }
-    ]
-  }
-];
-const superLinks: LinkItem[] = [
-  ...adminLinks,
-  {
-    text: "Foobar",
-    icon: "shield",
-    children: [
-      {
-        text: "Foobaz",
-        href: "#",
-        icon: "users"
-      }
-    ]
-  }
-];
-
-const links = {
-  USER: [...coreLinks],
-  ADMIN: [...adminLinks],
-  SUPER: [...superLinks]
-};
-
-const pathname = "/";
-
+const pathname = "foo";
 const baseSlideAnimation = "transition-all ease-in-out duration-300";
 
 export const SidebarNavigation = (props: SidebarNavigationProps) => {
@@ -75,7 +28,6 @@ export const SidebarNavigation = (props: SidebarNavigationProps) => {
 
   const [isNavExpanded, setIsNavExpanded] = React.useState(true);
   const handleToggleNav = () => setIsNavExpanded(!isNavExpanded);
-  const baseSlideAnimation = "transition-all ease-in-out duration-300";
 
   return (
     <div
@@ -84,179 +36,307 @@ export const SidebarNavigation = (props: SidebarNavigationProps) => {
       }`}
     >
       {/* Open/Close Button */}
-      <div className="absolute h-full -right-5 flex flex-row items-center">
-        <button
-          onClick={handleToggleNav}
-          className={`${baseSlideAnimation} duration-200 py-md bg-success opacity-50 hover:opacity-100`}
-        >
-          <Icon
-            name="hamburger"
-            style={{ className: "-rotate-90" }}
-          />
-        </button>
-      </div>
-
+      <ToggleExpandButton
+        isNavExpanded={isNavExpanded}
+        handleToggleNav={handleToggleNav}
+      />
       {/* LOGO */}
-      <div className="bg-secondary rounded-md p-xs max-h-4xs min-h-4xs w-full flex items-center">
-        <Image
-          priority
-          src={SmallLogo}
-          alt="Chasers Juice Logo"
-          className={`${baseSlideAnimation} w-4xs mx-auto`}
-        />
-      </div>
-
+      <NavigationHeader />
       {/* LINKS */}
-      <div
-        className={`${baseSlideAnimation} bg-secondary rounded-md flex-1 flex flex-col gap-xs h-full p-md border ${
-          isNavExpanded ? "items-start" : "items-center"
-        }`}
-      >
-        {links[role].map((item) => {
-          return (
-            <LinkItem
-              key={item.text}
-              item={item}
-              isNavExpanded={isNavExpanded}
-            />
-          );
-        })}
-
-        <button
-          onClick={() => signOut()}
-          className={`${baseSlideAnimation} relative w-full rounded-lg flex items-center gap-sm hover:bg-primary/50 mt-auto ${
-            isNavExpanded ? "justify-start py-sm px-md w-full" : "justify-center p-sm"
-          }`}
-        >
-          <Icon
-            name="signout"
-            style={{ fontSize: "2xl" }}
-          />
-          <p
-            className={`${baseSlideAnimation} duration-75 absolute left-14 w-2xs text-left ${
-              !isNavExpanded && "opacity-0"
-            }`}
-          >
-            Sign Out
-          </p>
-        </button>
-      </div>
-
+      <NavigationLinks
+        isNavExpanded={isNavExpanded}
+        role={role}
+      />
       {/* FOOTER */}
-      <div
-        className={`bg-secondary rounded-md min-h-4xs p-xs flex items-center ${
-          !isNavExpanded && "justify-center"
-        }`}
-      >
-        {user_email}
-      </div>
+      <NavigationFooter
+        isNavExpanded={isNavExpanded}
+        user_email={user_email}
+      />
     </div>
   );
 };
 
-function LinkItem({ item, isNavExpanded }: { item: LinkItem; isNavExpanded: boolean }) {
-  const { text, href, icon, children } = item;
+function NavigationLinks({
+  isNavExpanded,
+  role
+}: {
+  isNavExpanded: boolean;
+  role: $Enums.Roles;
+}) {
+  const links = getLinks();
 
-  const tooltip = useTooltip({
-    anchorSelect: `#link-to-${item.text}`,
-    content: item.text,
-    place: "right",
-    offset: 20,
-    style: {
-      fontSize: "1rem",
-      transitionDelay: "500ms",
-      transitionDuration: "300ms",
-      backgroundColor: "rgb(var(--success))"
-    }
-  });
-
-  const [isDropDownOpen, setIsDropdownOpen] = React.useState(
-    () => !!children?.find((child) => child.href === pathname)
-  );
-
-  const baseLink = !children && href && (
-    <Link
-      key={text}
-      href={href}
-      className={`${baseSlideAnimation} relative w-full flex items-center gap-sm rounded-lg ${
-        isNavExpanded ? "justify-start w-full p-sm px-md" : "justify-center p-xs"
-      } ${pathname === item.href ? "bg-success" : "hover:bg-primary/70"}`}
+  return (
+    <div
+      className={`${baseSlideAnimation} bg-secondary rounded-md flex-1 flex flex-col gap-xs h-full ${
+        isNavExpanded ? "items-start p-md" : "items-center p-xs"
+      }`}
     >
-      <Icon
-        name={item.icon}
-        id={`link-to-${item.text}`}
-        style={{ fontSize: "2xl" }}
-      />
-      {tooltip}
-
-      <p
-        className={`${baseSlideAnimation} duration-75 absolute left-14 ${
-          !isNavExpanded && "opacity-0"
-        }`}
-      >
-        {item.text}
-      </p>
-    </Link>
-  );
-
-  {
-    /* //TODO: Small shift isn't happening when collapsing menu for drop down title but is for other icons */
-  }
-  const nestedLink = children && (
-    <div className="w-full">
-      <div
-        className={`relative flex items-center gap-sm p-sm px-md cursor-pointer text-foreground/60 ${
-          isNavExpanded ? "justify-start w-full p-sm px-md" : "justify-center p-xs"
-        }`}
-        onClick={() => setIsDropdownOpen(!isDropDownOpen)}
-      >
-        <Icon
-          name={icon}
-          style={{ fontSize: "2xl" }}
-        />
-
-        <div
-          className={`${baseSlideAnimation} duration-75 absolute flex items-center justify-between left-14 right-0 ${
-            !isNavExpanded && "opacity-0"
-          }`}
-        >
-          <p>{text}</p>
-          <Icon
-            name="downarrow"
-            style={{
-              fontSize: "xl",
-              className: !isDropDownOpen ? "rotate-0" : "rotate-180"
-            }}
+      {links[role].map((item) =>
+        item.children ? (
+          <NestedLinkItem
+            key={item.text}
+            item={item}
+            isNavExpanded={isNavExpanded}
           />
-        </div>
-      </div>
+        ) : (
+          <BaseLinkItem
+            key={item.text}
+            item={item}
+            isNavExpanded={isNavExpanded}
+          />
+        )
+      )}
 
-      {/* //***TODO: *** Add tooltip for nested children */}
-      {isDropDownOpen &&
-        children.map((child) => (
-          <Link
-            key={child.text}
-            href={child.href}
-            className={`relative flex items-center gap-md p-sm px-md rounded-lg ${
-              isNavExpanded ? "ml-lg" : ""
-            } ${pathname === child.href ? "bg-success" : "hover:bg-primary/70"}`}
-          >
-            <Icon
-              name={child.icon}
-              style={{ fontSize: "2xl" }}
-            />
-
-            <p
-              className={`${baseSlideAnimation} duration-75 absolute left-14 ${
-                !isNavExpanded && "opacity-0"
-              }`}
-            >
-              {child.text}
-            </p>
-          </Link>
-        ))}
+      <SignOutButton isNavExpanded={isNavExpanded} />
     </div>
   );
+}
 
-  return children ? nestedLink : baseLink;
+const defaultLinkStyles = "rounded-lg p-xs w-full cursor-pointer hover:bg-primary/70";
+const defaultIconStyles = "text-2xl min-w-[20px]";
+const defaultSmoothAnimation = "transition-all ease-in-out duration-300";
+
+function SignOutButton({ isNavExpanded }: { isNavExpanded: boolean }) {
+  const tooltip = useTooltip({
+    anchorSelect: `#link-signout`,
+    content: "Sign out",
+    place: "right"
+  });
+  return (
+    <div
+      id="link-signout"
+      className={`${defaultSmoothAnimation} ${defaultLinkStyles} relative flex items-center gap-sm mt-auto ${
+        isNavExpanded ? "justify-start" : "justify-center"
+      }`}
+    >
+      <Icon
+        name="signout"
+        style={{ className: `${defaultIconStyles}` }}
+      />
+
+      <p className={`${isNavExpanded ? "min-w-4xs" : "hidden"}`}>Sign out</p>
+
+      {!isNavExpanded && tooltip}
+    </div>
+  );
+}
+
+function BaseLinkItem({
+  item,
+  isNavExpanded
+}: {
+  item: LinkItem;
+  isNavExpanded: boolean;
+}) {
+  const tooltip = useTooltip({
+    anchorSelect: `#link-${item.text}`,
+    content: item.text,
+    place: "right"
+  });
+
+  return (
+    <div
+      id={`link-${item.text}`}
+      className={`${defaultSmoothAnimation} ${defaultLinkStyles} relative flex items-center ${
+        isNavExpanded ? "justify-start" : "justify-center"
+      } ${pathname === item.href && "bg-success hover:bg-success-light"}`}
+    >
+      <Link
+        href={item.href as string}
+        className="flex items-center gap-sm"
+      >
+        <Icon
+          name={item.icon}
+          style={{ className: `${defaultIconStyles}` }}
+        />
+
+        <p className={`${isNavExpanded ? "" : "hidden"}`}>{item.text}</p>
+      </Link>
+
+      {!isNavExpanded && tooltip}
+    </div>
+  );
+}
+
+function NestedLinkItem({
+  item,
+  isNavExpanded
+}: {
+  item: LinkItem;
+  isNavExpanded: boolean;
+}) {
+  const [isShowingChildren, setIsShowingChildren] = React.useState(
+    () => !!item.children?.find((child) => child.href === pathname)
+  );
+  const handleToggleChildren = () => setIsShowingChildren(!isShowingChildren);
+  const tooltip = useTooltip({
+    anchorSelect: `#title-${item.text}`,
+    content: item.text,
+    place: "right"
+  });
+  return (
+    <div className="w-full flex flex-col">
+      <div
+        id={`title-${item.text}`}
+        onClick={handleToggleChildren}
+        className={`${defaultSmoothAnimation} ${defaultLinkStyles} relative flex items-center gap-sm w-full ${
+          isNavExpanded ? "justify-start" : "justify-center"
+        } ${isShowingChildren && "bg-tertiary/20 rounded-b-none"}`}
+      >
+        <Icon
+          name={item.icon}
+          style={{
+            className: `${defaultIconStyles}`
+          }}
+        />
+
+        <p className={`${isNavExpanded ? "" : "hidden"}`}>{item.text}</p>
+
+        <Icon
+          name="arrowsUpDown"
+          style={{
+            className: `opacity-50 hover:opacity-100 absolute ${
+              isNavExpanded ? "right-2" : "bottom-0 right-0"
+            } ${isShowingChildren && "rotate-180"}`
+          }}
+        />
+
+        {!isNavExpanded && tooltip}
+      </div>
+
+      <div
+        className={`${defaultSmoothAnimation} bg-tertiary/20 p-xs rounded-b-lg flex flex-col gap-xs ${
+          isNavExpanded && "px-md"
+        } ${isShowingChildren ? "min-h-none" : "h-none p-none"}`}
+      >
+        {isShowingChildren &&
+          item.children?.map((child) => (
+            <BaseLinkItem
+              key={child.text}
+              isNavExpanded={isNavExpanded}
+              item={child}
+            />
+          ))}
+      </div>
+      {/* )} */}
+    </div>
+  );
+}
+
+function ToggleExpandButton({
+  isNavExpanded,
+  handleToggleNav
+}: {
+  isNavExpanded: boolean;
+  handleToggleNav: () => void;
+}) {
+  return (
+    <div
+      className={`absolute h-full flex flex-row items-center ${
+        isNavExpanded ? "-right-2" : "-right-5"
+      }`}
+    >
+      <button
+        onClick={handleToggleNav}
+        className={`${baseSlideAnimation} duration-200 py-md bg-success opacity-50 hover:opacity-100`}
+      >
+        <Icon
+          name="hamburger"
+          style={{ className: "-rotate-90" }}
+        />
+      </button>
+    </div>
+  );
+}
+
+function NavigationHeader() {
+  return (
+    <div className="bg-secondary rounded-md p-xs max-h-4xs min-h-4xs w-full flex items-center">
+      <Image
+        priority
+        src={SmallLogo}
+        alt="Chasers Juice Logo"
+        className={`${baseSlideAnimation} w-4xs mx-auto`}
+      />
+    </div>
+  );
+}
+
+function NavigationFooter({
+  isNavExpanded,
+  user_email
+}: {
+  isNavExpanded: boolean;
+  user_email: string;
+}) {
+  return (
+    <div
+      className={`bg-secondary rounded-md min-h-4xs p-xs flex items-center ${
+        !isNavExpanded && "justify-center"
+      }`}
+    >
+      {user_email}
+    </div>
+  );
+}
+
+function getLinks() {
+  const coreLinks: LinkItem[] = [
+    {
+      text: "Home",
+      icon: "house",
+      href: "#"
+    },
+    {
+      text: "Dashboard",
+      icon: "threeCircles",
+      href: "#"
+    },
+    {
+      text: "Cart",
+      icon: "cart",
+      href: "#"
+    }
+  ];
+  const adminLinks: LinkItem[] = [
+    ...coreLinks,
+    {
+      text: "Administrators",
+      icon: "clipboard",
+      children: [
+        {
+          text: "Users",
+          href: "#",
+          icon: "users"
+        }
+      ]
+    }
+  ];
+  const superLinks: LinkItem[] = [
+    ...adminLinks,
+    {
+      text: "Super",
+      icon: "globe",
+      children: [
+        {
+          text: "Admins",
+          href: "foo",
+          icon: "lock"
+        },
+        {
+          text: "Permissions",
+          href: "#",
+          icon: "shield"
+        }
+      ]
+    }
+  ];
+
+  const links = {
+    USER: [...coreLinks],
+    ADMIN: [...adminLinks],
+    SUPER: [...superLinks]
+  };
+
+  return links;
 }

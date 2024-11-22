@@ -31,6 +31,7 @@ export const SidebarNavigation = (props: SidebarNavigationProps) => {
 
   return (
     <div
+      aria-expanded={isNavExpanded}
       className={`bg-primary relative flex flex-col gap-md ${baseSlideAnimation} ${
         isNavExpanded ? "p-lg min-w-sm max-w-sm w-full" : "p-sm min-w-3xs max-w-3xs w-ful"
       }`}
@@ -40,13 +41,16 @@ export const SidebarNavigation = (props: SidebarNavigationProps) => {
         isNavExpanded={isNavExpanded}
         handleToggleNav={handleToggleNav}
       />
+
       {/* LOGO */}
       <NavigationHeader />
+
       {/* LINKS */}
       <NavigationLinks
         isNavExpanded={isNavExpanded}
         role={role}
       />
+
       {/* FOOTER */}
       <NavigationFooter
         isNavExpanded={isNavExpanded}
@@ -92,7 +96,8 @@ function NavigationLinks({
   );
 }
 
-const defaultLinkStyles = "rounded-lg p-xs w-full cursor-pointer hover:bg-primary/70";
+const defaultLinkStyles =
+  "rounded-lg p-xs w-full cursor-pointer hover:bg-primary/70 focus:bg-primary/70";
 const defaultIconStyles = "text-2xl min-w-[20px]";
 const defaultSmoothAnimation = "transition-all ease-in-out duration-300";
 
@@ -103,9 +108,10 @@ function SignOutButton({ isNavExpanded }: { isNavExpanded: boolean }) {
     place: "right"
   });
   return (
-    <div
+    <button
+      onClick={() => signOut()}
       id="link-signout"
-      className={`${defaultSmoothAnimation} ${defaultLinkStyles} relative flex items-center gap-sm mt-auto ${
+      className={`${defaultSmoothAnimation} ${defaultLinkStyles} relative flex items-center gap-sm mt-auto hover:filter-none ${
         isNavExpanded ? "justify-start" : "justify-center"
       }`}
     >
@@ -117,7 +123,7 @@ function SignOutButton({ isNavExpanded }: { isNavExpanded: boolean }) {
       <p className={`${isNavExpanded ? "min-w-4xs" : "hidden"}`}>Sign out</p>
 
       {!isNavExpanded && tooltip}
-    </div>
+    </button>
   );
 }
 
@@ -135,15 +141,21 @@ function BaseLinkItem({
   });
 
   return (
-    <div
+    <Link
+      aria-label={`link to ${item.text} page`}
       id={`link-${item.text}`}
-      className={`${defaultSmoothAnimation} ${defaultLinkStyles} relative flex items-center ${
-        isNavExpanded ? "justify-start" : "justify-center"
-      } ${pathname === item.href && "bg-success hover:bg-success-light"}`}
+      href={item.href as string}
+      className={`${defaultSmoothAnimation} ${defaultLinkStyles} flex items-center gap-sm w-full ${
+        !isNavExpanded && "justify-center"
+      } ${
+        pathname === item.href &&
+        "bg-success hover:bg-success-light focus:bg-success-light"
+      }`}
     >
-      <Link
-        href={item.href as string}
-        className="flex items-center gap-sm"
+      <div
+        className={`relative flex items-center gap-sm ${
+          isNavExpanded ? "justify-start" : "justify-center"
+        } `}
       >
         <Icon
           name={item.icon}
@@ -151,10 +163,10 @@ function BaseLinkItem({
         />
 
         <p className={`${isNavExpanded ? "" : "hidden"}`}>{item.text}</p>
-      </Link>
+      </div>
 
       {!isNavExpanded && tooltip}
-    </div>
+    </Link>
   );
 }
 
@@ -176,12 +188,13 @@ function NestedLinkItem({
   });
   return (
     <div className="w-full flex flex-col">
-      <div
+      <button
+        aria-label={`Expand or collapse ${item.text} links`}
         id={`title-${item.text}`}
         onClick={handleToggleChildren}
-        className={`${defaultSmoothAnimation} ${defaultLinkStyles} relative flex items-center gap-sm w-full ${
+        className={`${defaultSmoothAnimation} ${defaultLinkStyles} relative flex items-center gap-sm w-full hover:filter-none ${
           isNavExpanded ? "justify-start" : "justify-center"
-        } ${isShowingChildren && "bg-tertiary/20 rounded-b-none"}`}
+        } ${isShowingChildren && "bg-tertiary/15 rounded-b-none"}`}
       >
         <Icon
           name={item.icon}
@@ -202,10 +215,10 @@ function NestedLinkItem({
         />
 
         {!isNavExpanded && tooltip}
-      </div>
+      </button>
 
       <div
-        className={`${defaultSmoothAnimation} bg-tertiary/20 p-xs rounded-b-lg flex flex-col gap-xs ${
+        className={`${defaultSmoothAnimation} bg-tertiary/15 p-xs rounded-b-lg flex flex-col gap-xs ${
           isNavExpanded && "px-md"
         } ${isShowingChildren ? "min-h-none" : "h-none p-none"}`}
       >
@@ -237,8 +250,9 @@ function ToggleExpandButton({
       }`}
     >
       <button
+        aria-label="expand or collapse navigation"
         onClick={handleToggleNav}
-        className={`${baseSlideAnimation} duration-200 py-md bg-success opacity-50 hover:opacity-100`}
+        className={`${baseSlideAnimation} duration-200 py-md bg-success opacity-50 hover:opacity-100 focus:opacity-100`}
       >
         <Icon
           name="hamburger"
@@ -271,7 +285,7 @@ function NavigationFooter({
 }) {
   return (
     <div
-      className={`bg-secondary rounded-md min-h-4xs p-xs flex items-center ${
+      className={`bg-secondary rounded-md min-h-[3rem] p-xs flex items-center ${
         !isNavExpanded && "justify-center"
       }`}
     >

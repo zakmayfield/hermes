@@ -5,7 +5,7 @@ export const SidebarNavigationDemo = () => {
     <div className="border border-foreground min-h-screen flex flex-row">
       <SidebarNavigation
         role="SUPER"
-        user_email="👽"
+        user_email="zakmayfield@gmail.com"
       />
     </div>
   );

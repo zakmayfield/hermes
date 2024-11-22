@@ -7,9 +7,9 @@ import Link from "next/link";
 import { IconNames, useTooltip } from "@/shared/hooks/ui";
 import { $Enums } from "@prisma/client";
 import { signOut } from "next-auth/react";
+import { usePathname } from "next/navigation";
 
 type SidebarNavigationProps = {
-  user_email: string;
   role: $Enums.Roles;
 };
 
@@ -20,11 +20,10 @@ type LinkItem = {
   children?: { href: string; text: string; icon: IconNames }[];
 };
 
-const pathname = "foo";
 const baseSlideAnimation = "transition-all ease-in-out duration-300";
 
 export const SidebarNavigation = (props: SidebarNavigationProps) => {
-  const { user_email, role } = props;
+  const { role } = props;
 
   const [isNavExpanded, setIsNavExpanded] = React.useState(false);
   const handleToggleNav = () => setIsNavExpanded(!isNavExpanded);
@@ -34,8 +33,8 @@ export const SidebarNavigation = (props: SidebarNavigationProps) => {
       aria-expanded={isNavExpanded}
       className={`bg-primary relative flex flex-col gap-md ${baseSlideAnimation} ${
         isNavExpanded
-          ? "p-lg sm:min-w-sm sm:max-w-sm w-full"
-          : "p-sm min-w-3xs max-w-3xs w-ful"
+          ? "p-lg w-full min-w-full md:max-w-sm md:min-w-sm"
+          : "p-sm min-w-3xs max-w-3xs w-full"
       }`}
     >
       {/* Open/Close Button */}
@@ -52,12 +51,6 @@ export const SidebarNavigation = (props: SidebarNavigationProps) => {
         isNavExpanded={isNavExpanded}
         role={role}
       />
-
-      {/* FOOTER */}
-      <NavigationFooter
-        isNavExpanded={isNavExpanded}
-        user_email={user_email}
-      />
     </div>
   );
 };
@@ -73,7 +66,7 @@ function NavigationLinks({
 
   return (
     <div
-      className={`${baseSlideAnimation} bg-secondary rounded-md flex-1 flex flex-col gap-xs h-full ${
+      className={`${baseSlideAnimation} bg-secondary rounded-md flex-1 flex flex-col gap-xs h-full py-xl ${
         isNavExpanded ? "items-start p-md" : "items-center p-xs"
       }`}
     >
@@ -136,6 +129,7 @@ function BaseLinkItem({
   item: LinkItem;
   isNavExpanded: boolean;
 }) {
+  const pathname = usePathname();
   const tooltip = useTooltip({
     anchorSelect: `#link-${item.text}`,
     content: item.text,
@@ -179,6 +173,8 @@ function NestedLinkItem({
   item: LinkItem;
   isNavExpanded: boolean;
 }) {
+  const pathname = usePathname();
+
   const [isShowingChildren, setIsShowingChildren] = React.useState(
     () => !!item.children?.find((child) => child.href === pathname)
   );
@@ -220,9 +216,9 @@ function NestedLinkItem({
       </button>
 
       <div
-        className={`${defaultSmoothAnimation} bg-tertiary/15 p-xs rounded-b-lg flex flex-col gap-xs ${
+        className={`${defaultSmoothAnimation} bg-tertiary/15  rounded-b-lg flex flex-col gap-xs ${
           isNavExpanded && "px-md"
-        } ${isShowingChildren ? "min-h-none" : "h-none p-none"}`}
+        } ${isShowingChildren ? "min-h-none p-xs" : "h-none p-none"}`}
       >
         {isShowingChildren &&
           item.children?.map((child) => (
@@ -233,7 +229,6 @@ function NestedLinkItem({
             />
           ))}
       </div>
-      {/* )} */}
     </div>
   );
 }
@@ -248,13 +243,13 @@ function ToggleExpandButton({
   return (
     <div
       className={`absolute h-full flex flex-row items-center ${
-        isNavExpanded ? "-right-2" : "-right-5"
+        isNavExpanded ? "right-1" : "-right-5"
       }`}
     >
       <button
         aria-label="expand or collapse navigation"
         onClick={handleToggleNav}
-        className={`${baseSlideAnimation} duration-200 py-md bg-success opacity-50 hover:opacity-100 focus:opacity-100`}
+        className={`${baseSlideAnimation} duration-200 py-xl md:py-md bg-success opacity-50 hover:opacity-100 focus:opacity-100`}
       >
         <Icon
           name="hamburger"
@@ -278,40 +273,22 @@ function NavigationHeader() {
   );
 }
 
-function NavigationFooter({
-  isNavExpanded,
-  user_email
-}: {
-  isNavExpanded: boolean;
-  user_email: string;
-}) {
-  return (
-    <div
-      className={`bg-secondary rounded-md min-h-[3rem] p-xs flex items-center ${
-        !isNavExpanded && "justify-center"
-      }`}
-    >
-      {user_email}
-    </div>
-  );
-}
-
 function getLinks() {
   const coreLinks: LinkItem[] = [
     {
       text: "Home",
       icon: "house",
-      href: "#"
+      href: "/"
     },
     {
       text: "Dashboard",
       icon: "threeCircles",
-      href: "#"
+      href: "/dashboard"
     },
     {
       text: "Cart",
       icon: "cart",
-      href: "#"
+      href: "/cart"
     }
   ];
   const adminLinks: LinkItem[] = [
@@ -322,7 +299,7 @@ function getLinks() {
       children: [
         {
           text: "Users",
-          href: "#",
+          href: "/manage-users",
           icon: "users"
         }
       ]
@@ -336,12 +313,12 @@ function getLinks() {
       children: [
         {
           text: "Admins",
-          href: "foo",
+          href: "/manage-admins",
           icon: "lock"
         },
         {
           text: "Permissions",
-          href: "#",
+          href: "/manage-permissions",
           icon: "shield"
         }
       ]

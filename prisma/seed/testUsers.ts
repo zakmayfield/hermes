@@ -15,7 +15,7 @@ const generateUsers = async (numOfUsers: number, role: "ADMIN" | "USER") => {
 const db = new PrismaClient();
 
 const seedTestUsers = async (role: "ADMIN" | "USER") => {
-  const users = await generateUsers(3, role);
+  const users = await generateUsers(2, role);
 
   users.forEach(
     async (user) =>

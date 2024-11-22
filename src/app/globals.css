@@ -46,6 +46,7 @@
     --font-4xl: 1.875rem;
 
     /* DIMENSION SIZES */
+    --size-none: 0rem;
     --size-4xs: 5rem;
     --size-3xs: 7rem;
     --size-2xs: 10rem;

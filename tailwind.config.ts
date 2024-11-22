@@ -19,6 +19,7 @@ const config: Config = {
         ...themeCtx.spacing
       }
     },
+
     padding: {
       ...themeCtx.spacing
     },

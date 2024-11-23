@@ -1,16 +1,48 @@
-import { Button, Form } from "@/ui";
-import { useForm } from "react-hook-form";
+"use client";
+import { useFormContext } from "@/shared/hooks/forms";
+import { Form, Input, SubmitButton } from "@/ui";
+import {
+  createProduct,
+  CreateProductInput,
+  CreateProductOutput
+} from "@/utils/qb/mutations";
+import { createProductValidator } from "@/utils/validators/formValidators";
+import { useMutation } from "@tanstack/react-query";
+
+// TODO: *** Create a separate QuickBooks services directory with one function per file ***
+// TODO: *** Update `createProduct` to accept more product data ***
 
 export const CreateProduct = () => {
-  // TODO: *** Implement form to create product ***
-  const {} = useForm({});
+  const { mutate } = useMutation({ mutationFn: createProduct });
+
+  const { methods, submitHandler } = useFormContext<
+    CreateProductInput,
+    CreateProductOutput | null
+  >({
+    mutate,
+    ...createProductValidator()
+  });
 
   return (
     <div>
-      <Form>
-        <input />
-        <input />
-        <Button options={{ variant: "primary" }}>Create Product</Button>
+      <Form submitHandler={submitHandler}>
+        <Input
+          options={{
+            name: "Name",
+            id: "Name",
+            placeholder: "LI-1",
+            register: methods.register
+          }}
+        />
+        <Input
+          options={{
+            name: "Type",
+            id: "Type",
+            placeholder: "NonInventory",
+            register: methods.register
+          }}
+        />
+        <SubmitButton options={{ text: "Create Product", variant: "primary" }} />
       </Form>
     </div>
   );

@@ -74,7 +74,7 @@ export default async function Page() {
 
       <Icon
         name="quickbooks"
-        style={{ fontSize: "3xl" }}
+        style={{ fontSize: "3xl", className: "opacity-75" }}
       />
     </div>
   );

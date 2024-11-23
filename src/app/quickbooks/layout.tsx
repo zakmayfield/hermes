@@ -10,7 +10,8 @@ export default async function Layout({
   error,
   no_token,
   renew_access,
-  invoicing
+  invoicing,
+  products
 }: {
   children: React.ReactNode;
   no_token: React.ReactNode;
@@ -18,7 +19,6 @@ export default async function Layout({
   renew_access: React.ReactNode;
   products: React.ReactNode;
   invoicing: React.ReactNode;
-  params: Promise<{ code: string; realmId: string }>;
 }) {
   const sessionData = await getAuthSession();
   if (!sessionData || !sessionData.response) {
@@ -49,7 +49,10 @@ export default async function Layout({
       ) : refreshToken.isValidToken && refreshToken.isExpired ? (
         renew_access
       ) : (
-        <div>{invoicing}</div>
+        <div>
+          {/* {invoicing} */}
+          {products}
+        </div>
       )}
     </div>
   );

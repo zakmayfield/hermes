@@ -36,6 +36,20 @@ export const authValidator = () => {
   };
 };
 
+export const createProductValidator = () => {
+  const validator = z.object({
+    Name: z.string().max(100).min(1),
+    Type: z.string()
+  });
+
+  const { defaultValues, resolver } = handleValidator(validator);
+
+  return {
+    defaultValues,
+    resolver
+  };
+};
+
 export const authorizedAdminsValidator = () => {
   const validator = z.object({
     email: z.string().email()

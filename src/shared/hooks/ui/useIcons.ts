@@ -40,7 +40,9 @@ import {
   PiClipboardTextDuotone,
   PiArrowURightDown,
   PiArrowURightDownDuotone,
-  PiArrowsDownUp
+  PiArrowsDownUp,
+  PiInvoice,
+  PiInvoiceDuotone
 } from "react-icons/pi";
 import { SiQuickbooks } from "react-icons/si";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -68,7 +70,8 @@ export type IconNames =
   | "gear"
   | "clipboard"
   | "uArrowDown"
-  | "arrowsUpDown";
+  | "arrowsUpDown"
+  | "invoice";
 
 export type IconVariants = "base" | "duotone";
 
@@ -95,6 +98,7 @@ export const useIcons = (props: UseIconsProps) => {
       hamburger: RxHamburgerMenu,
       house: PiHouse,
       info: PiInfo,
+      invoice: PiInvoice,
       lock: PiLock,
       quickbooks: SiQuickbooks,
       shield: PiShield,
@@ -123,6 +127,7 @@ export const useIcons = (props: UseIconsProps) => {
       hamburger: RxHamburgerMenu,
       house: PiHouseDuotone,
       info: PiInfoDuotone,
+      invoice: PiInvoiceDuotone,
       lock: PiLockDuotone,
       quickbooks: SiQuickbooks,
       shield: PiShield,

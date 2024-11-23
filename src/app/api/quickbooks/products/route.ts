@@ -31,8 +31,6 @@ async function handler() {
 
     const url = `${baseUrl}/company/${qbToken.realm_id}/query?query=select * from Item`;
 
-    console.log({ url });
-
     const response = await fetch(url, {
       method: "GET",
       headers: {

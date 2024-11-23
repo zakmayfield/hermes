@@ -1,3 +1,9 @@
+import { InvoiceManager } from "@/features/invoice-manager/InvoiceManager";
+
 export default function Page() {
-  return <div>Invoicing Page</div>;
+  return (
+    <div>
+      <InvoiceManager />
+    </div>
+  );
 }

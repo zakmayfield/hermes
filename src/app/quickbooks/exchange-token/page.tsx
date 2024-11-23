@@ -45,7 +45,7 @@ export default async function Page({
       <div className="absolute inline-flex items-center gap-sm right-0 top-0">
         <Icon
           name="quickbooks"
-          style={{ fontSize: "3xl" }}
+          style={{ fontSize: "3xl", className: "opacity-75" }}
         />
 
         <Spin

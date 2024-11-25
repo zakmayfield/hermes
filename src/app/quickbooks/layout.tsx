@@ -10,7 +10,7 @@ export default async function Layout({
   error,
   no_token,
   renew_access,
-  invoicing,
+  // invoicing,
   products
 }: {
   children: React.ReactNode;

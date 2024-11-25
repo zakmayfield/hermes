@@ -42,7 +42,7 @@ export const RoleSwitch = () => {
             onChange={handleChange}
             value={data}
           >
-            <option value="USER">USER</option>
+            <option value="CUSTOMER">CUSTOMER</option>
             <option value="ADMIN">ADMIN</option>
             <option value="SUPER">SUPER</option>
           </select>

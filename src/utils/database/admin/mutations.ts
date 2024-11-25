@@ -49,7 +49,7 @@ export const revokeAdminRole = async (email: string) => {
   if (user) {
     await db.user.update({
       where: { email },
-      data: { role: { connect: { name: "USER" } } }
+      data: { role: { connect: { name: "CUSTOMER" } } }
     });
   }
 };

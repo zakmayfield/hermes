@@ -14,7 +14,7 @@ export const GrantPermissions = () => {
     error,
     isLoading
   } = useQuery({
-    queryKey: [QueryKeys.USERS, `role:${$Enums.Roles.ADMIN}`],
+    queryKey: ["users", `role:${$Enums.Roles.ADMIN}`],
     queryFn: async () => await getUsersByRole($Enums.Roles.ADMIN),
     staleTime: Infinity
   });
@@ -71,7 +71,7 @@ function GrantPermissionsItem({
   const [isDropDownOpen, setDropDownOpen] = React.useState(false);
 
   const { data: userPermissions, isLoading } = useQuery({
-    queryKey: [QueryKeys.USER_PERMISSIONS, `user:${admin.id}`],
+    queryKey: ["permissions", `user:${admin.id}`],
     queryFn: async () => await getUserPermissionsById(admin.id),
     staleTime: Infinity
   });

@@ -331,7 +331,7 @@ function getLinks() {
   // ];
 
   // const links = {
-  //   USER: [...coreLinks],
+  //   CUSTOMER: [...coreLinks],
   //   ADMIN: [...adminLinks],
   //   SUPER: [...superLinks]
   // };
@@ -369,7 +369,7 @@ function getLinks() {
   ];
 
   const links2 = {
-    USER: [...userLinks],
+    CUSTOMER: [...userLinks],
     ADMIN: [...userLinks, ...adminLinks],
     SUPER: [...userLinks, ...adminLinks]
   };

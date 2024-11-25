@@ -9,6 +9,10 @@ import {
 import { createProductValidator } from "@/utils/validators/formValidators";
 import { useMutation } from "@tanstack/react-query";
 
+// TODO: *** Attempt QuickBooks authentication with PostMan again, if not configure workspace that uses Bearer token ***
+// TODO: *** Create a brainstorm note to work through the types of requests that will be needed ***
+// Note: several requests rely on other requests, for example creating a product requires `IncomeAccountRef` information, which means
+// an Account query is required to retrieve this data
 // TODO: *** Create a separate QuickBooks services directory with one function per file ***
 // TODO: *** Update `createProduct` to accept more product data ***
 

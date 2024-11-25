@@ -168,7 +168,7 @@ export const createProduct = async ({
     qbToken?.access_token_iv || ""
   );
 
-  const { error, response } = await fetcher<CreateProductOutput>({
+  const { response } = await fetcher<CreateProductOutput>({
     options: {
       fetchOptions: {
         baseUrl: `${baseUrl}/company/${qbToken?.realm_id}/item`,

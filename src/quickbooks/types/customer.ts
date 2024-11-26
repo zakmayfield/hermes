@@ -68,3 +68,30 @@ export type CustomerReadResponse = {
   Customer: Customer;
   time: string;
 };
+
+export type CreateCustomerData = {
+  DisplayName: string;
+  GivenName: string;
+  FamilyName: string;
+  PrimaryPhone: {
+    FreeFormNumber: string;
+  };
+  CompanyName: string;
+  PrimaryEmailAddr: {
+    Address: string;
+  };
+  BillAddr: {
+    Line1: string;
+    City: string;
+    Country: string;
+    CountrySubDivisionCode: string;
+    PostalCode: string;
+  };
+  ShipAddr: {
+    Line1: string;
+    City: string;
+    Country: string;
+    CountrySubDivisionCode: string;
+    PostalCode: string;
+  };
+};

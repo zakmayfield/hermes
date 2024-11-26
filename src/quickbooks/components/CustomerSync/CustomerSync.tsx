@@ -3,7 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 export const CustomerSync = () => {
-  const { data: newCustomers } = useQuery({
+  const {} = useQuery({
     queryKey: ["new_users"]
   });
 

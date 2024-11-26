@@ -4,7 +4,7 @@ import { db } from "@/lib/prisma";
 import { getUserAuthOrThrow } from "@/utils/auth";
 import { decryptToken, encryption_password } from "@/utils/security/encryption";
 import { QuickbooksToken } from "@prisma/client";
-import { CreateQBTokensPayload } from "../types";
+import { CreateOrUpdateQBToken } from "../types/token";
 
 // TOKENS
 export const getQBTokens = async (): Promise<QuickbooksToken | null> => {
@@ -74,7 +74,7 @@ export const getDecryptedQBTokensOrThrow = async (): Promise<{
 export const createOrUpdateQBTokens = async ({
   tokenPayload
 }: {
-  tokenPayload: CreateQBTokensPayload;
+  tokenPayload: CreateOrUpdateQBToken;
 }): Promise<QuickbooksToken> => {
   try {
     return await db.quickbooksToken.upsert({

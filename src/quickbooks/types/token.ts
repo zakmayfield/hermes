@@ -1,4 +1,4 @@
-export type QBAccessTokenPayload = {
+export type QBTokenRequest = {
   grant_type: "authorization_code";
   code: string;
   redirect_uri: string;
@@ -6,7 +6,7 @@ export type QBAccessTokenPayload = {
   client_secret: string;
 };
 
-export type QBAccessTokensResponse = {
+export type QBTokenResponse = {
   expires_in: number;
   token_type: string;
   access_token: string;
@@ -14,7 +14,7 @@ export type QBAccessTokensResponse = {
   x_refresh_token_expires_in: number;
 };
 
-export type CreateQBTokensPayload = {
+export type CreateOrUpdateQBToken = {
   user_id: string;
   realm_id: string;
   encrypted_access_token: string;

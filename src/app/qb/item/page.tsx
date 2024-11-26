@@ -1,3 +1,8 @@
 export default async function Page() {
-  return <div>page</div>;
+  return (
+    <div>
+      <h1>item</h1>
+      page
+    </div>
+  );
 }

@@ -4,7 +4,7 @@ import { validateRoles } from "./utils/security/role";
 
 const authenticationRoutes: string[] = ["/sign-up", "/sign-in"];
 const publicRoutes: string[] = [...authenticationRoutes];
-const adminRoutes: string[] = ["/quickbooks", "/manage-users"];
+const adminRoutes: string[] = ["/qb", "/quickbooks", "/manage-users"];
 const superRoutes: string[] = ["/manage-admins", "/manage-permissions"];
 
 export async function middleware(req: NextRequest) {

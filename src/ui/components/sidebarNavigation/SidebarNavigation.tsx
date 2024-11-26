@@ -295,7 +295,7 @@ function getLinks() {
         {
           text: "Customers",
           icon: "users",
-          href: "/qb/customers"
+          href: "/qb/customer"
         },
         {
           text: "Invoicing",

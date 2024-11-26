@@ -2,9 +2,13 @@
 
 import { db } from "@/lib/prisma";
 import { getUserAuthOrThrow } from "@/utils/auth";
-import { decryptToken, encryption_password } from "@/utils/security/encryption";
 import { QuickbooksToken } from "@prisma/client";
-import { CreateOrUpdateQBToken } from "../types/token";
+import {
+  CreateOrUpdateQBToken,
+  QBExchangeTokenRequest,
+  QBTokenResponse
+} from "../types/token";
+import { fetcher } from "@/utils/database/fetcher";
 
 // TOKENS
 export const getQBTokens = async (): Promise<QuickbooksToken | null> => {
@@ -37,29 +41,15 @@ export const getQBTokensOrThrow = async (): Promise<QuickbooksToken> => {
   }
 };
 
-export const getDecryptedQBTokensOrThrow = async (): Promise<{
-  access_token: string;
-  refresh_token: string;
-}> => {
+export const createOrUpdateQBTokens = async (
+  tokenPayload: CreateOrUpdateQBToken
+): Promise<QuickbooksToken> => {
   try {
-    const qbTokens = await getQBTokensOrThrow();
-
-    const decryptedAccessToken = decryptToken(
-      qbTokens?.encrypted_access_token,
-      encryption_password,
-      qbTokens?.access_token_iv
-    );
-
-    const decryptedRefreshToken = decryptToken(
-      qbTokens?.encrypted_refresh_token,
-      encryption_password,
-      qbTokens?.refresh_token_iv
-    );
-
-    return {
-      access_token: decryptedAccessToken,
-      refresh_token: decryptedRefreshToken
-    };
+    return await db.quickbooksToken.upsert({
+      where: { user_id: tokenPayload.user_id },
+      update: { ...tokenPayload },
+      create: { ...tokenPayload }
+    });
   } catch (error) {
     if (error instanceof Error) {
       console.error(error);
@@ -71,17 +61,62 @@ export const getDecryptedQBTokensOrThrow = async (): Promise<{
   }
 };
 
-export const createOrUpdateQBTokens = async ({
-  tokenPayload
-}: {
-  tokenPayload: CreateOrUpdateQBToken;
-}): Promise<QuickbooksToken> => {
+const access_token_base_url = process.env.QB_ACCESS_TOKEN_URL!;
+
+export const exchangeCodeForAccessToken = async (payload: QBExchangeTokenRequest) => {
   try {
-    return await db.quickbooksToken.upsert({
-      where: { user_id: tokenPayload.user_id },
-      update: { ...tokenPayload },
-      create: { ...tokenPayload }
+    const { response } = await fetcher<QBTokenResponse>({
+      options: {
+        fetchOptions: {
+          baseUrl: access_token_base_url,
+          init: {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: new URLSearchParams({
+              ...payload
+            })
+          }
+        }
+      }
     });
+
+    return response;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error);
+      throw new Error(error.message);
+    }
+
+    console.error(error);
+    throw new Error("Unexpected Server Error");
+  }
+};
+
+export const refreshAccessToken = async (refresh_token: string) => {
+  try {
+    const { response } = await fetcher<QBTokenResponse>({
+      options: {
+        fetchOptions: {
+          baseUrl: access_token_base_url,
+          init: {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/x-www-form-urlencoded",
+              Authorization: `Basic ${btoa(
+                `${process.env.QB_CLIENT_ID!}:${process.env.QB_CLIENT_SECRET!}`
+              )}`
+            },
+            body: `grant_type=refresh_token&refresh_token=${refresh_token}`
+          }
+        }
+      }
+    });
+
+    return response;
   } catch (error) {
     if (error instanceof Error) {
       console.error(error);

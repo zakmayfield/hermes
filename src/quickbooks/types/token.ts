@@ -1,4 +1,4 @@
-export type QBTokenRequest = {
+export type QBExchangeTokenRequest = {
   grant_type: "authorization_code";
   code: string;
   redirect_uri: string;

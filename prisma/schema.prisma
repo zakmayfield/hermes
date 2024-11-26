@@ -58,14 +58,17 @@ model User {
   password        String
   created_at      DateTime  @default(now())
   last_login_date DateTime?
+  company_name    String?
 
   verification_token VerificationToken[]
-  quickbooks_token   QuickbooksToken?
   onboarding         Onboarding?
   permissions        UserPermissions[]
   role               Role                @relation(fields: [role_id], references: [role_id])
   role_id            String
   orders             Order[]
+
+  quickbooks_token    QuickbooksToken?
+  quickbooks_customer QuickbooksCustomerSync?
 
   image    String?
   accounts Account[]
@@ -73,15 +76,12 @@ model User {
 }
 
 model Onboarding {
-  onboarding_id     String           @id @default(cuid())
-  status            OnboardingStatus @default(PENDING)
-  is_approved       Boolean          @default(false)
-  email_verified_at DateTime?
-  has_contact       Boolean          @default(false)
-  has_company       Boolean          @default(false)
-  has_address       Boolean          @default(false)
-  user_id           String           @unique
-  user              User             @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  onboarding_id  String           @id @default(cuid())
+  status         OnboardingStatus @default(PENDING)
+  is_approved    Boolean          @default(false)
+  email_verified DateTime?
+  user_id        String           @unique
+  user           User             @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 
 enum OnboardingStatus {
@@ -160,15 +160,24 @@ model AuthorizedAdmin {
 model QuickbooksToken {
   user_quickbooks_token_id      String   @id @default(cuid())
   user_id                       String   @unique
+  user                          User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
   created_at                    DateTime @default(now())
   encrypted_access_token        String
   encrypted_refresh_token       String
   access_token_expiration_time  DateTime
   refresh_token_expiration_time DateTime
-  realm_id                      String
   access_token_iv               String
   refresh_token_iv              String
-  user                          User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  realm_id                      String
+}
+
+model QuickbooksCustomerSync {
+  quickbooks_customer_sync_id String @id @default(cuid())
+  user_id                     String @unique
+  user                        User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  customer_id  String @unique
+  company_name String
 }
 
 // ----- END QUICKBOOKS

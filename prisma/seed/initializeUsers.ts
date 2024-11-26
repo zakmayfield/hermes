@@ -7,7 +7,12 @@ const db = new PrismaClient();
 const TEST_USER_PW = process.env.TEST_USER_PW || "";
 
 const seedInitialUsers = async () => {
-  const users: { email: string; password: string; role: $Enums.Roles }[] = [
+  const users: {
+    email: string;
+    password: string;
+    role: $Enums.Roles;
+    company_name?: string;
+  }[] = [
     {
       email: "super@test.com",
       password: TEST_USER_PW,
@@ -21,7 +26,8 @@ const seedInitialUsers = async () => {
     {
       email: "customer@test.com",
       password: TEST_USER_PW,
-      role: $Enums.Roles.CUSTOMER
+      role: $Enums.Roles.CUSTOMER,
+      company_name: "ACME Inc"
     }
   ];
 
@@ -31,6 +37,7 @@ const seedInitialUsers = async () => {
       data: {
         email: user.email,
         password: hashedPassword,
+        company_name: user.company_name,
         role: { connect: { name: user.role } },
         onboarding: {
           create: { status: user.role === $Enums.Roles.CUSTOMER ? "PENDING" : "COMPLETE" }

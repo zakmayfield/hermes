@@ -39,6 +39,7 @@ export const config = {
     "/sign-up",
     "/dashboard/:path*",
     "/quickbooks/:path*",
+    "/qb/:path*",
     "/manage-users",
     "/manage-admins"
   ]

@@ -2,8 +2,8 @@
 
 import { Box, Heading } from "@/ui";
 import React from "react";
-import { ReadProducts } from "./read-products/ReadProducts";
-import { CreateProduct } from "./create-product/CreateProduct";
+import { ReadProducts } from "./ProductsRead";
+import { CreateProduct } from "./ProductsCreate";
 
 type TabContext = {
   activeTab: string | null;

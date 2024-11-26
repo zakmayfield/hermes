@@ -1,4 +1,4 @@
-import { ProductsTemplate } from "@/features/quickbooks/products/ProductsTemplate";
+import { ProductsTemplate } from "./ProductsTemplate";
 
 export default function Page() {
   return <ProductsTemplate />;

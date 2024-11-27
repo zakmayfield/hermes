@@ -232,6 +232,7 @@ function CustomerActions({ dbCustomer }: { dbCustomer: UserWithOnboardingStatus 
         {approveUserTooltip}
       </button>
 
+      {/* // TODO: *** Implement create user API call *** */}
       <button
         id="add_user_button"
         className="btn-ghost opacity-75 hover:opacity-100"

@@ -35,12 +35,12 @@ export default async function RootLayout({
           >
             {is_auth && <SidebarNavigation role={session?.user.role} />}
 
-            <Box style={{ padding: "sm", width: "full" }}>
+            <Box style={{ width: "full" }}>
               <Box
                 style={{
                   backgroundColor: "secondary",
                   height: "full",
-                  borderRadius: "lg",
+                  minWidth: "3xl",
                   padding: "lg"
                 }}
               >

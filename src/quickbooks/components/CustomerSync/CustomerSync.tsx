@@ -31,15 +31,19 @@ export const CustomerSync = () => {
   });
 
   return (
-    <div className="bg-primary rounded-lg p-lg flex flex-col gap-lg">
+    <div className="bg-primary rounded-lg p-lg flex flex-col gap-lg ">
       <h2>Manage New Customers</h2>
 
       <div className="bg-secondary rounded-lg p-lg flex flex-col gap-md">
         {/* LABELS */}
         <div className="flex gap-md">
-          <h6 className="w-xs border-b italic opacity-60">Email</h6>
-          <h6 className="w-xs border-b italic opacity-60">Company Name</h6>
-          <h6 className="w-xs border-b italic opacity-60">Link Customer</h6>
+          <h6 className="max-w-xs min-w-xs w-full border-b italic opacity-60">Email</h6>
+          <h6 className="max-w-xs min-w-xs w-full border-b italic opacity-60">
+            Company Name
+          </h6>
+          <h6 className="max-w-xs min-w-xs w-full border-b italic opacity-60">
+            Link Customer
+          </h6>
         </div>
 
         {/* CUSTOMERS */}
@@ -115,11 +119,11 @@ function NewCustomer({
 
   return (
     <div className="flex gap-md">
-      <div className="w-xs">{dbCustomer.email}</div>
-      <div className="w-xs">{dbCustomer.company_name}</div>
+      <div className="max-w-xs min-w-xs w-full">{dbCustomer.email}</div>
+      <div className="max-w-xs min-w-xs w-full">{dbCustomer.company_name}</div>
 
       <Select
-        className={`max-w-xs w-full dark:text-background`}
+        className={`max-w-xs min-w-xs w-full dark:text-background`}
         options={quickbooksCustomers?.map((qbCustomer) => ({
           value: qbCustomer.Id,
           label: qbCustomer.CompanyName
@@ -129,6 +133,8 @@ function NewCustomer({
         onChange={(data) => handleLinkCustomerChange({ data })}
         value={(data && { value: data.customer_id, label: data.company_name }) || null}
       />
+
+      <button className="btn-primary ml-auto min-w-2xs">Approve Customer</button>
 
       {isConfirmationModalShowing && (
         <Modal>

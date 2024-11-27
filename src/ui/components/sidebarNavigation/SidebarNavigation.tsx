@@ -20,7 +20,7 @@ type LinkItem = {
   children?: { href: string; text: string; icon: IconNames }[];
 };
 
-const baseSlideAnimation = "transition-all ease-in-out duration-300";
+const baseSlideAnimation = "transition-all ease-in-out duration-200";
 
 export const SidebarNavigation = (props: SidebarNavigationProps) => {
   const { role } = props;
@@ -94,7 +94,7 @@ function NavigationLinks({
 const defaultLinkStyles =
   "rounded-lg p-xs w-full cursor-pointer hover:bg-primary/70 focus:bg-primary/70";
 const defaultIconStyles = "text-2xl min-w-[20px]";
-const defaultSmoothAnimation = "transition-all ease-in-out duration-300";
+const defaultSmoothAnimation = "transition-all ease-in-out duration-200";
 
 function SignOutButton({ isNavExpanded }: { isNavExpanded: boolean }) {
   const tooltip = useTooltip({

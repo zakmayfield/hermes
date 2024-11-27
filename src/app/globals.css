@@ -102,6 +102,7 @@
   }
 
   input,
+  select,
   textarea {
     @apply dark:text-background;
   }

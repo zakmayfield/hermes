@@ -13,7 +13,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const UserApprovals = () => {
   const { data, error, isLoading } = useQuery({
-    queryKey: [QueryKeys.UNAPPROVED_USERS_LIST],
+    queryKey: [QueryKeys.UNAPPROVED_CUSTOMERS_LIST],
     queryFn: async () => await getUnapprovedUsers(),
     staleTime: Infinity
   });
@@ -63,7 +63,7 @@ function UnapprovedUser({ user }: { user: UserWithOnboardingStatus }) {
 
   const handleFilterCache = (data: Onboarding) => {
     queryClient.setQueryData<UserWithOnboardingStatus[]>(
-      [QueryKeys.UNAPPROVED_USERS_LIST],
+      [QueryKeys.UNAPPROVED_CUSTOMERS_LIST],
       (oldData) => {
         return oldData ? oldData.filter((user) => user.id !== data.user_id) : oldData;
       }

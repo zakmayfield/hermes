@@ -109,7 +109,7 @@ function NavLinksList({ role }: { role: $Enums.Roles }) {
   ];
 
   const navLists: Record<$Enums.Roles, NavItem[]> = {
-    USER: [...coreNavItems],
+    CUSTOMER: [...coreNavItems],
     ADMIN: [...coreNavItems, ...adminNavItems],
     SUPER: [...coreNavItems, ...adminNavItems, ...superNavItems]
   };

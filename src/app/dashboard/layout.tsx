@@ -18,7 +18,7 @@ export default async function DashboardLayout({ admin, user }: LayoutProps) {
   const dashboard =
     user_role.includes($Enums.Roles.ADMIN) ||
     (user_role.includes($Enums.Roles.SUPER) && admin) ||
-    (user_role.includes($Enums.Roles.USER) && user);
+    (user_role.includes($Enums.Roles.CUSTOMER) && user);
 
   return <Layout options={{ as: "main", title: <h1>Dashboard</h1> }}>{dashboard}</Layout>;
 }

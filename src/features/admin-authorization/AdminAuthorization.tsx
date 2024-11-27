@@ -32,7 +32,7 @@ export const AdminAuthorization = () => {
         }
       );
       queryClient.invalidateQueries({
-        queryKey: [QueryKeys.USERS, `role:${$Enums.Roles.ADMIN}`]
+        queryKey: ["users", `role:${$Enums.Roles.ADMIN}`]
       });
     },
     onError(error) {
@@ -123,7 +123,7 @@ function AuthorizedAdminItem({ admin }: { admin: AuthorizedAdmin }) {
       await revokeAdminRole(data.email);
 
       queryClient.invalidateQueries({
-        queryKey: [QueryKeys.USERS, `role:${$Enums.Roles.ADMIN}`]
+        queryKey: ["users", `role:${$Enums.Roles.ADMIN}`]
       });
     }
   });

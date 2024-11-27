@@ -8,7 +8,7 @@ import { getRecentUsers } from "@/utils/database/user/queries";
 
 export const UserAnalytics = () => {
   const { data } = useQuery({
-    queryKey: [QueryKeys.RECENT_USER_SIGNUPS],
+    queryKey: [QueryKeys.RECENT_CUSTOMER_SIGNUPS],
     queryFn: async () => await getRecentUsers(7)
   });
 

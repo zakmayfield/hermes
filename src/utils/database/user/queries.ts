@@ -13,7 +13,7 @@ export const getUnapprovedUsers = async (): Promise<UserWithOnboardingStatus[]> 
   try {
     return await db.user.findMany({
       where: {
-        role: { name: $Enums.Roles.USER },
+        role: { name: $Enums.Roles.CUSTOMER },
         AND: { onboarding: { is_approved: false } }
       },
       include: {
@@ -34,7 +34,7 @@ export const getOnboardPendingUsers = async () => {
   try {
     return await db.user.findMany({
       where: {
-        role: { name: $Enums.Roles.USER },
+        role: { name: $Enums.Roles.CUSTOMER },
         AND: { onboarding: { status: "PENDING" } }
       },
       orderBy: { created_at: "asc" }
@@ -53,7 +53,7 @@ export const getRecentUsers = async (dateRange: 1 | 3 | 7) => {
   try {
     return await db.user.findMany({
       where: {
-        role: { name: $Enums.Roles.USER },
+        role: { name: $Enums.Roles.CUSTOMER },
         AND: { created_at: { gt: selectedRangeDate } }
       },
       orderBy: { created_at: "desc" }

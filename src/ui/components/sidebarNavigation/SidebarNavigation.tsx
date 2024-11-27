@@ -274,62 +274,43 @@ function NavigationHeader() {
 }
 
 function getLinks() {
-  const coreLinks: LinkItem[] = [
+  const userLinks: LinkItem[] = [
     {
       text: "Home",
-      icon: "house",
-      href: "/"
+      href: "/",
+      icon: "house"
     },
     {
       text: "Dashboard",
-      icon: "threeCircles",
-      href: "/dashboard"
-    },
-    {
-      text: "Cart",
-      icon: "cart",
-      href: "/cart"
+      href: "/dashboard",
+      icon: "threeCircles"
     }
   ];
+
   const adminLinks: LinkItem[] = [
-    ...coreLinks,
     {
-      text: "Administrators",
+      text: "Management",
       icon: "clipboard",
       children: [
         {
-          text: "Users",
-          href: "/manage-users",
-          icon: "users"
-        }
-      ]
-    }
-  ];
-  const superLinks: LinkItem[] = [
-    ...adminLinks,
-    {
-      text: "Super",
-      icon: "globe",
-      children: [
-        {
-          text: "Admins",
-          href: "/manage-admins",
-          icon: "lock"
+          text: "Customers",
+          icon: "users",
+          href: "/qb/customer"
         },
         {
-          text: "Permissions",
-          href: "/manage-permissions",
-          icon: "shield"
+          text: "Invoicing",
+          icon: "invoice",
+          href: "/qb/invoice"
         }
       ]
     }
   ];
 
-  const links = {
-    USER: [...coreLinks],
-    ADMIN: [...adminLinks],
-    SUPER: [...superLinks]
+  const links2 = {
+    CUSTOMER: [...userLinks],
+    ADMIN: [...userLinks, ...adminLinks],
+    SUPER: [...userLinks, ...adminLinks]
   };
 
-  return links;
+  return links2;
 }

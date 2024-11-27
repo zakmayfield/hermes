@@ -3,8 +3,8 @@ export enum QueryKeys {
   AUTHORIZED_ADMINS_LIST = "authorized_admins_list",
   ONBOARD_PENDING_LIST = "onboard_pending_list",
   PERMISSIONS = "permissions",
-  RECENT_USER_SIGNUPS = "recent_user_signups",
-  UNAPPROVED_USERS_LIST = "unapproved_users_list",
-  USERS = "users",
-  USER_PERMISSIONS = "user_permissions"
+  RECENT_CUSTOMER_SIGNUPS = "recent_customer_signups",
+  UNAPPROVED_CUSTOMERS_LIST = "unapproved_customers_list",
+  CUSTOMERS = "customers",
+  CUSTOMER_PERMISSIONS = "customer_permissions"
 }

@@ -121,7 +121,6 @@ function NewCustomer({
     <div className="flex gap-md">
       <div className="max-w-xs min-w-xs w-full">{dbCustomer.email}</div>
       <div className="max-w-xs min-w-xs w-full">{dbCustomer.company_name}</div>
-
       <Select
         className={`max-w-xs min-w-xs w-full dark:text-background`}
         options={quickbooksCustomers?.map((qbCustomer) => ({
@@ -134,6 +133,8 @@ function NewCustomer({
         value={(data && { value: data.customer_id, label: data.company_name }) || null}
       />
 
+      {/* // TODO: *** integrate dropdown with approve or create customer *** */}
+      {/* or two small square buttons to handle these actions */}
       <button className="btn-primary ml-auto min-w-2xs">Approve Customer</button>
 
       {isConfirmationModalShowing && (

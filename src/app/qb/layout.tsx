@@ -5,12 +5,10 @@ import { redirect } from "next/navigation";
 
 export default async function Layout({
   children,
-  auth_prompt,
-  expired_session
+  auth_prompt
 }: {
   children: React.ReactNode;
   auth_prompt: React.ReactNode;
-  expired_session: React.ReactNode;
 }) {
   const userAuth = await getUserAuth();
   if (!userAuth) {
@@ -24,13 +22,5 @@ export default async function Layout({
     await handleTokenRefresh(qbToken);
   }
 
-  return (
-    <div>
-      {!qbToken
-        ? auth_prompt
-        : refreshToken.isValid && refreshToken.isExpired
-        ? expired_session
-        : children}
-    </div>
-  );
+  return <div>{!qbToken ? auth_prompt : children}</div>;
 }

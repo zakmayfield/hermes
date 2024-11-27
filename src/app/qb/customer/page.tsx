@@ -9,9 +9,13 @@ export default async function Page() {
     redirect("/qb");
   }
 
-  const { accessToken } = await validateTokenExpiration(qbTokens);
-  if (accessToken.isExpired) {
-    await handleTokenRefresh(qbTokens);
+  const { accessToken, refreshToken } = await validateTokenExpiration(qbTokens);
+  if (accessToken.isExpired || refreshToken.isExpired) {
+    const { error } = await handleTokenRefresh(qbTokens);
+
+    if (error) {
+      throw new Error("Unable to refresh your session");
+    }
   }
 
   return (

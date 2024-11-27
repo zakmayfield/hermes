@@ -1,9 +1,9 @@
 import { Token } from "@/quickbooks/types/token";
 import { qb_token_url } from "@/quickbooks/utils/constants";
-import { decrypt } from "@/quickbooks/utils/token";
 import { fetcher } from "@/utils/fetcher";
 import { QuickbooksToken } from "@prisma/client";
 import { handleUpsertTokenData } from "./database";
+import { decrypt } from "@/quickbooks/utils/encryption";
 
 export const handleTokenRefresh = async (payload: QuickbooksToken) => {
   const refreshToken = await decrypt(
@@ -17,7 +17,7 @@ export const handleTokenRefresh = async (payload: QuickbooksToken) => {
       throw new Error("Invalid URL");
     }
 
-    const { response } = await fetcher<Token>({
+    const { error, response } = await fetcher<Token>({
       options: {
         fetchOptions: {
           baseUrl: qb_token_url,
@@ -44,7 +44,7 @@ export const handleTokenRefresh = async (payload: QuickbooksToken) => {
       });
     }
 
-    return response;
+    return { error, response };
   } catch (error) {
     if (error instanceof Error) {
       console.error(error);

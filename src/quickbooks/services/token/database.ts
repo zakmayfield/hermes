@@ -2,7 +2,8 @@
 
 import { db } from "@/lib/prisma";
 import { Token } from "@/quickbooks/types/token";
-import { encrypt, formatUpsertTokenPayload } from "@/quickbooks/utils/token";
+import { encrypt } from "@/quickbooks/utils/encryption";
+import { formatUpsertTokenPayload } from "@/quickbooks/utils/token";
 import { getUserAuthOrThrow } from "@/utils/auth";
 import { QuickbooksToken } from "@prisma/client";
 

@@ -6,3 +6,6 @@ export const qb_token_url = process.env.QB_ACCESS_TOKEN_URL;
 export const qb_base_url = process.env.QB_SANDBOX_BASE_URL;
 export const qb_scope = process.env.QB_SCOPE;
 export const qb_state = process.env.QB_STATE;
+
+export const encrypt_algo = process.env.ENCRYPT_ALGO;
+export const encrypt_key = process.env.ENCRYPT_KEY;

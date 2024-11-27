@@ -9,6 +9,7 @@ import {
 import { Modal } from "@/shared/components";
 import { useToast, useTooltip } from "@/shared/hooks/ui";
 import { Icon } from "@/ui";
+import { toggleUserApproval } from "@/utils/database/user/mutations";
 import {
   getUnapprovedUsers,
   UserWithOnboardingStatus
@@ -136,7 +137,7 @@ function NewCustomer({
 
       {/* // TODO: *** integrate dropdown with approve or create customer *** */}
       {/* or two small square buttons to handle these actions */}
-      <CustomerActions />
+      <CustomerActions dbCustomer={dbCustomer} />
 
       {isConfirmationModalShowing && (
         <Modal>
@@ -196,7 +197,7 @@ function NewCustomer({
   );
 }
 
-function CustomerActions() {
+function CustomerActions({ dbCustomer }: { dbCustomer: UserWithOnboardingStatus }) {
   const approveUserTooltip = useTooltip({
     anchorSelect: "#approve_user_button",
     place: "top-end",
@@ -208,9 +209,19 @@ function CustomerActions() {
     place: "top-end",
     content: "Create QuickBooks Customer"
   });
+
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation({
+    mutationFn: toggleUserApproval,
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: ["new_users"] });
+    }
+  });
+
   return (
     <div className="ml-auto flex gap-sm">
       <button
+        onClick={() => mutate(dbCustomer.id)}
         id="approve_user_button"
         className="btn-ghost opacity-75 hover:opacity-100"
       >

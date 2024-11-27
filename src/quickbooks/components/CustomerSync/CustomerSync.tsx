@@ -7,7 +7,8 @@ import {
   syncQuickbooksAccount
 } from "@/quickbooks/services/customer";
 import { Modal } from "@/shared/components";
-import { useToast } from "@/shared/hooks/ui";
+import { useToast, useTooltip } from "@/shared/hooks/ui";
+import { Icon } from "@/ui";
 import {
   getUnapprovedUsers,
   UserWithOnboardingStatus
@@ -31,7 +32,7 @@ export const CustomerSync = () => {
   });
 
   return (
-    <div className="bg-primary rounded-lg p-lg flex flex-col gap-lg ">
+    <div className="bg-primary rounded-lg p-lg flex flex-col gap-lg">
       <h2>Manage New Customers</h2>
 
       <div className="bg-secondary rounded-lg p-lg flex flex-col gap-md">
@@ -118,7 +119,7 @@ function NewCustomer({
   });
 
   return (
-    <div className="flex gap-md">
+    <div className="flex gap-md items-center bg-primary/50 p-sm rounded-lg">
       <div className="max-w-xs min-w-xs w-full">{dbCustomer.email}</div>
       <div className="max-w-xs min-w-xs w-full">{dbCustomer.company_name}</div>
       <Select
@@ -135,7 +136,7 @@ function NewCustomer({
 
       {/* // TODO: *** integrate dropdown with approve or create customer *** */}
       {/* or two small square buttons to handle these actions */}
-      <button className="btn-primary ml-auto min-w-2xs">Approve Customer</button>
+      <CustomerActions />
 
       {isConfirmationModalShowing && (
         <Modal>
@@ -191,6 +192,45 @@ function NewCustomer({
           </div>
         </Modal>
       )}
+    </div>
+  );
+}
+
+function CustomerActions() {
+  const approveUserTooltip = useTooltip({
+    anchorSelect: "#approve_user_button",
+    place: "top-end",
+    content: "Approve Customer"
+  });
+
+  const addUserTooltip = useTooltip({
+    anchorSelect: "#add_user_button",
+    place: "top-end",
+    content: "Create QuickBooks Customer"
+  });
+  return (
+    <div className="ml-auto flex gap-sm">
+      <button
+        id="approve_user_button"
+        className="btn-ghost opacity-75 hover:opacity-100"
+      >
+        <Icon
+          name="check"
+          style={{ fontSize: "2xl" }}
+        />
+        {approveUserTooltip}
+      </button>
+
+      <button
+        id="add_user_button"
+        className="btn-ghost opacity-75 hover:opacity-100"
+      >
+        <Icon
+          name="userPlus"
+          style={{ fontSize: "2xl" }}
+        />
+        {addUserTooltip}
+      </button>
     </div>
   );
 }

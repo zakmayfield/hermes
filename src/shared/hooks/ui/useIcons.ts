@@ -42,7 +42,11 @@ import {
   PiArrowURightDownDuotone,
   PiArrowsDownUp,
   PiInvoice,
-  PiInvoiceDuotone
+  PiInvoiceDuotone,
+  PiDotsThreeCircle,
+  PiDotsThreeCircleDuotone,
+  PiUserPlus,
+  PiUserPlusDuotone
 } from "react-icons/pi";
 import { SiQuickbooks } from "react-icons/si";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -71,7 +75,9 @@ export type IconNames =
   | "clipboard"
   | "uArrowDown"
   | "arrowsUpDown"
-  | "invoice";
+  | "invoice"
+  | "dotsThreeCircle"
+  | "userPlus";
 
 export type IconVariants = "base" | "duotone";
 
@@ -91,6 +97,7 @@ export const useIcons = (props: UseIconsProps) => {
       check: PiCheckCircle,
       clipboard: PiClipboardText,
       crown: PiCrown,
+      dotsThreeCircle: PiDotsThreeCircle,
       downarrowCircle: PiCaretCircleDown,
       error: PiWarningCircle,
       gear: PiGear,
@@ -107,6 +114,7 @@ export const useIcons = (props: UseIconsProps) => {
       threeCircles: PiCirclesThree,
       trash: PiTrash,
       uArrowDown: PiArrowURightDown,
+      userPlus: PiUserPlus,
       users: PiUsers,
       x: PiXCircle
     };
@@ -120,6 +128,7 @@ export const useIcons = (props: UseIconsProps) => {
       check: PiCheckCircleDuotone,
       clipboard: PiClipboardTextDuotone,
       crown: PiCrownDuotone,
+      dotsThreeCircle: PiDotsThreeCircleDuotone,
       downarrowCircle: PiCaretCircleDownDuotone,
       error: PiWarningCircleDuotone,
       gear: PiGearDuotone,
@@ -136,6 +145,7 @@ export const useIcons = (props: UseIconsProps) => {
       threeCircles: PiCirclesThreeDuotone,
       trash: PiTrashDuotone,
       uArrowDown: PiArrowURightDownDuotone,
+      userPlus: PiUserPlusDuotone,
       users: PiUsersDuotone,
       x: PiXCircleDuotone
     };

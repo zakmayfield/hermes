@@ -6,7 +6,6 @@ import {
   getQBSyncAccount,
   syncQuickbooksAccount
 } from "@/quickbooks/services/customer";
-import { Customer, CustomerQueryResponse } from "@/quickbooks/types/customer";
 import { Modal } from "@/shared/components";
 import { useToast } from "@/shared/hooks/ui";
 import {

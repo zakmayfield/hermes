@@ -2,10 +2,29 @@
 
 import { QuickbooksToken } from "@prisma/client";
 import { UpsertToken } from "../types/token";
-import { getQBTokens } from "../services/token";
+import { getQBTokens, getQBTokensOrThrow, handleTokenRefresh } from "../services/token";
+import { decrypt } from "./encryption";
 
 export const hasQbTokens = async (): Promise<boolean> => {
   return !!(await getQBTokens());
+};
+
+export const handleDecryptAccessToken = async () => {
+  let qbToken = await getQBTokensOrThrow();
+
+  const { accessToken } = await validateTokenExpiration(qbToken);
+
+  if (accessToken.isExpired) {
+    await handleTokenRefresh(qbToken);
+    qbToken = await getQBTokensOrThrow();
+  }
+
+  const decryptedAccessToken = await decrypt(
+    qbToken.encrypted_access_token,
+    qbToken.access_token_iv
+  );
+
+  return { realmId: qbToken.realm_id, accessToken: decryptedAccessToken };
 };
 
 export const validateTokenExpiration = async (payload: QuickbooksToken | null) => {

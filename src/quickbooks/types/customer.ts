@@ -1,4 +1,4 @@
-type Customer = {
+export type Customer = {
   Taxable: boolean;
   BillAddr: {
     Id: string;

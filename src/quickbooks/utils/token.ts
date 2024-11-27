@@ -10,7 +10,7 @@ const encryptAlgo = process.env.ENCRYPTION_ALGO || "";
 
 export const encrypt = async (str: string) => {
   const iv = crypto.randomBytes(16).toString("hex").slice(0, 16);
-  let key = crypto
+  const key = crypto
     .createHash("sha256")
     .update(String(encryptPassword))
     .digest("base64")

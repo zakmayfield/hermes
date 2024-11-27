@@ -22,7 +22,7 @@ export default async function Page({
       token: tokenData
     });
 
-    redirect("/qb");
+    redirect("/qb/customer");
   }
 
   return <div>Authenticating...</div>;

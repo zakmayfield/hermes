@@ -1,12 +1,8 @@
-export type QBExchangeTokenRequest = {
-  grant_type: "authorization_code";
+export type ExchangeToken = {
   code: string;
-  redirect_uri: string;
-  client_id: string;
-  client_secret: string;
 };
 
-export type QBTokenResponse = {
+export type Token = {
   expires_in: number;
   token_type: string;
   access_token: string;
@@ -14,7 +10,7 @@ export type QBTokenResponse = {
   x_refresh_token_expires_in: number;
 };
 
-export type CreateOrUpdateQBToken = {
+export type UpsertToken = {
   user_id: string;
   realm_id: string;
   encrypted_access_token: string;

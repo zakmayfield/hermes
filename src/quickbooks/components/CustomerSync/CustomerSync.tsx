@@ -14,7 +14,6 @@ import {
   getUnapprovedUsers,
   UserWithOnboardingStatus
 } from "@/utils/database/user/queries";
-import { QuickbooksCustomerSync } from "@prisma/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import Select, { SingleValue } from "react-select";
@@ -37,17 +36,6 @@ export const CustomerSync = () => {
       <h2>Manage New Customers</h2>
 
       <div className="bg-secondary rounded-lg p-lg flex flex-col gap-md">
-        {/* LABELS */}
-        <div className="flex gap-md">
-          <h6 className="max-w-xs min-w-xs w-full border-b italic opacity-60">Email</h6>
-          <h6 className="max-w-xs min-w-xs w-full border-b italic opacity-60">
-            Company Name
-          </h6>
-          <h6 className="max-w-xs min-w-xs w-full border-b italic opacity-60">
-            Link Customer
-          </h6>
-        </div>
-
         {/* CUSTOMERS */}
         {databaseUsers?.map((dbCustomer) => (
           <NewCustomer
@@ -97,17 +85,12 @@ function NewCustomer({
 
   const { mutate } = useMutation({
     mutationFn: syncQuickbooksAccount,
-    onSuccess(data) {
+    onSuccess() {
       toast("Successfully linked account");
       setIsConfirmationModalShowing(false);
       setSelectedCustomer(null);
 
-      queryClient.setQueryData<QuickbooksCustomerSync>(
-        ["linked_qb_account", dbCustomer.id],
-        (oldData) => {
-          return oldData ? { ...data } : oldData;
-        }
-      );
+      queryClient.invalidateQueries({ queryKey: ["linked_qb_account"] });
     },
     onError(error) {
       toast(error.message, "error");
@@ -121,10 +104,10 @@ function NewCustomer({
 
   return (
     <div className="flex gap-md items-center bg-primary/50 p-sm rounded-lg">
-      <div className="max-w-xs min-w-xs w-full">{dbCustomer.email}</div>
-      <div className="max-w-xs min-w-xs w-full">{dbCustomer.company_name}</div>
+      <div>{dbCustomer.email}</div>
+      <div>{dbCustomer.company_name}</div>
       <Select
-        className={`max-w-xs min-w-xs w-full dark:text-background`}
+        className={`dark:text-background`}
         options={quickbooksCustomers?.map((qbCustomer) => ({
           value: qbCustomer.Id,
           label: qbCustomer.CompanyName
@@ -210,16 +193,19 @@ function CustomerActions({ dbCustomer }: { dbCustomer: UserWithOnboardingStatus 
     content: "Create QuickBooks Customer"
   });
 
+  const { toast } = useToast();
+
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationFn: toggleUserApproval,
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ["new_users"] });
+      toast(`Successfully approved ${dbCustomer.company_name}`);
     }
   });
 
   return (
-    <div className="ml-auto flex gap-sm">
+    <div className="flex items-center gap-sm">
       <button
         onClick={() => mutate(dbCustomer.id)}
         id="approve_user_button"

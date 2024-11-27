@@ -40,7 +40,6 @@ export default async function RootLayout({
                 style={{
                   backgroundColor: "secondary",
                   height: "full",
-                  minWidth: "3xl",
                   padding: "lg"
                 }}
               >

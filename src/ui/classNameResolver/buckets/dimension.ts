@@ -13,7 +13,7 @@ export enum Width {
   "2xl" = "2xl",
   "3xl" = "3xl",
   full = "full",
-  half = "half",
+  "1/2" = "1/2",
   "1/3" = "1/3",
   "2/3" = "2/3"
 }
@@ -46,7 +46,7 @@ export const widthtBucket = {
     [Width["2xl"]]: "w-2xl",
     [Width["3xl"]]: "w-3xl",
     [Width.full]: "w-full",
-    [Width.half]: "w-half",
+    [Width["1/2"]]: "w-1/2",
     [Width["1/3"]]: "w-1/3",
     [Width["2/3"]]: "w-2/3"
   },
@@ -63,7 +63,7 @@ export const widthtBucket = {
     [Width["2xl"]]: "min-w-2xl",
     [Width["3xl"]]: "min-w-3xl",
     [Width.full]: "min-w-full",
-    [Width.half]: "min-w-half",
+    [Width["1/2"]]: "min-w-1/2",
     [Width["1/3"]]: "min-w-1/3",
     [Width["2/3"]]: "min-w-2/3"
   },
@@ -80,7 +80,7 @@ export const widthtBucket = {
     [Width["2xl"]]: "max-w-2xl",
     [Width["3xl"]]: "max-w-3xl",
     [Width.full]: "max-w-full",
-    [Width.half]: "max-w-half",
+    [Width["1/2"]]: "max-w-1/2",
     [Width["1/3"]]: "max-w-1/3",
     [Width["2/3"]]: "max-w-2/3"
   }

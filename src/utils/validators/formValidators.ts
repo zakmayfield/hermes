@@ -36,6 +36,68 @@ export const authValidator = () => {
   };
 };
 
+export const signupValidator = () => {
+  const customerSchema = z.object({
+    email: z.string().email(),
+    password: z.string().min(1, { message: "Password is required" }),
+    isExistingCustomer: z.boolean(),
+    givenName: z.optional(z.string()),
+    familyName: z.optional(z.string()),
+    companyName: z.optional(z.string()),
+    phoneNumber: z.optional(
+      z.string().regex(/^\d{10}$/, "Phone number must be 10 digits")
+    ),
+    isBillingSameAsShipping: z.boolean()
+  });
+
+  const addressSchema = z.object({
+    line1: z.string(),
+    city: z.string(),
+    country: z.string(),
+    state: z.string(),
+    postalCode: z.string()
+  });
+
+  const validator = z.object({
+    customerInfo: customerSchema,
+    shipAddr: z.optional(addressSchema),
+    billAddr: z.optional(addressSchema)
+  });
+
+  type DefaultDataType = z.infer<typeof validator>;
+
+  return {
+    validator,
+    defaultValues: {
+      customerInfo: {
+        email: "",
+        password: "",
+        isExistingCustomer: true,
+        givenName: "",
+        familyName: "",
+        companyName: "",
+        phoneNumber: "",
+        isBillingSameAsShipping: false
+      },
+      shipAddr: {
+        line1: "",
+        city: "",
+        country: "",
+        state: "",
+        postalCode: ""
+      },
+      billAddr: {
+        line1: "",
+        city: "",
+        country: "",
+        state: "",
+        postalCode: ""
+      }
+    } as DefaultDataType,
+    resolver: zodResolver(validator)
+  };
+};
+
 export const authorizedAdminsValidator = () => {
   const validator = z.object({
     email: z.string().email()

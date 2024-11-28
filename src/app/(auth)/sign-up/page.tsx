@@ -1,13 +1,12 @@
 import { SignUpForm } from "@/features/authentication/molecules";
-import { Layout } from "@/ui/components";
 
 export default function SignUp() {
   return (
-    <Layout
-      options={{ title: <h1>Sign Up</h1> }}
-      style={{ parentWrapper: { padding: "none", spaceY: "md" } }}
-    >
-      <SignUpForm />
-    </Layout>
+    <div className="w-full flex justify-center">
+      <div className="flex flex-col gap-lg w-full lg:items-center lg:w-2xl">
+        <h1>Create an Account</h1>
+        <SignUpForm />
+      </div>
+    </div>
   );
 }

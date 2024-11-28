@@ -104,7 +104,7 @@
   input,
   select,
   textarea {
-    @apply dark:text-background;
+    @apply dark:text-background px-[0.5rem] py-[0.25rem] rounded-md;
   }
 }
 

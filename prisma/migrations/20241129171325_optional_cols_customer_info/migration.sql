@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "CustomerInfo" ALTER COLUMN "givenName" DROP NOT NULL,
+ALTER COLUMN "familyName" DROP NOT NULL,
+ALTER COLUMN "phoneNumber" DROP NOT NULL;

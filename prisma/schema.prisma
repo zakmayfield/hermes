@@ -70,9 +70,46 @@ model User {
   quickbooks_token    QuickbooksToken?
   quickbooks_customer QuickbooksCustomerSync?
 
+  customerInfo     CustomerInfo?
+  customerShipAddr CustomerShipAddr?
+  customerBillAddr CustomerBillAddr?
+
   image    String?
   accounts Account[]
   sessions Session[]
+}
+
+model CustomerInfo {
+  customer_info_id   String  @id @default(cuid())
+  isExistingCustomer Boolean @default(false)
+  companyName        String
+  givenName          String?
+  familyName         String?
+  phoneNumber        String?
+  user_id            String  @unique
+  user               User    @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+model CustomerShipAddr {
+  customer_ship_addr_id String @id @default(cuid())
+  line1                 String
+  city                  String
+  country               String
+  state                 String
+  postalCode            String
+  user_id               String @unique
+  user                  User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+model CustomerBillAddr {
+  customer_bill_addr_id String @id @default(cuid())
+  line1                 String
+  city                  String
+  country               String
+  state                 String
+  postalCode            String
+  user_id               String @unique
+  user                  User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 
 model Onboarding {

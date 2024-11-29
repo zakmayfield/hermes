@@ -4,11 +4,15 @@ import { CoreSessionUser } from "../database/models/User";
 import { getCoreSessionUser } from "./getCoreSessionUser";
 
 export const getCoreSessionUserOrThrow = async (): Promise<CoreSessionUser> => {
-  const userAuth = await getCoreSessionUser();
+  const session = await getCoreSessionUser();
 
-  if (!userAuth) {
+  if (!session) {
     throw new Error("Unauthenticated");
   }
 
-  return userAuth;
+  return {
+    id: session.id,
+    email: session.email,
+    role: session.role
+  };
 };

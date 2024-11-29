@@ -1,6 +1,6 @@
 "use server";
 
-import { getSession } from "@/data/session";
+import { getSession } from "./getSession";
 
 export const isUserAuthenticated = async (): Promise<boolean> => {
   const sessionData = await getSession();

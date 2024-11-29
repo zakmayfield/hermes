@@ -4,8 +4,8 @@ import { db } from "@/lib/prisma";
 import { hasPermission } from "@/data/database/queries";
 import { $Enums, Onboarding } from "@prisma/client";
 
-export type ToggleUserApprovalInput = string;
-export type ToggleUserApprovalOutput = Onboarding;
+type ToggleUserApprovalInput = string;
+type ToggleUserApprovalOutput = Onboarding;
 
 export const toggleUserIsApproved = async (
   user_id: ToggleUserApprovalInput

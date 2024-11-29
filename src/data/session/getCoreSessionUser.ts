@@ -1,7 +1,7 @@
 "use server";
 
-import { getSession } from "@/data/session";
 import { CoreSessionUser } from "../database/models/User";
+import { getSession } from "./getSession";
 
 export const getCoreSessionUser = async (): Promise<CoreSessionUser | null> => {
   const sessionData = await getSession();

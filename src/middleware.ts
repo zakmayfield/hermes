@@ -1,6 +1,6 @@
 import { getToken } from "next-auth/jwt";
 import { NextResponse, NextRequest } from "next/server";
-import { validateRoles } from "./utils/security/role";
+import { hasValidRole } from "./utils/hasValidRole";
 
 const authenticationRoutes: string[] = ["/sign-up", "/sign-in"];
 const publicRoutes: string[] = [...authenticationRoutes];
@@ -21,12 +21,12 @@ export async function middleware(req: NextRequest) {
   }
 
   // Role validation
-  const { hasValidRole: isAdmin } = await validateRoles(["ADMIN", "SUPER"], token?.role);
+  const isAdmin = await hasValidRole(["ADMIN", "SUPER"], token?.role);
   if (!isAdmin && adminRoutes.includes(req.nextUrl.pathname)) {
     return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
   }
 
-  const { hasValidRole: isSuper } = await validateRoles(["SUPER"], token?.role);
+  const isSuper = await hasValidRole(["SUPER"], token?.role);
   if (!isSuper && superRoutes.includes(req.nextUrl.pathname)) {
     return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
   }

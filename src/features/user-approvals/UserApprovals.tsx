@@ -2,19 +2,16 @@
 
 import { useToast } from "@/shared/hooks/ui";
 import { Box, Button, Heading, Icon, Pulse, Text } from "@/ui";
-import { QueryKeys } from "@/utils/core/queryKeys";
-import { toggleUserApproval } from "@/utils/database/user/mutations";
-import {
-  getUnapprovedUsers,
-  UserWithOnboardingStatus
-} from "@/utils/database/user/queries";
-import { $Enums, Onboarding } from "@prisma/client";
+import { toggleUserIsApproved } from "@/data/database/mutations";
+import { $Enums } from "@prisma/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getCustomersByIsApproved } from "@/data/database/queries";
+import { UserWithOnboardingStatus } from "@/data/database/models/User";
 
 export const UserApprovals = () => {
   const { data, error, isLoading } = useQuery({
-    queryKey: [QueryKeys.UNAPPROVED_CUSTOMERS_LIST],
-    queryFn: async () => await getUnapprovedUsers(),
+    queryKey: ["customers", "is_approved", false],
+    queryFn: async () => await getCustomersByIsApproved({ is_approved: false }),
     staleTime: Infinity
   });
 
@@ -61,19 +58,14 @@ function UnapprovedUser({ user }: { user: UserWithOnboardingStatus }) {
 
   const queryClient = useQueryClient();
 
-  const handleFilterCache = (data: Onboarding) => {
-    queryClient.setQueryData<UserWithOnboardingStatus[]>(
-      [QueryKeys.UNAPPROVED_CUSTOMERS_LIST],
-      (oldData) => {
-        return oldData ? oldData.filter((user) => user.id !== data.user_id) : oldData;
-      }
-    );
+  const handleInvalidateQuery = () => {
+    queryClient.invalidateQueries({ queryKey: ["customers", "is_approved", false] });
   };
 
   const { mutate } = useMutation({
-    mutationFn: toggleUserApproval,
-    onSuccess(data) {
-      handleFilterCache(data);
+    mutationFn: toggleUserIsApproved,
+    onSuccess() {
+      handleInvalidateQuery();
       toast("Successfully approved user");
     },
     onError(error) {

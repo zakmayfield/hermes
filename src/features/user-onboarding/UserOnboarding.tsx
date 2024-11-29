@@ -1,15 +1,14 @@
 "use client";
+import { UserWithOnboardingStatus } from "@/data/database/models/User";
+import { getCustomersByOnboardingStatus } from "@/data/database/queries";
 import { useTooltip } from "@/shared/hooks/ui";
 import { Box, Button, Heading, Icon, Pulse } from "@/ui";
-import { QueryKeys } from "@/utils/core/queryKeys";
-import { getOnboardPendingUsers } from "@/utils/database/user/queries";
-import { User } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
 
 export const UserOnboarding = () => {
   const { data, error, isLoading } = useQuery({
-    queryKey: [QueryKeys.ONBOARD_PENDING_LIST],
-    queryFn: async () => await getOnboardPendingUsers(),
+    queryKey: ["customers", "pending"],
+    queryFn: async () => await getCustomersByOnboardingStatus({ status: "PENDING" }),
     staleTime: Infinity
   });
 
@@ -51,7 +50,7 @@ export const UserOnboarding = () => {
   );
 };
 
-function PendingUser({ user }: { user: Omit<User, "password"> }) {
+function PendingUser({ user }: { user: UserWithOnboardingStatus }) {
   const tooltip = useTooltip({
     anchorSelect: "#notify-button",
     content: `Send reminder email to complete onboarding`,

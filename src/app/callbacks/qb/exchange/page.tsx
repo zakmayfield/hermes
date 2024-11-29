@@ -1,5 +1,5 @@
+import { getCoreSessionUserOrThrow } from "@/data/session";
 import { handleTokenExchange, handleUpsertTokenData } from "@/quickbooks/services/token";
-import { getUserAuthOrThrow } from "@/utils/auth";
 import { redirect } from "next/navigation";
 
 export default async function Page({
@@ -7,7 +7,7 @@ export default async function Page({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const { id } = await getUserAuthOrThrow();
+  const { id } = await getCoreSessionUserOrThrow();
   const code = (await searchParams).code;
   const realmId = (await searchParams).realmId;
 

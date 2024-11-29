@@ -3,13 +3,12 @@ import { Box, Heading } from "@/ui";
 import { useQuery } from "@tanstack/react-query";
 import { formatSignupData } from "./UserAnalytics.utils";
 import { useChart } from "@/shared/hooks/ui";
-import { QueryKeys } from "@/utils/core/queryKeys";
-import { getRecentUsers } from "@/utils/database/user/queries";
+import { getCustomersCreatedWithinDateRange } from "@/data/database/queries";
 
 export const UserAnalytics = () => {
   const { data } = useQuery({
-    queryKey: [QueryKeys.RECENT_CUSTOMER_SIGNUPS],
-    queryFn: async () => await getRecentUsers(7)
+    queryKey: ["recently_created_customers"],
+    queryFn: async () => await getCustomersCreatedWithinDateRange({ dateRange: 7 })
   });
 
   {

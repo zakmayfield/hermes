@@ -9,19 +9,17 @@ import {
 import { Modal } from "@/shared/components";
 import { useToast, useTooltip } from "@/shared/hooks/ui";
 import { Icon } from "@/ui";
-import { toggleUserApproval } from "@/utils/database/user/mutations";
-import {
-  getUnapprovedUsers,
-  UserWithOnboardingStatus
-} from "@/utils/database/user/queries";
+import { toggleUserIsApproved } from "@/data/database/mutations";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import Select, { SingleValue } from "react-select";
+import { getCustomersByIsApproved } from "@/data/database/queries";
+import { UserWithOnboardingStatus } from "@/data/database/models/User";
 
 export const CustomerSync = () => {
   const { data: databaseUsers } = useQuery({
-    queryKey: ["new_users"],
-    queryFn: async () => await getUnapprovedUsers(),
+    queryKey: ["new_customers"],
+    queryFn: async () => await getCustomersByIsApproved({ is_approved: false }),
     staleTime: Infinity
   });
 
@@ -197,9 +195,9 @@ function CustomerActions({ dbCustomer }: { dbCustomer: UserWithOnboardingStatus 
 
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
-    mutationFn: toggleUserApproval,
+    mutationFn: toggleUserIsApproved,
     onSuccess() {
-      queryClient.invalidateQueries({ queryKey: ["new_users"] });
+      queryClient.invalidateQueries({ queryKey: ["new_customers"] });
       toast(`Successfully approved ${dbCustomer.company_name}`);
     }
   });

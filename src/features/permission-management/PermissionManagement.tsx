@@ -1,21 +1,18 @@
 "use client";
 
+import { RolePermissionsWithPermission } from "@/data/database/models/Permission";
+import { togglePermissionLevel } from "@/data/database/mutations";
+import { getRoleById, getRolePermissionsByRoles } from "@/data/database/queries";
 import { useToast, useTooltip } from "@/shared/hooks/ui";
 import { Box, Heading, Icon, Pulse, Text } from "@/ui";
-import { togglePermissionLevel } from "@/utils/database/permissions/mutations";
-import {
-  getRolePermissions,
-  GetRolePermissionsOutput
-} from "@/utils/database/permissions/queries";
-import { getRoleById } from "@/utils/database/roles/queries";
 import { $Enums } from "@prisma/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 
 export const PermissionManagement = () => {
   const { data, error, isLoading } = useQuery({
-    queryKey: [`role_permissions:${$Enums.Roles.ADMIN}`],
-    queryFn: async () => getRolePermissions({ role: $Enums.Roles.ADMIN }),
+    queryKey: [`admin_role_permissions`],
+    queryFn: async () => getRolePermissionsByRoles({ role: $Enums.Roles.ADMIN }),
     staleTime: Infinity
   });
 
@@ -55,7 +52,7 @@ export const PermissionManagement = () => {
 function PermissionCard({
   role_permission
 }: {
-  role_permission: GetRolePermissionsOutput;
+  role_permission: RolePermissionsWithPermission;
 }) {
   const { role_id, permission_id, permission_level, permission } = role_permission;
 
@@ -67,8 +64,8 @@ function PermissionCard({
     async onSuccess(data) {
       const role = await getRoleById({ role_id }).then((r) => r?.name);
 
-      queryClient.setQueryData<GetRolePermissionsOutput[]>(
-        [`role_permissions:${role}`],
+      queryClient.setQueryData<RolePermissionsWithPermission[]>(
+        ["admin_role_permissions"],
         (oldData) => {
           return oldData
             ? oldData.map((rp) =>
@@ -98,7 +95,8 @@ function PermissionCard({
     }
   });
 
-  const toggle = () => mutate({ role_id, permission_id, permission_level });
+  const toggle = () =>
+    mutate({ permission_level, permission: { role_id, permission_id } });
 
   const Tooltip = useTooltip({
     place: "top-end",

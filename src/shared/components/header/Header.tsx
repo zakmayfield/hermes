@@ -1,5 +1,4 @@
 import { SignOutButton } from "@/features/authentication/atoms";
-import { RoleSwitch } from "./RoleSwitch";
 import Link from "next/link";
 import { Box, Navbar } from "@/ui/components";
 
@@ -36,9 +35,6 @@ export const Header = () => {
           place: "center"
         }}
       >
-        {/* ROLE SWITCH */}
-        <RoleSwitch />
-
         {/* NAVBAR */}
         <Navbar style={{ display: "flex-row", gap: "md" }}>
           {navbarItems.map((item) => (

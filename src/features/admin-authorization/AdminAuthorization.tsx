@@ -2,27 +2,25 @@
 import { useFormContext } from "@/shared/hooks/forms";
 import { useToast } from "@/shared/hooks/ui";
 import { Box, Button, Form, Icon, Input, Pulse, SubmitButton, Text } from "@/ui";
-import { authorizedAdminsValidator } from "@/utils/validators/formValidators";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  addAuthorizedAdmin,
-  AddAuthorizedAdminInput,
-  AddAuthorizedAdminOutput,
-  deleteAuthorizedAdmin,
-  revokeAdminRole
-} from "@/utils/database/admin/mutations";
 import { QueryKeys } from "@/utils/core/queryKeys";
-import { fetchAuthorizedAdmins } from "@/utils/database/admin/queries";
 import { $Enums, AuthorizedAdmin } from "@prisma/client";
 import React from "react";
 import { Modal } from "@/shared/components";
+import { getAuthorizedAdmins } from "@/data/database/queries";
+import {
+  createAuthorizedAdmin,
+  deleteAuthorizedAdmin,
+  revokeAdminRole
+} from "@/data/database/mutations";
+import { authorizeAdminValidator } from "@/utils/validators/forms/authorizeAdminValidator";
 
 export const AdminAuthorization = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
-    mutationFn: addAuthorizedAdmin,
+    mutationFn: createAuthorizedAdmin,
     onSuccess(data) {
       toast(`Authorized: ${data.email}`);
       queryClient.setQueryData<AuthorizedAdmin[]>(
@@ -40,10 +38,13 @@ export const AdminAuthorization = () => {
     }
   });
 
-  const { methods, submitHandler } = useFormContext<
-    AddAuthorizedAdminInput,
-    AddAuthorizedAdminOutput
-  >({ mutate, ...authorizedAdminsValidator() });
+  const { defaultValues, resolver } = authorizeAdminValidator;
+
+  const { methods, submitHandler } = useFormContext<{ email: string }, AuthorizedAdmin>({
+    mutate,
+    defaultValues,
+    resolver
+  });
 
   return (
     <Box
@@ -75,8 +76,8 @@ export const AdminAuthorization = () => {
 
 function AuthorizedAdminList() {
   const { data, error, isLoading } = useQuery({
-    queryKey: [QueryKeys.AUTHORIZED_ADMINS_LIST],
-    queryFn: async () => await fetchAuthorizedAdmins(),
+    queryKey: ["authorized_admins"],
+    queryFn: async () => await getAuthorizedAdmins(),
     staleTime: Infinity
   });
 

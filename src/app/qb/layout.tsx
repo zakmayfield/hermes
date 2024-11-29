@@ -1,6 +1,6 @@
+import { isUserAuthenticated } from "@/data/session";
 import { getQBTokens, handleTokenRefresh } from "@/quickbooks/services/token";
 import { validateTokenExpiration } from "@/quickbooks/utils/token";
-import { getUserAuth } from "@/utils/auth";
 import { redirect } from "next/navigation";
 
 export default async function Layout({
@@ -10,8 +10,8 @@ export default async function Layout({
   children: React.ReactNode;
   auth_prompt: React.ReactNode;
 }) {
-  const userAuth = await getUserAuth();
-  if (!userAuth) {
+  const isAuth = await isUserAuthenticated();
+  if (!isAuth) {
     redirect("/dashboard");
   }
 

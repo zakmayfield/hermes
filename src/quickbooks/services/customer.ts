@@ -1,11 +1,11 @@
 "use server";
 
-import { getUserAuthOrThrow } from "@/utils/auth";
 import { fetcher } from "@/utils/fetcher";
 import { qb_base_url } from "../utils/constants";
 import { handleDecryptAccessToken } from "../utils/token";
 import { CustomerQueryResponse } from "../types/customer";
 import { db } from "@/lib/prisma";
+import { getCoreSessionUserOrThrow } from "@/data/session";
 
 export type FormattedCustomer = {
   Id: string;
@@ -19,7 +19,7 @@ export const getAllCustomers = async () => {
       throw new Error("Invalid Request URL");
     }
 
-    await getUserAuthOrThrow();
+    await getCoreSessionUserOrThrow();
     const { realmId, accessToken } = await handleDecryptAccessToken();
 
     const { response } = await fetcher<CustomerQueryResponse>({

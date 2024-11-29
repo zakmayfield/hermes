@@ -1,14 +1,14 @@
 "use server";
 
+import { getCoreSessionUserOrThrow } from "@/data/session";
 import { db } from "@/lib/prisma";
 import { Token } from "@/quickbooks/types/token";
 import { encrypt } from "@/quickbooks/utils/encryption";
 import { formatUpsertTokenPayload } from "@/quickbooks/utils/token";
-import { getUserAuthOrThrow } from "@/utils/auth";
 import { QuickbooksToken } from "@prisma/client";
 
 export const getQBTokens = async (): Promise<QuickbooksToken | null> => {
-  const { id } = await getUserAuthOrThrow();
+  const { id } = await getCoreSessionUserOrThrow();
 
   const qbToken = await db.quickbooksToken.findUnique({ where: { user_id: id } });
   if (!qbToken) {

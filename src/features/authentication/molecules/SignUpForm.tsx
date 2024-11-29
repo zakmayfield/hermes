@@ -3,7 +3,9 @@ import { FormProvider, useFormContext } from "react-hook-form";
 import { Form } from "@/ui/components";
 import { useSignUpForm } from "@/shared/hooks/forms";
 import { useEffect } from "react";
-import { signupValidator } from "@/utils/validators/formValidators";
+import { signupValidator } from "@/utils/validators/forms/signupValidator";
+
+// TODO: *** configure field validation error styles ***
 
 export const SignUpForm = () => {
   const { methods, submitHandler } = useSignUpForm();
@@ -38,7 +40,7 @@ export const SignUpForm = () => {
 };
 
 function Inputs() {
-  const { defaultValues } = signupValidator();
+  const { defaultValues } = signupValidator;
 
   const {
     register,
@@ -185,7 +187,7 @@ function Inputs() {
 }
 
 function ShipAddrInputs() {
-  const { defaultValues } = signupValidator();
+  const { defaultValues } = signupValidator;
 
   const {
     register,
@@ -253,7 +255,7 @@ function ShipAddrInputs() {
 }
 
 function BillAddrInputs() {
-  const { defaultValues } = signupValidator();
+  const { defaultValues } = signupValidator;
 
   const {
     register,

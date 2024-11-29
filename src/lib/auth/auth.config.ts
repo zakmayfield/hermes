@@ -2,17 +2,11 @@ import { NextAuthOptions } from "next-auth";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { db } from "@/lib/prisma";
-import { comparePasswords, hashPassword } from "@/utils/security/password";
-import {
-  createUser,
-  doesUserExist,
-  getJWTUser,
-  isUserAuthorizedAdmin,
-  isValidCredentials,
-  updateUserLoginDate
-} from "@/utils/security/user";
-import { createJWT } from "@/utils/security/jwt";
-import { $Enums } from "@prisma/client";
+import { signupValidator } from "@/utils/validators/forms/signupValidator";
+import { createNewUser, updateUserLoginDate } from "@/data/database/mutations";
+import { doesUserExist, getJWTUser } from "@/data/database/queries";
+import { signinValidator } from "@/utils/validators/forms/signinValidator";
+import { comparePasswords } from "@/utils/comparePasswords";
 
 //^ adapter
 type NextAuthAdapter = NextAuthOptions["adapter"];
@@ -46,22 +40,25 @@ const providers: NextAuthProviders = [
       password: { label: "Password", type: "password" }
     },
     async authorize(credentials) {
-      const { email, password } = await isValidCredentials(credentials);
-      if (!email || !password) {
-        throw new Error("Please complete all required fields");
+      const { validator } = signinValidator;
+      const safeParse = validator.safeParse(credentials);
+      if (!safeParse.success) {
+        throw new Error(safeParse.error.message);
       }
 
-      const { user } = await doesUserExist(email);
+      const { email, password } = safeParse.data;
+
+      const user = await doesUserExist({ email });
       if (!user) {
         throw new Error("A user with this email does not exist");
       }
 
-      const { isPasswordMatch } = await comparePasswords(password, user.password);
+      const isPasswordMatch = await comparePasswords(password, user.password);
       if (!isPasswordMatch) {
         throw new Error("Invalid password");
       }
 
-      await updateUserLoginDate(user.id);
+      await updateUserLoginDate({ id: user.id });
 
       return user;
     }
@@ -74,28 +71,25 @@ const providers: NextAuthProviders = [
       password: { label: "Password", type: "password" }
     },
     async authorize(credentials) {
-      const { email, password } = await isValidCredentials(credentials);
-      if (!email || !password) {
-        throw new Error("Please complete all required fields");
+      const { validator } = signupValidator;
+      const safeParse = validator.safeParse(credentials);
+
+      if (!safeParse.success) {
+        throw new Error(safeParse.error.message);
       }
 
-      const { user: userExists } = await doesUserExist(email);
+      const { customerInfo, billAddr, shipAddr } = safeParse.data;
+
+      const userExists = await doesUserExist({ email: customerInfo.email });
       if (!!userExists) {
         throw new Error("A user with that email already exists");
       }
 
-      const { jwt, jwt_expiration_date } = await createJWT(email);
-      const hashed_password = await hashPassword(password);
-      const isAuthorizedAdmin = await isUserAuthorizedAdmin(email);
-
-      const { user } = await createUser({
-        email: email.toLowerCase(),
-        password: hashed_password,
-        role: isAuthorizedAdmin ? $Enums.Roles.ADMIN : $Enums.Roles.CUSTOMER,
-        jwt: {
-          token: jwt,
-          identifier: `email-verification-${email}`,
-          expires: jwt_expiration_date
+      const user = await createNewUser({
+        data: {
+          customerInfo,
+          shipAddr,
+          billAddr
         }
       });
 
@@ -108,7 +102,7 @@ const providers: NextAuthProviders = [
 type NextAuthCallbacks = NextAuthOptions["callbacks"];
 const callbacks: NextAuthCallbacks = {
   async jwt({ token, user }) {
-    const db_user = await getJWTUser(token.email);
+    const db_user = await getJWTUser({ email: token.email });
 
     if (!db_user) {
       token.id = user.id;

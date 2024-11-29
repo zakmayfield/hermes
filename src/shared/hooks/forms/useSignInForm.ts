@@ -1,12 +1,12 @@
-import { authValidator } from "@/utils/validators/formValidators";
 import { useMutation } from "@tanstack/react-query";
 import { signIn, SignInResponse } from "next-auth/react";
 import { useFormContext } from "./useFormContext";
+import { signinValidator } from "@/utils/validators/forms/signinValidator";
 
 export const useSignInForm = () => {
-  const formMeta = authValidator();
+  const { defaultValues, resolver } = signinValidator;
 
-  type FormData = typeof formMeta.defaultValues;
+  type FormData = typeof defaultValues;
   type Response = SignInResponse | undefined;
 
   const signInMutation = async (data: FormData) => await signIn("sign-in", data);
@@ -14,5 +14,5 @@ export const useSignInForm = () => {
     mutationFn: signInMutation
   });
 
-  return useFormContext<FormData, Response>({ ...formMeta, mutate });
+  return useFormContext<FormData, Response>({ defaultValues, resolver, mutate });
 };

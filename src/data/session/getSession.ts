@@ -1,10 +1,10 @@
 "use server";
 
-import { authOptions } from "@/lib/auth/auth.options";
+import { config } from "@/lib/nextAuth/config";
 import { getServerSession } from "next-auth";
 
 export const getSession = async () => {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession(config);
 
   if (!session || !session.user) {
     return {

@@ -103,7 +103,6 @@ function NewCustomer({
   return (
     <div className="flex gap-md items-center bg-primary/50 p-sm rounded-lg">
       <div>{dbCustomer.email}</div>
-      <div>{dbCustomer.company_name}</div>
       <Select
         className={`dark:text-background`}
         options={quickbooksCustomers?.map((qbCustomer) => ({
@@ -136,7 +135,6 @@ function NewCustomer({
               <div className="flex flex-col gap-xs">
                 <h5 className="text-foreground/70">New Customer</h5>
                 <div className="flex-1 bg-secondary p-sm rounded-md">
-                  <p>{dbCustomer.company_name}</p>
                   <p>{dbCustomer.email}</p>
                 </div>
               </div>
@@ -198,7 +196,7 @@ function CustomerActions({ dbCustomer }: { dbCustomer: UserWithOnboardingStatus 
     mutationFn: toggleUserIsApproved,
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ["new_customers"] });
-      toast(`Successfully approved ${dbCustomer.company_name}`);
+      toast(`Successfully approved`);
     }
   });
 

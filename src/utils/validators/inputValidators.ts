@@ -9,5 +9,5 @@ export const inputValidators = {
       required_error: "Password is required"
     })
     .min(3, { message: "Password must be at least 3 characters" }),
-  phoneNumberValidator: z.string().regex(/^\d{10}$/, "Phone number must be 10 digits")
+  phoneNumberValidator: z.string()
 };

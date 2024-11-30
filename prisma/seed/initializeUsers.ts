@@ -11,7 +11,6 @@ const seedInitialUsers = async () => {
     email: string;
     password: string;
     role: $Enums.Roles;
-    company_name?: string;
   }[] = [
     {
       email: "super@test.com",
@@ -26,8 +25,7 @@ const seedInitialUsers = async () => {
     {
       email: "customer@test.com",
       password: TEST_USER_PW,
-      role: $Enums.Roles.CUSTOMER,
-      company_name: "ACME Inc"
+      role: $Enums.Roles.CUSTOMER
     }
   ];
 
@@ -37,7 +35,6 @@ const seedInitialUsers = async () => {
       data: {
         email: user.email,
         password: hashedPassword,
-        company_name: user.company_name,
         role: { connect: { name: user.role } },
         onboarding: {
           create: { status: user.role === $Enums.Roles.CUSTOMER ? "PENDING" : "COMPLETE" }

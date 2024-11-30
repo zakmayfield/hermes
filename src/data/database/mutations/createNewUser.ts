@@ -15,17 +15,17 @@ const isUserAuthorizedAdmin = async (email: string) => {
 };
 
 export const createNewUser = async ({ data }: { data: typeof defaultValues }) => {
-  const { customerInfo, shipAddr, billAddr } = data;
+  const { customer, bill, ship } = data;
 
-  const isAuthorizedAdmin = await isUserAuthorizedAdmin(customerInfo.email);
-  const hashed_password = await hashPassword(customerInfo.password);
-  const { jwt, jwt_expiration_date } = await createJWT(customerInfo.email);
-  const uniqueIdentifier = `email-verification-${customerInfo.email}`;
+  const isAuthorizedAdmin = await isUserAuthorizedAdmin(customer.email);
+  const hashed_password = await hashPassword(customer.password);
+  const { jwt, jwt_expiration_date } = await createJWT(customer.email);
+  const uniqueIdentifier = `email-verification-${customer.email}`;
 
   if (isAuthorizedAdmin) {
     return await db.user.create({
       data: {
-        email: customerInfo.email,
+        email: customer.email,
         password: hashed_password,
         last_login_date: new Date(),
         role: {
@@ -49,11 +49,11 @@ export const createNewUser = async ({ data }: { data: typeof defaultValues }) =>
     });
   }
 
-  switch (customerInfo.isExistingCustomer) {
+  switch (customer.isExistingCustomer) {
     case true:
       return await db.user.create({
         data: {
-          email: customerInfo.email,
+          email: customer.email,
           password: hashed_password,
           last_login_date: new Date(),
           role: {
@@ -73,8 +73,8 @@ export const createNewUser = async ({ data }: { data: typeof defaultValues }) =>
           },
           customerInfo: {
             create: {
-              companyName: customerInfo.companyName,
-              isExistingCustomer: customerInfo.isExistingCustomer
+              companyName: customer.companyName,
+              isExistingCustomer: customer.isExistingCustomer
             }
           }
         },
@@ -89,7 +89,7 @@ export const createNewUser = async ({ data }: { data: typeof defaultValues }) =>
     case false:
       return await db.user.create({
         data: {
-          email: customerInfo.email,
+          email: customer.email,
           password: hashed_password,
           last_login_date: new Date(),
           role: {
@@ -109,29 +109,29 @@ export const createNewUser = async ({ data }: { data: typeof defaultValues }) =>
           },
           customerInfo: {
             create: {
-              companyName: customerInfo.companyName,
-              isExistingCustomer: customerInfo.isExistingCustomer,
-              givenName: customerInfo.givenName,
-              familyName: customerInfo.familyName,
-              phoneNumber: customerInfo.phoneNumber
+              companyName: customer.companyName,
+              isExistingCustomer: customer.isExistingCustomer,
+              givenName: customer.givenName,
+              familyName: customer.familyName,
+              phoneNumber: customer.phoneNumber
             }
           },
           customerShipAddr: {
             create: {
-              line1: shipAddr!.line1,
-              city: shipAddr!.city,
-              country: shipAddr!.country,
-              state: shipAddr!.state,
-              postalCode: shipAddr!.postalCode
+              line1: ship!.line1,
+              city: ship!.city,
+              country: ship!.country,
+              state: ship!.state,
+              postalCode: ship!.postalCode
             }
           },
           customerBillAddr: {
             create: {
-              line1: billAddr!.line1,
-              city: billAddr!.city,
-              country: billAddr!.country,
-              state: billAddr!.state,
-              postalCode: billAddr!.postalCode
+              line1: bill!.line1,
+              city: bill!.city,
+              country: bill!.country,
+              state: bill!.state,
+              postalCode: bill!.postalCode
             }
           }
         },

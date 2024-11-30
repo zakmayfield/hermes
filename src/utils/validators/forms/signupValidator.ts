@@ -21,7 +21,7 @@ const customerSchema = z.object({
   isBillingSameAsShipping: booleanValidator
 });
 
-const addressSchema = z.object({
+const addrSchema = z.object({
   line1: stringValidator,
   city: stringValidator,
   country: stringValidator,
@@ -30,9 +30,9 @@ const addressSchema = z.object({
 });
 
 const validator = z.object({
-  customerInfo: customerSchema,
-  shipAddr: z.optional(addressSchema),
-  billAddr: z.optional(addressSchema)
+  customer: customerSchema,
+  ship: z.optional(addrSchema),
+  bill: z.optional(addrSchema)
 });
 
 type DefaultDataType = z.infer<typeof validator>;
@@ -41,7 +41,7 @@ export const signupValidator = {
   validator,
   resolver: zodResolver(validator),
   defaultValues: {
-    customerInfo: {
+    customer: {
       email: "",
       password: "",
       givenName: "",
@@ -51,14 +51,14 @@ export const signupValidator = {
       isExistingCustomer: true,
       isBillingSameAsShipping: false
     },
-    shipAddr: {
+    ship: {
       line1: "",
       city: "",
       country: "",
       state: "",
       postalCode: ""
     },
-    billAddr: {
+    bill: {
       line1: "",
       city: "",
       country: "",

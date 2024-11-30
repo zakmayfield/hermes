@@ -5,11 +5,9 @@ import { useSignUpForm } from "@/shared/hooks/forms";
 import { useEffect } from "react";
 import { signupValidator } from "@/utils/validators/forms/signupValidator";
 
-// TODO: *** configure field validation error styles ***
-
 export const SignUpForm = () => {
   const { methods, submitHandler } = useSignUpForm();
-  const watchIsExistingCustomer = methods.watch("customerInfo.isExistingCustomer");
+  const watchIsExistingCustomer = methods.watch("customer.isExistingCustomer");
 
   return (
     <div>
@@ -50,31 +48,30 @@ function Inputs() {
     formState: { errors }
   } = useFormContext<typeof defaultValues>();
 
-  const watchIsExistingCustomer = watch("customerInfo.isExistingCustomer");
-  const watchIsBillingSameAsShipping = watch("customerInfo.isBillingSameAsShipping");
+  const watchIsExistingCustomer = watch("customer.isExistingCustomer");
+  const watchIsBillingSameAsShipping = watch("customer.isBillingSameAsShipping");
 
   useEffect(() => {
     if (watchIsBillingSameAsShipping) {
-      const values = getValues().shipAddr;
+      const values = getValues().ship;
 
-      setValue("billAddr", {
-        line1: values?.line1 || "",
-        city: values?.city || "",
-        country: values?.country || "",
-        state: values?.state || "",
-        postalCode: values?.postalCode || ""
-      });
-
-      console.log("new values", getValues());
+      if (values) {
+        setValue("bill", {
+          city: values.city,
+          country: values.country,
+          line1: values.line1,
+          postalCode: values.postalCode,
+          state: values.state
+        });
+      }
     } else {
-      setValue("billAddr", {
-        line1: "",
+      setValue("bill", {
         city: "",
         country: "",
-        state: "",
-        postalCode: ""
+        line1: "",
+        postalCode: "",
+        state: ""
       });
-      console.log("new values", getValues());
     }
   }, [watchIsBillingSameAsShipping, getValues, setValue]);
 
@@ -93,9 +90,9 @@ function Inputs() {
             <input
               id="email"
               placeholder="Email"
-              {...register("customerInfo.email")}
+              {...register("customer.email")}
             />
-            <span>{errors.customerInfo?.email?.message}</span>
+            <span>{errors.customer?.email?.message}</span>
           </div>
 
           <div className="flex flex-col gap-xs">
@@ -104,15 +101,25 @@ function Inputs() {
               id="password"
               placeholder="Password"
               type="password"
-              {...register("customerInfo.password")}
+              {...register("customer.password")}
             />
-            <span>{errors.customerInfo?.password?.message}</span>
+            <span>{errors.customer?.password?.message}</span>
+          </div>
+
+          <div className="flex flex-col gap-xs">
+            <label htmlFor="companyName">Company Name</label>
+            <input
+              id="companyName"
+              placeholder="ACME Inc"
+              {...register("customer.companyName")}
+            />
+            <span>{errors.customer?.companyName?.message}</span>
           </div>
 
           <div className="flex items-center gap-xs mb-md">
             <input
               type="checkbox"
-              {...register("customerInfo.isExistingCustomer")}
+              {...register("customer.isExistingCustomer")}
             />
             <label htmlFor="isExistingCustomer">I am an existing customer</label>
           </div>
@@ -128,9 +135,9 @@ function Inputs() {
                 <input
                   id="givenName"
                   placeholder="John"
-                  {...register("customerInfo.givenName")}
+                  {...register("customer.givenName")}
                 />
-                <span>{errors.customerInfo?.givenName?.message}</span>
+                <span>{errors.customer?.givenName?.message}</span>
               </div>
 
               <div className="flex flex-col gap-xs flex-1">
@@ -138,20 +145,10 @@ function Inputs() {
                 <input
                   id="familyName"
                   placeholder="Doe"
-                  {...register("customerInfo.familyName")}
+                  {...register("customer.familyName")}
                 />
-                <span>{errors.customerInfo?.familyName?.message}</span>
+                <span>{errors.customer?.familyName?.message}</span>
               </div>
-            </div>
-
-            <div className="flex flex-col gap-xs">
-              <label htmlFor="companyName">Company Name</label>
-              <input
-                id="companyName"
-                placeholder="ACME Inc"
-                {...register("customerInfo.companyName")}
-              />
-              <span>{errors.customerInfo?.companyName?.message}</span>
             </div>
 
             <div className="flex flex-col gap-xs w-1/2">
@@ -159,9 +156,9 @@ function Inputs() {
               <input
                 id="phoneNumber"
                 placeholder="4892234212"
-                {...register("customerInfo.phoneNumber")}
+                {...register("customer.phoneNumber")}
               />
-              <span>{errors.customerInfo?.phoneNumber?.message}</span>
+              <span>{errors.customer?.phoneNumber?.message}</span>
             </div>
           </div>
         )}
@@ -174,7 +171,7 @@ function Inputs() {
           <div className="flex items-center justify-end gap-xs mt-sm mb-lg">
             <input
               type="checkbox"
-              {...register("customerInfo.isBillingSameAsShipping")}
+              {...register("customer.isBillingSameAsShipping")}
             />
             <label htmlFor="isExistingCustomer">Use shipping address for billing</label>
           </div>
@@ -202,9 +199,9 @@ function ShipAddrInputs() {
         <input
           id="shipAddrLine1"
           placeholder="10 Super Dr"
-          {...register("shipAddr.line1")}
+          {...register("ship.line1")}
         />
-        <span>{errors.shipAddr?.line1?.message}</span>
+        <span>{errors.ship?.line1?.message}</span>
       </div>
 
       <div className="flex gap-sm">
@@ -213,9 +210,9 @@ function ShipAddrInputs() {
           <input
             id="shipAddrCity"
             placeholder="Etobicoke"
-            {...register("shipAddr.city")}
+            {...register("ship.city")}
           />
-          <span>{errors.shipAddr?.city?.message}</span>
+          <span>{errors.ship?.city?.message}</span>
         </div>
 
         <div className="flex flex-col gap-xs">
@@ -223,9 +220,9 @@ function ShipAddrInputs() {
           <input
             id="shipAddrState"
             placeholder="Ontario"
-            {...register("shipAddr.state")}
+            {...register("ship.state")}
           />
-          <span>{errors.shipAddr?.state?.message}</span>
+          <span>{errors.ship?.state?.message}</span>
         </div>
       </div>
 
@@ -235,9 +232,9 @@ function ShipAddrInputs() {
           <input
             id="shipAddrCountry"
             placeholder="CA"
-            {...register("shipAddr.country")}
+            {...register("ship.country")}
           />
-          <span>{errors.shipAddr?.country?.message}</span>
+          <span>{errors.ship?.country?.message}</span>
         </div>
 
         <div className="flex flex-col gap-xs flex-1">
@@ -245,9 +242,9 @@ function ShipAddrInputs() {
           <input
             id="shipAddrPostalCode"
             placeholder="A1A2B2"
-            {...register("shipAddr.postalCode")}
+            {...register("ship.postalCode")}
           />
-          <span>{errors.shipAddr?.postalCode?.message}</span>
+          <span>{errors.ship?.postalCode?.message}</span>
         </div>
       </div>
     </div>
@@ -271,9 +268,9 @@ function BillAddrInputs() {
         <input
           id="billAddrLine1"
           placeholder="10 Super Dr"
-          {...register("billAddr.line1")}
+          {...register("bill.line1")}
         />
-        <span>{errors.billAddr?.line1?.message}</span>
+        <span>{errors.bill?.line1?.message}</span>
       </div>
 
       <div className="flex gap-sm">
@@ -282,9 +279,9 @@ function BillAddrInputs() {
           <input
             id="billAddrCity"
             placeholder="Etobicoke"
-            {...register("billAddr.city")}
+            {...register("bill.city")}
           />
-          <span>{errors.billAddr?.city?.message}</span>
+          <span>{errors.bill?.city?.message}</span>
         </div>
 
         <div className="flex flex-col gap-xs">
@@ -292,9 +289,9 @@ function BillAddrInputs() {
           <input
             id="billAddrState"
             placeholder="Ontario"
-            {...register("billAddr.state")}
+            {...register("bill.state")}
           />
-          <span>{errors.billAddr?.state?.message}</span>
+          <span>{errors.bill?.state?.message}</span>
         </div>
       </div>
 
@@ -304,9 +301,9 @@ function BillAddrInputs() {
           <input
             id="billAddrCountry"
             placeholder="CA"
-            {...register("billAddr.country")}
+            {...register("bill.country")}
           />
-          <span>{errors.billAddr?.country?.message}</span>
+          <span>{errors.bill?.country?.message}</span>
         </div>
 
         <div className="flex flex-col gap-xs flex-1">
@@ -314,9 +311,9 @@ function BillAddrInputs() {
           <input
             id="billAddrPostalCode"
             placeholder="A1A2B2"
-            {...register("billAddr.postalCode")}
+            {...register("bill.postalCode")}
           />
-          <span>{errors.billAddr?.postalCode?.message}</span>
+          <span>{errors.bill?.postalCode?.message}</span>
         </div>
       </div>
     </div>

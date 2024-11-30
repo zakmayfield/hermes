@@ -58,7 +58,6 @@ model User {
   password        String
   created_at      DateTime  @default(now())
   last_login_date DateTime?
-  company_name    String?
 
   verification_token VerificationToken[]
   onboarding         Onboarding?

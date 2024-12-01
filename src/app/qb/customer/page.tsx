@@ -1,4 +1,4 @@
-import { CustomerSync } from "@/quickbooks/components/CustomerSync";
+import { LinkCustomers } from "@/quickbooks/components/LinkCustomers";
 import { getQBTokens, handleTokenRefresh } from "@/quickbooks/services/token";
 import { validateTokenExpiration } from "@/quickbooks/utils/token";
 import { redirect } from "next/navigation";
@@ -20,9 +20,9 @@ export default async function Page() {
 
   return (
     <div>
-      <h1>customer</h1>
-
-      <CustomerSync />
+      <h1>Manage Customers</h1>
+      {/* <CustomerSync /> */}
+      <LinkCustomers />
     </div>
   );
 }

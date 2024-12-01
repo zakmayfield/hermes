@@ -2,7 +2,6 @@
 import { SecureUser } from "@/data/database/models/User";
 import { getUsers } from "@/data/database/queries";
 import { getAllCustomers } from "@/quickbooks/services/customer";
-import { Icon } from "@/ui";
 import {
   CustomerInfo as CustomerInfoType,
   CustomerShipAddr,

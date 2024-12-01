@@ -10,5 +10,6 @@ export { getRolePermissionsByRoles } from "./getRolePermissionsByRole";
 export { getUserByEmail } from "./getUserByEmail";
 export { getUserById } from "./getUserById";
 export { getUserPermissionsByUserId } from "./getUserPermissionsByUserId";
+export { getUsers } from "./getUsers";
 export { getUsersByRole } from "./getUsersByRole";
 export { hasPermission } from "./hasPermission";

@@ -8,8 +8,21 @@ import { doesUserExist, getJWTUser } from "@/data/database/queries";
 import { signinValidator } from "@/utils/validators/forms/signinValidator";
 import { comparePasswords } from "@/utils/comparePasswords";
 import { Provider } from "next-auth/providers";
+import { customLogger } from "../winston";
 
 export const config: NextAuthOptions = {
+  debug: true,
+  logger: {
+    error(code, metadata) {
+      customLogger("error", code, metadata);
+    },
+    warn(code) {
+      customLogger("warn", code);
+    },
+    debug(code, metadata) {
+      customLogger("debug", code, metadata);
+    }
+  },
   // @ts-expect-error NextAuth has not configured support for Prisma Omit API
   adapter: PrismaAdapter(db),
   session: {

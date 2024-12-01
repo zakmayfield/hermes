@@ -8,7 +8,11 @@
     "start": "next start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "seed-customers": "ts-node prisma/seed/seedTestCustomers.ts",
+    "seed-admins": "ts-node prisma/seed/seedTestAdmins.ts",
+    "seed-super": "ts-node prisma/seed/seedTestSuper.ts",
+    "seed-all-users": " ts-node prisma/seed/seedTestSuper.ts && ts-node prisma/seed/seedTestAdmins.ts && ts-node prisma/seed/seedTestCustomers.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

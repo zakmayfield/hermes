@@ -50,14 +50,14 @@ const btnVariants: TwPluginRules = {
       backgroundColor: "transparent"
     }
   },
-  ".btn-primary": {
-    backgroundColor: rgb("--success")
+  ".btn-blue": {
+    backgroundColor: rgb("--theme-blue-base")
   },
-  ".btn-warning": {
-    backgroundColor: rgb("--warning")
+  ".btn-red": {
+    backgroundColor: rgb("--theme-red-base")
   },
-  ".btn-caution": {
-    backgroundColor: rgb("--caution")
+  ".btn-green": {
+    backgroundColor: rgb("--theme-green-base")
   }
 };
 

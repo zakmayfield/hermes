@@ -5,6 +5,12 @@ import { useSignUpForm } from "@/shared/hooks/forms";
 import { useEffect } from "react";
 import { signupValidator } from "@/utils/validators/forms/signupValidator";
 
+// TODO: *** If user checks `same as shipping` before filling in the shipping data the sync will not occur ***
+// Either watch for the submit and then fill billing values, or disable the `same as shipping` check
+// until shipping data has been input
+
+// TODO: *** Change the form submit button UI ***
+
 export const SignUpForm = () => {
   const { methods, submitHandler } = useSignUpForm();
   const watchIsExistingCustomer = methods.watch("customer.isExistingCustomer");
@@ -16,7 +22,7 @@ export const SignUpForm = () => {
           submitHandler={submitHandler}
           style={{
             form: {
-              backgroundColor: "primary",
+              backgroundColor: "theme-primary",
               padding: "lg",
               className: `${watchIsExistingCustomer && "w-full lg:w-md"}`
             }
@@ -25,7 +31,7 @@ export const SignUpForm = () => {
           <Inputs />
 
           <button
-            className={`btn-primary p-xs ${
+            className={`btn-green p-xs ${
               watchIsExistingCustomer ? "w-full" : "w-1/2 mr-auto"
             }`}
           >
@@ -80,8 +86,8 @@ function Inputs() {
       <div
         className={` ${
           watchIsExistingCustomer
-            ? "w-full bg-primary"
-            : "flex-1 bg-secondary/50 p-md rounded-lg flex flex-col gap-md"
+            ? "w-full bg-theme-primary"
+            : "flex-1 bg-theme-secondary/50 p-md rounded-lg flex flex-col gap-md"
         }`}
       >
         <div className="flex flex-col gap-xs">
@@ -191,7 +197,7 @@ function ShipAddrInputs() {
     formState: { errors }
   } = useFormContext<typeof defaultValues>();
   return (
-    <div className="flex flex-col gap-xs p-md bg-accent/50 rounded-lg">
+    <div className="flex flex-col gap-xs p-md bg-theme-accent/50 rounded-lg">
       <h4 className="text-foreground/75">Shipping Address</h4>
 
       <div className="flex flex-col gap-xs">
@@ -260,7 +266,7 @@ function BillAddrInputs() {
   } = useFormContext<typeof defaultValues>();
 
   return (
-    <div className="flex flex-col gap-xs p-md bg-accent/50 rounded-lg">
+    <div className="flex flex-col gap-xs p-md bg-theme-accent/50 rounded-lg">
       <h4 className="text-foreground/75">Billing Address</h4>
 
       <div className="flex flex-col gap-xs">

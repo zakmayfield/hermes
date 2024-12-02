@@ -30,10 +30,10 @@ export const CustomerSync = () => {
   });
 
   return (
-    <div className="bg-primary rounded-lg p-lg flex flex-col gap-lg">
+    <div className="bg-theme-primary rounded-lg p-lg flex flex-col gap-lg">
       <h2>Manage New Customers</h2>
 
-      <div className="bg-secondary rounded-lg p-lg flex flex-col gap-md">
+      <div className="bg-theme-secondary rounded-lg p-lg flex flex-col gap-md">
         {/* CUSTOMERS */}
         {databaseUsers?.map((dbCustomer) => (
           <NewCustomer
@@ -101,7 +101,7 @@ function NewCustomer({
   });
 
   return (
-    <div className="flex gap-md items-center bg-primary/50 p-sm rounded-lg">
+    <div className="flex gap-md items-center bg-theme-primary/50 p-sm rounded-lg">
       <div>{dbCustomer.email}</div>
       <Select
         className={`dark:text-background`}
@@ -121,7 +121,7 @@ function NewCustomer({
 
       {isConfirmationModalShowing && (
         <Modal>
-          <div className="bg-primary rounded-lg p-lg flex flex-col gap-lg w-md">
+          <div className="bg-theme-primary rounded-lg p-lg flex flex-col gap-lg w-md">
             <div className="flex flex-col gap-xs">
               <h2>Confirm Account Link</h2>
 
@@ -134,7 +134,7 @@ function NewCustomer({
               {/* New Customer */}
               <div className="flex flex-col gap-xs">
                 <h5 className="text-foreground/70">New Customer</h5>
-                <div className="flex-1 bg-secondary p-sm rounded-md">
+                <div className="flex-1 bg-theme-secondary p-sm rounded-md">
                   <p>{dbCustomer.email}</p>
                 </div>
               </div>
@@ -142,7 +142,7 @@ function NewCustomer({
               {/* QB Customer */}
               <div className="flex flex-col gap-xs">
                 <h5 className="text-foreground/70">QuickBooks Customer</h5>
-                <div className="flex-1 bg-secondary p-sm rounded-md">
+                <div className="flex-1 bg-theme-secondary p-sm rounded-md">
                   <p>{selectedCustomer?.CompanyName}</p>
                   <p>{selectedCustomer?.PrimaryEmailAddr}</p>
                 </div>
@@ -158,13 +158,13 @@ function NewCustomer({
                     company_name: selectedCustomer?.CompanyName || null
                   })
                 }
-                className="btn-primary w-full px-sm"
+                className="btn-green w-full px-sm"
               >
                 Link Account
               </button>
               <button
                 onClick={handleCancelModal}
-                className="btn-warning px-sm"
+                className="btn-red px-sm"
               >
                 Cancel
               </button>

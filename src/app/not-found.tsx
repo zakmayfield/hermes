@@ -9,7 +9,7 @@ export default function NotFound() {
       <Box
         style={{
           maxWidth: "sm",
-          backgroundColor: "primary",
+          backgroundColor: "theme-primary",
           borderRadius: "lg"
         }}
       >
@@ -31,7 +31,7 @@ export default function NotFound() {
           style={{
             padding: "lg",
             borderRadius: "lg",
-            backgroundColor: "primary",
+            backgroundColor: "theme-primary",
             display: "flex-col"
           }}
         >

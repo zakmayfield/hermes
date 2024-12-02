@@ -12,7 +12,7 @@ export const Pulse = (props: PulseProps) => {
       display: "flex-col",
       gap: "sm",
       padding: "md",
-      backgroundColor: "tertiary",
+      backgroundColor: "theme-tertiary",
       ...style?.parentWrapper
     },
     childrenWrapper: {
@@ -24,7 +24,7 @@ export const Pulse = (props: PulseProps) => {
       animation: "pulse",
       padding: "md",
       borderRadius: "xl",
-      backgroundColor: "secondary",
+      backgroundColor: "theme-secondary",
       ...style?.children
     }
   });

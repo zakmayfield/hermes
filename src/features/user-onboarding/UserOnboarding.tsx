@@ -16,7 +16,7 @@ export const UserOnboarding = () => {
     <Box
       style={{
         borderRadius: "lg",
-        backgroundColor: "primary",
+        backgroundColor: "theme-primary",
         padding: "md",
         spaceY: "md"
       }}
@@ -26,7 +26,7 @@ export const UserOnboarding = () => {
       {isLoading ? (
         <Pulse />
       ) : error ? (
-        <Box style={{ textColor: "warning", textAlign: "center" }}>{error.message}</Box>
+        <Box style={{ textColor: "theme-red", textAlign: "center" }}>{error.message}</Box>
       ) : data && data.length > 0 ? (
         data.map((user) => (
           <PendingUser
@@ -37,9 +37,9 @@ export const UserOnboarding = () => {
       ) : (
         <Box
           style={{
-            textColor: "success-light",
+            textColor: "theme-green",
             padding: "lg",
-            backgroundColor: "secondary",
+            backgroundColor: "theme-secondary",
             borderRadius: "lg"
           }}
         >
@@ -63,7 +63,7 @@ function PendingUser({ user }: { user: UserWithOnboardingStatus }) {
         width: "full",
         padding: "md",
         borderRadius: "lg",
-        backgroundColor: "secondary",
+        backgroundColor: "theme-secondary",
         display: "flex-row",
         flexAlign: "center",
         flexSpacing: "space-between",

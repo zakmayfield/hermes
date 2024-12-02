@@ -19,7 +19,7 @@ export const UserApprovals = () => {
     <Box
       style={{
         borderRadius: "lg",
-        backgroundColor: "primary",
+        backgroundColor: "theme-primary",
         padding: "md",
         spaceY: "md"
       }}
@@ -29,7 +29,7 @@ export const UserApprovals = () => {
       {isLoading ? (
         <Pulse />
       ) : error ? (
-        <Box style={{ textColor: "warning", textAlign: "center" }}>{error.message}</Box>
+        <Box style={{ textColor: "theme-red", textAlign: "center" }}>{error.message}</Box>
       ) : data && data.length > 0 ? (
         data.map((user) => (
           <UnapprovedUser
@@ -40,8 +40,8 @@ export const UserApprovals = () => {
       ) : (
         <Box
           style={{
-            textColor: "success-light",
-            backgroundColor: "secondary",
+            textColor: "theme-green",
+            backgroundColor: "theme-secondary",
             padding: "lg",
             borderRadius: "lg"
           }}
@@ -81,7 +81,7 @@ function UnapprovedUser({ user }: { user: UserWithOnboardingStatus }) {
           minHeight: "3xs",
           padding: "md",
           borderRadius: "lg",
-          backgroundColor: "secondary",
+          backgroundColor: "theme-secondary",
           display: "flex-col",
           gap: "md"
         }}
@@ -101,8 +101,8 @@ function UnapprovedUser({ user }: { user: UserWithOnboardingStatus }) {
               fontSize: "sm",
               className: `text-foreground border-foreground/50 ${
                 user.onboarding?.status === $Enums.OnboardingStatus.PENDING
-                  ? "bg-warning/50"
-                  : "bg-success/50"
+                  ? "bg-theme-red/50"
+                  : "bg-theme-green/50"
               }`
             }}
           >
@@ -110,7 +110,7 @@ function UnapprovedUser({ user }: { user: UserWithOnboardingStatus }) {
           </Text>
 
           <Button
-            options={{ variant: "primary" }}
+            options={{ variant: "green" }}
             style={{ paddingX: "xl", className: "ml-auto" }}
             handleClick={() => mutate(user.id)}
           >

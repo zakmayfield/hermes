@@ -31,7 +31,7 @@ export const GrantPermissions = () => {
     <Box
       style={{
         borderRadius: "lg",
-        backgroundColor: "primary",
+        backgroundColor: "theme-primary",
         padding: "md",
         spaceY: "md"
       }}
@@ -53,7 +53,11 @@ export const GrantPermissions = () => {
           ))
         ) : (
           <Box
-            style={{ backgroundColor: "secondary", padding: "lg", borderRadius: "lg" }}
+            style={{
+              backgroundColor: "theme-secondary",
+              padding: "lg",
+              borderRadius: "lg"
+            }}
           >
             <Text>No admins</Text>
           </Box>
@@ -85,7 +89,7 @@ function GrantPermissionsItem({
           display: "flex-row",
           flexAlign: "center",
           flexSpacing: "space-between",
-          backgroundColor: "secondary",
+          backgroundColor: "theme-secondary",
           borderRadius: "lg",
           padding: "sm"
         }}
@@ -159,7 +163,7 @@ function PermissionItem({
   return (
     <Box
       style={{
-        backgroundColor: "secondary",
+        backgroundColor: "theme-secondary",
         display: "flex-row",
         gap: "sm",
         padding: "xs",

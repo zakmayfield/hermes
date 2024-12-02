@@ -12,11 +12,13 @@ export const SignInForm = () => {
       <FormProvider {...methods}>
         <Form
           submitHandler={submitHandler}
-          style={{ form: { backgroundColor: "primary", width: "md", padding: "lg" } }}
+          style={{
+            form: { backgroundColor: "theme-primary", width: "md", padding: "lg" }
+          }}
         >
           <AuthInputs />
           <SubmitButton
-            options={{ text: "Sign In", variant: "primary" }}
+            options={{ text: "Sign In", variant: "green" }}
             style={{ padding: "sm" }}
           />
         </Form>

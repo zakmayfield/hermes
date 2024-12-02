@@ -50,7 +50,7 @@ export const AdminAuthorization = () => {
     <Box
       style={{
         borderRadius: "lg",
-        backgroundColor: "primary",
+        backgroundColor: "theme-primary",
         padding: "md",
         spaceY: "md"
       }}
@@ -66,7 +66,7 @@ export const AdminAuthorization = () => {
             register: methods.register
           }}
         />
-        <SubmitButton options={{ text: "Authorize Admin", variant: "primary" }} />
+        <SubmitButton options={{ text: "Authorize Admin", variant: "green" }} />
       </Form>
 
       <AuthorizedAdminList />
@@ -95,7 +95,13 @@ function AuthorizedAdminList() {
           />
         ))
       ) : (
-        <Box style={{ backgroundColor: "secondary", padding: "lg", borderRadius: "lg" }}>
+        <Box
+          style={{
+            backgroundColor: "theme-secondary",
+            padding: "lg",
+            borderRadius: "lg"
+          }}
+        >
           <Text>No authorized admins</Text>
         </Box>
       )}
@@ -139,7 +145,7 @@ function AuthorizedAdminItem({ admin }: { admin: AuthorizedAdmin }) {
     >
       <Button
         handleClick={() => setIsModalOpen(true)}
-        options={{ variant: "warning" }}
+        options={{ variant: "red" }}
         style={{ padding: "none", paddingX: "lg", paddingY: "xs", className: "lg:px-sm" }}
       >
         <Icon
@@ -150,7 +156,7 @@ function AuthorizedAdminItem({ admin }: { admin: AuthorizedAdmin }) {
 
       <Box
         style={{
-          backgroundColor: "secondary",
+          backgroundColor: "theme-secondary",
           padding: "xs",
           paddingX: "md",
           borderRadius: "md",
@@ -174,7 +180,7 @@ function AuthorizedAdminItem({ admin }: { admin: AuthorizedAdmin }) {
 
             <div className="flex gap-[var(--space-lg)]">
               <Button
-                options={{ variant: "warning" }}
+                options={{ variant: "red" }}
                 handleClick={() => {
                   mutate({ authorized_admin_id: admin.authorized_admin_id });
                   setIsModalOpen(false);

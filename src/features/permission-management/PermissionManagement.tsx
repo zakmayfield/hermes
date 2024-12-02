@@ -20,7 +20,7 @@ export const PermissionManagement = () => {
     <Box
       style={{
         borderRadius: "lg",
-        backgroundColor: "primary",
+        backgroundColor: "theme-primary",
         padding: "md",
         spaceY: "md"
       }}
@@ -115,7 +115,7 @@ function PermissionCard({
         display: "flex-col",
         gap: "xs",
         flexSpacing: "space-between",
-        backgroundColor: "secondary",
+        backgroundColor: "theme-secondary",
         width: "full"
       }}
     >
@@ -132,12 +132,12 @@ function PermissionCard({
           style={{
             border: "sm",
             borderRadius: "xl",
-            textColor: isEnabled ? "success" : "warning",
-            borderColor: isEnabled ? "success" : "warning",
+            textColor: isEnabled ? "theme-green" : "theme-red",
+            borderColor: isEnabled ? "theme-green" : "theme-red",
             minWidth: "4xs",
             width: "4xs",
             textAlign: "center",
-            backgroundColor: "primary",
+            backgroundColor: "theme-primary",
             cursor: "pointer",
             className: "sm:py-none"
           }}
@@ -176,7 +176,7 @@ function PermissionCard({
       {/* DESCRIPTION */}
       <Text
         style={{
-          textColor: "accent",
+          textColor: "theme-accent",
           className: "italic h-full"
         }}
       >

@@ -14,14 +14,14 @@ export const buttonSizeBucket = {
 
 export enum ButtonVariant {
   ghost = "ghost",
-  primary = "primary",
-  warning = "warning",
-  caution = "caution"
+  green = "green",
+  red = "red",
+  blue = "blue"
 }
 
 export const buttonVariantBucket = {
   [ButtonVariant.ghost]: "btn-ghost",
-  [ButtonVariant.primary]: "btn-primary",
-  [ButtonVariant.warning]: "btn-warning",
-  [ButtonVariant.caution]: "btn-caution"
+  [ButtonVariant.green]: "btn-green",
+  [ButtonVariant.red]: "btn-red",
+  [ButtonVariant.blue]: "btn-blue"
 } satisfies SingleBucket<Keyof<typeof ButtonVariant>, string>;

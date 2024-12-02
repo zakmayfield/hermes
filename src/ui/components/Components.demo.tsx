@@ -16,12 +16,29 @@ export const ComponentsDemo = () => {
         <h2 className="w-xs border-b mb-lg">Styles</h2>
       </div>
 
+      <div className="demo bg-black text-white">
+        <h2>Colors</h2>
+
+        <div className="demo bg-theme-primary">
+          <h2>text</h2>
+          <div className="demo bg-theme-secondary">
+            <h2>text</h2>
+            <div className="demo bg-theme-tertiary">
+              <h2>text</h2>
+              <div className="demo bg-theme-accent">
+                <h2>text</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* <div className="demo">
         <h2 className="w-xs border-b mb-lg">Form Elements</h2>
 
         <Form
           options={{ title: "Form Title" }}
-          style={{ form: { maxWidth: "md", backgroundColor: "primary", padding: "lg" } }}
+          style={{ form: { maxWidth: "md", backgroundColor:  "theme-primary", padding: "lg" } }}
         >
           <Stack>
             <Label options={{ text: "Label One", htmlFor: "foobar" }} />
@@ -34,7 +51,7 @@ export const ComponentsDemo = () => {
                 name="error"
                 id="foobar_error"
                 style={{
-                  textColor: "warning-light",
+                  textColor: "theme-red",
                   position: "absolute",
                   fontSize: "lg",
                   className: "right-2"
@@ -52,7 +69,7 @@ export const ComponentsDemo = () => {
           </Stack>
 
           <SubmitButton
-            options={{ text: "Submit", variant: "primary" }}
+            options={{ text: "Submit", variant: "green" }}
             style={{ marginY: "sm", padding: "sm" }}
           />
         </Form>

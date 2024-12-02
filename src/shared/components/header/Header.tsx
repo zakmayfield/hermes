@@ -21,7 +21,7 @@ export const Header = () => {
       style={{
         paddingY: "md",
         paddingX: "lg",
-        backgroundColor: "primary"
+        backgroundColor: "theme-primary"
       }}
     >
       <Box

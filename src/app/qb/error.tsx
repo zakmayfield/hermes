@@ -8,7 +8,7 @@ export default function Error({
   reset: () => void;
 }) {
   return (
-    <div className="bg-primary border-l-4 border-warning rounded-lg p-lg w-md mx-auto flex flex-col gap-md">
+    <div className="bg-theme-primary border-l-4 border-theme-red rounded-lg p-lg w-md mx-auto flex flex-col gap-md">
       <div>
         <h2>Something went wrong!</h2>
         <p className="text-foreground/70">{error.message}</p>

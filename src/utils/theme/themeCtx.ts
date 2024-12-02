@@ -6,16 +6,25 @@ const themeCtx = {
   colors: {
     background: "rgb(var(--background))",
     foreground: "rgb(var(--foreground))",
-    primary: "rgb(var(--primary))",
-    secondary: "rgb(var(--secondary))",
-    tertiary: "rgb(var(--tertiary))",
-    accent: "rgb(var(--accent))",
-    "success-light": "rgb(var(--success-light))",
-    success: "rgb(var(--success))",
-    "warning-light": "rgb(var(--warning-light))",
-    warning: "rgb(var(--warning))",
-    caution: "rgb(var(--caution))",
-    ghost: "rgb(var(--ghost))"
+
+    ghost: "rgb(var(--ghost))",
+
+    "theme-primary": "rgb(var(--theme-primary))",
+    "theme-secondary": "rgb(var(--theme-secondary))",
+    "theme-tertiary": "rgb(var(--theme-tertiary))",
+    "theme-accent": "rgb(var(--theme-accent))",
+
+    "theme-blue-light": "rgb(var(--theme-blue-light))",
+    "theme-blue": "rgb(var(--theme-blue-base))",
+    "theme-blue-dark": "rgb(var(--theme-blue-light))",
+
+    "theme-red-light": "rgb(var(--theme-red-light))",
+    "theme-red": "rgb(var(--theme-red-base))",
+    "theme-red-dark": "rgb(var(--theme-red-light))",
+
+    "theme-green-light": "rgb(var(--theme-green-light))",
+    "theme-green": "rgb(var(--theme-green-base))",
+    "theme-green-dark": "rgb(var(--theme-green-light))"
   },
   spacing: {
     none: "var(--space-none)",

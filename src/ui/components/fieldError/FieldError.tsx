@@ -6,7 +6,7 @@ export const FieldError = (props: FieldErrorProps) => {
 
   const classes = useClassNameResolver({
     fieldError: {
-      textColor: "warning-light",
+      textColor: "theme-red",
       fontStyle: "italic",
       ...style
     }

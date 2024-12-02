@@ -38,7 +38,7 @@ export default async function RootLayout({
             <Box style={{ width: "full" }}>
               <Box
                 style={{
-                  backgroundColor: "secondary",
+                  backgroundColor: "theme-secondary",
                   height: "full",
                   padding: "lg"
                 }}

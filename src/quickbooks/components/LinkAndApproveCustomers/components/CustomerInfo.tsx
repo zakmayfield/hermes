@@ -27,6 +27,15 @@ export const CustomerInfo = ({
           <p className="bg-theme-primary px-lg py-xs rounded-lg min-w-xs">{email}</p>
         </div>
 
+        {customerInfo?.phoneNumber && (
+          <div className="flex flex-col gap-xs">
+            <h4 className="italic opacity-75">Phone Number</h4>
+            <p className="bg-theme-primary px-lg py-xs rounded-lg min-w-xs">
+              {customerInfo.phoneNumber}
+            </p>
+          </div>
+        )}
+
         <div className="flex flex-col gap-xs">
           <h4 className="italic opacity-75">Existing Customer</h4>
           <div className="bg-theme-primary px-lg py-xs rounded-lg flex justify-center max-w-4xs">

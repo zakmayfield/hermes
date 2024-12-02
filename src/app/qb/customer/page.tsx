@@ -19,9 +19,8 @@ export default async function Page() {
   }
 
   return (
-    <div>
+    <div className="flex flex-col gap-lg">
       <h1>Manage Customers</h1>
-      {/* <CustomerSync /> */}
       <LinkAndApproveCustomers />
     </div>
   );

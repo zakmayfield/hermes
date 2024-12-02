@@ -31,7 +31,7 @@ export const SidebarNavigation = (props: SidebarNavigationProps) => {
   return (
     <div
       aria-expanded={isNavExpanded}
-      className={`bg-theme-primary relative flex flex-col gap-md ${baseSlideAnimation} ${
+      className={`bg-theme-primary sticky flex top-0 flex-col gap-md z-50 max-h-screen ${baseSlideAnimation} ${
         isNavExpanded
           ? "p-lg w-full min-w-full md:max-w-sm md:min-w-sm"
           : "p-sm min-w-3xs max-w-3xs w-full"
@@ -143,10 +143,7 @@ function BaseLinkItem({
       href={item.href as string}
       className={`${defaultSmoothAnimation} ${defaultLinkStyles} flex items-center gap-sm w-full ${
         !isNavExpanded && "justify-center"
-      } ${
-        pathname === item.href &&
-        "bg-theme-green hover:bg-theme-green hover:brightness-110 focus:brightness-110"
-      }`}
+      } ${pathname === item.href && "bg-theme-green"}`}
     >
       <div
         className={`relative flex items-center gap-sm ${

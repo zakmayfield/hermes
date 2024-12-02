@@ -13,3 +13,4 @@ export { getUserPermissionsByUserId } from "./getUserPermissionsByUserId";
 export { getUsers } from "./getUsers";
 export { getUsersByRole } from "./getUsersByRole";
 export { hasPermission } from "./hasPermission";
+export { getQuickBooksCustomerSyncRecordByUserId } from "./getQuickBooksCustomerSyncRecordByUserId";

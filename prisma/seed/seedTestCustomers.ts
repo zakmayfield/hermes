@@ -20,6 +20,20 @@ const testCustomers: {
   customerBillAddr?: Omit<CustomerBillAddr, "customer_bill_addr_id" | "user_id">;
 }[] = [
   {
+    email: "customer0@test.com",
+    password: "123",
+    role: {
+      name: "CUSTOMER"
+    },
+    onboarding: {
+      status: "PENDING"
+    },
+    customerInfo: {
+      isExistingCustomer: true,
+      companyName: "Wraithtech Solutions"
+    }
+  },
+  {
     email: "customer1@test.com",
     password: "123",
     role: {

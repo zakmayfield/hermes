@@ -15,6 +15,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getQuickBooksCustomerSyncRecordByUserId } from "@/data/database/queries";
 import { createCustomer } from "@/data/services/createCustomer";
 import { Icon } from "@/ui";
+import { toggleUserIsApproved } from "@/data/database/mutations";
 
 export const ReviewCard = ({
   newCustomer,
@@ -24,6 +25,8 @@ export const ReviewCard = ({
   quickbooksCustomerData: QuickbooksCustomerData;
 }) => {
   const { customerShipAddr, customerBillAddr, customerInfo, ...rest } = newCustomer;
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
 
   const { data: qbSyncRecord } = useQuery({
     staleTime: Infinity,
@@ -31,9 +34,6 @@ export const ReviewCard = ({
     queryFn: async () =>
       await getQuickBooksCustomerSyncRecordByUserId({ user_id: newCustomer.id })
   });
-
-  const { toast } = useToast();
-  const queryClient = useQueryClient();
 
   const { mutate: createQuickBooksCustomer, isPending: isCreateCustomerPending } =
     useMutation({
@@ -49,6 +49,17 @@ export const ReviewCard = ({
         });
       }
     });
+
+  const { mutate: toggleIsApproved, isPending: isToggleIsApprovedPending } = useMutation({
+    mutationFn: toggleUserIsApproved,
+    onError(error) {
+      toast(error.message, "error");
+    },
+    onSuccess() {
+      toast(`Successfully approved ${customerInfo?.companyName}`);
+      queryClient.invalidateQueries({ queryKey: ["customers", "is_approved", false] });
+    }
+  });
 
   function handleIsAddressMatch() {
     const serialized = {
@@ -85,6 +96,12 @@ export const ReviewCard = ({
     ...createCustomerModalMethods
   } = useModal();
 
+  const {
+    Modal: ApproveCustomerModal,
+    isModalOpen: isApproveCustomerModalOpen,
+    ...approveCustomerModalMethods
+  } = useModal();
+
   return (
     <div className="p-lg bg-theme-secondary rounded-lg flex flex-col gap-lg">
       {/* Review Card Title and Status Pill */}
@@ -112,13 +129,17 @@ export const ReviewCard = ({
 
       {/* Link to QuickBooks Customer */}
       {customerInfo?.isExistingCustomer && !qbSyncRecord && (
-        <CustomerLink quickbooksCustomerData={quickbooksCustomerData} />
+        <CustomerLink
+          user_id={newCustomer.id}
+          quickbooksCustomerData={quickbooksCustomerData}
+        />
       )}
 
       {/* Operation Buttons */}
       <OperationButtons
         qbSyncRecord={qbSyncRecord}
         createCustomerModalMethods={{ ...createCustomerModalMethods }}
+        approveCustomerModalMethods={{ ...approveCustomerModalMethods }}
       />
 
       {isCreateCustomerModalOpen && (
@@ -207,6 +228,55 @@ export const ReviewCard = ({
             </div>
           </div>
         </CreateCustomerModal>
+      )}
+
+      {isApproveCustomerModalOpen && (
+        <ApproveCustomerModal>
+          <div className="bg-theme-primary p-lg rounded-lg w-xl flex flex-col gap-md">
+            <h2>Approve customer account</h2>
+
+            {!qbSyncRecord ? (
+              <div className="flex flex-col gap-md">
+                <p className="opacity-80">
+                  Please link this customer to a QuickBooks account to continue.
+                </p>
+
+                <CustomerLink
+                  user_id={rest.id}
+                  quickbooksCustomerData={quickbooksCustomerData}
+                />
+              </div>
+            ) : (
+              <div>
+                <p>Are you sure you want to approve {qbSyncRecord.company_name}</p>
+              </div>
+            )}
+
+            <div className="flex items-center gap-lg">
+              <button
+                disabled={isToggleIsApprovedPending || !qbSyncRecord}
+                className="flex-1 btn-green py-xs"
+                onClick={() => toggleIsApproved(newCustomer.id)}
+              >
+                {isToggleIsApprovedPending ? (
+                  <Icon
+                    name="spin"
+                    style={{ className: "animate-spin mx-auto text-2xl" }}
+                  />
+                ) : (
+                  "Approve Customer"
+                )}
+              </button>
+
+              <button
+                className="btn-red px-md py-xs"
+                onClick={() => approveCustomerModalMethods.handleCancelModal()}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </ApproveCustomerModal>
       )}
     </div>
   );

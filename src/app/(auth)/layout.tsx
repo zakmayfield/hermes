@@ -16,7 +16,7 @@ export default async function AuthenticationLayout({
         flexColPosition: "top-center"
       }}
     >
-      <Logo style={{ wrapper: { width: "sm" } }} />
+      <Logo style={{ wrapper: { width: "xs" } }} />
 
       {children}
 

@@ -2,19 +2,16 @@
 
 import { useToast } from "@/shared/hooks/ui";
 import { Box, Button, Heading, Icon, Pulse, Text } from "@/ui";
-import { QueryKeys } from "@/utils/core/queryKeys";
-import { toggleUserApproval } from "@/utils/database/user/mutations";
-import {
-  getUnapprovedUsers,
-  UserWithOnboardingStatus
-} from "@/utils/database/user/queries";
-import { $Enums, Onboarding } from "@prisma/client";
+import { toggleUserIsApproved } from "@/data/database/mutations";
+import { $Enums } from "@prisma/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getCustomersByIsApproved } from "@/data/database/queries";
+import { UserWithOnboardingStatus } from "@/data/database/models/User";
 
 export const UserApprovals = () => {
   const { data, error, isLoading } = useQuery({
-    queryKey: [QueryKeys.UNAPPROVED_CUSTOMERS_LIST],
-    queryFn: async () => await getUnapprovedUsers(),
+    queryKey: ["customers", "is_approved", false],
+    queryFn: async () => await getCustomersByIsApproved({ is_approved: false }),
     staleTime: Infinity
   });
 
@@ -22,7 +19,7 @@ export const UserApprovals = () => {
     <Box
       style={{
         borderRadius: "lg",
-        backgroundColor: "primary",
+        backgroundColor: "theme-primary",
         padding: "md",
         spaceY: "md"
       }}
@@ -32,7 +29,7 @@ export const UserApprovals = () => {
       {isLoading ? (
         <Pulse />
       ) : error ? (
-        <Box style={{ textColor: "warning", textAlign: "center" }}>{error.message}</Box>
+        <Box style={{ textColor: "theme-red", textAlign: "center" }}>{error.message}</Box>
       ) : data && data.length > 0 ? (
         data.map((user) => (
           <UnapprovedUser
@@ -43,8 +40,8 @@ export const UserApprovals = () => {
       ) : (
         <Box
           style={{
-            textColor: "success-light",
-            backgroundColor: "secondary",
+            textColor: "theme-green",
+            backgroundColor: "theme-secondary",
             padding: "lg",
             borderRadius: "lg"
           }}
@@ -61,19 +58,14 @@ function UnapprovedUser({ user }: { user: UserWithOnboardingStatus }) {
 
   const queryClient = useQueryClient();
 
-  const handleFilterCache = (data: Onboarding) => {
-    queryClient.setQueryData<UserWithOnboardingStatus[]>(
-      [QueryKeys.UNAPPROVED_CUSTOMERS_LIST],
-      (oldData) => {
-        return oldData ? oldData.filter((user) => user.id !== data.user_id) : oldData;
-      }
-    );
+  const handleInvalidateQuery = () => {
+    queryClient.invalidateQueries({ queryKey: ["customers", "is_approved", false] });
   };
 
   const { mutate } = useMutation({
-    mutationFn: toggleUserApproval,
-    onSuccess(data) {
-      handleFilterCache(data);
+    mutationFn: toggleUserIsApproved,
+    onSuccess() {
+      handleInvalidateQuery();
       toast("Successfully approved user");
     },
     onError(error) {
@@ -89,7 +81,7 @@ function UnapprovedUser({ user }: { user: UserWithOnboardingStatus }) {
           minHeight: "3xs",
           padding: "md",
           borderRadius: "lg",
-          backgroundColor: "secondary",
+          backgroundColor: "theme-secondary",
           display: "flex-col",
           gap: "md"
         }}
@@ -109,8 +101,8 @@ function UnapprovedUser({ user }: { user: UserWithOnboardingStatus }) {
               fontSize: "sm",
               className: `text-foreground border-foreground/50 ${
                 user.onboarding?.status === $Enums.OnboardingStatus.PENDING
-                  ? "bg-warning/50"
-                  : "bg-success/50"
+                  ? "bg-theme-red/50"
+                  : "bg-theme-green/50"
               }`
             }}
           >
@@ -118,7 +110,7 @@ function UnapprovedUser({ user }: { user: UserWithOnboardingStatus }) {
           </Text>
 
           <Button
-            options={{ variant: "primary" }}
+            options={{ variant: "green" }}
             style={{ paddingX: "xl", className: "ml-auto" }}
             handleClick={() => mutate(user.id)}
           >

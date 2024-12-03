@@ -1,9 +1,11 @@
 "use client";
+import {
+  getPermissionsByRole,
+  getUserPermissionsByUserId,
+  getUsersByRole
+} from "@/data/database/queries";
+import { toggleUserPermission } from "@/data/database/mutations";
 import { Box, Heading, Icon, Pulse, Text } from "@/ui";
-import { QueryKeys } from "@/utils/core/queryKeys";
-import { toggleUserPermission } from "@/utils/database/permissions/mutations";
-import { getPermissionsByRole } from "@/utils/database/permissions/queries";
-import { getUserPermissionsById, getUsersByRole } from "@/utils/database/user/queries";
 import { $Enums, Permission, User } from "@prisma/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React from "react";
@@ -14,14 +16,14 @@ export const GrantPermissions = () => {
     error,
     isLoading
   } = useQuery({
-    queryKey: ["users", `role:${$Enums.Roles.ADMIN}`],
-    queryFn: async () => await getUsersByRole($Enums.Roles.ADMIN),
+    queryKey: ["admins"],
+    queryFn: async () => await getUsersByRole({ role: $Enums.Roles.ADMIN }),
     staleTime: Infinity
   });
 
   const { data: permissions } = useQuery({
-    queryKey: [QueryKeys.PERMISSIONS, `role:${$Enums.Roles.ADMIN}`],
-    queryFn: async () => await getPermissionsByRole($Enums.Roles.ADMIN),
+    queryKey: ["admin_permissions"],
+    queryFn: async () => await getPermissionsByRole({ role: $Enums.Roles.ADMIN }),
     staleTime: Infinity
   });
 
@@ -29,7 +31,7 @@ export const GrantPermissions = () => {
     <Box
       style={{
         borderRadius: "lg",
-        backgroundColor: "primary",
+        backgroundColor: "theme-primary",
         padding: "md",
         spaceY: "md"
       }}
@@ -51,7 +53,11 @@ export const GrantPermissions = () => {
           ))
         ) : (
           <Box
-            style={{ backgroundColor: "secondary", padding: "lg", borderRadius: "lg" }}
+            style={{
+              backgroundColor: "theme-secondary",
+              padding: "lg",
+              borderRadius: "lg"
+            }}
           >
             <Text>No admins</Text>
           </Box>
@@ -71,8 +77,8 @@ function GrantPermissionsItem({
   const [isDropDownOpen, setDropDownOpen] = React.useState(false);
 
   const { data: userPermissions, isLoading } = useQuery({
-    queryKey: ["permissions", `user:${admin.id}`],
-    queryFn: async () => await getUserPermissionsById(admin.id),
+    queryKey: ["admin_permissions", admin.id],
+    queryFn: async () => await getUserPermissionsByUserId(admin.id),
     staleTime: Infinity
   });
 
@@ -83,7 +89,7 @@ function GrantPermissionsItem({
           display: "flex-row",
           flexAlign: "center",
           flexSpacing: "space-between",
-          backgroundColor: "secondary",
+          backgroundColor: "theme-secondary",
           borderRadius: "lg",
           padding: "sm"
         }}
@@ -148,7 +154,7 @@ function PermissionItem({
   const { mutate: togglePermission } = useMutation({
     mutationFn: toggleUserPermission,
     onSuccess() {
-      queryClient.invalidateQueries({ queryKey: ["user_permissions"] });
+      queryClient.invalidateQueries({ queryKey: ["admin_permissions", user_id] });
     }
   });
 
@@ -157,7 +163,7 @@ function PermissionItem({
   return (
     <Box
       style={{
-        backgroundColor: "secondary",
+        backgroundColor: "theme-secondary",
         display: "flex-row",
         gap: "sm",
         padding: "xs",

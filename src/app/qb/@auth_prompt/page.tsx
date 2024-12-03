@@ -10,7 +10,7 @@ export default function Page() {
   const OAuthUrl = `${baseOAuthURL}?response_type=code&client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&state=${state}`;
 
   return (
-    <div className="bg-primary p-lg rounded-md space-y-sm w-md mx-auto">
+    <div className="bg-theme-primary p-lg rounded-md space-y-sm w-md mx-auto">
       <h2>No QuickBooks account linked</h2>
 
       <p className="text-foreground/70">

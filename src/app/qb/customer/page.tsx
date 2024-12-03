@@ -1,15 +1,16 @@
-import { CustomerSync } from "@/quickbooks/components/CustomerSync";
-import { getQBTokens, handleTokenRefresh } from "@/quickbooks/services/token";
-import { validateTokenExpiration } from "@/quickbooks/utils/token";
+import { LinkAndApproveCustomers } from "@/features/LinkAndApproveCustomers";
+import { handleTokenRefresh } from "@/data/qb/services/token";
 import { redirect } from "next/navigation";
+import { validateTokenExp } from "@/utils/qb";
+import { getQuickbooksTokens } from "@/data/database/queries";
 
 export default async function Page() {
-  const qbTokens = await getQBTokens();
+  const qbTokens = await getQuickbooksTokens();
   if (!qbTokens) {
     redirect("/qb");
   }
 
-  const { accessToken, refreshToken } = await validateTokenExpiration(qbTokens);
+  const { accessToken, refreshToken } = await validateTokenExp(qbTokens);
   if (accessToken.isExpired || refreshToken.isExpired) {
     const { error } = await handleTokenRefresh(qbTokens);
 
@@ -19,10 +20,9 @@ export default async function Page() {
   }
 
   return (
-    <div>
-      <h1>customer</h1>
-
-      <CustomerSync />
+    <div className="flex flex-col gap-lg">
+      <h1>Manage Customers</h1>
+      <LinkAndApproveCustomers />
     </div>
   );
 }

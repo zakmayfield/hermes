@@ -10,7 +10,7 @@ export const FooterItem = (props: FooterItemProps) => {
   return (
     <Box
       style={{
-        backgroundColor: "primary",
+        backgroundColor: "theme-primary",
         padding: "lg",
         borderRadius: "lg",
         maxWidth: "lg",

@@ -20,7 +20,7 @@ type LinkItem = {
   children?: { href: string; text: string; icon: IconNames }[];
 };
 
-const baseSlideAnimation = "transition-all ease-in-out duration-300";
+const baseSlideAnimation = "transition-all ease-in-out duration-200";
 
 export const SidebarNavigation = (props: SidebarNavigationProps) => {
   const { role } = props;
@@ -31,7 +31,7 @@ export const SidebarNavigation = (props: SidebarNavigationProps) => {
   return (
     <div
       aria-expanded={isNavExpanded}
-      className={`bg-primary relative flex flex-col gap-md ${baseSlideAnimation} ${
+      className={`bg-theme-primary sticky flex top-0 flex-col gap-md z-50 max-h-screen ${baseSlideAnimation} ${
         isNavExpanded
           ? "p-lg w-full min-w-full md:max-w-sm md:min-w-sm"
           : "p-sm min-w-3xs max-w-3xs w-full"
@@ -66,7 +66,7 @@ function NavigationLinks({
 
   return (
     <div
-      className={`${baseSlideAnimation} bg-secondary rounded-md flex-1 flex flex-col gap-xs h-full py-xl ${
+      className={`${baseSlideAnimation} bg-theme-secondary rounded-md flex-1 flex flex-col gap-xs h-full py-xl ${
         isNavExpanded ? "items-start p-md" : "items-center p-xs"
       }`}
     >
@@ -92,9 +92,9 @@ function NavigationLinks({
 }
 
 const defaultLinkStyles =
-  "rounded-lg p-xs w-full cursor-pointer hover:bg-primary/70 focus:bg-primary/70";
+  "rounded-lg p-xs w-full cursor-pointer hover:bg-theme-primary/70 focus:bg-theme-primary/70";
 const defaultIconStyles = "text-2xl min-w-[20px]";
-const defaultSmoothAnimation = "transition-all ease-in-out duration-300";
+const defaultSmoothAnimation = "transition-all ease-in-out duration-200";
 
 function SignOutButton({ isNavExpanded }: { isNavExpanded: boolean }) {
   const tooltip = useTooltip({
@@ -143,10 +143,7 @@ function BaseLinkItem({
       href={item.href as string}
       className={`${defaultSmoothAnimation} ${defaultLinkStyles} flex items-center gap-sm w-full ${
         !isNavExpanded && "justify-center"
-      } ${
-        pathname === item.href &&
-        "bg-success hover:bg-success-light focus:bg-success-light"
-      }`}
+      } ${pathname === item.href && "bg-theme-green"}`}
     >
       <div
         className={`relative flex items-center gap-sm ${
@@ -192,7 +189,7 @@ function NestedLinkItem({
         onClick={handleToggleChildren}
         className={`${defaultSmoothAnimation} ${defaultLinkStyles} relative flex items-center gap-sm w-full hover:filter-none ${
           isNavExpanded ? "justify-start" : "justify-center"
-        } ${isShowingChildren && "bg-tertiary/15 rounded-b-none"}`}
+        } ${isShowingChildren && "bg-theme-tertiary/15 rounded-b-none"}`}
       >
         <Icon
           name={item.icon}
@@ -216,7 +213,7 @@ function NestedLinkItem({
       </button>
 
       <div
-        className={`${defaultSmoothAnimation} bg-tertiary/15  rounded-b-lg flex flex-col gap-xs ${
+        className={`${defaultSmoothAnimation} bg-theme-tertiary/15  rounded-b-lg flex flex-col gap-xs ${
           isNavExpanded && "px-md"
         } ${isShowingChildren ? "min-h-none p-xs" : "h-none p-none"}`}
       >
@@ -249,7 +246,7 @@ function ToggleExpandButton({
       <button
         aria-label="expand or collapse navigation"
         onClick={handleToggleNav}
-        className={`${baseSlideAnimation} duration-200 py-xl md:py-md bg-success opacity-50 hover:opacity-100 focus:opacity-100`}
+        className={`${baseSlideAnimation} duration-200 py-xl md:py-md bg-theme-green opacity-50 hover:opacity-100 focus:opacity-100`}
       >
         <Icon
           name="hamburger"
@@ -262,7 +259,7 @@ function ToggleExpandButton({
 
 function NavigationHeader() {
   return (
-    <div className="bg-secondary rounded-md p-xs max-h-4xs min-h-4xs w-full flex items-center">
+    <div className="bg-theme-secondary rounded-md p-xs max-h-4xs min-h-4xs w-full flex items-center">
       <Image
         priority
         src={SmallLogo}

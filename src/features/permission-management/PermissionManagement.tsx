@@ -1,21 +1,18 @@
 "use client";
 
+import { RolePermissionsWithPermission } from "@/data/database/models/Permission";
+import { togglePermissionLevel } from "@/data/database/mutations";
+import { getRoleById, getRolePermissionsByRoles } from "@/data/database/queries";
 import { useToast, useTooltip } from "@/shared/hooks/ui";
 import { Box, Heading, Icon, Pulse, Text } from "@/ui";
-import { togglePermissionLevel } from "@/utils/database/permissions/mutations";
-import {
-  getRolePermissions,
-  GetRolePermissionsOutput
-} from "@/utils/database/permissions/queries";
-import { getRoleById } from "@/utils/database/roles/queries";
 import { $Enums } from "@prisma/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 
 export const PermissionManagement = () => {
   const { data, error, isLoading } = useQuery({
-    queryKey: [`role_permissions:${$Enums.Roles.ADMIN}`],
-    queryFn: async () => getRolePermissions({ role: $Enums.Roles.ADMIN }),
+    queryKey: [`admin_role_permissions`],
+    queryFn: async () => getRolePermissionsByRoles({ role: $Enums.Roles.ADMIN }),
     staleTime: Infinity
   });
 
@@ -23,7 +20,7 @@ export const PermissionManagement = () => {
     <Box
       style={{
         borderRadius: "lg",
-        backgroundColor: "primary",
+        backgroundColor: "theme-primary",
         padding: "md",
         spaceY: "md"
       }}
@@ -55,7 +52,7 @@ export const PermissionManagement = () => {
 function PermissionCard({
   role_permission
 }: {
-  role_permission: GetRolePermissionsOutput;
+  role_permission: RolePermissionsWithPermission;
 }) {
   const { role_id, permission_id, permission_level, permission } = role_permission;
 
@@ -67,8 +64,8 @@ function PermissionCard({
     async onSuccess(data) {
       const role = await getRoleById({ role_id }).then((r) => r?.name);
 
-      queryClient.setQueryData<GetRolePermissionsOutput[]>(
-        [`role_permissions:${role}`],
+      queryClient.setQueryData<RolePermissionsWithPermission[]>(
+        ["admin_role_permissions"],
         (oldData) => {
           return oldData
             ? oldData.map((rp) =>
@@ -98,7 +95,8 @@ function PermissionCard({
     }
   });
 
-  const toggle = () => mutate({ role_id, permission_id, permission_level });
+  const toggle = () =>
+    mutate({ permission_level, permission: { role_id, permission_id } });
 
   const Tooltip = useTooltip({
     place: "top-end",
@@ -117,7 +115,7 @@ function PermissionCard({
         display: "flex-col",
         gap: "xs",
         flexSpacing: "space-between",
-        backgroundColor: "secondary",
+        backgroundColor: "theme-secondary",
         width: "full"
       }}
     >
@@ -134,12 +132,12 @@ function PermissionCard({
           style={{
             border: "sm",
             borderRadius: "xl",
-            textColor: isEnabled ? "success" : "warning",
-            borderColor: isEnabled ? "success" : "warning",
+            textColor: isEnabled ? "theme-green" : "theme-red",
+            borderColor: isEnabled ? "theme-green" : "theme-red",
             minWidth: "4xs",
             width: "4xs",
             textAlign: "center",
-            backgroundColor: "primary",
+            backgroundColor: "theme-primary",
             cursor: "pointer",
             className: "sm:py-none"
           }}
@@ -178,7 +176,7 @@ function PermissionCard({
       {/* DESCRIPTION */}
       <Text
         style={{
-          textColor: "accent",
+          textColor: "theme-accent",
           className: "italic h-full"
         }}
       >

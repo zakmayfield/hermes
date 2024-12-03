@@ -6,7 +6,7 @@ export const Footer = () => {
     <Box
       as="footer"
       style={{
-        backgroundColor: "secondary",
+        backgroundColor: "theme-secondary",
         padding: "lg"
       }}
     >

@@ -2,27 +2,25 @@
 import { useFormContext } from "@/shared/hooks/forms";
 import { useToast } from "@/shared/hooks/ui";
 import { Box, Button, Form, Icon, Input, Pulse, SubmitButton, Text } from "@/ui";
-import { authorizedAdminsValidator } from "@/utils/validators/formValidators";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  addAuthorizedAdmin,
-  AddAuthorizedAdminInput,
-  AddAuthorizedAdminOutput,
-  deleteAuthorizedAdmin,
-  revokeAdminRole
-} from "@/utils/database/admin/mutations";
 import { QueryKeys } from "@/utils/core/queryKeys";
-import { fetchAuthorizedAdmins } from "@/utils/database/admin/queries";
 import { $Enums, AuthorizedAdmin } from "@prisma/client";
 import React from "react";
 import { Modal } from "@/shared/components";
+import { getAuthorizedAdmins } from "@/data/database/queries";
+import {
+  createAuthorizedAdmin,
+  deleteAuthorizedAdmin,
+  revokeAdminRole
+} from "@/data/database/mutations";
+import { authorizeAdminValidator } from "@/utils/validators/forms/authorizeAdminValidator";
 
 export const AdminAuthorization = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
-    mutationFn: addAuthorizedAdmin,
+    mutationFn: createAuthorizedAdmin,
     onSuccess(data) {
       toast(`Authorized: ${data.email}`);
       queryClient.setQueryData<AuthorizedAdmin[]>(
@@ -40,16 +38,19 @@ export const AdminAuthorization = () => {
     }
   });
 
-  const { methods, submitHandler } = useFormContext<
-    AddAuthorizedAdminInput,
-    AddAuthorizedAdminOutput
-  >({ mutate, ...authorizedAdminsValidator() });
+  const { defaultValues, resolver } = authorizeAdminValidator;
+
+  const { methods, submitHandler } = useFormContext<{ email: string }, AuthorizedAdmin>({
+    mutate,
+    defaultValues,
+    resolver
+  });
 
   return (
     <Box
       style={{
         borderRadius: "lg",
-        backgroundColor: "primary",
+        backgroundColor: "theme-primary",
         padding: "md",
         spaceY: "md"
       }}
@@ -65,7 +66,7 @@ export const AdminAuthorization = () => {
             register: methods.register
           }}
         />
-        <SubmitButton options={{ text: "Authorize Admin", variant: "primary" }} />
+        <SubmitButton options={{ text: "Authorize Admin", variant: "green" }} />
       </Form>
 
       <AuthorizedAdminList />
@@ -75,8 +76,8 @@ export const AdminAuthorization = () => {
 
 function AuthorizedAdminList() {
   const { data, error, isLoading } = useQuery({
-    queryKey: [QueryKeys.AUTHORIZED_ADMINS_LIST],
-    queryFn: async () => await fetchAuthorizedAdmins(),
+    queryKey: ["authorized_admins"],
+    queryFn: async () => await getAuthorizedAdmins(),
     staleTime: Infinity
   });
 
@@ -94,7 +95,13 @@ function AuthorizedAdminList() {
           />
         ))
       ) : (
-        <Box style={{ backgroundColor: "secondary", padding: "lg", borderRadius: "lg" }}>
+        <Box
+          style={{
+            backgroundColor: "theme-secondary",
+            padding: "lg",
+            borderRadius: "lg"
+          }}
+        >
           <Text>No authorized admins</Text>
         </Box>
       )}
@@ -138,7 +145,7 @@ function AuthorizedAdminItem({ admin }: { admin: AuthorizedAdmin }) {
     >
       <Button
         handleClick={() => setIsModalOpen(true)}
-        options={{ variant: "warning" }}
+        options={{ variant: "red" }}
         style={{ padding: "none", paddingX: "lg", paddingY: "xs", className: "lg:px-sm" }}
       >
         <Icon
@@ -149,7 +156,7 @@ function AuthorizedAdminItem({ admin }: { admin: AuthorizedAdmin }) {
 
       <Box
         style={{
-          backgroundColor: "secondary",
+          backgroundColor: "theme-secondary",
           padding: "xs",
           paddingX: "md",
           borderRadius: "md",
@@ -173,7 +180,7 @@ function AuthorizedAdminItem({ admin }: { admin: AuthorizedAdmin }) {
 
             <div className="flex gap-[var(--space-lg)]">
               <Button
-                options={{ variant: "warning" }}
+                options={{ variant: "red" }}
                 handleClick={() => {
                   mutate({ authorized_admin_id: admin.authorized_admin_id });
                   setIsModalOpen(false);

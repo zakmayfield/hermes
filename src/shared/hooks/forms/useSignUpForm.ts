@@ -1,18 +1,39 @@
 import { signIn, SignInResponse } from "next-auth/react";
-import { useFormContext } from "./useFormContext";
-import { authValidator } from "@/utils/validators/formValidators";
 import { useMutation } from "@tanstack/react-query";
+import { signupValidator } from "@/utils/validators/forms/signupValidator";
+import { useForm } from "react-hook-form";
 
 export const useSignUpForm = () => {
-  const formMeta = authValidator();
+  const { defaultValues, resolver } = signupValidator;
 
-  type FormData = typeof formMeta.defaultValues;
+  type FormData = typeof defaultValues;
   type Response = SignInResponse | undefined;
 
-  const signUpMutation = async (data: FormData) => await signIn("sign-up", data);
+  const signUpMutation = async (data: FormData) => {
+    const serializedData = JSON.stringify(data);
+
+    // `signIn` sends data within the request body as `URLSearchParams`: node_modules/next-auth/src/react/index.tsx
+    // req.body must be serialized so the objects get flattened into a string of `[object object]`
+    // Need to serialize the data before we send it, and then parse the data when the credentials
+    // are received within the provider
+    return await signIn("sign-up", { data: serializedData });
+  };
+
   const { mutate } = useMutation({
     mutationFn: signUpMutation
   });
 
-  return useFormContext<FormData, Response>({ ...formMeta, mutate });
+  const methods = useForm<FormData, Response>({
+    defaultValues: { ...defaultValues },
+    resolver
+  });
+
+  const onSubmit = (data: FormData) => {
+    mutate(data);
+    methods.reset();
+  };
+
+  const submitHandler = methods.handleSubmit(onSubmit);
+
+  return { methods, submitHandler };
 };

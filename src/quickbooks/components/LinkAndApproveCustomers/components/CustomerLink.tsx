@@ -14,19 +14,18 @@ export const CustomerLink = ({
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
-  const { mutate: createQBSyncRecord, isPending: isCreateQBSyncRecordPending } =
-    useMutation({
-      mutationFn: createQuickbooksCustomerSyncRecord,
-      onError(error) {
-        toast(error.message, "error");
-      },
-      onSuccess(data) {
-        toast(`Successfully linked ${data.company_name}`);
-        queryClient.invalidateQueries({
-          queryKey: ["quickbooks_customer_sync_ref", user_id]
-        });
-      }
-    });
+  const { mutate: createQBSyncRecord } = useMutation({
+    mutationFn: createQuickbooksCustomerSyncRecord,
+    onError(error) {
+      toast(error.message, "error");
+    },
+    onSuccess(data) {
+      toast(`Successfully linked ${data.company_name}`);
+      queryClient.invalidateQueries({
+        queryKey: ["quickbooks_customer_sync_ref", user_id]
+      });
+    }
+  });
 
   const formattedDropdownData = !quickbooksCustomerData
     ? []

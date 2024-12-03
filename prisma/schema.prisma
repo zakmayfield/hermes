@@ -212,8 +212,8 @@ model QuickbooksCustomerSync {
   user_id                     String @unique
   user                        User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
-  // TODO: *** Multiple customers should be able to reference a single customerID ***
-  customer_id  String @unique
+  // *** Multiple customers should be able to reference a single customerID ***
+  customer_id  String
   company_name String
 }
 

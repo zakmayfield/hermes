@@ -1,5 +1,6 @@
 export { createAuthorizedAdmin } from "./createAuthorizedAdmin";
 export { createNewUser } from "./createNewUser";
+export { createQuickbooksCustomerSyncRecord } from "./createQuickbooksCustomerSyncRecord";
 export { deleteAuthorizedAdmin } from "./deleteAuthorizedAdmin";
 export { revokeAdminRole } from "./revokeAdminRole";
 export { togglePermissionLevel } from "./togglePermissionLevel";

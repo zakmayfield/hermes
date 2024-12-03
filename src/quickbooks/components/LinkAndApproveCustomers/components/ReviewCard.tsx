@@ -11,9 +11,10 @@ import { AddressMatch } from "./AddressMatch";
 import { ShippingAddress } from "./ShippingAddress";
 import { CustomerInfo } from "./CustomerInfo";
 import { ReviewCardTitle } from "./ReviewCardTitle";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getQuickBooksCustomerSyncRecordByUserId } from "@/data/database/queries";
 import { createCustomer } from "@/data/services/createCustomer";
+import { Icon } from "@/ui";
 
 export const ReviewCard = ({
   newCustomer,
@@ -32,13 +33,22 @@ export const ReviewCard = ({
   });
 
   const { toast } = useToast();
+  const queryClient = useQueryClient();
 
-  const { mutate: createQuickBooksCustomer } = useMutation({
-    mutationFn: createCustomer,
-    onError(error) {
-      toast(error.message, "error");
-    }
-  });
+  const { mutate: createQuickBooksCustomer, isPending: isCreateCustomerPending } =
+    useMutation({
+      mutationFn: createCustomer,
+      onError(error) {
+        toast(error.message, "error");
+      },
+      onSuccess(data) {
+        toast(`Successfully created customer: ${data.CompanyName}`);
+        createCustomerModalMethods.handleCancelModal();
+        queryClient.invalidateQueries({
+          queryKey: ["quickbooks_customer_sync_ref", newCustomer.id]
+        });
+      }
+    });
 
   function handleIsAddressMatch() {
     const serialized = {
@@ -78,7 +88,10 @@ export const ReviewCard = ({
   return (
     <div className="p-lg bg-theme-secondary rounded-lg flex flex-col gap-lg">
       {/* Review Card Title and Status Pill */}
-      <ReviewCardTitle customerInfo={customerInfo} />
+      <ReviewCardTitle
+        customerInfo={customerInfo}
+        qbSyncRecord={qbSyncRecord}
+      />
 
       {/* Customer Info */}
       <CustomerInfo
@@ -98,7 +111,7 @@ export const ReviewCard = ({
       )}
 
       {/* Link to QuickBooks Customer */}
-      {customerInfo?.isExistingCustomer && (
+      {customerInfo?.isExistingCustomer && !qbSyncRecord && (
         <CustomerLink quickbooksCustomerData={quickbooksCustomerData} />
       )}
 
@@ -113,7 +126,11 @@ export const ReviewCard = ({
           <div className="bg-theme-primary p-lg rounded-lg w-xl flex flex-col gap-md">
             <h2>Confirm customer information</h2>
 
-            <div className="bg-theme-secondary p-lg rounded-lg flex flex-col gap-md">
+            <div
+              className={`bg-theme-secondary p-lg rounded-lg flex flex-col gap-md ${
+                isCreateCustomerPending && "opacity-50"
+              }`}
+            >
               <div className="flex flex-col gap-xs">
                 <h3 className="text-3xl">{customerInfo?.companyName}</h3>
 
@@ -160,17 +177,26 @@ export const ReviewCard = ({
 
             <div className="flex items-center gap-lg">
               <button
+                disabled={isCreateCustomerPending}
                 className="flex-1 btn-green py-xs"
                 onClick={() =>
                   createQuickBooksCustomer({
-                    email: "",
+                    user_id: rest.id,
+                    email: rest.email,
                     customerInfo,
                     customerShipAddr,
                     customerBillAddr
                   })
                 }
               >
-                Create Customer
+                {isCreateCustomerPending ? (
+                  <Icon
+                    name="spin"
+                    style={{ className: "animate-spin mx-auto text-2xl" }}
+                  />
+                ) : (
+                  "Create Customer"
+                )}
               </button>
               <button
                 className="btn-red px-md py-xs"

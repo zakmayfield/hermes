@@ -6,10 +6,12 @@ export const CustomerLink = ({
 }: {
   quickbooksCustomerData: QuickbooksCustomerData;
 }) => {
-  const formattedDropdownData = quickbooksCustomerData?.map((c) => ({
-    value: c.Id,
-    label: c.CompanyName
-  }));
+  const formattedDropdownData = !quickbooksCustomerData
+    ? []
+    : quickbooksCustomerData.map((c) => ({
+        value: c.Id,
+        label: c.CompanyName
+      }));
   return (
     <div className="flex flex-col gap-md bg-theme-tertiary p-lg rounded-lg">
       <div>

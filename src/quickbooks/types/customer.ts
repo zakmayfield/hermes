@@ -64,7 +64,7 @@ export type CustomerQueryResponse = {
   time: string;
 };
 
-export type CustomerReadResponse = {
+export type CustomerResponse = {
   Customer: Customer;
   time: string;
 };

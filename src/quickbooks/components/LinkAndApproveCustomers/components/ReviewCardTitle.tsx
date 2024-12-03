@@ -1,18 +1,23 @@
-import { CustomerInfo } from "@prisma/client";
+import { CustomerInfo, QuickbooksCustomerSync } from "@prisma/client";
 
 export const ReviewCardTitle = ({
-  customerInfo
+  customerInfo,
+  qbSyncRecord
 }: {
   customerInfo: CustomerInfo | null;
+  qbSyncRecord: QuickbooksCustomerSync | null | undefined;
 }) => {
+  const isLinked = !!qbSyncRecord;
   return (
-    <div className="flex items-center gap-lg">
+    <div className="flex items-center gap-md">
       <h2>{customerInfo?.companyName}</h2>
-      {customerInfo?.isExistingCustomer ? (
-        <p className="border rounded-full px-sm text-sm">existing customer</p>
-      ) : (
-        <p className="border rounded-full px-sm text-sm">new customer</p>
-      )}
+      <p
+        className={`border rounded-full px-md opacity-75 text-sm ${
+          !isLinked ? "bg-theme-red" : "bg-theme-green"
+        }`}
+      >
+        {!isLinked ? "not linked" : "linked"}
+      </p>
     </div>
   );
 };

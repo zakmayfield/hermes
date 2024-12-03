@@ -7,3 +7,4 @@ export { togglePermissionLevel } from "./togglePermissionLevel";
 export { toggleUserIsApproved } from "./toggleUserIsApproved";
 export { toggleUserPermission } from "./toggleUserPermission";
 export { updateUserLoginDate } from "./updateUserLoginDate";
+export { upsertQuickbooksToken } from "./upsertQuickbooksToken";

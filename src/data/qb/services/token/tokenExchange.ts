@@ -1,11 +1,16 @@
-import { ExchangeToken, Token } from "@/quickbooks/types/token";
 import {
   qb_client_id,
   qb_client_secret,
   qb_redirect_uri,
   qb_token_url
-} from "@/quickbooks/utils/constants";
+} from "@/utils/qb/constants";
 import { fetcher } from "@/utils/fetcher";
+import { z } from "zod";
+import { tokenValidators } from "@/data/qb/validators";
+
+type ExchangeToken = {
+  code: string;
+};
 
 export const handleTokenExchange = async ({ code }: ExchangeToken) => {
   try {
@@ -27,7 +32,7 @@ export const handleTokenExchange = async ({ code }: ExchangeToken) => {
       client_secret: qb_client_secret
     };
 
-    const { response } = await fetcher<Token>({
+    const { response } = await fetcher<z.infer<typeof tokenValidators.accessToken>>({
       options: {
         fetchOptions: {
           baseUrl: qb_token_url,

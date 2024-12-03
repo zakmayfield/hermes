@@ -1,9 +1,10 @@
-import { Token } from "@/quickbooks/types/token";
-import { qb_token_url } from "@/quickbooks/utils/constants";
-import { fetcher } from "@/utils/fetcher";
+import { z } from "zod";
 import { QuickbooksToken } from "@prisma/client";
-import { handleUpsertTokenData } from "./database";
-import { decrypt } from "@/quickbooks/utils/encryption";
+import { qb_token_url } from "@/utils/qb/constants";
+import { fetcher } from "@/utils/fetcher";
+import { decrypt } from "@/utils/qb";
+import { upsertQuickbooksToken } from "@/data/database/mutations";
+import { tokenValidators } from "@/data/qb/validators";
 
 export const handleTokenRefresh = async (payload: QuickbooksToken) => {
   const refreshToken = await decrypt(
@@ -17,7 +18,9 @@ export const handleTokenRefresh = async (payload: QuickbooksToken) => {
       throw new Error("Invalid URL");
     }
 
-    const { error, response } = await fetcher<Token>({
+    const { error, response } = await fetcher<
+      z.infer<typeof tokenValidators.accessToken>
+    >({
       options: {
         fetchOptions: {
           baseUrl: qb_token_url,
@@ -37,7 +40,7 @@ export const handleTokenRefresh = async (payload: QuickbooksToken) => {
     });
 
     if (response) {
-      await handleUpsertTokenData({
+      await upsertQuickbooksToken({
         user_id: payload.user_id,
         realm_id: payload.realm_id,
         token: response

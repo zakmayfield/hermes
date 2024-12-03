@@ -1,7 +1,8 @@
 import { isUserAuthenticated } from "@/data/session";
-import { getQBTokens, handleTokenRefresh } from "@/quickbooks/services/token";
-import { validateTokenExpiration } from "@/quickbooks/utils/token";
+import { handleTokenRefresh } from "@/data/qb/services/token";
 import { redirect } from "next/navigation";
+import { validateTokenExp } from "@/utils/qb";
+import { getQuickbooksTokens } from "@/data/database/queries";
 
 export default async function Layout({
   children,
@@ -15,8 +16,8 @@ export default async function Layout({
     redirect("/dashboard");
   }
 
-  const qbToken = await getQBTokens();
-  const { refreshToken } = await validateTokenExpiration(qbToken);
+  const qbToken = await getQuickbooksTokens();
+  const { refreshToken } = await validateTokenExp(qbToken);
 
   if (qbToken && refreshToken.isExpired) {
     await handleTokenRefresh(qbToken);

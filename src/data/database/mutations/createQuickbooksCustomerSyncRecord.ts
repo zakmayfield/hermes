@@ -21,9 +21,7 @@ export const createQuickbooksCustomerSyncRecord = async ({
     });
   } catch (error) {
     if (error instanceof Error) {
-      if (error.message.includes("Unique")) {
-        throw new Error("This QuickBooks customer has already been linked");
-      }
+      throw new Error(error.message);
     }
 
     throw new Error("Unexpected Server Error");

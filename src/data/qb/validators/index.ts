@@ -9,4 +9,11 @@ export type {
   CustomerRead
 } from "./customer";
 
+export { invoiceValidators } from "./invoice";
+export type {
+  InvoiceCreateInput,
+  InvoiceCreateResponse,
+  InvoiceReadResponse
+} from "./invoice";
+
 export { tokenValidators } from "./token";

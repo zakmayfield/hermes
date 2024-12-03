@@ -137,6 +137,7 @@ export const ReviewCard = ({
 
       {/* Operation Buttons */}
       <OperationButtons
+        isExistingCustomer={customerInfo?.isExistingCustomer}
         qbSyncRecord={qbSyncRecord}
         createCustomerModalMethods={{ ...createCustomerModalMethods }}
         approveCustomerModalMethods={{ ...approveCustomerModalMethods }}

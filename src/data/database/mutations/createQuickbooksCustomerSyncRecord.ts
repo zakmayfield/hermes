@@ -11,11 +11,21 @@ export const createQuickbooksCustomerSyncRecord = async ({
   companyName: string;
   user_id: string;
 }) => {
-  return await db.quickbooksCustomerSync.create({
-    data: {
-      customer_id: id,
-      company_name: companyName,
-      user_id
+  try {
+    return await db.quickbooksCustomerSync.create({
+      data: {
+        customer_id: id,
+        company_name: companyName,
+        user_id
+      }
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      if (error.message.includes("Unique")) {
+        throw new Error("This QuickBooks customer has already been linked");
+      }
     }
-  });
+
+    throw new Error("Unexpected Server Error");
+  }
 };

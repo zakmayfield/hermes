@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { Invoice, time } from "./invoiceSchema";
 
-export const responseSchemas = {
+export const invoiceResponseSchemas = {
   read: z.object({
     Invoice,
     time
@@ -28,6 +28,6 @@ export const responseSchemas = {
     )
 };
 
-export type ReadInvoiceResponse = z.infer<typeof responseSchemas.read>;
-export type CreateInvoiceResponse = z.infer<typeof responseSchemas.create>;
-export type QueryInvoiceResponse = z.infer<typeof responseSchemas.query>;
+export type ReadInvoiceResponse = z.infer<typeof invoiceResponseSchemas.read>;
+export type CreateInvoiceResponse = z.infer<typeof invoiceResponseSchemas.create>;
+export type QueryInvoiceResponse = z.infer<typeof invoiceResponseSchemas.query>;

@@ -1,4 +1,4 @@
-export { responseSchemas } from "./responseSchemas";
+export { invoiceResponseSchemas } from "./responseSchemas";
 export type {
   CreateInvoiceResponse,
   QueryInvoiceResponse,

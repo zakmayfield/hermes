@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Foo",
+    "category": "singles",
+    "units": [
+      {
+        "size": "1L",
+        "price": 5.0,
+        "code": "WHS-Singles:FOO-1"
+      },
+      {
+        "size": "2L",
+        "price": 9.0,
+        "code": "WHS-Singles:FOO-2"
+      }
+    ]
+  },
+  {
+    "name": "Bar",
+    "category": "singles",
+    "units": [
+      {
+        "size": "1L",
+        "price": 7.5,
+        "code": "WHS-Singles:BAR-1"
+      },
+      {
+        "size": "2L",
+        "price": 14.5,
+        "code": "WHS-Singles:BAR-2"
+      }
+    ]
+  },
+  {
+    "name": "Foo Bar",
+    "category": "blends",
+    "units": [
+      {
+        "size": "1L",
+        "price": 6.0,
+        "code": "WHS-Blends:FOO-BAR-1"
+      },
+      {
+        "size": "2L",
+        "price": 11.0,
+        "code": "WHS-Blends:FOO-BAR-2"
+      }
+    ]
+  }
+]

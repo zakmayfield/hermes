@@ -14,8 +14,6 @@ export const ReviewCardTitle = ({
     customerInfo?.user_id
   ]);
 
-  console.log({ queryData });
-
   function isLinked() {
     if (queryData?.data) {
       return true;

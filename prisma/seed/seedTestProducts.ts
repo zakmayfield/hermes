@@ -3,7 +3,7 @@ import products from "../data/test-products.json";
 
 const db = new PrismaClient();
 
-const productsSeed = async () => {
+const seedTestProducts = async () => {
   products.forEach(
     async (product) =>
       await db.product.create({
@@ -16,7 +16,7 @@ const productsSeed = async () => {
   );
 };
 
-productsSeed()
+seedTestProducts()
   .catch((e) => {
     console.error("🚫 Error while seeding: ", e.stack);
     process.exit(1);

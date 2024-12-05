@@ -38,40 +38,45 @@ model Session {
 }
 
 model VerificationToken {
-  verification_token_id String @id @default(cuid())
-  user_id               String @unique
+  verificationTokenId String @id @default(cuid())
+  userId              String @unique
 
   identifier String   @unique
   token      String   @unique
   expires    DateTime
   is_valid   Boolean  @default(true)
 
-  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 // ----- END NEXTAUTH
 
 // ----- USER
 model User {
-  id              String    @id @default(cuid())
-  email           String    @unique
-  password        String
-  created_at      DateTime  @default(now())
-  last_login_date DateTime?
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String
+  createdAt     DateTime  @default(now())
+  lastLoginDate DateTime?
 
-  verification_token VerificationToken[]
-  onboarding         Onboarding?
-  permissions        UserPermissions[]
-  role               Role                @relation(fields: [role_id], references: [role_id])
-  role_id            String
-  orders             Order[]
+  verificationToken VerificationToken[]
+  onboarding        Onboarding?
+  permissions       UserPermissions[]
 
-  quickbooks_token    QuickbooksToken?
-  quickbooks_customer QuickbooksCustomerSync?
+  roleId String
+  role   Role   @relation(fields: [roleId], references: [roleId])
+
+  quickbooksToken    QuickbooksToken?
+  quickbooksCustomer QuickbooksCustomerSync?
 
   customerInfo     CustomerInfo?
   customerShipAddr CustomerShipAddr?
   customerBillAddr CustomerBillAddr?
+
+  cartId String?
+  cart   Cart?
+
+  orders Order[]
 
   image    String?
   accounts Account[]
@@ -79,45 +84,45 @@ model User {
 }
 
 model CustomerInfo {
-  customer_info_id   String  @id @default(cuid())
+  customerInfoId     String  @id @default(cuid())
   isExistingCustomer Boolean @default(false)
   companyName        String
   givenName          String?
   familyName         String?
   phoneNumber        String?
-  user_id            String  @unique
-  user               User    @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  userId             String  @unique
+  user               User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model CustomerShipAddr {
-  customer_ship_addr_id String @id @default(cuid())
-  line1                 String
-  city                  String
-  country               String
-  state                 String
-  postalCode            String
-  user_id               String @unique
-  user                  User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  customerShipAddrId String @id @default(cuid())
+  line1              String
+  city               String
+  country            String
+  state              String
+  postalCode         String
+  userId             String @unique
+  user               User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model CustomerBillAddr {
-  customer_bill_addr_id String @id @default(cuid())
-  line1                 String
-  city                  String
-  country               String
-  state                 String
-  postalCode            String
-  user_id               String @unique
-  user                  User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  customerBillAddrId String @id @default(cuid())
+  line1              String
+  city               String
+  country            String
+  state              String
+  postalCode         String
+  userId             String @unique
+  user               User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Onboarding {
-  onboarding_id  String           @id @default(cuid())
-  status         OnboardingStatus @default(PENDING)
-  is_approved    Boolean          @default(false)
-  email_verified DateTime?
-  user_id        String           @unique
-  user           User             @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  onboardingId  String           @id @default(cuid())
+  status        OnboardingStatus @default(PENDING)
+  isApproved    Boolean          @default(false)
+  emailVerified DateTime?
+  userId        String           @unique
+  user          User             @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 enum OnboardingStatus {
@@ -126,11 +131,11 @@ enum OnboardingStatus {
 }
 
 model Role {
-  role_id String @id @default(cuid())
-  name    Roles  @unique
+  roleId String @id @default(cuid())
+  name   Roles  @unique
 
-  role_permissions RolePermissions[]
-  users            User[]
+  rolePermissions RolePermissions[]
+  users           User[]
 }
 
 enum Roles {
@@ -139,7 +144,6 @@ enum Roles {
   CUSTOMER
 }
 
-// TODO: *** Can Auth Quickbooks permission ***
 enum Permissions {
   APPROVE_CUSTOMER
   CREATE_CUSTOMER
@@ -148,45 +152,44 @@ enum Permissions {
   DELETE_ADMIN
   GRANT_PERMISSIONS
   REVOKE_PERMISSIONS
-  // TODO: *** Add additional permissions like creating products, invoice management, ect ***
 }
 
 model Permission {
-  permission_id String      @id @default(cuid())
-  name          Permissions @unique
-  display_name  String?
-  description   String?
+  permissionId String      @id @default(cuid())
+  name         Permissions @unique
+  displayName  String?
+  description  String?
 
-  role_permissions RolePermissions[]
-  user_permissions UserPermissions[]
+  rolePermissions RolePermissions[]
+  userPermissions UserPermissions[]
 }
 
 model RolePermissions {
-  role_id          String
-  permission_id    String
+  roleId           String
+  permissionId     String
   permission_level Int    @default(1)
 
-  role       Role       @relation(fields: [role_id], references: [role_id])
-  permission Permission @relation(fields: [permission_id], references: [permission_id], onDelete: Cascade)
+  role       Role       @relation(fields: [roleId], references: [roleId])
+  permission Permission @relation(fields: [permissionId], references: [permissionId], onDelete: Cascade)
 
-  @@unique([role_id, permission_id])
+  @@unique([roleId, permissionId])
 }
 
 model UserPermissions {
-  user_id       String
-  permission_id String
-  granted_at    DateTime @default(now())
+  userId       String
+  permissionId String
+  grantedAt    DateTime @default(now())
 
-  user       User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  permission Permission @relation(fields: [permission_id], references: [permission_id])
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  permission Permission @relation(fields: [permissionId], references: [permissionId])
 
-  @@unique([user_id, permission_id])
+  @@unique([userId, permissionId])
 }
 
 model AuthorizedAdmin {
-  authorized_admin_id String   @id @default(cuid())
-  email               String   @unique
-  created_at          DateTime @default(now())
+  authorizedAdminId String   @id @default(cuid())
+  email             String   @unique
+  createdAt         DateTime @default(now())
 }
 
 // ----- END USER
@@ -194,27 +197,27 @@ model AuthorizedAdmin {
 // ----- QUICKBOOKS
 
 model QuickbooksToken {
-  user_quickbooks_token_id      String   @id @default(cuid())
-  user_id                       String   @unique
-  user                          User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  created_at                    DateTime @default(now())
-  encrypted_access_token        String
-  encrypted_refresh_token       String
-  access_token_expiration_time  DateTime
-  refresh_token_expiration_time DateTime
-  access_token_iv               String
-  refresh_token_iv              String
-  realm_id                      String
+  userQuickbooksTokenId      String   @id @default(cuid())
+  userId                     String   @unique
+  user                       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt                  DateTime @default(now())
+  encryptedAccessToken       String
+  encryptedRefreshToken      String
+  accessTokenExpirationTime  DateTime
+  refreshTokenExpirationTime DateTime
+  accessTokenIv              String
+  refreshTokenIv             String
+  realmId                    String
 }
 
 model QuickbooksCustomerSync {
-  quickbooks_customer_sync_id String @id @default(cuid())
-  user_id                     String @unique
-  user                        User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  quickbooksCustomerSyncId String @id @default(cuid())
+  userId                   String @unique
+  user                     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   // *** Multiple customers should be able to reference a single customerID ***
-  customer_id  String
-  company_name String
+  customerId  String
+  companyName String
 }
 
 // ----- END QUICKBOOKS
@@ -222,41 +225,77 @@ model QuickbooksCustomerSync {
 // ----- PRODUCTS
 
 model Product {
-  product_id String @id @default(cuid())
-  name       String
-  category   String
-  units      Unit[]
+  productId String @id @default(cuid())
+  name      String
+  category  String
+
+  units Unit[]
 }
 
 model Unit {
-  unit_id     String      @id @default(cuid())
-  size        String
-  price       Float
-  code        String
-  product_id  String
-  product     Product     @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
-  order_items OrderItem[]
+  unitId String @id @default(cuid())
+  size   String
+  price  Float
+  code   String
+
+  productId String
+  product   Product @relation(fields: [productId], references: [productId], onDelete: Cascade)
+
+  cartsItems CartItem[]
 }
 
 // ----- END PRODUCTS
 
+// ----- CART
+
+model Cart {
+  cartId String     @id @default(cuid())
+  userId String     @unique
+  items  CartItem[]
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// Junction with a relationship between `Cart` and `Unit`
+model CartItem {
+  cartItemId String @id @default(cuid())
+  cartId     String
+  unitId     String
+
+  quantity  Float
+  createdAt DateTime @default(now())
+
+  cart Cart @relation(fields: [cartId], references: [cartId], onDelete: Cascade)
+  unit Unit @relation(fields: [unitId], references: [unitId])
+
+  orderItems OrderItem[]
+
+  @@unique([cartId, unitId])
+}
+
+// ----- END CART
+
 // ----- ORDER
 
 model Order {
-  order_id    String      @id @default(cuid())
-  user_id     String
-  order_items OrderItem[]
-  created_at  DateTime    @default(now())
-  user        User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  orderId   String      @id @default(cuid())
+  createdAt DateTime    @default(now())
+  items     OrderItem[]
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+// Junction with a relationship between `Order` and `CartItem`
 model OrderItem {
-  order_item_id String @id @default(cuid())
-  order_id      String
-  unit_id       String
-  quantity      Int
-  order         Order  @relation(fields: [order_id], references: [order_id], onDelete: Cascade)
-  unit          Unit   @relation(fields: [unit_id], references: [unit_id])
+  orderItemId String @id @default(cuid())
+  orderId     String
+  cartItemId  String
+
+  order    Order    @relation(fields: [orderId], references: [orderId], onDelete: Cascade)
+  cartItem CartItem @relation(fields: [cartItemId], references: [cartItemId])
+
+  @@unique([orderId, cartItemId])
 }
 
 // ----- END ORDER

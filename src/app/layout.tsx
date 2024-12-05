@@ -50,7 +50,7 @@ export default async function RootLayout({
           <ToastContainer
             limit={4}
             autoClose={3000}
-            position="bottom-right"
+            position="top-right"
           />
 
           <ReactQueryDevtools initialIsOpen={false} />

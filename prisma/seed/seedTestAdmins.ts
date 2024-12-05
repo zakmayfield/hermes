@@ -21,13 +21,6 @@ const testAdmins: {
     role: {
       name: "ADMIN"
     }
-  },
-  {
-    email: "admin3@test.com",
-    password: "123",
-    role: {
-      name: "ADMIN"
-    }
   }
 ];
 

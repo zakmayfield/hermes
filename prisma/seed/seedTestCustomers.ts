@@ -20,7 +20,7 @@ const testCustomers: {
   customerBillAddr?: Omit<CustomerBillAddr, "customerBillAddrId" | "userId">;
 }[] = [
   {
-    email: "customer0@test.com",
+    email: "customer1@test.com",
     password: "123",
     role: {
       name: "CUSTOMER"
@@ -34,7 +34,7 @@ const testCustomers: {
     }
   },
   {
-    email: "customer1@test.com",
+    email: "customer2@test.com",
     password: "123",
     role: {
       name: "CUSTOMER"
@@ -48,7 +48,7 @@ const testCustomers: {
     }
   },
   {
-    email: "customer2@test.com",
+    email: "customer3@test.com",
     password: "123",
     role: {
       name: "CUSTOMER"
@@ -76,37 +76,6 @@ const testCustomers: {
       country: "CA",
       state: "ON",
       postalCode: "C2C4D4"
-    }
-  },
-  {
-    email: "customer3@test.com",
-    password: "123",
-    role: {
-      name: "CUSTOMER"
-    },
-    onboarding: {
-      status: "PENDING"
-    },
-    customerInfo: {
-      isExistingCustomer: false,
-      companyName: "Googleplex Innovations",
-      givenName: "Sasha",
-      familyName: "Marden",
-      phoneNumber: "9879879876"
-    },
-    customerShipAddr: {
-      line1: "232 Dover Rd",
-      city: "Jamestown",
-      country: "CA",
-      state: "ON",
-      postalCode: "Z6Z3A3"
-    },
-    customerBillAddr: {
-      line1: "232 Dover Rd",
-      city: "Jamestown",
-      country: "CA",
-      state: "ON",
-      postalCode: "Z6Z3A3"
     }
   }
 ];

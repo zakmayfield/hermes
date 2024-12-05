@@ -30,13 +30,13 @@ export type QuickbooksCustomerData =
 export const LinkAndApproveCustomers = () => {
   const { data: newCustomerData } = useQuery({
     staleTime: Infinity,
-    queryKey: ["customers", "is_approved", false],
+    queryKey: ["customers", "isApproved", false],
     queryFn: async () =>
       await getUsers<LinkAndApproveCustomersData[]>({
         options: {
           where: {
             role: { name: "CUSTOMER" },
-            AND: { onboarding: { is_approved: false } }
+            AND: { onboarding: { isApproved: false } }
           },
           include: {
             customerInfo: true,
@@ -44,7 +44,7 @@ export const LinkAndApproveCustomers = () => {
             customerBillAddr: true,
             onboarding: true
           },
-          orderBy: { created_at: "desc" }
+          orderBy: { createdAt: "desc" }
         }
       })
   });

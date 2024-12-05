@@ -6,7 +6,7 @@ import { TogglePermissionLevelInput } from "../models/Permission";
 export const togglePermissionLevel = async (payload: TogglePermissionLevelInput) => {
   const {
     permission_level,
-    permission: { permission_id, role_id }
+    permission: { permissionId, roleId }
   } = payload;
 
   function toggle() {
@@ -14,7 +14,7 @@ export const togglePermissionLevel = async (payload: TogglePermissionLevelInput)
   }
 
   return await db.rolePermissions.update({
-    where: { role_id_permission_id: { role_id, permission_id } },
+    where: { roleId_permissionId: { roleId, permissionId } },
     data: { permission_level: toggle() }
   });
 };

@@ -35,7 +35,7 @@ export const PermissionManagement = () => {
         <Box style={{ display: "flex-col", gap: "sm" }}>
           {data.map((rp) => (
             <PermissionCard
-              key={rp.permission_id}
+              key={rp.permissionId}
               role_permission={rp}
             />
           ))}
@@ -54,7 +54,7 @@ function PermissionCard({
 }: {
   role_permission: RolePermissionsWithPermission;
 }) {
-  const { role_id, permission_id, permission_level, permission } = role_permission;
+  const { roleId, permissionId, permission_level, permission } = role_permission;
 
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -62,14 +62,14 @@ function PermissionCard({
   const { mutate } = useMutation({
     mutationFn: togglePermissionLevel,
     async onSuccess(data) {
-      const role = await getRoleById({ role_id }).then((r) => r?.name);
+      const role = await getRoleById({ roleId }).then((r) => r?.name);
 
       queryClient.setQueryData<RolePermissionsWithPermission[]>(
         ["admin_role_permissions"],
         (oldData) => {
           return oldData
             ? oldData.map((rp) =>
-                rp.permission_id === data.permission_id
+                rp.permissionId === data.permissionId
                   ? {
                       ...rp,
                       permission_level: data.permission_level
@@ -95,12 +95,11 @@ function PermissionCard({
     }
   });
 
-  const toggle = () =>
-    mutate({ permission_level, permission: { role_id, permission_id } });
+  const toggle = () => mutate({ permission_level, permission: { roleId, permissionId } });
 
   const Tooltip = useTooltip({
     place: "top-end",
-    anchorSelect: `#${permission_id}_description`
+    anchorSelect: `#${permissionId}_description`
   });
 
   const isEnabled = React.useMemo(() => {
@@ -156,7 +155,7 @@ function PermissionCard({
         >
           {/* HEADING */}
           <Heading
-            text={permission.display_name as string}
+            text={permission.displayName as string}
             as="h5"
           />
 
@@ -164,7 +163,7 @@ function PermissionCard({
           <Box>
             <Icon
               name="info"
-              id={`${permission_id}_description`}
+              id={`${permissionId}_description`}
               tooltipHtml={permission.description || ""}
               style={{ fontSize: "lg" }}
             />

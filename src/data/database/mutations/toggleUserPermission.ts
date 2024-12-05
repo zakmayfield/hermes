@@ -4,28 +4,28 @@ import { db } from "@/lib/prisma";
 
 export const toggleUserPermission = async ({
   checked,
-  user_id,
-  permission_id
+  userId,
+  permissionId
 }: {
   checked: boolean;
-  user_id: string;
-  permission_id: string;
+  userId: string;
+  permissionId: string;
 }) => {
   switch (checked) {
     case true:
       return await db.userPermissions.delete({
         where: {
-          user_id_permission_id: {
-            user_id,
-            permission_id
+          userId_permissionId: {
+            userId,
+            permissionId
           }
         }
       });
     case false:
       return await db.userPermissions.create({
         data: {
-          user_id,
-          permission_id
+          userId,
+          permissionId
         }
       });
   }

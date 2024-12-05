@@ -16,9 +16,9 @@ export const handleDecryptAccessToken = async () => {
   }
 
   const decryptedAccessToken = await decrypt(
-    qbToken.encrypted_access_token,
-    qbToken.access_token_iv
+    qbToken.encryptedAccessToken,
+    qbToken.accessTokenIv
   );
 
-  return { realmId: qbToken.realm_id, accessToken: decryptedAccessToken };
+  return { realmId: qbToken.realmId, accessToken: decryptedAccessToken };
 };

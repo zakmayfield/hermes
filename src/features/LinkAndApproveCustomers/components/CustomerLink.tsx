@@ -6,7 +6,7 @@ import { CustomerQuery, CustomerQueryResults } from "@/data/qb/validators";
 import { Pulse } from "@/ui";
 import { useEffect } from "react";
 
-export const CustomerLink = ({ user_id }: { user_id: string }) => {
+export const CustomerLink = ({ userId }: { userId: string }) => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
@@ -25,9 +25,9 @@ export const CustomerLink = ({ user_id }: { user_id: string }) => {
       toast(error.message, "error");
     },
     onSuccess(data) {
-      toast(`Successfully linked ${data.company_name}`);
+      toast(`Successfully linked ${data.companyName}`);
       queryClient.invalidateQueries({
-        queryKey: ["quickbooks_customer_sync_ref", user_id]
+        queryKey: ["quickbooks_customer_sync_ref", userId]
       });
     }
   });
@@ -50,7 +50,7 @@ export const CustomerLink = ({ user_id }: { user_id: string }) => {
     }>
   ) => {
     if (data) {
-      createQBSyncRecord({ id: data.value, companyName: data.label, user_id });
+      createQBSyncRecord({ id: data.value, companyName: data.label, userId });
     }
   };
 

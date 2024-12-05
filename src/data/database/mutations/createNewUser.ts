@@ -27,7 +27,7 @@ export const createNewUser = async ({ data }: { data: typeof defaultValues }) =>
       data: {
         email: customer.email,
         password: hashed_password,
-        last_login_date: new Date(),
+        lastLoginDate: new Date(),
         role: {
           connect: {
             name: $Enums.Roles.ADMIN
@@ -37,6 +37,9 @@ export const createNewUser = async ({ data }: { data: typeof defaultValues }) =>
           create: {
             status: $Enums.OnboardingStatus.COMPLETE
           }
+        },
+        cart: {
+          create: {}
         }
       },
       include: {
@@ -55,11 +58,11 @@ export const createNewUser = async ({ data }: { data: typeof defaultValues }) =>
         data: {
           email: customer.email,
           password: hashed_password,
-          last_login_date: new Date(),
+          lastLoginDate: new Date(),
           role: {
             connect: { name: $Enums.Roles.CUSTOMER }
           },
-          verification_token: {
+          verificationToken: {
             create: {
               token: jwt,
               identifier: uniqueIdentifier,
@@ -91,11 +94,11 @@ export const createNewUser = async ({ data }: { data: typeof defaultValues }) =>
         data: {
           email: customer.email,
           password: hashed_password,
-          last_login_date: new Date(),
+          lastLoginDate: new Date(),
           role: {
             connect: { name: $Enums.Roles.CUSTOMER }
           },
-          verification_token: {
+          verificationToken: {
             create: {
               token: jwt,
               identifier: uniqueIdentifier,

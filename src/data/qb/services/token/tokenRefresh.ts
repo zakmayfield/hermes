@@ -8,8 +8,8 @@ import { tokenValidators } from "@/data/qb/validators";
 
 export const handleTokenRefresh = async (payload: QuickbooksToken) => {
   const refreshToken = await decrypt(
-    payload.encrypted_refresh_token,
-    payload.refresh_token_iv
+    payload.encryptedRefreshToken,
+    payload.refreshTokenIv
   );
 
   try {
@@ -41,8 +41,8 @@ export const handleTokenRefresh = async (payload: QuickbooksToken) => {
 
     if (response) {
       await upsertQuickbooksToken({
-        user_id: payload.user_id,
-        realm_id: payload.realm_id,
+        userId: payload.userId,
+        realmId: payload.realmId,
         token: response
       });
     }

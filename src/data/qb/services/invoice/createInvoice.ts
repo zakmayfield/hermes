@@ -38,9 +38,7 @@ const testInvoiceData = {
   ]
 };
 
-export const createInvoice = async ({
-  order
-}: {
+export const createInvoice = async ({}: {
   order: null;
 }): Promise<CreateInvoiceResponse> => {
   try {

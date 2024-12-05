@@ -5,18 +5,18 @@ import { db } from "@/lib/prisma";
 export const createQuickbooksCustomerSyncRecord = async ({
   id,
   companyName,
-  user_id
+  userId
 }: {
   id: string;
   companyName: string;
-  user_id: string;
+  userId: string;
 }) => {
   try {
     return await db.quickbooksCustomerSync.create({
       data: {
-        customer_id: id,
-        company_name: companyName,
-        user_id
+        customerId: id,
+        companyName: companyName,
+        userId
       }
     });
   } catch (error) {

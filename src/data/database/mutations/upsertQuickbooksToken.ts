@@ -7,20 +7,20 @@ import { z } from "zod";
 import { tokenValidators } from "@/data/qb/validators";
 
 export const upsertQuickbooksToken = async ({
-  user_id,
-  realm_id,
+  userId,
+  realmId,
   token
 }: {
-  user_id: string;
-  realm_id: string;
+  userId: string;
+  realmId: string;
   token: z.infer<typeof tokenValidators.accessToken>;
 }): Promise<QuickbooksToken> => {
   const eat = await encrypt(token.access_token);
   const ert = await encrypt(token.refresh_token);
 
   const upsertPayload = await formatUpsertQbTokenPayload({
-    user_id,
-    realm_id,
+    userId,
+    realmId,
     encryptedTokens: { accessToken: eat, refreshToken: ert },
     expiration: {
       accessExp: token.expires_in,
@@ -30,7 +30,7 @@ export const upsertQuickbooksToken = async ({
 
   try {
     return await db.quickbooksToken.upsert({
-      where: { user_id },
+      where: { userId },
       update: { ...upsertPayload },
       create: { ...upsertPayload }
     });

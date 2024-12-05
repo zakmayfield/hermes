@@ -22,7 +22,7 @@ export const getCustomersByOnboardingStatus = async ({
           }
         }
       },
-      orderBy: { created_at: "asc" }
+      orderBy: { createdAt: "asc" }
     });
 
     return customers;

@@ -4,6 +4,6 @@ import { $Enums } from "@prisma/client";
 
 export const getPermissionsByRole = async ({ role }: { role: $Enums.Roles }) => {
   return await db.permission.findMany({
-    where: { role_permissions: { some: { role: { name: role } } } }
+    where: { rolePermissions: { some: { role: { name: role } } } }
   });
 };

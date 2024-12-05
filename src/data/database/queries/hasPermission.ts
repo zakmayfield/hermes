@@ -26,7 +26,7 @@ export const hasPermission = async (permission_name: $Enums.Permissions) => {
   }
 
   const userPermissions = await db.userPermissions.findMany({
-    where: { user_id: id },
+    where: { userId: id },
     select: { permission: { select: { name: true } } }
   });
 

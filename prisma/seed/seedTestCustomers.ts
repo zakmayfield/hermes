@@ -15,9 +15,9 @@ const testCustomers: {
   password: string;
   role: { name: Roles };
   onboarding: { status: OnboardingStatus };
-  customerInfo: Partial<Omit<CustomerInfo, "customer_info_id" | "user_id">>;
-  customerShipAddr?: Omit<CustomerShipAddr, "customer_ship_addr_id" | "user_id">;
-  customerBillAddr?: Omit<CustomerBillAddr, "customer_bill_addr_id" | "user_id">;
+  customerInfo: Partial<Omit<CustomerInfo, "customerInfoId" | "userId">>;
+  customerShipAddr?: Omit<CustomerShipAddr, "customerShipAddrId" | "userId">;
+  customerBillAddr?: Omit<CustomerBillAddr, "customerBillAddrId" | "userId">;
 }[] = [
   {
     email: "customer0@test.com",
@@ -118,12 +118,15 @@ const seedTestCustomers = async () => {
         data: {
           email: customer.email,
           password: await hash(customer.password, 10),
-          last_login_date: new Date(),
+          lastLoginDate: new Date(),
           role: {
             connect: customer.role
           },
           onboarding: {
             create: customer.onboarding
+          },
+          cart: {
+            create: {}
           },
           customerInfo: {
             create: {

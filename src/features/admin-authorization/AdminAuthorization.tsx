@@ -90,7 +90,7 @@ function AuthorizedAdminList() {
       ) : data && data.length > 0 ? (
         data.map((admin) => (
           <AuthorizedAdminItem
-            key={admin.authorized_admin_id}
+            key={admin.authorizedAdminId}
             admin={admin}
           />
         ))
@@ -121,7 +121,7 @@ function AuthorizedAdminItem({ admin }: { admin: AuthorizedAdmin }) {
         (oldData) => {
           return oldData
             ? oldData.filter(
-                (admin) => admin.authorized_admin_id !== data.authorized_admin_id
+                (admin) => admin.authorizedAdminId !== data.authorizedAdminId
               )
             : oldData;
         }
@@ -182,7 +182,7 @@ function AuthorizedAdminItem({ admin }: { admin: AuthorizedAdmin }) {
               <Button
                 options={{ variant: "red" }}
                 handleClick={() => {
-                  mutate({ authorized_admin_id: admin.authorized_admin_id });
+                  mutate({ authorizedAdminId: admin.authorizedAdminId });
                   setIsModalOpen(false);
                 }}
                 style={{ width: "full" }}

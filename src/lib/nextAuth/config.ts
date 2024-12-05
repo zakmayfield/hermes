@@ -21,21 +21,21 @@ export const config: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, user }) {
-      const db_user = await getJWTUser({ email: token.email });
+      const dbUser = await getJWTUser({ email: token.email });
 
-      if (!db_user) {
+      if (!dbUser) {
         token.id = user.id;
         return token;
       }
 
-      const user_role = db_user.role.name;
-      const onboarding_status = db_user.onboarding?.status;
+      const userRole = dbUser.role.name;
+      const onboardingStatus = dbUser.onboarding?.status;
 
       return {
-        id: db_user.id,
-        email: db_user.email,
-        onboarding_status,
-        role: user_role
+        id: dbUser.id,
+        email: dbUser.email,
+        onboardingStatus,
+        role: userRole
       };
     },
 
@@ -43,7 +43,7 @@ export const config: NextAuthOptions = {
       if (token) {
         session.user.id = token.id;
         session.user.email = token.email;
-        session.user.onboarding_status = token.onboarding_status;
+        session.user.onboardingStatus = token.onboardingStatus;
         session.user.role = token.role;
       }
 

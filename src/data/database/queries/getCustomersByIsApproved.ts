@@ -5,15 +5,15 @@ import { $Enums } from "@prisma/client";
 import { UserWithOnboardingStatus } from "../models/User";
 
 export const getCustomersByIsApproved = async ({
-  is_approved
+  isApproved
 }: {
-  is_approved: boolean;
+  isApproved: boolean;
 }): Promise<UserWithOnboardingStatus[]> => {
   try {
     const customers = await db.user.findMany({
       where: {
         role: { name: $Enums.Roles.CUSTOMER },
-        AND: { onboarding: { is_approved } }
+        AND: { onboarding: { isApproved } }
       },
       include: {
         onboarding: {
@@ -22,7 +22,7 @@ export const getCustomersByIsApproved = async ({
           }
         }
       },
-      orderBy: { created_at: "asc" }
+      orderBy: { createdAt: "asc" }
     });
 
     return customers;

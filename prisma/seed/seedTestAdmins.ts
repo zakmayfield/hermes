@@ -40,7 +40,7 @@ const seedTestAdmins = async () => {
       data: {
         email: admin.email,
         password: await hash(admin.password, 10),
-        last_login_date: new Date(),
+        lastLoginDate: new Date(),
         role: {
           connect: admin.role
         }

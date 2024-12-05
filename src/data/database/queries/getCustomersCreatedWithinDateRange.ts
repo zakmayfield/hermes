@@ -17,9 +17,9 @@ export const getCustomersCreatedWithinDateRange = async ({
     return await db.user.findMany({
       where: {
         role: { name: $Enums.Roles.CUSTOMER },
-        AND: { created_at: { gt: selectedRangeDate } }
+        AND: { createdAt: { gt: selectedRangeDate } }
       },
-      orderBy: { created_at: "desc" }
+      orderBy: { createdAt: "desc" }
     });
   } catch (error) {
     if (error instanceof Error) {

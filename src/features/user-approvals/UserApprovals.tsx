@@ -10,8 +10,8 @@ import { UserWithOnboardingStatus } from "@/data/database/models/User";
 
 export const UserApprovals = () => {
   const { data, error, isLoading } = useQuery({
-    queryKey: ["customers", "is_approved", false],
-    queryFn: async () => await getCustomersByIsApproved({ is_approved: false }),
+    queryKey: ["customers", "isApproved", false],
+    queryFn: async () => await getCustomersByIsApproved({ isApproved: false }),
     staleTime: Infinity
   });
 
@@ -59,7 +59,7 @@ function UnapprovedUser({ user }: { user: UserWithOnboardingStatus }) {
   const queryClient = useQueryClient();
 
   const handleInvalidateQuery = () => {
-    queryClient.invalidateQueries({ queryKey: ["customers", "is_approved", false] });
+    queryClient.invalidateQueries({ queryKey: ["customers", "isApproved", false] });
   };
 
   const { mutate } = useMutation({

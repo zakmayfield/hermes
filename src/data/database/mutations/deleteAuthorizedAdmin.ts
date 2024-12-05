@@ -3,9 +3,9 @@ import { db } from "@/lib/prisma";
 import { AuthorizedAdmin } from "@prisma/client";
 
 export const deleteAuthorizedAdmin = async ({
-  authorized_admin_id
+  authorizedAdminId
 }: {
-  authorized_admin_id: string;
+  authorizedAdminId: string;
 }): Promise<AuthorizedAdmin> => {
-  return await db.authorizedAdmin.delete({ where: { authorized_admin_id } });
+  return await db.authorizedAdmin.delete({ where: { authorizedAdminId } });
 };

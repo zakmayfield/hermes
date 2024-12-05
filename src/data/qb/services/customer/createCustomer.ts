@@ -7,7 +7,7 @@ import { createQuickbooksCustomerSyncRecord } from "@/data/database/mutations";
 import { customerValidators } from "@/data/qb/validators";
 
 export const createCustomer = async (payload: {
-  user_id: string;
+  userId: string;
   email: string;
   customerInfo: CustomerInfo | null;
   customerShipAddr: CustomerShipAddr | null;
@@ -84,7 +84,7 @@ export const createCustomer = async (payload: {
     await createQuickbooksCustomerSyncRecord({
       id: data.Customer.Id,
       companyName: data.Customer.CompanyName,
-      user_id: payload.user_id
+      userId: payload.userId
     });
 
     return { Id: data.Customer.Id, CompanyName: data.Customer.CompanyName };

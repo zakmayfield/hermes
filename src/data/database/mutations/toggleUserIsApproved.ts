@@ -8,14 +8,14 @@ type ToggleUserApprovalInput = string;
 type ToggleUserApprovalOutput = Onboarding;
 
 export const toggleUserIsApproved = async (
-  user_id: ToggleUserApprovalInput
+  userId: ToggleUserApprovalInput
 ): Promise<ToggleUserApprovalOutput> => {
   if (await hasPermission($Enums.Permissions.APPROVE_CUSTOMER)) {
     try {
       return await db.onboarding.update({
-        where: { user_id },
+        where: { userId },
         data: {
-          is_approved: true
+          isApproved: true
         }
       });
     } catch (error) {

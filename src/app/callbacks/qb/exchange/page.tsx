@@ -1,7 +1,7 @@
 import { getCoreSessionUserOrThrow } from "@/data/session";
 import { handleTokenExchange } from "@/data/qb/services/token";
 import { redirect } from "next/navigation";
-import { upsertQuickbooksToken } from "@/data/database/mutations";
+import { upsertQuickbooksToken } from "@/data/database/quickbooks";
 
 export default async function Page({
   searchParams

@@ -1,8 +1,8 @@
 "use server";
 
 import { db } from "@/lib/prisma";
-import { hasPermission } from "@/data/database/queries";
 import { $Enums, Onboarding } from "@prisma/client";
+import { hasPermission } from "@/data/database/permission";
 
 type ToggleUserApprovalInput = string;
 type ToggleUserApprovalOutput = Onboarding;

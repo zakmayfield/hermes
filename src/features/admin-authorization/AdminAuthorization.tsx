@@ -7,13 +7,13 @@ import { QueryKeys } from "@/utils/core/queryKeys";
 import { $Enums, AuthorizedAdmin } from "@prisma/client";
 import React from "react";
 import { Modal } from "@/shared/components";
-import { getAuthorizedAdmins } from "@/data/database/queries";
+import { authorizeAdminValidator } from "@/utils/validators/forms/authorizeAdminValidator";
 import {
+  getAuthorizedAdmins,
   createAuthorizedAdmin,
   deleteAuthorizedAdmin,
   revokeAdminRole
-} from "@/data/database/mutations";
-import { authorizeAdminValidator } from "@/utils/validators/forms/authorizeAdminValidator";
+} from "@/data/database/authorizedAdmin";
 
 export const AdminAuthorization = () => {
   const { toast } = useToast();

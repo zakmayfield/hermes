@@ -3,8 +3,8 @@ import { QuickbooksToken } from "@prisma/client";
 import { qb_token_url } from "@/utils/qb/constants";
 import { fetcher } from "@/utils/fetcher";
 import { decrypt } from "@/utils/qb";
-import { upsertQuickbooksToken } from "@/data/database/mutations";
 import { tokenValidators } from "@/data/qb/validators";
+import { upsertQuickbooksToken } from "@/data/database/quickbooks";
 
 export const handleTokenRefresh = async (payload: QuickbooksToken) => {
   const refreshToken = await decrypt(

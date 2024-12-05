@@ -1,7 +1,7 @@
 "use server";
 
 import { QuickbooksToken } from "@prisma/client";
-import { getQuickbooksTokens } from "./getQuickbooksTokens";
+import { getQuickbooksTokens } from "@/data/database/quickbooks";
 
 export const getQuickbooksTokensOrThrow = async (): Promise<QuickbooksToken> => {
   try {

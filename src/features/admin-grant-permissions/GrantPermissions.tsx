@@ -2,9 +2,9 @@
 import {
   getPermissionsByRole,
   getUserPermissionsByUserId,
-  getUsersByRole
-} from "@/data/database/queries";
-import { toggleUserPermission } from "@/data/database/mutations";
+  toggleUserPermission
+} from "@/data/database/permission";
+import { getUsersByRole } from "@/data/database/user";
 import { Box, Heading, Icon, Pulse, Text } from "@/ui";
 import { $Enums, Permission, User } from "@prisma/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";

@@ -3,11 +3,15 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { db } from "@/lib/prisma";
 import { signupValidator } from "@/utils/validators/forms/signupValidator";
-import { createNewUser, updateUserLoginDate } from "@/data/database/mutations";
-import { doesUserExist, getJWTUser } from "@/data/database/queries";
 import { signinValidator } from "@/utils/validators/forms/signinValidator";
 import { comparePasswords } from "@/utils/comparePasswords";
 import { Provider } from "next-auth/providers";
+import {
+  createNewUser,
+  doesUserExist,
+  getJWTUser,
+  updateUserLoginDate
+} from "@/data/database/user";
 
 export const config: NextAuthOptions = {
   // @ts-expect-error NextAuth has not configured support for Prisma Omit API

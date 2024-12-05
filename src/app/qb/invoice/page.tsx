@@ -1,4 +1,4 @@
-import { getQuickbooksTokens } from "@/data/database/queries";
+import { getQuickbooksTokens } from "@/data/database/quickbooks";
 import { handleTokenRefresh } from "@/data/qb/services/token";
 import { GenerateInvoices } from "@/features/GenerateInvoices";
 import { validateTokenExp } from "@/utils/qb";

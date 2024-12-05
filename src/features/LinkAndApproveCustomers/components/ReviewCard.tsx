@@ -9,10 +9,10 @@ import { ShippingAddress } from "./ShippingAddress";
 import { CustomerInfo } from "./CustomerInfo";
 import { ReviewCardTitle } from "./ReviewCardTitle";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getQuickBooksCustomerSyncRecordByUserId } from "@/data/database/queries";
 import { createCustomer } from "@/data/qb/services/customer";
 import { Icon } from "@/ui";
-import { toggleUserIsApproved } from "@/data/database/mutations";
+import { getQuickBooksCustomerSyncRecordByUserId } from "@/data/database/quickbooks";
+import { toggleUserIsApproved } from "@/data/database/user";
 
 export const ReviewCard = ({
   newCustomer

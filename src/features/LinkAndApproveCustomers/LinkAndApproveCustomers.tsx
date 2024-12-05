@@ -1,6 +1,5 @@
 "use client";
 import { SecureUser } from "@/data/database/models/User";
-import { getUsers } from "@/data/database/queries";
 import {
   CustomerInfo as CustomerInfoType,
   CustomerShipAddr,
@@ -11,6 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ReviewCard } from "./components";
 import { queryCustomers } from "@/data/qb/services/customer";
 import { CustomerQueryResults } from "@/data/qb/validators";
+import { getUsers } from "@/data/database/user";
 
 export type LinkAndApproveCustomersData = SecureUser & {
   customerInfo: CustomerInfoType | null;

@@ -2,7 +2,7 @@ import { LinkAndApproveCustomers } from "@/features/LinkAndApproveCustomers";
 import { handleTokenRefresh } from "@/data/qb/services/token";
 import { redirect } from "next/navigation";
 import { validateTokenExp } from "@/utils/qb";
-import { getQuickbooksTokens } from "@/data/database/queries";
+import { getQuickbooksTokens } from "@/data/database/quickbooks";
 
 export default async function Page() {
   const qbTokens = await getQuickbooksTokens();

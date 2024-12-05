@@ -1,8 +1,11 @@
 "use client";
 
 import { RolePermissionsWithPermission } from "@/data/database/models/Permission";
-import { togglePermissionLevel } from "@/data/database/mutations";
-import { getRoleById, getRolePermissionsByRoles } from "@/data/database/queries";
+import {
+  getRolePermissionsByRoles,
+  togglePermissionLevel
+} from "@/data/database/permission";
+import { getRoleById } from "@/data/database/role";
 import { useToast, useTooltip } from "@/shared/hooks/ui";
 import { Box, Heading, Icon, Pulse, Text } from "@/ui";
 import { $Enums } from "@prisma/client";

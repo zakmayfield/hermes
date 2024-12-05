@@ -1,10 +1,10 @@
 import Select, { SingleValue } from "react-select";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createQuickbooksCustomerSyncRecord } from "@/data/database/mutations";
 import { useToast } from "@/shared/hooks/ui";
 import { CustomerQuery, CustomerQueryResults } from "@/data/qb/validators";
 import { Pulse } from "@/ui";
 import { useEffect } from "react";
+import { createQuickbooksCustomerSyncRecord } from "@/data/database/quickbooks";
 
 export const CustomerLink = ({ userId }: { userId: string }) => {
   const { toast } = useToast();

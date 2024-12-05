@@ -3,7 +3,7 @@
 import { handleTokenRefresh } from "@/data/qb/services/token";
 import { decrypt } from "@/utils/qb";
 import { validateTokenExp } from "./validateTokenExp";
-import { getQuickbooksTokensOrThrow } from "@/data/database/queries";
+import { getQuickbooksTokensOrThrow } from "@/data/database/quickbooks";
 
 export const handleDecryptAccessToken = async () => {
   let qbToken = await getQuickbooksTokensOrThrow();

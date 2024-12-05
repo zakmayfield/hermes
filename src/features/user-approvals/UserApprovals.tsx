@@ -2,11 +2,10 @@
 
 import { useToast } from "@/shared/hooks/ui";
 import { Box, Button, Heading, Icon, Pulse, Text } from "@/ui";
-import { toggleUserIsApproved } from "@/data/database/mutations";
 import { $Enums } from "@prisma/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getCustomersByIsApproved } from "@/data/database/queries";
 import { UserWithOnboardingStatus } from "@/data/database/models/User";
+import { getCustomersByIsApproved, toggleUserIsApproved } from "@/data/database/user";
 
 export const UserApprovals = () => {
   const { data, error, isLoading } = useQuery({

@@ -2,7 +2,7 @@
 
 import { db } from "@/lib/prisma";
 
-export const getUnitsFromOrder = async (orderId: string) => {
+export const getUnitsFromOrderId = async (orderId: string) => {
   try {
     const units = await db.unit.findMany({
       where: { orderItems: { some: { orderId } } }

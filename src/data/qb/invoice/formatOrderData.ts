@@ -3,7 +3,7 @@
 import { getQbSyncRecordOrThrow } from "@/data/database/quickbooks";
 import { Order, OrderItem } from "@prisma/client";
 import { getCustomerById } from "../customer";
-import { getUnitsFromOrder } from "@/data/database/order";
+import { getUnitsFromOrderId } from "@/data/database/product";
 import { CreateInvoiceRequest, LineItemRequestType } from "../validators/invoice";
 import { getItemRef } from "../item";
 
@@ -22,7 +22,7 @@ export const formatOrderData = async (
       DueDate: new Date().toISOString().split("T")[0]
     }));
 
-    const unitNamesAndQuantity = await getUnitsFromOrder(order.orderId).then((d) =>
+    const unitNamesAndQuantity = await getUnitsFromOrderId(order.orderId).then((d) =>
       d.map((u) => ({
         name: u.code.split(":")[1],
         quantity: order.items.find((or) => or.unitId === u.unitId)?.quantity || 1

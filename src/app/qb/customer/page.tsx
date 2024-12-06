@@ -1,5 +1,5 @@
 import { LinkAndApproveCustomers } from "@/features/LinkAndApproveCustomers";
-import { handleTokenRefresh } from "@/data/qb/services/token";
+import { handleTokenRefresh } from "@/data/qb/token";
 import { redirect } from "next/navigation";
 import { validateTokenExp } from "@/utils/qb";
 import { getQuickbooksTokens } from "@/data/database/quickbooks";

@@ -6,4 +6,4 @@ export type {
 } from "./responseSchemas";
 
 export { requestSchemas } from "./requestSchemas";
-export type { CreateInvoiceRequest } from "./requestSchemas";
+export type { CreateInvoiceRequest, LineTypeRequestType } from "./requestSchemas";

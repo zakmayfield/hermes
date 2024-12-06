@@ -1,6 +1,6 @@
 "use client";
 
-import { createInvoice } from "@/data/qb/services/invoice";
+import { createInvoice } from "@/data/qb/invoice";
 import { useMutation } from "@tanstack/react-query";
 
 export const GenerateInvoices = () => {

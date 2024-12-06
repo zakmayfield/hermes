@@ -9,9 +9,9 @@ import { ShippingAddress } from "./ShippingAddress";
 import { CustomerInfo } from "./CustomerInfo";
 import { ReviewCardTitle } from "./ReviewCardTitle";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createCustomer } from "@/data/qb/services/customer";
+import { createCustomer } from "@/data/qb/customer";
 import { Icon } from "@/ui";
-import { getQuickBooksCustomerSyncRecordByUserId } from "@/data/database/quickbooks";
+import { getQbSyncRecord } from "@/data/database/quickbooks";
 import { toggleUserIsApproved } from "@/data/database/user";
 
 export const ReviewCard = ({
@@ -26,8 +26,7 @@ export const ReviewCard = ({
   const qbSyncRecordQuery = useQuery({
     staleTime: Infinity,
     queryKey: ["quickbooks_customer_sync_ref", newCustomer.id],
-    queryFn: async () =>
-      await getQuickBooksCustomerSyncRecordByUserId({ userId: newCustomer.id })
+    queryFn: async () => await getQbSyncRecord({ userId: newCustomer.id })
   });
 
   const { mutate: createQuickBooksCustomer, isPending: isCreateCustomerPending } =

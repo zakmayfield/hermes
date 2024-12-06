@@ -1,5 +1,5 @@
 import { getQuickbooksTokens } from "@/data/database/quickbooks";
-import { handleTokenRefresh } from "@/data/qb/services/token";
+import { handleTokenRefresh } from "@/data/qb/token";
 import { GenerateInvoices } from "@/features/GenerateInvoices";
 import { validateTokenExp } from "@/utils/qb";
 import { redirect } from "next/navigation";

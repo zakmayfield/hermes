@@ -1,5 +1,5 @@
 import { getCoreSessionUserOrThrow } from "@/data/session";
-import { handleTokenExchange } from "@/data/qb/services/token";
+import { handleTokenExchange } from "@/data/qb/token";
 import { redirect } from "next/navigation";
 import { upsertQuickbooksToken } from "@/data/database/quickbooks";
 

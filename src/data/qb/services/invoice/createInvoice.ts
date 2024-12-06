@@ -3,6 +3,7 @@
 import { handleDecryptAccessToken } from "@/utils/qb";
 import { qb_base_url } from "@/utils/qb/constants";
 import { CreateInvoiceResponse } from "@/data/qb/validators/invoice";
+import { Order, OrderItem } from "@prisma/client";
 
 const testInvoiceData = {
   CustomerRef: {
@@ -38,8 +39,8 @@ const testInvoiceData = {
   ]
 };
 
-export const createInvoice = async ({}: {
-  order: null;
+export const createInvoice = async (order: {
+  order: Order & { items: OrderItem[] };
 }): Promise<CreateInvoiceResponse> => {
   try {
     const { accessToken, realmId } = await handleDecryptAccessToken();

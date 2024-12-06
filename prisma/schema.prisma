@@ -242,6 +242,7 @@ model Unit {
   product   Product @relation(fields: [productId], references: [productId], onDelete: Cascade)
 
   cartsItems CartItem[]
+  orderItems OrderItem[]
 }
 
 // ----- END PRODUCTS
@@ -268,8 +269,6 @@ model CartItem {
   cart Cart @relation(fields: [cartId], references: [cartId], onDelete: Cascade)
   unit Unit @relation(fields: [unitId], references: [unitId])
 
-  orderItems OrderItem[]
-
   @@unique([cartId, unitId])
 }
 
@@ -290,12 +289,14 @@ model Order {
 model OrderItem {
   orderItemId String @id @default(cuid())
   orderId     String
-  cartItemId  String
+  unitId      String
 
-  order    Order    @relation(fields: [orderId], references: [orderId], onDelete: Cascade)
-  cartItem CartItem @relation(fields: [cartItemId], references: [cartItemId])
+  quantity Float
 
-  @@unique([orderId, cartItemId])
+  order Order @relation(fields: [orderId], references: [orderId], onDelete: Cascade)
+  unit  Unit  @relation(fields: [unitId], references: [unitId])
+
+  @@unique([orderId, unitId])
 }
 
 // ----- END ORDER

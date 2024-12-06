@@ -3,7 +3,7 @@
 import { qb_base_url } from "@/utils/qb/constants";
 import { handleDecryptAccessToken } from "@/utils/qb";
 import { CustomerBillAddr, CustomerInfo, CustomerShipAddr } from "@prisma/client";
-import { customerValidators } from "@/data/qb/validators";
+import { customerValidators } from "@/data/qb/validators/customers";
 import { createQuickbooksCustomerSyncRecord } from "@/data/database/quickbooks";
 
 export const createCustomer = async (payload: {

@@ -4,9 +4,8 @@ import { getQbSyncRecordOrThrow } from "@/data/database/quickbooks";
 import { Order, OrderItem } from "@prisma/client";
 import { getCustomerById } from "../customer";
 import { getUnitsFromOrder } from "@/data/database/order";
-import { CreateInvoiceRequest } from "../validators/invoice";
+import { CreateInvoiceRequest, LineItemRequestType } from "../validators/invoice";
 import { getItemRef } from "../item";
-import { LineItemRequestType } from "../validators/invoice/requestSchemas";
 
 export const formatOrderData = async (
   order: Order & { items: OrderItem[] }

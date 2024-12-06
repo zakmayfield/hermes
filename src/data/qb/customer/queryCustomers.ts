@@ -3,7 +3,7 @@
 import { getCoreSessionUserOrThrow } from "@/data/session";
 import { qb_base_url } from "@/utils/qb/constants";
 import { handleDecryptAccessToken } from "@/utils/qb";
-import { CustomerQueryResults, customerValidators } from "@/data/qb/validators";
+import { CustomerQueryResults, customerValidators } from "@/data/qb/validators/customers";
 
 export const queryCustomers = async () => {
   try {

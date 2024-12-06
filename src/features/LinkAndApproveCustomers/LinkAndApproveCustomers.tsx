@@ -9,7 +9,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { ReviewCard } from "./components";
 import { queryCustomers } from "@/data/qb/customer";
-import { CustomerQueryResults } from "@/data/qb/validators";
+import { CustomerQueryResults } from "@/data/qb/validators/customers";
 import { getUsers } from "@/data/database/user";
 
 export type LinkAndApproveCustomersData = SecureUser & {

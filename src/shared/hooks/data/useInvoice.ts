@@ -1,10 +1,9 @@
 import { createInvoice } from "@/data/qb/invoice";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useToast } from "../ui";
 
 export const useInvoice = () => {
   const { toast } = useToast();
-  const queryClient = useQueryClient();
 
   const invoiceQuery = useQuery({
     staleTime: Infinity,

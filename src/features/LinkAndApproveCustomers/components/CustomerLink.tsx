@@ -1,7 +1,7 @@
 import Select, { SingleValue } from "react-select";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/shared/hooks/ui";
-import { CustomerQuery, CustomerQueryResults } from "@/data/qb/validators";
+import { CustomerQuery, CustomerQueryResults } from "@/data/qb/validators/customers";
 import { Pulse } from "@/ui";
 import { useEffect } from "react";
 import { createQuickbooksCustomerSyncRecord } from "@/data/database/quickbooks";

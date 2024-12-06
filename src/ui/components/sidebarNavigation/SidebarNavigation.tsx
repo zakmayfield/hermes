@@ -281,6 +281,11 @@ function getLinks() {
       text: "Dashboard",
       href: "/dashboard",
       icon: "threeCircles"
+    },
+    {
+      text: "Store",
+      href: "/store",
+      icon: "storeFront"
     }
   ];
 

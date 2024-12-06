@@ -2,22 +2,27 @@
 
 import { getCoreSessionUserOrThrow } from "@/data/session";
 import { db } from "@/lib/prisma";
-import { Prisma } from "@prisma/client";
+import { Order, Prisma } from "@prisma/client";
 
-export const getOrdersFromAuthenticatedUser = async <ReturnData>(options: {
+export const getOrdersFromAuthenticatedUser = async <
+  ReturnData extends Order[]
+>(options: {
+  take?: number;
+  skip?: number;
   include?: Prisma.OrderInclude;
   select?: Prisma.OrderSelect;
 }): Promise<ReturnData> => {
+  const { id } = await getCoreSessionUserOrThrow();
+
   try {
-    const { id } = await getCoreSessionUserOrThrow();
+    const { take, skip, include, select } = options;
 
-    const { include, select } = options;
-    const order = options.include
-      ? await db.order.findMany({ where: { userId: id }, include })
-      : await db.order.findMany({ where: { userId: id }, select });
+    const orders = options.include
+      ? await db.order.findMany({ take, skip, where: { userId: id }, include })
+      : await db.order.findMany({ take, skip, where: { userId: id }, select });
 
-    return order as ReturnData;
+    return orders as ReturnData;
   } catch (error) {
-    throw new Error("Unable to get order");
+    throw new Error("Unable to get orders");
   }
 };

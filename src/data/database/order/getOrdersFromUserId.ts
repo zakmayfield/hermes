@@ -1,21 +1,24 @@
 "use server";
 
 import { db } from "@/lib/prisma";
-import { Prisma } from "@prisma/client";
+import { Order, Prisma } from "@prisma/client";
 
-export const getOrdersFromUserId = async <ReturnData>(options: {
+export const getOrdersFromUserId = async <ReturnData extends Order[]>(options: {
+  take?: number;
+  skip?: number;
   where?: Prisma.OrderWhereInput;
   include?: Prisma.OrderInclude;
   select?: Prisma.OrderSelect;
 }): Promise<ReturnData> => {
   try {
-    const { where, include, select } = options;
-    const order = options.include
-      ? await db.order.findMany({ where, include })
-      : await db.order.findMany({ where, select });
+    const { take, skip, where, include, select } = options;
 
-    return order as ReturnData;
+    const orders = options.include
+      ? await db.order.findMany({ take, skip, where, include })
+      : await db.order.findMany({ take, skip, where, select });
+
+    return orders as ReturnData;
   } catch (error) {
-    throw new Error("Unable to get order");
+    throw new Error("Unable to get orders");
   }
 };

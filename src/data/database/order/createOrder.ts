@@ -9,9 +9,9 @@ export const createOrder = async ({
 }: {
   cartItems: CartItem[];
 }): Promise<Order & { items: OrderItem[] }> => {
-  try {
-    const { id } = await getCoreSessionUserOrThrow();
+  const { id } = await getCoreSessionUserOrThrow();
 
+  try {
     const orderItems = cartItems.map((ci) => ({
       unitId: ci.unitId,
       quantity: ci.quantity

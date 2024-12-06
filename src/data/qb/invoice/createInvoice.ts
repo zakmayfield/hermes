@@ -4,14 +4,14 @@ import { handleDecryptAccessToken } from "@/utils/qb";
 import { qb_base_url } from "@/utils/qb/constants";
 import { CreateInvoiceResponse } from "@/data/qb/validators/invoice";
 import { Order, OrderItem } from "@prisma/client";
-import { formatOrderData } from "./formatOrderData";
+import { formatOrderToInvoice } from "./formatOrderToInvoice";
 
 export const createInvoice = async (
   order: Order & { items: OrderItem[] }
 ): Promise<CreateInvoiceResponse> => {
   try {
     const { accessToken, realmId } = await handleDecryptAccessToken();
-    const invoiceData = await formatOrderData(order);
+    const invoiceData = await formatOrderToInvoice(order);
 
     const res = await fetch(`${qb_base_url}/company/${realmId}/invoice?minorversion=73`, {
       method: "POST",

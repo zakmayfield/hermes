@@ -2,17 +2,17 @@
 
 import { getCoreSessionUserOrThrow } from "@/data/session";
 import { db } from "@/lib/prisma";
-import { Prisma } from "@prisma/client";
+import { Cart, Prisma } from "@prisma/client";
 
-export const getCart = async <ReturnData>(options: {
+export const getCart = async <ReturnData extends Cart>(options?: {
   include?: Prisma.CartInclude;
   select?: Prisma.CartSelect;
 }): Promise<ReturnData> => {
   try {
     const { id } = await getCoreSessionUserOrThrow();
 
-    const { include, select } = options;
-    const cart = options.include
+    const { include, select } = options || {};
+    const cart = include
       ? await db.cart.findUnique({ where: { userId: id }, include })
       : await db.cart.findUnique({ where: { userId: id }, select });
 

@@ -7,11 +7,11 @@ import { getUnitsFromOrderId } from "@/data/database/product";
 import { CreateInvoiceRequest, LineItemRequestType } from "../validators/invoice";
 import { getItemRef } from "../item";
 
-export const formatOrderData = async (
+export const formatOrderToInvoice = async (
   order: Order & { items: OrderItem[] }
 ): Promise<CreateInvoiceRequest> => {
+  const { customerId } = await getQbSyncRecordOrThrow(order.userId);
   try {
-    const { customerId } = await getQbSyncRecordOrThrow(order.userId);
     const customerData = await getCustomerById(customerId).then((c) => ({
       CustomerRef: {
         value: c.Customer.Id

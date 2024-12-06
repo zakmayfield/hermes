@@ -2,26 +2,24 @@
 
 import { db } from "@/lib/prisma";
 import { getCart } from "./getCart";
-import { Cart, CartItem } from "@prisma/client";
+import { CartItem } from "@prisma/client";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
+import { getCartItem } from "./getCartItem";
+import { upsertCartItem } from "./upsertCartItem";
 
 export const createCartItem = async ({
-  unitId,
-  quantity
+  unitId
 }: {
   unitId: string;
-  quantity: number;
 }): Promise<CartItem> => {
-  try {
-    const cart = await getCart<Cart>({
-      select: { cartId: true }
-    });
+  const cart = await getCart();
 
+  try {
     const cartItem = await db.cartItem.create({
       data: {
         cartId: cart.cartId,
         unitId,
-        quantity
+        quantity: 1
       }
     });
 
@@ -29,7 +27,8 @@ export const createCartItem = async ({
   } catch (error) {
     if (error instanceof PrismaClientKnownRequestError) {
       if (error.code === "P2002") {
-        throw new Error("This item is already in your cart");
+        const cartItem = await getCartItem(cart.cartId, unitId);
+        return await upsertCartItem({ unitId, quantity: cartItem.quantity + 1 });
       }
     }
     throw new Error("Unable to create cart item");

@@ -4,7 +4,7 @@ import { getCoreSessionUserOrThrow } from "@/data/session";
 import { db } from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
 
-export const getOrders = async <ReturnData>(options: {
+export const getOrdersFromAuthenticatedUser = async <ReturnData>(options: {
   include?: Prisma.OrderInclude;
   select?: Prisma.OrderSelect;
 }): Promise<ReturnData> => {

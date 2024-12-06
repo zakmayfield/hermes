@@ -3,4 +3,5 @@ export { upsertQuickbooksToken } from "./upsertQuickbooksToken";
 
 export { getQuickbooksTokens } from "./getQuickbooksTokens";
 export { getQuickbooksTokensOrThrow } from "./getQuickbooksTokensOrThrow";
-export { getQuickBooksCustomerSyncRecordByUserId } from "./getQuickBooksCustomerSyncRecordByUserId";
+export { getQbSyncRecordOrThrow } from "./getQbSyncRecordOrThrow";
+export { getQbSyncRecord } from "./getQbSyncRecord";

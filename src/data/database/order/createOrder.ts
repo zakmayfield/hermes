@@ -12,7 +12,10 @@ export const createOrder = async ({
   try {
     const { id } = await getCoreSessionUserOrThrow();
 
-    const orderItems = cartItems.map((ci) => ({ cartItemId: ci.cartItemId }));
+    const orderItems = cartItems.map((ci) => ({
+      unitId: ci.unitId,
+      quantity: ci.quantity
+    }));
 
     const order = await db.order.create({
       data: {
@@ -30,6 +33,7 @@ export const createOrder = async ({
 
     return order;
   } catch (error) {
+    console.error(error);
     throw new Error("Unable to create order");
   }
 };

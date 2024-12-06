@@ -3,13 +3,13 @@
 import { db } from "@/lib/prisma";
 import { QuickbooksCustomerSync } from "@prisma/client";
 
-export const getQuickBooksCustomerSyncRecordByUserId = async ({
-  userId
-}: {
-  userId: string;
-}): Promise<QuickbooksCustomerSync | null> => {
+export const getQbSyncRecordOrThrow = async (
+  userId: string
+): Promise<QuickbooksCustomerSync> => {
   try {
-    const record = await db.quickbooksCustomerSync.findUnique({ where: { userId } });
+    const record = await db.quickbooksCustomerSync.findUniqueOrThrow({
+      where: { userId }
+    });
     return record;
   } catch (error) {
     if (error instanceof Error) {

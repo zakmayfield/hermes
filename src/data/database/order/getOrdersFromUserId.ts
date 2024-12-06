@@ -3,7 +3,7 @@
 import { db } from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
 
-export const getUserOrders = async <ReturnData>(options: {
+export const getOrdersFromUserId = async <ReturnData>(options: {
   where?: Prisma.OrderWhereInput;
   include?: Prisma.OrderInclude;
   select?: Prisma.OrderSelect;

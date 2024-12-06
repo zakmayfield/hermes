@@ -3,7 +3,7 @@ import { useToast } from "../ui";
 import {
   getOrdersFromAuthenticatedUser,
   createOrder,
-  getUserOrders
+  getOrdersFromUserId
 } from "@/data/database/order";
 import { Order, OrderItem } from "@prisma/client";
 
@@ -11,7 +11,7 @@ export const useOrder = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
-  const authUserOrdersQuery = useQuery({
+  const getOrdersFromAuthenticatedUserQuery = useQuery({
     staleTime: Infinity,
     queryKey: ["orders", "authenticated_user"],
     queryFn: async () =>
@@ -20,11 +20,11 @@ export const useOrder = () => {
       })
   });
 
-  const getUserOrdersQuery = useQuery({
+  const getOrdersFromUserIdQuery = useQuery({
     staleTime: Infinity,
     queryKey: ["orders", "cm4bl4b450000l9pac1lvxa0x"],
     queryFn: async () =>
-      await getUserOrders<(Order & { items: OrderItem[] })[]>({
+      await getOrdersFromUserId<(Order & { items: OrderItem[] })[]>({
         where: { userId: "cm4bl4b450000l9pac1lvxa0x" },
         include: { items: true }
       })
@@ -48,5 +48,9 @@ export const useOrder = () => {
     }
   });
 
-  return { getUserOrdersQuery, authUserOrdersQuery, createOrderMutation };
+  return {
+    getOrdersFromUserIdQuery,
+    getOrdersFromAuthenticatedUserQuery,
+    createOrderMutation
+  };
 };

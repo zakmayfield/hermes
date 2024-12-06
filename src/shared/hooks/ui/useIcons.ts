@@ -46,7 +46,9 @@ import {
   PiDotsThreeCircle,
   PiDotsThreeCircleDuotone,
   PiUserPlus,
-  PiUserPlusDuotone
+  PiUserPlusDuotone,
+  PiStorefront,
+  PiStorefrontDuotone
 } from "react-icons/pi";
 import { SiQuickbooks } from "react-icons/si";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -77,7 +79,8 @@ export type IconNames =
   | "arrowsUpDown"
   | "invoice"
   | "dotsThreeCircle"
-  | "userPlus";
+  | "userPlus"
+  | "storeFront";
 
 export type IconVariants = "base" | "duotone";
 
@@ -111,6 +114,7 @@ export const useIcons = (props: UseIconsProps) => {
       shield: PiShield,
       signout: PiSignOut,
       spin: PiSpinnerGap,
+      storeFront: PiStorefront,
       threeCircles: PiCirclesThree,
       trash: PiTrash,
       uArrowDown: PiArrowURightDown,
@@ -142,6 +146,7 @@ export const useIcons = (props: UseIconsProps) => {
       shield: PiShield,
       signout: PiSignOutDuotone,
       spin: PiSpinnerGapDuotone,
+      storeFront: PiStorefrontDuotone,
       threeCircles: PiCirclesThreeDuotone,
       trash: PiTrashDuotone,
       uArrowDown: PiArrowURightDownDuotone,

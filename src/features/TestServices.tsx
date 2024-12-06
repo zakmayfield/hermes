@@ -1,54 +1,51 @@
 "use client";
 import { useCart } from "@/shared/hooks/data/useCart";
+import { useInvoice } from "@/shared/hooks/data/useInvoice";
+import { useOrder } from "@/shared/hooks/data/useOrder";
 
-const testUnitId = "cm4blbulc00049kcos1d4u00t";
+const testUnitIds = ["cm4blbulc00049kcos1d4u00t", "cm4blbul700019kcocaxtlraq"];
 
 export const TestServices = () => {
-  const {
-    cartQuery,
-    createCartItemMutation,
-    deleteCartItemMutation,
-    upsertCartItemMutation
-  } = useCart();
+  const { cartQuery, createCartItemMutation } = useCart();
+  const { ordersQuery, createOrderMutation } = useOrder();
+  const { invoiceQuery, createInvoiceMutation } = useInvoice();
 
-  const { data, isLoading } = cartQuery;
+  const cartItems = cartQuery.data ? cartQuery.data.items : [];
+  const orders = ordersQuery.data ? ordersQuery.data : [];
 
   return (
-    <div>
+    <div className="space-y-lg">
       <h2>Test Services</h2>
+      <div className="flex flex-col gap-sm">
+        <button
+          className="btn-ghost"
+          onClick={() =>
+            testUnitIds.forEach((id) =>
+              createCartItemMutation.mutate({ unitId: id, quantity: 1 })
+            )
+          }
+        >
+          Create Cart Items
+        </button>
 
-      <div>
-        <h3>Query Data</h3>
-
-        <p>isLoading: {isLoading ? "true" : "false"}</p>
-        <p>Cart ID: {!data ? "null" : data.cartId}</p>
+        <button
+          className="btn-ghost"
+          onClick={() => createOrderMutation.mutate({ cartItems })}
+        >
+          Create Order With Cart Items
+        </button>
       </div>
 
-      <div>
-        <button
-          className="btn-ghost"
-          onClick={() =>
-            createCartItemMutation.mutate({ unitId: testUnitId, quantity: 1 })
-          }
-        >
-          Create Cart Item
-        </button>
-
-        <button
-          className="btn-ghost"
-          onClick={() =>
-            upsertCartItemMutation.mutate({ unitId: testUnitId, quantity: 10 })
-          }
-        >
-          Update Cart Item
-        </button>
-
-        <button
-          className="btn-ghost"
-          onClick={() => deleteCartItemMutation.mutate({ unitId: testUnitId })}
-        >
-          Delete Cart Item
-        </button>
+      <div className="flex flex-col gap-sm">
+        {orders.map((o) => (
+          <button
+            key={o.orderId}
+            onClick={() => {}}
+            className="btn-ghost"
+          >
+            Create Invoice for {o.orderId}
+          </button>
+        ))}
       </div>
     </div>
   );

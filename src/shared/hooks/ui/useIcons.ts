@@ -48,7 +48,9 @@ import {
   PiUserPlus,
   PiUserPlusDuotone,
   PiStorefront,
-  PiStorefrontDuotone
+  PiStorefrontDuotone,
+  PiX,
+  PiXDuotone
 } from "react-icons/pi";
 import { SiQuickbooks } from "react-icons/si";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -59,7 +61,7 @@ export type IconNames =
   | "error"
   | "info"
   | "check"
-  | "x"
+  | "xCircle"
   | "trash"
   | "downarrowCircle"
   | "house"
@@ -80,7 +82,8 @@ export type IconNames =
   | "invoice"
   | "dotsThreeCircle"
   | "userPlus"
-  | "storeFront";
+  | "storeFront"
+  | "x";
 
 export type IconVariants = "base" | "duotone";
 
@@ -120,7 +123,8 @@ export const useIcons = (props: UseIconsProps) => {
       uArrowDown: PiArrowURightDown,
       userPlus: PiUserPlus,
       users: PiUsers,
-      x: PiXCircle
+      x: PiX,
+      xCircle: PiXCircle
     };
   }, []);
 
@@ -152,7 +156,8 @@ export const useIcons = (props: UseIconsProps) => {
       uArrowDown: PiArrowURightDownDuotone,
       userPlus: PiUserPlusDuotone,
       users: PiUsersDuotone,
-      x: PiXCircleDuotone
+      x: PiXDuotone,
+      xCircle: PiXCircleDuotone
     };
   }, []);
 

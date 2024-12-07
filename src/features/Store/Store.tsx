@@ -60,7 +60,7 @@ function ProductCard({ product }: { product: Product & { units: Unit[] } }) {
                 className="inline-block px-sm py-xs rounded-md hover:bg-theme-secondary/25 cursor-pointer"
               >
                 <Icon
-                  name="x"
+                  name="xCircle"
                   style={{ fontSize: "2xl" }}
                 />
               </div>

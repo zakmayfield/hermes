@@ -10,16 +10,20 @@ import { Cart, CartItem } from "@prisma/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useToast } from "../ui";
 
-export const useCart = () => {
-  const queryClient = useQueryClient();
-  const { toast } = useToast();
-
+export const useCartQuery = () => {
   const cartQuery = useQuery({
     staleTime: Infinity,
     queryKey: ["cart"],
     queryFn: async () =>
       await getCart<Cart & { items: CartItem[] }>({ include: { items: true } })
   });
+
+  return cartQuery;
+};
+
+export const useCart = () => {
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
 
   const createCartItemMutation = useMutation({
     mutationFn: createCartItem,
@@ -65,7 +69,6 @@ export const useCart = () => {
   });
 
   return {
-    cartQuery,
     createCartItemMutation,
     upsertCartItemMutation,
     deleteCartItemMutation

@@ -1,16 +1,16 @@
 import { PrismaClient } from "@prisma/client";
-import products from "../data/test-products.json";
+import productGroups from "../data/test-products.json";
 
 const db = new PrismaClient();
 
 const seedTestProducts = async () => {
-  products.forEach(
-    async (product) =>
-      await db.product.create({
+  productGroups.forEach(
+    async (group) =>
+      await db.productGroup.create({
         data: {
-          name: product.name,
-          category: product.category,
-          units: { createMany: { data: product.units } }
+          name: group.group,
+          category: group.category,
+          products: { createMany: { data: group.products } }
         }
       })
   );

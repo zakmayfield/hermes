@@ -224,25 +224,25 @@ model QuickbooksCustomerSync {
 
 // ----- PRODUCTS
 
-model Product {
-  productId String @id @default(cuid())
-  name      String
-  category  String
-
-  units Unit[]
+model ProductGroup {
+  productGroupId String    @id @default(cuid())
+  name           String
+  category       String
+  products       Product[]
 }
 
-model Unit {
-  unitId String @id @default(cuid())
-  size   String
-  price  Float
-  code   String
+model Product {
+  productId      String       @id @default(cuid())
+  productGroupId String
+  productGroup   ProductGroup @relation(fields: [productGroupId], references: [productGroupId], onDelete: Cascade)
+  name           String
+  code           String
+  category       String
+  description    String
+  price          Float
 
-  productId String
-  product   Product @relation(fields: [productId], references: [productId], onDelete: Cascade)
-
-  cartsItems CartItem[]
   orderItems OrderItem[]
+  cartItems  CartItem[]
 }
 
 // ----- END PRODUCTS
@@ -257,19 +257,19 @@ model Cart {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-// Junction with a relationship between `Cart` and `Unit`
+// Junction with a relationship between `Cart` and `Product`
 model CartItem {
   cartItemId String @id @default(cuid())
   cartId     String
-  unitId     String
+  productId  String
 
   quantity  Float
   createdAt DateTime @default(now())
 
-  cart Cart @relation(fields: [cartId], references: [cartId], onDelete: Cascade)
-  unit Unit @relation(fields: [unitId], references: [unitId])
+  cart    Cart    @relation(fields: [cartId], references: [cartId], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [productId])
 
-  @@unique([cartId, unitId])
+  @@unique([cartId, productId])
 }
 
 // ----- END CART
@@ -285,18 +285,18 @@ model Order {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-// Junction with a relationship between `Order` and `CartItem`
+// Junction with a relationship between `Order` and `Product`
 model OrderItem {
   orderItemId String @id @default(cuid())
   orderId     String
-  unitId      String
+  productId   String
 
   quantity Float
 
-  order Order @relation(fields: [orderId], references: [orderId], onDelete: Cascade)
-  unit  Unit  @relation(fields: [unitId], references: [unitId])
+  order   Order   @relation(fields: [orderId], references: [orderId], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [productId])
 
-  @@unique([orderId, unitId])
+  @@unique([orderId, productId])
 }
 
 // ----- END ORDER

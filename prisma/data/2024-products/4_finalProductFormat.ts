@@ -13,7 +13,8 @@ function normalizeGroupNames() {
 
     return {
       ...g,
-      group: groupName
+      group: groupName,
+      category: g.products[0].category
     };
   });
 }

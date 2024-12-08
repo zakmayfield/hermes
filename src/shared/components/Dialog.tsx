@@ -72,7 +72,7 @@ export function Dialog({
         open={isOpen}
         onClick={(e) => e.stopPropagation()}
         className={`
-          bg-theme-primary p-lg rounded-md min-w-sm max-w-md shadow-lg shadow-theme-primary my-2xl relative
+          bg-theme-primary p-lg rounded-md min-w-sm sm:min-w-md max-w-lg shadow-lg shadow-theme-primary my-2xl relative
           ${className || ""}
         `}
       >

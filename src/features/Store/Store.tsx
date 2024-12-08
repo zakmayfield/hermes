@@ -1,10 +1,12 @@
 "use client";
 
+import { useDialog } from "@/shared/components";
 import { useCart, useCartQuery } from "@/shared/hooks/data/useCart";
 import { useProductsQuery } from "@/shared/hooks/data/useProduct";
-import { useModal } from "@/shared/hooks/ui";
-import { Icon, Pulse } from "@/ui";
+import { Pulse } from "@/ui";
 import { Product, Unit } from "@prisma/client";
+import React, { useEffect } from "react";
+import Select from "react-select";
 
 export const Store = () => {
   const productQuery = useProductsQuery();
@@ -33,41 +35,76 @@ export const Store = () => {
 };
 
 function ProductCard({ product }: { product: Product & { units: Unit[] } }) {
+  const [selectedUnitId, setSelectedUnitId] = React.useState<string | null>(null);
   const { createCartItemMutation } = useCart();
-  const { Modal, isModalOpen, handleOpenModal, handleCancelModal } = useModal();
+
+  useEffect(() => {
+    console.log(selectedUnitId);
+  }, [selectedUnitId]);
+
+  const {
+    Dialog,
+    isOpen,
+    methods: { handleClose, handleOpen }
+  } = useDialog();
 
   return (
     <div>
       <div
-        onClick={handleOpenModal}
-        className="flex items-center gap-md p-xs rounded-lg bg-theme-secondary border cursor-pointer"
+        onClick={handleOpen}
+        className="flex items-center gap-md p-xs rounded-lg bg-theme-secondary cursor-pointer"
       >
         <p>{product.name}</p>
         <p>{product.category}</p>
       </div>
 
-      {isModalOpen && (
-        <Modal handleCancelModal={handleCancelModal}>
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="bg-theme-primary p-lg rounded-lg min-w-md absolute top-[5rem]"
-          >
-            <div className="flex items-center justify-between">
-              <h2>{product.name}</h2>
-
-              <div
-                onClick={handleCancelModal}
-                className="inline-block px-sm py-xs rounded-md hover:bg-theme-secondary/25 cursor-pointer"
-              >
-                <Icon
-                  name="xCircle"
-                  style={{ fontSize: "2xl" }}
-                />
-              </div>
-            </div>
+      <Dialog
+        state={{ isOpen, handleClose }}
+        options={{ place: "top-center" }}
+        className="flex flex-col gap-lg"
+      >
+        <div className="flex flex-col gap-sm">
+          <div>
+            <h2>{product.name}</h2>
+            <p className="opacity-75">{product.category}</p>
           </div>
-        </Modal>
-      )}
+
+          <div className="flex flex-col gap-sm">
+            <h3>Select a size</h3>
+
+            {/* {product.units.map((unit) => (
+              <div className="flex items-center justify-between gap-md bg-theme-secondary p-xs rounded-md">
+                <p className="min-w-3xs">{unit.size}</p>
+
+                <button className="btn-green px-md py-xs">
+                  <Icon name="cart" />
+                </button>
+              </div>
+            ))} */}
+
+            <Select
+              className="dark:text-background"
+              onChange={(d) => setSelectedUnitId(d?.value || null)}
+              options={product.units.map((u) => ({ value: u.unitId, label: u.size }))}
+            />
+          </div>
+        </div>
+
+        <div className="flex items-center gap-md">
+          <button
+            onClick={handleClose}
+            className="btn-green flex-1"
+          >
+            Add To Cart
+          </button>
+          <button
+            onClick={handleClose}
+            className="btn-red ml-auto"
+          >
+            Cancel
+          </button>
+        </div>
+      </Dialog>
     </div>
   );
 }

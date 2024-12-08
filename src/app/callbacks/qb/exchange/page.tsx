@@ -1,7 +1,7 @@
 import { getCoreSessionUserOrThrow } from "@/data/session";
-import { handleTokenExchange } from "@/data/qb/services/token";
+import { handleTokenExchange } from "@/data/qb/token";
 import { redirect } from "next/navigation";
-import { upsertQuickbooksToken } from "@/data/database/mutations";
+import { upsertQuickbooksToken } from "@/data/database/quickbooks";
 
 export default async function Page({
   searchParams
@@ -18,8 +18,8 @@ export default async function Page({
 
   if (tokenData) {
     await upsertQuickbooksToken({
-      user_id: id,
-      realm_id: realmId as string,
+      userId: id,
+      realmId: realmId as string,
       token: tokenData
     });
 

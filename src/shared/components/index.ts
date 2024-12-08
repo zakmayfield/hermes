@@ -1,3 +1,4 @@
+export * from "./Dialog";
 export * from "./footer/Footer";
 export * from "./header/Header";
 export * from "./Logo";

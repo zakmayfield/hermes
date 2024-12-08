@@ -1,9 +1,9 @@
 "use server";
 
-import { handleTokenRefresh } from "@/data/qb/services/token";
+import { handleTokenRefresh } from "@/data/qb/token";
 import { decrypt } from "@/utils/qb";
 import { validateTokenExp } from "./validateTokenExp";
-import { getQuickbooksTokensOrThrow } from "@/data/database/queries";
+import { getQuickbooksTokensOrThrow } from "@/data/database/quickbooks";
 
 export const handleDecryptAccessToken = async () => {
   let qbToken = await getQuickbooksTokensOrThrow();
@@ -16,9 +16,9 @@ export const handleDecryptAccessToken = async () => {
   }
 
   const decryptedAccessToken = await decrypt(
-    qbToken.encrypted_access_token,
-    qbToken.access_token_iv
+    qbToken.encryptedAccessToken,
+    qbToken.accessTokenIv
   );
 
-  return { realmId: qbToken.realm_id, accessToken: decryptedAccessToken };
+  return { realmId: qbToken.realmId, accessToken: decryptedAccessToken };
 };

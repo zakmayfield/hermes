@@ -1,6 +1,6 @@
 "use client";
 import { UserWithOnboardingStatus } from "@/data/database/models/User";
-import { getCustomersByOnboardingStatus } from "@/data/database/queries";
+import { getCustomersByOnboardingStatus } from "@/data/database/user";
 import { useTooltip } from "@/shared/hooks/ui";
 import { Box, Button, Heading, Icon, Pulse } from "@/ui";
 import { useQuery } from "@tanstack/react-query";

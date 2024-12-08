@@ -1,4 +1,4 @@
-export const formatSignupData = ({ users }: { users?: { created_at: Date }[] }) => {
+export const formatSignupData = ({ users }: { users?: { createdAt: Date }[] }) => {
   const formatDate = (date: Date) => {
     return `${date.getMonth() + 1}/${date.getDate()}`;
   };
@@ -20,7 +20,7 @@ export const formatSignupData = ({ users }: { users?: { created_at: Date }[] }) 
   };
 
   const getUserSignups = () => {
-    return users?.map((user) => formatDate(user.created_at));
+    return users?.map((user) => formatDate(user.createdAt));
   };
 
   const getWeeklySignupAnalytics = () => {

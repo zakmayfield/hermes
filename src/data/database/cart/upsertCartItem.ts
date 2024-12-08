@@ -5,10 +5,10 @@ import { getCart } from "./getCart";
 import { Cart, CartItem } from "@prisma/client";
 
 export const upsertCartItem = async ({
-  unitId,
+  productId,
   quantity
 }: {
-  unitId: string;
+  productId: string;
   quantity: number;
 }): Promise<CartItem> => {
   try {
@@ -18,14 +18,14 @@ export const upsertCartItem = async ({
 
     const cartItem = await db.cartItem.upsert({
       where: {
-        cartId_unitId: {
+        cartId_productId: {
           cartId: cart.cartId,
-          unitId
+          productId
         }
       },
       create: {
         quantity,
-        unitId,
+        productId,
         cartId: cart.cartId
       },
       update: {

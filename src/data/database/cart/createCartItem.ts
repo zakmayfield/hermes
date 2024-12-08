@@ -8,9 +8,9 @@ import { getCartItem } from "./getCartItem";
 import { upsertCartItem } from "./upsertCartItem";
 
 export const createCartItem = async ({
-  unitId
+  productId
 }: {
-  unitId: string;
+  productId: string;
 }): Promise<CartItem> => {
   const cart = await getCart();
 
@@ -18,7 +18,7 @@ export const createCartItem = async ({
     const cartItem = await db.cartItem.create({
       data: {
         cartId: cart.cartId,
-        unitId,
+        productId,
         quantity: 1
       }
     });
@@ -27,8 +27,8 @@ export const createCartItem = async ({
   } catch (error) {
     if (error instanceof PrismaClientKnownRequestError) {
       if (error.code === "P2002") {
-        const cartItem = await getCartItem(cart.cartId, unitId);
-        return await upsertCartItem({ unitId, quantity: cartItem.quantity + 1 });
+        const cartItem = await getCartItem(cart.cartId, productId);
+        return await upsertCartItem({ productId, quantity: cartItem.quantity + 1 });
       }
     }
     throw new Error("Unable to create cart item");

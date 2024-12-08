@@ -1,5 +1,5 @@
-import { getProducts, getUnits } from "@/data/database/product";
-import { Product, Unit } from "@prisma/client";
+import { getProducts } from "@/data/database/product";
+import { Product, ProductGroup } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
 
 export const useProductsQuery = () => {
@@ -7,18 +7,10 @@ export const useProductsQuery = () => {
     staleTime: Infinity,
     queryKey: ["products"],
     queryFn: async () =>
-      await getProducts<(Product & { units: Unit[] })[]>({ include: { units: true } })
+      await getProducts<(ProductGroup & { products: Product[] })[]>({
+        include: { products: true }
+      })
   });
 
   return productsQuery;
-};
-
-export const useUnitsQuery = () => {
-  const unitsQuery = useQuery({
-    staleTime: Infinity,
-    queryKey: ["units"],
-    queryFn: async () => await getUnits()
-  });
-
-  return unitsQuery;
 };

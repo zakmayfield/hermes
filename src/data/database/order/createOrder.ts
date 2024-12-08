@@ -13,7 +13,7 @@ export const createOrder = async ({
 
   try {
     const orderItems = cartItems.map((ci) => ({
-      unitId: ci.unitId,
+      productId: ci.productId,
       quantity: ci.quantity
     }));
 

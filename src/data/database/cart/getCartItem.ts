@@ -3,13 +3,16 @@
 import { db } from "@/lib/prisma";
 import { CartItem } from "@prisma/client";
 
-export const getCartItem = async (cartId: string, unitId: string): Promise<CartItem> => {
+export const getCartItem = async (
+  cartId: string,
+  productId: string
+): Promise<CartItem> => {
   try {
     const cartItem = await db.cartItem.findUniqueOrThrow({
       where: {
-        cartId_unitId: {
+        cartId_productId: {
           cartId,
-          unitId
+          productId
         }
       }
     });

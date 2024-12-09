@@ -1,6 +1,6 @@
 [
   {
-    "group": "Foo",
+    "name": "Foo",
     "category": "singles",
     "products": [
       {
@@ -8,19 +8,21 @@
         "code": "WHS-Singles:FOO-2",
         "description": "2 Litres of Foo",
         "category": "singles",
-        "price": 22.45
+        "price": 22.45,
+        "size": "2L"
       },
       {
         "name": "Foo",
         "code": "WHS-Singles:FOO-1",
         "description": "1 Litre of Foo",
         "category": "singles",
-        "price": 7.6
+        "price": 7.6,
+        "size": "1L"
       }
     ]
   },
   {
-    "group": "Bar",
+    "name": "Bar",
     "category": "singles",
     "products": [
       {
@@ -28,19 +30,21 @@
         "code": "WHS-Singles:BAR-2",
         "description": "2 Litres of Bar",
         "category": "singles",
-        "price": 12.5
+        "price": 12.5,
+        "size": "2L"
       },
       {
         "name": "Bar",
         "code": "WHS-Singles:BAR-1",
         "description": "1 Litre of Bar",
         "category": "singles",
-        "price": 6.35
+        "price": 6.35,
+        "size": "1L"
       }
     ]
   },
   {
-    "group": "Foo Bar",
+    "name": "Foo Bar",
     "category": "blends",
     "products": [
       {
@@ -48,14 +52,16 @@
         "code": "WHS-Blends:FOO-BAR-2",
         "description": "2 Litres of Foo Bar",
         "category": "blends",
-        "price": 14.2
+        "price": 14.2,
+        "size": "2L"
       },
       {
         "name": "Foo Bar",
         "code": "WHS-Blends:FOO-BAR-1",
         "description": "1 Litre of Foo Bar",
         "category": "blends",
-        "price": 7.3
+        "price": 7.3,
+        "size": "1L"
       }
     ]
   }

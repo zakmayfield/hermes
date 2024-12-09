@@ -1,6 +1,6 @@
 import fs from "fs";
 import cpl from "./complete-product-list-2024.json";
-import cats from "../categories.json";
+import cats from "../../categories.json";
 
 function filterCompleteProductList() {
   return cpl.filter((p) => {

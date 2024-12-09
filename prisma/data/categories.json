@@ -1,12 +1,8 @@
 [
   "blends",
-  "ice pops",
   "tea",
   "mojito",
-  "chili peppers",
   "ciders",
-  "dried",
-  "garnish",
   "lemonades",
   "limonades",
   "nut milks",
@@ -16,8 +12,12 @@
   "smoothies",
   "syrups",
   "vegetables",
-  "zest",
   "mocktail",
+  "ice pops",
+  "chili peppers",
+  "dried",
+  "garnish",
+  "zest",
   "cleanses",
   "wholesale"
 ]

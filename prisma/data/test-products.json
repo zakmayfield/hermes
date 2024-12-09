@@ -64,5 +64,19 @@
         "size": "1L"
       }
     ]
+  },
+  {
+    "group": "Limes",
+    "category": "wholesale",
+    "products": [
+      {
+        "name": "Limes",
+        "code": "Wholesale:CASE OF LIMES",
+        "description": "1 Case Limes",
+        "category": "wholesale",
+        "price": 48.95,
+        "size": null
+      }
+    ]
   }
 ]

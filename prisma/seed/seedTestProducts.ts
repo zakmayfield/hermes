@@ -8,7 +8,7 @@ const seedTestProducts = async () => {
     async (group) =>
       await db.productGroup.create({
         data: {
-          name: group.group,
+          name: group.name,
           category: group.category,
           products: { createMany: { data: group.products } }
         }

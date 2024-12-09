@@ -43,7 +43,7 @@ export const useCart = () => {
       toast(error.message, "error");
       queryClient.invalidateQueries({ queryKey: ["cart"] });
     },
-    onSuccess(data) {
+    onSuccess() {
       toast(`Updated cart item`);
       queryClient.invalidateQueries({ queryKey: ["cart"] });
     }

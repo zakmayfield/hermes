@@ -7,10 +7,7 @@ import {
 } from "@/data/database/order";
 import { Order, OrderItem } from "@prisma/client";
 
-export const useOrder = () => {
-  const { toast } = useToast();
-  const queryClient = useQueryClient();
-
+export const useGetOrdersFromAuthenticatedUser = () => {
   const getOrdersFromAuthenticatedUserQuery = useQuery({
     staleTime: Infinity,
     queryKey: ["orders", "authenticated_user"],
@@ -20,6 +17,10 @@ export const useOrder = () => {
       })
   });
 
+  return getOrdersFromAuthenticatedUserQuery;
+};
+
+export const useGetOrdersFromUserIdQuery = () => {
   const getOrdersFromUserIdQuery = useQuery({
     staleTime: Infinity,
     queryKey: ["orders", "cm4bl4b450000l9pac1lvxa0x"],
@@ -30,27 +31,26 @@ export const useOrder = () => {
       })
   });
 
+  return getOrdersFromUserIdQuery;
+};
+
+export const useOrder = () => {
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+
   const createOrderMutation = useMutation({
     mutationFn: createOrder,
     onError(error) {
       toast(error.message, "error");
       queryClient.invalidateQueries({ queryKey: ["orders", "authenticated_user"] });
     },
-    onSuccess(data) {
+    onSuccess() {
       toast(`Successfully created order`);
-
-      queryClient.setQueryData<(Order & { items: OrderItem[] })[]>(
-        ["orders", "authenticated_user"],
-        (oldData) => {
-          return oldData ? [data, ...oldData] : oldData;
-        }
-      );
+      queryClient.invalidateQueries({ queryKey: ["orders", "authenticated_user"] });
     }
   });
 
   return {
-    getOrdersFromUserIdQuery,
-    getOrdersFromAuthenticatedUserQuery,
     createOrderMutation
   };
 };

@@ -6,7 +6,7 @@ import {
   getCart,
   upsertCartItem
 } from "@/data/database/cart";
-import { Cart, CartItem } from "@prisma/client";
+import { Cart, CartItem, Product } from "@prisma/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useToast } from "../ui";
 
@@ -15,7 +15,20 @@ export const useCartQuery = () => {
     staleTime: Infinity,
     queryKey: ["cart"],
     queryFn: async () =>
-      await getCart<Cart & { items: CartItem[] }>({ include: { items: true } })
+      await getCart<Cart & { items: (CartItem & { product: Product })[] }>({
+        select: {
+          items: {
+            select: {
+              cartId: true,
+              cartItemId: true,
+              createdAt: true,
+              productId: true,
+              quantity: true,
+              product: true
+            }
+          }
+        }
+      })
   });
 
   return cartQuery;

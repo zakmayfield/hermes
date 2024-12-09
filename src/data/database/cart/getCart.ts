@@ -18,6 +18,7 @@ export const getCart = async <ReturnData extends Cart>(options?: {
 
     return cart as ReturnData;
   } catch (error) {
-    throw new Error("Unexpected Server Error");
+    console.log(error);
+    throw new Error("Unable to get cart");
   }
 };

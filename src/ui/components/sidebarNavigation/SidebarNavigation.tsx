@@ -283,6 +283,11 @@ function getLinks() {
       icon: "threeCircles"
     },
     {
+      text: "Cart",
+      href: "/cart",
+      icon: "cart"
+    },
+    {
       text: "Store",
       href: "/store",
       icon: "storeFront"

@@ -38,6 +38,7 @@ export const config = {
     "/sign-in",
     "/sign-up",
     "/dashboard/:path*",
+    "/cart",
     "/store",
     "/quickbooks/:path*",
     "/qb/:path*",

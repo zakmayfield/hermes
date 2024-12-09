@@ -1,90 +1,135 @@
 "use client";
 
+import React from "react";
+import { Product, ProductGroup } from "@prisma/client";
+import { Pulse } from "@/ui";
 import { useDialog } from "@/shared/components";
 import { useCart, useCartQuery } from "@/shared/hooks/data/useCart";
 import { useProductsQuery } from "@/shared/hooks/data/useProduct";
-import { Pulse } from "@/ui";
-import React, { useEffect } from "react";
-import Select from "react-select";
+import Select, { SingleValue } from "react-select";
 
 export const Store = () => {
-  const productQuery = useProductsQuery();
+  const { data: products, ...productQuery } = useProductsQuery();
   useCartQuery();
 
-  return <div></div>;
+  const { createCartItemMutation } = useCart();
+  const handleAddToCart = (productId: string) => createCartItemMutation.mutate(productId);
+
+  return (
+    <div>
+      {productQuery.isLoading ? (
+        <Pulse />
+      ) : productQuery.isError ? (
+        <div>{productQuery.error.message}</div>
+      ) : (
+        <div>
+          <h2>Products</h2>
+
+          {products?.map((group) => (
+            <ProductCard
+              key={group.productGroupId}
+              productGroup={group}
+              handleAddToCart={handleAddToCart}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
 };
 
-// function ProductCard({ product }: { product: Product & { units: Unit[] } }) {
-//   const [selectedUnitId, setSelectedUnitId] = React.useState<string | null>(null);
-//   const { createCartItemMutation } = useCart();
+function ProductCard({
+  productGroup,
+  handleAddToCart
+}: {
+  productGroup: ProductGroup & { products: Product[] };
+  handleAddToCart: (productId: string) => void;
+}) {
+  const {
+    Dialog,
+    isOpen,
+    methods: { handleClose, handleOpen }
+  } = useDialog();
 
-//   useEffect(() => {
-//     console.log(selectedUnitId);
-//   }, [selectedUnitId]);
+  return (
+    <div key={productGroup.productGroupId}>
+      <div onClick={handleOpen}>
+        <h2>{productGroup.name}</h2>
+      </div>
 
-//   const {
-//     Dialog,
-//     isOpen,
-//     methods: { handleClose, handleOpen }
-//   } = useDialog();
+      <Dialog
+        state={{ isOpen, handleClose }}
+        options={{ place: "top-center" }}
+      >
+        <ProductDialog
+          productGroup={productGroup}
+          handleClose={handleClose}
+          handleAddToCart={handleAddToCart}
+        />
+      </Dialog>
+    </div>
+  );
+}
 
-//   return (
-//     <div>
-//       <div
-//         onClick={handleOpen}
-//         className="flex items-center gap-md p-xs rounded-lg bg-theme-secondary cursor-pointer"
-//       >
-//         <p>{product.name}</p>
-//         <p>{product.category}</p>
-//       </div>
+function ProductDialog({
+  productGroup,
+  handleClose,
+  handleAddToCart
+}: {
+  productGroup: ProductGroup & { products: Product[] };
+  handleClose?: () => void;
+  handleAddToCart: (productId: string) => void;
+}) {
+  const [selectedProduct, setSelectedProduct] = React.useState<Product | null>(null);
 
-//       <Dialog
-//         state={{ isOpen, handleClose }}
-//         options={{ place: "top-center" }}
-//         className="flex flex-col gap-lg"
-//       >
-//         <div className="flex flex-col gap-sm">
-//           <div>
-//             <h2>{product.name}</h2>
-//             <p className="opacity-75">{product.category}</p>
-//           </div>
+  const handleSelectProduct = (
+    data: SingleValue<{
+      value: string;
+      label: string;
+    }>
+  ) => {
+    const product = productGroup.products.find((p) => p.code === data?.value);
+    setSelectedProduct(product ? product : null);
+  };
 
-//           <div className="flex flex-col gap-sm">
-//             <h3>Select a size</h3>
+  return (
+    <div className="flex flex-col gap-md">
+      <div>
+        <h2>{productGroup.name}</h2>
+        <p>
+          {productGroup.category.charAt(0).toUpperCase() + productGroup.category.slice(1)}
+        </p>
+      </div>
 
-//             {/* {product.units.map((unit) => (
-//               <div className="flex items-center justify-between gap-md bg-theme-secondary p-xs rounded-md">
-//                 <p className="min-w-3xs">{unit.size}</p>
+      <div className="flex flex-col gap-xs">
+        <h3>Select a Size</h3>
+        <Select
+          className="dark:text-background"
+          isClearable={true}
+          onChange={(data) => handleSelectProduct(data)}
+          options={productGroup.products.map((p) => ({
+            value: p.code,
+            label: p.size ? p.size : p.description
+          }))}
+        />
+      </div>
 
-//                 <button className="btn-green px-md py-xs">
-//                   <Icon name="cart" />
-//                 </button>
-//               </div>
-//             ))} */}
+      <div className="flex items-center gap-md">
+        <button
+          disabled={!selectedProduct}
+          className="btn-green flex-1"
+          onClick={() => handleAddToCart(selectedProduct?.productId || "")}
+        >
+          Add to Cart
+        </button>
 
-//             <Select
-//               className="dark:text-background"
-//               onChange={(d) => setSelectedUnitId(d?.value || null)}
-//               options={product.units.map((u) => ({ value: u.unitId, label: u.size }))}
-//             />
-//           </div>
-//         </div>
-
-//         <div className="flex items-center gap-md">
-//           <button
-//             onClick={handleClose}
-//             className="btn-green flex-1"
-//           >
-//             Add To Cart
-//           </button>
-//           <button
-//             onClick={handleClose}
-//             className="btn-red ml-auto"
-//           >
-//             Cancel
-//           </button>
-//         </div>
-//       </Dialog>
-//     </div>
-//   );
-// }
+        <button
+          className="btn-red"
+          onClick={handleClose}
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  );
+}

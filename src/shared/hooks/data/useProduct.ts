@@ -8,7 +8,7 @@ export const useProductsQuery = () => {
     queryKey: ["products"],
     queryFn: async () =>
       await getProducts<(ProductGroup & { products: Product[] })[]>({
-        include: { products: true }
+        include: { products: { orderBy: { price: "asc" } } }
       })
   });
 

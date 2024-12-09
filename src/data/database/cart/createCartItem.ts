@@ -7,11 +7,7 @@ import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { getCartItem } from "./getCartItem";
 import { upsertCartItem } from "./upsertCartItem";
 
-export const createCartItem = async ({
-  productId
-}: {
-  productId: string;
-}): Promise<CartItem> => {
+export const createCartItem = async (productId: string): Promise<CartItem> => {
   const cart = await getCart();
 
   try {

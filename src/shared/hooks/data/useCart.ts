@@ -32,9 +32,8 @@ export const useCart = () => {
       queryClient.invalidateQueries({ queryKey: ["cart"] });
     },
     onSuccess(data) {
-      queryClient.setQueryData<Cart & { items: CartItem[] }>(["cart"], (oldData) => {
-        return oldData ? { ...oldData, items: [data, ...oldData.items] } : oldData;
-      });
+      toast(`Added to cart: (${data.quantity})`);
+      queryClient.invalidateQueries({ queryKey: ["cart"] });
     }
   });
 
@@ -46,9 +45,7 @@ export const useCart = () => {
     },
     onSuccess(data) {
       toast(`Updated cart item`);
-      queryClient.setQueryData<Cart & { items: CartItem[] }>(["cart"], (oldData) => {
-        return oldData ? { ...oldData, items: [data, ...oldData.items] } : oldData;
-      });
+      queryClient.invalidateQueries({ queryKey: ["cart"] });
     }
   });
 
@@ -62,7 +59,10 @@ export const useCart = () => {
       toast(`Removed cart item`);
       queryClient.setQueryData<Cart & { items: CartItem[] }>(["cart"], (oldData) => {
         return oldData
-          ? { ...oldData, items: oldData.items.filter((i) => i.unitId !== data.unitId) }
+          ? {
+              ...oldData,
+              items: oldData.items.filter((i) => i.productId !== data.productId)
+            }
           : oldData;
       });
     }

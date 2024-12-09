@@ -1,19 +1,22 @@
 import { Icon } from "@/ui";
-import React from "react";
+import React, { useCallback } from "react";
 
 export const useDialog = () => {
   const [isOpen, setIsOpen] = React.useState(false);
 
-  const handleEscape = (e: KeyboardEvent) => {
-    if (e.key === "Escape" && isOpen) {
-      setIsOpen(false);
-    }
-  };
+  const handleEscape = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isOpen) {
+        setIsOpen(false);
+      }
+    },
+    [isOpen]
+  );
 
   React.useEffect(() => {
     document.addEventListener("keydown", handleEscape);
     return () => document.removeEventListener("keydown", handleEscape);
-  }, [isOpen]);
+  }, [isOpen, handleEscape]);
 
   React.useEffect(() => {
     if (isOpen) {
@@ -110,7 +113,7 @@ function Overlay({
 }) {
   return (
     <div
-      onClick={(e) => (closeOnClickOverlay ? handleClose() : null)}
+      onClick={() => (closeOnClickOverlay ? handleClose() : null)}
       className={`
         ${!isOpen && "hidden"}
         bg-theme-tertiary/60 fixed top-0 left-0 w-full h-screen z-[100]

@@ -7,7 +7,7 @@ export type RolePermissionsWithPermission = RolePermissions & {
 export type TogglePermissionLevelInput = {
   permission_level: number;
   permission: {
-    permission_id: string;
-    role_id: string;
+    permissionId: string;
+    roleId: string;
   };
 };

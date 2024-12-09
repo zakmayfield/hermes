@@ -11,10 +11,8 @@ export const ReviewCardTitle = ({
 
   const queryData = queryClient.getQueryState<QuickbooksCustomerSync>([
     "quickbooks_customer_sync_ref",
-    customerInfo?.user_id
+    customerInfo?.userId
   ]);
-
-  console.log({ queryData });
 
   function isLinked() {
     if (queryData?.data) {

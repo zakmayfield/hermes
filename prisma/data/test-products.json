@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Foo",
+    "category": "singles",
+    "products": [
+      {
+        "name": "Foo",
+        "code": "WHS-Singles:FOO-2",
+        "description": "2 Litres of Foo",
+        "category": "singles",
+        "price": 22.45,
+        "size": "2L"
+      },
+      {
+        "name": "Foo",
+        "code": "WHS-Singles:FOO-1",
+        "description": "1 Litre of Foo",
+        "category": "singles",
+        "price": 7.6,
+        "size": "1L"
+      }
+    ]
+  },
+  {
+    "name": "Bar",
+    "category": "singles",
+    "products": [
+      {
+        "name": "Bar",
+        "code": "WHS-Singles:BAR-2",
+        "description": "2 Litres of Bar",
+        "category": "singles",
+        "price": 12.5,
+        "size": "2L"
+      },
+      {
+        "name": "Bar",
+        "code": "WHS-Singles:BAR-1",
+        "description": "1 Litre of Bar",
+        "category": "singles",
+        "price": 6.35,
+        "size": "1L"
+      }
+    ]
+  },
+  {
+    "name": "Foo Bar",
+    "category": "blends",
+    "products": [
+      {
+        "name": "Foo Bar",
+        "code": "WHS-Blends:FOO-BAR-2",
+        "description": "2 Litres of Foo Bar",
+        "category": "blends",
+        "price": 14.2,
+        "size": "2L"
+      },
+      {
+        "name": "Foo Bar",
+        "code": "WHS-Blends:FOO-BAR-1",
+        "description": "1 Litre of Foo Bar",
+        "category": "blends",
+        "price": 7.3,
+        "size": "1L"
+      }
+    ]
+  },
+  {
+    "name": "Limes",
+    "category": "wholesale",
+    "products": [
+      {
+        "name": "Limes",
+        "code": "Wholesale:CASE OF LIMES",
+        "description": "1 Case Limes",
+        "category": "wholesale",
+        "price": 48.95,
+        "size": null
+      }
+    ]
+  }
+]

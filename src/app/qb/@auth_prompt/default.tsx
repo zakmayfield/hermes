@@ -1,4 +1,4 @@
-import { getQuickbooksTokens } from "@/data/database/queries";
+import { getQuickbooksTokens } from "@/data/database/quickbooks";
 import { redirect } from "next/navigation";
 
 export default async function Default() {

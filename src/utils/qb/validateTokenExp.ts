@@ -18,8 +18,8 @@ export const validateTokenExp = async (payload: QuickbooksToken | null) => {
     };
   }
 
-  const isAccessTokenExpired = currentDate > payload.access_token_expiration_time;
-  const isRefreshTokenExpired = currentDate > payload.refresh_token_expiration_time;
+  const isAccessTokenExpired = currentDate > payload.accessTokenExpirationTime;
+  const isRefreshTokenExpired = currentDate > payload.refreshTokenExpirationTime;
 
   return {
     accessToken: {

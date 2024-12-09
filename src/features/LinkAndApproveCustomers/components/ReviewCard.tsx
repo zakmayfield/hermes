@@ -9,10 +9,10 @@ import { ShippingAddress } from "./ShippingAddress";
 import { CustomerInfo } from "./CustomerInfo";
 import { ReviewCardTitle } from "./ReviewCardTitle";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getQuickBooksCustomerSyncRecordByUserId } from "@/data/database/queries";
-import { createCustomer } from "@/data/qb/services/customer";
+import { createCustomer } from "@/data/qb/customer";
 import { Icon } from "@/ui";
-import { toggleUserIsApproved } from "@/data/database/mutations";
+import { getQbSyncRecord } from "@/data/database/quickbooks";
+import { toggleUserIsApproved } from "@/data/database/user";
 
 export const ReviewCard = ({
   newCustomer
@@ -26,8 +26,7 @@ export const ReviewCard = ({
   const qbSyncRecordQuery = useQuery({
     staleTime: Infinity,
     queryKey: ["quickbooks_customer_sync_ref", newCustomer.id],
-    queryFn: async () =>
-      await getQuickBooksCustomerSyncRecordByUserId({ user_id: newCustomer.id })
+    queryFn: async () => await getQbSyncRecord({ userId: newCustomer.id })
   });
 
   const { mutate: createQuickBooksCustomer, isPending: isCreateCustomerPending } =
@@ -52,7 +51,7 @@ export const ReviewCard = ({
     },
     onSuccess() {
       toast(`Successfully approved ${customerInfo?.companyName}`);
-      queryClient.invalidateQueries({ queryKey: ["customers", "is_approved", false] });
+      queryClient.invalidateQueries({ queryKey: ["customers", "isApproved", false] });
     }
   });
 
@@ -121,7 +120,7 @@ export const ReviewCard = ({
 
       {/* Link to QuickBooks Customer */}
       {customerInfo?.isExistingCustomer && !qbSyncRecordQuery.data && (
-        <CustomerLink user_id={newCustomer.id} />
+        <CustomerLink userId={newCustomer.id} />
       )}
 
       {/* Operation Buttons */}
@@ -191,7 +190,7 @@ export const ReviewCard = ({
                 className="flex-1 btn-green py-xs"
                 onClick={() =>
                   createQuickBooksCustomer({
-                    user_id: rest.id,
+                    userId: rest.id,
                     email: rest.email,
                     customerInfo,
                     customerShipAddr,
@@ -230,12 +229,12 @@ export const ReviewCard = ({
                   Please link this customer to a QuickBooks account to continue.
                 </p>
 
-                <CustomerLink user_id={rest.id} />
+                <CustomerLink userId={rest.id} />
               </div>
             ) : (
               <div>
                 <p>
-                  Are you sure you want to approve {qbSyncRecordQuery.data.company_name}
+                  Are you sure you want to approve {qbSyncRecordQuery.data.companyName}
                 </p>
               </div>
             )}

@@ -276,10 +276,15 @@ model CartItem {
 // ----- END CART
 
 // ----- ORDER
+enum OrderStatus {
+  INVOICE_PENDING
+  INVOICE_CREATED
+}
 
 model Order {
   orderId   String      @id @default(cuid())
   createdAt DateTime    @default(now())
+  status    OrderStatus @default(INVOICE_PENDING)
   items     OrderItem[]
 
   userId String

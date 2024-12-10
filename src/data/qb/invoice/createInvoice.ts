@@ -5,6 +5,7 @@ import { qb_base_url } from "@/utils/qb/constants";
 import { CreateInvoiceResponse } from "@/data/qb/validators/invoice";
 import { Order, OrderItem } from "@prisma/client";
 import { formatOrderToInvoice } from "./formatOrderToInvoice";
+import { updateOrderStatus } from "@/data/database/order";
 
 export const createInvoice = async (
   order: Order & { items: OrderItem[] }
@@ -25,8 +26,10 @@ export const createInvoice = async (
 
     if (!res.ok) {
       console.error(await res.text());
-      throw new Error(res.statusText);
+      throw new Error("The was an issue with your request");
     }
+
+    await updateOrderStatus(order.orderId, "INVOICE_CREATED");
 
     const data = await res.json();
 

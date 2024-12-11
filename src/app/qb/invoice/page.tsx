@@ -1,5 +1,6 @@
-import { getQuickbooksTokens } from "@/data/database/queries";
-import { handleTokenRefresh } from "@/data/qb/services/token";
+import { getQuickbooksTokens } from "@/data/database/quickbooks";
+import { handleTokenRefresh } from "@/data/qb/token";
+import { GenerateInvoices } from "@/features/GenerateInvoices";
 import { validateTokenExp } from "@/utils/qb";
 import { redirect } from "next/navigation";
 
@@ -19,9 +20,9 @@ export default async function Page() {
   }
 
   return (
-    <div>
-      <h1>invoice</h1>
-      page
+    <div className="flex flex-col gap-lg">
+      <h1>Manage Invoices</h1>
+      <GenerateInvoices />
     </div>
   );
 }

@@ -13,7 +13,7 @@ declare module "next-auth" {
   interface Session {
     user: User & {
       email: string;
-      onboarding_status?: OnboardingStatus;
+      onboardingStatus?: OnboardingStatus;
       role: Roles;
     };
   }
@@ -23,7 +23,7 @@ declare module "next-auth/jwt" {
   interface JWT {
     id: string;
     email: string;
-    onboarding_status?: OnboardingStatus;
+    onboardingStatus?: OnboardingStatus;
     role: Roles;
   }
 }

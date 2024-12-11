@@ -2,9 +2,9 @@
 import {
   getPermissionsByRole,
   getUserPermissionsByUserId,
-  getUsersByRole
-} from "@/data/database/queries";
-import { toggleUserPermission } from "@/data/database/mutations";
+  toggleUserPermission
+} from "@/data/database/permission";
+import { getUsersByRole } from "@/data/database/user";
 import { Box, Heading, Icon, Pulse, Text } from "@/ui";
 import { $Enums, Permission, User } from "@prisma/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -126,10 +126,10 @@ function GrantPermissionsItem({
             : permissions?.map((p) => (
                 <PermissionItem
                   key={p.name}
-                  user_id={admin.id}
+                  userId={admin.id}
                   permission={p}
                   checked={
-                    !!userPermissions?.find((up) => up.permission_id === p.permission_id)
+                    !!userPermissions?.find((up) => up.permissionId === p.permissionId)
                   }
                 />
               ))}
@@ -141,24 +141,24 @@ function GrantPermissionsItem({
 
 function PermissionItem({
   checked,
-  user_id,
+  userId,
   permission
 }: {
   checked: boolean;
-  user_id: string;
+  userId: string;
   permission: Permission;
 }) {
-  const { permission_id } = permission;
+  const { permissionId } = permission;
   const queryClient = useQueryClient();
 
   const { mutate: togglePermission } = useMutation({
     mutationFn: toggleUserPermission,
     onSuccess() {
-      queryClient.invalidateQueries({ queryKey: ["admin_permissions", user_id] });
+      queryClient.invalidateQueries({ queryKey: ["admin_permissions", userId] });
     }
   });
 
-  const handleChange = () => togglePermission({ checked, user_id, permission_id });
+  const handleChange = () => togglePermission({ checked, userId, permissionId });
 
   return (
     <Box
@@ -178,7 +178,7 @@ function PermissionItem({
         checked={checked}
         onChange={handleChange}
       />
-      <p>{permission.display_name}</p>
+      <p>{permission.displayName}</p>
     </Box>
   );
 }

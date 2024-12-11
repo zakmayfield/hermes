@@ -24,7 +24,7 @@ const seedTestSuper = async () => {
         data: {
           email: s.email,
           password: await hash(s.password, 10),
-          last_login_date: new Date(),
+          lastLoginDate: new Date(),
           role: {
             connect: s.role
           }

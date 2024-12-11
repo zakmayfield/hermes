@@ -1,9 +1,9 @@
 "use client";
 import { Box, Heading } from "@/ui";
+// import { getCustomersCreatedWithinDateRange } from '@/data/database/user';
 // import { useQuery } from "@tanstack/react-query";
 // import { formatSignupData } from "./UserAnalytics.utils";
 // import { useChart } from "@/shared/hooks/ui";
-// import { getCustomersCreatedWithinDateRange } from "@/data/database/queries";
 
 export const UserAnalytics = () => {
   // const { data } = useQuery({

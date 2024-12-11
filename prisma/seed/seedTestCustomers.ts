@@ -15,12 +15,12 @@ const testCustomers: {
   password: string;
   role: { name: Roles };
   onboarding: { status: OnboardingStatus };
-  customerInfo: Partial<Omit<CustomerInfo, "customer_info_id" | "user_id">>;
-  customerShipAddr?: Omit<CustomerShipAddr, "customer_ship_addr_id" | "user_id">;
-  customerBillAddr?: Omit<CustomerBillAddr, "customer_bill_addr_id" | "user_id">;
+  customerInfo: Partial<Omit<CustomerInfo, "customerInfoId" | "userId">>;
+  customerShipAddr?: Omit<CustomerShipAddr, "customerShipAddrId" | "userId">;
+  customerBillAddr?: Omit<CustomerBillAddr, "customerBillAddrId" | "userId">;
 }[] = [
   {
-    email: "customer0@test.com",
+    email: "customer1@test.com",
     password: "123",
     role: {
       name: "CUSTOMER"
@@ -34,7 +34,7 @@ const testCustomers: {
     }
   },
   {
-    email: "customer1@test.com",
+    email: "customer2@test.com",
     password: "123",
     role: {
       name: "CUSTOMER"
@@ -48,7 +48,7 @@ const testCustomers: {
     }
   },
   {
-    email: "customer2@test.com",
+    email: "customer3@test.com",
     password: "123",
     role: {
       name: "CUSTOMER"
@@ -77,37 +77,6 @@ const testCustomers: {
       state: "ON",
       postalCode: "C2C4D4"
     }
-  },
-  {
-    email: "customer3@test.com",
-    password: "123",
-    role: {
-      name: "CUSTOMER"
-    },
-    onboarding: {
-      status: "PENDING"
-    },
-    customerInfo: {
-      isExistingCustomer: false,
-      companyName: "Googleplex Innovations",
-      givenName: "Sasha",
-      familyName: "Marden",
-      phoneNumber: "9879879876"
-    },
-    customerShipAddr: {
-      line1: "232 Dover Rd",
-      city: "Jamestown",
-      country: "CA",
-      state: "ON",
-      postalCode: "Z6Z3A3"
-    },
-    customerBillAddr: {
-      line1: "232 Dover Rd",
-      city: "Jamestown",
-      country: "CA",
-      state: "ON",
-      postalCode: "Z6Z3A3"
-    }
   }
 ];
 
@@ -118,12 +87,15 @@ const seedTestCustomers = async () => {
         data: {
           email: customer.email,
           password: await hash(customer.password, 10),
-          last_login_date: new Date(),
+          lastLoginDate: new Date(),
           role: {
             connect: customer.role
           },
           onboarding: {
             create: customer.onboarding
+          },
+          cart: {
+            create: {}
           },
           customerInfo: {
             create: {

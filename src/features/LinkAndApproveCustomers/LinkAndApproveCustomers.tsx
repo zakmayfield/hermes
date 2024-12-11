@@ -1,6 +1,5 @@
 "use client";
 import { SecureUser } from "@/data/database/models/User";
-import { getUsers } from "@/data/database/queries";
 import {
   CustomerInfo as CustomerInfoType,
   CustomerShipAddr,
@@ -9,8 +8,9 @@ import {
 } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
 import { ReviewCard } from "./components";
-import { queryCustomers } from "@/data/qb/services/customer";
-import { CustomerQueryResults } from "@/data/qb/validators";
+import { queryCustomers } from "@/data/qb/customer";
+import { CustomerQueryResults } from "@/data/qb/validators/customers";
+import { getUsers } from "@/data/database/user";
 
 export type LinkAndApproveCustomersData = SecureUser & {
   customerInfo: CustomerInfoType | null;
@@ -30,13 +30,13 @@ export type QuickbooksCustomerData =
 export const LinkAndApproveCustomers = () => {
   const { data: newCustomerData } = useQuery({
     staleTime: Infinity,
-    queryKey: ["customers", "is_approved", false],
+    queryKey: ["customers", "isApproved", false],
     queryFn: async () =>
       await getUsers<LinkAndApproveCustomersData[]>({
         options: {
           where: {
             role: { name: "CUSTOMER" },
-            AND: { onboarding: { is_approved: false } }
+            AND: { onboarding: { isApproved: false } }
           },
           include: {
             customerInfo: true,
@@ -44,7 +44,7 @@ export const LinkAndApproveCustomers = () => {
             customerBillAddr: true,
             onboarding: true
           },
-          orderBy: { created_at: "desc" }
+          orderBy: { createdAt: "desc" }
         }
       })
   });

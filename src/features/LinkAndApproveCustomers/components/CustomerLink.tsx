@@ -1,11 +1,12 @@
 import Select, { SingleValue } from "react-select";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createQuickbooksCustomerSyncRecord } from "@/data/database/mutations";
 import { useToast } from "@/shared/hooks/ui";
-import { CustomerQuery, CustomerQueryResults } from "@/data/qb/validators";
+import { CustomerQuery, CustomerQueryResults } from "@/data/qb/validators/customers";
 import { Pulse } from "@/ui";
+import { useEffect } from "react";
+import { createQuickbooksCustomerSyncRecord } from "@/data/database/quickbooks";
 
-export const CustomerLink = ({ user_id }: { user_id: string }) => {
+export const CustomerLink = ({ userId }: { userId: string }) => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
@@ -14,15 +15,19 @@ export const CustomerLink = ({ user_id }: { user_id: string }) => {
     "customers"
   ]);
 
+  useEffect(() => {
+    console.log(queryData);
+  }, [queryData]);
+
   const { mutate: createQBSyncRecord } = useMutation({
     mutationFn: createQuickbooksCustomerSyncRecord,
     onError(error) {
       toast(error.message, "error");
     },
     onSuccess(data) {
-      toast(`Successfully linked ${data.company_name}`);
+      toast(`Successfully linked ${data.companyName}`);
       queryClient.invalidateQueries({
-        queryKey: ["quickbooks_customer_sync_ref", user_id]
+        queryKey: ["quickbooks_customer_sync_ref", userId]
       });
     }
   });
@@ -45,7 +50,7 @@ export const CustomerLink = ({ user_id }: { user_id: string }) => {
     }>
   ) => {
     if (data) {
-      createQBSyncRecord({ id: data.value, companyName: data.label, user_id });
+      createQBSyncRecord({ id: data.value, companyName: data.label, userId });
     }
   };
 

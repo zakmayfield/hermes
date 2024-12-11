@@ -49,9 +49,6 @@ export const Store = () => {
 
   useCartQuery();
 
-  const { createCartItemMutation } = useCart();
-  const handleAddToCart = (productId: string) => createCartItemMutation.mutate(productId);
-
   return (
     <div>
       <div>
@@ -99,6 +96,26 @@ function ProductTable({
     }>
   ) => void;
 }) {
+  const { createCartItemMutation } = useCart();
+  const handleAddToCart = (productId: string) => createCartItemMutation.mutate(productId);
+
+  const [selectedProductGroup, setSelectedProductGroup] = React.useState<
+    (ProductGroup & { products: Product[] }) | null
+  >();
+  const handleSetDialogGroup = (productGroup: ProductGroup & { products: Product[] }) => {
+    setSelectedProductGroup(productGroup);
+    handleOpen();
+  };
+  const handleClearDialogGroup = () => {
+    setSelectedProductGroup(null);
+    handleClose();
+  };
+
+  const {
+    Dialog,
+    isOpen,
+    methods: { handleOpen, handleClose }
+  } = useDialog();
   return (
     <div className="flex flex-col gap-md">
       <table className="max-w-lg">
@@ -130,13 +147,11 @@ function ProductTable({
 
         <tbody className="border">
           {productsData?.map((group) => (
-            <tr
+            <ProductRow
               key={group.productGroupId}
-              className="odd:bg-theme-secondary/50"
-            >
-              <td className="p-xs">{group.name}</td>
-              <td className="p-xs">{group.category}</td>
-            </tr>
+              productGroup={group}
+              handleSetDialogGroup={handleSetDialogGroup}
+            />
           ))}
         </tbody>
       </table>
@@ -185,40 +200,36 @@ function ProductTable({
           </select>
         </div>
       </div>
-    </div>
-  );
-}
-
-function ProductCard({
-  productGroup,
-  handleAddToCart
-}: {
-  productGroup: ProductGroup & { products: Product[] };
-  handleAddToCart: (productId: string) => void;
-}) {
-  const {
-    Dialog,
-    isOpen,
-    methods: { handleClose, handleOpen }
-  } = useDialog();
-
-  return (
-    <div key={productGroup.productGroupId}>
-      <div onClick={handleOpen}>
-        <h2>{productGroup.name}</h2>
-      </div>
 
       <Dialog
-        state={{ isOpen, handleClose }}
+        state={{ handleClose: handleClearDialogGroup, isOpen }}
         options={{ place: "top-center" }}
       >
         <ProductDialog
-          productGroup={productGroup}
-          handleClose={handleClose}
+          productGroup={selectedProductGroup}
+          handleClose={handleClearDialogGroup}
           handleAddToCart={handleAddToCart}
         />
       </Dialog>
     </div>
+  );
+}
+
+function ProductRow({
+  productGroup,
+  handleSetDialogGroup
+}: {
+  productGroup: ProductGroup & { products: Product[] };
+  handleSetDialogGroup: (productGroup: ProductGroup & { products: Product[] }) => void;
+}) {
+  return (
+    <tr
+      className="odd:bg-theme-secondary/50"
+      onClick={() => handleSetDialogGroup(productGroup)}
+    >
+      <td className="p-xs">{productGroup.name}</td>
+      <td className="p-xs">{productGroup.category}</td>
+    </tr>
   );
 }
 
@@ -227,7 +238,7 @@ function ProductDialog({
   handleClose,
   handleAddToCart
 }: {
-  productGroup: ProductGroup & { products: Product[] };
+  productGroup: (ProductGroup & { products: Product[] }) | undefined | null;
   handleClose?: () => void;
   handleAddToCart: (productId: string) => void;
 }) {
@@ -239,16 +250,18 @@ function ProductDialog({
       label: string;
     }>
   ) => {
-    const product = productGroup.products.find((p) => p.code === data?.value);
+    const product = productGroup?.products.find((p) => p.code === data?.value);
     setSelectedProduct(product ? product : null);
   };
 
   return (
     <div className="flex flex-col gap-md">
       <div>
-        <h2>{productGroup.name}</h2>
+        <h2>{productGroup?.name}</h2>
         <p>
-          {productGroup.category.charAt(0).toUpperCase() + productGroup.category.slice(1)}
+          {`${productGroup?.category
+            .charAt(0)
+            .toUpperCase()}${productGroup?.category.slice(1)}`}
         </p>
       </div>
 
@@ -258,7 +271,7 @@ function ProductDialog({
           className="dark:text-background"
           isClearable={true}
           onChange={(data) => handleSelectProduct(data)}
-          options={productGroup.products.map((p) => ({
+          options={productGroup?.products.map((p) => ({
             value: p.code,
             label: p.size ? p.size : p.description
           }))}

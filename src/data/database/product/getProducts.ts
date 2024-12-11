@@ -9,7 +9,7 @@ export const getProducts = async <ReturnData extends ProductGroup[]>(options?: {
   where?: Prisma.ProductGroupWhereInput;
   include?: Prisma.ProductGroupInclude;
   select?: Prisma.ProductGroupSelect;
-}): Promise<ReturnData> => {
+}): Promise<{ products: ReturnData; totalCount: number }> => {
   try {
     const { take, skip, where, include, select } = options || {};
 
@@ -17,8 +17,11 @@ export const getProducts = async <ReturnData extends ProductGroup[]>(options?: {
       ? await db.productGroup.findMany({ take, skip, where, include })
       : await db.productGroup.findMany({ take, skip, where, select });
 
-    return products as ReturnData;
+    const totalCount = await db.productGroup.count({ where });
+
+    return { products: products as ReturnData, totalCount };
   } catch (error) {
+    console.error(error);
     throw new Error("Unable to get products");
   }
 };

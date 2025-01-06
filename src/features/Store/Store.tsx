@@ -4,49 +4,13 @@ import React from "react";
 import { Product, ProductGroup } from "@prisma/client";
 import { useDialog } from "@/shared/components";
 import { useCart, useCartQuery } from "@/shared/hooks/data/useCart";
-import { useProductsQuery } from "@/shared/hooks/data/useProduct";
 import Select, { SingleValue } from "react-select";
 import categories from "../../../prisma/data/categories.json";
 import { Icon } from "@/ui";
+import { useStore } from "./hooks/useStore";
 
 export const Store = () => {
-  const [currentPage, setCurrentPage] = React.useState(1);
-  const handlePageChange = (page: number) => {
-    if (page > 0 && page <= totalPages) {
-      setCurrentPage(page);
-    }
-  };
-
-  const [pageSize, setPageSize] = React.useState(2);
-  const handlePageSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setPageSize(Number(e.target.value));
-    if (pageSize !== Number(e.target.value)) {
-      setCurrentPage(1);
-    }
-  };
-
-  const [filterInput, setFilterInput] = React.useState("");
-  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    setFilterInput(e.target.value);
-    setCurrentPage(1);
-  };
-
-  const [filterCategory, setFilterCategory] = React.useState<string | null>(null);
-  const handleCategoryFilterChange = (
-    data: SingleValue<{
-      value: string;
-      label: string;
-    }>
-  ) => {
-    setFilterCategory(data?.value ? data.value : null);
-  };
-
-  const { data } = useProductsQuery(currentPage, pageSize, filterCategory, filterInput);
-  const productsData = data?.products;
-  const totalCount = data?.totalCount || 0;
-  const totalPages = Math.ceil(totalCount / pageSize);
-
+  const { products, pagination, filter } = useStore();
   useCartQuery();
 
   return (
@@ -55,15 +19,9 @@ export const Store = () => {
         <h2>Products</h2>
 
         <ProductTable
-          totalPages={totalPages}
-          currentPage={currentPage}
-          productsData={productsData}
-          pageSize={pageSize}
-          filterInput={filterInput}
-          handlePageChange={handlePageChange}
-          handleFilterChange={handleFilterChange}
-          handlePageSizeChange={handlePageSizeChange}
-          handleCategoryFilterChange={handleCategoryFilterChange}
+          products={products}
+          pagination={pagination}
+          filter={filter}
         />
       </div>
     </div>
@@ -71,41 +29,46 @@ export const Store = () => {
 };
 
 function ProductTable({
-  totalPages,
-  currentPage,
-  productsData,
-  pageSize,
-  filterInput,
-  handlePageChange,
-  handleFilterChange,
-  handlePageSizeChange,
-  handleCategoryFilterChange
+  products,
+  pagination,
+  filter
 }: {
-  totalPages: number;
-  currentPage: number;
-  pageSize: number;
-  productsData?: (ProductGroup & { products: Product[] })[];
-  filterInput: string;
-  handlePageChange: (page: number) => void;
-  handleFilterChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handlePageSizeChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  handleCategoryFilterChange: (
-    data: SingleValue<{
-      value: string;
-      label: string;
-    }>
-  ) => void;
+  products: { data?: (ProductGroup & { products: Product[] })[] };
+  pagination: {
+    totalPages: number;
+    currentPage: number;
+    handlePageChange: (page: number) => void;
+    pageSize: number;
+    handlePageSizeChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  };
+  filter: {
+    filterInput: string;
+    handleFilterChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    handleCategoryFilterChange: (
+      data: SingleValue<{
+        value: string;
+        label: string;
+      }>
+    ) => void;
+  };
 }) {
+  const { data } = products;
+  const { totalPages, currentPage, handlePageChange, pageSize, handlePageSizeChange } =
+    pagination;
+  const { filterInput, handleFilterChange, handleCategoryFilterChange } = filter;
+
   const { createCartItemMutation } = useCart();
   const handleAddToCart = (productId: string) => createCartItemMutation.mutate(productId);
 
   const [selectedProductGroup, setSelectedProductGroup] = React.useState<
     (ProductGroup & { products: Product[] }) | null
   >();
+
   const handleSetDialogGroup = (productGroup: ProductGroup & { products: Product[] }) => {
     setSelectedProductGroup(productGroup);
     handleOpen();
   };
+
   const handleClearDialogGroup = () => {
     setSelectedProductGroup(null);
     handleClose();
@@ -146,7 +109,7 @@ function ProductTable({
         </thead>
 
         <tbody className="border">
-          {productsData?.map((group) => (
+          {data?.map((group) => (
             <ProductRow
               key={group.productGroupId}
               productGroup={group}

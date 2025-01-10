@@ -6,7 +6,7 @@ import { useDialog } from "@/shared/components";
 import { useCart, useCartQuery } from "@/shared/hooks/data/useCart";
 import Select, { SingleValue } from "react-select";
 import categories from "../../../prisma/data/categories.json";
-import { Icon } from "@/ui";
+import { Icon, Pulse } from "@/ui";
 import { useStore } from "./hooks/useStore";
 
 export const Store = () => {
@@ -16,8 +16,6 @@ export const Store = () => {
   return (
     <div>
       <div>
-        <h2>Products</h2>
-
         <ProductTable
           products={products}
           pagination={pagination}
@@ -33,7 +31,7 @@ function ProductTable({
   pagination,
   filter
 }: {
-  products: { data?: (ProductGroup & { products: Product[] })[] };
+  products: { data?: (ProductGroup & { products: Product[] })[]; isLoading: boolean };
   pagination: {
     totalPages: number;
     currentPage: number;
@@ -52,7 +50,7 @@ function ProductTable({
     ) => void;
   };
 }) {
-  const { data } = products;
+  const { data, isLoading } = products;
   const { totalPages, currentPage, handlePageChange, pageSize, handlePageSizeChange } =
     pagination;
   const { filterInput, handleFilterChange, handleCategoryFilterChange } = filter;
@@ -81,10 +79,10 @@ function ProductTable({
   } = useDialog();
   return (
     <div className="flex flex-col gap-md">
-      <table className="max-w-lg">
-        <thead className="border">
+      <table className="max-w-xl">
+        <thead>
           <tr>
-            <th className="border w-2/3 text-left p-xs">
+            <th className="text-left pr-xs pb-sm w-md">
               <input
                 placeholder="Name"
                 type="text"
@@ -95,7 +93,7 @@ function ProductTable({
                 className="w-full bg-theme-tertiary/35 focus:bg-theme-tertiary/75 dark:text-foreground"
               />
             </th>
-            <th className="border text-left p-xs">
+            <th className="text-left pb-sm w-2xs">
               <Select
                 id="category-select"
                 placeholder="Category"
@@ -108,14 +106,25 @@ function ProductTable({
           </tr>
         </thead>
 
-        <tbody className="border">
-          {data?.map((group) => (
-            <ProductRow
-              key={group.productGroupId}
-              productGroup={group}
-              handleSetDialogGroup={handleSetDialogGroup}
-            />
-          ))}
+        <tbody>
+          {isLoading ? (
+            <tr className="border">
+              <td
+                colSpan={2}
+                className="p-xs"
+              >
+                <Pulse size="lg" />
+              </td>
+            </tr>
+          ) : (
+            data?.map((group) => (
+              <ProductRow
+                key={group.productGroupId}
+                productGroup={group}
+                handleSetDialogGroup={handleSetDialogGroup}
+              />
+            ))
+          )}
         </tbody>
       </table>
 
@@ -187,11 +196,15 @@ function ProductRow({
 }) {
   return (
     <tr
-      className="odd:bg-theme-secondary/50"
+      className="cursor-pointer"
       onClick={() => handleSetDialogGroup(productGroup)}
     >
-      <td className="p-xs">{productGroup.name}</td>
-      <td className="p-xs">{productGroup.category}</td>
+      <td className="pr-xs pb-sm">
+        <div className="p-xs bg-theme-primary rounded-lg">{productGroup.name}</div>
+      </td>
+      <td className="pb-sm">
+        <div className="p-xs bg-theme-primary rounded-lg">{productGroup.category}</div>
+      </td>
     </tr>
   );
 }

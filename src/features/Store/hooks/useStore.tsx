@@ -35,7 +35,12 @@ export const useStore = () => {
     setFilterCategory(data?.value ? data.value : null);
   };
 
-  const { data } = useProductsQuery(currentPage, pageSize, filterCategory, filterInput);
+  const { data, isLoading } = useProductsQuery(
+    currentPage,
+    pageSize,
+    filterCategory,
+    filterInput
+  );
 
   const productsData = data?.products;
   const totalCount = data?.totalCount || 0;
@@ -43,7 +48,8 @@ export const useStore = () => {
 
   return {
     products: {
-      data: productsData
+      data: productsData,
+      isLoading
     },
     pagination: {
       totalPages,

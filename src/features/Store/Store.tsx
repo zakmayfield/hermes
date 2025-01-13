@@ -15,13 +15,11 @@ export const Store = () => {
 
   return (
     <div>
-      <div>
-        <ProductTable
-          products={products}
-          pagination={pagination}
-          filter={filter}
-        />
-      </div>
+      <ProductTable
+        products={products}
+        pagination={pagination}
+        filter={filter}
+      />
     </div>
   );
 };
@@ -77,112 +75,120 @@ function ProductTable({
     isOpen,
     methods: { handleOpen, handleClose }
   } = useDialog();
+
   return (
-    <div className="flex flex-col gap-md">
-      <table className="max-w-xl">
-        <thead>
-          <tr>
-            <th className="text-left pr-xs pb-sm w-md">
-              <input
-                placeholder="Name"
-                type="text"
-                name="filter"
-                id="filter"
-                value={filterInput}
-                onChange={handleFilterChange}
-                className="w-full bg-theme-tertiary/35 focus:bg-theme-tertiary/75 dark:text-foreground"
-              />
-            </th>
-            <th className="text-left pb-sm w-2xs">
-              <Select
-                id="category-select"
-                placeholder="Category"
-                isClearable={true}
-                className="text-background"
-                onChange={(data) => handleCategoryFilterChange(data)}
-                options={categories.map((c) => ({ value: c, label: c }))}
-              />
-            </th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {isLoading ? (
-            <tr className="border">
-              <td
-                colSpan={2}
-                className="p-xs"
-              >
-                <Pulse size="lg" />
-              </td>
+    <div className="bg-theme-secondary p-lg rounded-lg max-w-2xl">
+      <div className="flex flex-col gap-md">
+        <table className="border-separate border-spacing-y-1">
+          <thead className="h-[5rem]">
+            <tr>
+              <th className="text-left px-xs w-md">
+                <input
+                  placeholder="Search..."
+                  type="text"
+                  name="filter"
+                  id="filter"
+                  value={filterInput}
+                  onChange={handleFilterChange}
+                  className="w-full bg-theme-primary/75 dark:text-foreground p-xs border-2 border-theme-tertiary"
+                />
+              </th>
+              <th className="text-left px-xs w-2xs">
+                <Select
+                  id="category-select"
+                  placeholder="Category"
+                  isClearable={true}
+                  className="text-background"
+                  onChange={(data) => handleCategoryFilterChange(data)}
+                  options={categories.map((c) => ({ value: c, label: c }))}
+                />
+              </th>
             </tr>
-          ) : (
-            data?.map((group) => (
-              <ProductRow
-                key={group.productGroupId}
-                productGroup={group}
-                handleSetDialogGroup={handleSetDialogGroup}
-              />
-            ))
-          )}
-        </tbody>
-      </table>
+          </thead>
 
-      <div className="flex items-center gap-md">
-        <div className="flex items-center gap-xs">
-          <button
-            className="btn-ghost"
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            {"<<"}
-          </button>
-
-          <span className="min-w-3xs text-center">
-            Page {currentPage} of{" "}
-            {totalPages === 0 ? (
-              <Icon
-                name="spin"
-                style={{ className: "animate-spin inline" }}
-              />
+          <tbody className="">
+            {isLoading ? (
+              <tr className="border">
+                <td
+                  colSpan={2}
+                  className="p-xs"
+                >
+                  <div className="flex flex-col gap-sm">
+                    <Pulse size="sm" />
+                    <Pulse size="sm" />
+                    <Pulse size="sm" />
+                  </div>
+                </td>
+              </tr>
             ) : (
-              totalPages
+              data?.map((group) => (
+                <ProductRow
+                  key={group.productGroupId}
+                  productGroup={group}
+                  handleSetDialogGroup={handleSetDialogGroup}
+                />
+              ))
             )}
-          </span>
+          </tbody>
+        </table>
 
-          <button
-            className="btn-ghost"
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
-          >
-            {">>"}
-          </button>
+        <div className="flex items-center gap-md">
+          <div className="flex items-center gap-xs">
+            <button
+              className="btn-ghost"
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              {"<<"}
+            </button>
+
+            <span className="min-w-3xs text-center">
+              Page {currentPage} of{" "}
+              {totalPages === 0 ? (
+                <Icon
+                  name="spin"
+                  style={{ className: "animate-spin inline" }}
+                />
+              ) : (
+                totalPages
+              )}
+            </span>
+
+            <button
+              className="btn-ghost"
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              {">>"}
+            </button>
+          </div>
+
+          <div className="flex items-center gap-xs">
+            <span>Show</span>
+            <select
+              name="show"
+              id="show"
+              value={pageSize}
+              onChange={(e) => handlePageSizeChange(e)}
+            >
+              <option value={1}>1</option>
+              <option value={2}>2</option>
+              <option value={3}>3</option>
+            </select>
+          </div>
         </div>
 
-        <div className="flex items-center gap-xs">
-          <span>Show</span>
-          <select
-            name="show"
-            id="show"
-            value={pageSize}
-            onChange={(e) => handlePageSizeChange(e)}
-          >
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-          </select>
-        </div>
+        <Dialog
+          state={{ handleClose: handleClearDialogGroup, isOpen }}
+          options={{ place: "top-center" }}
+        >
+          <ProductDialog
+            productGroup={selectedProductGroup}
+            handleClose={handleClearDialogGroup}
+            handleAddToCart={handleAddToCart}
+          />
+        </Dialog>
       </div>
-
-      <Dialog
-        state={{ handleClose: handleClearDialogGroup, isOpen }}
-        options={{ place: "top-center" }}
-      >
-        <ProductDialog
-          productGroup={selectedProductGroup}
-          handleClose={handleClearDialogGroup}
-          handleAddToCart={handleAddToCart}
-        />
-      </Dialog>
     </div>
   );
 }
@@ -196,14 +202,17 @@ function ProductRow({
 }) {
   return (
     <tr
-      className="cursor-pointer"
+      tabIndex={0}
+      className="cursor-pointer hover:bg-theme-tertiary/50"
       onClick={() => handleSetDialogGroup(productGroup)}
     >
-      <td className="pr-xs pb-sm">
-        <div className="p-xs bg-theme-primary rounded-lg">{productGroup.name}</div>
+      <td className="py-xs pl-md pr-xs">
+        <div className="py-xs px-md bg-theme-primary rounded-lg">{productGroup.name}</div>
       </td>
-      <td className="pb-sm">
-        <div className="p-xs bg-theme-primary rounded-lg">{productGroup.category}</div>
+      <td className="py-xs pr-md pl-xs">
+        <div className="py-xs px-md bg-theme-primary rounded-lg">
+          {productGroup.category}
+        </div>
       </td>
     </tr>
   );

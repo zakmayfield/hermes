@@ -10,7 +10,7 @@ export const useStore = () => {
     }
   };
 
-  const [pageSize, setPageSize] = React.useState(2);
+  const [pageSize, setPageSize] = React.useState(3);
   const handlePageSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setPageSize(Number(e.target.value));
     if (pageSize !== Number(e.target.value)) {

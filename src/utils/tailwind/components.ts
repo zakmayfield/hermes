@@ -34,7 +34,7 @@ const btn: TwPluginRules = {
     },
     "&:disabled": {
       filter: "brightness(1)",
-      opacity: "0.7"
+      opacity: "0.6"
     }
   }
 };

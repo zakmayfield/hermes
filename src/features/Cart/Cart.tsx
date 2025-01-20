@@ -1,7 +1,6 @@
 "use client";
 
 import { useCart, useCartQuery } from "@/shared/hooks/data/useCart";
-import { useOrder } from "@/shared/hooks/data/useOrder";
 import { Icon, Pulse } from "@/ui";
 import { CartItem, Product } from "@prisma/client";
 import React from "react";

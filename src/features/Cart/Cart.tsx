@@ -5,6 +5,9 @@ import { Icon, Pulse } from "@/ui";
 import { CartItem, Product } from "@prisma/client";
 import React from "react";
 
+// TODO: *** Cart Tasks ***
+// - create order
+
 export const Cart = () => {
   return (
     <div>

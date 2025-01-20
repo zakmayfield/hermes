@@ -73,7 +73,10 @@ function CartTable() {
               </tr>
             )}
             {cart?.items.map((cartItem) => (
-              <CartItemRow cartItem={cartItem} />
+              <CartItemRow
+                key={cartItem.cartItemId}
+                cartItem={cartItem}
+              />
             ))}
           </tbody>
         </table>

@@ -7,44 +7,86 @@ import { CartItem, Product } from "@prisma/client";
 import React from "react";
 
 export const Cart = () => {
-  const { data: cart, isLoading, error } = useCartQuery();
-  const { createOrderMutation } = useOrder();
-
   return (
-    <div className="flex flex-col gap-md">
+    <div>
       <h1>Cart</h1>
 
-      <div className="bg-theme-primary p-lg rounded-lg">
-        {isLoading ? (
-          <Pulse />
-        ) : error ? (
-          <div>{error.message}</div>
-        ) : (
-          <div className="flex flex-col gap-sm">
-            {cart?.items.map((i) => (
-              <CartItemCard
-                key={i.cartItemId}
-                cartItem={i}
-              />
-            ))}
-          </div>
-        )}
-      </div>
-
-      <button
-        disabled={cart?.items.length === 0}
-        className="btn-green"
-        onClick={() =>
-          createOrderMutation.mutate({ cartItems: cart?.items ? cart.items : [] })
-        }
-      >
-        Place Order
-      </button>
+      <CartTable />
     </div>
   );
 };
 
-function CartItemCard({ cartItem }: { cartItem: CartItem & { product: Product } }) {
+function CartTable() {
+  const { data: cart, isLoading } = useCartQuery();
+
+  return (
+    <div>
+      <div className=" p-md rounded-lg">
+        <table className="bg-theme-primary p-md rounded-lg border-separate border-spacing-y-3 border-spacing-x-1">
+          <thead>
+            <tr>
+              <th className="w-4xs" />
+
+              <th
+                align="left"
+                className="w-sm font-normal"
+              >
+                Name
+              </th>
+              <th
+                align="left"
+                className="w-2xs font-normal"
+              >
+                Size
+              </th>
+              <th
+                align="left"
+                className="w-xs font-normal"
+              >
+                Quantity
+              </th>
+            </tr>
+          </thead>
+
+          <tbody className="border">
+            {isLoading && (
+              <tr>
+                <td colSpan={4}>
+                  <div className="flex flex-col gap-sm">
+                    <Pulse />
+                    <Pulse />
+                  </div>
+                </td>
+              </tr>
+            )}
+            {cart?.items.length === 0 && (
+              <tr>
+                <td colSpan={4}>
+                  <div className="flex items-center justify-center p-md">
+                    <span className="text-center p-sm px-lg bg-theme-secondary rounded-md">
+                      Cart is empty
+                    </span>
+                  </div>
+                </td>
+              </tr>
+            )}
+            {cart?.items.map((cartItem) => (
+              <CartItemRow cartItem={cartItem} />
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function CartItemRow({
+  cartItem
+}: {
+  cartItem: CartItem & {
+    product: Product;
+  };
+}) {
   const { deleteCartItemMutation, upsertCartItemMutation } = useCart();
 
   // UPDATE QUANTITY
@@ -81,74 +123,72 @@ function CartItemCard({ cartItem }: { cartItem: CartItem & { product: Product } 
       quantity: quantityInput
     });
 
-    if (upsertCartItemMutation.isSuccess) {
-      handleToggleEditOff();
-    }
+    handleToggleEditOff();
   };
-
   return (
-    <div className="bg-theme-secondary rounded-md p-xs flex gap-sm items-center min-h-4xs">
-      <button
-        className="hover:bg-theme-primary/50"
-        onClick={() => deleteCartItemMutation.mutate({ productId: cartItem.productId })}
-      >
-        <Icon name="x" />
-      </button>
-
-      <div className="flex items-center gap-xs">
-        <p className="min-w-3xs">{cartItem.product.name}</p>
-
-        <p className="min-w-3xs">
+    <tr className="border">
+      {/* Remove Item Button */}
+      <td align="left">
+        <button
+          onClick={() => deleteCartItemMutation.mutate({ productId: cartItem.productId })}
+          className="bg-theme-secondary"
+        >
+          <Icon name="x" />
+        </button>
+      </td>
+      {/* Name */}
+      <td>
+        <div className="p-xs rounded-md bg-theme-secondary">{cartItem.product.name}</div>
+      </td>
+      {/* Size */}
+      <td>
+        <div className="p-xs rounded-md bg-theme-secondary">
           {cartItem.product.size ? cartItem.product.size : cartItem.product.description}
-        </p>
-
-        <div className="flex items-center gap-sm">
-          <div className="flex items-center">
-            <span>x</span>
-
-            <span className="ml-1 mr-3">{cartItem.quantity}</span>
-
-            {!isQuantityEditToggled && (
-              <span>
-                <button
-                  onClick={handleToggleEditOn}
-                  className="bg-theme-primary/50"
-                >
-                  <Icon name="edit" />
-                </button>
-              </span>
-            )}
-          </div>
-
-          {isQuantityEditToggled && (
+        </div>
+      </td>
+      {/* Quantity */}
+      <td>
+        <div className="p-xs rounded-md bg-theme-secondary flex items-center gap-sm">
+          {/* Current Quantity */}
+          <p>x{cartItem.quantity}</p>
+          {/* Edit Quantity Button/Input */}
+          {!isQuantityEditToggled ? (
+            <button
+              onClick={handleToggleEditOn}
+              className="bg-theme-primary"
+            >
+              <Icon name="edit" />
+            </button>
+          ) : (
             <div className="flex items-center gap-xs">
               <input
                 type="number"
-                min={1}
                 value={quantityInput}
+                min={1}
                 onChange={(e) => handleUpdateQuantityInput(Number(e.target.value))}
-                className="max-w-4xs"
+                className="p-none px-sm w-4xs"
               />
 
               <button
                 onClick={handleSaveInput}
                 disabled={cartItem.quantity === quantityInput}
-                className={`hover:bg-theme-primary/50 ${
-                  cartItem.quantity === quantityInput ? "bg-theme-primary/50" : ""
+                className={`py-none hover:bg-theme-primary ${
+                  cartItem.quantity === quantityInput ? "bg-theme-primary" : ""
                 }`}
               >
                 save
               </button>
+
               <button
                 onClick={handleCancelInput}
-                className="hover:bg-theme-primary/50"
+                className="py-none hover:bg-theme-primary"
               >
                 cancel
               </button>
             </div>
           )}
         </div>
-      </div>
-    </div>
+      </td>
+    </tr>
   );
 }

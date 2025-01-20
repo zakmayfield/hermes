@@ -60,6 +60,8 @@ function ProductTable({
     (ProductGroup & { products: Product[] }) | null
   >();
 
+  const [selectedProduct, setSelectedProduct] = React.useState<Product | null>(null);
+
   const handleSetDialogGroup = (productGroup: ProductGroup & { products: Product[] }) => {
     setSelectedProductGroup(productGroup);
     handleOpen();
@@ -68,6 +70,7 @@ function ProductTable({
   const handleClearDialogGroup = () => {
     setSelectedProductGroup(null);
     handleClose();
+    setSelectedProduct(null);
   };
 
   const {
@@ -179,13 +182,18 @@ function ProductTable({
         </div>
 
         <Dialog
-          state={{ handleClose: handleClearDialogGroup, isOpen }}
+          state={{
+            handleClose: handleClearDialogGroup,
+            isOpen
+          }}
           options={{ place: "top-center" }}
         >
           <ProductDialog
             productGroup={selectedProductGroup}
             handleClose={handleClearDialogGroup}
             handleAddToCart={handleAddToCart}
+            selectedProduct={selectedProduct}
+            setSelectedProduct={setSelectedProduct}
           />
         </Dialog>
       </div>
@@ -221,14 +229,16 @@ function ProductRow({
 function ProductDialog({
   productGroup,
   handleClose,
-  handleAddToCart
+  handleAddToCart,
+  selectedProduct,
+  setSelectedProduct
 }: {
   productGroup: (ProductGroup & { products: Product[] }) | undefined | null;
   handleClose?: () => void;
   handleAddToCart: (productId: string) => void;
+  selectedProduct: Product | null;
+  setSelectedProduct: React.Dispatch<React.SetStateAction<Product | null>>;
 }) {
-  const [selectedProduct, setSelectedProduct] = React.useState<Product | null>(null);
-
   const handleSelectProduct = (
     data: SingleValue<{
       value: string;
@@ -237,6 +247,11 @@ function ProductDialog({
   ) => {
     const product = productGroup?.products.find((p) => p.code === data?.value);
     setSelectedProduct(product ? product : null);
+  };
+
+  const handleAddToCartAndReset = (productId: string) => {
+    handleAddToCart(productId);
+    setSelectedProduct(null);
   };
 
   return (
@@ -260,6 +275,17 @@ function ProductDialog({
             value: p.code,
             label: p.size ? p.size : p.description
           }))}
+          placeholder="Select..."
+          value={
+            selectedProduct
+              ? {
+                  value: selectedProduct.code,
+                  label: selectedProduct.size
+                    ? selectedProduct.size
+                    : selectedProduct.description
+                }
+              : { value: "", label: "Select..." }
+          }
         />
       </div>
 
@@ -267,7 +293,7 @@ function ProductDialog({
         <button
           disabled={!selectedProduct}
           className="btn-green flex-1"
-          onClick={() => handleAddToCart(selectedProduct?.productId || "")}
+          onClick={() => handleAddToCartAndReset(selectedProduct?.productId || "")}
         >
           Add to Cart
         </button>

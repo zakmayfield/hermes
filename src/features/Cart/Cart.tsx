@@ -1,9 +1,10 @@
 "use client";
 
 import { useCart, useCartQuery } from "@/shared/hooks/data/useCart";
+import { useOrder } from "@/shared/hooks/data/useOrder";
 import { Icon, Pulse } from "@/ui";
 import { CartItem, Product } from "@prisma/client";
-import React from "react";
+import React, { useEffect } from "react";
 
 // TODO: *** Cart Tasks ***
 // - create order
@@ -20,11 +21,19 @@ export const Cart = () => {
 
 function CartTable() {
   const { data: cart, isLoading } = useCartQuery();
+  const { deleteAllCartItemsMutation } = useCart();
+  const { createOrderMutation } = useOrder();
+
+  useEffect(() => {
+    if (createOrderMutation.isSuccess) {
+      deleteAllCartItemsMutation.mutate();
+    }
+  }, [createOrderMutation.isSuccess]);
 
   return (
     <div>
-      <div className=" p-md rounded-lg">
-        <table className="bg-theme-primary p-md rounded-lg border-separate border-spacing-y-3 border-spacing-x-1">
+      <div className="p-md rounded-lg bg-theme-tertiary flex flex-col gap-lg max-w-2xl">
+        <table className="bg-theme-primary p-md rounded-lg border-separate border-spacing-y-3 border-spacing-x-1 w-full">
           <thead>
             <tr>
               <th className="w-4xs" />
@@ -80,6 +89,16 @@ function CartTable() {
             ))}
           </tbody>
         </table>
+
+        <div className="p-lg rounded-lg bg-theme-primary">
+          <button
+            onClick={() => createOrderMutation.mutate({ cartItems: cart?.items || [] })}
+            disabled={cart?.items.length === 0 || isLoading}
+            className="btn-green w-full"
+          >
+            Place Order
+          </button>
+        </div>
       </div>
     </div>
   );

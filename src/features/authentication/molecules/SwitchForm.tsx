@@ -1,6 +1,5 @@
 "use client";
 
-import { Box } from "@/ui/components";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -13,12 +12,7 @@ export const SwitchForm = () => {
     : "Already have an account?";
 
   return (
-    <Box
-      style={{
-        display: "flex-row",
-        gap: "md"
-      }}
-    >
+    <div className="flex gap-md">
       <p>{switch_text}</p>
 
       <Link
@@ -27,6 +21,6 @@ export const SwitchForm = () => {
       >
         Sign {is_sign_in ? "Up" : "In"} Here
       </Link>
-    </Box>
+    </div>
   );
 };

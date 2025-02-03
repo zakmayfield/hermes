@@ -6,7 +6,6 @@ import { CoreProvider } from "@/lib/providers";
 import "./globals.css";
 import "react-toastify/ReactToastify.min.css";
 import "react-tooltip/dist/react-tooltip.css";
-import { Box, SidebarNavigation } from "@/ui";
 import { getCoreSessionUser } from "@/data/session";
 
 export const metadata: Metadata = {
@@ -26,26 +25,21 @@ export default async function RootLayout({
     <html lang="en">
       <CoreProvider>
         <body className={`${quicksand.className} antialiased`}>
-          <Box
-            style={{
-              minHeight: "screen",
-              display: "flex-row",
-              position: "relative"
-            }}
-          >
-            {is_auth && <SidebarNavigation role={user.role} />}
+          <div className="min-h-screen flex relative">
+            {/* {is_auth && <SidebarNavigation role={user.role} />} */}
 
-            <Box style={{ width: "full" }}>
-              <Box
+            <div className="w-full">
+              <div
+                className="h-full p-lg"
                 style={{
                   height: "full",
                   padding: "lg"
                 }}
               >
                 {children}
-              </Box>
-            </Box>
-          </Box>
+              </div>
+            </div>
+          </div>
 
           <ToastContainer
             limit={4}

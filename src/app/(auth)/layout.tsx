@@ -1,6 +1,5 @@
 import { SwitchForm } from "@/features/authentication/molecules";
 import { Logo } from "@/shared/components";
-import { Box } from "@/ui/components";
 
 export default async function AuthenticationLayout({
   children
@@ -8,19 +7,12 @@ export default async function AuthenticationLayout({
   children: React.ReactNode;
 }) {
   return (
-    <Box
-      as="main"
-      style={{
-        display: "flex-col",
-        gap: "xl",
-        flexColPosition: "top-center"
-      }}
-    >
-      <Logo style={{ wrapper: { width: "xs" } }} />
+    <main className="flex flex-col gap-xl justify-start items-center">
+      <Logo classNames={{ container: "w-xs" }} />
 
       {children}
 
       <SwitchForm />
-    </Box>
+    </main>
   );
 }

@@ -1,4 +1,3 @@
-import { Icon } from "@/ui";
 import React, { useCallback } from "react";
 
 export const useDialog = () => {
@@ -83,13 +82,14 @@ export function Dialog({
           onClick={handleClose}
           className="absolute top-2 right-2 hover:bg-theme-secondary/25 py-[.5rem] px-[.6rem] opacity-50 hover:opacity-100 focus:opacity-100"
         >
-          <Icon
+          ICON:X
+          {/* <Icon
             name="x"
             style={{
               fontSize: "xl",
               className: ""
             }}
-          />
+          /> */}
         </button>
 
         {children}

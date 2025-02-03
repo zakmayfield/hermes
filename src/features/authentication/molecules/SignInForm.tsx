@@ -1,7 +1,4 @@
 "use client";
-import { FormProvider } from "react-hook-form";
-import { AuthInputs } from "../atoms/Inputs";
-import { Form, SubmitButton } from "@/ui/components";
 import { useSignInForm } from "@/shared/hooks/forms";
 
 export const SignInForm = () => {
@@ -9,7 +6,8 @@ export const SignInForm = () => {
 
   return (
     <div>
-      <FormProvider {...methods}>
+      Sign In Form
+      {/* <FormProvider {...methods}>
         <Form
           submitHandler={submitHandler}
           style={{
@@ -22,7 +20,7 @@ export const SignInForm = () => {
             style={{ padding: "sm" }}
           />
         </Form>
-      </FormProvider>
+      </FormProvider> */}
     </div>
   );
 };

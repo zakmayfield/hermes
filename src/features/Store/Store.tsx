@@ -4,111 +4,73 @@ import React from "react";
 import { Product, ProductGroup } from "@prisma/client";
 import { useDialog } from "@/shared/components";
 import { useCart, useCartQuery } from "@/shared/hooks/data/useCart";
-import { useProductsQuery } from "@/shared/hooks/data/useProduct";
 import Select, { SingleValue } from "react-select";
 import categories from "../../../prisma/data/categories.json";
-import { Icon } from "@/ui";
+import { Icon, Pulse } from "@/ui";
+import { useStore } from "./hooks/useStore";
 
 export const Store = () => {
-  const [currentPage, setCurrentPage] = React.useState(1);
-  const handlePageChange = (page: number) => {
-    if (page > 0 && page <= totalPages) {
-      setCurrentPage(page);
-    }
-  };
-
-  const [pageSize, setPageSize] = React.useState(2);
-  const handlePageSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setPageSize(Number(e.target.value));
-    if (pageSize !== Number(e.target.value)) {
-      setCurrentPage(1);
-    }
-  };
-
-  const [filterInput, setFilterInput] = React.useState("");
-  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    setFilterInput(e.target.value);
-    setCurrentPage(1);
-  };
-
-  const [filterCategory, setFilterCategory] = React.useState<string | null>(null);
-  const handleCategoryFilterChange = (
-    data: SingleValue<{
-      value: string;
-      label: string;
-    }>
-  ) => {
-    setFilterCategory(data?.value ? data.value : null);
-  };
-
-  const { data } = useProductsQuery(currentPage, pageSize, filterCategory, filterInput);
-  const productsData = data?.products;
-  const totalCount = data?.totalCount || 0;
-  const totalPages = Math.ceil(totalCount / pageSize);
-
+  const { products, pagination, filter } = useStore();
   useCartQuery();
 
   return (
     <div>
-      <div>
-        <h2>Products</h2>
-
-        <ProductTable
-          totalPages={totalPages}
-          currentPage={currentPage}
-          productsData={productsData}
-          pageSize={pageSize}
-          filterInput={filterInput}
-          handlePageChange={handlePageChange}
-          handleFilterChange={handleFilterChange}
-          handlePageSizeChange={handlePageSizeChange}
-          handleCategoryFilterChange={handleCategoryFilterChange}
-        />
-      </div>
+      <ProductTable
+        products={products}
+        pagination={pagination}
+        filter={filter}
+      />
     </div>
   );
 };
 
 function ProductTable({
-  totalPages,
-  currentPage,
-  productsData,
-  pageSize,
-  filterInput,
-  handlePageChange,
-  handleFilterChange,
-  handlePageSizeChange,
-  handleCategoryFilterChange
+  products,
+  pagination,
+  filter
 }: {
-  totalPages: number;
-  currentPage: number;
-  pageSize: number;
-  productsData?: (ProductGroup & { products: Product[] })[];
-  filterInput: string;
-  handlePageChange: (page: number) => void;
-  handleFilterChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handlePageSizeChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  handleCategoryFilterChange: (
-    data: SingleValue<{
-      value: string;
-      label: string;
-    }>
-  ) => void;
+  products: { data?: (ProductGroup & { products: Product[] })[]; isLoading: boolean };
+  pagination: {
+    totalPages: number;
+    currentPage: number;
+    handlePageChange: (page: number) => void;
+    pageSize: number;
+    handlePageSizeChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  };
+  filter: {
+    filterInput: string;
+    handleFilterChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    handleCategoryFilterChange: (
+      data: SingleValue<{
+        value: string;
+        label: string;
+      }>
+    ) => void;
+  };
 }) {
+  const { data, isLoading } = products;
+  const { totalPages, currentPage, handlePageChange, pageSize, handlePageSizeChange } =
+    pagination;
+  const { filterInput, handleFilterChange, handleCategoryFilterChange } = filter;
+
   const { createCartItemMutation } = useCart();
   const handleAddToCart = (productId: string) => createCartItemMutation.mutate(productId);
 
   const [selectedProductGroup, setSelectedProductGroup] = React.useState<
     (ProductGroup & { products: Product[] }) | null
   >();
+
+  const [selectedProduct, setSelectedProduct] = React.useState<Product | null>(null);
+
   const handleSetDialogGroup = (productGroup: ProductGroup & { products: Product[] }) => {
     setSelectedProductGroup(productGroup);
     handleOpen();
   };
+
   const handleClearDialogGroup = () => {
     setSelectedProductGroup(null);
     handleClose();
+    setSelectedProduct(null);
   };
 
   const {
@@ -116,101 +78,125 @@ function ProductTable({
     isOpen,
     methods: { handleOpen, handleClose }
   } = useDialog();
+
   return (
-    <div className="flex flex-col gap-md">
-      <table className="max-w-lg">
-        <thead className="border">
-          <tr>
-            <th className="border w-2/3 text-left p-xs">
-              <input
-                placeholder="Name"
-                type="text"
-                name="filter"
-                id="filter"
-                value={filterInput}
-                onChange={handleFilterChange}
-                className="w-full bg-theme-tertiary/35 focus:bg-theme-tertiary/75 dark:text-foreground"
-              />
-            </th>
-            <th className="border text-left p-xs">
-              <Select
-                id="category-select"
-                placeholder="Category"
-                isClearable={true}
-                className="text-background"
-                onChange={(data) => handleCategoryFilterChange(data)}
-                options={categories.map((c) => ({ value: c, label: c }))}
-              />
-            </th>
-          </tr>
-        </thead>
+    <div className="bg-theme-secondary p-lg rounded-lg max-w-2xl">
+      <div className="flex flex-col gap-md">
+        <table className="border-separate border-spacing-y-1">
+          <thead className="h-[5rem]">
+            <tr>
+              <th className="text-left px-xs w-md">
+                <input
+                  placeholder="Search..."
+                  type="text"
+                  name="filter"
+                  id="filter"
+                  value={filterInput}
+                  onChange={handleFilterChange}
+                  className="w-full bg-theme-primary/75 dark:text-foreground p-xs border-2 border-theme-tertiary"
+                />
+              </th>
+              <th className="text-left px-xs w-2xs">
+                <Select
+                  id="category-select"
+                  placeholder="Category"
+                  isClearable={true}
+                  className="text-background"
+                  onChange={(data) => handleCategoryFilterChange(data)}
+                  options={categories.map((c) => ({ value: c, label: c }))}
+                />
+              </th>
+            </tr>
+          </thead>
 
-        <tbody className="border">
-          {productsData?.map((group) => (
-            <ProductRow
-              key={group.productGroupId}
-              productGroup={group}
-              handleSetDialogGroup={handleSetDialogGroup}
-            />
-          ))}
-        </tbody>
-      </table>
-
-      <div className="flex items-center gap-md">
-        <div className="flex items-center gap-xs">
-          <button
-            className="btn-ghost"
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            {"<<"}
-          </button>
-
-          <span className="min-w-3xs text-center">
-            Page {currentPage} of{" "}
-            {totalPages === 0 ? (
-              <Icon
-                name="spin"
-                style={{ className: "animate-spin inline" }}
-              />
+          <tbody className="">
+            {isLoading ? (
+              <tr className="border">
+                <td
+                  colSpan={2}
+                  className="p-xs"
+                >
+                  <div className="flex flex-col gap-sm">
+                    <Pulse size="sm" />
+                    <Pulse size="sm" />
+                    <Pulse size="sm" />
+                  </div>
+                </td>
+              </tr>
             ) : (
-              totalPages
+              data?.map((group) => (
+                <ProductRow
+                  key={group.productGroupId}
+                  productGroup={group}
+                  handleSetDialogGroup={handleSetDialogGroup}
+                />
+              ))
             )}
-          </span>
+          </tbody>
+        </table>
 
-          <button
-            className="btn-ghost"
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
-          >
-            {">>"}
-          </button>
+        <div className="flex items-center gap-md">
+          <div className="flex items-center gap-xs">
+            <button
+              className="btn-ghost"
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              {"<<"}
+            </button>
+
+            <span className="min-w-3xs text-center">
+              Page {currentPage} of{" "}
+              {totalPages === 0 ? (
+                <Icon
+                  name="spin"
+                  style={{ className: "animate-spin inline" }}
+                />
+              ) : (
+                totalPages
+              )}
+            </span>
+
+            <button
+              className="btn-ghost"
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              {">>"}
+            </button>
+          </div>
+
+          <div className="flex items-center gap-xs">
+            <span>Show</span>
+            <select
+              name="show"
+              id="show"
+              value={pageSize}
+              onChange={(e) => handlePageSizeChange(e)}
+            >
+              <option value={1}>1</option>
+              <option value={2}>2</option>
+              <option value={3}>3</option>
+            </select>
+          </div>
         </div>
 
-        <div className="flex items-center gap-xs">
-          <span>Show</span>
-          <select
-            name="show"
-            id="show"
-            value={pageSize}
-            onChange={(e) => handlePageSizeChange(e)}
-          >
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-          </select>
-        </div>
+        <Dialog
+          state={{
+            handleClose: handleClearDialogGroup,
+            isOpen
+          }}
+          options={{ place: "top-center" }}
+        >
+          <ProductDialog
+            productGroup={selectedProductGroup}
+            handleClose={handleClearDialogGroup}
+            handleAddToCart={handleAddToCart}
+            selectedProduct={selectedProduct}
+            setSelectedProduct={setSelectedProduct}
+          />
+        </Dialog>
       </div>
-
-      <Dialog
-        state={{ handleClose: handleClearDialogGroup, isOpen }}
-        options={{ place: "top-center" }}
-      >
-        <ProductDialog
-          productGroup={selectedProductGroup}
-          handleClose={handleClearDialogGroup}
-          handleAddToCart={handleAddToCart}
-        />
-      </Dialog>
     </div>
   );
 }
@@ -224,11 +210,18 @@ function ProductRow({
 }) {
   return (
     <tr
-      className="odd:bg-theme-secondary/50"
+      tabIndex={0}
+      className="cursor-pointer hover:bg-theme-tertiary/50"
       onClick={() => handleSetDialogGroup(productGroup)}
     >
-      <td className="p-xs">{productGroup.name}</td>
-      <td className="p-xs">{productGroup.category}</td>
+      <td className="py-xs pl-md pr-xs">
+        <div className="py-xs px-md bg-theme-primary rounded-lg">{productGroup.name}</div>
+      </td>
+      <td className="py-xs pr-md pl-xs">
+        <div className="py-xs px-md bg-theme-primary rounded-lg">
+          {productGroup.category}
+        </div>
+      </td>
     </tr>
   );
 }
@@ -236,14 +229,16 @@ function ProductRow({
 function ProductDialog({
   productGroup,
   handleClose,
-  handleAddToCart
+  handleAddToCart,
+  selectedProduct,
+  setSelectedProduct
 }: {
   productGroup: (ProductGroup & { products: Product[] }) | undefined | null;
   handleClose?: () => void;
   handleAddToCart: (productId: string) => void;
+  selectedProduct: Product | null;
+  setSelectedProduct: React.Dispatch<React.SetStateAction<Product | null>>;
 }) {
-  const [selectedProduct, setSelectedProduct] = React.useState<Product | null>(null);
-
   const handleSelectProduct = (
     data: SingleValue<{
       value: string;
@@ -252,6 +247,11 @@ function ProductDialog({
   ) => {
     const product = productGroup?.products.find((p) => p.code === data?.value);
     setSelectedProduct(product ? product : null);
+  };
+
+  const handleAddToCartAndReset = (productId: string) => {
+    handleAddToCart(productId);
+    setSelectedProduct(null);
   };
 
   return (
@@ -275,6 +275,17 @@ function ProductDialog({
             value: p.code,
             label: p.size ? p.size : p.description
           }))}
+          placeholder="Select..."
+          value={
+            selectedProduct
+              ? {
+                  value: selectedProduct.code,
+                  label: selectedProduct.size
+                    ? selectedProduct.size
+                    : selectedProduct.description
+                }
+              : { value: "", label: "Select..." }
+          }
         />
       </div>
 
@@ -282,7 +293,7 @@ function ProductDialog({
         <button
           disabled={!selectedProduct}
           className="btn-green flex-1"
-          onClick={() => handleAddToCart(selectedProduct?.productId || "")}
+          onClick={() => handleAddToCartAndReset(selectedProduct?.productId || "")}
         >
           Add to Cart
         </button>

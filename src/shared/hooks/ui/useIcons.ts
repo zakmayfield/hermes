@@ -54,11 +54,13 @@ import {
 } from "react-icons/pi";
 import { SiQuickbooks } from "react-icons/si";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { TbEdit } from "react-icons/tb";
 
 export type IconNames =
   | "spin"
   | "cart"
   | "error"
+  | "edit"
   | "info"
   | "check"
   | "xCircle"
@@ -105,6 +107,7 @@ export const useIcons = (props: UseIconsProps) => {
       crown: PiCrown,
       dotsThreeCircle: PiDotsThreeCircle,
       downarrowCircle: PiCaretCircleDown,
+      edit: TbEdit,
       error: PiWarningCircle,
       gear: PiGear,
       globe: PiGlobe,
@@ -138,6 +141,8 @@ export const useIcons = (props: UseIconsProps) => {
       crown: PiCrownDuotone,
       dotsThreeCircle: PiDotsThreeCircleDuotone,
       downarrowCircle: PiCaretCircleDownDuotone,
+      // no variant for edit
+      edit: TbEdit,
       error: PiWarningCircleDuotone,
       gear: PiGearDuotone,
       globe: PiGlobeDuotone,

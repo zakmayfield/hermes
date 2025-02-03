@@ -2,6 +2,7 @@
 
 import {
   createCartItem,
+  deleteAllCartItems,
   deleteCartItem,
   getCart,
   upsertCartItem
@@ -81,9 +82,21 @@ export const useCart = () => {
     }
   });
 
+  const deleteAllCartItemsMutation = useMutation({
+    mutationFn: deleteAllCartItems,
+    onError(error) {
+      toast(error.message, "error");
+      queryClient.invalidateQueries({ queryKey: ["cart"] });
+    },
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: ["cart"] });
+    }
+  });
+
   return {
     createCartItemMutation,
     upsertCartItemMutation,
-    deleteCartItemMutation
+    deleteCartItemMutation,
+    deleteAllCartItemsMutation
   };
 };

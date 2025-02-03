@@ -11,6 +11,7 @@ export const formatOrderToInvoice = async (
   order: Order & { items: OrderItem[] }
 ): Promise<CreateInvoiceRequest> => {
   const { customerId } = await getQbSyncRecordOrThrow(order.userId);
+
   try {
     const customerData = await getCustomerById(customerId).then((c) => ({
       CustomerRef: {

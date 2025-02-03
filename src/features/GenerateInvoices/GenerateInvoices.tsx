@@ -12,7 +12,8 @@ export const GenerateInvoices = () => {
     queryKey: ["orders", $Enums.OrderStatus.INVOICE_PENDING],
     queryFn: async () =>
       getOrders<(Order & { items: OrderItem[] })[]>({
-        where: { status: $Enums.OrderStatus.INVOICE_PENDING }
+        where: { status: $Enums.OrderStatus.INVOICE_PENDING },
+        include: { items: true }
       })
   });
 

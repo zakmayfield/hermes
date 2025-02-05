@@ -12,7 +12,7 @@ export const SwitchForm = () => {
     : "Already have an account?";
 
   return (
-    <div className="flex gap-md">
+    <div className="flex gap-3 justify-center">
       <p>{switch_text}</p>
 
       <Link

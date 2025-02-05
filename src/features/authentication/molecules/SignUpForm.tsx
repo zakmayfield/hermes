@@ -1,38 +1,35 @@
 "use client";
-// import { useFormContext } from "react-hook-form";
-// import { useSignUpForm } from "@/shared/hooks/forms";
-// import { useEffect } from "react";
-// import { signupValidator } from "@/utils/validators/forms/signupValidator";
+
+import { useState } from "react";
 
 export const SignUpForm = () => {
-  // const { methods, submitHandler } = useSignUpForm();
-  // const watchIsExistingCustomer = methods.watch("customer.isExistingCustomer");
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div>
-      Sign up Form
-      {/* <FormProvider {...methods}>
-        <Form
-          submitHandler={submitHandler}
-          style={{
-            form: {
-              backgroundColor: "theme-primary",
-              padding: "lg",
-              className: `${watchIsExistingCustomer && "w-full lg:w-md"}`
-            }
-          }}
-        >
-          <Inputs />
+      <form className="flex flex-col gap-3">
+        <div className="w-full">
+          <label htmlFor="email">Email</label>
+          <input
+            name="email"
+            type="text"
+            placeholder="name@host.com"
+            className="w-full p-2 rounded-md"
+          />
+        </div>
 
-          <button
-            className={`btn-green p-xs ${
-              watchIsExistingCustomer ? "w-full" : "w-1/2 mr-auto"
-            }`}
-          >
-            Sign Up
-          </button>
-        </Form>
-      </FormProvider> */}
+        <div className="w-full">
+          <label htmlFor="password">Password</label>
+          <input
+            name="password"
+            type={showPassword ? "text" : "password"}
+            placeholder="password"
+            className="w-full p-2 rounded-md"
+          />
+        </div>
+
+        <button className="bg-theme-green p-2 rounded-md">Sign Up</button>
+      </form>
     </div>
   );
 };

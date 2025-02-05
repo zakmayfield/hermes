@@ -76,35 +76,6 @@
   dialog {
     @apply text-foreground bg-background;
   }
-
-  button {
-    @apply btn;
-  }
-
-  input,
-  select,
-  textarea {
-    @apply dark:text-background px-[0.5rem] py-[0.25rem] rounded-md;
-  }
-}
-
-h1 {
-  @apply text-2xl;
-}
-h2 {
-  @apply text-xl;
-}
-h3 {
-  @apply text-lg;
-}
-h4 {
-  @apply text-md;
-}
-h5 {
-  @apply text-sm;
-}
-h6 {
-  @apply text-sm;
 }
 
 @layer utilities {

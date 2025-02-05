@@ -1,5 +1,4 @@
 import { TwPluginRules } from "./config";
-import { rgb } from "./useRgb";
 
 const demo: TwPluginRules = {
   ".demo": {
@@ -25,40 +24,4 @@ const demo: TwPluginRules = {
   }
 };
 
-const btn: TwPluginRules = {
-  ".btn": {
-    padding: "0.25rem 0.5rem",
-    borderRadius: "0.375rem",
-    "&:hover": {
-      filter: "brightness(1.15)"
-    },
-    "&:disabled": {
-      filter: "brightness(1)",
-      opacity: "0.6"
-    }
-  }
-};
-
-const btnVariants: TwPluginRules = {
-  ".btn-ghost": {
-    borderWidth: "1px",
-    backgroundColor: "transparent",
-    "&:hover": {
-      backgroundColor: rgb("--ghost")
-    },
-    "&:disabled": {
-      backgroundColor: "transparent"
-    }
-  },
-  ".btn-blue": {
-    backgroundColor: rgb("--theme-blue-base")
-  },
-  ".btn-red": {
-    backgroundColor: rgb("--theme-red-base")
-  },
-  ".btn-green": {
-    backgroundColor: rgb("--theme-green-base")
-  }
-};
-
-export { demo, btn, btnVariants };
+export { demo };

@@ -7,8 +7,8 @@ export default async function AuthenticationLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="flex flex-col gap-xl justify-start items-center">
-      <Logo classNames={{ container: "w-xs" }} />
+    <main className="max-w-lg mx-auto space-y-3">
+      <Logo classNames={{ container: "w-xs mx-auto" }} />
 
       {children}
 

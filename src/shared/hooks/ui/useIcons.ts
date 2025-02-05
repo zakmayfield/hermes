@@ -50,7 +50,9 @@ import {
   PiStorefront,
   PiStorefrontDuotone,
   PiX,
-  PiXDuotone
+  PiXDuotone,
+  PiEye,
+  PiEyeDuotone
 } from "react-icons/pi";
 import { SiQuickbooks } from "react-icons/si";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -61,6 +63,7 @@ export type IconNames =
   | "cart"
   | "error"
   | "edit"
+  | "eye"
   | "info"
   | "check"
   | "xCircle"
@@ -109,6 +112,7 @@ export const useIcons = (props: UseIconsProps) => {
       downarrowCircle: PiCaretCircleDown,
       edit: TbEdit,
       error: PiWarningCircle,
+      eye: PiEye,
       gear: PiGear,
       globe: PiGlobe,
       hamburger: RxHamburgerMenu,
@@ -144,6 +148,7 @@ export const useIcons = (props: UseIconsProps) => {
       // no variant for edit
       edit: TbEdit,
       error: PiWarningCircleDuotone,
+      eye: PiEyeDuotone,
       gear: PiGearDuotone,
       globe: PiGlobeDuotone,
       hamburger: RxHamburgerMenu,

@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 import plugin from "tailwindcss/plugin";
-import { components, utilities } from "./src/utils/tailwind/index";
+import { components } from "./src/utils/tailwind/index";
 import { themeCtx } from "./src/utils/theme/themeCtx";
 
 const config: Config = {
@@ -15,21 +15,21 @@ const config: Config = {
       colors: {
         ...themeCtx.colors
       },
-      margin: {
-        ...themeCtx.spacing
-      },
-      padding: {
-        ...themeCtx.spacing
-      },
-      space: {
-        ...themeCtx.spacing
-      },
-      gap: {
-        ...themeCtx.spacing
-      },
-      fontSize: {
-        ...themeCtx.fontSize
-      },
+      // margin: {
+      //   ...themeCtx.spacing
+      // },
+      // padding: {
+      //   ...themeCtx.spacing
+      // },
+      // space: {
+      //   ...themeCtx.spacing
+      // },
+      // gap: {
+      //   ...themeCtx.spacing
+      // },
+      // fontSize: {
+      //   ...themeCtx.fontSize
+      // },
       maxWidth: {
         ...themeCtx.size
       },
@@ -54,13 +54,10 @@ const config: Config = {
     }
   },
   plugins: [
-    plugin(function ({ addUtilities, addComponents }) {
-      addUtilities({
-        ...utilities
-      }),
-        addComponents({
-          ...components
-        });
+    plugin(function ({ addComponents }) {
+      addComponents({
+        ...components
+      });
     })
   ]
 };
